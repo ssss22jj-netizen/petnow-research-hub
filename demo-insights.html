@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>경쟁사 데모 시각 분석 — 펫나우 CRM M1</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Pretendard','Apple SD Gothic Neo',sans-serif;background:#f5f5f3;color:#1a1a1a;line-height:1.6;font-size:14px}
+.demo-shell{display:grid;grid-template-columns:250px minmax(0,1fr) 220px;min-height:100vh}
+.demo-sidebar{position:sticky;top:0;height:100vh;padding:22px 16px;background:#123d2d;color:#eaf6ef;display:flex;flex-direction:column;z-index:200}
+.demo-brand{display:flex;gap:12px;align-items:center;padding:0 10px 24px;color:inherit;text-decoration:none}
+.demo-brand-mark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:#68d29e;color:#0d3a29;font-weight:800}
+.demo-brand strong,.demo-brand small{display:block}.demo-brand small{margin-top:2px;color:#a9c8b8;font-size:11px;text-transform:uppercase;letter-spacing:.11em}
+.demo-nav-label{margin:9px 0 3px;padding:0 12px;color:#88ad9a;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.demo-nav a{display:flex;align-items:center;gap:10px;padding:10px 12px;margin:2px 0;color:#cfe2d8;text-decoration:none;border-radius:10px;font-size:14px}
+.demo-nav a:hover,.demo-nav a.active{color:#fff;background:rgba(255,255,255,.1)}
+.demo-nav i{width:20px;text-align:center;font-style:normal;opacity:.9}
+.demo-sidebar-foot{margin-top:auto;padding:13px 12px 0;border-top:1px solid rgba(255,255,255,.12);color:#a9c8b8;font-size:12px}
+.demo-sidebar-foot::before{content:"";display:inline-block;width:7px;height:7px;margin-right:7px;border-radius:50%;background:#68d29e}
+.demo-main{min-width:0}
+.demo-toc{position:sticky;top:0;height:100vh;padding:28px 18px;background:#f5f5f3;border-left:1px solid #dfe7e2;overflow-y:auto}
+.demo-toc strong{display:block;margin:0 8px 10px;color:#374151;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.demo-toc a{display:block;margin:2px 0;padding:7px 9px;border-left:2px solid transparent;border-radius:0 7px 7px 0;color:#6b7280;font-size:12px;line-height:1.35;text-decoration:none;transition:background .15s,color .15s,border-color .15s}
+.demo-toc a:hover{background:#e9efeb;color:#123d2d}
+.demo-toc a.active{border-left-color:#176b48;background:#e2eee7;color:#123d2d;font-weight:700}
+.demo-toc a.toc-sub{padding-left:18px;color:#7b8380}
+.demo-toc .toc-divider{height:1px;margin:10px 8px;background:#dfe7e2}
+[id]{scroll-margin-top:52px}
+.demo-menu{display:none;position:fixed;top:12px;left:12px;z-index:250;width:40px;height:40px;border:1px solid #dce5df;border-radius:10px;background:#fff;color:#123d2d;font-size:20px;box-shadow:0 4px 14px rgba(0,0,0,.1)}
+.ph{background:#123d2d;color:#fff;padding:32px 48px 26px}
+.back{display:inline-block;margin-bottom:14px;color:rgba(255,255,255,.72);font-size:12px;font-weight:700;text-decoration:none}.back:hover{color:#fff}
+.ph h1{font-size:20px;font-weight:700;letter-spacing:-.3px;margin-bottom:5px}
+.ph .meta{font-size:12px;color:rgba(255,255,255,.55);display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.ph .conclusion{font-size:14px;color:rgba(255,255,255,.88);border-left:3px solid #4ade80;padding:8px 14px;background:rgba(255,255,255,.06);border-radius:0 6px 6px 0;line-height:1.65}
+.limits-top{background:#fefce8;border-bottom:1px solid #fde047;padding:16px 48px}
+.limits-top .lt-title{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#854d0e;margin-bottom:8px}
+.limits-top ul{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:4px 24px;list-style:none}
+.limits-top li{font-size:12px;color:#713f12;padding-left:12px;position:relative}
+.limits-top li::before{content:"·";position:absolute;left:0}
+.method{background:#f8faf9;border-bottom:1px solid #dfe7e2;padding:22px 48px}
+.method-grid{display:grid;grid-template-columns:1.1fr 1.35fr 1.15fr;gap:12px}
+.method-card{background:#fff;border:1px solid #dfe7e2;border-radius:8px;padding:14px 16px}
+.method-card h3{font-size:12px;color:#123d2d;margin-bottom:8px}
+.method-card ul{list-style:none;display:grid;gap:5px}
+.method-card li{font-size:12px;color:#4b5563;line-height:1.5}
+.method-card strong{color:#1f2937}
+.method-note{font-size:11px;color:#6b7280;margin-top:10px}
+.summary{background:#fff;border-bottom:1px solid #e5e7eb;padding:24px 48px}
+.summary-label{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:#6b7280;margin-bottom:10px}
+.kv-table{width:100%;border-collapse:collapse;font-size:13px}
+.kv-table td{padding:8px 12px;border:1px solid #e5e7eb;vertical-align:top}
+.kv-table td:first-child{width:130px;font-weight:700;background:#f9fafb;color:#374151}
+.timing{background:#fff;border-bottom:1px solid #e5e7eb;padding:22px 48px}
+.timing-title{font-size:14px;font-weight:700;margin-bottom:16px}
+.timing-title span{color:#9ca3af;font-weight:400;font-size:12px;margin-left:8px}
+.t-row{display:grid;grid-template-columns:148px minmax(140px,1fr) minmax(250px,auto) 60px;align-items:center;gap:12px;margin-bottom:9px}
+.t-name{font-size:12px;font-weight:600}
+.t-wrap{flex:1;background:#f3f4f6;border-radius:4px;height:24px;position:relative;overflow:visible}
+.t-bar{height:100%;border-radius:4px;position:relative}
+.t-bar.g{background:#16a34a}.t-bar.b{background:#2563eb}.t-bar.r{background:#dc2626;opacity:.7}.t-bar.s{background:#9ca3af}
+.t-stat{font-size:11px;color:#374151;line-height:1.35}
+.tbadge{font-size:11px;padding:2px 8px;border-radius:99px;font-weight:700;width:60px;text-align:center;flex-shrink:0}
+.tok{background:#dcfce7;color:#15803d}.tfail{background:#fee2e2;color:#dc2626}
+.insights{background:#fff;padding:28px 48px;border-top:2px solid #123d2d}
+.insights-title{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:#123d2d;margin-bottom:20px}
+.insight{display:grid;grid-template-columns:22px 1fr;gap:10px 14px;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid #f3f4f6}
+.insight:last-child{border-bottom:none;margin-bottom:0;opacity:.6}
+.insight-num{font-size:13px;font-weight:800;color:#d1d5db;padding-top:1px}
+.insight-title{font-size:14px;font-weight:700;color:#111;margin-bottom:4px;line-height:1.4}
+.insight-desc{font-size:13px;color:#374151;line-height:1.65;margin:7px 0 9px;padding-left:18px}
+.insight-desc li{margin:3px 0;padding-left:2px}
+.insight-links{display:flex;gap:6px;flex-wrap:wrap}
+.ilink{font-size:11px;font-weight:700;padding:2px 10px;border-radius:99px;text-decoration:none;border:1px solid;transition:opacity .15s}
+.ilink:hover{opacity:.7}
+.ilink.sl{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe}
+.ilink.pw{background:#fff7ed;color:#c2410c;border-color:#fed7aa}
+.ilink.asm{background:#f0fdf4;color:#15803d;border-color:#bbf7d0}
+.ilink.pp{background:#faf5ff;color:#7c3aed;border-color:#ddd6fe}
+.ilink.top{background:#f9fafb;color:#374151;border-color:#e5e7eb}
+.insight-note{font-size:11px;color:#9ca3af;margin-top:4px}
+.xc{background:#fff;padding:26px 48px;border-top:1px solid #e5e7eb}
+.xt{width:100%;border-collapse:collapse;font-size:12px;margin-top:12px}
+.xt th{background:#f9fafb;padding:9px 12px;text-align:left;font-weight:700;border:1px solid #e5e7eb;color:#374151}
+.xt td{padding:8px 12px;border:1px solid #e5e7eb;vertical-align:top}
+.xt tr:nth-child(even) td{background:#fafafa}
+.xt ul{margin:6px 0 0;padding-left:16px;line-height:1.5}
+.xt li{margin:2px 0}
+.rating-legend{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 4px}
+.rating{display:inline-block;padding:2px 8px;border-radius:99px;font-size:10px;font-weight:800;white-space:nowrap}
+.rating.good{background:#dcfce7;color:#166534}.rating.mixed{background:#fef3c7;color:#92400e}
+.rating.bad{background:#fee2e2;color:#b91c1c}.rating.unknown{background:#e5e7eb;color:#4b5563}
+.dp{background:#fff;padding:26px 48px;border-top:1px solid #e5e7eb}
+.dp-area{margin-bottom:22px}
+.dp-area-title{font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:#374151;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #e5e7eb}
+.dp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.dp-card{padding:13px 15px;border:1px solid #e5e7eb;border-radius:7px;font-size:13px}
+.dp-card .dp-t{font-weight:700;margin-bottom:3px;color:#111}
+.dp-card .dp-b{font-size:12px;color:#6b7280;line-height:1.5}
+.basis{display:inline-block;margin-bottom:6px;padding:2px 7px;border-radius:99px;background:#e8f3ed;color:#176b48;font-size:10px;font-weight:800}
+.basis.observation{background:#eef0f2;color:#5f6872}
+.evidence-ref{display:inline-flex;align-items:center;gap:4px;margin-top:7px;color:#176b48;font-size:11px;font-weight:700;text-decoration:none;border-bottom:1px solid #b9d9c8}
+.evidence-ref:hover{color:#0f5136;border-bottom-color:#176b48}
+.dp-card.avoid{border-left:3px solid #dc2626}
+.dp-card.avoid .dp-t{color:#dc2626}
+.next{background:#f8faf9;padding:26px 48px;border-top:1px solid #dfe7e2}
+.next .xt td:first-child{font-weight:700;color:#374151;white-space:nowrap}
+.status{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;background:#fff7ed;color:#9a3412;margin-right:6px}
+.source-note{background:#eef3f0;border-top:1px solid #d7e1db;padding:18px 48px;color:#4b5563;font-size:11px;line-height:1.7}
+.source-note strong{color:#1f2937}
+.sec-title{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#6b7280;margin-bottom:12px}
+.snav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:2px solid #e5e7eb;display:flex;overflow-x:auto}
+.snav a{padding:11px 18px;font-size:12px;font-weight:700;color:#6b7280;border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;text-decoration:none}
+.snav a.sl{border-color:#3b82f6;color:#1d4ed8}.snav a.pw{border-color:#f97316;color:#c2410c}
+.snav a.asm{border-color:#10b981;color:#065f46}.snav a.pp{border-color:#8b5cf6;color:#6d28d9}
+.ps{border-left:4px solid}
+.ps-sl{border-color:#3b82f6;background:#f8fbff}.ps-pw{border-color:#f97316;background:#fffbf7}
+.ps-asm{border-color:#10b981;background:#f7fdfb}.ps-pp{border-color:#8b5cf6;background:#faf8ff}
+.ps-hd{padding:18px 44px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid rgba(0,0,0,.07)}
+.ps-name{font-size:16px;font-weight:800}
+.ps-sl .ps-name{color:#1d4ed8}.ps-pw .ps-name{color:#c2410c}.ps-asm .ps-name{color:#065f46}.ps-pp .ps-name{color:#6d28d9}
+.ps-note{font-size:12px;color:#6b7280}
+.ts{padding:16px 44px 20px;border-bottom:1px solid rgba(0,0,0,.05)}
+.ts-head{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.ts-label{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:#6b7280}
+.ts-m{font-size:11px;color:#6b7280;background:#f3f4f6;padding:2px 8px;border-radius:4px}
+.ts-m.done{background:#dcfce7;color:#15803d}.ts-m.bad{background:#fee2e2;color:#dc2626}.ts-m.warn{background:#fef3c7;color:#92400e}
+.ev{display:grid;grid-template-columns:1fr 1fr;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;background:#fff;margin-bottom:12px}
+.ev-img{background:#f9fafb;border-right:1px solid #e5e7eb;overflow:hidden;min-height:200px}
+.ev-img img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.ev-txt{padding:20px 22px;display:flex;flex-direction:column;justify-content:center;gap:8px}
+.ev-badges{display:flex;gap:6px;flex-wrap:wrap}
+.ev-title{font-size:14px;font-weight:700;color:#111;line-height:1.4}
+.ev-desc{font-size:13px;color:#374151;line-height:1.65}
+.ev-impl{background:#f0fdf4;border-left:3px solid #16a34a;padding:8px 12px;border-radius:0 5px 5px 0;font-size:12px;color:#166534;line-height:1.55;margin-top:2px}
+.ev-impl strong{display:block;font-size:11px;letter-spacing:.3px;margin-bottom:1px}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:99px}
+.psl{background:#dbeafe;color:#1d4ed8}.ppw{background:#ffedd5;color:#c2410c}
+.pasm{background:#d1fae5;color:#065f46}.ppp{background:#ede9fe;color:#6d28d9}
+.tbk{font-size:11px;padding:2px 9px;border-radius:99px;font-weight:700}
+.tb-done{background:#dcfce7;color:#15803d}.tb-partial{background:#fef3c7;color:#92400e}
+.tb-block{background:#fee2e2;color:#dc2626}.tb-before{background:#e0f2fe;color:#075985}
+.sc-tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px}
+.tag-bad{background:#fee2e2;color:#dc2626}.tag-warn{background:#fef3c7;color:#92400e}
+.tag-good{background:#dcfce7;color:#15803d}.tag-note{background:#f3f4f6;color:#6b7280}
+.foot{text-align:center;font-size:12px;color:#9ca3af;padding:18px;border-top:1px solid #e5e7eb}
+@media(max-width:768px){
+  .demo-shell{display:block}.demo-sidebar{position:fixed;left:0;width:250px;transform:translateX(-100%);transition:transform .2s;box-shadow:20px 0 40px rgba(0,0,0,.18)}
+  .demo-sidebar.open{transform:translateX(0)}.demo-menu{display:block}.ph{padding-top:64px}
+  .ph,.summary,.timing,.insights,.xc,.dp,.limits-top,.method,.next,.source-note{padding-left:20px;padding-right:20px}
+  .method-grid{grid-template-columns:1fr}
+  .ps-hd,.ts{padding-left:20px;padding-right:20px}
+  .ev{grid-template-columns:1fr}
+  .ev-img{border-right:none;border-bottom:1px solid #e5e7eb;min-height:180px}
+  .t-row{grid-template-columns:90px minmax(90px,1fr) 55px}.t-stat{display:none}
+}
+@media(max-width:1180px){
+  .demo-shell{grid-template-columns:250px minmax(0,1fr)}
+  .demo-toc{display:none}
+}
+@media(max-width:768px){.demo-shell{display:block}}
+</style>
+</head>
+<body>
+<div class="demo-shell">
+<aside class="demo-sidebar" id="demo-sidebar">
+  <a class="demo-brand" href="./index.html#/">
+    <span class="demo-brand-mark">P</span>
+    <span><strong>Petnow</strong><small>문서 라이브러리</small></span>
+  </a>
+  <nav class="demo-nav" aria-label="주요 메뉴">
+    <div class="demo-nav-label">문서 찾기</div>
+    <a href="./index.html#/"><i>⌂</i>전체 문서</a>
+    <div class="demo-nav-label">주제별 문서</div>
+    <a href="./index.html#/library/project"><i>◷</i>프로젝트 계획·현황</a>
+    <a href="./index.html#/library/interview"><i>◎</i>고객 인터뷰</a>
+    <a href="./index.html#/library/workflow"><i>◫</i>쉘터 업무 플로우</a>
+    <a class="active" href="./index.html#/library/competitors"><i>▥</i>경쟁사 조사</a>
+    <a href="./index.html#/library/methods"><i>▧</i>출처·분석 방법</a>
+    <a href="./index.html#/library/appendix"><i>◇</i>별첨</a>
+  </nav>
+  <div class="demo-sidebar-foot">M1 문서 라이브러리</div>
+</aside>
+<main class="demo-main">
+<button class="demo-menu" id="demo-menu" aria-label="메뉴 열기">☰</button>
+
+<header id="overview" class="ph">
+  <a class="back" href="./index.html#/library/competitors">← 문서 라이브러리로 돌아가기</a>
+  <h1>경쟁사 데모 시각 분석</h1>
+  <div class="meta"><span>기준일: 2026.07.26</span><span>전문가 워크스루 + 사용자 리뷰 교차검증</span><span>Shelterluv · Pawlytics · ASM · PawPlacer</span></div>
+  <p class="conclusion">기능 범위는 4사 모두 유사하다. 펫나우의 기회는 기능 추가보다 현장 기록이 동물 상태·담당자·후속 업무에 반영되기까지의 재입력과 수동 조정을 줄이는 데 있다.</p>
+</header>
+
+<div class="limits-top">
+  <div class="lt-title">분석 조건 · 한계 — 읽기 전에</div>
+  <ul>
+    <li>실제 사용자가 아닌 전문가 1명의 워크스루 — 사용자 만족도·이탈률 확정 불가</li>
+    <li>무료 체험·로그인 데모 계정 — 권한·설정이 실제 운영 계정과 다를 수 있음</li>
+    <li>Pawlytics 저장 무반응: 데모 계정 환경 특성일 수 있음 — 실제 운영 계정 재검증 필요</li>
+    <li>Shelterluv 임보자 계정·입양자 모바일 흐름 미검증 | Petstablished 미착수 | Chameleon/CMS 별도 트랙</li>
+    <li>임시 사용자 역할(R1~R4)은 Gina 인터뷰 후 검증 필요</li>
+  </ul>
+</div>
+
+<section id="method" class="method">
+  <div class="sec-title">검증 설계</div>
+  <div class="method-grid">
+    <article class="method-card">
+      <h3>임시 사용자 역할</h3>
+      <ul>
+        <li><strong>R1 임보 운영 코디네이터</strong> — 임보자 매칭·배치·상태 관리</li>
+        <li><strong>R2 임보자</strong> — 휴대전화로 사진·투약·행동 기록</li>
+        <li><strong>R3 입양 코디네이터</strong> — 신청·계약·결제·인계</li>
+        <li><strong>R4 운영 관리자</strong> — 전체 현황·누락·병목 확인</li>
+      </ul>
+    </article>
+    <article class="method-card">
+      <h3>대표 과업</h3>
+      <ul>
+        <li><strong>T1 신규 동물 등록 및 임보 배치</strong> — 동물·임보자·위치·담당자 연결</li>
+        <li><strong>T2 임보 중 상태 업데이트</strong> — 투약·행동 기록과 후속 업무 연결</li>
+        <li><strong>T3 입양 신청부터 인계 완료</strong> — 신청자·계약·결제·동물 상태 갱신</li>
+      </ul>
+    </article>
+    <article class="method-card">
+      <h3>동일 조건 및 측정 항목</h3>
+      <ul>
+        <li><strong>공통 데이터</strong> — 동물 Milo, 임보자 Alex Kim, 입양 신청자 Jamie Lee</li>
+        <li><strong>정량 측정</strong> — 완료 여부·시간·화면 전환·입력 필드·오류·막힘</li>
+        <li><strong>정성 판단</strong> — 역할 적합성·상태 가시성·복구·연속성·모바일 완결성</li>
+      </ul>
+    </article>
+  </div>
+  <p class="method-note">R1~R4는 미국 쉘터 업무 흐름 조사에서 도출한 검증 전 역할 가설이며, Gina 및 미국 로컬 쉘터 인터뷰 후 수정 필요.</p>
+</section>
+
+<section id="summary" class="summary">
+  <div class="summary-label">핵심 판단</div>
+  <table class="kv-table">
+    <tr><td>분석 완료</td><td>Shelterluv 운영자 계정 1차, Pawlytics·ASM·PawPlacer 데스크톱·모바일 워크스루</td></tr>
+    <tr><td>과업 연결성 우위</td><td>PawPlacer — 동물→임보자→기록→입양→Checkout 흐름이 가장 자연스럽게 연결</td></tr>
+    <tr><td>기능 범위 우위</td><td>Animal Shelter Manager — 의료·행동·임보·입양 기능 깊음. 고밀도 UI와 학습 부담 병존</td></tr>
+    <tr><td>주요 관찰</td><td>Pawlytics 데모에서 사람 레코드 저장 무반응 관찰 (데모 환경 가능성 — 재검증 필요) + 입양 기능 사전 설정 의존성</td></tr>
+    <tr><td>펫나우 적용</td><td>임보자→운영자 업무 인계, 상태·위치·담당자 동시 갱신, 중단 과업 복구, 기존 CRM 병행 사용</td></tr>
+  </table>
+</section>
+
+<div id="timing" class="timing">
+  <div class="timing-title">T1 완료 시간 <span>신규 동물 등록 + 임보 배치</span></div>
+  <div class="t-row"><div class="t-name"><span class="pill pasm">ASM</span></div><div class="t-wrap"><div class="t-bar g" style="width:31%"></div></div><div class="t-stat">2분 43초 · 11개 필드 · 9회 전환</div><div class="tbadge tok">완료</div></div>
+  <div class="t-row"><div class="t-name"><span class="pill ppp">PawPlacer</span></div><div class="t-wrap"><div class="t-bar b" style="width:41%"></div></div><div class="t-stat">3분 35초 · 18개 필드 · 10회 전환</div><div class="tbadge tok">완료</div></div>
+  <div class="t-row"><div class="t-name"><span class="pill ppw">Pawlytics</span></div><div class="t-wrap"><div class="t-bar r" style="width:95%"></div></div><div class="t-stat">8분 16초 · 22개 필드 · 임보 배치 실패*</div><div class="tbadge tfail">실패*</div></div>
+  <div class="t-row"><div class="t-name"><span class="pill psl">Shelterluv</span></div><div class="t-wrap"><div class="t-bar s" style="width:100%"></div></div><div class="t-stat">8분 44초 · 37개 필드 · 16회 전환</div><div class="tbadge tok">완료</div></div>
+  <p style="font-size:11px;color:#9ca3af;margin-top:10px">* 데모 계정 환경 특성 가능성 — 재검증 필요</p>
+</div>
+
+<section id="insights" class="insights">
+  <div class="insights-title">상위 제품 판단</div>
+  <div class="insight">
+    <div class="insight-num">01</div>
+    <div>
+      <div class="insight-title">기능 추가보다 기존 CRM의 실행 부담을 줄이는 것이 진입 기회다</div>
+      <ul class="insight-desc"><li>T1·T2·T3 관련 기능은 4개 제품에서 모두 확인돼 기능 부재만으로는 진입 공백을 설명하기 어려움.</li><li>T1 완료 시간은 ASM 2분 43초, Shelterluv 8분 44초로 최대 3.2배 차이. 입력 필드도 11~37개로 차이.</li><li>리뷰에서는 데이터 이전·교육·외부 연동이 전환 장벽으로 나타나므로, 전체 CRM 교체보다 기존 시스템과 병행하며 실행 부담을 줄이는 접근을 우선 검증해야 함.</li></ul>
+      <div class="insight-links">
+        <a class="ilink top" href="#timing">T1 타이밍 바</a>
+        <a class="ilink asm" href="#ev-asm-t1-form">ASM: 입력 필드 11개</a>
+        <a class="ilink sl" href="#ev-sl-t1-form">Shelterluv: 입력 필드 37개</a>
+      </div>
+    </div>
+  </div>
+  <div class="insight">
+    <div class="insight-num">02</div>
+    <div>
+      <div class="insight-title">검증되지 않은 공백은 모바일 화면이 아니라 임보자→운영자 업무 인계다</div>
+      <ul class="insight-desc"><li>4개 제품 모두 코디네이터와 관리자가 PC에서 기록하는 업무를 중심으로 설계.</li><li>Shelterluv는 일상 관찰 기록이 설정에 의존하고, ASM은 임보 중인 동물이 일상 관찰 목록에서 제외됨.</li><li>리뷰의 현장 기록 최신화·담당자 전달 문제를 함께 보면, 임보자 입력이 운영자 확인과 후속 업무로 연결되는 전체 흐름이 핵심 검증 대상임.</li></ul>
+      <div class="insight-links">
+        <a class="ilink sl" href="#ev-sl-daily-obs">Shelterluv: 일상 관찰 기능 비활성</a>
+        <a class="ilink asm" href="#ev-asm-daily-obs">ASM: 임보 동물의 일상 관찰 목록 제외</a>
+      </div>
+    </div>
+  </div>
+  <div class="insight">
+    <div class="insight-num">03</div>
+    <div>
+      <div class="insight-title">모바일은 ‘화면 적응성’과 ‘역할별 과업 완결성’을 나눠 평가해야 한다</div>
+      <ul class="insight-desc"><li><strong>화면 적응성:</strong> Pawlytics와 ASM은 데스크톱 화면을 축소해 터치 영역이 작고 가로 이동이 필요. PawPlacer는 390px에서 단일 열 카드로 재배치됐고, Shelterluv는 운영자 화면의 반응형 구성을 확인함.</li><li><strong>역할별 과업 완결성:</strong> 임보자가 투약·행동 기록을 저장하고 운영자가 이를 확인해 동물 상태나 후속 업무에 반영하는 전체 과정. 입양자의 계약·결제 후 운영자 화면과 동물 상태가 갱신되는 과정도 포함.</li><li>이번 데모에서는 4개 제품 모두 역할 간 전체 과정을 끝까지 확인하지 못함. 따라서 화면 배치와 별도로 과업 완료 여부·재입력·확인 연락을 측정해야 함.</li></ul>
+      <div class="insight-links">
+        <a class="ilink pp" href="#ev-pp-mobile">PawPlacer: 단일 열 카드 구성</a>
+        <a class="ilink pw" href="#ev-pw-mobile">Pawlytics — 데스크톱 축소</a>
+        <a class="ilink asm" href="#ev-asm-mobile">ASM — 고밀도 축소</a>
+      </div>
+    </div>
+  </div>
+  <div class="insight">
+    <div class="insight-num">04</div>
+    <div>
+      <div class="insight-title">동물 등록과 임보 배치를 따로 처리하면 위치·담당자 정보가 빠질 수 있다</div>
+      <ul class="insight-desc"><li>동물 등록과 임보 배치는 이어지는 업무지만 4개 제품 모두 별도 단계로 처리함.</li><li>등록만 마친 뒤 임보 배치를 누락하거나 일부 정보만 수정하면, 실제로는 임보처로 이동했는데 시스템에는 이전 상태·위치·담당자가 남을 수 있음. 이번 데모에서 누락이 실제로 발생한 것은 아니며, 리뷰의 기록 불일치와 외부 문서 병행 사례를 근거로 도출한 위험임.</li><li>펫나우는 임보 배치를 확정할 때 동물 상태·현재 위치·임보자·배치 시작일·담당 코디네이터·다음 확인 업무를 함께 저장하는 방식을 검증해야 함.</li></ul>
+      <div class="insight-links">
+        <a class="ilink sl" href="#ev-sl-foster">Shelterluv — 별도 이벤트</a>
+        <a class="ilink pp" href="#ev-pp-foster">PawPlacer: 비교 제품 중 단계가 가장 적으나 2단계 필요</a>
+      </div>
+    </div>
+  </div>
+  <div class="insight">
+    <div class="insight-num">05</div>
+    <div>
+      <div class="insight-title">정상 처리 속도와 함께 실패·중단 후 복구 능력을 검증해야 한다</div>
+      <ul class="insight-desc"><li>Pawlytics 데모의 저장 무반응과 Shelterluv의 입력값·저장값 불일치는 실제 운영 계정 재검증이 필요함.</li><li>리뷰에서는 중복·설정·이관 과정의 높은 부담이 나타나 정상 경로만 빠른 제품으로는 운영 문제를 해결하기 어려움.</li><li>저장 상태 표시뿐 아니라 입력값 보존, 미완료 재개, 변경 전후 비교와 이전 상태 복원을 함께 검증해야 함.</li></ul>
+      <div class="insight-links">
+        <a class="ilink pw" href="#ev-pw-save">Pawlytics: 저장 버튼 미작동 화면(재검증 필요)</a>
+        <a class="ilink sl" href="#ev-sl-field-reset">Shelterluv: 입력값과 저장값 불일치</a>
+      </div>
+      <div class="insight-note">데모 계정의 설정·권한에 따른 현상일 수 있어 실제 운영 계정에서 재검증 필요</div>
+    </div>
+  </div>
+</section>
+
+<section id="xc" class="xc">
+  <div class="sec-title">교차 비교</div>
+  <div class="rating-legend" aria-label="판정 기준"><span class="rating good">우수</span><span class="rating mixed">보통·부분 완료</span><span class="rating bad">미흡·차단</span><span class="rating unknown">미검증</span></div>
+  <div style="overflow-x:auto">
+  <table class="xt">
+    <tr><th>평가 항목</th><th>Shelterluv</th><th>Pawlytics</th><th>Animal Shelter Manager</th><th>PawPlacer</th><th>펫나우 기준</th></tr>
+    <tr><td><strong>T1 등록·임보</strong></td><td><span class="rating mixed">완료·부담 큼</span><ul><li>8분 44초</li><li>37개 필드</li></ul></td><td><span class="rating bad">부분 완료·재검증</span><ul><li>동물 등록 완료</li><li>사람 저장 무반응으로 임보 배치 차단</li></ul></td><td><span class="rating good">우수</span><ul><li>2분 43초</li><li>11개 필드</li></ul></td><td><span class="rating good">우수</span><ul><li>3분 35초</li><li>18개 필드</li></ul></td><td><ul><li>등록과 임보 배치 연결</li><li>저장 결과 명시</li></ul></td></tr>
+    <tr><td><strong>T2 투약·행동</strong></td><td><span class="rating unknown">임보자 미검증</span><ul><li>운영자 기록 화면만 확인</li></ul></td><td><span class="rating good">완료</span><ul><li>투약·행동 기록 저장</li></ul></td><td><span class="rating mixed">부분 우수</span><ul><li>기록 완료</li><li>임보 동물은 일상 관찰 목록에서 제외</li></ul></td><td><span class="rating mixed">부분 우수</span><ul><li>기록 완료</li><li>투약 주기 표현이 모호</li></ul></td><td><ul><li>임보자 직접 입력</li><li>“하루 2회” 등 자연어형 주기</li></ul></td></tr>
+    <tr><td><strong>T3 입양·결제</strong></td><td><span class="rating unknown">부분 검증</span><ul><li>운영자 결제 링크 발송까지 확인</li><li>입양자 결제·이후 상태 변경 미확인</li></ul></td><td><span class="rating bad">차단</span><ul><li>입양 기능 미설정</li><li>사람 레코드 문제</li></ul></td><td><span class="rating unknown">완료 직전</span><ul><li>최종 결제·상태 변경 전까지 확인</li></ul></td><td><span class="rating unknown">완료 직전</span><ul><li>Checkout 방식 선택까지 확인</li></ul></td><td><ul><li>실행 전 변경 내용 표시</li><li>취소 가능 여부 안내</li></ul></td></tr>
+    <tr><td><strong>모바일 화면</strong></td><td><span class="rating mixed">운영자 화면 양호</span><ul><li>모바일 폭에 맞춰 재배치</li><li>역할별 전체 과업 미검증</li></ul></td><td><span class="rating bad">미흡</span><ul><li>데스크톱 구조 축소</li><li>작은 터치 영역</li></ul></td><td><span class="rating bad">미흡</span><ul><li>표·입력 화면 축소</li><li>작은 글자와 터치 영역</li></ul></td><td><span class="rating good">우수</span><ul><li>단일 열 카드 재배치</li><li>가로 스크롤 없음</li></ul></td><td><ul><li>390px 단일 열</li><li>표 대신 카드</li><li>역할별 과업은 별도 검증</li></ul></td></tr>
+    <tr><td><strong>오류·복구</strong></td><td><span class="rating bad">미흡</span><ul><li>입력값 초기화</li><li>입력값·저장값 불일치</li></ul></td><td><span class="rating unknown">재검증 필요</span><ul><li>저장 무반응 관찰</li><li>데모 환경 영향 가능</li></ul></td><td><span class="rating unknown">판단 보류</span><ul><li>테스트 범위에서 중대 오류 미관찰</li></ul></td><td><span class="rating unknown">판단 보류</span><ul><li>테스트 범위에서 중대 오류 미관찰</li></ul></td><td><ul><li>저장 중·완료·실패 표시</li><li>재시도·임시 저장·입력값 보존</li></ul></td></tr>
+    <tr><td><strong>초기 학습 부담</strong></td><td><span class="rating bad">부담 있음</span><ul><li>사전 설정 의존 기능</li></ul></td><td><span class="rating bad">부담 있음</span><ul><li>입양 기능 선행 설정</li></ul></td><td><span class="rating bad">부담 큼</span><ul><li>높은 정보·기능 밀도</li></ul></td><td><span class="rating good">상대적 우수</span><ul><li>4개 제품 중 가장 단순한 화면 구조</li></ul></td><td><ul><li>기본 설정으로 대표 과업 시작</li><li>필요할 때 상세 설정</li></ul></td></tr>
+  </table>
+  </div>
+</section>
+
+<section id="dp" class="dp">
+  <div class="sec-title">펫나우 제품 설계 시사점</div>
+  <p style="font-size:13px;color:#6b7280;margin-bottom:20px">상위 제품 판단에서 내려온 기준과 개별 데모 화면에서 확인한 개선점을 구분해 표시.</p>
+  <div class="dp-area"><div class="dp-area-title">신규 동물 등록</div><div class="dp-grid">
+    <div class="dp-card"><span class="basis">상위 판단 ⑤ 연결</span><div class="dp-t">조건 필드 바뀌어도 기존 입력값 유지</div><div class="dp-b">종·견종 선택으로 새 필드 나타나도 이름·나이·메모는 지우지 않는다<br><a class="evidence-ref" href="#ev-sl-field-reset">화면 보기: Shelterluv 종 선택 후 8회 이상 재입력 ↓</a></div></div>
+    <div class="dp-card"><span class="basis observation">데모 화면 관찰</span><div class="dp-t">동물 기본 정보 먼저, 발견자는 나중</div><div class="dp-b">이름·종·나이·성별 등록 후 발견자는 선택 단계<br><a class="evidence-ref" href="#ev-sl-t1-form">화면 보기: Shelterluv 발견자 정보 9개 항목 선행 ↓</a></div></div>
+    <div class="dp-card"><span class="basis">상위 판단 ① 연결</span><div class="dp-t">필수 항목 목표 11개 이하</div><div class="dp-b">나머지는 저장 후 추가 입력으로 유도<br><a class="evidence-ref" href="#ev-asm-t1-form">화면 보기: ASM 11개 필드로 T1 완료 ↓</a></div></div>
+    <div class="dp-card"><span class="basis">상위 판단 ⑤ 연결</span><div class="dp-t">저장된 값을 화면에서 바로 확인</div><div class="dp-b">입력값과 저장값이 다르면 즉시 표시<br><a class="evidence-ref" href="#ev-sl-field-reset">화면 보기: Shelterluv 입력 연령과 저장 연령 불일치 ↓</a></div></div>
+  </div></div>
+  <div class="dp-area"><div class="dp-area-title">임보 배치</div><div class="dp-grid">
+    <div class="dp-card"><span class="basis">상위 판단 ④ 연결</span><div class="dp-t">임보자 선택 → 관련 정보 함께 저장</div><div class="dp-b">동물 상태·현재 위치·임보자·시작일·담당자·다음 확인 업무를 함께 반영<br><a class="evidence-ref" href="#ev-pp-foster">화면 보기: PawPlacer 임보 배치 화면 ↓</a></div></div>
+    <div class="dp-card"><span class="basis">상위 판단 ② 연결</span><div class="dp-t">임보 중 일상 기록 기본 활성화</div><div class="dp-b">행동·식사·이상 상태 기록을 초기 설정 없이 사용<br><a class="evidence-ref" href="#ev-sl-daily-obs">화면 보기: Shelterluv 일상 관찰 기능 비활성 ↓</a><br><a class="evidence-ref" href="#ev-asm-daily-obs">화면 보기: ASM 임보 동물 목록 제외 ↓</a></div></div>
+  </div></div>
+  <div class="dp-area"><div class="dp-area-title">저장·오류 처리</div><div class="dp-grid">
+    <div class="dp-card"><span class="basis">상위 판단 ⑤ 연결</span><div class="dp-t">저장 결과를 모든 화면에서 명시</div><div class="dp-b">저장 중(스피너) / 저장 완료(타임스탬프) / 저장 실패(이유 + 재시도)<br><a class="evidence-ref" href="#ev-pw-save">화면 보기: Pawlytics 저장 버튼 무반응(재검증 필요) ↓</a></div></div>
+    <div class="dp-card"><span class="basis">상위 판단 ⑤ 연결</span><div class="dp-t">저장 실패해도 입력값 유지</div><div class="dp-b">재입력 없이 재시도 가능. 임시 저장으로 보호</div></div>
+  </div></div>
+  <div class="dp-area"><div class="dp-area-title">투약·행동 기록</div><div class="dp-grid">
+    <div class="dp-card"><span class="basis observation">데모 화면 관찰</span><div class="dp-t">투약 빈도는 선택지로 입력</div><div class="dp-b">"하루 1회" "하루 2회" "격일" "필요시" 중 선택<br>수량과 단위를 조합하는 방식은 사용하지 않음<br><a class="evidence-ref" href="#ev-pp-medication">화면 보기: PawPlacer 투약 주기 입력 ↓</a></div></div>
+    <div class="dp-card"><span class="basis">상위 판단 ② 연결</span><div class="dp-t">임보자가 직접 기록을 남길 수 있다</div><div class="dp-b">코디네이터가 대신 입력하는 구조에 의존하지 않는다<br><a class="evidence-ref" href="#ev-sl-daily-obs">화면 보기: Shelterluv 운영자 화면 대체 검증 ↓</a></div></div>
+  </div></div>
+  <div class="dp-area"><div class="dp-area-title">입양·결제</div><div class="dp-grid">
+    <div class="dp-card"><span class="basis observation">데모 화면 관찰</span><div class="dp-t">입양 처리 전 미완료 조건 먼저 표시</div><div class="dp-b">마이크로칩 미등록, 중성화 미완료, 접종 기한 경과 등<br>미완료 조건을 무시하고 진행하면 기록에 남김<br><a class="evidence-ref" href="#ev-sl-payment">화면 보기: Shelterluv 마이크로칩 미등록 경고 ↓</a></div></div>
+    <div class="dp-card"><span class="basis observation">데모 화면 관찰</span><div class="dp-t">되돌리기 어려운 동작 전 변경 내용 표시</div><div class="dp-b">결제·계약·상태 변경 전에 실행 결과와 취소 가능 여부 안내<br><a class="evidence-ref" href="#ev-asm-adoption">화면 보기: ASM 최종 실행 전 확인 ↓</a><br><a class="evidence-ref" href="#ev-pp-adoption">화면 보기: PawPlacer 최종 실행 전 확인 ↓</a></div></div>
+    <div class="dp-card"><span class="basis observation">데모 화면 관찰</span><div class="dp-t">결제 링크 발송만으로 입양 완료 처리하지 않음</div><div class="dp-b">결제와 계약이 끝난 뒤 동물 상태를 입양 완료로 변경<br><a class="evidence-ref" href="#ev-sl-status">화면 보기: Shelterluv 결제 대기 중 상태 유지 ↓</a></div></div>
+  </div></div>
+  <div class="dp-area"><div class="dp-area-title">모바일</div><div class="dp-grid">
+    <div class="dp-card avoid"><span class="basis">상위 판단 ③ 연결</span><div class="dp-t">데스크톱 화면을 그대로 축소하지 않음</div><div class="dp-b">390px 기준으로 핵심 과업 완료 흐름을 별도 설계<br><a class="evidence-ref" href="#ev-pw-mobile">화면 보기: Pawlytics 모바일 화면 ↓</a><br><a class="evidence-ref" href="#ev-asm-mobile">화면 보기: ASM 모바일 화면 ↓</a></div></div>
+    <div class="dp-card"><span class="basis">상위 판단 ③ 연결</span><div class="dp-t">목록 화면은 표 대신 카드</div><div class="dp-b">가로 스크롤을 없애고 주요 버튼을 화면 하단에 고정<br><a class="evidence-ref" href="#ev-pp-mobile">화면 보기: PawPlacer 단일 열 카드 ↓</a></div></div>
+  </div></div>
+  <div class="dp-area"><div class="dp-area-title">도입·연동</div><div class="dp-grid">
+    <div class="dp-card"><span class="basis">상위 판단 ① 연결</span><div class="dp-t">기존 CRM과 병행해 사용할 수 있게 시작</div><div class="dp-b">운영자가 변경 내용을 확인한 뒤 내보내고, 실제 사용이 검증된 항목부터 자동 동기화</div></div>
+  </div></div>
+</section>
+
+<section id="next" class="next">
+  <div class="sec-title">남은 검증 항목</div>
+  <div style="overflow-x:auto">
+    <table class="xt">
+      <tr><th>제품</th><th>추가 확인이 필요한 항목</th></tr>
+      <tr><td>Shelterluv</td><td><span class="status">부분 검증</span>모바일 T1 저장, 임보자 직접 입력, 입양자 계약·서명·결제와 결제 후 상태 변경, Daily Observations 설정 후 재검증</td></tr>
+      <tr><td>Pawlytics</td><td><span class="status">재검증</span>실제 운영 계정의 사람 레코드 저장, 입양 설정 완료 후 T1 임보 배치와 T3 입양·결제 재검증</td></tr>
+      <tr><td>Animal Shelter Manager</td><td><span class="status">부분 검증</span>임보자 Daily Observations 경로와 승인된 환경의 최종 입양 실행</td></tr>
+      <tr><td>PawPlacer</td><td><span class="status">부분 검증</span>Checkout 이후 동물 상태 변경과 투약 빈도 단위에 대한 사용자 이해</td></tr>
+      <tr><td>Petstablished</td><td><span class="status">미착수</span>실제 기관 정보 사용 승인 또는 예약형 데모 확보 후 동일 과업 수행</td></tr>
+      <tr><td>Chameleon/CMS</td><td><span class="status">별도 트랙</span>공공기관용 대표 과업 설계와 영업 데모 확보 후 분석 여부 결정</td></tr>
+    </table>
+  </div>
+</section>
+
+<nav class="snav">
+  <a href="#sl" class="sl">Shelterluv</a>
+  <a href="#pw" class="pw">Pawlytics</a>
+  <a href="#asm" class="asm">Animal Shelter Manager</a>
+  <a href="#pp" class="pp">PawPlacer</a>
+</nav>
+
+<!-- SHELTERLUV -->
+<section id="sl" class="ps ps-sl">
+  <div class="ps-hd"><span class="ps-name">Shelterluv</span><span class="tbk tb-partial">T1 완료 — 8분 44초</span><span class="tbk tb-partial">T2 부분 완료</span><span class="tbk tb-partial">T3 부분 완료</span><span class="ps-note">무료 체험 계정 DEMO_2850 · 데스크톱+모바일</span></div>
+  <div class="ts">
+    <div class="ts-head"><span class="ts-label">T1 신규 등록 · 임보 배치</span><span class="ts-m warn">8분 44초</span><span class="ts-m">37개 필드</span><span class="ts-m">16회 전환</span><span class="ts-m bad">재입력 8회+</span></div>
+    <div id="ev-sl-t1-form" class="ev"><div class="ev-img"><img src="assets/shelterluv-evidence/SL-T1-01-intake-form.png" alt="Stray Intake 초기 양식"></div><div class="ev-txt"><div class="ev-badges"><span class="pill psl">Shelterluv</span><span class="sc-tag tag-warn">단계 증가</span></div><div class="ev-title">Stray Intake — 발견자 정보가 먼저</div><div class="ev-desc">동물 정보보다 발견자 이름·주소·전화·이메일 등 9개 항목이 먼저 나온다. 동물 등록 전에 사람 레코드 생성이 선행 조건.</div><div class="ev-impl"><strong>→ 펫나우</strong>동물 기본 정보를 먼저, 발견자는 이후 단계로 분리</div></div></div>
+    <div class="ev"><div class="ev-img"><img src="assets/shelterluv-evidence/SL-T1-02-intake-completed.png" alt="제출 전 전체 양식"></div><div class="ev-txt"><div class="ev-badges"><span class="pill psl">Shelterluv</span><span class="sc-tag tag-warn">고밀도 입력</span></div><div class="ev-title">제출 전 전체 양식 — 37개 필드 단일 스크롤</div><div class="ev-desc">동물 종·견종·색상·의료·메모·담당자·임보 정보까지 단일 폼에 집중. 모바일에서 긴 세로 스크롤 발생.</div><div class="ev-impl"><strong>→ 펫나우</strong>필수 항목 11개 이하 목표. 나머지는 저장 후 추가</div></div></div>
+    <div id="ev-sl-field-reset" class="ev"><div class="ev-img"><img src="assets/shelterluv-evidence/SL-T1-03-intake-validation-recovered.png" alt="종 선택 후 필드 초기화"></div><div class="ev-txt"><div class="ev-badges"><span class="pill psl">Shelterluv</span><span class="sc-tag tag-bad">오류 예방 미흡</span></div><div class="ev-title">종·견종 선택 → 앞서 입력한 값이 사라진다</div><div class="ev-desc">동적 필드 노출 시 상태 검토일·메모·연령이 초기화. T1 데모에서 8회 이상 재입력 발생. 저장 후 "2세"가 "0Y/5M/0D · Puppy"로 표시되는 입력값·저장값 불일치도 확인.</div><div class="ev-impl"><strong>→ 펫나우</strong>조건 필드 변경 시 기존 입력 보존. 저장된 값 즉시 확인 가능</div></div></div>
+    <div class="ev"><div class="ev-img"><img src="assets/shelterluv-evidence/SL-T1-04-intake-success.png" alt="동물 기록 생성 완료"></div><div class="ev-txt"><div class="ev-badges"><span class="pill psl">Shelterluv</span><span class="sc-tag tag-note">등록 완료</span></div><div class="ev-title">동물 기록 생성 완료 — 저장값 확인</div><div class="ev-desc">기록 생성 성공. 단, 연령 필드에서 입력값 "2세"가 "0Y/5M/0D"로 저장. 입양 판단·의료 일정 오류 위험.</div></div></div>
+    <div id="ev-sl-foster" class="ev"><div class="ev-img"><img src="assets/shelterluv-evidence/SL-T1-05-foster-placement-success.png" alt="Alex Kim 임보 배치 성공"></div><div class="ev-txt"><div class="ev-badges"><span class="pill psl">Shelterluv</span><span class="sc-tag tag-note">별도 이벤트</span></div><div class="ev-title">임보 배치 성공 — 등록과 별도 단계</div><div class="ev-desc">동물 등록과 임보 배치가 별도 이벤트로 분리. 등록 완료 후 별도 화면에서 Alex Kim 연결.</div><div class="ev-impl"><strong>→ 펫나우</strong>임보자 선택 시 상태·시작일·관계 연결이 한 번에 처리</div></div></div>
+  </div>
+  <div class="ts">
+    <div class="ts-head"><span class="ts-label">T2 투약·행동 기록</span><span class="ts-m warn">부분 완료</span><span class="ts-m">약 2분</span><span class="ts-m bad">임보자 계정 미확보</span></div>
+    <div id="ev-sl-daily-obs" class="ev"><div class="ev-img"><img src="assets/shelterluv-evidence/SL-M-T2-observations.png" alt="Daily Observations 비활성"></div><div class="ev-txt"><div class="ev-badges"><span class="pill psl">Shelterluv</span><span class="sc-tag tag-bad">설정 의존성</span></div><div class="ev-title">Daily Observations — 선행 설정 없이 비활성</div><div class="ev-desc">Configuration → General → Daily Observations 선행 설정 없이는 기능 비활성. 신규 계정에서 임보자의 일상 기록 즉시 사용 불가.</div><div class="ev-impl"><strong>→ 펫나우</strong>일상 관찰 기록이 초기 설정 없이 기본 활성화</div></div></div>
+    <div class="ev"><div class="ev-img"><img src="assets/shelterluv-evidence/SL-M-T2-treatments.png" alt="투약 Treatments 화면"></div><div class="ev-txt"><div class="ev-badges"><span class="pill psl">Shelterluv</span><span class="sc-tag tag-good">데이터 가시성 우수</span></div><div class="ev-title">투약 Treatments — 유형·작성자·일시 표시</div><div class="ev-desc">의료·행동 메모 입력 시 유형·작성자·작성일이 함께 저장. 단, 임보자 계정 직접 입력 흐름은 미검증.</div></div></div>
+  </div>
+  <div class="ts">
+    <div class="ts-head"><span class="ts-label">T3 입양 · 계약 · 결제</span><span class="ts-m warn">부분 완료</span><span class="ts-m">약 2분 30초</span></div>
+    <div id="ev-sl-payment" class="ev"><div class="ev-img"><img src="assets/shelterluv-evidence/SL-T3-01-payment-approval-boundary.png" alt="결제 전 Missing Microchip 경고"></div><div class="ev-txt"><div class="ev-badges"><span class="pill psl">Shelterluv</span><span class="sc-tag tag-good">선행조건 경고 우수</span></div><div class="ev-title">결제 직전 — Missing Microchip 경고 + 자동 입양비</div><div class="ev-desc">$200 결제 전 Missing Microchip 경고 표시. 등록된 입양비 $200가 자동으로 장바구니에 반영.</div><div class="ev-impl"><strong>→ 펫나우</strong>입양 처리 전 블로커 목록 표시. 되돌리기 어려운 동작 전 영향 범위 요약</div></div></div>
+    <div class="ev"><div class="ev-img"><img src="assets/shelterluv-evidence/SL-T3-02-checkout-sent.png" alt="Checkout Sent 상태"></div><div class="ev-txt"><div class="ev-badges"><span class="pill psl">Shelterluv</span><span class="sc-tag tag-good">상태 가시성 우수</span></div><div class="ev-title">결제 링크 발송 → Checkout Sent 즉시 반영</div><div class="ev-desc">링크 발송 후 Cart Manager 상태가 "Checkout Sent"로 즉시 변경.</div></div></div>
+    <div id="ev-sl-status" class="ev"><div class="ev-img"><img src="assets/shelterluv-evidence/SL-T3-03-status-pending-payment.png" alt="결제 대기 중 Milo 상태 유지"></div><div class="ev-txt"><div class="ev-badges"><span class="pill psl">Shelterluv</span><span class="sc-tag tag-good">상태 동기화 우수</span></div><div class="ev-title">결제 대기 중 — 동물 상태 조기 변경 없음</div><div class="ev-desc">결제 링크 발송 후에도 Milo 상태가 "Available Foster"로 유지. 결제·계약 완료 전 입양 완료 상태로 조기 전환 없음.</div><div class="ev-impl"><strong>→ 펫나우</strong>결제 링크 발송 후 동물 상태를 바로 입양 완료로 바꾸지 않음</div></div></div>
+  </div>
+  <div class="ts">
+    <div class="ts-head"><span class="ts-label">모바일 (390×844px · 운영자 화면)</span><span class="ts-m done">반응형 설계 확인</span></div>
+    <div class="ev"><div class="ev-img"><img src="assets/shelterluv-evidence/SL-M-T1-dashboard.png" alt="모바일 대시보드"></div><div class="ev-txt"><div class="ev-badges"><span class="pill psl">Shelterluv</span><span class="sc-tag tag-good">반응형 설계</span></div><div class="ev-title">모바일 대시보드 — 데스크톱 단순 축소 아님</div><div class="ev-desc">햄버거 메뉴·카드·축약 화면 제공. 데스크톱 화면을 단순히 줄인 것이 아닌 모바일용 구조 확인.</div></div></div>
+    <div class="ev"><div class="ev-img"><img src="assets/shelterluv-evidence/SL-M-T1-intake-form.png" alt="모바일 Intake 양식"></div><div class="ev-txt"><div class="ev-badges"><span class="pill psl">Shelterluv</span><span class="sc-tag tag-warn">필드 수 부담</span></div><div class="ev-title">모바일 T1 폼 — 37개 필드 긴 스크롤</div><div class="ev-desc">저장 버튼까지 노출 확인. 약 37개 필드의 긴 세로 스크롤 부담. 모바일 저장 완료는 미재검증.</div><div class="ev-impl"><strong>→ 펫나우</strong>모바일 등록 폼은 단계별 분리</div></div></div>
+    <div class="ev"><div class="ev-img"><img src="assets/shelterluv-evidence/SL-M-T3-cart-status.png" alt="모바일 Cart 상태"></div><div class="ev-txt"><div class="ev-badges"><span class="pill psl">Shelterluv</span><span class="sc-tag tag-good">상태 모바일 접근 가능</span></div><div class="ev-title">모바일 T3 — Cart 상태 카드 형태 노출</div><div class="ev-desc">운영자 계정에서 Cart Manager, Checkout Sent 상태가 모바일 카드 형태로 노출.</div></div></div>
+  </div>
+</section>
+
+<!-- PAWLYTICS -->
+<section id="pw" class="ps ps-pw">
+  <div class="ps-hd"><span class="ps-name">Pawlytics</span><span class="tbk tb-partial">T1 부분 완료 — 임보 배치 실패*</span><span class="tbk tb-done">T2 완료</span><span class="tbk tb-block">T3 차단</span><span class="ps-note">* 데모 계정 특성 가능성 — 재검증 필요</span></div>
+  <div class="ts">
+    <div class="ts-head"><span class="ts-label">T1 신규 등록 · 임보 배치</span><span class="ts-m bad">임보 배치 실패 (재검증 필요)</span><span class="ts-m">약 8분 16초</span></div>
+    <div class="ev"><div class="ev-img"><img src="assets/competitor-evidence/pawlytics/PW-T1-01-add-pet-form.png" alt="동물 등록 폼"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppw">Pawlytics</span><span class="sc-tag tag-note">T1 시작</span></div><div class="ev-title">동물 등록 폼</div><div class="ev-desc">이름·종·나이·성별·색상 등 기본 정보 입력. 동물 기록 생성까지는 정상 완료.</div></div></div>
+    <div class="ev"><div class="ev-img"><img src="assets/competitor-evidence/pawlytics/PW-T1-02-pet-created.png" alt="동물 기록 생성 완료"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppw">Pawlytics</span><span class="sc-tag tag-good">동물 등록 완료</span></div><div class="ev-title">동물 기록 생성 완료</div><div class="ev-desc">동물 프로필 생성 성공. 이후 임보자 연결을 위해 사람 레코드 생성 단계로 이동.</div></div></div>
+    <div id="ev-pw-save" class="ev"><div class="ev-img"><img src="assets/competitor-evidence/pawlytics/PW-T1-03-foster-form.png" alt="임보자 폼 저장 무반응"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppw">Pawlytics</span><span class="sc-tag tag-warn">관찰 — 재검증 필요</span></div><div class="ev-title">임보자 폼 저장 무반응 (데모 계정에서 관찰)</div><div class="ev-desc">임보자 정보 입력 후 저장 → 아무 반응 없음. 오류 메시지도, 다음 화면도 없음. T1 임보 배치 차단. 데모 계정 환경 특성 가능성 있음 — 실제 운영 계정에서 재검증 필요.</div><div class="ev-impl"><strong>→ 펫나우 (환경과 무관한 설계 기준)</strong>저장 결과를 명시 (저장 중 / 완료 / 실패+재시도). 실패해도 입력값 유지</div></div></div>
+  </div>
+  <div class="ts">
+    <div class="ts-head"><span class="ts-label">T2 투약·행동 기록</span><span class="ts-m done">완료</span><span class="ts-m">약 2분</span></div>
+    <div class="ev"><div class="ev-img"><img src="assets/competitor-evidence/pawlytics/PW-T2-01-medical-form.png" alt="투약 입력"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppw">Pawlytics</span><span class="sc-tag tag-good">입력 간결</span></div><div class="ev-title">의료 기록 입력 — 간결</div><div class="ev-desc">필드 수가 적어 빠른 입력 가능. T1과 달리 T2 저장은 정상 동작.</div></div></div>
+    <div class="ev"><div class="ev-img"><img src="assets/competitor-evidence/pawlytics/PW-T2-02-medical-saved.png" alt="의료 저장 완료"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppw">Pawlytics</span><span class="sc-tag tag-good">T2 저장 정상</span></div><div class="ev-title">의료 기록 저장 완료</div><div class="ev-desc">작성자·저장 시간과 함께 저장. T1에서 저장 무반응이 T2에서는 정상 동작.</div></div></div>
+    <div class="ev"><div class="ev-img"><img src="assets/competitor-evidence/pawlytics/PW-T2-03-behavior-note-saved.png" alt="행동 기록 저장"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppw">Pawlytics</span><span class="sc-tag tag-good">T2 완료</span></div><div class="ev-title">행동 기록 저장 완료</div><div class="ev-desc">Notes에 행동 기록 입력 및 저장. 작성자·시간 표시.</div></div></div>
+  </div>
+  <div class="ts">
+    <div class="ts-head"><span class="ts-label">T3 입양 · 결제</span><span class="ts-m bad">차단</span></div>
+    <div class="ev"><div class="ev-img"><img src="assets/competitor-evidence/pawlytics/PW-T3-01-adoption-outcome-blocked.png" alt="입양 기능 차단"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppw">Pawlytics</span><span class="sc-tag tag-bad">T3 완전 차단</span></div><div class="ev-title">입양 기능 미활성 · 입양자 레코드 부재</div><div class="ev-desc">입양 기능 미설정 및 입양자 레코드 부재로 T3 차단.</div></div></div>
+  </div>
+  <div class="ts">
+    <div class="ts-head"><span class="ts-label">모바일</span><span class="ts-m bad">데스크톱 구조 유지</span></div>
+    <div id="ev-pw-mobile" class="ev"><div class="ev-img"><img src="assets/competitor-evidence/pawlytics/PW-M-03-pet-detail-loaded.png" alt="Pawlytics 모바일 동물 상세"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppw">Pawlytics</span><span class="sc-tag tag-bad">모바일 최적화 미흡</span></div><div class="ev-title">모바일 — 데스크톱 카드 배열 그대로</div><div class="ev-desc">단일 열 재배치 없이 데스크톱 내비게이션·카드 축소. 터치 대상이 작고 가로 이동 의존.</div><div class="ev-impl"><strong>→ 펫나우</strong>390px 기준으로 흐름을 별도 설계. 표 대신 카드. 하단 행동 고정</div></div></div>
+  </div>
+</section>
+
+<!-- ASM -->
+<section id="asm" class="ps ps-asm">
+  <div class="ps-hd"><span class="ps-name">Animal Shelter Manager</span><span class="tbk tb-done">T1 완료 — 2분 43초</span><span class="tbk tb-done">T2 완료</span><span class="tbk tb-before">T3 완료 직전</span><span class="ps-note">로그인 데모 · 데스크톱+모바일</span></div>
+  <div class="ts">
+    <div class="ts-head"><span class="ts-label">T1 신규 등록 · 임보 배치</span><span class="ts-m done">완료 — 2분 43초 (4사 최단)</span><span class="ts-m">11개 필드 · 9회 전환</span></div>
+    <div id="ev-asm-t1-form" class="ev"><div class="ev-img"><img src="assets/competitor-evidence/animal-shelter-manager/ASM-T1-01-animal-and-foster-form.png" alt="ASM 동물·임보자 폼"></div><div class="ev-txt"><div class="ev-badges"><span class="pill pasm">ASM</span><span class="sc-tag tag-good">최소 필드 기준점</span></div><div class="ev-title">동물·임보자 폼 — 11개 필드로 T1 완료</div><div class="ev-desc">Shelterluv 37개 대비 필드 수 70% 절감. 기능 범위는 4사 중 가장 넓지만 핵심 과업의 입력 밀도는 가장 낮다.</div><div class="ev-impl"><strong>→ 펫나우</strong>"최소 필드로 핵심 과업 완료"의 기준점. 목표 11개 이하</div></div></div>
+    <div class="ev"><div class="ev-img"><img src="assets/competitor-evidence/animal-shelter-manager/ASM-T1-02-animal-created.png" alt="동물 기록 생성"></div><div class="ev-txt"><div class="ev-badges"><span class="pill pasm">ASM</span><span class="sc-tag tag-good">등록 완료 — 오류 없음</span></div><div class="ev-title">동물 기록 생성 완료</div><div class="ev-desc">동물 등록이 빠르게 완료. 오류 없음. 이후 임보자 위치 배치 화면으로 자연스럽게 이동.</div></div></div>
+    <div class="ev"><div class="ev-img"><img src="assets/competitor-evidence/animal-shelter-manager/ASM-T1-03-foster-confirmed.png" alt="임보 배치 확인"></div><div class="ev-txt"><div class="ev-badges"><span class="pill pasm">ASM</span><span class="sc-tag tag-good">T1 완료</span></div><div class="ev-title">임보 배치 확인 완료</div><div class="ev-desc">동물·임보자 생성과 Foster 위치 배치 완료. T1 전체 2분 43초로 완주.</div></div></div>
+  </div>
+  <div class="ts">
+    <div class="ts-head"><span class="ts-label">T2 투약·행동 기록</span><span class="ts-m done">완료</span><span class="ts-m">약 1분 43초</span></div>
+    <div class="ev"><div class="ev-img"><img src="assets/competitor-evidence/animal-shelter-manager/ASM-T2-01-medical-regimen.png" alt="의료 Regimen 설정"></div><div class="ev-txt"><div class="ev-badges"><span class="pill pasm">ASM</span><span class="sc-tag tag-good">의료 기능 깊음</span></div><div class="ev-title">의료 Regimen — 구조적 투약 일정</div><div class="ev-desc">Medical regimen으로 하루 2회 투약 일정을 구조적으로 등록 가능.</div></div></div>
+    <div class="ev"><div class="ev-img"><img src="assets/competitor-evidence/animal-shelter-manager/ASM-T2-02-medical-saved.png" alt="의료 저장 완료"></div><div class="ev-txt"><div class="ev-badges"><span class="pill pasm">ASM</span><span class="sc-tag tag-good">저장 완료</span></div><div class="ev-title">의료 기록 저장</div><div class="ev-desc">투약 정보 저장. 기록 유형·작성자·일시가 함께 저장.</div></div></div>
+    <div id="ev-asm-daily-obs" class="ev"><div class="ev-img"><img src="assets/competitor-evidence/animal-shelter-manager/ASM-T2-03-behavior-log-success.png" alt="행동 기록 저장"></div><div class="ev-txt"><div class="ev-badges"><span class="pill pasm">ASM</span><span class="sc-tag tag-warn">임보 동물 Daily Obs 제외</span></div><div class="ev-title">행동 기록 History 저장 — 임보 동물은 Daily Obs 제외</div><div class="ev-desc">행동 History 저장 완료. 단, 임보 동물은 Daily Observations 목록에서 제외됨 확인.</div><div class="ev-impl"><strong>→ 펫나우</strong>임보 중인 동물도 일상 관찰 기록 기본 활성화</div></div></div>
+  </div>
+  <div class="ts">
+    <div class="ts-head"><span class="ts-label">T3 입양 · 결제</span><span class="ts-m">완료 직전</span><span class="ts-m">약 40초</span></div>
+    <div id="ev-asm-adoption" class="ev"><div class="ev-img"><img src="assets/competitor-evidence/animal-shelter-manager/ASM-T3-01-payment-contract-boundary.png" alt="결제·계약 실행 직전 경계"></div><div class="ev-txt"><div class="ev-badges"><span class="pill pasm">ASM</span><span class="sc-tag tag-good">위험 동작 전 확인</span></div><div class="ev-title">결제·계약 실행 직전 경계 확인</div><div class="ev-desc">입양자·동물·결제·서류 옵션 확인 후 결제 기록·상태 변경·계약 이메일 실행 전 중단. 실행 전 영향 범위가 명시됨.</div><div class="ev-impl"><strong>→ 펫나우</strong>결제·계약·상태 변경 전 영향 범위 요약 + 취소 가능 여부 표시</div></div></div>
+  </div>
+  <div class="ts">
+    <div class="ts-head"><span class="ts-label">모바일</span><span class="ts-m bad">고밀도 데스크톱 축소</span></div>
+    <div id="ev-asm-mobile" class="ev"><div class="ev-img"><img src="assets/competitor-evidence/animal-shelter-manager/ASM-M-01-animal-detail.png" alt="ASM 모바일 동물 상세"></div><div class="ev-txt"><div class="ev-badges"><span class="pill pasm">ASM</span><span class="sc-tag tag-bad">데스크톱 단순 축소</span></div><div class="ev-title">모바일 — 고정 폭 표·탭 축소</div><div class="ev-desc">고정 폭 표·탭·폼을 축소 표시해 터치 대상과 텍스트가 매우 작음. 정보 밀도 유지로 모바일 가독성 낮음.</div></div></div>
+  </div>
+</section>
+
+<!-- PAWPLACER -->
+<section id="pp" class="ps ps-pp">
+  <div class="ps-hd"><span class="ps-name">PawPlacer</span><span class="tbk tb-done">T1 완료 — 3분 35초</span><span class="tbk tb-done">T2 완료</span><span class="tbk tb-before">T3 완료 직전</span><span class="ps-note">로그인 데모 · 과업 연결성 4사 최우수</span></div>
+  <div class="ts">
+    <div class="ts-head"><span class="ts-label">T1 신규 등록 · 임보 배치</span><span class="ts-m done">완료</span><span class="ts-m">약 3분 35초</span><span class="ts-m">18개 필드 · 10회 전환</span></div>
+    <div class="ev"><div class="ev-img"><img src="assets/competitor-evidence/pawplacer/PP-T1-01-add-pet-form.png" alt="동물 등록 폼"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppp">PawPlacer</span><span class="sc-tag tag-good">현대적 UI</span></div><div class="ev-title">동물 등록 폼 — 동물 정보에 바로 진입</div><div class="ev-desc">현대적 UI로 동물 기본 정보 입력. 발견자 선행 입력 없이 동물 정보에 바로 진입.</div></div></div>
+    <div class="ev"><div class="ev-img"><img src="assets/competitor-evidence/pawplacer/PP-T1-02-pet-created.png" alt="동물 기록 생성 완료"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppp">PawPlacer</span><span class="sc-tag tag-good">흐름 연결 우수</span></div><div class="ev-title">동물 기록 생성 → 임보자 연결 단계로 자연스럽게</div><div class="ev-desc">프로필 생성 성공. 곧바로 임보자 연결 단계로 흐름이 이어짐.</div></div></div>
+    <div class="ev"><div class="ev-img"><img src="assets/competitor-evidence/pawplacer/PP-T1-03-foster-form.png" alt="임보자 연결 폼"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppp">PawPlacer</span><span class="sc-tag tag-good">저장 신뢰성 확인</span></div><div class="ev-title">임보자 연결 폼 — 저장 정상</div><div class="ev-desc">임보자 정보 입력 후 저장 정상 동작.</div></div></div>
+    <div id="ev-pp-foster" class="ev"><div class="ev-img"><img src="assets/competitor-evidence/pawplacer/PP-T1-04-foster-assignment.png" alt="임보 배치 단일 처리"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppp">PawPlacer</span><span class="sc-tag tag-good">임보 배치 단일 처리 최우수</span></div><div class="ev-title">임보 배치 — 상태·시작일·관계 한 화면</div><div class="ev-desc">동물 선택 후 임보자 연결, Fostered 상태 변경, 관계 시작일이 단일 화면에서 동시 처리. 4사 중 가장 매끄럽지만 동물 생성과는 여전히 별도 단계.</div><div class="ev-impl"><strong>→ 펫나우</strong>임보자 선택 시 ① 상태 변경 ② 시작일 기본값 ③ 관계 연결이 한 번에</div></div></div>
+  </div>
+  <div class="ts">
+    <div class="ts-head"><span class="ts-label">T2 투약·행동 기록</span><span class="ts-m done">완료</span><span class="ts-m">약 2분</span></div>
+    <div id="ev-pp-medication" class="ev"><div class="ev-img"><img src="assets/competitor-evidence/pawplacer/PP-T2-02-prescription-confirmed.png" alt="투약 처방 확인"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppp">PawPlacer</span><span class="sc-tag tag-warn">투약 주기 표현 모호</span></div><div class="ev-title">투약 처방 — 수량·단위 조합 의미 모호</div><div class="ev-desc">투약 빈도를 수량·단위 조합으로 입력. 의미가 모호해 자유 메모로 보완 필요.</div><div class="ev-impl"><strong>→ 펫나우</strong>"하루 1회" "하루 2회" "격일" 등 선택지로 입력. 수량×단위 조합 금지</div></div></div>
+    <div class="ev"><div class="ev-img"><img src="assets/competitor-evidence/pawplacer/PP-T2-03-behavior-note-saved.png" alt="행동 기록 저장"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppp">PawPlacer</span><span class="sc-tag tag-good">T2 완료</span></div><div class="ev-title">행동 기록 저장</div><div class="ev-desc">행동 메모 입력 및 저장 완료. 작성자·시간 기록.</div></div></div>
+  </div>
+  <div class="ts">
+    <div class="ts-head"><span class="ts-label">T3 입양 · 결제</span><span class="ts-m">완료 직전</span><span class="ts-m">약 3분</span></div>
+    <div id="ev-pp-adoption" class="ev"><div class="ev-img"><img src="assets/competitor-evidence/pawplacer/PP-T3-03-adoption-boundary.png" alt="Checkout 분기 직전"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppp">PawPlacer</span><span class="sc-tag tag-good">결제 분기 설계 우수</span></div><div class="ev-title">Checkout — QR / 현장 즉시 완료 분기 확인</div><div class="ev-desc">입양자 생성, Milo Pending 연결, Checkout QR과 현장 즉시 완료 분기까지 확인 후 실행 전 중단.</div></div></div>
+  </div>
+  <div class="ts">
+    <div class="ts-head"><span class="ts-label">모바일</span><span class="ts-m done">단일 열 재배치 — 4사 최우수</span></div>
+    <div id="ev-pp-mobile" class="ev"><div class="ev-img"><img src="assets/competitor-evidence/pawplacer/PP-M-01-adoption-boundary.png" alt="PawPlacer 모바일 입양 카드"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppp">PawPlacer</span><span class="sc-tag tag-good">단일 열 재배치 최우수</span></div><div class="ev-title">모바일 — 단일 열 카드로 재배치</div><div class="ev-desc">입양 방법 선택이 단일 열 카드로 재배치. 가로 스크롤 없이 노출. Pawlytics·ASM의 데스크톱 축소 방식과 명확히 다름.</div><div class="ev-impl"><strong>→ 펫나우</strong>390px 단일 열, 표 대신 카드, 가로 스크롤 없는 레이아웃의 실증 기준</div></div></div>
+  </div>
+</section>
+
+<div class="source-note">
+  <strong>문서 기준</strong> — 분석 기준일 2026.07.26 · 원문 <code>analysis/경쟁사_데모_UIUX_통합분석.md</code> · 화면 증거 38개(Shelterluv 14개, Pawlytics·Animal Shelter Manager·PawPlacer 24개) · 전문가 워크스루 결과이며 실제 사용자 테스트 아님
+</div>
+</main>
+<aside class="demo-toc" aria-label="문서 목차">
+  <strong>문서 목차</strong>
+  <a href="#overview">개요·분석 한계</a>
+  <a href="#method">검증 설계</a>
+  <a href="#summary">핵심 판단</a>
+  <a href="#timing">T1 완료 시간</a>
+  <a href="#insights">상위 제품 판단</a>
+  <a href="#xc">4개 제품 교차 비교</a>
+  <a href="#dp">펫나우 설계 시사점</a>
+  <a href="#next">남은 검증 항목</a>
+  <div class="toc-divider"></div>
+  <a class="toc-sub" href="#sl">Shelterluv 화면</a>
+  <a class="toc-sub" href="#pw">Pawlytics 화면</a>
+  <a class="toc-sub" href="#asm">Animal Shelter Manager 화면</a>
+  <a class="toc-sub" href="#pp">PawPlacer 화면</a>
+</aside>
+</div>
+<script>
+  const demoSidebar = document.querySelector('#demo-sidebar');
+  document.querySelector('#demo-menu').addEventListener('click', () => demoSidebar.classList.toggle('open'));
+  demoSidebar.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => demoSidebar.classList.remove('open')));
+  const tocLinks = [...document.querySelectorAll('.demo-toc a')];
+  const tocSections = tocLinks.map((link) => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+  function updateToc() {
+    const position = window.scrollY + 140;
+    let current = tocSections[0];
+    tocSections.forEach((section) => { if (section.offsetTop <= position) current = section; });
+    tocLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${current.id}`));
+  }
+  tocLinks.forEach((link) => link.addEventListener('click', (event) => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (!target) return;
+    event.preventDefault();
+    history.replaceState(null, '', link.getAttribute('href'));
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
+  window.addEventListener('scroll', updateToc, { passive: true });
+  window.addEventListener('load', updateToc);
+  updateToc();
+</script>
+</body>
+</html>

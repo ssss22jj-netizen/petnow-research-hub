@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <title>Petnow Shelter CRM 문서 라이브러리</title>
+    <link rel="stylesheet" href="styles.css?v=20260728-1" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#/">
+          <span class="brand-mark">P</span>
+          <span><strong>Petnow</strong><small>문서 라이브러리</small></span>
+        </a>
+        <nav id="main-nav" aria-label="주요 메뉴"></nav>
+        <div class="sidebar-footer">
+          <span class="status-dot"></span>
+          <span>M1 문서 라이브러리</span>
+        </div>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <button id="menu-button" class="icon-button" aria-label="메뉴 열기">☰</button>
+          <div class="search-wrap">
+            <span>⌕</span>
+            <input id="global-search" type="search" placeholder="문서 제목·내용 검색" autocomplete="off" />
+            <kbd>⌘ K</kbd>
+          </div>
+          <div id="build-time" class="build-time"></div>
+        </header>
+        <div id="search-panel" class="search-panel hidden"></div>
+        <div id="app" class="page"></div>
+      </main>
+    </div>
+    <script type="module" src="app.js?v=20260728-1"></script>
+  </body>
+</html>
