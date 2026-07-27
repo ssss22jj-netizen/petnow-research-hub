@@ -71,7 +71,7 @@ function compactDocRow(doc, index) {
 
 function visualAnalysisRow(index) {
   const number = String(index + 1).padStart(2, "0");
-  return `<a class="compact-doc-row" href="demo-insights.html"><span class="compact-doc-number">${number}</span><span class="compact-doc-copy"><strong>경쟁사 데모 제품 UI·UX 시각 분석</strong><small>4개 데모 제품의 과업별 검증 결과와 화면 증거</small></span><span class="compact-doc-role">화면 검증</span><span class="compact-doc-arrow">↗</span></a>`;
+  return `<a class="compact-doc-row" href="demo-insights.html"><span class="compact-doc-number">${number}</span><span class="compact-doc-copy"><strong>경쟁사 데모 제품 UI·UX 시각 분석</strong><small>4개 제품 데모의 과업별 검증 결과와 화면 증거</small></span><span class="compact-doc-role">화면 검증</span><span class="compact-doc-arrow">↗</span></a>`;
 }
 
 function collectionRows(key, selectedDocs) {
@@ -94,8 +94,8 @@ function docsForCollection(key) {
 
 function renderLibrary(key = "all") {
   if (key === "all") {
-    app.innerHTML = `${pageHeader("문서 목록", "Petnow Shelter CRM 문서", "카테고리별 전체 문서와 각 문서의 역할을 한 화면에서 확인합니다.")}
-      <div class="library-summary"><strong>원본 문서 ${docs.length}개</strong><span>상단 검색 또는 왼쪽 주제 메뉴에서 조회</span></div>
+    app.innerHTML = `${pageHeader("문서 목록", "Petnow Shelter CRM 문서", "카테고리별 전체 문서와 각 문서의 역할을 한 화면에서 볼 수 있습니다.")}
+      <div class="library-summary"><strong>원본 문서 ${docs.length}개</strong><span>상단 검색 또는 왼쪽 주제 메뉴에서 찾아보세요</span></div>
       <div class="compact-library">${primaryGroups.map((groupKey, groupIndex) => { const group = collectionDefinitions[groupKey]; const groupDocs = docsForCollection(groupKey); const isReference = ["methods", "appendix"].includes(groupKey); return `<section class="compact-section ${isReference ? "reference-section" : ""}"><div class="compact-section-head"><div><span>${String(groupIndex + 1).padStart(2, "0")}</span><h2>${group.title}</h2><b>${collectionCount(groupKey, groupDocs)}개</b></div>${isReference ? `<small class="section-tier">참고 자료</small>` : ""}<p>${group.lead}</p><div class="compact-section-links"><a href="#/library/${groupKey}">섹션 열기 →</a></div></div><div class="compact-doc-list">${collectionRows(groupKey, groupDocs)}</div></section>`; }).join("")}</div>`;
     return;
   }
