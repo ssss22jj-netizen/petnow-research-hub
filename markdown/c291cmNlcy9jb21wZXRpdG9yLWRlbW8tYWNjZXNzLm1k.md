@@ -7,7 +7,7 @@
 | 제품 | 접근 상태 | 다음 행동 |
 | --- | --- | --- |
 | Shelterluv | 운영자 계정 1차 분석 완료 | 임보자 직접 입력, 입양자 계약·서명·결제 및 결제 후 상태 변경, 모바일 T1 저장, Daily Observations 재검증 |
-| Pawlytics | 실제 운영 계정 확보. 인증·운영 데이터 조회 확인 후 웹 화면 빈 페이지로 재검증 중단 | 별도 브라우저 세션에서 화면 복구 후 사람 레코드 저장과 입양 설정 완료 경로 재검증 |
+| Pawlytics | 실제 운영 계정 과업 검증 완료 | T1 완료, T2 운영자 대리입력 기준 부분 완료, T3 계약 이메일·상태 변경 실행 직전까지 확인. 임보자 직접 입력과 최종 계약·결제·상태 변경 검증 필요 |
 | Animal Shelter Manager | 로그인 데모 분석 완료 | 임보자 Daily Observations 경로와 승인된 환경의 최종 입양 실행 검증 |
 | PawPlacer | 로그인 데모 분석 완료 | Checkout 이후 상태 변경과 투약 빈도 단위의 사용자 이해 검증 |
 | Petstablished | KK9R 실제 운영 계정 읽기 전용 워크스루 완료 | 승인된 테스트 레코드에서 T1~T3 저장·상태 변경·오류 복구 검증 |
@@ -19,7 +19,7 @@
 | --- | --- | --- | --- | --- |
 | Petstablished | KK9R 실제 운영 계정 | 로그인 계정 별도 제공 | 실제 운영 데이터 포함. 동물 등록·임보·의료·신청·계약 구조를 읽기 전용으로 확인 | 저장·상태 변경·외부 발송은 테스트 레코드 승인 후 가능 |
 | Petstablished | 예약형 데모 | [데모 예약](https://calendly.com/petstablished-team/demo) | Calendly 일정 예약 | 제품 설명 확인 가능. 자유 과업 수행 가능 여부 미확인 |
-| Pawlytics | 14일 무료 체험 | [무료 체험 가입](https://app.pawlytics.com/signup) | 공식 사이트에서 14일 위험 부담 없는 체험으로 안내 | 셀프서비스 분석 우선 후보 |
+| Pawlytics | 펫나우팀 제공 실제 운영 계정 | 로그인 계정 별도 제공 | 가상 테스트 레코드로 등록·임보·의료·행동·입양 Outcome 직전까지 검증 | 임보자 직접 입력과 외부 발송·최종 상태 변경은 승인 후 가능 |
 | Pawlytics | 예약형 전체 데모 | [전체 데모 예약](https://learn.pawlytics.com/meetings/nisha23/full-pawlytics-demo) | 일정 예약 | 제품 설명 및 질문 가능 |
 | Shelterluv | 14일 무료 체험 | [무료 체험 활성화](https://www.shelterluv.com/activate/) | 신용카드 불필요. 실제 가입 양식의 기관 정보 요구 범위는 가입 진행 시 추가 확인 필요 | 셀프서비스 분석 우선 후보 |
 | Shelterluv | 셀프 가이드 제품 투어 | [제품 투어](https://www.shelterluv.com/product/tour/) | 가입 없이 주요 기능 영상 확인 가능 | 무료 체험 전 정보 구조·기능 사전 분석 가능 |
@@ -30,7 +30,7 @@
 | 순서 | 제품 | 실행 |
 | --- | --- | --- |
 | 1 | Shelterluv | 셀프 가이드 투어 분석 후 14일 무료 체험 신청 |
-| 2 | Pawlytics | 14일 무료 체험 신청, 접근 제한 발생 시 전체 데모 예약 |
+| 2 | Pawlytics | 실제 운영 계정에서 남은 외부 발송·최종 상태 변경 과업만 승인 후 검증 |
 | 3 | Petstablished | 펫나우·KK9R과 사용할 실제 기관 정보와 승인 범위 확인 후 가입 또는 데모 예약 |
 | 4 | Chameleon/CMS | 민간 레스큐용 세 제품 분석과 분리하여 영업 데모 요청 여부 결정 |
 
@@ -46,4 +46,6 @@
 ## 4. 분석 연결 문서
 
 - `../analysis/경쟁사_데모_UIUX_통합분석.md`
-- `../analysis/competitor-evidence/`: Pawlytics·Animal Shelter Manager·PawPlacer 화면 증거 24개
+- `../analysis/Pawlytics_정식계정_과업재검증_20260729.md`
+- `../analysis/competitor-evidence/pawlytics-recheck-20260729/`: Pawlytics 정식 계정 화면 증거 13개
+- `../analysis/competitor-evidence/`: Animal Shelter Manager·PawPlacer 등 경쟁 제품 화면 증거
