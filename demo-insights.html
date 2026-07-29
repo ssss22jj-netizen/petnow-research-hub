@@ -319,6 +319,45 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Pretendard','Apple SD Gothic 
   </div>
 </section>
 
+<section id="data-vs-workflow" class="insights">
+  <div class="insights-title">업무 플로우 인사이트 검증 — 데이터 계층에는 있고, 업무 계층에는 없다</div>
+  <p style="font-size:13px;color:#4b5563;line-height:1.75;margin:0 0 6px"><a href="index.html#/doc/66-46rWt7ImY7YSwX-q1rOyhsOu2gO2EsOyeheyWkeq5jOyngF_sl4XrrLTtlIzroZzsmrBf65Sl66as7ISc7LmYXzIwMjYwNzI1Lm1k" style="color:#176b48;font-weight:700">업무 플로우 딥리서치</a>의 인사이트 1(제품의 기본 단위는 단계가 아니라 동물·사건·상태 변화다)을 5개 제품 데모에서 확인한 결과. 이 원칙은 업계 데이터 표준이라 경쟁 제품의 저장 구조에는 이미 반영돼 있다. ASM은 동물 상세에서 입소·결과를 분리 관리하고 입양 완료 동물의 상태 수정에 Undo Adoption·Return Pet 절차를 강제하며, Shelterluv는 입양 1건당 $2의 사건 단위 과금을 쓴다. 격차는 이 구조를 현장 업무 흐름으로 꺼내주는 화면의 부재에서 발생한다.</p>
+  <p style="font-size:11px;color:#9ca3af;margin:0 0 16px">근거 수준: 데모 직접 관찰과 리뷰 분석 종합. 각 제품의 내부 데이터 구조는 화면·공개자료 기반 추정.</p>
+  <div class="insight">
+    <div class="insight-num">01</div>
+    <div>
+      <div class="insight-title">레코드 편집 화면으로 회귀한다</div>
+      <ul class="insight-desc"><li>데이터는 사건 단위로 저장되지만, 사용자가 만나는 것은 동물 파일 하나를 열어서 고치는 경험.</li><li>Shelterluv 등록 양식은 필드 37개, ASM은 기본 정보·행동·위치·입소 결과·의료·문서 등 12개 섹션을 한 편집 화면에 연속 배치.</li></ul>
+      <div class="insight-links">
+        <a class="ilink sl" href="#ev-sl-t1-form">Shelterluv: 입력 필드 37개</a>
+        <a class="ilink asm" href="#asm">ASM 검증 결과</a>
+      </div>
+    </div>
+  </div>
+  <div class="insight">
+    <div class="insight-num">02</div>
+    <div>
+      <div class="insight-title">다차원 상태를 분리하지 않는다</div>
+      <ul class="insight-desc"><li>법적·의료·행동·물리 위치·예상 결과·입양 공개 상태는 각각 따로 움직이는데, 경쟁 제품은 대표 상태 필드와 위치 정도만 두고 차원 간 동기화를 강제하지 않음.</li><li>리뷰 반복 병목 1위인 위치·상태 불일치가 그 결과. 예외적으로 PawPlacer는 임보 배치 시 상태·위치·임보자·시작일을 한 화면에서 함께 저장.</li></ul>
+      <div class="insight-links">
+        <a class="ilink pp" href="#ev-pp-foster">PawPlacer: 임보 배치 단일 처리</a>
+        <a class="ilink sl" href="#ev-sl-status">Shelterluv: 결제 대기 중 상태 유지</a>
+      </div>
+    </div>
+  </div>
+  <div class="insight">
+    <div class="insight-num">03</div>
+    <div>
+      <div class="insight-title">상태 변화가 다음 행동을 만들지 않는다</div>
+      <ul class="insight-desc"><li>무엇이 이 동물의 다음 이동을 막고 있는가(차단 사유·담당·기한)를 보여주는 화면은 검증한 어느 제품에도 없음. 현장은 이 공백을 Population Rounds 회의로 매일 수동 보완.</li><li>부분 채택 사례로 Petstablished는 임보자 지정 시 동물 상태가 Fostered로 함께 바뀐다는 것을 실행 전에 안내.</li></ul>
+      <div class="insight-links">
+        <a class="ilink" href="#ev-pst-foster">Petstablished: 상태 연결 안내</a>
+        <a class="ilink" href="#ev-pst-application">Petstablished: 신청 단계 분리</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="xc" class="xc">
   <div class="sec-title">교차 비교</div>
   <div class="rating-legend" aria-label="판정 기준"><span class="rating good">우수</span><span class="rating mixed">보통·부분 완료</span><span class="rating bad">미흡·차단</span><span class="rating unknown">미검증</span></div>
@@ -534,6 +573,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Pretendard','Apple SD Gothic 
   <a href="#summary">핵심 판단</a>
   <a href="#timing">T1 완료 시간</a>
   <a href="#insights">상위 제품 판단</a>
+  <a href="#data-vs-workflow">데이터 계층 vs 업무 계층</a>
   <a href="#xc">5개 제품 교차 비교</a>
   <a href="#dp">펫나우 설계 시사점</a>
   <a href="#next">남은 검증 항목</a>

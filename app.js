@@ -37,7 +37,7 @@ function pageHeader(eyebrow, title, lead) {
 }
 
 const collectionDefinitions = {
-  project: { title: "프로젝트 계획·현황", lead: "프로젝트 배경, 전략 목적과 M1 실행 계획을 확인하는 문서입니다.", paths: ["킥오프정리_노션용_v2.md"] },
+  project: { title: "프로젝트 계획·현황", lead: "프로젝트 배경·실행 계획과 전 기간에 유지할 의사결정 기준을 확인하는 문서입니다.", paths: ["킥오프정리_노션용_v2.md", "펫나우_Shelter_CRM_프로젝트_의사결정_체크리스트.md"] },
   interview: { title: "고객 인터뷰", lead: "Gina와 미국 로컬 쉘터의 실제 업무를 파악하기 위해 설계한 인터뷰 계획 문서입니다.", paths: ["지나인터뷰_계획.md"] },
   workflow: { title: "쉘터 업무 플로우", lead: "미국 동물보호소·레스큐의 조직 유형과 구조부터 입양까지의 업무 흐름을 정리한 문서입니다.", paths: ["미국쉘터_구조부터입양까지_업무플로우_딥리서치_20260725.md"] },
   competitors: { title: "경쟁사 조사", lead: "경쟁 4사의 제품·가격·기능, 사용자 리뷰와 4개 제품 데모 UI·UX 검증 자료입니다.", paths: ["경쟁4사_검증본_M1실무요약_20260726.md", "경쟁4사_딥리서치_20260725.md", "경쟁4사_리뷰40개_파일럿코딩_20260726.md"] },
@@ -49,6 +49,7 @@ const primaryGroups = ["project", "interview", "workflow", "competitors", "metho
 
 const documentRoles = new Map([
   ["킥오프정리_노션용_v2.md", "실행 계획"],
+  ["펫나우_Shelter_CRM_프로젝트_의사결정_체크리스트.md", "방향 점검"],
   ["PROJECT_STATE.md", "진행 현황"],
   ["가설_근거_반증실험_보드.md", "가설 관리"],
   ["지나인터뷰_계획.md", "인터뷰 설계"],
