@@ -171,6 +171,10 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .document-header h1 { margin: 8px 0; font-size: 32px; letter-spacing: -.035em; }
 .source-path { color: var(--muted); font-family: ui-monospace, monospace; font-size: 11px; }
 .markdown-body { font-size: 15px; line-height: 1.72; }
+.document-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.document-actions a, .document-actions button { display: inline-flex; align-items: center; min-height: 38px; padding: 0 13px; border: 1px solid #b9c9c0; border-radius: 9px; background: #fff; color: #28483a; font: inherit; font-size: 12px; font-weight: 750; text-decoration: none; cursor: pointer; }
+.document-actions a:hover, .document-actions button:hover { border-color: var(--green); background: var(--soft); color: var(--green); }
+.document-actions-help { margin: 8px 0 0; color: var(--muted); font-size: 11px; }
 .markdown-body h1 { display: none; }
 .markdown-body h2 { margin: 42px 0 14px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 23px; }
 .markdown-body h3 { margin: 28px 0 10px; font-size: 18px; }

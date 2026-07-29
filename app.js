@@ -211,7 +211,20 @@ function renderDocument(id) {
   const doc = byId.get(id);
   if (!doc) return renderNotFound();
   const visualAnalysisLink = doc.path === "analysis/경쟁사_데모_UIUX_통합분석.md" ? `<a class="document-visual-link" href="demo-insights.html">UI·UX 화면 분석 보기 ↗</a>` : "";
-  app.innerHTML = `<div class="doc-layout"><article class="document"><header class="document-header"><div class="evidence-meta"><span class="tag">${doc.category}</span></div><h1>${doc.title}</h1><div class="source-path">${doc.path}</div>${visualAnalysisLink}</header><div class="markdown-body">${doc.html}</div></article><aside class="toc"><strong>문서 목차</strong></aside></div>`;
+  const markdownUrl = new URL(doc.markdown, window.location.href).href;
+  const downloadName = doc.path.split("/").pop();
+  app.innerHTML = `<div class="doc-layout"><article class="document"><header class="document-header"><div class="evidence-meta"><span class="tag">${doc.category}</span></div><h1>${doc.title}</h1><div class="source-path">${doc.path}</div><div class="document-actions" aria-label="원본 Markdown 공유"><a href="${doc.markdown}" target="_blank" rel="noopener">Markdown 열기 ↗</a><a href="${doc.markdown}" download="${downloadName}">Markdown 다운로드 ↓</a><button type="button" data-copy-markdown="${markdownUrl}">AI용 링크 복사</button></div><p class="document-actions-help">SPA 화면 대신 원본 Markdown 주소를 AI 도구에 전달할 수 있습니다.</p>${visualAnalysisLink}</header><div class="markdown-body">${doc.html}</div></article><aside class="toc"><strong>문서 목차</strong></aside></div>`;
+  app.querySelector("[data-copy-markdown]")?.addEventListener("click", async (event) => {
+    const button = event.currentTarget;
+    const originalLabel = button.textContent;
+    try {
+      await navigator.clipboard.writeText(button.dataset.copyMarkdown);
+      button.textContent = "링크 복사 완료";
+    } catch {
+      window.prompt("아래 Markdown 링크를 복사해 주세요.", button.dataset.copyMarkdown);
+    }
+    window.setTimeout(() => { button.textContent = originalLabel; }, 1800);
+  });
   app.querySelectorAll(".markdown-body a[href^='#']").forEach((a) => {
     a.addEventListener("click", (e) => {
       const target = document.getElementById(a.getAttribute("href").slice(1));
