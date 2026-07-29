@@ -197,7 +197,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Pretendard','Apple SD Gothic 
     <li>실제 사용자가 아닌 전문가 1명의 워크스루 — 사용자 만족도·이탈률 확정 불가</li>
     <li>제품별 운영 계정·무료 체험·로그인 데모의 권한과 조직 설정이 서로 다름</li>
     <li>Pawlytics는 정식 운영 계정에서 가상 테스트 레코드로 검증. 외부 이메일 발송·최종 Outcome 실행과 임보자 직접 입력은 미수행</li>
-    <li>Petstablished는 실제 운영 데이터 보호를 위해 읽기 전용으로 검증. 저장·상태 변경·외부 발송 미수행</li>
+    <li>Petstablished는 37개 화면과 가상 테스트 동물의 생성·수정·검색·삭제를 검증. 계약·결제·최종 입양·구매·계정 설정 변경은 미수행</li>
     <li>Shelterluv 임보자 계정·입양자 모바일 흐름 미검증 | Chameleon/CMS 별도 트랙</li>
     <li>임시 사용자 역할(R1~R4)은 Gina 인터뷰 후 검증 필요</li>
   </ul>
@@ -238,7 +238,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Pretendard','Apple SD Gothic 
 <section id="summary" class="summary">
   <div class="summary-label">핵심 판단</div>
   <table class="kv-table">
-    <tr><td>분석 완료</td><td>Shelterluv 운영자 계정, Pawlytics 정식 운영 계정, ASM·PawPlacer 워크스루, Petstablished 실제 운영 계정 읽기 전용 워크스루</td></tr>
+    <tr><td>분석 완료</td><td>Shelterluv 운영자 계정, Pawlytics 정식 운영 계정, ASM·PawPlacer 워크스루, Petstablished 실제 운영 계정 37개 화면·테스트 레코드 검증</td></tr>
     <tr><td>과업 연결성 우위</td><td>PawPlacer — 동물→임보자→기록→입양→Checkout 흐름이 가장 자연스럽게 연결</td></tr>
     <tr><td>기능 범위 우위</td><td>Animal Shelter Manager — 의료·행동·임보·입양 기능 깊음. 고밀도 UI와 학습 부담 병존</td></tr>
     <tr><td>주요 관찰</td><td>Petstablished는 임보자 지정과 Fostered 상태 변경을 연결. Pawlytics는 임보 위치와 동물 상태를 별도로 변경해야 함</td></tr>
@@ -252,7 +252,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Pretendard','Apple SD Gothic 
   <div class="t-row"><div class="t-name"><span class="pill ppp">PawPlacer</span></div><div class="t-wrap"><div class="t-bar b" style="width:41%"></div></div><div class="t-stat">3분 35초 · 18개 필드 · 10회 전환</div><div class="tbadge tok">완료</div></div>
   <div class="t-row"><div class="t-name"><span class="pill ppw">Pawlytics</span></div><div class="t-wrap"><div class="t-bar b" style="width:46%"></div></div><div class="t-stat">3분 58초 · 약 24개 필드 · 약 9회 전환</div><div class="tbadge tok">완료</div></div>
   <div class="t-row"><div class="t-name"><span class="pill psl">Shelterluv</span></div><div class="t-wrap"><div class="t-bar s" style="width:100%"></div></div><div class="t-stat">8분 44초 · 37개 필드 · 16회 전환</div><div class="tbadge tok">완료</div></div>
-  <p style="font-size:11px;color:#9ca3af;margin-top:4px">Petstablished는 실제 운영 데이터를 변경하지 않는 읽기 전용 검증으로 정량 비교에서 제외.</p>
+  <p style="font-size:11px;color:#9ca3af;margin-top:4px">Petstablished는 테스트 동물 생성·수정·검색·삭제를 실행했으나 임보·의료·입양 전체 과업을 완주하지 않아 T1 시간 비교에서 제외.</p>
 </div>
 
 <section id="insights" class="insights">
@@ -366,8 +366,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Pretendard','Apple SD Gothic 
     <tr><td><strong>T1 등록·임보</strong></td><td><span class="rating mixed">완료·부담 큼</span><ul><li>8분 44초</li><li>37개 필드</li></ul></td><td><span class="rating mixed">완료·보통</span><ul><li>3분 58초</li><li>임보 위치 지정 후 상태 별도 변경</li></ul></td><td><span class="rating good">우수</span><ul><li>2분 43초</li><li>11개 필드</li></ul></td><td><span class="rating good">우수</span><ul><li>3분 35초</li><li>18개 필드</li></ul></td><td><span class="rating mixed">부분 우수</span><ul><li>임보 지정과 Fostered 상태 변경 연결</li><li>실제 지정 미실행</li></ul></td><td><ul><li>등록과 임보 배치 연결</li><li>위치·상태·담당자 함께 저장</li></ul></td></tr>
     <tr><td><strong>T2 투약·행동</strong></td><td><span class="rating unknown">임보자 미검증</span><ul><li>운영자 기록 화면만 확인</li></ul></td><td><span class="rating mixed">부분 우수</span><ul><li>투약·행동 기록 저장</li><li>보고자와 입력자 구분 불가</li></ul></td><td><span class="rating mixed">부분 우수</span><ul><li>기록 완료</li><li>임보 동물 일상 관찰 제외</li></ul></td><td><span class="rating mixed">부분 우수</span><ul><li>기록 완료</li><li>투약 주기 표현 모호</li></ul></td><td><span class="rating mixed">부분 우수</span><ul><li>임보자 담당 의료 기록</li><li>직접 입력·저장 미검증</li></ul></td><td><ul><li>임보자 직접 입력</li><li>보고자·입력자 분리</li><li>자연어형 주기</li></ul></td></tr>
     <tr><td><strong>T3 입양·결제</strong></td><td><span class="rating unknown">부분 검증</span><ul><li>운영자 결제 링크 발송</li><li>입양자 결제 미확인</li></ul></td><td><span class="rating unknown">완료 직전</span><ul><li>계약 이메일·상태 변경 직전</li><li>결제 경로 미확인</li></ul></td><td><span class="rating unknown">완료 직전</span><ul><li>최종 실행 전까지 확인</li></ul></td><td><span class="rating unknown">완료 직전</span><ul><li>Checkout 방식 선택까지 확인</li></ul></td><td><span class="rating mixed">부분 우수</span><ul><li>신청·계약 단계 연결</li><li>결제는 계좌 설정에서 차단</li></ul></td><td><ul><li>계약·결제·상태 변경 분리</li><li>실행 전 영향 표시</li></ul></td></tr>
-    <tr><td><strong>모바일 화면</strong></td><td><span class="rating mixed">운영자 화면 양호</span><ul><li>모바일 폭에 맞춰 재배치</li><li>전체 과업 미검증</li></ul></td><td><span class="rating bad">미흡</span><ul><li>데스크톱 구조 축소</li></ul></td><td><span class="rating bad">미흡</span><ul><li>고밀도 화면 축소</li></ul></td><td><span class="rating good">우수</span><ul><li>단일 열 카드</li><li>가로 스크롤 없음</li></ul></td><td><span class="rating mixed">부분 우수</span><ul><li>등록 양식 단일 열</li><li>세로 길이 1,674px</li></ul></td><td><ul><li>390px 단일 열</li><li>표 대신 카드</li><li>과업 완결성 별도 검증</li></ul></td></tr>
-    <tr><td><strong>오류·복구</strong></td><td><span class="rating bad">미흡</span><ul><li>입력값 초기화</li><li>저장값 불일치</li></ul></td><td><span class="rating mixed">보통</span><ul><li>저장 결과 확인 가능</li><li>위치·상태 불일치 경고 없음</li></ul></td><td><span class="rating unknown">판단 보류</span><ul><li>중대 오류 미관찰</li></ul></td><td><span class="rating unknown">판단 보류</span><ul><li>중대 오류 미관찰</li></ul></td><td><span class="rating unknown">판단 보류</span><ul><li>읽기 전용 검증</li></ul></td><td><ul><li>저장 상태 표시</li><li>상태 불일치 경고</li><li>재시도·입력값 보존</li></ul></td></tr>
+    <tr><td><strong>모바일 화면</strong></td><td><span class="rating mixed">운영자 화면 양호</span><ul><li>모바일 폭에 맞춰 재배치</li><li>전체 과업 미검증</li></ul></td><td><span class="rating bad">미흡</span><ul><li>데스크톱 구조 축소</li></ul></td><td><span class="rating bad">미흡</span><ul><li>고밀도 화면 축소</li></ul></td><td><span class="rating good">우수</span><ul><li>단일 열 카드</li><li>가로 스크롤 없음</li></ul></td><td><span class="rating mixed">과업별 상이</span><ul><li>37개 기본 페이지 무오버플로</li><li>의료 모달 잘림</li><li>설정 화면 최대 10,034px</li></ul></td><td><ul><li>기본 페이지·모달 별도 검증</li><li>핵심 조작부 화면 내 유지</li><li>과업 완결성 별도 검증</li></ul></td></tr>
+    <tr><td><strong>오류·복구</strong></td><td><span class="rating bad">미흡</span><ul><li>입력값 초기화</li><li>저장값 불일치</li></ul></td><td><span class="rating mixed">보통</span><ul><li>저장 결과 확인 가능</li><li>위치·상태 불일치 경고 없음</li></ul></td><td><span class="rating unknown">판단 보류</span><ul><li>중대 오류 미관찰</li></ul></td><td><span class="rating unknown">판단 보류</span><ul><li>중대 오류 미관찰</li></ul></td><td><span class="rating bad">미흡</span><ul><li>자동완성 오선택</li><li>상·하단 저장 동작 불일치</li><li>소프트 삭제·복구 경로</li></ul></td><td><ul><li>저장 동작 명칭 통일</li><li>선택값 확인</li><li>오류·복구 상태 명시</li></ul></td></tr>
     <tr><td><strong>초기 학습 부담</strong></td><td><span class="rating bad">부담 있음</span><ul><li>사전 설정 의존</li></ul></td><td><span class="rating bad">부담 있음</span><ul><li>입양 기능 선행 설정</li></ul></td><td><span class="rating bad">부담 큼</span><ul><li>높은 정보 밀도</li></ul></td><td><span class="rating good">상대적 우수</span><ul><li>가장 단순한 화면 구조</li></ul></td><td><span class="rating bad">부담 큼</span><ul><li>긴 편집 화면</li><li>조직별 설정 다수</li></ul></td><td><ul><li>기본 설정으로 과업 시작</li><li>상세 설정 단계 분리</li></ul></td></tr>
   </table>
   </div>
@@ -420,7 +420,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Pretendard','Apple SD Gothic 
       <tr><td>Pawlytics</td><td><span class="status">부분 검증</span>임보자 직접 입력, 사진 업로드, 최종 Outcome 실행 후 계약·결제·상태 변경 확인</td></tr>
       <tr><td>Animal Shelter Manager</td><td><span class="status">부분 검증</span>임보자 Daily Observations 경로와 승인된 환경의 최종 입양 실행</td></tr>
       <tr><td>PawPlacer</td><td><span class="status">부분 검증</span>Checkout 이후 동물 상태 변경과 투약 빈도 단위에 대한 사용자 이해</td></tr>
-      <tr><td>Petstablished</td><td><span class="status">부분 검증</span>승인된 테스트 레코드에서 T1~T3 저장·상태 변경·오류 복구와 결제 완주</td></tr>
+      <tr><td>Petstablished</td><td><span class="status">부분 검증</span>임보자 직접 입력, 계약·결제·최종 입양, 삭제 레코드 복구 실행</td></tr>
       <tr><td>Chameleon/CMS</td><td><span class="status">별도 트랙</span>공공기관용 대표 과업 설계와 영업 데모 확보 후 분석 여부 결정</td></tr>
     </table>
   </div>
@@ -491,15 +491,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Pretendard','Apple SD Gothic 
 
 <!-- PETSTABLISHED -->
 <section id="pst" class="ps ps-pst">
-  <div class="ps-hd"><span class="ps-name">Petstablished</span><span class="tbk tb-partial">T1·T2·T3 부분 검증</span><span class="tbk tb-before">읽기 전용</span><span class="ps-note">KK9R 실제 운영 계정 · 저장·상태 변경·외부 발송 미수행</span></div>
+  <div class="ps-hd"><span class="ps-name">Petstablished</span><span class="tbk tb-done">전체 37개 화면 검증</span><span class="tbk tb-partial">테스트 동물 생성·수정·삭제</span><span class="ps-note">KK9R 실제 운영 계정 · 계약·결제·최종 입양 미수행</span></div>
   <div class="ts">
     <div class="ts-head"><span class="ts-label">T1 신규 등록 · 임보 배치</span><span class="ts-m warn">부분 우수</span><span class="ts-m">등록 1단계 14개 입력 요소</span></div>
-    <div class="ev"><div class="ev-img"><img src="assets/competitor-evidence/petstablished/PS-T1-01-new-pet-form.png" alt="Petstablished 신규 동물 등록 양식"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppst">Petstablished</span><span class="sc-tag tag-note">등록 구조 확인</span></div><div class="ev-title">신규 등록 — 기본 정보와 공개 상태를 한 화면에서 설정</div><div class="ev-desc">이름·상태·입소 유형·품종·성별·입소일·발견 위치를 첫 단계에 입력. 실제 동물 생성은 수행하지 않아 완료시간과 저장 복구는 미검증.</div></div></div>
+    <div class="ev"><div class="ev-img"><img src="assets/competitor-evidence/petstablished-recheck-20260729/PS2-T1-01-new-pet-form.png" alt="Petstablished 신규 동물 등록 양식"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppst">Petstablished</span><span class="sc-tag tag-warn">저장 동작 불일치</span></div><div class="ev-title">신규 등록 — Next가 레코드를 즉시 생성</div><div class="ev-desc">Next는 단계 이동처럼 보이지만 실제로 레코드를 생성. 품종 자동완성 오선택과 같은 이름의 상·하단 Save changes 버튼이 다르게 작동하는 현상도 재현.</div><div class="ev-impl"><strong>→ 펫나우</strong>버튼 명칭과 실제 동작을 일치시키고 저장 결과·선택값을 즉시 확인</div></div></div>
     <div class="ev" id="ev-pst-foster"><div class="ev-img"><img src="assets/competitor-evidence/petstablished/PS-T1-01-new-pet-form.png" alt="Petstablished 임보 배치 검증 기준"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppst">Petstablished</span><span class="sc-tag tag-good">상태 변경 영향 안내</span></div><div class="ev-title">임보자 지정 — Fostered 상태 변경을 실행 전에 안내</div><div class="ev-desc">임보자를 지정하면 해당 동물의 상태도 Fostered로 변경된다는 결과를 다음 단계 전에 문장으로 안내. 실제 지정은 실행하지 않음.</div><div class="ev-impl"><strong>→ 펫나우</strong>임보자·현재 위치·동물 상태·시작일을 함께 저장하고 변경 결과를 실행 전에 표시</div></div></div>
   </div>
   <div class="ts">
     <div class="ts-head"><span class="ts-label">T2 투약·행동 기록</span><span class="ts-m warn">운영자 구조 확인</span></div>
-    <div class="ev"><div class="ev-img"><img src="assets/competitor-evidence/petstablished/PS-T2-01-medical-form.png" alt="Petstablished 의료 기록 양식"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppst">Petstablished</span><span class="sc-tag tag-good">임보 담당자 연결</span></div><div class="ev-title">의료 기록 — 임보 담당자를 기록에 직접 연결</div><div class="ev-desc">진료·백신·수술·진단·투약·검사 기록에 임보 담당자를 연결할 수 있음. 임보자 직접 입력과 저장 후 운영자 후속 처리는 미검증.</div><div class="ev-impl"><strong>→ 펫나우</strong>현장 기록의 작성자·담당자·후속 조치 주체를 분리해 저장</div></div></div>
+    <div class="ev"><div class="ev-img"><img src="assets/competitor-evidence/petstablished-recheck-20260729/PS2-M-02-medical-entry-picker.png" alt="Petstablished 모바일 의료 기록 모달"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppst">Petstablished</span><span class="sc-tag tag-bad">모바일 과업 차단</span></div><div class="ev-title">의료 기록 — 모바일 모달 핵심 조작부 잘림</div><div class="ev-desc">430px에서 대상 동물 선택 모달의 제목과 Create Record 조작부가 오른쪽에서 잘려 가시성과 조작 안정성이 낮음.</div><div class="ev-impl"><strong>→ 펫나우</strong>기본 페이지뿐 아니라 모달·파일 선택·저장까지 모바일 완결성 검증</div></div></div>
   </div>
   <div class="ts">
     <div class="ts-head"><span class="ts-label">T3 신청 · 계약 · 결제</span><span class="ts-m warn">부분 검증</span><span class="ts-m bad">결제 설정 차단</span></div>
@@ -507,7 +507,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Pretendard','Apple SD Gothic 
   </div>
   <div class="ts">
     <div class="ts-head"><span class="ts-label">모바일</span><span class="ts-m done">단일 열·가로 스크롤 없음</span><span class="ts-m warn">긴 세로 입력</span></div>
-    <div id="ev-pst-mobile" class="ev"><div class="ev-img"><img src="assets/competitor-evidence/petstablished/PS-M-01-new-pet-form.png" alt="Petstablished 모바일 신규 등록"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppst">Petstablished</span><span class="sc-tag tag-warn">화면 적응 양호·과업 부담 있음</span></div><div class="ev-title">430px 등록 화면 — 단일 열이지만 1,674px 세로 길이</div><div class="ev-desc">입력 영역이 한 열로 재배치되고 가로 스크롤은 없음. 첫 단계만 긴 세로 이동이 필요해 저장 완결성과 필드 단계화는 추가 검증 대상.</div><div class="ev-impl"><strong>→ 펫나우</strong>단일 열 여부뿐 아니라 단계별 필드 수·세로 이동·중간 저장을 함께 측정</div></div></div>
+    <div id="ev-pst-mobile" class="ev"><div class="ev-img"><img src="assets/competitor-evidence/petstablished-full-product-20260729/PSF-M-02-pet-defaults-top.png" alt="Petstablished 모바일 기본값 설정"></div><div class="ev-txt"><div class="ev-badges"><span class="pill ppst">Petstablished</span><span class="sc-tag tag-warn">화면 적응·과업 부담 병존</span></div><div class="ev-title">37개 기본 페이지는 맞춰지지만 설정은 10,034px</div><div class="ev-desc">430px 기본 페이지의 가로 오버플로는 없었으나 Pet Defaults는 가시 컨트롤 136개와 10,034px 세로 길이. 반응형 제공만으로 과업 완결성을 판단할 수 없음.</div><div class="ev-impl"><strong>→ 펫나우</strong>기본·고급·조직별 설정을 단계화하고 모바일 핵심 설정만 우선 노출</div></div></div>
   </div>
 </section>
 
@@ -562,7 +562,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Pretendard','Apple SD Gothic 
 </section>
 
 <div class="source-note">
-  <strong>문서 기준</strong> — 분석 기준일 2026.07.29 · 원문 <code>analysis/경쟁사_데모_UIUX_통합분석.md</code> · 화면 증거 47개(Shelterluv 14개, Pawlytics 정식 계정 13개, Animal Shelter Manager·PawPlacer 16개, Petstablished 4개) · 전문가 워크스루 결과이며 실제 사용자 테스트 아님
+  <strong>문서 기준</strong> — 분석 기준일 2026.07.29 · 원문 <code>analysis/경쟁사_데모_UIUX_통합분석.md</code> · 화면 증거 51개(Shelterluv 14개, Pawlytics 13개, Animal Shelter Manager·PawPlacer 16개, Petstablished 8개) · 전문가 워크스루 결과이며 실제 사용자 테스트 아님
 </div>
 </main>
 <aside class="demo-toc" aria-label="문서 목차">

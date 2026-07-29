@@ -10,14 +10,14 @@
 | Pawlytics | 실제 운영 계정 과업 검증 완료 | T1 완료, T2 운영자 대리입력 기준 부분 완료, T3 계약 이메일·상태 변경 실행 직전까지 확인. 임보자 직접 입력과 최종 계약·결제·상태 변경 검증 필요 |
 | Animal Shelter Manager | 로그인 데모 분석 완료 | 임보자 Daily Observations 경로와 승인된 환경의 최종 입양 실행 검증 |
 | PawPlacer | 로그인 데모 분석 완료 | Checkout 이후 상태 변경과 투약 빈도 단위의 사용자 이해 검증 |
-| Petstablished | KK9R 실제 운영 계정 읽기 전용 워크스루 완료 | 승인된 테스트 레코드에서 T1~T3 저장·상태 변경·오류 복구 검증 |
+| Petstablished | KK9R 실제 운영 계정 전체 제품·테스트 레코드 검증 완료 | 임보자 직접 입력, 계약·결제·최종 입양, 삭제 레코드 복구 실행 검증 |
 | Chameleon/CMS | 공개 체험 미확보 | 공공기관용 과업을 별도 설계한 뒤 영업 데모 요청 |
 
 ## 1. 접근 현황
 
 | 제품 | 접근 방식 | 공식 링크 | 확인된 조건 | 분석 가능성 |
 | --- | --- | --- | --- | --- |
-| Petstablished | KK9R 실제 운영 계정 | 로그인 계정 별도 제공 | 실제 운영 데이터 포함. 동물 등록·임보·의료·신청·계약 구조를 읽기 전용으로 확인 | 저장·상태 변경·외부 발송은 테스트 레코드 승인 후 가능 |
+| Petstablished | KK9R 실제 운영 계정 | 로그인 계정 별도 제공 | 상위 메뉴 9개·하위 화면 37개와 430px 모바일 검증. 가상 동물 생성·수정·검색·삭제 실행 | 임보자 직접 입력, 계약·결제·최종 입양, 삭제 레코드 복구는 추가 승인 후 가능 |
 | Petstablished | 예약형 데모 | [데모 예약](https://calendly.com/petstablished-team/demo) | Calendly 일정 예약 | 제품 설명 확인 가능. 자유 과업 수행 가능 여부 미확인 |
 | Pawlytics | 펫나우팀 제공 실제 운영 계정 | 로그인 계정 별도 제공 | 가상 테스트 레코드로 등록·임보·의료·행동·입양 Outcome 직전까지 검증 | 임보자 직접 입력과 외부 발송·최종 상태 변경은 승인 후 가능 |
 | Pawlytics | 예약형 전체 데모 | [전체 데모 예약](https://learn.pawlytics.com/meetings/nisha23/full-pawlytics-demo) | 일정 예약 | 제품 설명 및 질문 가능 |
@@ -47,5 +47,8 @@
 
 - `../analysis/경쟁사_데모_UIUX_통합분석.md`
 - `../analysis/Pawlytics_정식계정_과업재검증_20260729.md`
+- `../analysis/Petstablished_전체제품_UIUX_검증_20260729.md`
+- `../analysis/competitor-evidence/petstablished-full-product-20260729/`: 전체 제품 화면 증거 4개
+- `../analysis/competitor-evidence/petstablished-recheck-20260729/`: 과업·모바일 화면 증거 4개
 - `../analysis/competitor-evidence/pawlytics-recheck-20260729/`: Pawlytics 정식 계정 화면 증거 13개
 - `../analysis/competitor-evidence/`: Animal Shelter Manager·PawPlacer 등 경쟁 제품 화면 증거
