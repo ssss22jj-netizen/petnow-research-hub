@@ -221,6 +221,13 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .workflow-insight-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin: 18px 0 30px; }
 .workflow-insight-card { display: flex; flex-direction: column; min-width: 0; padding: 18px 19px; border: 1px solid var(--line); border-top: 3px solid var(--green-2); border-radius: 14px; background: #fbfdfc; }
 .markdown-body .workflow-insight-card h3 { margin: 0 0 10px; color: #193c2d; font-size: 16px; line-height: 1.45; }
+.epistemic-status { display: flex; align-items: flex-start; gap: 9px; margin: 10px 0 14px !important; color: var(--muted); font-size: 12px; line-height: 1.55; }
+.epistemic-legend { margin: 12px 0 16px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: #f7faf8; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.epistemic-legend p { margin: 0; }
+.epistemic-label { flex: 0 0 auto; padding: 3px 7px; border-radius: 999px; font-size: 10px; font-weight: 800; letter-spacing: .02em; }
+.epistemic-label.strong { background: #dff3e8; color: #17633f; }
+.epistemic-label.moderate { background: #e8effa; color: #315d91; }
+.epistemic-label.emerging { background: #fff0d8; color: #8a5918; }
 .workflow-insight-card > p { margin: 0 0 12px; color: #435149; font-size: 13px; line-height: 1.68; }
 .workflow-insight-card .workflow-implication { margin-top: auto; padding: 11px 12px; border-left: 3px solid var(--green-2); border-radius: 0 8px 8px 0; background: #eaf6ef; color: #214b38; }
 .workflow-insight-card .workflow-implication strong { color: var(--green); }
