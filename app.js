@@ -37,7 +37,7 @@ function pageHeader(eyebrow, title, lead) {
 }
 
 const collectionDefinitions = {
-  project: { title: "프로젝트 계획·현황", lead: "프로젝트 배경·실행 계획과 전 기간에 유지할 의사결정 기준을 확인하는 문서입니다.", paths: ["킥오프정리_노션용_v2.md", "펫나우_Shelter_CRM_프로젝트_의사결정_체크리스트.md"] },
+  project: { title: "프로젝트 계획·현황", lead: "프로젝트 배경·실행 계획과 전 기간에 유지할 의사결정 기준을 확인하는 문서입니다.", homeLead: "프로젝트 배경과 M1 실행 계획을 확인하는 문서입니다.", paths: ["킥오프정리_노션용_v2.md", "펫나우_Shelter_CRM_프로젝트_의사결정_체크리스트.md"], homePaths: ["킥오프정리_노션용_v2.md"] },
   interview: { title: "고객 인터뷰", lead: "Gina와 미국 로컬 쉘터의 실제 업무를 파악하기 위해 설계한 인터뷰 계획 문서입니다.", paths: ["지나인터뷰_계획.md"] },
   workflow: { title: "쉘터 업무 플로우", lead: "미국 동물보호소·레스큐의 조직 유형과 구조부터 입양까지의 업무 흐름을 정리한 문서입니다.", paths: ["미국쉘터_구조부터입양까지_업무플로우_딥리서치_20260725.md"] },
   competitors: { title: "경쟁사 조사", lead: "경쟁 4사의 제품·가격·기능, 사용자 리뷰와 4개 제품 데모 UI·UX 검증 자료입니다.", paths: ["경쟁4사_검증본_M1실무요약_20260726.md", "경쟁4사_딥리서치_20260725.md", "경쟁4사_리뷰40개_파일럿코딩_20260726.md"] },
@@ -93,11 +93,16 @@ function docsForCollection(key) {
   return definition.paths.map((path) => byPath.get(path)).filter(Boolean);
 }
 
+function docsForHome(key) {
+  const definition = collectionDefinitions[key];
+  return (definition.homePaths ?? definition.paths).map((path) => byPath.get(path)).filter(Boolean);
+}
+
 function renderLibrary(key = "all") {
   if (key === "all") {
     app.innerHTML = `${pageHeader("문서 목록", "Petnow Shelter CRM 문서", "카테고리별 전체 문서와 각 문서의 역할을 한 화면에서 볼 수 있습니다.")}
       <div class="library-summary"><strong>원본 문서 ${docs.length}개</strong><span>상단 검색 또는 왼쪽 주제 메뉴에서 찾아보세요</span><a class="download-all" href="Petnow_Shelter_CRM_전체_Markdown.zip" download>전체 Markdown 다운로드 ↓</a></div>
-      <div class="compact-library">${primaryGroups.map((groupKey, groupIndex) => { const group = collectionDefinitions[groupKey]; const groupDocs = docsForCollection(groupKey); const isReference = ["methods", "appendix"].includes(groupKey); return `<section class="compact-section ${isReference ? "reference-section" : ""}"><div class="compact-section-head"><div><span>${String(groupIndex + 1).padStart(2, "0")}</span><h2>${group.title}</h2><b>${collectionCount(groupKey, groupDocs)}개</b></div>${isReference ? `<small class="section-tier">참고 자료</small>` : ""}<p>${group.lead}</p><div class="compact-section-links"><a href="#/library/${groupKey}">섹션 열기 →</a></div></div><div class="compact-doc-list">${collectionRows(groupKey, groupDocs)}</div></section>`; }).join("")}</div>`;
+      <div class="compact-library">${primaryGroups.map((groupKey, groupIndex) => { const group = collectionDefinitions[groupKey]; const groupDocs = docsForHome(groupKey); const isReference = ["methods", "appendix"].includes(groupKey); return `<section class="compact-section ${isReference ? "reference-section" : ""}"><div class="compact-section-head"><div><span>${String(groupIndex + 1).padStart(2, "0")}</span><h2>${group.title}</h2><b>${collectionCount(groupKey, groupDocs)}개</b></div>${isReference ? `<small class="section-tier">참고 자료</small>` : ""}<p>${group.homeLead ?? group.lead}</p><div class="compact-section-links"><a href="#/library/${groupKey}">섹션 열기 →</a></div></div><div class="compact-doc-list">${collectionRows(groupKey, groupDocs)}</div></section>`; }).join("")}</div>`;
     return;
   }
   const definition = collectionDefinitions[key];
