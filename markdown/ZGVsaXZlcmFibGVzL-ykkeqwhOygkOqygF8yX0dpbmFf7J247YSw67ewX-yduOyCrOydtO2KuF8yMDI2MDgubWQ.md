@@ -1,4 +1,4 @@
-# 2. Gina 인터뷰 인사이트
+# Gina 인터뷰 인사이트
 
 > 미팅 배정: 15분  
 > 인터뷰이: Gina Kim-Sadiku, KK9R CEO  
