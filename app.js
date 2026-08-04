@@ -42,7 +42,7 @@ const collectionDefinitions = {
   workflow: { title: "쉘터 업무 플로우", lead: "미국 동물보호소·레스큐의 조직 유형과 구조부터 입양까지의 업무 흐름을 정리한 문서입니다.", paths: ["미국쉘터_구조부터입양까지_업무플로우_딥리서치_20260725.md"] },
   competitors: { title: "경쟁사 조사", lead: "경쟁 4사의 제품·가격·기능, 사용자 리뷰와 4개 제품 데모 UI·UX 검증 자료입니다.", paths: ["경쟁4사_검증본_M1실무요약_20260726.md", "경쟁4사_딥리서치_20260725.md", "경쟁4사_리뷰40개_파일럿코딩_20260726.md"] },
   methods: { title: "출처·분석 방법", lead: "리뷰 출처, 데모 접근 경로와 기획·분석의 근거를 정리한 문서입니다.", paths: ["EBP_ShelterCRM_2주계획검토.md", "sources/source-index.md", "EBP_경쟁4사_리뷰전수_질적분석.md", "sources/competitor-demo-access.md", "analysis/EBP_경쟁사_리뷰_데모_UIUX_전문가패널_20260728.md", "deliverables/Track2_ICP_Persona_소재_정의_근거_20260805.md"] },
-  appendix: { title: "별첨", lead: "실행에 필요한 설정 가이드와 Shelter CRM 본 조사 범위 밖의 참고 자료입니다.", paths: ["deliverables/Track2_광고계정_설정가이드_Meta_LinkedIn_20260805.md", "펫나우_비문인식_현재기능_검증_20260726.md"] },
+  appendix: { title: "별첨", lead: "실행에 필요한 설정 가이드와 Shelter CRM 본 조사 범위 밖의 참고 자료입니다.", paths: ["펫나우_비문인식_현재기능_검증_20260726.md", "deliverables/Track2_광고계정_설정가이드_Meta_LinkedIn_20260805.md"] },
 };
 
 const primaryGroups = ["project", "interview", "workflow", "competitors", "methods", "appendix"];
