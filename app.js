@@ -47,6 +47,15 @@ const collectionDefinitions = {
 
 const primaryGroups = ["project", "interview", "workflow", "competitors", "methods", "appendix"];
 
+const externalCollectionDocs = {
+  interview: [{
+    title: "LinkedIn 인터뷰 후보·섭외 현황",
+    description: "인터뷰 후보, 우선순위, 연락 진행 상태를 관리하는 Google Sheet",
+    role: "섭외 현황",
+    url: "https://docs.google.com/spreadsheets/d/1wkeSUFVlOBCDuR5_GCHLElfhQyS0cTswEWkXcaSp1Ho/edit?pli=1&gid=0#gid=0",
+  }],
+};
+
 const documentRoles = new Map([
   ["킥오프정리_노션용_v2.md", "실행 계획"],
   ["PROJECT_STATE.md", "진행 현황"],
@@ -78,8 +87,17 @@ function visualAnalysisRow(index) {
   return `<a class="compact-doc-row" href="demo-insights.html"><span class="compact-doc-number">${number}</span><span class="compact-doc-copy"><strong>경쟁사 데모 제품 UI·UX 시각 분석</strong><small>4개 제품 데모의 과업별 검증 결과와 화면 증거</small></span><span class="compact-doc-role">화면 검증</span><span class="compact-doc-arrow">↗</span></a>`;
 }
 
+function externalDocRow(doc, index) {
+  const number = String(index + 1).padStart(2, "0");
+  return `<a class="compact-doc-row external-doc-row" href="${doc.url}" target="_blank" rel="noopener noreferrer"><span class="compact-doc-number">${number}</span><span class="compact-doc-copy"><strong>${doc.title}</strong><small>${doc.description}</small></span><span class="compact-doc-role">${doc.role}</span><span class="compact-doc-arrow">↗</span></a>`;
+}
+
 function collectionRows(key, selectedDocs) {
-  if (key !== "competitors") return selectedDocs.map(compactDocRow).join("");
+  const externalDocs = externalCollectionDocs[key] ?? [];
+  if (key !== "competitors") return [
+    ...externalDocs.map(externalDocRow),
+    ...selectedDocs.map((doc, index) => compactDocRow(doc, index + externalDocs.length)),
+  ].join("");
   return [
     compactDocRow(selectedDocs[0], 0),
     visualAnalysisRow(1),
@@ -88,7 +106,7 @@ function collectionRows(key, selectedDocs) {
 }
 
 function collectionCount(key, selectedDocs) {
-  return selectedDocs.length + (key === "competitors" ? 1 : 0);
+  return selectedDocs.length + (externalCollectionDocs[key]?.length ?? 0) + (key === "competitors" ? 1 : 0);
 }
 
 function docsForCollection(key) {
