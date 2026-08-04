@@ -49,7 +49,7 @@ const primaryGroups = ["project", "interview", "workflow", "competitors", "metho
 
 const externalCollectionDocs = {
   interview: [{
-    title: "LinkedIn 인터뷰 후보·섭외 현황",
+    title: "인터뷰 후보·섭외 현황",
     description: "인터뷰 후보, 우선순위, 연락 진행 상태를 관리하는 Google Sheet",
     role: "섭외 현황",
     url: "https://docs.google.com/spreadsheets/d/1wkeSUFVlOBCDuR5_GCHLElfhQyS0cTswEWkXcaSp1Ho/edit?pli=1&gid=0#gid=0",
