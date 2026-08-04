@@ -37,12 +37,12 @@ function pageHeader(eyebrow, title, lead) {
 }
 
 const collectionDefinitions = {
-  project: { title: "프로젝트 계획·현황", lead: "프로젝트 배경과 M1 실행 계획을 확인하는 문서입니다.", homeLead: "프로젝트 배경과 M1 실행 계획을 확인하는 문서입니다.", paths: ["킥오프정리_노션용_v2.md"], homePaths: ["킥오프정리_노션용_v2.md"] },
-  interview: { title: "고객 인터뷰", lead: "Gina와 미국 로컬 쉘터의 실제 업무를 파악하기 위해 설계한 인터뷰 계획 문서입니다.", paths: ["지나인터뷰_계획.md"] },
+  project: { title: "프로젝트 계획·현황", lead: "프로젝트 배경과 M1·Track 2 실행 계획을 확인하는 문서입니다.", homeLead: "프로젝트 배경과 M1·Track 2 실행 계획을 확인하는 문서입니다.", paths: ["킥오프정리_노션용_v2.md", "deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md"], homePaths: ["킥오프정리_노션용_v2.md", "deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md"] },
+  interview: { title: "고객 인터뷰", lead: "Gina 인터뷰 계획과 확인된 인사이트, 미국 로컬 쉘터 후속 인터뷰 자료입니다.", paths: ["지나인터뷰_계획.md", "deliverables/중간점검_2_Gina_인터뷰_인사이트_202608.md"] },
   workflow: { title: "쉘터 업무 플로우", lead: "미국 동물보호소·레스큐의 조직 유형과 구조부터 입양까지의 업무 흐름을 정리한 문서입니다.", paths: ["미국쉘터_구조부터입양까지_업무플로우_딥리서치_20260725.md"] },
   competitors: { title: "경쟁사 조사", lead: "경쟁 4사의 제품·가격·기능, 사용자 리뷰와 4개 제품 데모 UI·UX 검증 자료입니다.", paths: ["경쟁4사_검증본_M1실무요약_20260726.md", "경쟁4사_딥리서치_20260725.md", "경쟁4사_리뷰40개_파일럿코딩_20260726.md"] },
-  methods: { title: "출처·분석 방법", lead: "리뷰 출처, 데모 접근 경로와 분석·검토 방법을 정리한 문서입니다.", paths: ["sources/source-index.md", "sources/competitor-demo-access.md", "EBP_경쟁4사_리뷰전수_질적분석.md", "analysis/EBP_경쟁사_리뷰_데모_UIUX_전문가패널_20260728.md", "EBP_ShelterCRM_2주계획검토.md"] },
-  appendix: { title: "별첨", lead: "Shelter CRM 본 조사 범위에 포함되지 않는 참고 자료입니다.", paths: ["펫나우_비문인식_현재기능_검증_20260726.md"] },
+  methods: { title: "출처·분석 방법", lead: "리뷰 출처, 데모 접근 경로와 기획·분석의 근거를 정리한 문서입니다.", paths: ["sources/source-index.md", "sources/competitor-demo-access.md", "deliverables/Track2_ICP_Persona_소재_정의_근거_20260805.md", "EBP_경쟁4사_리뷰전수_질적분석.md", "analysis/EBP_경쟁사_리뷰_데모_UIUX_전문가패널_20260728.md", "EBP_ShelterCRM_2주계획검토.md"] },
+  appendix: { title: "별첨", lead: "실행에 필요한 설정 가이드와 Shelter CRM 본 조사 범위 밖의 참고 자료입니다.", paths: ["deliverables/Track2_광고계정_설정가이드_Meta_LinkedIn_20260805.md", "펫나우_비문인식_현재기능_검증_20260726.md"] },
 };
 
 const primaryGroups = ["project", "interview", "workflow", "competitors", "methods", "appendix"];
@@ -52,6 +52,10 @@ const documentRoles = new Map([
   ["PROJECT_STATE.md", "진행 현황"],
   ["가설_근거_반증실험_보드.md", "가설 관리"],
   ["지나인터뷰_계획.md", "인터뷰 설계"],
+  ["deliverables/중간점검_2_Gina_인터뷰_인사이트_202608.md", "인터뷰 결과"],
+  ["deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", "Track 2 계획"],
+  ["deliverables/Track2_ICP_Persona_소재_정의_근거_20260805.md", "기획 근거"],
+  ["deliverables/Track2_광고계정_설정가이드_Meta_LinkedIn_20260805.md", "실행 가이드"],
   ["미국쉘터_구조부터입양까지_업무플로우_딥리서치_20260725.md", "업무 이해"],
   ["경쟁4사_검증본_M1실무요약_20260726.md", "먼저 읽기"],
   ["경쟁4사_딥리서치_20260725.md", "상세 자료"],
@@ -223,7 +227,8 @@ function renderDocument(id) {
   const visualAnalysisLink = doc.path === "analysis/경쟁사_데모_UIUX_통합분석.md" ? `<a class="document-visual-link" href="demo-insights.html">UI·UX 화면 분석 보기 ↗</a>` : "";
   const markdownUrl = new URL(doc.markdown, window.location.href).href;
   const downloadName = doc.path.split("/").pop();
-  app.innerHTML = `<div class="doc-layout"><article class="document"><header class="document-header"><div class="evidence-meta"><span class="tag">${doc.category}</span></div><h1>${doc.title}</h1><div class="source-path">${doc.path}</div><div class="document-actions" aria-label="원본 Markdown 공유"><a href="${doc.markdown}" target="_blank" rel="noopener">Markdown 열기 ↗</a><a href="${doc.markdown}" download="${downloadName}">Markdown 다운로드 ↓</a><button type="button" data-copy-markdown="${markdownUrl}">AI용 링크 복사</button></div><p class="document-actions-help">SPA 화면 대신 원본 Markdown 주소를 AI 도구에 전달할 수 있습니다.</p>${visualAnalysisLink}</header><div class="markdown-body">${doc.html}</div></article><aside class="toc"><strong>문서 목차</strong></aside></div>`;
+  const bodyClass = doc.path === "deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md" ? " track2-plan" : "";
+  app.innerHTML = `<div class="doc-layout"><article class="document${bodyClass}"><header class="document-header"><div class="evidence-meta"><span class="tag">${doc.category}</span></div><h1>${doc.title}</h1><div class="source-path">${doc.path}</div><div class="document-actions" aria-label="원본 Markdown 공유"><a href="${doc.markdown}" target="_blank" rel="noopener">Markdown 열기 ↗</a><a href="${doc.markdown}" download="${downloadName}">Markdown 다운로드 ↓</a><button type="button" data-copy-markdown="${markdownUrl}">AI용 링크 복사</button></div><p class="document-actions-help">SPA 화면 대신 원본 Markdown 주소를 AI 도구에 전달할 수 있습니다.</p>${visualAnalysisLink}</header><div class="markdown-body">${doc.html}</div></article><aside class="toc"><strong>문서 목차</strong></aside></div>`;
   app.querySelector("[data-copy-markdown]")?.addEventListener("click", async (event) => {
     const button = event.currentTarget;
     const originalLabel = button.textContent;
