@@ -84,7 +84,7 @@ function compactDocRow(doc, index) {
 
 function visualAnalysisRow(index) {
   const number = String(index + 1).padStart(2, "0");
-  return `<a class="compact-doc-row" href="demo-insights.html"><span class="compact-doc-number">${number}</span><span class="compact-doc-copy"><strong>경쟁사 데모 제품 UI·UX 시각 분석</strong><small>4개 제품 데모의 과업별 검증 결과와 화면 증거</small></span><span class="compact-doc-role">화면 검증</span><span class="compact-doc-arrow">↗</span></a>`;
+  return `<a class="compact-doc-row" href="demo-insights.html"><span class="compact-doc-number">${number}</span><span class="compact-doc-copy"><strong>경쟁사 데모 제품 UI·UX 시각 분석</strong><small>4개 제품 데모의 과업별 검증 결과와 화면 증거</small></span><span class="compact-doc-role">화면 검증</span><span class="compact-doc-arrow">→</span></a>`;
 }
 
 function externalDocRow(doc, index) {
@@ -242,7 +242,7 @@ function wireDocumentToc() {
 function renderDocument(id) {
   const doc = byId.get(id);
   if (!doc) return renderNotFound();
-  const visualAnalysisLink = doc.path === "analysis/경쟁사_데모_UIUX_통합분석.md" ? `<a class="document-visual-link" href="demo-insights.html">UI·UX 화면 분석 보기 ↗</a>` : "";
+  const visualAnalysisLink = doc.path === "analysis/경쟁사_데모_UIUX_통합분석.md" ? `<a class="document-visual-link" href="demo-insights.html">UI·UX 화면 분석 보기 →</a>` : "";
   const markdownUrl = new URL(doc.markdown, window.location.href).href;
   const downloadName = doc.path.split("/").pop();
   const bodyClass = doc.path === "deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md" ? " track2-plan" : "";
