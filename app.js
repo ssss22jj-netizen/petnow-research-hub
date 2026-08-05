@@ -77,9 +77,18 @@ const documentRoles = new Map([
   ["analysis/EBP_경쟁사_리뷰_데모_UIUX_전문가패널_20260728.md", "분석 검토"],
 ]);
 
+const externalDocumentUrls = new Map([
+  ["deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", "https://claude.ai/code/artifact/5293d79f-045f-4e27-899c-ca8e82726789"],
+]);
+
 function compactDocRow(doc, index) {
   const number = String(index + 1).padStart(2, "0");
-  return `<a class="compact-doc-row" href="#/doc/${doc.id}"><span class="compact-doc-number">${number}</span><span class="compact-doc-copy"><strong>${doc.title}</strong><small>${doc.description}</small></span><span class="compact-doc-role">${documentRoles.get(doc.path) ?? doc.category}</span><span class="compact-doc-arrow">→</span></a>`;
+  const externalUrl = externalDocumentUrls.get(doc.path);
+  const href = externalUrl ?? `#/doc/${doc.id}`;
+  const externalAttributes = externalUrl ? ' target="_blank" rel="noopener noreferrer"' : "";
+  const rowClass = externalUrl ? "compact-doc-row external-doc-row" : "compact-doc-row";
+  const arrow = externalUrl ? "↗" : "→";
+  return `<a class="${rowClass}" href="${href}"${externalAttributes}><span class="compact-doc-number">${number}</span><span class="compact-doc-copy"><strong>${doc.title}</strong><small>${doc.description}</small></span><span class="compact-doc-role">${documentRoles.get(doc.path) ?? doc.category}</span><span class="compact-doc-arrow">${arrow}</span></a>`;
 }
 
 function visualAnalysisRow(index) {
