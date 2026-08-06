@@ -63,7 +63,7 @@ const documentRoles = new Map([
   ["지나인터뷰_계획.md", "인터뷰 설계"],
   ["deliverables/중간점검_2_Gina_인터뷰_인사이트_202608.md", "인터뷰 결과"],
   ["deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", "Track 2 계획"],
-  ["meetings/2026-08-07_Track2_LMF_후속기획_대화기록.md", "후속 기획"],
+  ["meetings/2026-08-07_Track2_LMF_후속기획_대화기록.md", "상세 기획"],
   ["deliverables/Track2_ICP_Persona_소재_정의_근거_20260805.md", "기획 근거"],
   ["deliverables/Track2_광고계정_설정가이드_Meta_LinkedIn_20260805.md", "실행 가이드"],
   ["미국쉘터_구조부터입양까지_업무플로우_딥리서치_20260725.md", "업무 이해"],
