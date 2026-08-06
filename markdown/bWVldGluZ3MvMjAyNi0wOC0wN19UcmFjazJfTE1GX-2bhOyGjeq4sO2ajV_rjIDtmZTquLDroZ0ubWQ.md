@@ -13,7 +13,7 @@
 | 구분 | 8월 5일 이후 카야 진행 내용 |
 | --- | --- |
 | 캠페인 목적 | 리드 수집 이후 액션을 인터뷰와 데모 사이에서 검토: 데모로 확정 |
-| LMF 방향성 명료화 | 구현 완료된 기능 판매가 아닌, 제시한 문제와 해결 방식에 대한 관심·데모 예약·가격 반응을 확인하는 페이크도어·프리토타입(Pretotype) 테스트|
+| LMF 방향성 명료화 | 구현 완료된 기능 판매가 아닌, 제시한 문제와 해결 방식에 대한 관심·데모 예약·가격 반응을 확인하는 **프리토타입(Pretotype) 테스트**|
 | 제품 맥락 정리 | LP에서 제시할 약속, 경쟁 우위 구체화를 위해 펫나우·Petstablished 관계 재정리. 펫나우 CRM은 자체 동물 레코드로 크로스보더 정보와 준비 상태를 관리함. Petstablished는 KK9R 뉴욕 조직의 즉시 Intake, 외부 게시, 입양 운영을 담당. Petstablished의 핵심 기능은 외부 게시(API)  |
 | 소구점 후보 검증|준비 상태 판단(A)·임보자 업데이트 수집(B)·등록부터 게시까지의 업무 부담(C) 소구점 후보 보다 구체적 기준으로 검토(제품 포지셔닝/경쟁 우위 여부/데모 가능 여부 관점, 지나/합성소비자 인터뷰 재검증) |
 | 제품 콘셉트 정의| 간편 등록(C) → 현장·임보 업데이트 수집(B) → 입양 준비 상태 판단(A) → 홈페이지·외부 입양 플랫폼 게시(C)의 단일 제품 흐름 |
@@ -62,16 +62,16 @@ Track 2 LMF 캠페인에서는 하나의 제품에서 어떤 문제와 기능이
 
 | 검토 항목 | 카야 후속 작업 방향 |
 | --- | --- |
-| 검증 대상 | 현재 구현 여부가 아니라 문제 반응, 해결 방식 반응, 데모 예약, 조건부 가격 인식 |
-| 소재 구성 | 하나의 제품 흐름을 유지하고 A·B·C별 문제제기형과 해결책형을 함께 구성 |
-| 광고·랜딩페이지 | **A·B·C가 결합된 제품 경험을 제시하고, 광고 유입자를 해당 소재의 프리토타입 데모로 연결** |
+| 검증 대상 | 시장에 존재할 것으로 추측되는 문제에 대한 반응(CTR), 해결책에 대한 관심도(Scroll), 데모 신청 여부(CTA), 후속 논의 의향(Demo) |
+| 소재 구성 | 한 제품 내 세 가지의 주요 기능(A·B·C)을 각각 문제제기+해결책 구조로 구성 |
+| 랜딩페이지 | **A·B·C가 결합된 제품 경험을 제시하고 소재별로 LP에서 강조하는 소구점 변주, CTA는 프리토타입 데모로 연결** |
 | CTA 방향 | 즉시 제품 제공을 전제하는 무료 체험·즉시 사용 대신 **데모·얼리 액세스·피드백 세션**으로 전환 |
 | CTA 예시 | `Book a demo & feedback session`, `Request early access`, `See the workflow`, `Preview the workflow` |
-| 데모 | 하나의 피그마 **프리토타입**(**[링크](https://www.figma.com/design/YT41mZ3g78IJMlxVOjnNMu/Petnow-CRM-%C2%B7-LMF-Demo-Wireframes-%C2%B7-2026-08-06?node-id=0-1&t=igW01OBXFGy7vXim-1)**)을 사용하되 A는 준비 상태 화면, B는 임보 업데이트 화면, C는 신규 등록 화면에서 시연 시작 |
+| 데모 | 피그마 **프리토타입**(**[링크](https://www.figma.com/design/YT41mZ3g78IJMlxVOjnNMu/Petnow-CRM-%C2%B7-LMF-Demo-Wireframes-%C2%B7-2026-08-06?node-id=0-1&t=igW01OBXFGy7vXim-1)**)을 사용하여 시연 |
 | 인터뷰 | 데모에 대한 반응 온도, 현재 업무, 후속 논의/파일럿/구매 의향 확인 |
 | 세션 종료 | 제품 준비되면 early access 연락 드리겠다고 안내하며 인터뷰 종료 |
 
-### 프리토타입 고객 안내 원칙
+### 프리토타입 고객 안내 원칙(광고와 랜딩 간 일치성 유지)
 
 - 제품 가치와 A·B·C 기능은 적극적으로 제시
 - CTA는 `Book a demo` 또는 `Request early access`와 같은 표현 사용 CTA 아래 한 줄과 신청 완료 화면에서 얼리 액세스 단계임을 자연스럽게 안내 (예: Preview the workflow and get notified when early access opens. )
@@ -119,7 +119,7 @@ Track 2 LMF 캠페인에서는 하나의 제품에서 어떤 문제와 기능이
 | **예산 50% 소진**<br>소재당 7.5만 원 | 동일 채널 내 소재별 CTR 추이, 페이지 조회 이후 스크롤·CTA·리드 제출 발생 여부 | Meta·LinkedIn의 공개 CTR 벤치마크와 동일 채널 내 소재 간 차이를 함께 확인. 표본이 작으면 중단하지 않고 잠정 우세·열세만 기록 |
 | **예산 100% 소진**<br>소재당 15만 원 | CTR, 랜딩페이지 전환, 리드 적합성, 데모 참석과 후속 행동 종합 | 문제·메시지 반응, 해결 방식 관심, 제품 가설 진전을 분리해 최종 기록 |
 
-<small>※ CPM 참고: 2026년 1분기 미국 Meta 광고 평균 CPM은 Traffic·Engagement 캠페인 $10~15, 웹사이트 Lead Generation 캠페인 $26~40 수준임. 좁은 타깃의 리드 캠페인은 $40~55까지 상승 가능. 출처: [Affect Group, US Meta Ads CPM Insights Q1 2026](https://affectgroup.com/blog/meta-ads-cpm-in-the-united-states-benchmarks-for-facebook-and-instagram/)</small>
+<small>※ CPM 참고: Affect Group의 2026년 1분기 미국 Meta 광고 자료에서 평균 CPM은 Traffic·Engagement $10~15, 웹사이트 Lead Generation $26~40이며, 웹사이트 Lead Generation의 평균 상단 범위(Average Max)는 $40~55임. 이 자료는 대규모 지역·전국 단위 미국 캠페인에 주로 적용되며 도시·DMA 단위 타기팅에서는 차이가 날 수 있음. 출처: [Affect Group, US Meta Ads CPM Insights Q1 2026](https://affectgroup.com/blog/meta-ads-cpm-in-the-united-states-benchmarks-for-facebook-and-instagram/)</small>
 
 #### 지표 조합에 따른 중간 대응
 
@@ -139,9 +139,9 @@ Track 2 LMF 캠페인에서는 하나의 제품에서 어떤 문제와 기능이
 
 | 지표 | 낮음 | 보통 | 높음 | 기준 및 근거 |
 | --- | ---: | ---: | ---: | --- |
-| **Meta Traffic CTR** | 0.8% 미만 | 0.8~1.4% | 1.4% 이상 | 공개 평균: Business Services 1.38%, Industrial & Commercial 1.36%, Animals & Pets 1.64%. [WordStream, Facebook Ads Benchmarks 2025](https://www.wordstream.com/blog/facebook-ads-benchmarks-2025) |
-| **LinkedIn CTR** | 0.4% 미만 | 0.4~0.8% | 0.8% 이상 | 공개 평균: B2B SaaS 분기별 0.82~0.96%. 70곳 이상, 3년간 광고비 2,800만 달러 표본. [HockeyStack, 2025 LinkedIn Ads Benchmark Report](https://www.hockeystack.com/lab-blog-posts/linkedin-ads-benchmarks) |
-| **페이지 조회 → 리드 제출률** | 2% 미만 | 2~5% | 5% 이상 | 공개 중앙값: SaaS 전체 3.8%, paid social 2.9%, Facebook 3.5%. [Unbounce, SaaS Conversion Rate Benchmark](https://unbounce.com/conversion-benchmark-report/saas-conversion-rate/) |
+| **Meta Traffic CTR** | 0.8% 미만 | 0.8~1.4% | 1.4% 이상 | 공개 중앙값: Business Services 1.38%, Industrial & Commercial 1.36%, Animals & Pets 1.64%. 미국 Traffic 캠페인 554개, 2024년 4월 1일~2025년 6월 30일 표본. [WordStream, Facebook Ads Benchmarks 2025](https://www.wordstream.com/blog/facebook-ads-benchmarks-2025) |
+| **LinkedIn CTR** | 0.4% 미만 | 0.4~0.8% | 0.8% 이상 | 공개 관찰값: Q1 0.82%, Q3 0.96%(Q2·Q4 미제공). 70곳 이상 B2B SaaS 기업, 3년간 광고비 2,800만 달러 표본. [HockeyStack, 2025 LinkedIn Ads Benchmark Report](https://www.hockeystack.com/lab-blog-posts/linkedin-ads-benchmarks) |
+| **페이지 조회 → 리드 제출률** | 2% 미만 | 2~5% | 5% 이상 | 공개 중앙값: SaaS 랜딩페이지 전체 3.8%, paid social 2.9%, Facebook 3.5%. 데모·무료 체험·콘텐츠 등 여러 전환 목표가 포함된 수치이므로 리드 폼 제출률의 참고값으로만 사용. [Unbounce, SaaS Conversion Rate Benchmark](https://unbounce.com/conversion-benchmark-report/saas-conversion-rate/) |
 
 <small>※ 링크 클릭 대비 랜딩페이지 조회율은 기술 상태 확인용 진단 지표로만 사용하며, 비교 가능한 공개 근거가 없어 별도 성공 구간을 설정하지 않음.</small>
 
@@ -192,11 +192,14 @@ Track 2 LMF 캠페인에서는 하나의 제품에서 어떤 문제와 기능이
 - `analysis/LMF_agent_전달브리프_ABC_통합제품구조_20260807.md`
 - `analysis/Track2_LMF_데모_목업_와이어프레임_기획_20260806.md`
 
-### 프리토타입·광고 벤치마크 근거
+### 프리토타입 운영 근거
 
 - [Pretotype It, 10 Year Anniversary Edition](https://pretotyping.org/uploads/1/4/0/9/14099067/pretotype_it_10_year_anniversary_edition_pdf_version_1.0.pdf)
 - [Amplitude, Fake Door Testing](https://amplitude.com/explore/experiment/fake-door-testing)
 - [FTC, Advertising FAQ's: A Guide for Small Business](https://www.ftc.gov/business-guidance/resources/advertising-faqs-guide-small-business)
+
+### 광고·랜딩페이지 벤치마크 근거
+
 - [Affect Group, US Meta Ads CPM Insights Q1 2026](https://affectgroup.com/blog/meta-ads-cpm-in-the-united-states-benchmarks-for-facebook-and-instagram/)
 - [WordStream, Facebook Ads Benchmarks 2025](https://www.wordstream.com/blog/facebook-ads-benchmarks-2025)
 - [HockeyStack, 2025 LinkedIn Ads Benchmark Report](https://www.hockeystack.com/lab-blog-posts/linkedin-ads-benchmarks)
