@@ -3,14 +3,14 @@
 > 작성일: 2026년 8월 9일  
 > 문서 상태: 제품 콘셉트 초안 · 펫나우팀 검토 전  
 > 개발 대상: 클릭형 프리토타입  
-> 제품 범위: 동물 Intake부터 준비 상태 관리와 사이트·외부 입양 채널 게시까지  
+> 제품 범위: 동물 Intake부터 준비 상태 관리와 쉘터 웹사이트 게시까지. 외부 입양 채널은 연동 가능성만 표시  
 > 한 줄 정의: Petify for Shelters는 동물을 등록한 순간부터 필요한 정보와 임보 업데이트를 하나의 레코드에 모으고, 준비 상태를 판단해 게시까지 연결하는 Shelter CRM이다.
 
 ## 0. 제품 정의
 
 Petify for Shelters는 현재 구현된 펫나우 CRM의 기능 범위를 재현하는 제품이 아니다. 시장에 제시할 새로운 Shelter CRM의 전체 경험을 검증하기 위해 설계하는 프리토타입이다. 따라서 현재 구현 여부나 기존 시스템 연동 여부에 제한받지 않고, 아래 흐름이 하나의 제품 안에서 완결되는 모습을 제시한다.
 
-`Intake → 동물 레코드 생성 → 임보 배치 → 업데이트 수집·검토 → 준비 상태 판단 → 게시 프로필 완성 → 사이트·외부 채널 게시`
+`Intake → 동물 레코드 생성 → 임보 배치 → 업데이트 수집·검토 → 준비 상태 판단 → 게시 프로필 완성 → 쉘터 웹사이트 게시`
 
 ### 0.1 A·B·C의 제품 내 역할
 
@@ -29,7 +29,7 @@ Petify for Shelters는 현재 구현된 펫나우 CRM의 기능 범위를 재현
 | 운영 책임자 | 전체 동물의 진행 상태와 게시 가능 여부를 한 화면에서 확인 |
 | 임보·입양 코디네이터 | 임보자에게 반복 연락하지 않고 최신 정보를 받아 차단 항목과 다음 행동을 관리 |
 | 임보자 | 계정이나 앱 설치 없이 링크에서 동물의 최신 상태와 사진 제출 |
-| 게시 담당자 | 준비된 동물의 프로필을 다시 정리하지 않고 사이트와 외부 입양 채널에 게시 |
+| 게시 담당자 | 준비된 동물의 프로필을 다시 정리하지 않고 쉘터 웹사이트에 게시. 외부 입양 채널은 연동이 확정된 이후 추가 |
 
 ### 0.3 핵심 제품 약속
 
@@ -203,7 +203,7 @@ Petify for Shelters는 현재 구현된 펫나우 CRM의 기능 범위를 재현
 | 5 | 코디네이터가 기존 행동 기록과 비교해 승인 | 행동 항목 최신화, 제출 이력 보존 | 안전한 정보 반영 |
 | 6 | 시스템이 준비 상태 다시 계산 | 유일한 차단 사유가 해소돼 `Ready`로 변경 | 사람에게 묻지 않고 준비 여부 판단 |
 | 7 | 게시 담당자가 공개 프로필 미리보기 | 내부 메모를 제외한 공개 정보·사진 표시 | 재입력 없이 게시 정보 완성 |
-| 8 | 사이트·Petfinder·Adopt a Pet 선택 후 게시 | 채널별 `Published` 상태와 게시 시각 표시 | Intake부터 게시까지 하나의 흐름 완결 |
+| 8 | 쉘터 웹사이트 게시 | 쉘터 웹사이트의 `Published` 상태와 게시 시각 표시. Petfinder·Adopt a Pet은 `Planned`로 구분 | Intake부터 게시까지 하나의 흐름 완결 |
 
 ### 7.2 소재별 데모 진입점
 
@@ -331,11 +331,12 @@ Petify for Shelters는 현재 구현된 펫나우 CRM의 기능 범위를 재현
 
 | 영역 | 요구사항 |
 | --- | --- |
-| 채널 | Shelter website, Petfinder, Adopt a Pet |
-| 게시 전 | 채널별 필수 정보 충족 여부와 미리보기 표시 |
-| 게시 중 | 채널별 진행 상태 표시 |
+| 현재 게시 채널 | Shelter website |
+| 향후 연동 후보 | Petfinder, Adopt a Pet. 제휴·기술 연동 확정 전까지 `Planned`로 비활성 표시 |
+| 게시 전 | 쉘터 웹사이트 게시에 필요한 정보 충족 여부와 미리보기 표시 |
+| 게시 중 | 쉘터 웹사이트 전송 진행 상태 표시 |
 | 게시 후 | Published 상태, 게시 시각, 공개 링크 표시 |
-| 실패 | 실패 원인, 영향을 받은 채널, `Fix & retry` 행동 표시 |
+| 실패 | 쉘터 웹사이트 게시 실패 원인과 `Fix & retry` 행동 표시 |
 
 ## 9. 기능 요구사항
 
@@ -356,7 +357,7 @@ Petify for Shelters는 현재 구현된 펫나우 CRM의 기능 범위를 재현
 | FR-011 | 승인 결과에 따라 체크리스트와 준비 상태 갱신 | P0 |
 | FR-012 | 상태별 차단 사유, 담당자, 다음 행동 표시 | P0 |
 | FR-013 | Ready 전환 후 공개 프로필 미리보기 활성화 | P0 |
-| FR-014 | 사이트·Petfinder·Adopt a Pet 채널 선택과 게시 상태 변화 시뮬레이션 | P0 |
+| FR-014 | 쉘터 웹사이트 게시 상태 변화를 시뮬레이션하고 Petfinder·Adopt a Pet은 비활성 `Planned` 상태로 표시 | P0 |
 | FR-015 | Intake부터 게시까지의 활동 이력 표시 | P0 |
 | FR-016 | 상태·차단 사유·담당자·최신성 필터 제공 | P1 |
 | FR-017 | 미응답·만료·게시 실패 예외 대시보드 제공 | P1 |
@@ -413,14 +414,14 @@ Petify for Shelters는 현재 구현된 펫나우 CRM의 기능 범위를 재현
 | 자동 판단처럼 과장하지 않음 | `Ready based on your organization’s checklist` |
 | 임보자에게 내부 용어를 요구하지 않음 | `How is Milo doing?` 후 변화가 있을 때 상세 질문 |
 | 제출·승인 차이를 명확히 표현 | `Submitted for review`, `Approved and added to Milo’s record` |
-| 게시 결과를 채널별로 표시 | `Petfinder · Published 10:42 AM`, `Adopt a Pet · Failed` |
+| 확정된 게시 결과와 향후 연동을 구분 | `Shelter website · Published 10:42 AM`, `Petfinder · Planned` |
 
 ## 13. 프리토타입 완료 조건
 
 ### 13.1 화면 완결성
 
 - Dashboard, Animals, Updates, Fosters, Publishing, Settings 메뉴 이동 가능
-- New Intake부터 채널 게시까지 Milo 또는 Coco 기준 End-to-end 흐름 완주 가능
+- New Intake부터 쉘터 웹사이트 게시까지 Milo 또는 Coco 기준 End-to-end 흐름 완주 가능
 - A 소재 진입 화면과 B 소재 진입 화면이 동일 제품 상태로 연결
 - 운영자 화면과 임보자 모바일 화면의 역할 차이가 명확함
 - 주요 버튼이 실제 화면 상태를 변경하며 막힌 링크나 무반응 버튼이 없음
@@ -455,7 +456,7 @@ Petify for Shelters는 현재 구현된 펫나우 CRM의 기능 범위를 재현
 | 우선순위 | 결정 항목 | PRD 현재안 | 필요한 판단 |
 | ---: | --- | --- | --- |
 | 1 | 제품의 최종 범주 | Intake부터 게시까지의 pre-adoption CRM | 신청·계약·결제까지 첫 제품에 포함할지 |
-| 2 | 게시 채널 | Shelter website, Petfinder, Adopt a Pet | 세 채널을 모두 프리토타입에 표시할지 |
+| 2 | 게시 채널 | Shelter website만 게시 가능. Petfinder·Adopt a Pet은 `Planned`로 표시 | 외부 채널별 제휴·기술 연동 가능 여부 확인 후 게시 기능 추가 |
 | 3 | 준비 체크리스트 | Health·Behavior·Media·Documents·Public profile | 로컬 레스큐 기준 기본 항목 확정 |
 | 4 | Intake 필드 | 기본 정보·입소 맥락·사진 중심 | 화면에 표시할 정확한 필드와 단계 수 |
 | 5 | 임보자 제출 방식 | 계정 없는 보안 링크 | 반복 사용 시에도 계정 없이 유지할지 |
@@ -492,4 +493,4 @@ Petify for Shelters는 현재 구현된 펫나우 CRM의 기능 범위를 재현
 | H-A 입양 준비 상태 판단 | 준비된 동물과 막힌 사유를 사람에게 물어봐야 확인 | 상태·차단 사유·다음 행동을 한 화면에서 확인 | Dashboard, Animals, Animal Overview, Readiness Checklist | Ready 전환 후 게시 행동 활성화 |
 | H-B 임보 업데이트 독촉 해방 | 임보자가 보내지 않으면 반복 연락하고, 보내도 여러 채널에 흩어짐 | 계정 없는 요청·자동 리마인드·구조화 제출·운영자 검토 | Update Request, Foster Mobile Form, Updates Inbox | 승인 정보가 체크리스트와 상태에 반영 |
 | H-D 인테이크 입력 속도 | 최초 등록에 정보가 몰리고 이후 업무와 분리 | 최초 레코드 생성과 이후 보완을 분리 | New Intake, Animal Overview | 저장 즉시 레코드·체크리스트 생성 |
-| H-C 실시간 게시·안정성 | 준비된 동물의 공개 정보 정리와 채널별 게시 상태 확인 부담 | 하나의 공개 프로필 검토 후 채널별 게시·상태 확인 | Public Profile, Publishing Queue, Publish to Channels | 사이트·외부 채널 Published 상태 표시 |
+| H-C 실시간 게시·안정성 | 준비된 동물의 공개 정보 정리와 게시 상태 확인 부담 | 하나의 공개 프로필 검토 후 쉘터 웹사이트 게시·상태 확인 | Public Profile, Publishing Queue, Publish to Channels | 쉘터 웹사이트 Published 상태와 외부 채널 Planned 상태 표시 |
