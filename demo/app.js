@@ -59,6 +59,33 @@ const TAB_LABELS = {
   updates:'Foster updates', media:'Media', documents:'Documents', public:'Public profile', activity:'Activity'
 };
 
+const UPDATE_SUBMISSIONS = [
+  {
+    id:'milo', name:'Milo', img:'assets/dog1.png', foster:'Jamie Lee', time:'12 min ago',
+    status:'Needs review', statusType:'review', filter:'review', flag:'Behavior changed', photoCount:3,
+    summaryTitle:'1 meaningful change detected', summaryText:'Compare the approved behavior record with Jamie’s new observation before applying it.', summaryType:'warning',
+    field:'Comfort around dogs', current:'Needs slow introductions. Avoid crowded play groups.', currentMeta:'Confirmed 18 days ago',
+    incoming:'Relaxed with two resident dogs and has started initiating play.', incomingMeta:'Submitted today by Jamie',
+    photos:['assets/dog1.png','assets/milo-home.jpg','assets/milo-yard.jpg'], mode:'review'
+  },
+  {
+    id:'buddy', name:'Buddy', img:'assets/dog3.png', foster:'Morgan Kim', time:'Yesterday',
+    status:'Changes requested', statusType:'failed', filter:'requested', flag:'Health follow-up needed', photoCount:3,
+    summaryTitle:'Clarification requested from Morgan', summaryText:'Buddy skipped one meal after treatment. Confirm appetite and bandage condition before approval.', summaryType:'alert',
+    field:'Post-treatment recovery', current:'Eating normally. No swelling or mobility concerns reported.', currentMeta:'Confirmed 7 days ago',
+    incoming:'Skipped dinner after treatment and is licking the bandaged paw. Morning walk was normal.', incomingMeta:'Submitted yesterday by Morgan',
+    photos:['assets/dog3.png','assets/buddy-recovery.jpg','assets/buddy-walk.jpg'], mode:'requested'
+  },
+  {
+    id:'luna', name:'Luna', img:'assets/dog2.png', foster:'Taylor Reed', time:'Aug 7',
+    status:'Approved', statusType:'complete', filter:'approved', flag:'No concerns reported', photoCount:3,
+    summaryTitle:'Update approved and applied', summaryText:'No readiness-impacting changes were reported. Two photos were added to Luna’s public media.', summaryType:'success',
+    field:'Weekly wellbeing', current:'Eating, sleeping, and exercising normally.', currentMeta:'Confirmed Jul 31',
+    incoming:'No health or behavior changes. Settling well and sleeping through the night.', incomingMeta:'Approved Aug 7 by Alex',
+    photos:['assets/dog2.png','assets/luna-sleep.jpg','assets/luna-play.jpg'], mode:'approved'
+  }
+];
+
 function animals() {
   const list = BASE_ANIMALS.map(a => ({...a}));
   const milo = list.find(a => a.id === 'milo');
@@ -270,17 +297,13 @@ function activityTab(a) { return `<section class="surface tab-panel"><div class=
 
 function updatesView() {
   const selected = state.selectedUpdate;
-  const submissions = [
-    {id:'milo',name:'Milo',img:'assets/dog1.png',foster:'Jamie Lee',time:'12 min ago',flag:'Behavior changed',status:'New'},
-    {id:'buddy',name:'Buddy',img:'assets/dog3.png',foster:'Morgan Kim',time:'Yesterday',flag:'Health changed',status:'New'},
-    {id:'luna',name:'Luna',img:'assets/dog2.png',foster:'Taylor Reed',time:'Aug 7',flag:'No changes',status:'Approved'}
-  ].filter(x=>state.updateFilter==='all'||x.status.toLowerCase()===state.updateFilter);
-  const item = submissions.find(x=>x.id===selected)||submissions[0]||{id:'milo',name:'Milo',img:'assets/dog1.png',foster:'Jamie Lee',time:'12 min ago',flag:'Behavior changed',status:'New'};
+  const submissions = UPDATE_SUBMISSIONS.filter(x=>state.updateFilter==='all'||x.filter===state.updateFilter);
+  const item = submissions.find(x=>x.id===selected)||submissions[0]||UPDATE_SUBMISSIONS[0];
   return `<section class="content">
     ${pageHeader('FOSTER COMMUNICATION','Updates','Track requests, follow up automatically, and review structured submissions.',`${state.requestSent&&!state.fosterSubmitted?'<button class="secondary-button" data-action="preview-foster-form">Open foster form ↗</button>':'<button class="secondary-button" data-action="copy-link">Copy foster link</button>'}<button class="primary-button" data-action="request-update">＋ Request update</button>`)}
-    <div class="update-metrics">${[['Overdue','4','overdue'],['Sent','7','sent'],['In progress','3','progress'],['Needs review',state.updateApproved?'1':'2','review']].map(([a,b,c])=>`<button data-update-filter="${c==='review'?'new':'all'}"><small>${a}</small><b>${b}</b><i class="${c}"></i></button>`).join('')}</div>
+    <div class="update-metrics">${[['Overdue','4','overdue','requested'],['Sent','7','sent','all'],['In progress','3','progress','all'],['Needs review',state.updateApproved?'0':'1','review','review']].map(([a,b,c,f])=>`<button data-update-filter="${f}"><small>${a}</small><b>${b}</b><i class="${c}"></i></button>`).join('')}</div>
     <section class="surface inbox">
-      <aside class="inbox-sidebar"><div class="inbox-tabs">${[['all','All'],['new','Needs review'],['approved','Approved']].map(([id,l])=>`<button class="${state.updateFilter===id?'active':''}" data-update-filter="${id}">${l}</button>`).join('')}</div><label class="inbox-search">⌕ <input placeholder="Search updates"></label><div class="submission-list">${submissions.map(s=>`<button class="submission ${item.id===s.id?'active':''}" data-select-update="${s.id}"><img src="${s.img}" alt=""><span><b>${s.name}<em>${s.status}</em></b><small>${s.foster} · ${s.time}</small><i>${s.flag}</i></span></button>`).join('')}</div></aside>
+      <aside class="inbox-sidebar"><div class="inbox-tabs">${[['all','All'],['review','Needs review'],['requested','Changes requested'],['approved','Approved']].map(([id,l])=>`<button class="${state.updateFilter===id?'active':''}" data-update-filter="${id}">${l}</button>`).join('')}</div><label class="inbox-search">⌕ <input placeholder="Search updates"></label><div class="submission-list">${submissions.map(s=>`<button class="submission ${item.id===s.id?'active':''}" data-select-update="${s.id}"><img src="${s.img}" alt=""><span><b>${s.name}<em class="${s.statusType}">${s.status}</em></b><small>${s.foster} · ${s.time}</small><i class="${s.statusType}">${s.flag}</i></span></button>`).join('')}</div></aside>
       ${reviewPanel(item)}
     </section>
   </section>`;
@@ -288,12 +311,15 @@ function updatesView() {
 
 function reviewPanel(item) {
   const approved = item.id==='milo' && state.updateApproved;
+  const effectiveMode = approved ? 'approved' : item.mode;
+  const effectiveStatus = approved ? 'Approved' : item.status;
+  const effectiveType = approved ? 'complete' : item.statusType;
   return `<article class="review-panel">
-    <div class="review-head"><div><p class="kicker">WEEKLY CHECK-IN · ${item.time.toUpperCase()}</p><h2>${item.name} · submitted by ${item.foster}</h2><p>${item.flag} · 3 photos attached</p></div>${statusPill(approved?'complete':'review',approved?'Approved':'Needs review')}</div>
-    <div class="change-summary"><span>!</span><div><b>1 meaningful change detected</b><p>Compare the approved record with the new response before applying it.</p></div><button data-action="review-help">How review works</button></div>
-    <div class="comparison"><div><small>CURRENT APPROVED RECORD</small><b>Comfort around dogs</b><p>Needs slow introductions. Avoid crowded play groups.</p><em>Confirmed 18 days ago</em></div><div class="new"><small>NEW FOSTER SUBMISSION</small><b>Comfort around dogs</b><p>Relaxed with two resident dogs and has started initiating play.</p><em>Submitted today by Jamie</em><label><input type="checkbox" checked> Approve this change</label></div></div>
-    <div class="attachment-panel"><div><small>NEW MEDIA</small><b>3 photos from Jamie</b></div><div class="review-photos">${['assets/dog1.png','assets/dog2.png','assets/dog4.png'].map((x,i)=>`<button data-action="preview-photo"><img src="${x}" alt=""><span>⌕</span><label><input type="checkbox" ${i<2?'checked':''}> Public use</label></button>`).join('')}</div></div>
-    <div class="review-actions"><button class="danger-text" data-action="reject-update">Reject</button><span></span><button class="secondary-button" data-action="request-changes">Request changes</button><button class="secondary-button" data-action="partial-approve">Approve selected</button><button class="primary-button" data-action="approve-update" ${approved?'disabled':''}>${approved?'Approved ✓':'Approve all & update record'}</button></div>
+    <div class="review-head"><div><p class="kicker">WEEKLY CHECK-IN · ${item.time.toUpperCase()}</p><h2>${item.name} · submitted by ${item.foster}</h2><p>${item.flag} · ${item.photoCount} photos attached</p></div>${statusPill(effectiveType,effectiveStatus)}</div>
+    <div class="change-summary ${effectiveMode==='approved'?'success':item.summaryType==='alert'?'alert':''}"><span>${effectiveMode==='approved'?'✓':effectiveMode==='requested'?'!':'↻'}</span><div><b>${approved?'Update approved and applied':item.summaryTitle}</b><p>${approved?'Milo’s behavior record and readiness checklist were updated.':item.summaryText}</p></div><button data-action="review-help">${effectiveMode==='requested'?'View request':effectiveMode==='approved'?'View audit trail':'How review works'}</button></div>
+    <div class="comparison"><div><small>CURRENT APPROVED RECORD</small><b>${item.field}</b><p>${item.current}</p><em>${item.currentMeta}</em></div><div class="new ${effectiveMode==='approved'?'approved':''}"><small>${effectiveMode==='approved'?'APPROVED FOSTER UPDATE':'NEW FOSTER SUBMISSION'}</small><b>${item.field}</b><p>${item.incoming}</p><em>${item.incomingMeta}</em>${effectiveMode==='review'?'<label><input type="checkbox" checked> Approve this change</label>':''}</div></div>
+    <div class="attachment-panel"><div><small>${effectiveMode==='approved'?'APPROVED MEDIA':'NEW MEDIA'}</small><b>${item.photoCount} photos from ${item.foster.split(' ')[0]}</b></div><div class="review-photos">${item.photos.map((x,i)=>`<button data-action="preview-photo"><img src="${x}" alt="${item.name} foster update photo ${i+1}"><span>⌕</span><label><input type="checkbox" ${effectiveMode==='approved'||i<2?'checked':''} ${effectiveMode==='approved'?'disabled':''}> ${effectiveMode==='approved'?'Public media':'Public use'}</label></button>`).join('')}</div></div>
+    ${effectiveMode==='review'?`<div class="review-actions"><button class="danger-text" data-action="reject-update">Reject</button><span></span><button class="secondary-button" data-action="request-changes">Request changes</button><button class="secondary-button" data-action="partial-approve">Approve selected</button><button class="primary-button" data-action="approve-update">Approve all & update record</button></div>`:effectiveMode==='requested'?`<div class="review-actions resolved"><button class="secondary-button" data-action="view-message">View request message</button><span></span><button class="secondary-button" data-action="send-reminder">Send reminder</button><button class="primary-button" data-action="mark-resolved">Mark clarification received</button></div>`:`<div class="review-actions resolved"><button class="secondary-button" data-action="view-history">View approval history</button><span></span><button class="primary-button" data-action="open-update-animal" data-animal-id="${item.id}">Open ${item.name}’s record</button></div>`}
   </article>`;
 }
 
@@ -344,7 +370,7 @@ function settingsPanel() {
 function fosterFormView() {
   return `<section class="foster-form-page"><div class="foster-brand"><span class="brand-mark"><b></b></span><strong>petnow</strong><small>Secure foster check-in · No account required</small></div>${state.fosterSubmitted?fosterSubmittedView():fosterQuestionView()}</section>`;
 }
-function fosterQuestionView() { return `<div class="foster-form-card"><div class="foster-pet"><img src="assets/dog1.png" alt="Milo"><span><small>SECOND CHANCE RESCUE</small><h1>Milo’s weekly check-in</h1><p>For Jamie · Due today</p></span></div><div class="autosave"><i></i> Draft saved automatically</div><div class="question"><span>1</span><div><h2>How is Milo doing this week?</h2><p>Choose the closest answer. We’ll only ask for details when needed.</p><div class="choice-grid"><button class="selected" data-form-choice="same"><b>Doing well</b><small>No urgent concerns</small></button><button data-form-choice="change"><b>Something changed</b><small>Health or behavior</small></button><button data-form-choice="help"><b>Needs attention</b><small>Please contact me</small></button></div></div></div><div class="question"><span>2</span><div><h2>Tell us about any behavior changes</h2><textarea>Relaxed with our two resident dogs and has started initiating play.</textarea></div></div><div class="question"><span>3</span><div><h2>Add recent photos</h2><button class="upload-zone" data-action="foster-upload"><b>＋ Choose photos or video</b><small>JPG, PNG, MP4 · Up to 10 files</small></button>${state.uploads?`<div class="upload-preview">${[1,2,3].slice(0,state.uploads).map((x,i)=>`<div><img src="assets/dog${[1,2,4][i]}.png" alt=""><span>✓ Uploaded</span></div>`).join('')}</div>`:''}</div></div><label class="consent"><input type="checkbox" checked> Second Chance Rescue may use these photos on Milo’s public adoption profile.</label><div class="foster-form-actions"><button class="secondary-button" data-action="save-foster-draft">Save & finish later</button><button class="primary-button" data-action="submit-foster">Send update</button></div><p class="form-help"><button data-action="contact-shelter">Need help? Contact your coordinator</button></p></div>`; }
+function fosterQuestionView() { return `<div class="foster-form-card"><div class="foster-pet"><img src="assets/dog1.png" alt="Milo"><span><small>SECOND CHANCE RESCUE</small><h1>Milo’s weekly check-in</h1><p>For Jamie · Due today</p></span></div><div class="autosave"><i></i> Draft saved automatically</div><div class="question"><span>1</span><div><h2>How is Milo doing this week?</h2><p>Choose the closest answer. We’ll only ask for details when needed.</p><div class="choice-grid"><button class="selected" data-form-choice="same"><b>Doing well</b><small>No urgent concerns</small></button><button data-form-choice="change"><b>Something changed</b><small>Health or behavior</small></button><button data-form-choice="help"><b>Needs attention</b><small>Please contact me</small></button></div></div></div><div class="question"><span>2</span><div><h2>Tell us about any behavior changes</h2><textarea>Relaxed with our two resident dogs and has started initiating play.</textarea></div></div><div class="question"><span>3</span><div><h2>Add recent photos</h2><button class="upload-zone" data-action="foster-upload"><b>＋ Choose photos or video</b><small>JPG, PNG, MP4 · Up to 10 files</small></button>${state.uploads?`<div class="upload-preview">${['assets/dog1.png','assets/milo-home.jpg','assets/milo-yard.jpg'].slice(0,state.uploads).map((src)=>`<div><img src="${src}" alt="Milo foster update"><span>✓ Uploaded</span></div>`).join('')}</div>`:''}</div></div><label class="consent"><input type="checkbox" checked> Second Chance Rescue may use these photos on Milo’s public adoption profile.</label><div class="foster-form-actions"><button class="secondary-button" data-action="save-foster-draft">Save & finish later</button><button class="primary-button" data-action="submit-foster">Send update</button></div><p class="form-help"><button data-action="contact-shelter">Need help? Contact your coordinator</button></p></div>`; }
 function fosterSubmittedView() { return `<div class="foster-form-card success-screen"><span class="success-icon">✓</span><h1>Your update was sent</h1><p>Thanks, Jamie. Alex will review your changes before Milo’s record is updated.</p><div class="submission-summary"><img src="assets/dog1.png" alt="Milo"><span><b>Milo · Weekly check-in</b><small>Behavior change · 3 photos · Submitted just now</small></span></div><button class="primary-button full" data-action="return-staff">Return to staff demo</button><button class="text-button" data-action="edit-submission">Edit my response</button></div>`; }
 
 function profilePreviewView() {
@@ -442,6 +468,7 @@ function handleAction(action, el) {
     case 'return-staff': state.selectedUpdate='milo';state.view='updates';render();break;
     case 'edit-submission': state.fosterSubmitted=false;render();break;
     case 'review-milo': state.selectedUpdate='milo';state.view='updates';render();break;
+    case 'open-update-animal': openAnimal(el.dataset.animalId);break;
     case 'approve-update': state.updateApproved=true;state.miloReady=true;state.fosterSubmitted=true;state.animalId='milo';state.detailTab='overview';state.view='animal';toast('Update approved · Milo is now ready to publish');break;
     case 'partial-approve': state.partialApproved=true;toast('Behavior change approved · photos remain in review');break;
     case 'request-changes': state.changesRequested=true;toast('Clarification request sent to Jamie');break;
