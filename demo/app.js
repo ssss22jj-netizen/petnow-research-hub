@@ -16,6 +16,7 @@ const INITIAL = () => ({
   requestSent: true,
   requestOpened: false,
   fosterSubmitted: true,
+  fosterSubmittedNow: false,
   updateApproved: false,
   partialApproved: false,
   changesRequested: false,
@@ -28,6 +29,7 @@ const INITIAL = () => ({
   selectedUpdate: 'milo',
   selectedFoster: 'jamie',
   messageChannel: 'sms',
+  tutorialId: null,
   tutorialStep: null,
   channels: { website: true, petfinder: true, adoptapet: true },
   settingsTab: 'readiness',
@@ -61,20 +63,54 @@ const TAB_LABELS = {
   updates:'Foster updates', media:'Media', documents:'Documents', public:'Public profile', activity:'Activity'
 };
 
-const TUTORIAL_STEPS = [
-  { selector:'.quick-actions [data-view="updates"]', kind:'view', value:'updates', title:'Open foster updates', text:'Start in Updates, where requests, submissions, and approvals are managed together.' },
-  { selector:'.page-actions [data-action="request-update"]', kind:'action', value:'request-update', title:'Request a new update', text:'Create a structured check-in request for Milo’s foster, Jamie.' },
-  { selector:'.modal-card [data-action="preview-message"]', kind:'action', value:'preview-message', title:'Preview before sending', text:'Check exactly what Jamie will receive before the request goes out.' },
-  { selector:'.message-tabs [data-message-channel="email"]', kind:'channel', value:'email', title:'Compare both channels', text:'The same secure request is prepared for SMS and email. Click Email to see the second version.' },
-  { selector:'.message-drawer > .primary-button[data-action="open-form-from-preview"]', kind:'action', value:'open-form-from-preview', title:'See Jamie’s experience', text:'Open the secure, no-account form exactly as Jamie would see it.' },
-  { selector:'[data-form-choice="change"]', kind:'choice', value:'change', title:'Report only what changed', text:'Jamie starts with a quick status. Choosing a change reveals the context the shelter needs to review.' },
-  { selector:'[data-action="foster-upload"]', kind:'action', value:'foster-upload', title:'Add recent evidence', text:'Photos arrive with the update, already attached to Milo and the current check-in.' },
-  { selector:'[data-action="submit-foster"]', kind:'action', value:'submit-foster', title:'Send the update', text:'The submission goes to staff review. It does not overwrite Milo’s official record.' },
-  { selector:'[data-action="return-staff"]', kind:'action', value:'return-staff', title:'Return to the shelter console', text:'Switch back to the staff side to review what Jamie submitted.' },
-  { selector:'.comparison', kind:'manual', title:'Compare before applying', text:'Petify shows the approved record beside Jamie’s new observation. Staff can approve, request clarification, or reject it.' },
-  { selector:'[data-action="approve-update"]', kind:'action', value:'approve-update', title:'Approve the verified change', text:'Only approved information updates Milo’s record and recalculates adoption readiness.' },
-  { selector:'.status-banner.ready', kind:'finish', title:'Milo is ready to publish', text:'The approved foster update is now part of the official record, and the resolved blocker moves Milo to Ready to publish.' }
-];
+const TUTORIALS = {
+  a: {
+    label:'DEMO A · READINESS',
+    name:'Which dogs are ready to go?',
+    steps:[
+      { selector:'.table-wrap', kind:'manual', title:'Frame the readiness problem', text:'Say: “This view tells the team who is ready, what is blocking everyone else, and the next action—without asking around.”' },
+      { selector:'[data-animal-filter="review"]', kind:'animal-filter', value:'review', title:'Focus on decisions waiting', text:'Filter to animals whose latest information needs a staff decision.' },
+      { selector:'[data-open-animal="milo"]', kind:'animal', value:'milo', title:'Open the animal behind the status', text:'Open Milo to show the evidence behind the Needs review label.' },
+      { selector:'.status-banner.review', kind:'manual', title:'Show why Milo is not ready', text:'Milo’s status includes the reason, the responsible action, and the effect on publishing—not just a colored label.' },
+      { selector:'.status-banner [data-action="review-milo"]', kind:'action', value:'review-milo', title:'Follow the next action', text:'Open the update that may resolve Milo’s final blocker.' },
+      { selector:'.comparison', kind:'manual', title:'Review the evidence', text:'Compare the approved record with Jamie’s new observation before anything changes.' },
+      { selector:'[data-action="approve-update"]', kind:'action', value:'approve-update', title:'Approve the verified change', text:'Apply only the information staff has reviewed.' },
+      { selector:'.status-banner.ready', kind:'manual', title:'Show the readiness decision', text:'The behavior blocker is cleared, the checklist becomes 5 of 5, and Milo moves to Ready to publish automatically.' },
+      { selector:'.status-banner [data-action="open-profile"]', kind:'action', value:'open-profile', title:'Move directly to the outcome', text:'Open the adopter-facing profile from the readiness decision.' },
+      { selector:'.publish-aside', kind:'manual', title:'Check once before publishing', text:'Confirm the public profile and selected channels without rebuilding Milo’s information elsewhere.' },
+      { selector:'.publish-aside [data-action="publish-now"]', kind:'action', value:'publish-now', title:'Publish to every selected channel', text:'Send the approved profile to the shelter website, Petfinder, and Adopt a Pet.' },
+      { selector:'.publish-aside', kind:'finish', title:'Readiness became action', text:'Milo is published across all three channels. The demo has connected a blocked record to an adoption-ready outcome.' }
+    ]
+  },
+  b: {
+    label:'DEMO B · FOSTER UPDATES',
+    name:'Stop texting your fosters for updates',
+    steps:[
+      { selector:'.update-metrics', kind:'manual', title:'Frame the follow-up burden', text:'Say: “Every request, reminder, response, and review is visible here, so coordinators do not manage follow-ups from memory.”' },
+      { selector:'.page-actions [data-action="request-update"]', kind:'action', value:'request-update', title:'Create one structured request', text:'Request the exact health, behavior, medication, photo, and note fields the team needs.' },
+      { selector:'.modal-card .form-grid', kind:'manual', title:'Set the follow-up once', text:'Choose the due date and reminder rule. Petify will follow up automatically if Jamie has not responded.' },
+      { selector:'.modal-card [data-action="preview-message"]', kind:'action', value:'preview-message', title:'Preview before sending', text:'Check the exact request and secure link Jamie will receive.' },
+      { selector:'.message-tabs [data-message-channel="email"]', kind:'channel', value:'email', title:'Show both delivery channels', text:'The same request is prepared for SMS and email, while the submission still lands in one record.' },
+      { selector:'.message-drawer [data-action="return-request"]', kind:'action', value:'return-request', title:'Return to the request', text:'Go back with the message confirmed and send the request.' },
+      { selector:'.modal-card [data-action="send-request"]', kind:'action', value:'send-request', title:'Send once', text:'Send the secure link by SMS and email. The automatic reminder schedule starts now.' },
+      { selector:'.pending-request', kind:'manual', title:'Show the waiting state', text:'The console now shows delivery, deadline, and next reminder. Staff can see that follow-up is already handled.' },
+      { selector:'.pending-request [data-action="preview-foster-form"]', kind:'action', value:'preview-foster-form', title:'Switch to Jamie’s view', text:'Open the same no-account mobile form Jamie receives from the secure link.' },
+      { selector:'[data-form-choice="change"]', kind:'choice', value:'change', title:'Capture only what changed', text:'Jamie reports a behavior change first, so the form can focus on the details that matter.' },
+      { selector:'[data-action="foster-upload"]', kind:'action', value:'foster-upload', title:'Attach recent evidence', text:'Add current photos to the same update instead of sending them in a separate message thread.' },
+      { selector:'[data-action="submit-foster"]', kind:'action', value:'submit-foster', title:'Submit the update', text:'Jamie sends one structured response for Milo.' },
+      { selector:'[data-action="return-staff"]', kind:'action', value:'return-staff', title:'Return to the shelter console', text:'Switch back to the staff view to see how the response arrived.' },
+      { selector:'.comparison', kind:'manual', title:'Review before applying', text:'Petify highlights the changed field and keeps the official record untouched until staff approves it.' },
+      { selector:'[data-action="approve-update"]', kind:'action', value:'approve-update', title:'Approve the verified update', text:'Apply Jamie’s reviewed behavior change and approved photos.' },
+      { selector:'.status-banner.ready', kind:'manual', title:'Connect the update to readiness', text:'The latest foster information resolves Milo’s final blocker and moves him to Ready to publish.' },
+      { selector:'.status-banner [data-action="open-profile"]', kind:'action', value:'open-profile', title:'Continue to the adoption outcome', text:'Open the completed public profile without re-entering Jamie’s approved information.' },
+      { selector:'.publish-aside', kind:'manual', title:'Confirm the publishing handoff', text:'The same approved record is ready for the shelter website and external adoption channels.' },
+      { selector:'.publish-aside [data-action="publish-now"]', kind:'action', value:'publish-now', title:'Publish the profile', text:'Send Milo to all selected channels.' },
+      { selector:'.publish-aside', kind:'finish', title:'The full loop is complete', text:'One request became a reviewed record, a readiness decision, and a published adoption profile—without manual chasing.' }
+    ]
+  }
+};
+
+function tutorialSteps() { return TUTORIALS[state.tutorialId]?.steps || []; }
 
 const UPDATE_SUBMISSIONS = [
   {
@@ -147,7 +183,7 @@ function layout(content) {
           <button class="mobile-brand" data-action="open-nav">☰</button>
           <label class="global-search"><span>⌕</span><input id="global-search" value="${state.search}" placeholder="Search animals, fosters, or records" aria-label="Search"></label>
           <div class="top-actions">
-            <button class="tutorial-launch" data-action="guide"><span>?</span> Tutorial</button>
+            <button class="tutorial-launch" data-action="guide"><span>▶</span> Demo tours</button>
             ${iconButton('◌','Notifications','notifications')}
             <button class="add-button" data-action="open-intake"><span>＋</span> Add animal</button>
           </div>
@@ -315,11 +351,21 @@ function activityTab(a) { return `<section class="surface tab-panel"><div class=
 
 function updatesView() {
   const selected = state.selectedUpdate;
-  const submissions = UPDATE_SUBMISSIONS.filter(x=>state.updateFilter==='all'||x.filter===state.updateFilter);
+  const currentSubmissions = UPDATE_SUBMISSIONS.map(x=>{
+    if(x.id!=='milo') return x;
+    if(state.updateApproved) return {...x,status:'Approved',statusType:'complete',filter:'approved',flag:'Applied to record',time:'Just now'};
+    if(state.requestSent&&!state.fosterSubmitted) return {...x,status:'Sent',statusType:'neutral',filter:'all',flag:'Waiting for response',time:'Just now'};
+    if(!state.requestSent&&!state.fosterSubmitted) return {...x,status:'Due today',statusType:'failed',filter:'all',flag:'Request not sent',time:'Due today'};
+    if(state.fosterSubmittedNow) return {...x,time:'Just now'};
+    return x;
+  });
+  const submissions = currentSubmissions.filter(x=>state.updateFilter==='all'||x.filter===state.updateFilter);
   const item = submissions.find(x=>x.id===selected)||submissions[0]||UPDATE_SUBMISSIONS[0];
+  const needsReviewCount=state.fosterSubmitted&&!state.updateApproved?'1':'0';
+  const sentCount=state.requestSent&&!state.fosterSubmitted?'8':'7';
   return `<section class="content">
     ${pageHeader('FOSTER COMMUNICATION','Updates','Track requests, follow up automatically, and review structured submissions.',`${state.requestSent&&!state.fosterSubmitted?'<button class="secondary-button" data-action="preview-foster-form">Open foster form ↗</button>':'<button class="secondary-button" data-action="copy-link">Copy foster link</button>'}<button class="primary-button" data-action="request-update">＋ Request update</button>`)}
-    <div class="update-metrics">${[['Overdue','4','overdue','requested'],['Sent','7','sent','all'],['In progress','3','progress','all'],['Needs review',state.updateApproved?'0':'1','review','review']].map(([a,b,c,f])=>`<button data-update-filter="${f}"><small>${a}</small><b>${b}</b><i class="${c}"></i></button>`).join('')}</div>
+    <div class="update-metrics">${[['Overdue','4','overdue','requested'],['Sent',sentCount,'sent','all'],['In progress','3','progress','all'],['Needs review',needsReviewCount,'review','review']].map(([a,b,c,f])=>`<button data-update-filter="${f}"><small>${a}</small><b>${b}</b><i class="${c}"></i></button>`).join('')}</div>
     <section class="surface inbox">
       <aside class="inbox-sidebar"><div class="inbox-tabs">${[['all','All'],['review','Needs review'],['requested','Changes requested'],['approved','Approved']].map(([id,l])=>`<button class="${state.updateFilter===id?'active':''}" data-update-filter="${id}">${l}</button>`).join('')}</div><label class="inbox-search">⌕ <input placeholder="Search updates"></label><div class="submission-list">${submissions.map(s=>`<button class="submission ${item.id===s.id?'active':''}" data-select-update="${s.id}"><img src="${s.img}" alt=""><span><b>${s.name}<em class="${s.statusType}">${s.status}</em></b><small>${s.foster} · ${s.time}</small><i class="${s.statusType}">${s.flag}</i></span></button>`).join('')}</div></aside>
       ${reviewPanel(item)}
@@ -328,6 +374,8 @@ function updatesView() {
 }
 
 function reviewPanel(item) {
+  if(item.id==='milo'&&!state.requestSent&&!state.fosterSubmitted) return dueRequestPanel(item);
+  if(item.id==='milo'&&state.requestSent&&!state.fosterSubmitted) return pendingRequestPanel(item);
   const approved = item.id==='milo' && state.updateApproved;
   const effectiveMode = approved ? 'approved' : item.mode;
   const effectiveStatus = approved ? 'Approved' : item.status;
@@ -338,6 +386,24 @@ function reviewPanel(item) {
     <div class="comparison"><div><small>CURRENT APPROVED RECORD</small><b>${item.field}</b><p>${item.current}</p><em>${item.currentMeta}</em></div><div class="new ${effectiveMode==='approved'?'approved':''}"><small>${effectiveMode==='approved'?'APPROVED FOSTER UPDATE':'NEW FOSTER SUBMISSION'}</small><b>${item.field}</b><p>${item.incoming}</p><em>${item.incomingMeta}</em>${effectiveMode==='review'?'<label><input type="checkbox" checked> Approve this change</label>':''}</div></div>
     <div class="attachment-panel"><div><small>${effectiveMode==='approved'?'APPROVED MEDIA':'NEW MEDIA'}</small><b>${item.photoCount} photos from ${item.foster.split(' ')[0]}</b></div><div class="review-photos">${item.photos.map((x,i)=>`<button data-action="preview-photo"><img src="${x}" alt="${item.name} foster update photo ${i+1}"><span>⌕</span><label><input type="checkbox" ${effectiveMode==='approved'||i<2?'checked':''} ${effectiveMode==='approved'?'disabled':''}> ${effectiveMode==='approved'?'Public media':'Public use'}</label></button>`).join('')}</div></div>
     ${effectiveMode==='review'?`<div class="review-actions"><button class="danger-text" data-action="reject-update">Reject</button><span></span><button class="secondary-button" data-action="request-changes">Request changes</button><button class="secondary-button" data-action="partial-approve">Approve selected</button><button class="primary-button" data-action="approve-update">Approve all & update record</button></div>`:effectiveMode==='requested'?`<div class="review-actions resolved"><button class="secondary-button" data-action="view-message">View request message</button><span></span><button class="secondary-button" data-action="send-reminder">Send reminder</button><button class="primary-button" data-action="mark-resolved">Mark clarification received</button></div>`:`<div class="review-actions resolved"><button class="secondary-button" data-action="view-history">View approval history</button><span></span><button class="primary-button" data-action="open-update-animal" data-animal-id="${item.id}">Open ${item.name}’s record</button></div>`}
+  </article>`;
+}
+
+function dueRequestPanel(item) {
+  return `<article class="review-panel due-request">
+    <div class="review-head"><div><p class="kicker">WEEKLY CHECK-IN · DUE TODAY</p><h2>${item.name} · ${item.foster}</h2><p>Last approved update was 7 days ago</p></div>${statusPill('failed','Due today')}</div>
+    <div class="request-due"><span>!</span><div><b>Milo’s weekly update has not been requested</b><p>Send one structured request now. Petify will track delivery and follow up automatically.</p></div></div>
+    <div class="request-delivery-grid"><div><small>FOSTER</small><b>${item.foster}</b><em>Active placement</em></div><div><small>SCHEDULE</small><b>Weekly</b><em>Due every Sunday</em></div><div><small>LAST APPROVED</small><b>Aug 2</b><em>7 days ago</em></div><div><small>REQUEST STATUS</small><b>Not sent</b><em>Action required</em></div></div>
+    <div class="request-link-row"><div><small>NEXT ACTION</small><b>Request Milo’s weekly check-in</b><p>Health, behavior, medication, photos, and notes</p></div><button class="primary-button" data-action="request-update">Request update</button></div>
+  </article>`;
+}
+
+function pendingRequestPanel(item) {
+  return `<article class="review-panel pending-request">
+    <div class="review-head"><div><p class="kicker">WEEKLY CHECK-IN · SENT JUST NOW</p><h2>${item.name} · requested from ${item.foster}</h2><p>Health, behavior, medication, photos, and notes</p></div>${statusPill('neutral','Sent')}</div>
+    <div class="request-waiting"><span>↻</span><div><b>Waiting for Jamie</b><p>No manual follow-up is needed. Petify will remind Jamie in 2 days if the form is still incomplete.</p></div></div>
+    <div class="request-delivery-grid"><div><small>SMS</small><b>Delivered</b><em>Just now</em></div><div><small>EMAIL</small><b>Delivered</b><em>Just now</em></div><div><small>DUE</small><b>Aug 12</b><em>3 days remaining</em></div><div><small>NEXT REMINDER</small><b>Aug 11</b><em>Automatic · 1 of 2</em></div></div>
+    <div class="request-link-row"><div><small>SECURE INDIVIDUAL LINK</small><b>petnow.link/milo-8K4P</b><p>No account required · Opens only Milo’s weekly check-in</p></div><button class="primary-button" data-action="preview-foster-form">Open Jamie’s form preview</button></div>
   </article>`;
 }
 
@@ -421,8 +487,8 @@ function requestModal() { return `<button class="modal-close" data-action="close
 function assignModal() { return `<button class="modal-close" data-action="close-modal">×</button><p class="kicker">ASSIGN NEXT ACTION</p><h2>Choose an owner</h2><div class="form-grid"><label class="full"><span>Task</span><input value="Review Milo’s foster update"></label><label><span>Owner</span><select><option>Morgan Kim</option><option>Alex Rivera</option><option>Sam Chen</option></select></label><label><span>Due date</span><input value="Today"></label><label class="full"><span>Note</span><textarea rows="3">Please compare the behavior change before approval.</textarea></label></div><div class="modal-actions"><button class="secondary-button" data-action="close-modal">Cancel</button><button class="primary-button" data-action="confirm-assign">Assign task</button></div>`; }
 
 function renderDrawer() {
-  if(state.drawer==='message-preview') return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer message-drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">RECIPIENT PREVIEW</p><h2>What Jamie receives</h2><p>Preview the request before sending it by SMS and email.</p><div class="message-tabs"><button class="${state.messageChannel==='sms'?'active':''}" data-message-channel="sms">SMS</button><button class="${state.messageChannel==='email'?'active':''}" data-message-channel="email">Email</button></div>${state.messageChannel==='sms'?smsPreview():emailPreview()}<div class="delivery-details"><div><span>↻</span><p><b>Automatic follow-up</b>Reminder after 2 days if Jamie has not submitted. Maximum 2 reminders.</p></div><div><span>⌁</span><p><b>Secure individual link</b>No account required. The link opens only Milo’s requested check-in form.</p></div></div><div class="preview-flow"><small>AFTER JAMIE SUBMITS</small><div><span><i>1</i><b>Submitted</b></span><em>›</em><span><i>2</i><b>Needs review</b></span><em>›</em><span><i>3</i><b>Approved record</b></span></div><p>The submission does not overwrite Milo’s official record until a staff member approves it.</p></div><button class="primary-button full" data-action="open-form-from-preview">Open Jamie’s form preview</button><button class="text-button centered" data-action="copy-link">Copy secure link</button></aside></div>`;
-  if(state.drawer==='guide') return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">INTERACTIVE TUTORIAL</p><h2>How foster updates become trusted records</h2><p>Follow the highlighted controls to experience both the foster and shelter sides of one update.</p><ol class="guide-steps">${[['1','Request','Choose what Jamie should update'],['2','Preview','Check the SMS and email'],['3','Respond','Complete Jamie’s mobile form'],['4','Review','Compare new and approved information'],['5','Apply','Approve the change and clear the blocker']].map(([n,a,b])=>`<li><i>${n}</i><span><b>${a}</b><small>${b}</small></span></li>`).join('')}</ol><button class="primary-button full" data-action="start-guide">Start foster update tutorial</button></aside></div>`;
+  if(state.drawer==='message-preview') return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer message-drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">RECIPIENT PREVIEW</p><h2>What Jamie receives</h2><p>Preview the request before sending it by SMS and email.</p><div class="message-tabs"><button class="${state.messageChannel==='sms'?'active':''}" data-message-channel="sms">SMS</button><button class="${state.messageChannel==='email'?'active':''}" data-message-channel="email">Email</button></div>${state.messageChannel==='sms'?smsPreview():emailPreview()}<div class="delivery-details"><div><span>↻</span><p><b>Automatic follow-up</b>Reminder after 2 days if Jamie has not submitted. Maximum 2 reminders.</p></div><div><span>⌁</span><p><b>Secure individual link</b>No account required. The link opens only Milo’s requested check-in form.</p></div></div><div class="preview-flow"><small>AFTER JAMIE SUBMITS</small><div><span><i>1</i><b>Submitted</b></span><em>›</em><span><i>2</i><b>Needs review</b></span><em>›</em><span><i>3</i><b>Approved record</b></span></div><p>The submission does not overwrite Milo’s official record until a staff member approves it.</p></div><button class="primary-button full" data-action="return-request">Back to request</button><button class="text-button centered" data-action="open-form-from-preview">Open Jamie’s form preview</button></aside></div>`;
+  if(state.drawer==='guide') return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer guide-drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">DEMO PRESENTER MODE</p><h2>Choose the story you are demonstrating</h2><p>Each tour resets the sample data, opens the right starting screen, and provides a talk track with the exact next click.</p><div class="tutorial-picker"><button class="tutorial-option" data-action="start-tutorial" data-tutorial="a"><small>MATERIAL A · 12 STEPS</small><b>Which dogs are ready to go?</b><span>Readiness overview → blocker → approval → Ready → publish</span><em>Start Demo A ›</em></button><button class="tutorial-option" data-action="start-tutorial" data-tutorial="b"><small>MATERIAL B · 20 STEPS</small><b>Stop texting your fosters for updates</b><span>Request → automatic follow-up → foster response → approval → publish</span><em>Start Demo B ›</em></button></div><div class="guide-note"><b>Presenter tip</b><p>Read the talk track, then use only the highlighted control. End tour or press Esc at any time.</p></div></aside></div>`;
   if(state.drawer==='notifications') return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">NOTIFICATIONS</p><h2>What changed</h2><div class="notification-list">${[['New foster update','Jamie submitted Milo’s weekly check-in','12 min'],['Publishing failed','Daisy could not sync to Adopt a Pet','42 min'],['Profile ready','Luna completed all readiness checks','1 hr']].map(([a,b,c])=>`<button data-action="notification-item"><i></i><span><b>${a}</b><small>${b}</small></span><time>${c}</time></button>`).join('')}</div><button class="text-button centered" data-action="mark-read">Mark all as read</button></aside></div>`;
   return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">DETAILS</p><h2>Prepared content</h2><p>This interaction is represented in the pretotype.</p></aside></div>`;
 }
@@ -431,15 +497,18 @@ function smsPreview() { return `<div class="phone-preview"><div class="phone-pre
 function emailPreview() { return `<div class="email-preview"><div class="email-meta"><span><small>FROM</small><b>Second Chance Rescue</b></span><span><small>TO</small><b>Jamie Lee</b></span></div><div class="email-body"><span class="brand-mark"><b></b></span><p class="kicker">MILO’S WEEKLY CHECK-IN</p><h3>How is Milo doing this week?</h3><p>Please share any health or behavior changes and add recent photos by <b>August 12</b>. Most updates take about 3 minutes.</p><button data-action="open-form-from-preview">Share Milo’s update</button><small>No account or app is required. This secure link is unique to Milo.</small></div></div>`; }
 
 function renderTutorial() {
-  const step=TUTORIAL_STEPS[state.tutorialStep];
+  const steps=tutorialSteps();
+  const tutorial=TUTORIALS[state.tutorialId];
+  const step=steps[state.tutorialStep];
   if(!step) return '';
   const final=step.kind==='finish';
+  const interactive=!['manual','finish'].includes(step.kind);
   return `<div class="tutorial-layer" role="dialog" aria-modal="true" aria-label="Interactive product tutorial">
     <div class="tutorial-dim tutorial-dim-top"></div><div class="tutorial-dim tutorial-dim-left"></div><div class="tutorial-dim tutorial-dim-right"></div><div class="tutorial-dim tutorial-dim-bottom"></div>
-    <div class="tutorial-highlight" aria-hidden="true"></div>
+    ${interactive?'<button class="tutorial-highlight interactive" data-action="tutorial-target" aria-label="Use highlighted control"></button>':'<div class="tutorial-highlight" aria-hidden="true"></div>'}
     <section class="tutorial-card">
-      <div class="tutorial-card-head"><span>GUIDED TOUR</span><button data-action="exit-tutorial" aria-label="Exit tutorial">×</button></div>
-      <small>STEP ${state.tutorialStep+1} OF ${TUTORIAL_STEPS.length}</small><h3>${step.title}</h3><p>${step.text}</p>
+      <div class="tutorial-card-head"><span>${tutorial.label}</span><button data-action="exit-tutorial" aria-label="Exit tutorial">×</button></div>
+      <small>STEP ${state.tutorialStep+1} OF ${steps.length}</small><h3>${step.title}</h3><p>${step.text}</p>
       <div class="tutorial-card-actions"><button class="tutorial-exit" data-action="exit-tutorial">End tour</button>${step.kind==='manual'?'<button class="tutorial-next" data-action="tutorial-next">Continue</button>':final?'<button class="tutorial-next" data-action="finish-tutorial">Finish tutorial</button>':'<span>Click the highlighted control</span>'}</div>
     </section>
   </div>`;
@@ -447,7 +516,7 @@ function renderTutorial() {
 
 function positionTutorial() {
   if(state.tutorialStep===null) return;
-  const step=TUTORIAL_STEPS[state.tutorialStep];
+  const step=tutorialSteps()[state.tutorialStep];
   const layer=document.querySelector('.tutorial-layer');
   const target=step&&document.querySelector(step.selector);
   if(!layer||!target) return;
@@ -483,12 +552,13 @@ function positionTutorial() {
 
 function tutorialMatches(kind,value) {
   if(state.tutorialStep===null) return false;
-  const step=TUTORIAL_STEPS[state.tutorialStep];
+  const step=tutorialSteps()[state.tutorialStep];
   return step&&step.kind===kind&&step.value===value;
 }
 
 function advanceTutorial(kind,value) {
-  if(tutorialMatches(kind,value)) state.tutorialStep=Math.min(TUTORIAL_STEPS.length-1,state.tutorialStep+1);
+  const steps=tutorialSteps();
+  if(tutorialMatches(kind,value)) state.tutorialStep=Math.min(steps.length-1,state.tutorialStep+1);
 }
 
 function render() {
@@ -497,19 +567,20 @@ function render() {
     ? `${fosterFormView()}${state.tutorialStep!==null?renderTutorial():''}${state.toast?`<div class="toast"><span>✓</span>${state.toast}</div>`:''}`
     : layout((views[state.view] || dashboardView)());
   bind();
-  if(state.tutorialStep!==null) requestAnimationFrame(positionTutorial);
+  if(state.tutorialStep!==null){requestAnimationFrame(positionTutorial);clearTimeout(tutorialPositionTimer);tutorialPositionTimer=setTimeout(positionTutorial,180);}
 }
 
 let toastTimer;
+let tutorialPositionTimer;
 function toast(message) { state.toast=message; render(); clearTimeout(toastTimer); toastTimer=setTimeout(()=>{state.toast='';render();},2300); }
 function openAnimal(id,tab='overview') { state.animalId=id; state.detailTab=tab; state.view='animal'; state.modal=null; render(); }
 function genericPrepared(message='Prepared content opened') { toast(message); }
 
 function bind() {
   document.querySelectorAll('[data-view]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();const value=el.dataset.view;if(state.tutorialStep!==null&&!tutorialMatches('view',value))return;state.view=value;state.modal=null;state.drawer=null;if(el.dataset.setFilter)state.animalFilter=el.dataset.setFilter;advanceTutorial('view',value);render();}));
-  document.querySelectorAll('[data-open-animal]').forEach(el=>el.addEventListener('click',e=>{if(e.target.closest('input,button'))return;openAnimal(el.dataset.openAnimal);}));
+  document.querySelectorAll('[data-open-animal]').forEach(el=>el.addEventListener('click',e=>{if(e.target.closest('input,button'))return;const value=el.dataset.openAnimal;if(state.tutorialStep!==null&&!tutorialMatches('animal',value))return;state.animalId=value;state.detailTab='overview';state.view='animal';state.modal=null;advanceTutorial('animal',value);render();}));
   document.querySelectorAll('[data-detail-tab]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();state.detailTab=el.dataset.detailTab;render();}));
-  document.querySelectorAll('[data-animal-filter]').forEach(el=>el.addEventListener('click',()=>{state.animalFilter=el.dataset.animalFilter;render();}));
+  document.querySelectorAll('[data-animal-filter]').forEach(el=>el.addEventListener('click',()=>{const value=el.dataset.animalFilter;if(state.tutorialStep!==null&&!tutorialMatches('animal-filter',value))return;state.animalFilter=value;advanceTutorial('animal-filter',value);render();}));
   document.querySelectorAll('[data-update-filter]').forEach(el=>el.addEventListener('click',()=>{state.updateFilter=el.dataset.updateFilter;render();}));
   document.querySelectorAll('[data-publish-filter]').forEach(el=>el.addEventListener('click',()=>{state.publishFilter=el.dataset.publishFilter;render();}));
   document.querySelectorAll('[data-select-update]').forEach(el=>el.addEventListener('click',()=>{state.selectedUpdate=el.dataset.selectUpdate;render();}));
@@ -518,7 +589,7 @@ function bind() {
   document.querySelectorAll('[data-filter-jump]').forEach(el=>el.addEventListener('click',()=>{const f=el.dataset.filterJump;if(f==='review'){state.view='updates';state.updateFilter='new';}else if(f==='published'){state.view='publishing';state.publishFilter='published';}else{state.view='animals';state.animalFilter=f==='new'?'all':f;}render();}));
   document.querySelectorAll('[data-channel]').forEach(el=>el.addEventListener('change',()=>{state.channels[el.dataset.channel]=el.checked;render();}));
   const search=document.querySelector('#global-search'); if(search){search.addEventListener('input',e=>{state.search=e.target.value;});search.addEventListener('keydown',e=>{if(e.key==='Enter'){state.view='animals';render();}});}
-  document.querySelectorAll('[data-action]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();const action=el.dataset.action;const tutorialControl=['exit-tutorial','tutorial-next','finish-tutorial'].includes(action);if(state.tutorialStep!==null&&!tutorialControl&&!tutorialMatches('action',action))return;handleAction(action,el);}));
+  document.querySelectorAll('[data-action]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();const action=el.dataset.action;const tutorialControl=['exit-tutorial','tutorial-next','finish-tutorial','tutorial-target'].includes(action);if(state.tutorialStep!==null&&!tutorialControl&&!tutorialMatches('action',action))return;handleAction(action,el);}));
   document.querySelectorAll('[data-next-action]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();const id=el.dataset.nextAction;if(id==='milo'&&!state.updateApproved){state.selectedUpdate='milo';state.view='updates';}else if(id==='coco')openAnimal('coco');else if(id==='luna'){state.view='profilepreview';}else openAnimal(id);render();}));
   document.querySelectorAll('[data-publish-action]').forEach(el=>el.addEventListener('click',()=>{const id=el.dataset.publishAction;if(id==='milo'&&state.miloReady){state.animalId='milo';state.view='profilepreview';render();}else if(id==='luna'){state.animalId='luna';state.view='profilepreview';render();}else if(id==='daisy')toast('Adopt a Pet connection retried · status is syncing');else openAnimal(id);}));
   document.querySelectorAll('[data-exception]').forEach(el=>el.addEventListener('click',()=>{const x=el.dataset.exception;if(x==='assign'){state.modal='assign';render();}else{state.view=x;if(x==='animals')state.animalFilter='stale';render();}}));
@@ -535,9 +606,10 @@ function handleAction(action, el) {
     case 'close-modal': state.modal=null;render();break;
     case 'close-drawer': state.drawer=null;render();break;
     case 'guide': drawerOpen('guide');break;
-    case 'exit-tutorial': state.tutorialStep=null;render();break;
-    case 'tutorial-next': state.tutorialStep=Math.min(TUTORIAL_STEPS.length-1,state.tutorialStep+1);render();break;
-    case 'finish-tutorial': state.tutorialStep=null;toast('Tutorial complete · foster update applied to Milo’s record');break;
+    case 'exit-tutorial': state.tutorialId=null;state.tutorialStep=null;render();break;
+    case 'tutorial-target': document.querySelector(tutorialSteps()[state.tutorialStep]?.selector)?.click();break;
+    case 'tutorial-next': state.tutorialStep=Math.min(tutorialSteps().length-1,state.tutorialStep+1);render();break;
+    case 'finish-tutorial': {const name=TUTORIALS[state.tutorialId]?.name||'Demo';state.tutorialId=null;state.tutorialStep=null;toast(`${name} · tutorial complete`);break;}
     case 'notifications': drawerOpen('notifications');break;
     case 'reset-demo': modalOpen('confirm-reset');break;
     case 'confirm-reset': state=INITIAL();toast('Demo reset to its starting state');break;
@@ -549,14 +621,15 @@ function handleAction(action, el) {
     case 'save-placement': state.cocoPlaced=true;state.modal=null;toast('Coco was placed with Casey · first check-in scheduled');break;
     case 'request-update': modalOpen('request');break;
     case 'preview-message': state.messageChannel='sms';drawerOpen('message-preview');break;
-    case 'open-form-from-preview': state.drawer=null;state.modal=null;state.fosterSubmitted=false;state.uploads=0;state.view='fosterform';render();break;
-    case 'send-request': state.requestSent=true;state.requestOpened=false;state.fosterSubmitted=false;state.modal=null;state.view='updates';toast('Secure update link sent to Jamie by email and SMS');break;
-    case 'preview-foster-form': state.drawer=null;state.fosterSubmitted=false;state.uploads=0;state.view='fosterform';render();break;
-    case 'start-guide': state=INITIAL();state.tutorialStep=0;render();break;
+    case 'return-request': state.drawer=null;render();break;
+    case 'open-form-from-preview': state.drawer=null;state.modal=null;state.fosterSubmitted=false;state.fosterSubmittedNow=false;state.uploads=0;state.view='fosterform';render();break;
+    case 'send-request': state.requestSent=true;state.requestOpened=false;state.fosterSubmitted=false;state.fosterSubmittedNow=false;state.modal=null;state.view='updates';toast('Secure update link sent to Jamie by email and SMS');break;
+    case 'preview-foster-form': state.drawer=null;state.fosterSubmitted=false;state.fosterSubmittedNow=false;state.uploads=0;state.view='fosterform';render();break;
+    case 'start-tutorial': {const id=el.dataset.tutorial;state=INITIAL();state.tutorialId=id;state.tutorialStep=0;state.view=id==='a'?'animals':'updates';if(id==='b'){state.requestSent=false;state.fosterSubmitted=false;}render();break;}
     case 'copy-link': navigator.clipboard?.writeText('https://petnow.link/milo-checkin');toast('Secure foster link copied');break;
     case 'foster-upload': state.uploads=3;toast('3 photos uploaded');break;
     case 'save-foster-draft': toast('Draft saved · Jamie can return from the same link');break;
-    case 'submit-foster': state.fosterSubmitted=true;state.uploads=3;render();break;
+    case 'submit-foster': state.fosterSubmitted=true;state.fosterSubmittedNow=true;state.uploads=3;render();break;
     case 'return-staff': state.selectedUpdate='milo';state.view='updates';render();break;
     case 'edit-submission': state.fosterSubmitted=false;render();break;
     case 'review-milo': state.selectedUpdate='milo';state.view='updates';render();break;
@@ -568,7 +641,7 @@ function handleAction(action, el) {
     case 'open-profile': state.view='profilepreview';render();break;
     case 'publish-now':
       if(state.published){toast('Milo is already live on all selected channels');break;}
-      state.publishStarted=true;render();setTimeout(()=>{state.published=true;state.publishStarted=false;toast('Milo published to 3 channels');},1100);break;
+      state.publishStarted=true;render();setTimeout(()=>{state.published=true;state.publishStarted=false;if(tutorialMatches('action','publish-now'))advanceTutorial('action','publish-now');toast('Milo published to 3 channels');},1100);break;
     case 'edit-profile': state.view='animal';state.detailTab='public';render();break;
     case 'save-profile': state.profileSaved=true;toast('Public profile saved');break;
     case 'assign-task': case 'assign': modalOpen('assign');break;
@@ -594,10 +667,10 @@ function handleAction(action, el) {
     case 'new-placement': modalOpen('placement');break;
     default: genericPrepared(`${(el?.innerText||'Control').trim().split('\n')[0]} · prepared interaction opened`);
   }
-  if(shouldAdvance&&state.tutorialStep!==null){advanceTutorial('action',action);render();}
+  if(shouldAdvance&&action!=='publish-now'&&state.tutorialStep!==null){advanceTutorial('action',action);render();}
 }
 
 window.addEventListener('resize',()=>{if(state.tutorialStep!==null)positionTutorial();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.tutorialStep!==null){state.tutorialStep=null;render();}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.tutorialStep!==null){state.tutorialId=null;state.tutorialStep=null;render();}});
 
 render();

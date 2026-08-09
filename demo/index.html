@@ -41,8 +41,9 @@
     .tutorial-launch:hover{border-color:var(--orange);background:var(--orange-soft)}
     .tutorial-launch>span{width:24px;height:24px;border-radius:8px;background:var(--orange);color:#fff;display:grid;place-items:center;font-weight:800}
     .tutorial-layer{position:fixed;inset:0;z-index:300;pointer-events:none}
-    .tutorial-dim{position:fixed;background:rgba(31,33,37,.24);pointer-events:auto}
-    .tutorial-highlight{position:fixed;border:3px solid #fff;border-radius:14px;box-shadow:0 0 0 3px var(--orange),0 0 0 8px rgba(255,89,44,.22);pointer-events:none;animation:tutorialPulse 1.5s ease-in-out infinite}
+    .tutorial-dim{position:fixed;background:rgba(31,33,37,.10);pointer-events:auto}
+    .tutorial-highlight{position:fixed;border:3px solid #fff;border-radius:14px;box-shadow:0 0 0 3px var(--orange),0 0 0 8px rgba(255,89,44,.22);pointer-events:auto;background:transparent;padding:0;animation:tutorialPulse 1.5s ease-in-out infinite}
+    .tutorial-highlight.interactive{cursor:pointer}
     .tutorial-card{position:fixed;visibility:hidden;background:#fff;border:1px solid rgba(255,255,255,.5);border-radius:16px;padding:18px;box-shadow:0 22px 65px rgba(18,20,24,.28);pointer-events:auto}
     .tutorial-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}
     .tutorial-card-head>span{font-size:9px;color:var(--orange-dark);font-weight:850;letter-spacing:.12em}
@@ -54,12 +55,34 @@
     .tutorial-card-actions>span{color:var(--orange-dark);font-size:10px;font-weight:700}
     .tutorial-exit{border:0;background:transparent;color:var(--muted);font-size:10px;padding:7px 0}
     .tutorial-next{border:0;background:var(--orange);color:#fff;border-radius:9px;padding:9px 13px;font-size:11px;font-weight:700}
+    .guide-drawer{overflow:auto}
+    .tutorial-picker{display:grid;gap:11px;margin:22px 0 16px}
+    .tutorial-option{border:1px solid var(--line);background:#fff;border-radius:15px;padding:16px;text-align:left;display:block;width:100%}
+    .tutorial-option:hover{border-color:#ffb8a3;background:var(--orange-pale);transform:translateY(-1px)}
+    .tutorial-option small,.tutorial-option b,.tutorial-option span,.tutorial-option em{display:block}
+    .tutorial-option small{color:var(--orange-dark);font-size:9px;font-weight:800;letter-spacing:.09em}
+    .tutorial-option b{font-size:16px;margin:7px 0 5px}
+    .tutorial-option span{color:var(--muted);font-size:10px;line-height:1.45}
+    .tutorial-option em{color:var(--orange-dark);font-size:11px;font-weight:750;font-style:normal;margin-top:13px}
+    .guide-note{background:var(--input);border-radius:12px;padding:13px}
+    .guide-note b{display:block;font-size:11px;margin-bottom:4px}.guide-note p{font-size:10px}
+    .request-waiting{display:grid;grid-template-columns:36px 1fr;gap:11px;align-items:center;background:var(--blue-soft);border:1px solid #d8e6f7;border-radius:13px;padding:14px;margin-bottom:14px}
+    .request-waiting>span{width:34px;height:34px;border-radius:10px;background:#fff;color:var(--blue);display:grid;place-items:center;font-size:16px}
+    .request-waiting b{display:block;margin-bottom:3px}.request-waiting p{font-size:10px}
+    .request-due{display:grid;grid-template-columns:36px 1fr;gap:11px;align-items:center;background:var(--amber-soft);border:1px solid #f3dfb9;border-radius:13px;padding:14px;margin-bottom:14px}
+    .request-due>span{width:34px;height:34px;border-radius:10px;background:#fff;color:var(--amber);display:grid;place-items:center;font-size:16px;font-weight:800}
+    .request-due b{display:block;margin-bottom:3px}.request-due p{font-size:10px}
+    .request-delivery-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:13px;overflow:hidden;margin-bottom:14px}
+    .request-delivery-grid>div{padding:14px;border-right:1px solid var(--line)}.request-delivery-grid>div:last-child{border-right:0}
+    .request-delivery-grid small,.request-delivery-grid b,.request-delivery-grid em{display:block}.request-delivery-grid small{color:var(--muted);font-size:8px;letter-spacing:.07em}.request-delivery-grid b{margin:7px 0 4px;font-size:12px}.request-delivery-grid em{font-style:normal;color:var(--muted);font-size:9px}
+    .request-link-row{display:flex;align-items:center;justify-content:space-between;gap:16px;border:1px solid var(--line);border-radius:13px;padding:15px}
+    .request-link-row small,.request-link-row b{display:block}.request-link-row small{font-size:8px;color:var(--muted);letter-spacing:.07em}.request-link-row b{margin:5px 0;color:var(--blue)}.request-link-row p{font-size:10px}
     @keyframes tutorialPulse{0%,100%{box-shadow:0 0 0 3px var(--orange),0 0 0 8px rgba(255,89,44,.18)}50%{box-shadow:0 0 0 3px var(--orange),0 0 0 12px rgba(255,89,44,.08)}}
-    @media(max-width:680px){.tutorial-launch{width:40px;padding:0;justify-content:center;font-size:0}.tutorial-launch>span{background:transparent;color:var(--orange-dark);font-size:14px}.tutorial-card{border-radius:14px}.tutorial-card-actions>span{max-width:150px;text-align:right}}
+    @media(max-width:680px){.tutorial-launch{width:40px;padding:0;justify-content:center;font-size:0}.tutorial-launch>span{background:transparent;color:var(--orange-dark);font-size:12px}.tutorial-card{border-radius:14px}.tutorial-card-actions>span{max-width:150px;text-align:right}.request-delivery-grid{grid-template-columns:1fr 1fr}.request-delivery-grid>div{border-bottom:1px solid var(--line)}.request-link-row{align-items:stretch;flex-direction:column}}
   </style>
 </head>
 <body>
   <div id="app"></div>
-  <script src="app.js?v=20260810-4"></script>
+  <script src="app.js?v=20260810-5"></script>
 </body>
 </html>
