@@ -43,6 +43,45 @@ const INITIAL = (language='en') => ({
 let state = INITIAL(localStorage.getItem('petify-language') || 'en');
 const app = document.querySelector('#app');
 
+const NAVIGATION_KEYS = ['view','animalId','detailTab','animalFilter','updateFilter','publishFilter','settingsTab','selectedUpdate','selectedFoster','search'];
+let restoringNavigation = false;
+let lastNavigationSignature = null;
+
+function navigationSnapshot() {
+  return NAVIGATION_KEYS.reduce((snapshot,key)=>{
+    snapshot[key]=state[key];
+    return snapshot;
+  },{petifyNavigation:true});
+}
+
+function navigationSignature(snapshot=navigationSnapshot()) {
+  return JSON.stringify(NAVIGATION_KEYS.map(key=>snapshot[key]));
+}
+
+function restoreNavigation(snapshot) {
+  if(!snapshot?.petifyNavigation) return false;
+  NAVIGATION_KEYS.forEach(key=>{
+    if(Object.prototype.hasOwnProperty.call(snapshot,key)) state[key]=snapshot[key];
+  });
+  state.modal=null;
+  state.drawer=null;
+  state.toast='';
+  return true;
+}
+
+function syncNavigationHistory() {
+  const snapshot=navigationSnapshot();
+  const signature=navigationSignature(snapshot);
+  if(restoringNavigation){lastNavigationSignature=signature;return;}
+  if(lastNavigationSignature===null){
+    history.replaceState(snapshot,'');
+  } else if(signature!==lastNavigationSignature) {
+    if(state.tutorialStep!==null) history.replaceState(snapshot,'');
+    else history.pushState(snapshot,'');
+  }
+  lastNavigationSignature=signature;
+}
+
 const BASE_ANIMALS = [
   { id:'pepper', name:'Pepper', img:'assets/dog4.png', meta:'Mixed breed · Female · 2 years', queue:'new', stage:'New intake', readiness:'neutral', label:'New intake', blocker:'Intake review', next:'Complete intake', owner:'Alex Rivera', updated:'Today' },
   { id:'olive', name:'Olive', img:'assets/dog2.png', meta:'Terrier mix · Female · 5 years', queue:'care', stage:'In foster', readiness:'neutral', label:'In care', blocker:'None', next:'Open record', owner:'Sam Chen', updated:'Today' },
@@ -723,6 +762,7 @@ function advanceTutorial(kind,value) {
 }
 
 function render() {
+  syncNavigationHistory();
   const views = {dashboard:dashboardView,animals:animalsView,animal:animalView,updates:updatesView,fosters:fostersView,publishing:publishingView,settings:settingsView,fosterform:fosterFormView,profilepreview:profilePreviewView};
   app.innerHTML = state.view==='fosterform'
     ? `${fosterFormView()}${state.tutorialStep!==null?renderTutorial():''}${state.toast?`<div class="toast"><span>✓</span>${state.toast}</div>`:''}`
@@ -833,7 +873,14 @@ function handleAction(action, el) {
   if(shouldAdvance&&action!=='publish-now'&&state.tutorialStep!==null){advanceTutorial('action',action);render();}
 }
 
+window.addEventListener('popstate',event=>{
+  if(!restoreNavigation(event.state)) return;
+  restoringNavigation=true;
+  render();
+  restoringNavigation=false;
+});
 window.addEventListener('resize',()=>{if(state.tutorialStep!==null)positionTutorial();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.tutorialStep!==null){state.tutorialId=null;state.tutorialStep=null;render();}});
 
+restoreNavigation(history.state);
 render();
