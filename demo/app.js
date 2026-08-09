@@ -15,6 +15,9 @@ const INITIAL = (language='en') => ({
   intakePhoto: false,
   cocoCreated: false,
   cocoPlaced: false,
+  placements: {},
+  placementAnimalId: 'pepper',
+  placementFosterId: 'casey',
   requestSent: true,
   requestOpened: false,
   fosterSubmitted: true,
@@ -91,6 +94,24 @@ const BASE_ANIMALS = [
   { id:'buddy', name:'Buddy', img:'assets/dog3.png', meta:'Jindo mix · Male · 3 years', queue:'review', stage:'Needs review', readiness:'review', label:'Needs review', blocker:'Medical clearance', next:'Review record', owner:'Morgan Kim', updated:'Yesterday' },
   { id:'daisy', name:'Daisy', img:'assets/dog4.png', meta:'Poodle mix · Female · 4 years', queue:'published', stage:'Published', readiness:'published', label:'Published', blocker:'None', next:'View live profile', owner:'Alex Rivera', updated:'Aug 7' }
 ];
+
+const FOSTER_PEOPLE = [
+  {id:'casey',name:'Casey Brooks',initials:'CB'},
+  {id:'riley',name:'Riley Park',initials:'RP'}
+];
+
+function fosterPerson(id) {
+  return FOSTER_PEOPLE.find(person=>person.id===id)||FOSTER_PEOPLE[0];
+}
+
+function placementCandidates() {
+  return animals().filter(animal=>['pepper','coco'].includes(animal.id)&&!state.placements[animal.id]);
+}
+
+function availablePlacementFosters() {
+  const assigned=new Set(Object.values(state.placements));
+  return FOSTER_PEOPLE.filter(person=>!assigned.has(person.id));
+}
 
 const NAV = [
   ['dashboard','⌂','Dashboard'],
@@ -210,7 +231,7 @@ const KO_UI = {
   'Secure foster check-in · No account required':'안전한 임보 체크인 · 계정 불필요','Milo’s weekly check-in':'Milo 주간 체크인','For Jamie · Due today':'Jamie · 오늘 마감','Draft saved automatically':'초안 자동 저장됨','How is Milo doing this week?':'이번 주 Milo는 어떻게 지냈나요?','Choose the closest answer. We’ll only ask for details when needed.':'가장 가까운 답을 선택하세요. 필요한 경우에만 세부 내용을 묻습니다.','Doing well':'잘 지내고 있어요','No urgent concerns':'긴급한 문제 없음','Something changed':'달라진 점이 있어요','Health or behavior':'건강 또는 행동','Needs attention':'확인이 필요해요','Please contact me':'연락해 주세요','Tell us about any behavior changes':'행동 변화를 알려주세요','Add recent photos':'최근 사진 추가','Choose photos or video':'사진 또는 영상 선택','Second Chance Rescue may use these photos on Milo’s public adoption profile.':'Second Chance Rescue가 이 사진을 Milo의 공개 입양 프로필에 사용할 수 있습니다.','Save & finish later':'저장 후 나중에 완료','Send update':'업데이트 보내기','Need help? Contact your coordinator':'도움이 필요한가요? 코디네이터에게 문의하세요','Your update was sent':'업데이트가 전송되었습니다','Thanks, Jamie. Alex will review your changes before Milo’s record is updated.':'감사합니다, Jamie. Milo의 레코드가 변경되기 전에 Alex가 내용을 검토합니다.','Behavior change · 3 photos · Submitted just now':'행동 변화 · 사진 3장 · 방금 제출','Return to staff demo':'직원용 데모로 돌아가기','Edit my response':'응답 수정',
   'RESET PRETOTYPE':'프리토타입 초기화','Start the demo over?':'데모를 처음부터 시작할까요?','This only resets the sample data in your browser. Nothing external is changed.':'브라우저의 샘플 데이터만 초기화됩니다. 외부 데이터는 변경되지 않습니다.','Cancel':'취소','ANIMAL FILTERS':'동물 필터','Focus the workspace':'업무 화면 좁혀 보기','Current location':'현재 위치','All locations':'모든 위치','Foster homes':'임보 가정','Main shelter':'메인 쉘터','All owners':'모든 담당자','Information age':'정보 경과 기간','Any age':'전체 기간','Older than 14 days':'14일 초과','Any stage':'모든 단계','Apply filters':'필터 적용','Clear':'초기화','PRETOTYPE':'프리토타입','Prepared interaction':'준비된 상호작용','This control is represented in the pretotype and opens the prepared state shown here.':'이 기능은 프리토타입에서 준비된 상태로 동작합니다.','Got it':'확인',
   'NEW INTAKE':'신규 입소','Add an animal':'동물 추가','Create the record now. Complete the rest as care progresses.':'지금 레코드를 만들고 나머지는 보호 과정에서 보완합니다.','Animal':'동물','Intake':'입소','Initial state':'초기 상태','Primary photo':'대표 사진','Photo added':'사진 추가됨','Click to replace':'클릭하여 교체','Add a photo':'사진 추가','Name or temporary name':'이름 또는 임시 이름','Species':'동물 종류','Dog':'개','Cat':'고양이','Breed':'품종','Estimated age':'추정 나이','Intake type':'입소 유형','Owner surrender':'소유자 인계','Stray':'유기 동물','Transfer in':'기관 이관','Date & time':'일시','Source':'접수 경로','Community member':'지역 주민','Partner clinic':'협력 동물병원','Intake notes':'입소 메모','Does Coco need immediate medical attention?':'Coco에게 즉각적인 의료 조치가 필요한가요?','Does Coco need a foster placement?':'Coco에게 임보 배치가 필요한가요?','No':'아니요','Yes':'예','Record owner':'레코드 담당자','Priority':'우선순위','Normal':'보통','Urgent':'긴급','Ready to create Coco’s record':'Coco 레코드 생성 준비 완료','A five-section readiness checklist will be created automatically.':'5개 항목의 준비 체크리스트가 자동으로 생성됩니다.','Back':'이전','Continue':'계속','Save & open record':'저장 후 레코드 열기',
-  'FOSTER PLACEMENT':'임보 배치','Place Coco with a foster':'Coco를 임보자에게 배치','Connect the animal, foster, coordinator, and update schedule.':'동물, 임보자, 코디네이터, 업데이트 일정을 연결합니다.','Foster person':'임보자','Start date':'시작일','Expected end date':'예상 종료일','Coordinator':'코디네이터','Check-in schedule':'체크인 일정','First check-in: Aug 16':'첫 체크인: 8월 16일','Casey will receive a secure form link. Reminder after 2 days.':'Casey에게 보안 양식 링크가 발송됩니다. 2일 후 리마인드합니다.','Confirm placement':'배치 확정',
+  'FOSTER PLACEMENT':'임보 배치','Create a foster placement':'새 임보 배치','Choose an animal without a foster, then connect the foster person and update schedule.':'임보자가 배정되지 않은 동물을 선택한 뒤 임보자와 업데이트 일정을 연결합니다.','Animal without a foster placement':'임보자 미배정 동물','Foster person':'임보자','Start date':'시작일','Expected end date':'예상 종료일','Coordinator':'코디네이터','Check-in schedule':'체크인 일정','First check-in: Aug 16':'첫 체크인: 8월 16일','No foster people are currently available':'현재 배치 가능한 임보자가 없습니다','Choose an available foster person to continue.':'계속하려면 배치 가능한 임보자를 선택하세요.','All current animals have a foster placement':'현재 모든 동물에 임보자가 배정되어 있습니다','There are no unassigned animals in the named demo records. Add a new animal or end an existing placement first.':'이름이 표시된 데모 레코드에 임보자 미배정 동물이 없습니다. 동물을 추가하거나 기존 배치를 종료해 주세요.','Confirm placement':'배치 확정','Close':'닫기',
   'Request a foster update':'임보 업데이트 요청','Jamie gets a secure mobile link. No account or app is required.':'Jamie는 보안 모바일 링크를 받습니다. 계정이나 앱이 필요하지 않습니다.','Update form':'업데이트 양식','Send now':'지금 발송','Now · Email + SMS':'지금 · 이메일 + 문자','Schedule for tomorrow':'내일 예약','Due date':'마감일','Automatic reminder':'자동 리마인드','After 2 days · max 2':'2일 후 · 최대 2회','Ask for':'요청 항목','Medication':'투약','Photos':'사진','Notes':'메모','SMS + EMAIL PREVIEW':'문자 + 이메일 미리보기','See the exact message, secure link, and reminder schedule Jamie receives.':'Jamie가 받을 실제 메시지, 보안 링크, 리마인드 일정을 확인합니다.','Open preview':'미리보기 열기','Copy link':'링크 복사','Send request':'요청 보내기','ASSIGN NEXT ACTION':'다음 행동 배정','Choose an owner':'담당자 선택','Task':'업무','Note':'메모','Assign task':'업무 배정',
   'RECIPIENT PREVIEW':'수신자 미리보기','What Jamie receives':'Jamie가 받는 내용','Preview the request before sending it by SMS and email.':'문자와 이메일로 보내기 전 요청 내용을 확인합니다.','Email':'이메일','Text message':'문자 메시지','Automatic follow-up':'자동 후속 연락','Reminder after 2 days if Jamie has not submitted. Maximum 2 reminders.':'Jamie가 제출하지 않으면 2일 후 리마인드합니다. 최대 2회 발송합니다.','Secure individual link':'개별 보안 링크','No account required. The link opens only Milo’s requested check-in form.':'계정이 필요 없으며 Milo의 요청된 체크인 양식만 열립니다.','AFTER JAMIE SUBMITS':'JAMIE 제출 후','Submitted':'제출됨','Approved record':'승인된 레코드','The submission does not overwrite Milo’s official record until a staff member approves it.':'직원이 승인하기 전에는 제출 내용이 Milo의 공식 레코드를 덮어쓰지 않습니다.','Back to request':'요청 화면으로 돌아가기','Open Jamie’s form preview':'Jamie 양식 미리보기 열기','FROM':'보낸 사람','TO':'받는 사람','Share Milo’s update':'Milo 업데이트 작성','No account or app is required. This secure link is unique to Milo.':'계정이나 앱이 필요하지 않습니다. Milo 전용 보안 링크입니다.',
   'DEMO PRESENTER MODE':'데모 시연 모드','Choose the story you are demonstrating':'시연할 소재를 선택하세요','Each tour resets the sample data, opens the right starting screen, and provides a talk track with the exact next click.':'각 튜토리얼은 샘플 데이터를 초기화하고 시작 화면과 다음 클릭 위치를 안내합니다.','MATERIAL A · 12 STEPS':'소재 A · 12단계','Which dogs are ready to go?':'어떤 동물이 입양 준비를 마쳤을까?','Readiness overview → blocker → approval → Ready → publish':'준비 현황 → 차단 사유 → 승인 → 준비 완료 → 게시','Start Demo A':'데모 A 시작','Start Demo A ›':'데모 A 시작 ›','MATERIAL B · 20 STEPS':'소재 B · 20단계','Stop texting your fosters for updates':'임보자 업데이트 독촉에서 벗어나기','Request → automatic follow-up → foster response → approval → publish':'요청 → 자동 후속 연락 → 임보자 응답 → 승인 → 게시','Start Demo B':'데모 B 시작','Start Demo B ›':'데모 B 시작 ›','Presenter tip':'시연 안내','Read the talk track, then use only the highlighted control. End tour or press Esc at any time.':'안내 내용을 확인한 뒤 강조된 요소를 누르세요. 언제든 튜토리얼을 종료하거나 Esc를 누를 수 있습니다.','NOTIFICATIONS':'알림','What changed':'최근 변경','New foster update':'새 임보 업데이트','Profile published':'프로필 게시 완료','Profile ready':'프로필 준비 완료','Mark all as read':'모두 읽음 처리','DETAILS':'상세','Prepared content':'준비된 콘텐츠','This interaction is represented in the pretotype.':'이 상호작용은 프리토타입에 준비된 상태로 구현되어 있습니다.','End tour':'튜토리얼 종료','Continue':'계속','Finish tutorial':'튜토리얼 완료','Click the highlighted control':'강조된 요소를 클릭하세요','Interactive product tutorial':'제품 인터랙티브 튜토리얼','Use highlighted control':'강조된 요소 사용','Exit tutorial':'튜토리얼 종료',
@@ -245,6 +266,10 @@ function translateText(value) {
       [/^(\d+) hr$/,(_,a)=>`${a}시간 전`],
       [/^Showing: (.+)$/,(_,a)=>`표시 중: ${KO_UI[a]||a}`],
       [/^(\d+) photos attached$/,(_,a)=>`사진 ${a}장 첨부`],
+      [/^(.+) · (New intake|In foster)$/,(_,a,b)=>`${a} · ${KO_UI[b]||b}`],
+      [/^(.+) · Available$/,(_,a)=>`${a} · ${KO_UI.Available}`],
+      [/^(.+) will receive a secure form link for (.+). Reminder after 2 days.$/,(_,foster,animal)=>`${foster}에게 ${animal} 전용 보안 양식 링크가 발송됩니다. 2일 후 리마인드합니다.`],
+      [/^(.+) was placed with (.+) · first check-in scheduled$/,(_,animal,foster)=>`${animal}가 ${foster}에게 배치됐고 첫 체크인이 예약되었습니다`],
       [/^WEEKLY CHECK-IN · (.+)$/,(_,a)=>`주간 체크인 · ${a}`],
       [/^(.+) · tutorial complete$/,(_,a)=>`${KO_UI[a]||a} · 튜토리얼 완료`],
       [/^(.+) · prepared interaction opened$/,(_,a)=>`${a} · 준비된 상호작용 열림`]
@@ -316,6 +341,10 @@ const UPDATE_SUBMISSIONS = [
 
 function animals() {
   const list = BASE_ANIMALS.map(a => ({...a}));
+  const pepper = list.find(a => a.id === 'pepper');
+  if (state.placements.pepper) {
+    Object.assign(pepper, {queue:'care', stage:'In foster', readiness:'neutral', label:'In care', blocker:'None', next:'Request first update', updated:'Just now'});
+  }
   const milo = list.find(a => a.id === 'milo');
   if (state.updateApproved || state.miloReady) {
     Object.assign(milo, {queue:'ready', stage:'Ready to publish', readiness:'ready', label:'Ready', blocker:'None', next:'Preview profile', updated:'Just now'});
@@ -325,11 +354,12 @@ function animals() {
     Object.assign(milo, {queue:'care', stage:'In foster', readiness:'neutral', label:'In care', blocker:'Behavior update · 18 days old', next:'Request update'});
   }
   if (state.published) Object.assign(milo, {queue:'published', stage:'Published', readiness:'published', label:'Published', next:'View live profile', updated:'Just now'});
+  const cocoAssigned=Boolean(state.placements.coco);
   if (state.cocoCreated) list.unshift({
     id:'coco', name:'Coco', img:'assets/dog4.png', meta:'Mixed breed · Female · 2 years',
-    queue:state.cocoPlaced?'care':'new', stage:state.cocoPlaced?'In foster':'New intake', readiness:'neutral', label:state.cocoPlaced?'In care':'New intake',
-    blocker:state.cocoPlaced?'Health, behavior, profile':'Foster placement + 4 items',
-    next:state.cocoPlaced?'Request first update':'Place in foster', owner:'Alex Rivera', updated:'Just now'
+    queue:cocoAssigned?'care':'new', stage:cocoAssigned?'In foster':'New intake', readiness:'neutral', label:cocoAssigned?'In care':'New intake',
+    blocker:cocoAssigned?'Health, behavior, profile':'Foster placement + 4 items',
+    next:cocoAssigned?'Request first update':'Place in foster', owner:'Alex Rivera', updated:'Just now'
   });
   return list;
 }
@@ -338,9 +368,11 @@ function animalQueueTotals() {
   const miloIsPublished=state.published;
   const miloIsReady=(state.updateApproved||state.miloReady)&&!miloIsPublished;
   const miloNeedsReview=state.fosterSubmitted&&!state.updateApproved&&!state.miloReady&&!miloIsPublished;
+  const pepperAssigned=Boolean(state.placements.pepper);
+  const cocoAssigned=Boolean(state.placements.coco);
   return {
-    new:3+(state.cocoCreated&&!state.cocoPlaced?1:0),
-    care:28+(state.cocoPlaced?1:0)+(!state.fosterSubmitted&&!miloIsReady&&!miloIsPublished?1:0),
+    new:3-(pepperAssigned?1:0)+(state.cocoCreated&&!cocoAssigned?1:0),
+    care:28+(pepperAssigned?1:0)+(cocoAssigned?1:0)+(!state.fosterSubmitted&&!miloIsReady&&!miloIsPublished?1:0),
     review:1+(miloNeedsReview?1:0),
     ready:12+(miloIsReady?1:0),
     published:24+(miloIsPublished?1:0)
@@ -500,14 +532,16 @@ function animalRow(a) {
 function animalView() {
   const a = currentAnimal();
   const isMilo = a.id === 'milo';
-  const isCoco = a.id === 'coco';
+  const assignedFosterId=state.placements[a.id];
+  const assignedFoster=assignedFosterId?fosterPerson(assignedFosterId):null;
+  const needsPlacement=['pepper','coco'].includes(a.id)&&!assignedFosterId;
   const ready = isMilo ? state.miloReady : a.readiness==='ready';
   const review = isMilo && state.fosterSubmitted && !state.updateApproved;
   return `<section class="content detail-content">
     <button class="back-link" data-view="animals">‹ Back to animals</button>
     <div class="animal-header surface">
-      <img src="${a.img}" alt="${a.name}"><div class="animal-title"><div><h1>${a.name}</h1>${statusPill(ready?'ready':review?'review':a.readiness,ready?'Ready to publish':review?'Needs review':a.label)}</div><p>${a.meta} · ID PN-${a.id==='milo'?'1048':a.id==='coco'?'1092':'1051'}</p><div class="animal-facts"><span>⌂ ${isCoco&&!state.cocoPlaced?'Main shelter':'Jamie Lee · Foster home'}</span><span>♧ ${isCoco&&!state.cocoPlaced?'No foster assigned':'Foster coordinator: Alex'}</span></div></div>
-      <div class="header-actions"><button class="secondary-button" data-action="animal-more">•••</button>${isCoco&&!state.cocoPlaced?`<button class="primary-button" data-action="place-foster">Place in foster</button>`:`<button class="secondary-button" data-action="request-update">Request update</button><button class="primary-button" data-action="open-profile" ${ready?'':'disabled'}>Preview & publish</button>`}</div>
+      <img src="${a.img}" alt="${a.name}"><div class="animal-title"><div><h1>${a.name}</h1>${statusPill(ready?'ready':review?'review':a.readiness,ready?'Ready to publish':review?'Needs review':a.label)}</div><p>${a.meta} · ID PN-${a.id==='milo'?'1048':a.id==='coco'?'1092':'1051'}</p><div class="animal-facts"><span>⌂ ${needsPlacement?'Main shelter':assignedFoster?`${assignedFoster.name} · Foster home`:'Jamie Lee · Foster home'}</span><span>♧ ${needsPlacement?'No foster assigned':'Foster coordinator: Alex'}</span></div></div>
+      <div class="header-actions"><button class="secondary-button" data-action="animal-more">•••</button>${needsPlacement?`<button class="primary-button" data-action="place-foster">Place in foster</button>`:`<button class="secondary-button" data-action="request-update">Request update</button><button class="primary-button" data-action="open-profile" ${ready?'':'disabled'}>Preview & publish</button>`}</div>
     </div>
     <nav class="detail-tabs">${Object.entries(TAB_LABELS).map(([id,label])=>`<button class="${state.detailTab===id?'active':''}" data-detail-tab="${id}">${label}${id==='updates'?'<span>3</span>':''}</button>`).join('')}</nav>
     ${renderAnimalTab(a, ready, review)}
@@ -527,26 +561,26 @@ function renderAnimalTab(a, ready, review) {
 }
 
 function overviewTab(a, ready, review) {
-  const isCoco=a.id==='coco';
-  const completed = ready?5:isCoco?1:4;
+  const needsPlacement=['pepper','coco'].includes(a.id)&&!state.placements[a.id];
+  const completed = ready?5:needsPlacement?1:4;
   return `<div class="detail-grid">
     <div class="detail-main">
       <section class="surface status-banner ${ready?'ready':review?'review':'blocked'}">
-        <div class="status-symbol">${ready?'✓':review?'↻':'!'}</div><div><p class="kicker">CURRENT READINESS</p><h2>${ready?'Ready to publish':review?'1 update waiting for review':isCoco?'4 items block publishing':'Behavior information is outdated'}</h2><p>${ready?'All required information is complete and current.':review?'Jamie’s submission may resolve the final blocker. Review it before the record changes.':isCoco?'Complete health, behavior, documents, and public profile information.':'Request a new foster update to confirm behavior before publishing.'}</p></div>
-        <button class="${ready?'primary-button':'secondary-button'}" data-action="${ready?'open-profile':review?'review-milo':isCoco?'place-foster':'request-update'}">${ready?'Preview profile':review?'Review update':isCoco?'Place in foster':'Request update'} <span>›</span></button>
+        <div class="status-symbol">${ready?'✓':review?'↻':'!'}</div><div><p class="kicker">CURRENT READINESS</p><h2>${ready?'Ready to publish':review?'1 update waiting for review':needsPlacement?'4 items block publishing':'Behavior information is outdated'}</h2><p>${ready?'All required information is complete and current.':review?'Jamie’s submission may resolve the final blocker. Review it before the record changes.':needsPlacement?'Complete health, behavior, documents, and public profile information.':'Request a new foster update to confirm behavior before publishing.'}</p></div>
+        <button class="${ready?'primary-button':'secondary-button'}" data-action="${ready?'open-profile':review?'review-milo':needsPlacement?'place-foster':'request-update'}">${ready?'Preview profile':review?'Review update':needsPlacement?'Place in foster':'Request update'} <span>›</span></button>
       </section>
       <section class="surface readiness-card">
         <div class="section-head"><div><p class="kicker">READINESS CHECKLIST</p><h2>${completed} of 5 sections complete</h2></div><div class="progress-ring" style="--progress:${completed*20}"><b>${completed*20}%</b></div></div>
         <div class="progress-track"><i style="width:${completed*20}%"></i></div>
         ${checkRow('Health','Vaccinations and medical clearance complete','Complete','complete','health')}
-        ${checkRow('Behavior',ready?'Foster update approved today':review?'New foster update waiting for review':isCoco?'No behavior assessment':'Last confirmed 18 days ago',ready?'Complete':review?'Needs review':'Blocked',ready?'complete':review?'review':'blocked','behavior')}
-        ${checkRow('Media',isCoco?'1 intake photo · 3 more recommended':'8 approved photos · 1 video',isCoco?'In progress':'Complete',isCoco?'review':'complete','media')}
-        ${checkRow('Documents',isCoco?'Intake record only':'All required documents approved',isCoco?'Blocked':'Complete',isCoco?'blocked':'complete','documents')}
-        ${checkRow('Public profile',isCoco?'Description not started':'Profile copy and adoption details complete',isCoco?'Blocked':'Complete',isCoco?'blocked':'complete','public')}
+        ${checkRow('Behavior',ready?'Foster update approved today':review?'New foster update waiting for review':needsPlacement?'No behavior assessment':'Last confirmed 18 days ago',ready?'Complete':review?'Needs review':'Blocked',ready?'complete':review?'review':'blocked','behavior')}
+        ${checkRow('Media',needsPlacement?'1 intake photo · 3 more recommended':'8 approved photos · 1 video',needsPlacement?'In progress':'Complete',needsPlacement?'review':'complete','media')}
+        ${checkRow('Documents',needsPlacement?'Intake record only':'All required documents approved',needsPlacement?'Blocked':'Complete',needsPlacement?'blocked':'complete','documents')}
+        ${checkRow('Public profile',needsPlacement?'Description not started':'Profile copy and adoption details complete',needsPlacement?'Blocked':'Complete',needsPlacement?'blocked':'complete','public')}
       </section>
     </div>
     <aside class="detail-aside">
-      <section class="surface next-action-card"><p class="kicker">NEXT ACTION</p><h2>${ready?'Publish adoption profile':review?'Review Jamie’s update':isCoco?'Assign a foster home':'Request behavior update'}</h2><p>${ready?'Ready now':review?'Due today':isCoco?'Owner · Alex Rivera':'Owner · Alex Rivera · Due today'}</p><div class="mini-owner"><span class="avatar">AR</span><span><b>Alex Rivera</b><small>Foster coordinator</small></span></div><button class="primary-button full" data-action="${ready?'open-profile':review?'review-milo':isCoco?'place-foster':'request-update'}">${ready?'Open profile':review?'Review submission':isCoco?'Set placement':'Send request'}</button><button class="text-button centered" data-action="assign-task">Assign to someone else</button></section>
+      <section class="surface next-action-card"><p class="kicker">NEXT ACTION</p><h2>${ready?'Publish adoption profile':review?'Review Jamie’s update':needsPlacement?'Assign a foster home':'Request behavior update'}</h2><p>${ready?'Ready now':review?'Due today':needsPlacement?'Owner · Alex Rivera':'Owner · Alex Rivera · Due today'}</p><div class="mini-owner"><span class="avatar">AR</span><span><b>Alex Rivera</b><small>Foster coordinator</small></span></div><button class="primary-button full" data-action="${ready?'open-profile':review?'review-milo':needsPlacement?'place-foster':'request-update'}">${ready?'Open profile':review?'Review submission':needsPlacement?'Set placement':'Send request'}</button><button class="text-button centered" data-action="assign-task">Assign to someone else</button></section>
       <section class="surface side-activity"><div class="section-head"><div><p class="kicker">RECENT ACTIVITY</p><h2>Latest changes</h2></div><button class="round-button" data-detail-tab="activity">›</button></div>${activityItem(a.img,review?'Update submitted by Jamie':'Photos approved by Alex',review?'3 new photos · behavior changed':'8 public photos ready','Today')}${activityItem(a.img,'Medical clearance received','Added by Dr. Casey','Aug 6')}</section>
     </aside>
   </div>`;
@@ -674,11 +708,17 @@ function fostersView() {
   const rows = [
     {id:'jamie',name:'Jamie Lee',initials:'JL',pet:'Milo',img:'assets/dog1.png',status:'Active',schedule:'Weekly · next Aug 16',rate:'98%',responded:true},
     {id:'taylor',name:'Taylor Reed',initials:'TR',pet:'Luna',img:'assets/dog2.png',status:'Active',schedule:'Every 2 weeks · next Aug 18',rate:'92%',responded:true},
-    {id:'morgan',name:'Morgan Kim',initials:'MK',pet:'Buddy',img:'assets/dog3.png',status:'Active',schedule:'Weekly · overdue 2 days',rate:'86%',responded:true,due:true},
-    {id:'riley',name:'Riley Park',initials:'RP',pet:'No placement',img:'',status:'Available',schedule:'—',rate:'100%',responded:true}
+    {id:'morgan',name:'Morgan Kim',initials:'MK',pet:'Buddy',img:'assets/dog3.png',status:'Active',schedule:'Weekly · overdue 2 days',rate:'86%',responded:true,due:true}
   ];
-  if(state.cocoPlaced) rows.unshift({id:'casey',name:'Casey Brooks',initials:'CB',pet:'Coco',img:'assets/dog4.png',status:'Active',schedule:'Weekly · starts Aug 16',rate:'New',responded:false});
-  const totals={active:state.cocoPlaced?19:18,available:12,due:7,responded:29};
+  FOSTER_PEOPLE.forEach(person=>{
+    const animalId=Object.keys(state.placements).find(id=>state.placements[id]===person.id);
+    const animal=animalId?animals().find(item=>item.id===animalId):null;
+    rows.push(animal
+      ? {id:person.id,name:person.name,initials:person.initials,pet:animal.name,img:animal.img,status:'Active',schedule:'Weekly · starts Aug 16',rate:'New',responded:false}
+      : {id:person.id,name:person.name,initials:person.initials,pet:'No placement',img:'',status:'Available',schedule:'—',rate:'100%',responded:true});
+  });
+  const placementCount=Object.keys(state.placements).length;
+  const totals={active:18+placementCount,available:12-placementCount,due:7,responded:29};
   const matches=(row,filter)=>filter==='active'?row.status==='Active':filter==='available'?row.status==='Available':filter==='due'?row.due===true:filter==='responded'?row.responded===true:true;
   const realRows=state.fosterFilter==='all'?rows:rows.filter(row=>matches(row,state.fosterFilter));
   const targetCount=state.fosterFilter==='all'?31:totals[state.fosterFilter];
@@ -758,7 +798,14 @@ function intakeModal() {
   return `<button class="modal-close" data-action="close-modal">×</button><div class="intake-heading"><div><p class="kicker">NEW INTAKE</p><h2>Add an animal</h2><p>Create the record now. Complete the rest as care progresses.</p></div><b>Step ${step} of 3</b></div><div class="stepper">${[1,2,3].map((n)=>`<span class="${step>=n?'active':''}"><i>${step>n?'✓':n}</i><b>${['Animal','Intake','Initial state'][n-1]}</b></span>`).join('')}</div>${step===1?`<div class="form-grid"><label class="full"><span>Primary photo</span><button class="intake-photo ${state.intakePhoto?'has-photo':''}" data-action="intake-upload">${state.intakePhoto?'<img src="assets/dog4.png" alt="Coco"><b>Photo added</b><small>Click to replace</small>':'<b>＋ Add a photo</b><small>JPG or PNG · up to 10 MB</small>'}</button></label><label><span>Name or temporary name</span><input id="intake-name" value="Coco"></label><label><span>Species</span><select><option>Dog</option><option>Cat</option></select></label><label><span>Breed</span><input value="Mixed breed"></label><label><span>Sex</span><select><option>Female</option><option>Male</option><option>Unknown</option></select></label><label><span>Estimated age</span><input value="2 years"></label></div>`:step===2?`<div class="form-grid"><label><span>Intake type</span><select><option>Owner surrender</option><option>Stray</option><option>Transfer in</option></select></label><label><span>Date & time</span><input value="Aug 9, 2026 · 10:30 AM"></label><label><span>Source</span><input value="Community member"></label><label><span>Current location</span><select><option>Main shelter</option><option>Partner clinic</option></select></label><label class="full"><span>Intake notes</span><textarea rows="3">Friendly on intake. No visible injury. Medical check requested.</textarea></label></div>`:`<div class="form-grid"><label class="full choice-line"><span>Does Coco need immediate medical attention?</span><span><button class="segmented active" data-action="medical-no">No</button><button class="segmented" data-action="medical-yes">Yes</button></span></label><label class="full choice-line"><span>Does Coco need a foster placement?</span><span><button class="segmented" data-action="foster-no">No</button><button class="segmented active" data-action="foster-yes">Yes</button></span></label><label><span>Record owner</span><select><option>Alex Rivera</option><option>Morgan Kim</option></select></label><label><span>Priority</span><select><option>Normal</option><option>Urgent</option></select></label><div class="intake-result full"><span>✓</span><p><b>Ready to create Coco’s record</b>A five-section readiness checklist will be created automatically.</p></div></div>`}<div class="modal-actions"><button class="secondary-button" data-action="${step===1?'close-modal':'intake-back'}">${step===1?'Cancel':'Back'}</button><span></span><button class="primary-button" data-action="${step===3?'save-intake':'intake-next'}">${step===3?'Save & open record':'Continue'}</button></div>`;
 }
 
-function placementModal() { return `<button class="modal-close" data-action="close-modal">×</button><p class="kicker">FOSTER PLACEMENT</p><h2>Place Coco with a foster</h2><p>Connect the animal, foster, coordinator, and update schedule.</p><div class="form-grid"><label class="full"><span>Foster person</span><select><option>Casey Brooks · Available</option><option>Riley Park · Available</option></select></label><label><span>Start date</span><input value="Aug 10, 2026"></label><label><span>Expected end date</span><input value="Sep 10, 2026"></label><label><span>Coordinator</span><select><option>Alex Rivera</option></select></label><label><span>Check-in schedule</span><select><option>Weekly</option><option>Every 2 weeks</option></select></label><div class="intake-result full"><span>↻</span><p><b>First check-in: Aug 16</b>Casey will receive a secure form link. Reminder after 2 days.</p></div></div><div class="modal-actions"><button class="secondary-button" data-action="close-modal">Cancel</button><button class="primary-button" data-action="save-placement">Confirm placement</button></div>`; }
+function placementModal() {
+  const candidates=placementCandidates();
+  if(!candidates.length) return `<button class="modal-close" data-action="close-modal">×</button><p class="kicker">FOSTER PLACEMENT</p><h2>All current animals have a foster placement</h2><p>There are no unassigned animals in the named demo records. Add a new animal or end an existing placement first.</p><div class="modal-actions"><span></span><button class="primary-button" data-action="close-modal">Close</button></div>`;
+  const selectedAnimal=candidates.find(animal=>animal.id===state.placementAnimalId)||candidates[0];
+  const availableFosters=availablePlacementFosters();
+  const selectedFoster=availableFosters.find(person=>person.id===state.placementFosterId)||availableFosters[0];
+  return `<button class="modal-close" data-action="close-modal">×</button><p class="kicker">FOSTER PLACEMENT</p><h2>Create a foster placement</h2><p>Choose an animal without a foster, then connect the foster person and update schedule.</p><div class="form-grid"><label class="full"><span>Animal without a foster placement</span><select data-placement-animal>${candidates.map(animal=>`<option value="${animal.id}" ${animal.id===selectedAnimal.id?'selected':''}>${animal.name} · ${animal.stage}</option>`).join('')}</select></label><label class="full"><span>Foster person</span><select data-placement-foster ${availableFosters.length?'':'disabled'}>${availableFosters.length?availableFosters.map(person=>`<option value="${person.id}" ${person.id===selectedFoster?.id?'selected':''}>${person.name} · Available</option>`).join(''):'<option>No foster people are currently available</option>'}</select></label><label><span>Start date</span><input value="Aug 10, 2026"></label><label><span>Expected end date</span><input value="Sep 10, 2026"></label><label><span>Coordinator</span><select><option>Alex Rivera</option></select></label><label><span>Check-in schedule</span><select><option>Weekly</option><option>Every 2 weeks</option></select></label><div class="intake-result full"><span>↻</span><p><b>First check-in: Aug 16</b>${selectedFoster?`${selectedFoster.name} will receive a secure form link for ${selectedAnimal.name}. Reminder after 2 days.`:'Choose an available foster person to continue.'}</p></div></div><div class="modal-actions"><button class="secondary-button" data-action="close-modal">Cancel</button><button class="primary-button" data-action="save-placement" ${selectedFoster?'':'disabled'}>Confirm placement</button></div>`;
+}
 function requestModal() { return `<button class="modal-close" data-action="close-modal">×</button><p class="kicker">MILO · JAMIE LEE</p><h2>Request a foster update</h2><p>Jamie gets a secure mobile link. No account or app is required.</p><div class="form-grid"><label class="full"><span>Update form</span><select><option>Weekly check-in</option></select></label><label><span>Send now</span><select><option>Now · Email + SMS</option><option>Schedule for tomorrow</option></select></label><label><span>Due date</span><input value="Aug 12, 2026"></label><label><span>Automatic reminder</span><select><option>After 2 days · max 2</option></select></label><label><span>Coordinator</span><select><option>Alex Rivera</option></select></label><fieldset class="full"><legend>Ask for</legend><div class="check-options">${['Health','Behavior','Medication','Weight','Photos','Notes'].map((x,i)=>`<label><input type="checkbox" ${i!==3?'checked':''}> ${x}</label>`).join('')}</div></fieldset><button class="message-preview full" data-action="preview-message"><small>SMS + EMAIL PREVIEW</small><b>How is Milo doing this week?</b><span>See the exact message, secure link, and reminder schedule Jamie receives.</span><i>Open preview ›</i></button></div><div class="modal-actions"><button class="secondary-button" data-action="copy-link">Copy link</button><span></span><button class="secondary-button" data-action="close-modal">Cancel</button><button class="primary-button" data-action="send-request">Send request</button></div>`; }
 function assignModal() { return `<button class="modal-close" data-action="close-modal">×</button><p class="kicker">ASSIGN NEXT ACTION</p><h2>Choose an owner</h2><div class="form-grid"><label class="full"><span>Task</span><input value="Review Milo’s foster update"></label><label><span>Owner</span><select><option>Morgan Kim</option><option>Alex Rivera</option><option>Sam Chen</option></select></label><label><span>Due date</span><input value="Today"></label><label class="full"><span>Note</span><textarea rows="3">Please compare the behavior change before approval.</textarea></label></div><div class="modal-actions"><button class="secondary-button" data-action="close-modal">Cancel</button><button class="primary-button" data-action="confirm-assign">Assign task</button></div>`; }
 
@@ -876,6 +923,8 @@ function bind() {
   document.querySelectorAll('[data-publish-filter]').forEach(el=>el.addEventListener('click',()=>{state.publishFilter=el.dataset.publishFilter;render();}));
   document.querySelectorAll('[data-select-update]').forEach(el=>el.addEventListener('click',()=>{state.selectedUpdate=el.dataset.selectUpdate;render();}));
   document.querySelectorAll('[data-select-foster]').forEach(el=>el.addEventListener('click',e=>{if(e.target.closest('button'))return;state.selectedFoster=el.dataset.selectFoster;state.drawer='more';render();}));
+  document.querySelectorAll('[data-placement-animal]').forEach(el=>el.addEventListener('change',()=>{state.placementAnimalId=el.value;render();}));
+  document.querySelectorAll('[data-placement-foster]').forEach(el=>el.addEventListener('change',()=>{state.placementFosterId=el.value;render();}));
   document.querySelectorAll('[data-settings-tab]').forEach(el=>el.addEventListener('click',()=>{state.settingsTab=el.dataset.settingsTab;render();}));
   document.querySelectorAll('[data-message-channel]').forEach(el=>el.addEventListener('click',()=>{const value=el.dataset.messageChannel;if(state.tutorialStep!==null&&!tutorialMatches('channel',value))return;state.messageChannel=value;advanceTutorial('channel',value);render();}));
   document.querySelectorAll('[data-filter-jump]').forEach(el=>el.addEventListener('click',()=>{state.view='animals';state.animalFilter=el.dataset.filterJump;state.search='';render();}));
@@ -909,8 +958,23 @@ function handleAction(action, el) {
     case 'intake-next': state.intakeStep=Math.min(3,state.intakeStep+1);render();break;
     case 'intake-back': state.intakeStep=Math.max(1,state.intakeStep-1);render();break;
     case 'save-intake': state.cocoCreated=true;state.animalId='coco';state.detailTab='overview';state.view='animal';state.modal=null;toast('Coco’s record and readiness checklist were created');break;
-    case 'place-foster': modalOpen('placement');break;
-    case 'save-placement': state.cocoPlaced=true;state.modal=null;toast('Coco was placed with Casey · first check-in scheduled');break;
+    case 'place-foster': {
+      state.placementAnimalId=state.animalId;
+      state.placementFosterId=availablePlacementFosters()[0]?.id||'';
+      modalOpen('placement');break;
+    }
+    case 'save-placement': {
+      const candidates=placementCandidates();
+      const animal=candidates.find(item=>item.id===state.placementAnimalId)||candidates[0];
+      const fosters=availablePlacementFosters();
+      const foster=fosters.find(person=>person.id===state.placementFosterId)||fosters[0];
+      if(!animal||!foster){state.modal=null;toast('No unassigned animal or available foster person was found');break;}
+      state.placements={...state.placements,[animal.id]:foster.id};
+      if(animal.id==='coco') state.cocoPlaced=true;
+      state.modal=null;
+      toast(`${animal.name} was placed with ${foster.name} · first check-in scheduled`);
+      break;
+    }
     case 'request-update': modalOpen('request');break;
     case 'preview-message': state.messageChannel='sms';drawerOpen('message-preview');break;
     case 'return-request': state.drawer=null;render();break;
@@ -956,7 +1020,12 @@ function handleAction(action, el) {
     case 'export-report': case 'export-activity': toast('Demo export prepared');break;
     case 'activity-log': state.animalId='milo';state.detailTab='activity';state.view='animal';render();break;
     case 'notification-item': state.drawer=null;state.view='updates';render();break;
-    case 'new-placement': modalOpen('placement');break;
+    case 'new-placement': {
+      const candidates=placementCandidates();
+      state.placementAnimalId=candidates[0]?.id||'';
+      state.placementFosterId=availablePlacementFosters()[0]?.id||'';
+      modalOpen('placement');break;
+    }
     default: genericPrepared(`${(el?.innerText||'Control').trim().split('\n')[0]} · prepared interaction opened`);
   }
   if(shouldAdvance&&action!=='publish-now'&&state.tutorialStep!==null){advanceTutorial('action',action);render();}
