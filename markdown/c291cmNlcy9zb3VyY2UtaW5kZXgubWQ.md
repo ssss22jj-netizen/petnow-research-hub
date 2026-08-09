@@ -1,6 +1,6 @@
 # 경쟁사 리뷰 출처 인덱스
 
-> 확인 기준일: 2026-07-26
+> 확인 기준일: 2026-08-09
 
 ## 현재 확보 수준
 
@@ -29,3 +29,13 @@
 - 동일 리뷰가 여러 출처에 재게시된 경우 하나의 리뷰로 집계
 - 인센티브 리뷰, 공급사 추천 리뷰, 익명 커뮤니티 사례를 별도 표시
 - Chameleon/CMS 분석 시 동물관리 제품 사용 맥락이 확인된 리뷰만 채택
+
+## 소재 C 인테이크 필드 재검증 출처
+
+| 출처 | 확인 내용 | 확인일 | 분석 위치 |
+| --- | --- | --- | --- |
+| [Shelterluv Features](https://www.shelterluv.com/product/features/) | 구성 가능한 Intake & Outcome Forms, 보고·게시 연동 | 2026-08-09 | `../analysis/소재C_인테이크필드_재검증_20260809.md` |
+| [Shelter Animals Count Animal-Level Data](https://www.shelteranimalscount.org/explore-the-data/elementor-5427/animal-level-data/) | 업계 표준 동물·인테이크 데이터 속성 | 2026-08-09 | `../analysis/소재C_인테이크필드_재검증_20260809.md` |
+| [Shelter Animals Count Animal-Level Data SOP](https://www.shelteranimalscount.org/wp-content/uploads/2024/12/ALD-SOP-Complete-Document.pdf) | 최초 입력 후 갱신, Unknown·공란 허용 조건 | 2026-08-09 | `../analysis/소재C_인테이크필드_재검증_20260809.md` |
+| [Shelter Animals Count Resources](https://www.shelteranimalscount.org/resources/) | 데이터 제출의 자발성, 지원기관별 별도 요건 가능성 | 2026-08-09 | `../analysis/소재C_인테이크필드_재검증_20260809.md` |
+| [Shelter Animals Count API with Shelterluv](https://www.shelteranimalscount.org/apis-with-sac/) | 월별 자동 제출과 지원금 데이터 요건 활용 | 2026-08-09 | `../analysis/소재C_인테이크필드_재검증_20260809.md` |
