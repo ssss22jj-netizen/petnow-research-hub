@@ -28,6 +28,7 @@ const INITIAL = () => ({
   selectedUpdate: 'milo',
   selectedFoster: 'jamie',
   messageChannel: 'sms',
+  tutorialStep: null,
   channels: { website: true, petfinder: true, adoptapet: true },
   settingsTab: 'readiness',
   settingsSaved: false,
@@ -59,6 +60,21 @@ const TAB_LABELS = {
   overview:'Overview', profile:'Profile', health:'Health', behavior:'Behavior',
   updates:'Foster updates', media:'Media', documents:'Documents', public:'Public profile', activity:'Activity'
 };
+
+const TUTORIAL_STEPS = [
+  { selector:'.quick-actions [data-view="updates"]', kind:'view', value:'updates', title:'Open foster updates', text:'Start in Updates, where requests, submissions, and approvals are managed together.' },
+  { selector:'.page-actions [data-action="request-update"]', kind:'action', value:'request-update', title:'Request a new update', text:'Create a structured check-in request for Milo’s foster, Jamie.' },
+  { selector:'.modal-card [data-action="preview-message"]', kind:'action', value:'preview-message', title:'Preview before sending', text:'Check exactly what Jamie will receive before the request goes out.' },
+  { selector:'.message-tabs [data-message-channel="email"]', kind:'channel', value:'email', title:'Compare both channels', text:'The same secure request is prepared for SMS and email. Click Email to see the second version.' },
+  { selector:'.message-drawer [data-action="open-form-from-preview"]', kind:'action', value:'open-form-from-preview', title:'See Jamie’s experience', text:'Open the secure, no-account form exactly as Jamie would see it.' },
+  { selector:'[data-form-choice="change"]', kind:'choice', value:'change', title:'Report only what changed', text:'Jamie starts with a quick status. Choosing a change reveals the context the shelter needs to review.' },
+  { selector:'[data-action="foster-upload"]', kind:'action', value:'foster-upload', title:'Add recent evidence', text:'Photos arrive with the update, already attached to Milo and the current check-in.' },
+  { selector:'[data-action="submit-foster"]', kind:'action', value:'submit-foster', title:'Send the update', text:'The submission goes to staff review. It does not overwrite Milo’s official record.' },
+  { selector:'[data-action="return-staff"]', kind:'action', value:'return-staff', title:'Return to the shelter console', text:'Switch back to the staff side to review what Jamie submitted.' },
+  { selector:'.comparison', kind:'manual', title:'Compare before applying', text:'Petify shows the approved record beside Jamie’s new observation. Staff can approve, request clarification, or reject it.' },
+  { selector:'[data-action="approve-update"]', kind:'action', value:'approve-update', title:'Approve the verified change', text:'Only approved information updates Milo’s record and recalculates adoption readiness.' },
+  { selector:'.status-banner.ready', kind:'finish', title:'Milo is ready to publish', text:'The approved foster update is now part of the official record, and the resolved blocker moves Milo to Ready to publish.' }
+];
 
 const UPDATE_SUBMISSIONS = [
   {
@@ -131,7 +147,7 @@ function layout(content) {
           <button class="mobile-brand" data-action="open-nav">☰</button>
           <label class="global-search"><span>⌕</span><input id="global-search" value="${state.search}" placeholder="Search animals, fosters, or records" aria-label="Search"></label>
           <div class="top-actions">
-            ${iconButton('?','Demo guide','guide')}
+            <button class="tutorial-launch" data-action="guide"><span>?</span> Tutorial</button>
             ${iconButton('◌','Notifications','notifications')}
             <button class="add-button" data-action="open-intake"><span>＋</span> Add animal</button>
           </div>
@@ -141,6 +157,7 @@ function layout(content) {
     </div>
     ${state.modal ? renderModal() : ''}
     ${state.drawer ? renderDrawer() : ''}
+    ${state.tutorialStep!==null ? renderTutorial() : ''}
     ${state.toast ? `<div class="toast"><span>✓</span>${state.toast}</div>` : ''}
   `;
 }
@@ -405,7 +422,7 @@ function assignModal() { return `<button class="modal-close" data-action="close-
 
 function renderDrawer() {
   if(state.drawer==='message-preview') return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer message-drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">RECIPIENT PREVIEW</p><h2>What Jamie receives</h2><p>Preview the request before sending it by SMS and email.</p><div class="message-tabs"><button class="${state.messageChannel==='sms'?'active':''}" data-message-channel="sms">SMS</button><button class="${state.messageChannel==='email'?'active':''}" data-message-channel="email">Email</button></div>${state.messageChannel==='sms'?smsPreview():emailPreview()}<div class="delivery-details"><div><span>↻</span><p><b>Automatic follow-up</b>Reminder after 2 days if Jamie has not submitted. Maximum 2 reminders.</p></div><div><span>⌁</span><p><b>Secure individual link</b>No account required. The link opens only Milo’s requested check-in form.</p></div></div><div class="preview-flow"><small>AFTER JAMIE SUBMITS</small><div><span><i>1</i><b>Submitted</b></span><em>›</em><span><i>2</i><b>Needs review</b></span><em>›</em><span><i>3</i><b>Approved record</b></span></div><p>The submission does not overwrite Milo’s official record until a staff member approves it.</p></div><button class="primary-button full" data-action="open-form-from-preview">Open Jamie’s form preview</button><button class="text-button centered" data-action="copy-link">Copy secure link</button></aside></div>`;
-  if(state.drawer==='guide') return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">GUIDED DEMO</p><h2>From intake to publishing</h2><p>This pretotype keeps one coherent workflow across every menu.</p><ol class="guide-steps">${[['1','Create Coco at intake','Add animal'],['2','Place Coco with Casey','Open Coco’s record'],['3','Send a foster request','Use Milo’s next action'],['4','Open Jamie’s form','Submit a behavior change'],['5','Approve the submission','Milo becomes ready'],['6','Publish Milo','Send to three channels']].map(([n,a,b])=>`<li><i>${n}</i><span><b>${a}</b><small>${b}</small></span></li>`).join('')}</ol><button class="primary-button full" data-action="start-guide">Start with intake</button></aside></div>`;
+  if(state.drawer==='guide') return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">INTERACTIVE TUTORIAL</p><h2>How foster updates become trusted records</h2><p>Follow the highlighted controls to experience both the foster and shelter sides of one update.</p><ol class="guide-steps">${[['1','Request','Choose what Jamie should update'],['2','Preview','Check the SMS and email'],['3','Respond','Complete Jamie’s mobile form'],['4','Review','Compare new and approved information'],['5','Apply','Approve the change and clear the blocker']].map(([n,a,b])=>`<li><i>${n}</i><span><b>${a}</b><small>${b}</small></span></li>`).join('')}</ol><button class="primary-button full" data-action="start-guide">Start foster update tutorial</button></aside></div>`;
   if(state.drawer==='notifications') return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">NOTIFICATIONS</p><h2>What changed</h2><div class="notification-list">${[['New foster update','Jamie submitted Milo’s weekly check-in','12 min'],['Publishing failed','Daisy could not sync to Adopt a Pet','42 min'],['Profile ready','Luna completed all readiness checks','1 hr']].map(([a,b,c])=>`<button data-action="notification-item"><i></i><span><b>${a}</b><small>${b}</small></span><time>${c}</time></button>`).join('')}</div><button class="text-button centered" data-action="mark-read">Mark all as read</button></aside></div>`;
   return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">DETAILS</p><h2>Prepared content</h2><p>This interaction is represented in the pretotype.</p></aside></div>`;
 }
@@ -413,12 +430,74 @@ function renderDrawer() {
 function smsPreview() { return `<div class="phone-preview"><div class="phone-preview-bar"><span>‹</span><div><b>Second Chance Rescue</b><small>Text message</small></div><i>•••</i></div><div class="message-time">Today · 10:30 AM</div><div class="sms-bubble">Hi Jamie! How is Milo doing this week?<br><br>Share any health or behavior changes and add recent photos by Aug 12. It takes about 3 minutes.<br><br><strong>petnow.link/milo-8K4P</strong><br><br><small>Reply STOP to opt out.</small></div><div class="sms-input">Text message <span>↑</span></div></div>`; }
 function emailPreview() { return `<div class="email-preview"><div class="email-meta"><span><small>FROM</small><b>Second Chance Rescue</b></span><span><small>TO</small><b>Jamie Lee</b></span></div><div class="email-body"><span class="brand-mark"><b></b></span><p class="kicker">MILO’S WEEKLY CHECK-IN</p><h3>How is Milo doing this week?</h3><p>Please share any health or behavior changes and add recent photos by <b>August 12</b>. Most updates take about 3 minutes.</p><button data-action="open-form-from-preview">Share Milo’s update</button><small>No account or app is required. This secure link is unique to Milo.</small></div></div>`; }
 
+function renderTutorial() {
+  const step=TUTORIAL_STEPS[state.tutorialStep];
+  if(!step) return '';
+  const final=step.kind==='finish';
+  return `<div class="tutorial-layer" role="dialog" aria-modal="true" aria-label="Interactive product tutorial">
+    <div class="tutorial-dim tutorial-dim-top"></div><div class="tutorial-dim tutorial-dim-left"></div><div class="tutorial-dim tutorial-dim-right"></div><div class="tutorial-dim tutorial-dim-bottom"></div>
+    <div class="tutorial-highlight" aria-hidden="true"></div>
+    <section class="tutorial-card">
+      <div class="tutorial-card-head"><span>GUIDED TOUR</span><button data-action="exit-tutorial" aria-label="Exit tutorial">×</button></div>
+      <small>STEP ${state.tutorialStep+1} OF ${TUTORIAL_STEPS.length}</small><h3>${step.title}</h3><p>${step.text}</p>
+      <div class="tutorial-card-actions"><button class="tutorial-exit" data-action="exit-tutorial">End tour</button>${step.kind==='manual'?'<button class="tutorial-next" data-action="tutorial-next">Continue</button>':final?'<button class="tutorial-next" data-action="finish-tutorial">Finish tutorial</button>':'<span>Click the highlighted control</span>'}</div>
+    </section>
+  </div>`;
+}
+
+function positionTutorial() {
+  if(state.tutorialStep===null) return;
+  const step=TUTORIAL_STEPS[state.tutorialStep];
+  const layer=document.querySelector('.tutorial-layer');
+  const target=step&&document.querySelector(step.selector);
+  if(!layer||!target) return;
+  const viewport={w:window.innerWidth,h:window.innerHeight};
+  const initial=target.getBoundingClientRect();
+  if(initial.top<12||initial.bottom>viewport.h-12) target.scrollIntoView({block:'center',inline:'nearest'});
+  requestAnimationFrame(()=>{
+    if(!document.body.contains(target)) return;
+    const rect=target.getBoundingClientRect();
+    const pad=8;
+    const top=Math.max(0,rect.top-pad), left=Math.max(0,rect.left-pad);
+    const right=Math.min(viewport.w,rect.right+pad), bottom=Math.min(viewport.h,rect.bottom+pad);
+    const set=(selector,styles)=>Object.assign(layer.querySelector(selector).style,styles);
+    set('.tutorial-dim-top',{left:'0px',top:'0px',width:'100vw',height:`${top}px`});
+    set('.tutorial-dim-bottom',{left:'0px',top:`${bottom}px`,width:'100vw',height:`${Math.max(0,viewport.h-bottom)}px`});
+    set('.tutorial-dim-left',{left:'0px',top:`${top}px`,width:`${left}px`,height:`${Math.max(0,bottom-top)}px`});
+    set('.tutorial-dim-right',{left:`${right}px`,top:`${top}px`,width:`${Math.max(0,viewport.w-right)}px`,height:`${Math.max(0,bottom-top)}px`});
+    set('.tutorial-highlight',{left:`${left}px`,top:`${top}px`,width:`${Math.max(1,right-left)}px`,height:`${Math.max(1,bottom-top)}px`});
+    const card=layer.querySelector('.tutorial-card');
+    const cardW=Math.min(360,viewport.w-24), gap=18;
+    card.style.width=`${cardW}px`;card.style.visibility='hidden';card.style.left='12px';card.style.top='12px';
+    const cardH=card.offsetHeight;
+    let x,y;
+    if(right+gap+cardW<=viewport.w-12){x=right+gap;y=rect.top+(rect.height-cardH)/2;}
+    else if(left-gap-cardW>=12){x=left-gap-cardW;y=rect.top+(rect.height-cardH)/2;}
+    else {x=Math.min(Math.max(12,rect.left),viewport.w-cardW-12);y=bottom+gap+cardH<=viewport.h?bottom+gap:top-gap-cardH;}
+    card.style.left=`${Math.max(12,Math.min(x,viewport.w-cardW-12))}px`;
+    card.style.top=`${Math.max(12,Math.min(y,viewport.h-cardH-12))}px`;
+    card.style.visibility='visible';
+    target.focus({preventScroll:true});
+  });
+}
+
+function tutorialMatches(kind,value) {
+  if(state.tutorialStep===null) return false;
+  const step=TUTORIAL_STEPS[state.tutorialStep];
+  return step&&step.kind===kind&&step.value===value;
+}
+
+function advanceTutorial(kind,value) {
+  if(tutorialMatches(kind,value)) state.tutorialStep=Math.min(TUTORIAL_STEPS.length-1,state.tutorialStep+1);
+}
+
 function render() {
   const views = {dashboard:dashboardView,animals:animalsView,animal:animalView,updates:updatesView,fosters:fostersView,publishing:publishingView,settings:settingsView,fosterform:fosterFormView,profilepreview:profilePreviewView};
   app.innerHTML = state.view==='fosterform'
-    ? `${fosterFormView()}${state.toast?`<div class="toast"><span>✓</span>${state.toast}</div>`:''}`
+    ? `${fosterFormView()}${state.tutorialStep!==null?renderTutorial():''}${state.toast?`<div class="toast"><span>✓</span>${state.toast}</div>`:''}`
     : layout((views[state.view] || dashboardView)());
   bind();
+  if(state.tutorialStep!==null) requestAnimationFrame(positionTutorial);
 }
 
 let toastTimer;
@@ -427,7 +506,7 @@ function openAnimal(id,tab='overview') { state.animalId=id; state.detailTab=tab;
 function genericPrepared(message='Prepared content opened') { toast(message); }
 
 function bind() {
-  document.querySelectorAll('[data-view]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();state.view=el.dataset.view;state.modal=null;state.drawer=null;if(el.dataset.setFilter)state.animalFilter=el.dataset.setFilter;render();}));
+  document.querySelectorAll('[data-view]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();const value=el.dataset.view;if(state.tutorialStep!==null&&!tutorialMatches('view',value))return;state.view=value;state.modal=null;state.drawer=null;if(el.dataset.setFilter)state.animalFilter=el.dataset.setFilter;advanceTutorial('view',value);render();}));
   document.querySelectorAll('[data-open-animal]').forEach(el=>el.addEventListener('click',e=>{if(e.target.closest('input,button'))return;openAnimal(el.dataset.openAnimal);}));
   document.querySelectorAll('[data-detail-tab]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();state.detailTab=el.dataset.detailTab;render();}));
   document.querySelectorAll('[data-animal-filter]').forEach(el=>el.addEventListener('click',()=>{state.animalFilter=el.dataset.animalFilter;render();}));
@@ -435,26 +514,30 @@ function bind() {
   document.querySelectorAll('[data-publish-filter]').forEach(el=>el.addEventListener('click',()=>{state.publishFilter=el.dataset.publishFilter;render();}));
   document.querySelectorAll('[data-select-update]').forEach(el=>el.addEventListener('click',()=>{state.selectedUpdate=el.dataset.selectUpdate;render();}));
   document.querySelectorAll('[data-settings-tab]').forEach(el=>el.addEventListener('click',()=>{state.settingsTab=el.dataset.settingsTab;render();}));
-  document.querySelectorAll('[data-message-channel]').forEach(el=>el.addEventListener('click',()=>{state.messageChannel=el.dataset.messageChannel;render();}));
+  document.querySelectorAll('[data-message-channel]').forEach(el=>el.addEventListener('click',()=>{const value=el.dataset.messageChannel;if(state.tutorialStep!==null&&!tutorialMatches('channel',value))return;state.messageChannel=value;advanceTutorial('channel',value);render();}));
   document.querySelectorAll('[data-filter-jump]').forEach(el=>el.addEventListener('click',()=>{const f=el.dataset.filterJump;if(f==='review'){state.view='updates';state.updateFilter='new';}else if(f==='published'){state.view='publishing';state.publishFilter='published';}else{state.view='animals';state.animalFilter=f==='new'?'all':f;}render();}));
   document.querySelectorAll('[data-channel]').forEach(el=>el.addEventListener('change',()=>{state.channels[el.dataset.channel]=el.checked;render();}));
   const search=document.querySelector('#global-search'); if(search){search.addEventListener('input',e=>{state.search=e.target.value;});search.addEventListener('keydown',e=>{if(e.key==='Enter'){state.view='animals';render();}});}
-  document.querySelectorAll('[data-action]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();handleAction(el.dataset.action,el);}));
+  document.querySelectorAll('[data-action]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();const action=el.dataset.action;const tutorialControl=['exit-tutorial','tutorial-next','finish-tutorial'].includes(action);if(state.tutorialStep!==null&&!tutorialControl&&!tutorialMatches('action',action))return;handleAction(action,el);}));
   document.querySelectorAll('[data-next-action]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();const id=el.dataset.nextAction;if(id==='milo'&&!state.updateApproved){state.selectedUpdate='milo';state.view='updates';}else if(id==='coco')openAnimal('coco');else if(id==='luna'){state.view='profilepreview';}else openAnimal(id);render();}));
   document.querySelectorAll('[data-publish-action]').forEach(el=>el.addEventListener('click',()=>{const id=el.dataset.publishAction;if(id==='milo'&&state.miloReady){state.animalId='milo';state.view='profilepreview';render();}else if(id==='luna'){state.animalId='luna';state.view='profilepreview';render();}else if(id==='daisy')toast('Adopt a Pet connection retried · status is syncing');else openAnimal(id);}));
   document.querySelectorAll('[data-exception]').forEach(el=>el.addEventListener('click',()=>{const x=el.dataset.exception;if(x==='assign'){state.modal='assign';render();}else{state.view=x;if(x==='animals')state.animalFilter='stale';render();}}));
   document.querySelectorAll('[data-row-menu],[data-foster-menu],[data-publish-menu]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();state.drawer='more';render();}));
-  document.querySelectorAll('[data-form-choice]').forEach(el=>el.addEventListener('click',()=>{document.querySelectorAll('[data-form-choice]').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');toast('Response saved automatically');}));
+  document.querySelectorAll('[data-form-choice]').forEach(el=>el.addEventListener('click',()=>{const value=el.dataset.formChoice;if(state.tutorialStep!==null&&!tutorialMatches('choice',value))return;document.querySelectorAll('[data-form-choice]').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');advanceTutorial('choice',value);state.toast='Response saved automatically';render();clearTimeout(toastTimer);toastTimer=setTimeout(()=>{state.toast='';render();},2300);}));
 }
 
 function handleAction(action, el) {
   const modalOpen = m => {state.modal=m;render();};
   const drawerOpen = d => {state.drawer=d;render();};
+  const shouldAdvance=tutorialMatches('action',action);
   switch(action) {
     case 'open-intake': state.intakeStep=1;state.modal='intake';render();break;
     case 'close-modal': state.modal=null;render();break;
     case 'close-drawer': state.drawer=null;render();break;
     case 'guide': drawerOpen('guide');break;
+    case 'exit-tutorial': state.tutorialStep=null;render();break;
+    case 'tutorial-next': state.tutorialStep=Math.min(TUTORIAL_STEPS.length-1,state.tutorialStep+1);render();break;
+    case 'finish-tutorial': state.tutorialStep=null;toast('Tutorial complete · foster update applied to Milo’s record');break;
     case 'notifications': drawerOpen('notifications');break;
     case 'reset-demo': modalOpen('confirm-reset');break;
     case 'confirm-reset': state=INITIAL();toast('Demo reset to its starting state');break;
@@ -468,7 +551,8 @@ function handleAction(action, el) {
     case 'preview-message': state.messageChannel='sms';drawerOpen('message-preview');break;
     case 'open-form-from-preview': state.drawer=null;state.modal=null;state.fosterSubmitted=false;state.uploads=0;state.view='fosterform';render();break;
     case 'send-request': state.requestSent=true;state.requestOpened=false;state.fosterSubmitted=false;state.modal=null;state.view='updates';toast('Secure update link sent to Jamie by email and SMS');break;
-    case 'preview-foster-form': case 'start-guide': state.drawer=null;state.fosterSubmitted=false;state.uploads=0;state.view=action==='start-guide'?'dashboard':'fosterform';if(action==='start-guide'){state.modal='intake';}render();break;
+    case 'preview-foster-form': state.drawer=null;state.fosterSubmitted=false;state.uploads=0;state.view='fosterform';render();break;
+    case 'start-guide': state=INITIAL();state.tutorialStep=0;render();break;
     case 'copy-link': navigator.clipboard?.writeText('https://petnow.link/milo-checkin');toast('Secure foster link copied');break;
     case 'foster-upload': state.uploads=3;toast('3 photos uploaded');break;
     case 'save-foster-draft': toast('Draft saved · Jamie can return from the same link');break;
@@ -510,6 +594,10 @@ function handleAction(action, el) {
     case 'new-placement': modalOpen('placement');break;
     default: genericPrepared(`${(el?.innerText||'Control').trim().split('\n')[0]} · prepared interaction opened`);
   }
+  if(shouldAdvance&&state.tutorialStep!==null){advanceTutorial('action',action);render();}
 }
+
+window.addEventListener('resize',()=>{if(state.tutorialStep!==null)positionTutorial();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.tutorialStep!==null){state.tutorialStep=null;render();}});
 
 render();
