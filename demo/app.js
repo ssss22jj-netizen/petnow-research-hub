@@ -44,10 +44,12 @@ let state = INITIAL(localStorage.getItem('petify-language') || 'en');
 const app = document.querySelector('#app');
 
 const BASE_ANIMALS = [
-  { id:'milo', name:'Milo', img:'assets/dog1.png', meta:'Labrador mix · Male · 2 years', stage:'In foster', readiness:'blocked', label:'Blocked', blocker:'Behavior update · 18 days old', next:'Review update', owner:'Alex Rivera', updated:'12 min ago' },
-  { id:'luna', name:'Luna', img:'assets/dog2.png', meta:'Terrier mix · Female · 1 year', stage:'In care', readiness:'ready', label:'Ready', blocker:'None', next:'Preview profile', owner:'Sam Chen', updated:'Today' },
-  { id:'buddy', name:'Buddy', img:'assets/dog3.png', meta:'Jindo mix · Male · 3 years', stage:'Needs review', readiness:'review', label:'Needs review', blocker:'Medical clearance', next:'Review record', owner:'Morgan Kim', updated:'Yesterday' },
-  { id:'daisy', name:'Daisy', img:'assets/dog4.png', meta:'Poodle mix · Female · 4 years', stage:'Published', readiness:'published', label:'Published', blocker:'None', next:'View live profile', owner:'Alex Rivera', updated:'Aug 7' }
+  { id:'pepper', name:'Pepper', img:'assets/dog4.png', meta:'Mixed breed · Female · 2 years', queue:'new', stage:'New intake', readiness:'neutral', label:'New intake', blocker:'Intake review', next:'Complete intake', owner:'Alex Rivera', updated:'Today' },
+  { id:'olive', name:'Olive', img:'assets/dog2.png', meta:'Terrier mix · Female · 5 years', queue:'care', stage:'In foster', readiness:'neutral', label:'In care', blocker:'None', next:'Open record', owner:'Sam Chen', updated:'Today' },
+  { id:'milo', name:'Milo', img:'assets/dog1.png', meta:'Labrador mix · Male · 2 years', queue:'review', stage:'Needs review', readiness:'review', label:'Needs review', blocker:'New behavior update', next:'Review update', owner:'Alex Rivera', updated:'12 min ago' },
+  { id:'luna', name:'Luna', img:'assets/dog2.png', meta:'Terrier mix · Female · 1 year', queue:'ready', stage:'Ready to publish', readiness:'ready', label:'Ready', blocker:'None', next:'Preview profile', owner:'Sam Chen', updated:'Today' },
+  { id:'buddy', name:'Buddy', img:'assets/dog3.png', meta:'Jindo mix · Male · 3 years', queue:'review', stage:'Needs review', readiness:'review', label:'Needs review', blocker:'Medical clearance', next:'Review record', owner:'Morgan Kim', updated:'Yesterday' },
+  { id:'daisy', name:'Daisy', img:'assets/dog4.png', meta:'Poodle mix · Female · 4 years', queue:'published', stage:'Published', readiness:'published', label:'Published', blocker:'None', next:'View live profile', owner:'Alex Rivera', updated:'Aug 7' }
 ];
 
 const NAV = [
@@ -158,7 +160,7 @@ const KO_TUTORIALS = {
 
 const KO_UI = {
   'Petify for Shelters':'쉘터용 Petify','Dashboard':'대시보드','Animals':'동물','Updates':'업데이트','Fosters':'임보자','Publishing':'게시','Settings':'설정','Reset demo':'데모 초기화','Administrator':'관리자','Search animals, fosters, or records':'동물, 임보자 또는 기록 검색','Search':'검색','Demo tours':'데모 튜토리얼','Notifications':'알림','Add animal':'동물 추가','Language':'언어 선택',
-  'SUNDAY, AUGUST 9':'8월 9일 일요일','Good morning, Alex':'좋은 아침이에요, Alex','Here is what needs attention across your shelter today.':'오늘 쉘터에서 확인해야 할 업무입니다.','Export report':'보고서 내보내기','New intake':'신규 입소','In care':'보호 중','Needs review':'검토 필요','Ready to publish':'게시 준비 완료','Published':'게시 완료','Shelter website':'쉘터 웹사이트','Updates waiting':'대기 중인 업데이트','Milo is now ready':'Milo 게시 준비 완료','3 ready this week':'이번 주 3마리 준비 완료','6 in foster homes':'6마리 임보 중','+1 this week':'이번 주 +1','EXCEPTIONS':'확인 필요','Needs your attention':'확인이 필요한 항목','View all':'전체 보기','4 foster updates are overdue':'임보 업데이트 4건 기한 초과','Oldest request is 5 days late':'가장 오래된 요청은 5일 지연','Open overdue requests':'기한 초과 요청 열기','3 animals have outdated information':'동물 3마리의 정보가 오래됨','1 animal has outdated information':'동물 1마리의 정보가 오래됨','Behavior or health details are older than 14 days':'행동 또는 건강 정보가 14일 이상 지남','View blocked animals':'차단된 동물 보기','2 profiles are ready to publish':'프로필 2건 게시 준비 완료','Shelter website publishing is available':'쉘터 웹사이트에 게시 가능','Open publishing queue':'게시 대기열 열기','2 blockers have no owner':'차단 항목 2건의 담당자 없음','Assign the next action to a teammate':'다음 행동을 팀원에게 배정','Assign owners':'담당자 배정','LIVE ACTIVITY':'최근 활동','Recent changes':'최근 변경','Milo became ready to publish':'Milo 게시 준비 완료','Jamie submitted an update for Milo':'Jamie가 Milo 업데이트 제출','Behavior update approved by Alex':'Alex가 행동 업데이트 승인','Behavior changes · 3 new photos':'행동 변화 · 새 사진 3장','Luna’s profile is ready':'Luna 프로필 준비 완료','All 5 readiness sections complete':'준비 항목 5개 모두 완료','Medical clearance added for Buddy':'Buddy 의료 확인 추가','Submitted by Morgan Kim':'Morgan Kim 제출','Daisy published to shelter website':'Daisy 쉘터 웹사이트 게시 완료','Published by Alex Rivera':'Alex Rivera 게시','Open full activity log':'전체 활동 기록 열기','QUICK START':'빠른 실행','Move work forward':'다음 업무 진행','Create a record':'레코드 생성','Review updates':'업데이트 검토','Resolve blockers':'차단 항목 해결','Publish profiles':'프로필 게시','2 waiting':'2건 대기','8 animals':'동물 8마리','12 ready':'12마리 준비 완료',
+  'SUNDAY, AUGUST 9':'8월 9일 일요일','Good morning, Alex':'좋은 아침이에요, Alex','Here is what needs attention across your shelter today.':'오늘 쉘터에서 확인해야 할 업무입니다.','Export report':'보고서 내보내기','New intake':'신규 입소','In care':'보호 중','Needs review':'검토 필요','Ready to publish':'게시 준비 완료','Published':'게시 완료','Shelter website':'쉘터 웹사이트','Updates waiting':'대기 중인 업데이트','Milo is now ready':'Milo 게시 준비 완료','3 ready this week':'이번 주 3마리 준비 완료','6 in foster homes':'6마리 임보 중','+1 this week':'이번 주 +1','ANIMAL WORKFLOW STATUS':'동물 업무 상태','Each animal appears in one status queue. Select a card to open the matching list.':'각 동물은 하나의 상태 목록에만 포함됩니다. 카드를 누르면 해당 목록이 열립니다.','Animal records':'동물 레코드','ANIMALS NEEDING ATTENTION':'확인이 필요한 동물','Review the animal, reason, and next action':'동물별 사유와 다음 행동 확인','New behavior update needs review':'새 행동 업데이트 검토 필요','Jamie Lee · Submitted 12 min ago':'Jamie Lee · 12분 전 제출','Review Milo':'Milo 검토','Medical clearance needs review':'의료 확인 검토 필요','Morgan Kim · Updated yesterday':'Morgan Kim · 어제 업데이트','Review Buddy':'Buddy 검토','Profile ready to publish':'프로필 게시 준비 완료','Open Luna':'Luna 열기','Open Milo':'Milo 열기','EXCEPTIONS':'확인 필요','Needs your attention':'확인이 필요한 항목','View all':'전체 보기','4 foster updates are overdue':'임보 업데이트 4건 기한 초과','Oldest request is 5 days late':'가장 오래된 요청은 5일 지연','Open overdue requests':'기한 초과 요청 열기','3 animals have outdated information':'동물 3마리의 정보가 오래됨','1 animal has outdated information':'동물 1마리의 정보가 오래됨','Behavior or health details are older than 14 days':'행동 또는 건강 정보가 14일 이상 지남','View blocked animals':'차단된 동물 보기','2 profiles are ready to publish':'프로필 2건 게시 준비 완료','Shelter website publishing is available':'쉘터 웹사이트에 게시 가능','Open publishing queue':'게시 대기열 열기','2 blockers have no owner':'차단 항목 2건의 담당자 없음','Assign the next action to a teammate':'다음 행동을 팀원에게 배정','Assign owners':'담당자 배정','LIVE ACTIVITY':'최근 활동','Recent changes':'최근 변경','Milo became ready to publish':'Milo 게시 준비 완료','Jamie submitted an update for Milo':'Jamie가 Milo 업데이트 제출','Behavior update approved by Alex':'Alex가 행동 업데이트 승인','Behavior changes · 3 new photos':'행동 변화 · 새 사진 3장','Luna’s profile is ready':'Luna 프로필 준비 완료','All 5 readiness sections complete':'준비 항목 5개 모두 완료','Medical clearance added for Buddy':'Buddy 의료 확인 추가','Submitted by Morgan Kim':'Morgan Kim 제출','Daisy published to shelter website':'Daisy 쉘터 웹사이트 게시 완료','Published by Alex Rivera':'Alex Rivera 게시','Open full activity log':'전체 활동 기록 열기','QUICK START':'빠른 실행','Move work forward':'다음 업무 진행','Create a record':'레코드 생성','Review updates':'업데이트 검토','Review animal records':'동물 레코드 검토','Resolve blockers':'차단 항목 해결','Publish profiles':'프로필 게시','2 waiting':'2건 대기','8 animals':'동물 8마리','12 ready':'12마리 준비 완료','Dashboard and list counts use the same animal status.':'대시보드와 목록이 동일한 동물 상태 기준을 사용합니다.',
   'ANIMAL WORKSPACE':'동물 업무 공간','See who is ready, what is missing, and the next action for every animal.':'준비된 동물, 누락 정보, 다음 행동을 한눈에 확인합니다.','Bulk actions':'일괄 작업','All':'전체','Ready':'준비 완료','Blocked':'차단됨','Filters':'필터','Columns':'열 설정','Save view':'보기 저장','Animal':'동물','Stage':'단계','Readiness':'준비 상태','Primary blocker':'주요 차단 사유','Next action':'다음 행동','Owner':'담당자','Updated':'업데이트','No animals found':'동물을 찾지 못했습니다','Try a different search or filter.':'다른 검색어나 필터를 사용해보세요.','Clear filters':'필터 초기화','In foster':'임보 중','In care':'보호 중','None':'없음','Review update':'업데이트 검토','Review record':'레코드 검토','Preview profile':'프로필 미리보기','View live profile':'게시 프로필 보기','Medical clearance':'의료 확인','New behavior update':'새 행동 업데이트','Today':'오늘','Yesterday':'어제','Just now':'방금 전','Male':'수컷','Female':'암컷','Unknown':'알 수 없음','Mixed breed':'믹스견','Labrador mix · Male · 2 years':'래브라도 믹스 · 수컷 · 2살','Terrier mix · Female · 1 year':'테리어 믹스 · 암컷 · 1살','Jindo mix · Male · 3 years':'진도 믹스 · 수컷 · 3살','Poodle mix · Female · 4 years':'푸들 믹스 · 암컷 · 4살','Mixed breed · Female · 2 years':'믹스견 · 암컷 · 2살',
   'CURRENT READINESS':'현재 준비 상태','Ready now':'현재 준비 완료','Due today':'오늘 마감','Action required':'조치 필요','All required information is complete and current.':'필수 정보가 모두 완료됐으며 최신 상태입니다.','Jamie’s submission may resolve the final blocker. Review it before the record changes.':'Jamie의 제출 내용으로 마지막 차단 항목이 해소될 수 있습니다. 레코드 변경 전 검토하세요.','Behavior information is outdated':'행동 정보가 오래되었습니다','Review Jamie’s update':'Jamie 업데이트 검토','Request behavior update':'행동 업데이트 요청','Open profile':'프로필 열기','Review submission':'제출 내용 검토','Send request':'요청 보내기','READINESS CHECKLIST':'준비 체크리스트','Health':'건강','Behavior':'행동','Media':'미디어','Documents':'문서','Public profile':'공개 프로필','RECENT ACTIVITY':'최근 활동','ANIMAL RECORD':'동물 레코드','Overview':'개요','Profile':'프로필','Foster updates':'임보 업데이트','Activity':'활동','Edit':'수정','Save profile':'프로필 저장','Draft autosaved a moment ago':'초안이 방금 자동 저장됨','All changes saved':'모든 변경사항 저장됨','About Milo':'Milo 소개','Internal notes are never included in the public profile.':'내부 메모는 공개 프로필에 포함되지 않습니다.','Public name':'공개 이름','Headline':'한 줄 소개','Adoption listing':'입양 소개','Adoption contact':'입양 문의','Best home':'적합한 가정','Adults or older children':'성인 또는 연령대가 높은 자녀가 있는 가정','MEDIA LIBRARY':'미디어 라이브러리','Choose which assets can appear on public adoption profiles.':'공개 입양 프로필에 사용할 사진을 선택합니다.','Cover photo':'대표 사진','Foster upload':'임보자 업로드','Public use':'공개 사용','Public media':'공개 미디어','Upload':'업로드','Add entry':'항목 추가','AUDIT TRAIL':'변경 이력','Requests, approvals, state changes, and publishing events.':'요청, 승인, 상태 변경, 게시 이력을 확인합니다.',
   'FOSTER UPDATES':'임보 업데이트','Requests and submissions':'요청 및 제출','Track every request, reminder, response, and review in one place.':'요청, 리마인드, 응답, 검토를 한곳에서 관리합니다.','Request update':'업데이트 요청','Overdue':'기한 초과','Sent':'발송됨','In progress':'진행 중','Changes requested':'보완 요청','Approved':'승인됨','Latest changes':'최근 변경','CURRENT APPROVED RECORD':'현재 승인된 기록','NEW FOSTER SUBMISSION':'새 임보자 제출','APPROVED FOSTER UPDATE':'승인된 임보 업데이트','Approve this change':'변경 승인','Approve selected':'선택 항목 승인','Approve all & update record':'전체 승인 및 레코드 반영','Request changes':'보완 요청','Reject':'거절','View history':'이력 보기','How review works':'검토 방식 보기','View request':'요청 보기','View audit trail':'변경 이력 보기','Comfort around dogs':'다른 개와의 편안함','Needs slow introductions. Avoid crowded play groups.':'천천히 소개해야 합니다. 붐비는 놀이 그룹은 피하세요.','Relaxed with two resident dogs and has started initiating play.':'함께 사는 개 두 마리와 편안하게 지내며 먼저 놀이를 시작했습니다.','Confirmed 18 days ago':'18일 전 확인','Submitted today by Jamie':'오늘 Jamie 제출','Behavior changed':'행동 변화','1 meaningful change detected':'의미 있는 변경 1건 감지','Compare the approved behavior record with Jamie’s new observation before applying it.':'반영 전 승인된 행동 기록과 Jamie의 새 관찰을 비교하세요.','3 photos attached':'사진 3장 첨부',
@@ -185,8 +187,13 @@ function translateText(value) {
     const rules=[
       [/^STEP (\d+) OF (\d+)$/,(_,a,b)=>`${a} / ${b}단계`],
       [/^Step (\d+) of 3$/,(_,a)=>`3단계 중 ${a}단계`],
-      [/^(All|Ready|Blocked|Needs review|Published) (\d+)$/,(_,a,b)=>`${KO_UI[a]||a} ${b}`],
+      [/^(All|New intake|In care|Ready|Ready to publish|Blocked|Needs review|Published) (\d+)$/,(_,a,b)=>`${KO_UI[a]||a} ${b}`],
+      [/^(\d+) animals$/,(_,a)=>`동물 ${a}마리`],
+      [/^(\d+) ready$/,(_,a)=>`준비 완료 ${a}마리`],
+      [/^(\d+) submission$/,(_,a)=>`제출 ${a}건`],
       [/^(\d+) of (\d+) animals$/,(_,a,b)=>`동물 ${b}마리 중 ${a}마리`],
+      [/^(\d+) named demo records · (\d+) animals total$/,(_,a,b)=>`전체 동물 ${b}마리 · 이름이 표시된 데모 레코드 ${a}건`],
+      [/^(\d+) matching named demo records$/,(_,a)=>`검색과 일치하는 데모 레코드 ${a}건`],
       [/^(\d+) of 5 sections complete$/,(_,a)=>`5개 항목 중 ${a}개 완료`],
       [/^(\d+) min ago$/,(_,a)=>`${a}분 전`],
       [/^(\d+) minutes ago$/,(_,a)=>`${a}분 전`],
@@ -249,18 +256,46 @@ function animals() {
   const list = BASE_ANIMALS.map(a => ({...a}));
   const milo = list.find(a => a.id === 'milo');
   if (state.updateApproved || state.miloReady) {
-    Object.assign(milo, {stage:'Ready to publish', readiness:'ready', label:'Ready', blocker:'None', next:'Preview profile', updated:'Just now'});
+    Object.assign(milo, {queue:'ready', stage:'Ready to publish', readiness:'ready', label:'Ready', blocker:'None', next:'Preview profile', updated:'Just now'});
   } else if (state.fosterSubmitted) {
-    Object.assign(milo, {stage:'Needs review', readiness:'review', label:'Needs review', blocker:'New behavior update', next:'Review update'});
+    Object.assign(milo, {queue:'review', stage:'Needs review', readiness:'review', label:'Needs review', blocker:'New behavior update', next:'Review update'});
+  } else {
+    Object.assign(milo, {queue:'care', stage:'In foster', readiness:'neutral', label:'In care', blocker:'Behavior update · 18 days old', next:'Request update'});
   }
-  if (state.published) Object.assign(milo, {stage:'Published', readiness:'published', label:'Published', next:'View live profile', updated:'Just now'});
+  if (state.published) Object.assign(milo, {queue:'published', stage:'Published', readiness:'published', label:'Published', next:'View live profile', updated:'Just now'});
   if (state.cocoCreated) list.unshift({
     id:'coco', name:'Coco', img:'assets/dog4.png', meta:'Mixed breed · Female · 2 years',
-    stage:state.cocoPlaced?'In foster':'New intake', readiness:'blocked', label:'Blocked',
+    queue:state.cocoPlaced?'care':'new', stage:state.cocoPlaced?'In foster':'New intake', readiness:'neutral', label:state.cocoPlaced?'In care':'New intake',
     blocker:state.cocoPlaced?'Health, behavior, profile':'Foster placement + 4 items',
     next:state.cocoPlaced?'Request first update':'Place in foster', owner:'Alex Rivera', updated:'Just now'
   });
   return list;
+}
+
+function animalQueueTotals() {
+  const miloIsPublished=state.published;
+  const miloIsReady=(state.updateApproved||state.miloReady)&&!miloIsPublished;
+  const miloNeedsReview=state.fosterSubmitted&&!state.updateApproved&&!state.miloReady&&!miloIsPublished;
+  return {
+    new:3+(state.cocoCreated&&!state.cocoPlaced?1:0),
+    care:28+(state.cocoPlaced?1:0)+(!state.fosterSubmitted&&!miloIsReady&&!miloIsPublished?1:0),
+    review:1+(miloNeedsReview?1:0),
+    ready:12+(miloIsReady?1:0),
+    published:24+(miloIsPublished?1:0)
+  };
+}
+
+function animalQueueLabel(queue) {
+  return {new:'New intake',care:'In care',review:'Needs review',ready:'Ready to publish',published:'Published'}[queue]||'All';
+}
+
+function placeholderAnimalRow(queue,index) {
+  const label=animalQueueLabel(queue);
+  return `<tr class="placeholder-row" aria-label="Additional ${label.toLowerCase()} animal record">
+    <td><span class="skeleton-check"></span></td>
+    <td><div class="animal-cell skeleton-animal"><span class="skeleton-avatar"></span><span><i class="skeleton-line wide"></i><i class="skeleton-line medium"></i></span></div></td>
+    <td><i class="skeleton-line short"></i></td><td><span class="skeleton-pill"></span></td><td><i class="skeleton-line medium"></i></td><td><i class="skeleton-line short"></i></td><td><i class="skeleton-line medium"></i></td><td><i class="skeleton-line short"></i></td><td><span class="skeleton-dot">•••</span></td>
+  </tr>`;
 }
 
 function currentAnimal() { return animals().find(a => a.id === state.animalId) || animals()[0]; }
@@ -311,24 +346,25 @@ function pageHeader(kicker, title, description, actions='') {
 }
 
 function dashboardView() {
+  const totals=animalQueueTotals();
   const stats = [
-    ['New intake', state.cocoCreated?'4':'3', '+1 this week', 'new'],
-    ['In care', '28', '6 in foster homes', 'care'],
-    ['Needs review', state.updateApproved?'1':'2', 'Updates waiting', 'review'],
-    ['Ready to publish', state.miloReady?'13':'12', state.miloReady?'Milo is now ready':'3 ready this week', 'ready'],
-    ['Published', state.published?'25':'24', 'Shelter website', 'published']
+    ['New intake', totals.new, 'Animal records', 'new'],
+    ['In care', totals.care, '6 in foster homes', 'care'],
+    ['Needs review', totals.review, 'Animal records', 'review'],
+    ['Ready to publish', totals.ready, state.miloReady&&!state.published?'Milo is now ready':'3 ready this week', 'ready'],
+    ['Published', totals.published, 'Shelter website', 'published']
   ];
   return `<section class="content">
     ${pageHeader('SUNDAY, AUGUST 9','Good morning, Alex','Here is what needs attention across your shelter today.',`<button class="secondary-button" data-action="export-report">Export report</button><button class="primary-button" data-action="open-intake">＋ Add animal</button>`)}
+    <div class="metric-context"><span>ANIMAL WORKFLOW STATUS</span><small>Each animal appears in one status queue. Select a card to open the matching list.</small></div>
     <div class="metric-grid five">${stats.map(([label,num,note,type]) => `<button class="metric-card ${type}" data-filter-jump="${type}"><span class="metric-icon"></span><span><b>${label}</b>${formatCount(num)}<small>${note}</small></span><i>›</i></button>`).join('')}</div>
     <div class="dashboard-grid">
       <section class="surface attention-card">
-        <div class="section-head"><div><p class="kicker">EXCEPTIONS</p><h2>Needs your attention</h2></div><button class="text-button" data-view="animals">View all <span>›</span></button></div>
+        <div class="section-head"><div><p class="kicker">ANIMALS NEEDING ATTENTION</p><h2>Review the animal, reason, and next action</h2></div><button class="text-button" data-view="animals" data-set-filter="review">View all <span>›</span></button></div>
         <div class="exception-list">
-          ${exceptionRow('overdue','!','4 foster updates are overdue','Oldest request is 5 days late','Open overdue requests','updates')}
-          ${exceptionRow('stale','↻',state.updateApproved?'1 animal has outdated information':'3 animals have outdated information','Behavior or health details are older than 14 days','View blocked animals','animals')}
-          ${exceptionRow('publish','↑','2 profiles are ready to publish','Shelter website publishing is available','Open publishing queue','publishing')}
-          ${exceptionRow('owner','＋','2 blockers have no owner','Assign the next action to a teammate','Assign owners','assign')}
+          ${!state.updateApproved&&!state.published?attentionAnimalRow('milo','assets/dog1.png','Milo','New behavior update needs review','Jamie Lee · Submitted 12 min ago','Review Milo'):attentionAnimalRow('milo','assets/dog1.png','Milo',state.published?'Profile published':'Ready to publish','All readiness requirements complete','Open Milo')}
+          ${attentionAnimalRow('buddy','assets/dog3.png','Buddy','Medical clearance needs review','Morgan Kim · Updated yesterday','Review Buddy')}
+          ${attentionAnimalRow('luna','assets/dog2.png','Luna','Profile ready to publish','All 5 readiness sections complete','Open Luna')}
         </div>
       </section>
       <section class="surface activity-card">
@@ -345,38 +381,44 @@ function dashboardView() {
     <section class="surface quick-actions">
       <div><p class="kicker">QUICK START</p><h2>Move work forward</h2></div>
       <button data-action="open-intake"><span>＋</span><b>New intake</b><small>Create a record</small></button>
-      <button data-view="updates"><span>✓</span><b>Review updates</b><small>2 waiting</small></button>
-      <button data-view="animals" data-set-filter="blocked"><span>!</span><b>Resolve blockers</b><small>8 animals</small></button>
-      <button data-view="publishing"><span>↑</span><b>Publish profiles</b><small>12 ready</small></button>
+      <button data-view="updates"><span>✓</span><b>Review updates</b><small>${state.updateApproved?'0':'1'} submission</small></button>
+      <button data-view="animals" data-set-filter="review"><span>!</span><b>Review animal records</b><small>${totals.review} animals</small></button>
+      <button data-view="animals" data-set-filter="ready"><span>↑</span><b>Publish profiles</b><small>${totals.ready} ready</small></button>
     </section>
   </section>`;
 }
 
-function exceptionRow(type, icon, title, note, action, target) {
-  return `<div class="exception-row ${state.exceptionDone && type==='owner'?'done':''}"><span class="exception-icon ${type}">${state.exceptionDone&&type==='owner'?'✓':icon}</span><div><b>${state.exceptionDone&&type==='owner'?'Owners assigned':title}</b><small>${state.exceptionDone&&type==='owner'?'Alex and Morgan were notified':note}</small></div><button data-exception="${target}">${state.exceptionDone&&type==='owner'?'View assignments':action} <span>›</span></button></div>`;
+function attentionAnimalRow(id,img,name,title,note,action) {
+  return `<div class="exception-row animal-attention"><img src="${img}" alt="${name}"><div><b>${name} · ${title}</b><small>${note}</small></div><button data-attention-animal="${id}">${action} <span>›</span></button></div>`;
 }
 function activityItem(img,title,note,time) { return `<button class="activity-item" data-action="activity-item"><img src="${img}" alt=""><span><b>${title}</b><small>${note}</small></span><time>${time}</time></button>`; }
 
 function animalsView() {
-  let list = animals();
+  const realAnimals=animals();
+  const counts=animalQueueTotals();
+  const totalAnimals=Object.values(counts).reduce((sum,count)=>sum+count,0);
+  let list=state.animalFilter==='all'?realAnimals:realAnimals.filter(a=>a.queue===state.animalFilter);
   if (state.search) list = list.filter(a => `${a.name} ${a.meta} ${a.owner}`.toLowerCase().includes(state.search.toLowerCase()));
-  if (state.animalFilter !== 'all') list = list.filter(a => {
-    if (state.animalFilter==='stale') return a.id==='milo' && !state.updateApproved;
-    return a.readiness===state.animalFilter || a.stage.toLowerCase().includes(state.animalFilter);
-  });
-  const counts = {all:animals().length,ready:animals().filter(a=>a.readiness==='ready').length,blocked:animals().filter(a=>a.readiness==='blocked').length,review:animals().filter(a=>a.readiness==='review').length};
+  const targetCount=state.animalFilter==='all'?totalAnimals:counts[state.animalFilter];
+  const placeholderCount=state.search||state.animalFilter==='all'?0:Math.max(0,targetCount-list.length);
+  const rows=[...list,...Array.from({length:placeholderCount},(_,index)=>({placeholder:true,queue:state.animalFilter,index}))];
+  const footerText=state.search
+    ? `${list.length} matching named demo records`
+    : state.animalFilter==='all'
+      ? `${realAnimals.length} named demo records · ${totalAnimals} animals total`
+      : `${targetCount} of ${targetCount} animals`;
   return `<section class="content">
     ${pageHeader('ANIMAL WORKSPACE','Animals','See who is ready, what is missing, and the next action for every animal.',`<button class="secondary-button" data-action="bulk-actions">Bulk actions</button><button class="primary-button" data-action="open-intake">＋ Add animal</button>`)}
     <section class="surface table-surface">
       <div class="table-toolbar">
-        <div class="filter-tabs">${[['all',`All ${counts.all}`],['ready',`Ready ${counts.ready}`],['blocked',`Blocked ${counts.blocked}`],['review',`Needs review ${counts.review}`],['published','Published 1']].map(([id,label])=>`<button class="${state.animalFilter===id?'active':''}" data-animal-filter="${id}">${label}</button>`).join('')}</div>
-        <div class="toolbar-actions"><button class="filter-button" data-action="filters">☷ Filters <span>2</span></button><button class="filter-button" data-action="columns">▤ Columns</button></div>
+        <div class="filter-tabs">${[['all',`All ${totalAnimals}`],['new',`New intake ${counts.new}`],['care',`In care ${counts.care}`],['review',`Needs review ${counts.review}`],['ready',`Ready to publish ${counts.ready}`],['published',`Published ${counts.published}`]].map(([id,label])=>`<button class="${state.animalFilter===id?'active':''}" data-animal-filter="${id}">${label}</button>`).join('')}</div>
+        <div class="toolbar-actions"><button class="filter-button" data-action="filters">☷ Filters ${state.animalFilter==='all'?'':'<span>1</span>'}</button><button class="filter-button" data-action="columns">▤ Columns</button></div>
       </div>
-      <div class="active-filters ${state.animalFilter==='all'?'hidden':''}"><span>Showing: ${state.animalFilter}<button data-animal-filter="all">×</button></span><button data-action="save-view">Save view</button></div>
+      <div class="active-filters ${state.animalFilter==='all'?'hidden':''}"><span>Showing: ${animalQueueLabel(state.animalFilter)}<button data-animal-filter="all">×</button></span><small>Dashboard and list counts use the same animal status.</small><button data-action="save-view">Save view</button></div>
       <div class="table-wrap"><table><thead><tr><th><input type="checkbox" data-action="select-all" aria-label="Select all"></th><th>Animal</th><th>Stage</th><th>Readiness</th><th>Primary blocker</th><th>Next action</th><th>Owner</th><th>Updated</th><th></th></tr></thead><tbody>
-        ${list.length ? list.map(animalRow).join('') : `<tr><td colspan="9"><div class="empty"><span>⌕</span><h3>No animals found</h3><p>Try a different search or filter.</p><button class="secondary-button" data-action="clear-search">Clear filters</button></div></td></tr>`}
+        ${rows.length ? rows.map(a=>a.placeholder?placeholderAnimalRow(a.queue,a.index):animalRow(a)).join('') : `<tr><td colspan="9"><div class="empty"><span>⌕</span><h3>No animals found</h3><p>Try a different search or filter.</p><button class="secondary-button" data-action="clear-search">Clear filters</button></div></td></tr>`}
       </tbody></table></div>
-      <div class="table-footer"><span>${list.length} of ${animals().length} animals</span><div><button data-action="prev-page">‹</button><b>1</b><button data-action="next-page">›</button></div></div>
+      <div class="table-footer"><span>${footerText}</span><div><button data-action="prev-page">‹</button><b>1</b><button data-action="next-page">›</button></div></div>
     </section>
   </section>`;
 }
@@ -707,13 +749,13 @@ function bind() {
   document.querySelectorAll('[data-select-update]').forEach(el=>el.addEventListener('click',()=>{state.selectedUpdate=el.dataset.selectUpdate;render();}));
   document.querySelectorAll('[data-settings-tab]').forEach(el=>el.addEventListener('click',()=>{state.settingsTab=el.dataset.settingsTab;render();}));
   document.querySelectorAll('[data-message-channel]').forEach(el=>el.addEventListener('click',()=>{const value=el.dataset.messageChannel;if(state.tutorialStep!==null&&!tutorialMatches('channel',value))return;state.messageChannel=value;advanceTutorial('channel',value);render();}));
-  document.querySelectorAll('[data-filter-jump]').forEach(el=>el.addEventListener('click',()=>{const f=el.dataset.filterJump;if(f==='review'){state.view='updates';state.updateFilter='new';}else if(f==='published'){state.view='publishing';state.publishFilter='published';}else{state.view='animals';state.animalFilter=f==='new'?'all':f;}render();}));
+  document.querySelectorAll('[data-filter-jump]').forEach(el=>el.addEventListener('click',()=>{state.view='animals';state.animalFilter=el.dataset.filterJump;state.search='';render();}));
+  document.querySelectorAll('[data-attention-animal]').forEach(el=>el.addEventListener('click',()=>{openAnimal(el.dataset.attentionAnimal);}));
   document.querySelectorAll('[data-channel]').forEach(el=>el.addEventListener('change',()=>{state.channels[el.dataset.channel]=el.checked;render();}));
   const search=document.querySelector('#global-search'); if(search){search.addEventListener('input',e=>{state.search=e.target.value;});search.addEventListener('keydown',e=>{if(e.key==='Enter'){state.view='animals';render();}});}
   document.querySelectorAll('[data-action]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();const action=el.dataset.action;const tutorialControl=['exit-tutorial','tutorial-next','finish-tutorial','tutorial-target'].includes(action);if(state.tutorialStep!==null&&!tutorialControl&&!tutorialMatches('action',action))return;handleAction(action,el);}));
   document.querySelectorAll('[data-next-action]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();const id=el.dataset.nextAction;if(id==='milo'&&!state.updateApproved){state.selectedUpdate='milo';state.view='updates';}else if(id==='coco')openAnimal('coco');else if(id==='luna'){state.view='profilepreview';}else openAnimal(id);render();}));
   document.querySelectorAll('[data-publish-action]').forEach(el=>el.addEventListener('click',()=>{const id=el.dataset.publishAction;if(id==='milo'&&state.miloReady){state.animalId='milo';state.view='profilepreview';render();}else if(id==='luna'||id==='daisy'){state.animalId=id;state.view='profilepreview';render();}else openAnimal(id);}));
-  document.querySelectorAll('[data-exception]').forEach(el=>el.addEventListener('click',()=>{const x=el.dataset.exception;if(x==='assign'){state.modal='assign';render();}else{state.view=x;if(x==='animals')state.animalFilter='stale';render();}}));
   document.querySelectorAll('[data-row-menu],[data-foster-menu],[data-publish-menu]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();state.drawer='more';render();}));
   document.querySelectorAll('[data-form-choice]').forEach(el=>el.addEventListener('click',()=>{const value=el.dataset.formChoice;if(state.tutorialStep!==null&&!tutorialMatches('choice',value))return;document.querySelectorAll('[data-form-choice]').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');advanceTutorial('choice',value);state.toast='Response saved automatically';render();clearTimeout(toastTimer);toastTimer=setTimeout(()=>{state.toast='';render();},2300);}));
 }
@@ -768,7 +810,7 @@ function handleAction(action, el) {
     case 'assign-task': case 'assign': modalOpen('assign');break;
     case 'confirm-assign': state.taskAssigned=true;state.exceptionDone=true;state.modal=null;toast('Task assigned to Morgan Kim');break;
     case 'filters': modalOpen('filters');break;
-    case 'apply-filters': state.animalFilter='stale';state.modal=null;toast('2 filters applied');break;
+    case 'apply-filters': state.animalFilter='review';state.modal=null;toast('2 filters applied');break;
     case 'clear-filters': state.animalFilter='all';state.modal=null;render();break;
     case 'clear-search': state.search='';state.animalFilter='all';render();break;
     case 'save-settings': state.settingsSaved=true;toast('Workspace settings saved');break;
