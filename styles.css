@@ -221,6 +221,15 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .toc-link.toc-sub { padding-left: 18px; font-size: 11px; }
 .markdown-body h2, .markdown-body h3 { scroll-margin-top: 92px; }
 
+.markdown-body .markdown-appendix { margin-top: 52px; padding: 20px 22px 12px; border: 1px solid #e4eae6; border-radius: 14px; background: #f7f9f8; color: #6c7771; font-size: 13px; line-height: 1.65; }
+.markdown-body .markdown-appendix > h2 { margin: 0 0 14px; padding: 0; border: 0; color: #59655f; font-size: 18px; }
+.markdown-body .markdown-appendix h3 { margin: 22px 0 8px; color: #65716b; font-size: 14px; }
+.markdown-body .markdown-appendix table { margin: 12px 0 18px; background: rgba(255,255,255,.62); font-size: 11px; }
+.markdown-body .markdown-appendix th,
+.markdown-body .markdown-appendix td { min-width: 96px; padding: 8px 9px; border-color: #e2e8e4; }
+.markdown-body .markdown-appendix th { background: #eef2f0; color: #5e6a64; }
+.markdown-body .markdown-appendix strong { color: #55625c; }
+
 /* Track 2 LMF 기획안: 원본 아티팩트의 도식 구조를 사이트 팔레트로 재현 */
 .track2-plan { padding-top: 0; }
 .track2-plan .document-header { margin: 0 -40px; padding: 34px 40px 24px; background: #f6faf7; }
@@ -387,6 +396,7 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
   .doc-row { grid-template-columns: 1fr 22px; }
   .doc-path { display: none; }
   .document { padding: 24px 18px; border-radius: 14px; }
+  .markdown-body .markdown-appendix { margin: 42px -4px 0; padding: 16px 14px 8px; }
   .track2-plan .document-header { margin: 0 -18px; padding: 26px 18px 20px; }
   .track2-plan .track2-hero { margin: 0 -18px; padding: 18px 18px 6px; }
   .track2-plan .track2-section > ul,
