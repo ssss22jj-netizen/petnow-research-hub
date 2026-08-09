@@ -38,23 +38,6 @@ Petstablished와 Shelterluv를 직접 경쟁사로, Pawlytics를 상대적 UX �
 | Shelterluv | 인테이크부터 입양·결제·게시까지 폭넓게 지원 | 자주 하는 업무를 필요한 정보만 입력해 적은 화면 이동으로 완료 |
 | Pawlytics | 리뷰상 학습이 쉽고 정보를 한곳에서 관리 | 모바일에서도 상태 변경과 담당자 인계를 중단 없이 완료 |
 
-## 3. 해석 한계
-
-- 고객 인터뷰는 지나 1명이며 KK9R의 Petstablished·크로스보더 운영 맥락이 포함됨
-- Shelterluv와 Pawlytics 워크스루는 특정 계정 설정과 테스트 과업의 결과임
-- Petstablished는 실제 운영 계정에서 테스트 레코드를 생성했으나 전체 T1 완료시간은 측정하지 않음
-- ICE 점수는 현재 확보 근거를 비교하기 위한 내부 우선순위이며 시장 규모·발생률·지불의향을 나타내지 않음
-- 광고 반응은 문제와 가치약속의 상대적 반응을 보여주며, 구매 의향은 후속 데모 콜과 실제 행동으로 별도 확인해야 함
-
-## 4. 근거 문서
-
-- [Track 2 ICP·퍼소나·소재 정의 배경 및 근거](Track2_ICP_Persona_소재_정의_근거_20260805.md)
-- [경쟁사 데모 제품 UI·UX 통합분석](../analysis/경쟁사_데모_UIUX_통합분석.md)
-- [Pawlytics 정식 계정 UI·UX 과업 검증](../analysis/Pawlytics_정식계정_과업재검증_20260729.md)
-- [Petstablished 전체 제품 UI·UX 검증](../analysis/Petstablished_전체제품_UIUX_검증_20260729.md)
-- [경쟁 4사 사용자 리뷰 질적분석 파일럿](../경쟁4사_리뷰40개_파일럿코딩_20260726.md)
-- [소재 C 인테이크 필드 재검증](../analysis/소재C_인테이크필드_재검증_20260809.md)
-
 ## 별첨. ICE 재스코어링 표
 
 ### 재스코어링 기준
@@ -93,3 +76,12 @@ ICE는 `Impact × Confidence × Ease`로 계산하며 각 항목은 1~10점이�
 | H-F 신규 인력 즉시 투입 | Confidence 6→3 | 강한 근거가 B2G형 Chameleon에 집중. Pawlytics는 쉬운 학습이라는 반례가 다수이며 Shelterluv 사례도 인테이크 직접 근거가 아님 |
 | H-F 신규 인력 즉시 투입 | Ease 5→4 | 가치약속을 증명하려면 실제 신규 사용자의 무도움 과업 테스트 필요 |
 | H-G 데이터 이전 안전성 | Confidence 8→7 | 강한 전환 장벽이지만 지나도 `어떤 소프트웨어든 발생하는 문제`로 평가. 펫나우 우위 근거 미확보 |
+
+### 근거 문서
+
+- [Track 2 ICP·퍼소나·소재 정의 배경 및 근거](Track2_ICP_Persona_소재_정의_근거_20260805.md)
+- [경쟁사 데모 제품 UI·UX 통합분석](../analysis/경쟁사_데모_UIUX_통합분석.md)
+- [Pawlytics 정식 계정 UI·UX 과업 검증](../analysis/Pawlytics_정식계정_과업재검증_20260729.md)
+- [Petstablished 전체 제품 UI·UX 검증](../analysis/Petstablished_전체제품_UIUX_검증_20260729.md)
+- [경쟁 4사 사용자 리뷰 질적분석 파일럿](../경쟁4사_리뷰40개_파일럿코딩_20260726.md)
+- [Track 2 LMF ICE 재스코어링 추가 검증 근거](../analysis/소재C_인테이크필드_재검증_20260809.md)
