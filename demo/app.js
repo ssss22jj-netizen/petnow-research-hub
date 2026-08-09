@@ -68,7 +68,7 @@ const TUTORIALS = {
     label:'DEMO A · READINESS',
     name:'Which dogs are ready to go?',
     steps:[
-      { selector:'.table-wrap', kind:'manual', title:'Frame the readiness problem', text:'Say: “This view tells the team who is ready, what is blocking everyone else, and the next action—without asking around.”' },
+      { selector:'.table-wrap', kind:'manual', title:'Frame the readiness problem', text:'This view tells the team who is ready, what is blocking everyone else, and the next action—without asking around.' },
       { selector:'[data-animal-filter="review"]', kind:'animal-filter', value:'review', title:'Focus on decisions waiting', text:'Filter to animals whose latest information needs a staff decision.' },
       { selector:'[data-open-animal="milo"]', kind:'animal', value:'milo', title:'Open the animal behind the status', text:'Open Milo to show the evidence behind the Needs review label.' },
       { selector:'.status-banner.review', kind:'manual', title:'Show why Milo is not ready', text:'Milo’s status includes the reason, the responsible action, and the effect on publishing—not just a colored label.' },
@@ -86,7 +86,7 @@ const TUTORIALS = {
     label:'DEMO B · FOSTER UPDATES',
     name:'Stop texting your fosters for updates',
     steps:[
-      { selector:'.update-metrics', kind:'manual', title:'Frame the follow-up burden', text:'Say: “Every request, reminder, response, and review is visible here, so coordinators do not manage follow-ups from memory.”' },
+      { selector:'.update-metrics', kind:'manual', title:'Frame the follow-up burden', text:'Every request, reminder, response, and review is visible here, so coordinators do not manage follow-ups from memory.' },
       { selector:'.page-actions [data-action="request-update"]', kind:'action', value:'request-update', title:'Create one structured request', text:'Request the exact health, behavior, medication, photo, and note fields the team needs.' },
       { selector:'.modal-card .form-grid', kind:'manual', title:'Set the follow-up once', text:'Choose the due date and reminder rule. Petify will follow up automatically if Jamie has not responded.' },
       { selector:'.modal-card [data-action="preview-message"]', kind:'action', value:'preview-message', title:'Preview before sending', text:'Check the exact request and secure link Jamie will receive.' },
