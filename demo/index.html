@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css">
-  <link rel="stylesheet" href="styles.css?v=20260810-1">
+  <link rel="stylesheet" href="styles.css?v=20260810-2">
   <style>
     .foster-form-page{min-height:100vh!important}
     .submission b em.review{color:var(--amber);background:var(--amber-soft)}
@@ -21,10 +21,26 @@
     .change-summary.success>span,.change-summary.success button{color:var(--green)}
     .comparison>div.new.approved{border-color:#bfe5d7;background:var(--green-soft)}
     .review-actions.resolved{grid-template-columns:auto 1fr auto auto}
+    .message-drawer{overflow:auto}
+    .message-tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--input);border-radius:11px;padding:4px;margin:20px 0 14px}
+    .message-tabs button{border:0;background:transparent;border-radius:8px;padding:9px;color:var(--muted);font-weight:650}
+    .message-tabs button.active{background:#fff;color:var(--orange-dark);box-shadow:0 1px 4px rgba(44,47,52,.08)}
+    .phone-preview{width:280px;margin:0 auto 16px;border:7px solid var(--ink);border-radius:28px;background:#eef1f4;padding:0 10px 11px;overflow:hidden}
+    .phone-preview-bar{display:grid;grid-template-columns:20px 1fr 24px;align-items:center;text-align:center;background:#fff;margin:0 -10px 12px;padding:12px 10px 9px}
+    .phone-preview-bar b,.phone-preview-bar small{display:block}.phone-preview-bar small{font-size:9px;color:var(--muted);margin-top:2px}.phone-preview-bar i{font-style:normal;color:var(--muted)}
+    .message-time{text-align:center;font-size:9px;color:var(--muted);margin-bottom:8px}
+    .sms-bubble{background:#fff;border-radius:15px 15px 15px 4px;padding:12px;font-size:11px;line-height:1.45;box-shadow:0 1px 2px rgba(44,47,52,.06)}
+    .sms-bubble strong{color:var(--blue)}.sms-bubble small{color:var(--muted)}
+    .sms-input{margin-top:12px;background:#fff;border-radius:999px;padding:8px 9px 8px 12px;color:var(--muted);font-size:10px}.sms-input span{float:right;background:var(--orange);color:#fff;width:20px;height:20px;border-radius:50%;display:grid;place-items:center}
+    .email-preview{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:16px;background:#fff}
+    .email-meta{background:var(--input);padding:11px 13px;display:grid;gap:7px}.email-meta span{display:grid;grid-template-columns:42px 1fr;align-items:center}.email-meta small{font-size:8px;color:var(--muted)}.email-meta b{font-size:10px}
+    .email-body{padding:20px;text-align:center}.email-body>.brand-mark{transform:scale(.65);margin:0 auto 7px}.email-body h3{font-size:18px;margin:5px 0 8px}.email-body>p:not(.kicker){font-size:11px}.email-body>button{border:0;background:var(--orange);color:#fff;border-radius:9px;padding:11px 16px;font-weight:700;margin:15px 0 10px}.email-body>small{display:block;color:var(--muted);font-size:9px}
+    .delivery-details{display:grid;gap:8px;margin:16px 0}.delivery-details>div{display:grid;grid-template-columns:28px 1fr;gap:9px;align-items:start;background:var(--input);padding:11px;border-radius:10px}.delivery-details>div>span{width:27px;height:27px;background:#fff;border-radius:8px;display:grid;place-items:center;color:var(--orange-dark)}.delivery-details b{display:block;color:var(--ink);font-size:11px}.delivery-details p{font-size:10px}
+    .preview-flow{border:1px solid var(--line);border-radius:12px;padding:13px;margin-bottom:15px}.preview-flow>small{font-size:8px;color:var(--muted);font-weight:800;letter-spacing:.09em}.preview-flow>div{display:flex;align-items:center;justify-content:space-between;margin:10px 0}.preview-flow span{display:flex;align-items:center;gap:5px;font-size:9px}.preview-flow span i{width:19px;height:19px;border-radius:50%;background:var(--orange-soft);color:var(--orange-dark);display:grid;place-items:center;font-style:normal;font-weight:800}.preview-flow em{font-style:normal;color:var(--muted-2)}.preview-flow p{font-size:9px}
   </style>
 </head>
 <body>
   <div id="app"></div>
-  <script src="app.js?v=20260810-1"></script>
+  <script src="app.js?v=20260810-2"></script>
 </body>
 </html>
