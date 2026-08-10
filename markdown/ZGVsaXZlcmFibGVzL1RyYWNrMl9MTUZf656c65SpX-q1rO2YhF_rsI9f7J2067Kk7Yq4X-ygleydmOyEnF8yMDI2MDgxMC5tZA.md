@@ -17,7 +17,7 @@
 
 | 도구 | 측정 항목 | 현재 기준 |
 | --- | --- | --- |
-| Meta Pixel | `PageView`, CTA 클릭, `Lead` | `PageView`·`Lead`에 `landing_variant`, `page_path`, `page_url` 명시. `Lead`는 CAPI와 동일한 `event_id`로 중복 제거 |
+| Meta Pixel | `PageView`, `MainCTAClick`, `FloatingCTAClick`, `Lead` | Meta 자동 이벤트 감지 비활성화. 수동 이벤트에 랜딩·경로·URL·UTM 속성 명시. `Lead`는 CAPI와 동일한 `event_id`로 중복 제거 |
 | Meta Conversions API | 서버 측 `Lead` | 폼 저장 성공 건만 전송 |
 | LinkedIn Insight Tag | 페이지 방문·리드 전환 | Partner ID·Conversion ID 연결 필요 |
 | Mixpanel | 섹션 열독·단계 도달·CTA·리드 | `Petify for shelters` 프로젝트 토큰 연결 완료. 직접 수집 API QA 이벤트 수신 확인. 추적 차단 확장 프로그램이 없는 세션에서 SDK 이벤트 최종 확인 필요 |
@@ -50,6 +50,8 @@
 | `Main CTA Clicked` | 본문 중간 CTA 클릭 | `landing_variant`, `cta_location`, `cta_text`, `destination` |
 | `Floating CTA Clicked` | 화면 하단 플로팅 CTA 클릭 | `landing_variant`, `cta_location`, `cta_text`, `destination` |
 | `Lead Submitted` | Google Apps Script의 저장 성공 응답 수신 | `landing_variant`, `event_id` |
+
+Meta는 이벤트명 제약과 표준 `Lead` 최적화를 고려하여 Mixpanel과 동일한 트리거를 `MainCTAClick`, `FloatingCTAClick`, `Lead`로 수집. Meta 자동 감지 이벤트(`SubscribedButtonClick` 등)는 사용하지 않음.
 
 `Lead Submitted`는 제출 버튼 클릭이 아니라 폼 유효성 검사 통과 및 서버 저장 성공을 기준으로 기록. 필수값 오류, 네트워크 오류, 서버 저장 실패는 전환에서 제외.
 
