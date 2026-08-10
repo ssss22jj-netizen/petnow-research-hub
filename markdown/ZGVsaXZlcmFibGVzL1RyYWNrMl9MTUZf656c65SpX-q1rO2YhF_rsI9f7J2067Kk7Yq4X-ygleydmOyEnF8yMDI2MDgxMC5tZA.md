@@ -20,7 +20,7 @@
 | Meta Pixel | `PageView`, CTA 클릭, `Lead` | `Lead`는 CAPI와 동일한 `event_id`로 중복 제거 |
 | Meta Conversions API | 서버 측 `Lead` | 폼 저장 성공 건만 전송 |
 | LinkedIn Insight Tag | 페이지 방문·리드 전환 | Partner ID·Conversion ID 연결 필요 |
-| Mixpanel | 섹션 열독·단계 도달·CTA·리드 | 코드 구현 완료, 프로젝트 토큰 연결 및 수신 QA 필요 |
+| Mixpanel | 섹션 열독·단계 도달·CTA·리드 | `Petify for shelters` 프로젝트 토큰 연결 완료. 직접 수집 API QA 이벤트 수신 확인. 추적 차단 확장 프로그램이 없는 세션에서 SDK 이벤트 최종 확인 필요 |
 
 ## 3. Mixpanel 이벤트 택소노미
 
@@ -72,5 +72,4 @@
 2. 작동 방식 1·2·3단계의 `step_number`·`step_title` 확인
 3. 메인 CTA와 플로팅 CTA 이벤트 분리 확인
 4. 폼 성공 건의 Google Sheet 저장 및 Pixel+CAPI 중복 제거 확인
-5. Mixpanel 프로젝트 토큰 연결 후 실시간 이벤트 수신 확인
-
+5. Mixpanel SDK 이벤트의 실시간 수신 확인. 추적 차단 브라우저는 별도 환경으로 구분
