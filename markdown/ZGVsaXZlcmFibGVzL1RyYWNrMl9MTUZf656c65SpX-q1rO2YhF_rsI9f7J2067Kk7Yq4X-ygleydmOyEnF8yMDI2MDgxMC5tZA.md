@@ -52,11 +52,14 @@
 | --- | --- | --- |
 | `Inline CTA Clicked` | 본문 중간 CTA 클릭 | `landing_variant`, `cta_location`, `cta_text`, `destination` |
 | `Floating CTA Clicked` | 화면 하단 플로팅 CTA 클릭 | `landing_variant`, `cta_location`, `cta_text`, `destination` |
-| `Lead Submitted` | Google Apps Script의 저장 성공 응답 수신 | `landing_variant`, `event_id` |
+| `Lead Submitted` | Google Apps Script의 저장 성공 응답 수신 | `landing_variant`, `event_id`, `lead_intent`, `annual_adoptions`, `active_fosters`, `animal_origin`, `current_tools` |
 
 Meta는 이벤트명 제약과 표준 `Lead` 최적화를 고려하여 Mixpanel과 동일한 트리거를 `InlineCTAClick`, `FloatingCTAClick`, `Lead`로 수집. Meta 자동 감지 이벤트(`SubscribedButtonClick` 등)는 사용하지 않음.
 
 `Lead Submitted`는 제출 버튼 클릭이 아니라 폼 유효성 검사 통과 및 서버 저장 성공을 기준으로 기록. 필수값 오류, 네트워크 오류, 서버 저장 실패는 전환에서 제외.
+
+- Mixpanel 리드 속성: 조직명·이름·이메일·허니팟을 제외한 폼 필드를 각각 수집
+- Meta `Lead`: 광고 최적화용 표준 이벤트와 기존 랜딩·URL·UTM 속성만 유지. 폼 자유입력값은 Meta에 전송하지 않음
 
 ## 4. 콘텐츠 수정 시 유지 항목
 
