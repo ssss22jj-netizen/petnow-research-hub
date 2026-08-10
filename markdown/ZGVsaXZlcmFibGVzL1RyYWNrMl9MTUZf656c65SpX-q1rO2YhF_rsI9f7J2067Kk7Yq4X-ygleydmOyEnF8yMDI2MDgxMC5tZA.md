@@ -13,6 +13,9 @@
 | 공통 추적 | `/tracking-config.js`, `/tracking.js` |
 | 리드 저장 | Google Apps Script 성공 응답 후 Google Sheet 저장 완료 처리 |
 
+- 세션 리플레이 QA: 2026-08-10 운영 A·B 랜딩으로 생성한 실제 리플레이가 Mixpanel에 수신·재생됨을 확인. 공개 콘텐츠는 재생되고, QA용으로 입력한 조직명·이름·이메일·자유입력 값은 재생 화면에서 노출되지 않음
+- 캐시 기준: A·B·C에서 `tracking-config.js`와 `tracking.js`에 배포 버전을 부여하여 기존 방문자도 최신 수집·마스킹 설정을 불러오도록 관리
+
 ## 2. 측정 구성
 
 | 도구 | 측정 항목 | 현재 기준 |
