@@ -6,7 +6,7 @@
 > 제품 범위: 동물 Intake부터 준비 상태 관리와 쉘터 웹사이트 게시까지. 외부 입양 채널은 연동 가능성만 표시  
 > 한 줄 정의: Petify for Shelters는 동물을 등록한 순간부터 필요한 정보와 임보 업데이트를 하나의 레코드에 모으고, 준비 상태를 판단해 게시까지 연결하는 Shelter CRM이다.
 
-브랜드 표기는 `Petify for Shelters`를 제품명으로 사용하고, `Petnow`는 `by Petnow` 형태의 보조 표기로만 사용한다.
+제품 화면의 브랜드 표기는 `Petify for Shelters`로 통일한다. 데스크톱·임보자 화면에는 심볼과 제품명을 함께 표시하고, 모바일 상단에는 심볼과 제품명을 가로형으로 배치한다.
 
 ## 0. 제품 정의
 
@@ -476,7 +476,7 @@ Petify for Shelters는 현재 구현된 펫나우 CRM의 기능 범위를 재현
 | 4 | Intake 필드 | 기본 정보·입소 맥락·사진 중심 | 화면에 표시할 정확한 필드와 단계 수 |
 | 5 | 임보자 제출 방식 | 계정 없는 보안 링크 | 반복 사용 시에도 계정 없이 유지할지 |
 | 6 | 준비 상태 용어 | Ready, Blocked, Needs review | `Ready for adoption`과 `Ready to publish` 구분 여부 |
-| 7 | 제품명 | `Petify for Shelters`를 주 브랜드로, `by Petnow`를 보조 표기로 사용 | 기존 Petify 생체인식 제품과의 장기 브랜드 관계 |
+| 7 | 제품명 | 제품 화면에서는 `Petify for Shelters`로 단일 표기 | 기존 Petify 생체인식 제품과의 장기 브랜드 관계 |
 | 8 | 데모 구현 형식 | 웹 기반 클릭형 프리토타입 | Figma와 HTML 중 최종 배포 방식 |
 
 ## 16. 제작 순서
