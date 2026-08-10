@@ -28,7 +28,7 @@
 
 | 이벤트명 | 트리거 | 핵심 속성 |
 | --- | --- | --- |
-| `Landing Viewed` | 랜딩 페이지 로드 | `landing_variant`, `page_path`, `page_title` |
+| `Landing Viewed` | 랜딩 페이지 로드 | `landing_variant`, `page_path`, `page_title`, URL에 포함된 UTM 5종 |
 | `Landing 01 Hero Viewed` | Hero 섹션 진입 | `landing_variant`, `section_id`, `main_text` |
 | `Landing 02 Problem Viewed` | 문제 설명 섹션 진입 | `landing_variant`, `section_id`, `main_text` |
 | `Landing 03 How It Works Viewed` | 작동 방식 섹션 진입 | `landing_variant`, `section_id`, `main_text` |
@@ -41,6 +41,7 @@
 - 중복 기준: 동일 페이지 세션에서 섹션별·단계별 1회 기록
 - `main_text`: 사용자가 실제로 본 섹션 대표 제목의 현재 화면 문구
 - Mixpanel의 퍼센트 기반 자동 스크롤 이벤트: 미사용
+- UTM super property: 현재 URL의 `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`을 등록하여 같은 방문에서 발생하는 섹션·CTA·리드 이벤트에도 전달. URL에 없는 UTM 값은 이전 방문 값이 남지 않도록 해제
 
 ### 3.2 행동 및 전환
 
