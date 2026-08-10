@@ -20,7 +20,7 @@
 | Meta Pixel | `PageView`, `InlineCTAClick`, `FloatingCTAClick`, `Lead` | Meta 자동 이벤트 감지 비활성화. 수동 이벤트에 랜딩·경로·URL·UTM 속성 명시. `Lead`는 CAPI와 동일한 `event_id`로 중복 제거 |
 | Meta Conversions API | 서버 측 `Lead` | 폼 저장 성공 건만 전송 |
 | LinkedIn Insight Tag | 페이지 방문·리드 전환 | Partner ID·Conversion ID 연결 필요 |
-| Mixpanel | 섹션 열독·단계 도달·CTA·리드 | `Petify for shelters` 프로젝트 토큰 및 공식 브라우저 SDK 연결 완료. 브라우저에서 페이지·섹션·CTA 이벤트와 랜딩·UTM 속성 실수신 확인 |
+| Mixpanel | 섹션 열독·단계 도달·CTA·리드·세션 리플레이 | `Petify for shelters` 프로젝트 토큰 및 공식 브라우저 SDK 연결. A·B·C 방문 세션 100% 녹화, 폼 입력값 마스킹. 페이지·섹션·CTA 이벤트와 랜딩·UTM 속성 실수신 확인 |
 
 ## 3. Mixpanel 이벤트 택소노미
 
@@ -62,7 +62,7 @@ Meta는 이벤트명 제약과 표준 `Lead` 최적화를 고려하여 Mixpanel�
 | 랜딩 구분 | `<body data-landing-variant="A|B|C">` |
 | 섹션 | `data-track-section="hero|problem|how_it_works|outcomes|evidence|lead_form"` |
 | 작동 방식 단계 | `#how` 내부 `.step`, 단계 제목 `<h4>` |
-| 메인 CTA | `data-track-cta="main"` |
+| 본문 Inline CTA | `data-track-cta="main"` |
 | 플로팅 CTA | `data-track-cta="floating"` |
 | 리드 전환 | 저장 성공 후 `petifyTracking.trackLead(eventId)` 호출 |
 | Privacy Notice | 새 창 열기 `target="_blank" rel="noopener"` |
@@ -76,3 +76,4 @@ Meta는 이벤트명 제약과 표준 `Lead` 최적화를 고려하여 Mixpanel�
 3. 메인 CTA와 플로팅 CTA 이벤트 분리 확인
 4. 폼 성공 건의 Google Sheet 저장 및 Pixel+CAPI 중복 제거 확인
 5. Mixpanel SDK 이벤트의 실시간 수신 확인. 추적 차단 브라우저는 별도 환경으로 구분
+6. Mixpanel 세션 리플레이 생성·재생 및 폼 입력값 마스킹 확인
