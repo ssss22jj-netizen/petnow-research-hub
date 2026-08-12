@@ -246,4 +246,4 @@
 
 ## 원문
 
-- [Claude 아티팩트: Track 2 LMF 소구점 검증 실험 기획안](https://claude.ai/code/artifact/5293d79f-045f-4e27-899c-ca8e82726789)
+- [Claude 아티팩트: Track 2 LMF 소구점 검증 실험 기획안 v1.1](https://claude.ai/code/artifact/a9930521-585c-4280-bee6-e434d6251d5f)
