@@ -7,10 +7,6 @@
     <meta name="description" content="광고·랜딩페이지로 소재 A·B 2종의 소구점을 비교하는 4주 정찰 실험 기획안 (v1.1)" />
   </head>
   <body>
-    <p style="max-width:780px;margin:0 auto;padding:14px 36px 0;display:flex;gap:18px;flex-wrap:wrap;font:13px -apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;">
-      <a href="./" style="color:#1A9090;text-decoration:none;font-weight:600;">← Petnow 문서 라이브러리</a>
-      <a href="./markdown/ZGVsaXZlcmFibGVzL1RyYWNrMl9MTUZf7IaM6rWs7KCQX-qygOymnV_si6Ttl5hf6riw7ZqNXzIwMjYwODA1Lm1k.md" target="_blank" rel="noopener" style="color:#1A9090;text-decoration:none;font-weight:600;">Markdown 원본 ↗</a>
-    </p>
 <style>
 /* === TOKENS === */
 :root {
@@ -27,34 +23,6 @@
   --amber: #B86E1A;
   --amber-light: #FBF0E3;
   --radius: 6px;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0F1C20;
-    --surface: #182830;
-    --surface-2: #1F333A;
-    --border: #2A4148;
-    --text-p: #E0ECEB;
-    --text-s: #8FAEB0;
-    --text-t: #5A7880;
-    --teal: #2AADAD;
-    --teal-mid: #3CC5C5;
-    --teal-light: #162E30;
-    --amber: #D4853A;
-    --amber-light: #251808;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0F1C20; --surface: #182830; --surface-2: #1F333A;
-  --border: #2A4148; --text-p: #E0ECEB; --text-s: #8FAEB0;
-  --text-t: #5A7880; --teal: #2AADAD; --teal-mid: #3CC5C5;
-  --teal-light: #162E30; --amber: #D4853A; --amber-light: #251808;
-}
-:root[data-theme="light"] {
-  --bg: #F4F7F6; --surface: #FFFFFF; --surface-2: #EBF2F1;
-  --border: #CDD9D8; --text-p: #152226; --text-s: #4D6265;
-  --text-t: #8AA0A2; --teal: #0F7070; --teal-mid: #1A9090;
-  --teal-light: #D8EDEC; --amber: #B86E1A; --amber-light: #FBF0E3;
 }
 
 /* === BASE === */
@@ -959,77 +927,71 @@ details[open] > .archive-toggle::before { content: "▾ "; }
 .changelog-table th { color: var(--text-t); font-weight: 600; font-size: 11.5px; }
 .changelog-table td { color: var(--text-s); }
 
-/* === 우측 문서 목차 === */
-.doc-shell {
-  display: grid;
-  grid-template-columns: minmax(0, 780px) 208px;
-  gap: 44px;
-  justify-content: center;
-  align-items: start;
+
+/* === 문서 라이브러리 공통 셸 (demo-insights.html과 동일 규격) === */
+:root { color-scheme: light; }
+.lib-shell { display: grid; grid-template-columns: 250px minmax(0, 1fr) 220px; min-height: 100vh; }
+.lib-sidebar { position: sticky; top: 0; height: 100vh; padding: 22px 16px; background: #123d2d; color: #eaf6ef; display: flex; flex-direction: column; z-index: 200; }
+.lib-brand { display: flex; gap: 12px; align-items: center; padding: 0 10px 24px; color: inherit; text-decoration: none; }
+.lib-brand-mark { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: #68d29e; color: #0d3a29; font-weight: 800; }
+.lib-brand strong, .lib-brand small { display: block; }
+.lib-brand small { margin-top: 2px; color: #a9c8b8; font-size: 11px; text-transform: uppercase; letter-spacing: .11em; }
+.lib-nav-label { margin: 9px 0 3px; padding: 0 12px; color: #88ad9a; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.lib-nav a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin: 2px 0; color: #cfe2d8; text-decoration: none; border-radius: 10px; font-size: 14px; }
+.lib-nav a:hover, .lib-nav a.active { color: #fff; background: rgba(255,255,255,.1); }
+.lib-nav i { width: 20px; text-align: center; font-style: normal; opacity: .9; }
+.lib-sidebar-foot { margin-top: auto; padding: 13px 12px 0; border-top: 1px solid rgba(255,255,255,.12); color: #a9c8b8; font-size: 12px; }
+.lib-sidebar-foot::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 7px; border-radius: 50%; background: #68d29e; }
+.lib-main { min-width: 0; }
+.lib-toc { position: sticky; top: 0; height: 100vh; padding: 28px 18px; background: #f5f5f3; border-left: 1px solid #dfe7e2; overflow-y: auto; }
+.lib-toc strong { display: block; margin: 0 8px 10px; color: #374151; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+.lib-toc a { display: block; margin: 2px 0; padding: 7px 9px; border-left: 2px solid transparent; border-radius: 0 7px 7px 0; color: #6b7280; font-size: 12px; line-height: 1.35; text-decoration: none; transition: background .15s, color .15s, border-color .15s; }
+.lib-toc a:hover { background: #e9efeb; color: #123d2d; }
+.lib-toc a.active { border-left-color: #176b48; background: #e2eee7; color: #123d2d; font-weight: 700; }
+.lib-toc .toc-divider { height: 1px; margin: 10px 8px; background: #dfe7e2; }
+.lib-menu { display: none; position: fixed; top: 12px; left: 12px; z-index: 250; width: 40px; height: 40px; border: 1px solid #dce5df; border-radius: 10px; background: #fff; color: #123d2d; font-size: 20px; box-shadow: 0 4px 14px rgba(0,0,0,.1); cursor: pointer; }
+.lib-back { display: inline-block; margin-bottom: 14px; color: var(--teal); font-size: 12px; font-weight: 700; text-decoration: none; }
+.lib-back:hover { text-decoration: underline; }
+.section, .doc-header { scroll-margin-top: 24px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--teal-mid); outline-offset: 2px; }
+@media (max-width: 1180px) {
+  .lib-shell { grid-template-columns: 250px minmax(0, 1fr); }
+  .lib-toc { display: none; }
 }
-.doc-shell > .page { max-width: none; padding-left: 0; padding-right: 0; }
-.doc-toc {
-  position: sticky;
-  top: 28px;
-  max-height: calc(100vh - 56px);
-  padding: 20px 0 20px 18px;
-  margin-top: 52px;
-  border-left: 1px solid var(--border);
-  overflow: hidden;
-}
-.toc-heading {
-  margin-bottom: 10px;
-  font-family: Georgia, serif;
-  font-size: 10.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--teal-mid);
-}
-.toc-links { max-height: calc(100vh - 116px); overflow-y: auto; scrollbar-width: thin; }
-.toc-link {
-  display: flex;
-  gap: 8px;
-  padding: 6px 9px;
-  margin: 1px 0 1px -10px;
-  border-left: 2px solid transparent;
-  border-radius: 0 6px 6px 0;
-  color: var(--text-s);
-  font-size: 12px;
-  line-height: 1.45;
-  text-decoration: none;
-  transition: color .15s, background .15s, border-color .15s;
-}
-.toc-link span {
-  flex: 0 0 auto;
-  color: var(--text-t);
-  font-family: Georgia, serif;
-  font-size: 10.5px;
-  font-variant-numeric: tabular-nums;
-}
-.toc-link:hover { color: var(--teal); background: var(--surface-2); }
-.toc-link.active {
-  border-left-color: var(--teal-mid);
-  background: var(--teal-light);
-  color: var(--teal);
-  font-weight: 700;
-}
-.toc-link.active span { color: var(--teal-mid); }
-.toc-link:focus-visible { outline: 2px solid var(--teal-mid); outline-offset: 1px; }
-.section { scroll-margin-top: 24px; }
-@media (max-width: 1120px) {
-  .doc-shell { grid-template-columns: minmax(0, 1fr); gap: 0; }
-  .doc-toc { display: none; }
-  .doc-shell > .page { padding-left: 36px; padding-right: 36px; }
-}
-@media (max-width: 560px) {
-  .doc-shell > .page { padding-left: 18px; padding-right: 18px; }
+@media (max-width: 768px) {
+  .lib-shell { display: block; }
+  .lib-sidebar { position: fixed; left: 0; width: 250px; transform: translateX(-100%); transition: transform .2s; box-shadow: 20px 0 40px rgba(0,0,0,.18); }
+  .lib-sidebar.open { transform: translateX(0); }
+  .lib-menu { display: block; }
+  .page { padding-top: 64px; }
 }
 </style>
 
-<div class="doc-shell">
-<main class="page">
+<div class="lib-shell">
+<aside class="lib-sidebar" id="lib-sidebar">
+  <a class="lib-brand" href="./index.html#/">
+    <span class="lib-brand-mark">P</span>
+    <span><strong>Petnow</strong><small>문서 라이브러리</small></span>
+  </a>
+  <nav class="lib-nav" aria-label="주요 메뉴">
+    <div class="lib-nav-label">문서 찾기</div>
+    <a href="./index.html#/"><i>⌂</i>전체 문서</a>
+    <div class="lib-nav-label">주제별 문서</div>
+    <a class="active" href="./index.html#/library/project"><i>◷</i>프로젝트 계획·현황</a>
+    <a href="./index.html#/library/interview"><i>◎</i>고객 인터뷰</a>
+    <a href="./index.html#/library/workflow"><i>◫</i>쉘터 업무 플로우</a>
+    <a href="./index.html#/library/competitors"><i>▥</i>경쟁사 조사</a>
+    <a href="./index.html#/library/methods"><i>▧</i>출처·분석 방법</a>
+    <a href="./index.html#/library/appendix"><i>◇</i>별첨</a>
+  </nav>
+  <div class="lib-sidebar-foot">M1 문서 라이브러리</div>
+</aside>
+<main class="lib-main">
+<button class="lib-menu" id="lib-menu" aria-label="메뉴 열기">☰</button>
+<div class="page">
 
   <!-- HEADER -->
+  <a class="lib-back" href="./index.html#/library/project">← 문서 라이브러리</a>
   <header class="doc-header">
     <div class="doc-eyebrow">Petnow Shelter CRM · M1 Track 2 기획안</div>
     <h1 class="doc-title">LMF 소구점 검증 실험<br>광고·랜딩페이지 1차 라운드</h1>
@@ -1559,47 +1521,51 @@ details[open] > .archive-toggle::before { content: "▾ "; }
     </div>
   </section>
 
+</div>
 </main>
-
-<aside class="doc-toc" aria-label="문서 목차">
-  <p class="toc-heading">문서 목차</p>
-  <nav class="toc-links">
-      <a class="toc-link" href="#sec-01"><span>01</span>목적 및 방향</a>
-      <a class="toc-link" href="#sec-02"><span>02</span>제약사항 및 보완</a>
-      <a class="toc-link" href="#sec-03"><span>03</span>실험 성공 기준</a>
-      <a class="toc-link" href="#sec-04"><span>04</span>LMF 프레임 내 위치</a>
-      <a class="toc-link" href="#sec-05"><span>05</span>채널 선정</a>
-      <a class="toc-link" href="#sec-06"><span>06</span>캠페인 구조</a>
-      <a class="toc-link" href="#sec-07"><span>07</span>실행 전제</a>
-      <a class="toc-link" href="#sec-08"><span>08</span>예산</a>
-      <a class="toc-link" href="#sec-09"><span>09</span>일정</a>
-      <a class="toc-link" href="#sec-appendix"><span>별첨</span>변경 전 원문 (v1.0)</a>
-  </nav>
+<aside class="lib-toc" aria-label="문서 목차">
+  <strong>문서 목차</strong>
+  <a href="#sec-01"><span style="color:#9aa8a1;font-size:10.5px;margin-right:6px;">01</span>목적 및 방향</a>
+  <a href="#sec-02"><span style="color:#9aa8a1;font-size:10.5px;margin-right:6px;">02</span>제약사항 및 보완</a>
+  <a href="#sec-03"><span style="color:#9aa8a1;font-size:10.5px;margin-right:6px;">03</span>실험 성공 기준</a>
+  <a href="#sec-04"><span style="color:#9aa8a1;font-size:10.5px;margin-right:6px;">04</span>LMF 프레임 내 위치</a>
+  <a href="#sec-05"><span style="color:#9aa8a1;font-size:10.5px;margin-right:6px;">05</span>채널 선정</a>
+  <a href="#sec-06"><span style="color:#9aa8a1;font-size:10.5px;margin-right:6px;">06</span>캠페인 구조</a>
+  <a href="#sec-07"><span style="color:#9aa8a1;font-size:10.5px;margin-right:6px;">07</span>실행 전제</a>
+  <a href="#sec-08"><span style="color:#9aa8a1;font-size:10.5px;margin-right:6px;">08</span>예산</a>
+  <a href="#sec-09"><span style="color:#9aa8a1;font-size:10.5px;margin-right:6px;">09</span>일정</a>
+  <a href="#sec-appendix"><span style="color:#9aa8a1;font-size:10.5px;margin-right:6px;">별첨</span>변경 전 원문 (v1.0)</a>
+  <div class="toc-divider"></div>
+  <a href="./index.html#/">← 전체 문서로</a>
 </aside>
 </div>
 
 <script>
 (function () {
-  var links = Array.prototype.slice.call(document.querySelectorAll(".toc-link"));
-  if (!links.length) return;
-  var byId = {};
-  var targets = links.map(function (link) {
-    var el = document.getElementById(link.getAttribute("href").slice(1));
-    if (el) byId[el.id] = link;
-    return el;
-  }).filter(Boolean);
-  function activate(id) {
-    links.forEach(function (link) {
-      link.classList.toggle("active", link === byId[id]);
-    });
+  var sidebar = document.querySelector('#lib-sidebar');
+  document.querySelector('#lib-menu').addEventListener('click', function () { sidebar.classList.toggle('open'); });
+  sidebar.querySelectorAll('a').forEach(function (link) { link.addEventListener('click', function () { sidebar.classList.remove('open'); }); });
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.lib-toc a[href^="#"]'));
+  var sections = tocLinks.map(function (link) { return document.querySelector(link.getAttribute('href')); }).filter(Boolean);
+  function updateToc() {
+    var position = window.scrollY + 140;
+    var current = sections[0];
+    sections.forEach(function (section) { if (section.offsetTop <= position) current = section; });
+    if (!current) return;
+    tocLinks.forEach(function (link) { link.classList.toggle('active', link.getAttribute('href') === '#' + current.id); });
   }
-  var observer = new IntersectionObserver(function (entries) {
-    var visible = entries.filter(function (e) { return e.isIntersecting; })
-      .sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top; })[0];
-    if (visible) activate(visible.target.id);
-  }, { rootMargin: "-10% 0px -70% 0px", threshold: 0 });
-  targets.forEach(function (el) { observer.observe(el); });
-  activate(targets[0].id);
+  tocLinks.forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      var target = document.querySelector(link.getAttribute('href'));
+      if (!target) return;
+      event.preventDefault();
+      history.replaceState(null, '', link.getAttribute('href'));
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+  window.addEventListener('scroll', updateToc, { passive: true });
+  window.addEventListener('load', updateToc);
+  updateToc();
 })();
 </script>
   </body>
