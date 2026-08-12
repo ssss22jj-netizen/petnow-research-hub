@@ -143,68 +143,68 @@ const TAB_LABELS = {
 
 const TUTORIALS = {
   a: {
-    label:'DEMO A · READINESS',
+    label:'DEMO A · READY TO PUBLISH',
     name:'Which dogs are ready to go?',
     steps:[
-      { selector:'.table-wrap', kind:'manual', title:'Frame the publishing status problem', text:'This view tells the team who is ready, which requirements remain unmet for everyone else, and the next action—without asking around.' },
-      { selector:'[data-animal-filter="review"]', kind:'animal-filter', value:'review', title:'Focus on decisions waiting', text:'Filter to animals whose latest information needs a staff decision.' },
-      { selector:'[data-open-animal="milo"]', kind:'animal', value:'milo', title:'Open the animal behind the status', text:'Open Milo to show the evidence behind the Needs review label.' },
-      { selector:'.status-banner.review', kind:'manual', title:'Show why Milo is not ready', text:'Milo’s status includes the reason, the responsible action, and the effect on publishing—not just a colored label.' },
-      { selector:'.status-banner [data-action="review-milo"]', kind:'action', value:'review-milo', title:'Follow the next step', text:'Open the check-in that may resolve Milo’s final unmet requirement.' },
-      { selector:'.comparison', kind:'manual', title:'Review the evidence', text:'Compare the current record with Jamie’s new check-in before anything changes.' },
-      { selector:'[data-action="approve-update"]', kind:'action', value:'approve-update', title:'Apply the verified change', text:'Apply only the information staff has reviewed to the official record.' },
-      { selector:'.status-banner.ready', kind:'manual', title:'Show the publishing status decision', text:'The unmet behavior requirement is resolved, the checklist becomes 5 of 5, and Milo moves to Ready to publish automatically.' },
-      { selector:'.status-banner [data-action="open-profile"]', kind:'action', value:'open-profile', title:'Move directly to the outcome', text:'Open the adopter-facing profile from the publishing status decision.' },
-      { selector:'.publish-aside', kind:'manual', title:'Check once before publishing', text:'Confirm the public profile and the channel currently available for publishing. Partner channels remain clearly marked as planned.' },
-      { selector:'.publish-aside [data-action="publish-now"]', kind:'action', value:'publish-now', title:'Publish to the shelter website', text:'Send the approved profile to the shelter’s own adoption website.' },
-      { selector:'.publish-aside', kind:'finish', title:'Publishing status became action', text:'Milo is now live on the shelter website. The demo has connected a record with unmet requirements to an adoption-ready outcome without promising unconfirmed partner integrations.' }
+      { selector:'.table-wrap', kind:'manual', title:'See where every animal stands', text:'One list shows who is ready to publish, what is still missing for everyone else, and who does the next step. Nobody has to ask around.' },
+      { selector:'[data-animal-filter="review"]', kind:'animal-filter', value:'review', title:'Start with the ones waiting on you', text:'Filter to the animals whose newest information needs a staff decision.' },
+      { selector:'[data-open-animal="milo"]', kind:'animal', value:'milo', title:'Open the record behind the status', text:'Open Milo and see what put him in Needs review.' },
+      { selector:'.status-banner.review', kind:'manual', title:'Why Milo is not ready yet', text:'The status names the reason, the action that clears it, and what it is holding up. Not just a colored label.' },
+      { selector:'.status-banner [data-action="review-milo"]', kind:'action', value:'review-milo', title:'Go straight to the next step', text:'Open the check-in that can clear Milo’s last open requirement.' },
+      { selector:'.comparison', kind:'manual', title:'Compare before anything changes', text:'Jamie’s new check-in sits beside the current record, so you can see exactly what would change.' },
+      { selector:'[data-action="approve-update"]', kind:'action', value:'approve-update', title:'Approve what you reviewed', text:'Only the information you just checked goes into the official record.' },
+      { selector:'.status-banner.ready', kind:'manual', title:'Milo turns ready on his own', text:'The open behavior requirement is now met, the checklist reads 5 of 5, and Milo moves to Ready to publish. No one edits a status by hand.' },
+      { selector:'.status-banner [data-action="open-profile"]', kind:'action', value:'open-profile', title:'Go straight to the result', text:'Open the profile adopters will see, from the same screen.' },
+      { selector:'.publish-aside', kind:'manual', title:'One last check before publishing', text:'Confirm the public profile and the channel you can publish to today. Partner channels stay marked as planned.' },
+      { selector:'.publish-aside [data-action="publish-now"]', kind:'action', value:'publish-now', title:'Publish to the shelter website', text:'Send the approved profile to your own adoption website.' },
+      { selector:'.publish-aside', kind:'finish', title:'From open requirement to live listing', text:'Milo is live on the shelter website. A record with a missing requirement became an adoptable listing, and nothing here depends on a partner integration that does not exist yet.' }
     ]
   },
   b1: {
     label:'DEMO B-1 · CHECK-IN REQUEST',
     name:'Send one check-in request',
     steps:[
-      { selector:'.care-program', kind:'manual', nextView:'updates', title:'Daily care goes out automatically', text:'Jamie receives Milo’s daily care link automatically at the scheduled time. Routine completions go straight to Milo’s care log; only a missed medication or reported concern alerts Alex.' },
-      { selector:'.update-metrics', kind:'manual', title:'Frame the follow-up burden', text:'Every request, reminder, response, and review is visible here, so coordinators do not manage follow-ups from memory.' },
-      { selector:'.page-actions [data-action="request-update"]', kind:'action', value:'request-update', title:'Create one structured request', text:'Request the exact health, behavior, medication, photo, and note fields the team needs.' },
-      { selector:'.modal-card .form-grid', kind:'manual', title:'Set the follow-up once', text:'Choose the due date and reminder rule. Petify will follow up automatically if Jamie has not responded.' },
-      { selector:'.modal-card [data-action="preview-message"]', kind:'action', value:'preview-message', title:'Preview before sending', text:'Check the exact request and secure link Jamie will receive.' },
-      { selector:'.message-tabs [data-message-channel="sms"]', kind:'channel', value:'sms', title:'Switch to the text message', text:'The same request goes out by email and SMS. Most fosters answer the text, and either way the response lands in one record.' },
-      { selector:'.message-drawer [data-action="return-request"]', kind:'action', value:'return-request', title:'Return to the request', text:'Go back with the message confirmed and send the request.' },
-      { selector:'.modal-card [data-action="send-request"]', kind:'action', value:'send-request', title:'Send once', text:'Send the secure link by SMS and email. The automatic reminder schedule starts now.' },
-      { selector:'.pending-request', kind:'manual', title:'Show the waiting state', text:'The console now shows delivery, deadline, and next reminder. Staff can see that follow-up is already handled.' },
-      { selector:'.pending-request', kind:'finish', next:'b2', nextLabel:'Continue to the foster response', title:'The request is on its way', text:'See the screen Jamie receives?' }
+      { selector:'.care-program', kind:'manual', nextView:'updates', title:'Daily care goes out on its own', text:'Jamie gets Milo’s daily care link at the scheduled time, automatically. Routine answers go straight to the care log, and only a missed medication or a reported concern reaches Alex.' },
+      { selector:'.update-metrics', kind:'manual', title:'Every follow-up in one place', text:'Requests, reminders, responses, and reviews all show up here, so nobody is tracking who still owes an update from memory.' },
+      { selector:'.page-actions [data-action="request-update"]', kind:'action', value:'request-update', title:'Ask for exactly what you need', text:'Choose the health, behavior, medication, photo, and note fields the team needs this week.' },
+      { selector:'.modal-card .form-grid', kind:'manual', title:'Set the follow-up once', text:'Pick the due date and the reminder rule. If Jamie does not answer, Petify follows up without you.' },
+      { selector:'.modal-card [data-action="preview-message"]', kind:'action', value:'preview-message', title:'Check it before it goes out', text:'See the exact message and secure link Jamie will receive.' },
+      { selector:'.message-tabs [data-message-channel="sms"]', kind:'channel', value:'sms', title:'Look at the text message too', text:'The same request goes out by email and SMS. Most fosters answer the text, and either way the reply lands in one record.' },
+      { selector:'.message-drawer [data-action="return-request"]', kind:'action', value:'return-request', title:'Back to the request', text:'The message is confirmed, so go back and send it.' },
+      { selector:'.modal-card [data-action="send-request"]', kind:'action', value:'send-request', title:'Send it once', text:'The secure link goes out by SMS and email, and the reminder schedule starts now.' },
+      { selector:'.pending-request', kind:'manual', title:'See what you are waiting on', text:'Delivery, due date, and the next reminder are all on screen. The chasing is already taken care of.' },
+      { selector:'.pending-request', kind:'finish', next:'b2', nextLabel:'Continue to the foster response', title:'The request is on its way', text:'Want to see the screen Jamie gets?' }
     ]
   },
   b2: {
     label:'DEMO B-2 · FOSTER RESPONSE',
     name:'What the foster receives',
     steps:[
-      { selector:'.pending-request [data-action="preview-foster-form"]', kind:'action', value:'preview-foster-form', title:'Switch to Jamie’s view', text:'Open the same no-account mobile form Jamie receives from the secure link.' },
-      { selector:'[data-form-choice="same"]', kind:'choice', value:'same', title:'Report a quiet week', text:'Jamie confirms nothing changed. The form stops asking here — there is nothing else to fill in.' },
-      { selector:'[data-action="submit-foster"]', kind:'action', value:'submit-foster', title:'Send the check-in', text:'One tap. No forms to chase, no reply for staff to read.' },
-      { selector:'.success-screen', kind:'finish', next:'b3', nextLabel:'Continue to a week with changes', title:'The quiet week is done', text:'Nothing was sent to staff. Milo’s behavior information is current again, so he is now ready to publish. See what happens on a week when something does change?' }
+      { selector:'.pending-request [data-action="preview-foster-form"]', kind:'action', value:'preview-foster-form', title:'Switch to Jamie’s view', text:'Open the mobile form Jamie gets from the secure link. No account, no app.' },
+      { selector:'[data-form-choice="same"]', kind:'choice', value:'same', title:'A week with nothing to report', text:'Jamie confirms nothing changed, and the form stops there. There is nothing else to fill in.' },
+      { selector:'[data-action="submit-foster"]', kind:'action', value:'submit-foster', title:'Send the check-in', text:'One tap. Nothing for staff to chase, nothing for staff to read.' },
+      { selector:'.success-screen', kind:'finish', next:'b3', nextLabel:'Continue to a week with changes', title:'The quiet week is done', text:'Nothing landed on a staff member’s desk, and Milo’s behavior information is current again, so he is ready to publish. Want to see a week when something does change?' }
     ]
   },
   b3: {
-    label:'DEMO B-3 · REVIEW & APPLY',
+    label:'DEMO B-3 · REVIEW & APPROVE',
     name:'Review and apply the check-in',
     steps:[
-      { selector:'.update-metrics', kind:'manual', title:'New check-in arrived', text:'Jamie’s response is waiting in Check-ins. Staff review it before the official record changes.' },
-      { selector:'.comparison', kind:'manual', title:'Review before applying', text:'Petify highlights the changed field and keeps the official record untouched until staff approves it.' },
-      { selector:'[data-action="approve-update"]', kind:'action', value:'approve-update', title:'Apply the verified check-in', text:'Apply Jamie’s reviewed behavior change and selected photos to the official record.' },
-      { selector:'.review-panel', kind:'finish', next:'bpublish', nextLabel:'Continue to publishing', title:'The record is updated', text:'See how the approved information is used next?' }
+      { selector:'.update-metrics', kind:'manual', title:'A new check-in arrived', text:'Jamie’s response is waiting in Check-ins. Staff look at it before the official record changes.' },
+      { selector:'.comparison', kind:'manual', title:'Review it side by side', text:'Petify marks the field that changed and leaves the official record untouched until someone approves it.' },
+      { selector:'[data-action="approve-update"]', kind:'action', value:'approve-update', title:'Approve the check-in', text:'Jamie’s behavior update and the photos you selected go into the official record.' },
+      { selector:'.review-panel', kind:'finish', next:'bpublish', nextLabel:'Continue to publishing', title:'The record is up to date', text:'Want to see what that approved information is used for next?' }
     ]
   },
   bpublish: {
     label:'DEMO B · PUBLISHING',
     name:'Continue to publishing',
     steps:[
-      { selector:'.status-banner.ready', kind:'manual', title:'Connect the check-in to publishing status', text:'The latest foster information resolves Milo’s final unmet requirement and moves him to Ready to publish.' },
-      { selector:'.status-banner [data-action="open-profile"]', kind:'action', value:'open-profile', title:'Continue to the adoption outcome', text:'Open the completed public profile without re-entering Jamie’s approved information.' },
-      { selector:'.publish-aside', kind:'manual', title:'Confirm the publishing handoff', text:'The same approved record is ready for the shelter website. Petfinder and Adopt a Pet are shown separately as planned integrations.' },
-      { selector:'.publish-aside [data-action="publish-now"]', kind:'action', value:'publish-now', title:'Publish the profile', text:'Send Milo to the shelter’s own adoption website.' },
-      { selector:'.publish-aside', kind:'finish', title:'The full loop is complete', text:'One request became a reviewed record, a publishing status decision, and a profile published on the shelter website—without manual chasing.' }
+      { selector:'.status-banner.ready', kind:'manual', title:'The check-in moves the status', text:'Jamie’s latest information clears Milo’s last open requirement, and he moves to Ready to publish.' },
+      { selector:'.status-banner [data-action="open-profile"]', kind:'action', value:'open-profile', title:'Continue to the public profile', text:'Everything Jamie sent and you approved is already in place. Nothing to type again.' },
+      { selector:'.publish-aside', kind:'manual', title:'Confirm the handoff', text:'The same approved record is ready for the shelter website. Petfinder and Adopt a Pet are shown separately as planned integrations.' },
+      { selector:'.publish-aside [data-action="publish-now"]', kind:'action', value:'publish-now', title:'Publish the profile', text:'Send Milo to your own adoption website.' },
+      { selector:'.publish-aside', kind:'finish', title:'That is the whole loop', text:'One request became a reviewed record, a ready status, and a live profile on the shelter website. Nobody had to chase it along the way.' }
     ]
   }
 };
@@ -213,33 +213,33 @@ const KO_TUTORIALS = {
   a: {
     label:'데모 A · 입양 게시 상태',
     steps:[
-      ['게시 상태 판단의 어려움 확인','누가 게시 준비를 마쳤고, 나머지 동물은 어떤 요건을 아직 충족하지 못했으며, 다음 행동이 무엇인지 팀 전체가 별도 확인 없이 파악할 수 있는 화면이다.'],
-      ['판단이 필요한 동물만 확인','최신 정보를 직원이 검토해야 하는 동물만 필터링한다.'],
-      ['상태의 근거가 되는 동물 열기','Milo를 열어 검토 필요 상태의 근거를 확인한다.'],
-      ['Milo가 아직 준비되지 않은 이유 확인','단순한 색상 표시가 아니라 상태의 이유, 담당 행동, 게시에 미치는 영향까지 함께 보여준다.'],
-      ['다음 행동으로 바로 이동','Milo의 마지막 미완료 요건을 해결할 수 있는 체크인를 연다.'],
-      ['변경 근거 비교','공식 기록을 바꾸기 전에 반영된 기존 기록과 Jamie의 새 관찰을 비교한다.'],
-      ['검토한 변경사항 반영','직원이 확인한 정보만 공식 기록에 반영한다.'],
-      ['게시 상태 전환 확인','충족하지 못한 행동 요건이 해결되고 체크리스트가 5/5로 완료되면서 Milo가 자동으로 게시 준비 상태가 된다.'],
-      ['결과 화면으로 바로 이동','게시 상태 판단 결과에서 입양자용 공개 프로필로 바로 이동한다.'],
-      ['게시 전 한 번만 확인','공개 프로필과 현재 게시 가능한 채널을 확인한다. 제휴 채널은 지원 예정 상태로 명확히 구분돼 있다.'],
-      ['쉘터 웹사이트에 게시','반영된 프로필을 쉘터 자체 입양 웹사이트에 게시한다.'],
-      ['게시 상태가 실제 행동으로 연결','Milo가 쉘터 웹사이트에 게시됐다. 확정되지 않은 제휴 연동을 약속하지 않으면서 미충족 요건이 있던 레코드가 입양 가능한 결과로 연결됐다.']
+      ['모든 동물의 현재 상태 한눈에','누가 게시 준비를 마쳤는지, 나머지 동물은 무엇이 비어 있는지, 다음 행동은 누가 하는지가 한 목록에 있다. 따로 물어볼 필요가 없다.'],
+      ['판단이 필요한 동물부터','최신 정보를 직원이 검토해야 하는 동물만 필터링한다.'],
+      ['상태의 근거가 되는 레코드 열기','Milo를 열어 검토 필요 상태가 된 이유를 확인한다.'],
+      ['Milo가 아직 준비되지 않은 이유','상태의 이유, 해소할 행동, 그 때문에 막혀 있는 일까지 함께 보여준다. 단순한 색상 표시가 아니다.'],
+      ['다음 행동으로 바로 이동','Milo의 마지막 미완료 요건을 해소할 수 있는 체크인을 연다.'],
+      ['변경 전 비교','Jamie의 새 체크인이 현재 기록 옆에 나란히 놓여, 무엇이 바뀌는지 그대로 보인다.'],
+      ['검토한 내용만 승인','방금 확인한 정보만 공식 기록에 반영된다.'],
+      ['Milo가 스스로 준비 완료로','미완료였던 행동 요건이 충족되고 체크리스트가 5/5가 되면서 Milo가 게시 준비 완료로 넘어간다. 상태를 손으로 바꾸는 사람은 없다.'],
+      ['결과 화면으로 바로 이동','같은 화면에서 입양자가 보게 될 프로필을 연다.'],
+      ['게시 전 한 번만 확인','공개 프로필과 오늘 게시할 수 있는 채널을 확인한다. 제휴 채널은 지원 예정으로 구분돼 있다.'],
+      ['쉘터 웹사이트에 게시','승인된 프로필을 쉘터 자체 입양 웹사이트에 게시한다.'],
+      ['미완료 요건에서 게시 완료까지','Milo가 쉘터 웹사이트에 게시됐다. 요건이 비어 있던 레코드가 입양 가능한 상태가 됐고, 아직 없는 제휴 연동에 기대는 부분도 없다.']
     ]
   },
   b1: {
     label:'데모 B-1 · 체크인 요청',
     nextLabel:'임보자 응답 이어보기',
     steps:[
-      ['일간 돌봄 자동 발송','Jamie는 정해진 시간에 Milo의 일간 돌봄 링크를 자동으로 받는다. 일상적인 완료 기록은 Milo의 돌봄 로그에 바로 저장되고, 투약 누락이나 우려 사항만 Alex에게 알림으로 전달된다.'],
-      ['체크인 독촉 부담 확인','요청, 리마인드, 응답, 검토가 한곳에 보여 코디네이터가 기억에 의존해 후속 연락을 관리할 필요가 없다.'],
-      ['구조화된 요청 만들기','팀에 필요한 건강, 행동, 투약, 사진, 메모 항목을 지정해 요청한다.'],
-      ['후속 연락 규칙 한 번만 설정','기한과 리마인드 규칙을 정한다. Jamie가 응답하지 않으면 Petify가 자동으로 후속 연락한다.'],
-      ['발송 전 메시지 확인','Jamie가 받을 실제 요청 문구와 보안 링크를 확인한다.'],
-      ['문자 발송 화면으로 전환','같은 요청이 이메일과 문자로 함께 나간다. 임보자 대부분은 문자에 답하며, 어느 쪽이든 응답은 하나의 레코드로 들어온다.'],
-      ['요청 화면으로 돌아가기','메시지를 확인한 뒤 요청 화면으로 돌아가 발송한다.'],
-      ['한 번만 발송','보안 링크를 문자와 이메일로 보내면 자동 리마인드 일정이 시작된다.'],
-      ['응답 대기 상태 확인','전달 여부, 기한, 다음 리마인드를 콘솔에서 확인할 수 있어 후속 연락이 이미 처리되고 있음을 알 수 있다.'],
+      ['일간 돌봄은 자동으로 나간다','Jamie는 정해진 시간에 Milo의 일간 돌봄 링크를 자동으로 받는다. 일상적인 응답은 돌봄 로그에 바로 저장되고, 투약 누락이나 우려 사항만 Alex에게 전달된다.'],
+      ['후속 연락이 한곳에','요청, 리마인드, 응답, 검토가 모두 여기에 보인다. 누가 아직 안 보냈는지 기억에 의존해 챙길 필요가 없다.'],
+      ['필요한 항목만 지정해 요청','이번 주에 필요한 건강, 행동, 투약, 사진, 메모 항목을 선택한다.'],
+      ['후속 연락 규칙은 한 번만','기한과 리마인드 규칙을 정한다. Jamie가 응답하지 않으면 Petify가 대신 후속 연락한다.'],
+      ['나가기 전에 확인','Jamie가 받게 될 실제 문구와 보안 링크를 확인한다.'],
+      ['문자 화면도 확인','같은 요청이 이메일과 문자로 함께 나간다. 임보자 대부분은 문자에 답하며, 어느 쪽이든 응답은 하나의 레코드로 들어온다.'],
+      ['요청 화면으로 돌아가기','메시지를 확인했으니 요청 화면으로 돌아가 발송한다.'],
+      ['한 번만 발송','보안 링크가 문자와 이메일로 나가고 자동 리마인드 일정이 시작된다.'],
+      ['무엇을 기다리는 중인지 보인다','전달 여부, 기한, 다음 리마인드가 모두 화면에 있다. 독촉은 이미 처리되고 있다.'],
       ['요청 발송 완료','Jamie가 받는 화면을 이어서 확인하시겠습니까?']
     ]
   },
@@ -247,30 +247,30 @@ const KO_TUTORIALS = {
     label:'데모 B-2 · 임보자 응답',
     nextLabel:'변화가 있는 주로 이어보기',
     steps:[
-      ['Jamie 화면으로 전환','Jamie가 보안 링크에서 보게 되는 계정 없는 모바일 폼을 연다.'],
-      ['변화 없는 주 보고','Jamie가 달라진 점이 없다고 확인하면 양식은 더 묻지 않는다. 작성할 내용이 더 없기 때문이다.'],
+      ['Jamie 화면으로 전환','Jamie가 보안 링크로 받는 모바일 양식을 연다. 계정도, 앱 설치도 필요 없다.'],
+      ['보고할 게 없는 주','Jamie가 달라진 점이 없다고 확인하면 양식은 거기서 끝난다. 더 작성할 내용이 없기 때문이다.'],
       ['체크인 보내기','한 번 누르면 끝난다. 독촉할 양식도, 직원이 읽을 답변도 없다.'],
-      ['변화 없는 주 완료','직원에게 전달된 것은 없다. Milo의 행동 정보가 다시 최신이 되어 게시 준비 완료 상태가 됐다. 변화가 생긴 주에는 어떻게 처리되는지 이어서 확인하시겠습니까?']
+      ['변화 없는 주 완료','직원에게 넘어간 일은 없고, Milo의 행동 정보는 다시 최신이 되어 게시 준비 완료가 됐다. 변화가 생긴 주에는 어떻게 되는지 이어서 확인하시겠습니까?']
     ]
   },
   b3: {
     label:'데모 B-3 · 검토 및 반영',
     nextLabel:'게시로 이어보기',
     steps:[
-      ['새 체크인 도착','Jamie의 응답이 체크인에 도착했다. 직원이 검토하기 전까지 공식 기록은 변경되지 않는다.'],
-      ['반영 전 비교 검토','변경된 항목을 강조하고 직원 반영 전까지 공식 기록은 그대로 유지한다.'],
-      ['검토한 체크인 반영','Jamie의 행동 변화와 반영된 사진을 공식 기록에 반영한다.'],
-      ['레코드 업데이트 완료','승인된 정보가 다음 업무에 사용되는 과정을 이어서 확인하시겠습니까?']
+      ['새 체크인 도착','Jamie의 응답이 체크인에 도착했다. 직원이 검토하기 전까지 공식 기록은 바뀌지 않는다.'],
+      ['나란히 놓고 검토','변경된 항목을 표시해 주고, 누군가 승인하기 전까지 공식 기록은 그대로 둔다.'],
+      ['체크인 승인','Jamie의 행동 변화와 선택한 사진이 공식 기록에 반영된다.'],
+      ['레코드 업데이트 완료','승인된 정보가 다음 업무에 어떻게 쓰이는지 이어서 확인하시겠습니까?']
     ]
   },
   bpublish: {
     label:'데모 B · 게시',
     steps:[
-      ['체크인를 게시 상태와 연결','최신 임보 정보가 Milo의 마지막 미완료 요건을 해소하고 게시 게시 상태로 전환한다.'],
-      ['입양 결과로 이어가기','반영된 정보를 다시 입력하지 않고 완성된 공개 프로필을 연다.'],
-      ['게시 연결 확인','동일한 반영 레코드가 쉘터 웹사이트 게시에 사용된다. Petfinder와 Adopt a Pet은 지원 예정 연동으로 구분된다.'],
+      ['체크인이 상태를 바꾼다','Jamie의 최신 정보가 Milo의 마지막 미완료 요건을 해소하면서 게시 준비 완료로 넘어간다.'],
+      ['공개 프로필로 이어가기','Jamie가 보내고 승인된 정보가 이미 들어가 있다. 다시 입력할 것이 없다.'],
+      ['게시 연결 확인','같은 승인 레코드가 쉘터 웹사이트 게시에 그대로 쓰인다. Petfinder와 Adopt a Pet은 지원 예정 연동으로 구분된다.'],
       ['프로필 게시','Milo를 쉘터 자체 입양 웹사이트에 게시한다.'],
-      ['전체 흐름 완료','한 번의 요청이 검토된 레코드, 게시 상태 판단 결과, 쉘터 웹사이트 게시까지 연결됐다. 수동 독촉은 필요하지 않았다.']
+      ['이게 전체 흐름이다','한 번의 요청이 검토된 레코드, 게시 준비 완료 상태, 쉘터 웹사이트 게시까지 이어졌다. 중간에 독촉한 사람은 없었다.']
     ]
   }
 };
@@ -285,7 +285,7 @@ const TOUR_SETUP = {
 
 const KO_UI = {
   'Beagle mix · Male · 4 years':'비글 믹스 · 수컷 · 4살','Shepherd mix · Female · 2 years':'셰퍼드 믹스 · 암컷 · 2살','Corgi mix · Female · 3 years':'코기 믹스 · 암컷 · 3살','Check-in overdue · 5 days':'체크인 기한 초과 · 5일','Follow up with foster':'임보자에게 후속 연락','Open record':'레코드 열기','2 hr ago':'2시간 전','38 min ago':'38분 전',
-  'Petify for Shelters':'쉘터용 Petify','Dashboard':'대시보드','Animals':'동물','Check-ins':'체크인','Fosters':'임보자','Publishing':'게시','Settings':'설정','Reset demo':'데모 초기화','Administrator':'관리자','Search animals, fosters, or records':'동물, 임보자 또는 기록 검색','Search':'검색','Demo tours':'데모 튜토리얼','Notifications':'알림','Add animal':'동물 추가','Language':'언어 선택',
+  'Petify for Shelters':'쉘터용 Petify','Dashboard':'대시보드','Animals':'동물','Check-ins':'체크인','Fosters':'임보자','Publishing':'게시','Settings':'설정','Reset demo':'데모 초기화','Administrator':'관리자','Search animals, fosters, or records':'동물, 임보자 또는 기록 검색','Search':'검색','Demo tours':'데모 튜토리얼','Guided demo':'가이드 데모','Notifications':'알림','Add animal':'동물 추가','Language':'언어 선택',
   'SUNDAY, AUGUST 9':'8월 9일 일요일','Good morning, Alex':'좋은 아침이에요, Alex','Here is what needs attention across your shelter today.':'오늘 쉘터에서 확인해야 할 업무입니다.','Export report':'보고서 내보내기','New intake':'신규 입소','In care':'보호 중','Needs review':'검토 필요','Ready to publish':'게시 준비 완료','Published':'게시 완료','Shelter website':'쉘터 웹사이트','Updates waiting':'대기 중인 업데이트','Milo is now ready':'Milo 게시 준비 완료','3 ready to publish this week':'이번 주 게시 준비 완료 3마리','6 in foster homes':'6마리 임보 중','+1 this week':'이번 주 +1','ANIMAL STATUS':'동물 상태','NEEDS ATTENTION':'확인 필요','LISTING STATUS':'게시 상태','Each animal appears in one status queue. Select a card to open the matching list.':'각 동물은 하나의 상태 목록에만 포함됩니다. 카드를 누르면 해당 목록이 열립니다.','Animal records':'동물 레코드','ANIMALS NEEDING ATTENTION':'확인이 필요한 동물','Review the animal, reason, and next action':'동물별 사유와 다음 행동 확인','New behavior update needs review':'새 행동 업데이트 검토 필요','Jamie Lee · Submitted 12 min ago':'Jamie Lee · 12분 전 제출','Review Milo':'Milo 검토','Medical clearance needs review':'의료 확인 검토 필요','Morgan Kim · Updated yesterday':'Morgan Kim · 어제 업데이트','Review Buddy':'Buddy 검토','Profile ready to publish':'프로필 게시 준비 완료','Open Luna':'Luna 열기','Open Milo':'Milo 열기','EXCEPTIONS':'확인 필요','Needs your attention':'확인이 필요한 항목','View all':'전체 보기','4 foster updates are overdue':'임보 업데이트 4건 기한 초과','Oldest request is 5 days late':'가장 오래된 요청은 5일 지연','Open overdue requests':'기한 초과 요청 열기','3 animals have outdated information':'동물 3마리의 정보가 오래됨','1 animal has outdated information':'동물 1마리의 정보가 오래됨','Behavior or health details are older than 14 days':'행동 또는 건강 정보가 14일 이상 지남','View blocked animals':'차단된 동물 보기','2 profiles are ready to publish':'프로필 2건 게시 준비 완료','Shelter website publishing is available':'쉘터 웹사이트에 게시 가능','Open publishing queue':'게시 대기열 열기','2 blockers have no owner':'차단 항목 2건의 담당자 없음','Assign the next action to a teammate':'다음 행동을 팀원에게 배정','Assign owners':'담당자 배정','LIVE ACTIVITY':'최근 활동','Recent changes':'최근 변경','Milo became ready to publish':'Milo 게시 준비 완료','Jamie submitted an update for Milo':'Jamie가 Milo 업데이트 제출','Behavior update approved by Alex':'Alex가 행동 업데이트 승인','Behavior changes · 3 new photos':'행동 변화 · 새 사진 3장','Luna’s profile is ready':'Luna 프로필 준비 완료','All 5 publishing requirements complete':'게시 요건 5개 모두 충족','Medical clearance added for Buddy':'Buddy 의료 확인 추가','Submitted by Morgan Kim':'Morgan Kim 제출','Daisy published to shelter website':'Daisy 쉘터 웹사이트 게시 완료','Published by Alex Rivera':'Alex Rivera 게시','Open full activity log':'전체 활동 기록 열기','QUICK START':'빠른 실행','Move work forward':'다음 업무 진행','Create a record':'레코드 생성','Review updates':'업데이트 검토','Review animal records':'동물 레코드 검토','Resolve blockers':'차단 항목 해결','Publish profiles':'프로필 게시','2 waiting':'2건 대기','8 animals':'동물 8마리','12 ready':'12마리 준비 완료','Dashboard and list counts use the same animal status.':'대시보드와 목록이 동일한 동물 상태 기준을 사용합니다.',
   'ANIMAL WORKSPACE':'동물 업무 공간','See who is ready, what is missing, and the next action for every animal.':'준비된 동물, 누락 정보, 다음 행동을 한눈에 확인합니다.','Bulk actions':'일괄 작업','All':'전체','Ready':'준비 완료','Blocked':'차단됨','Filters':'필터','Columns':'열 설정','Save view':'보기 저장','Animal':'동물','Stage':'단계','Readiness':'준비 상태','Needs attention':'확인 필요','Next action':'다음 행동','Owner':'담당자','Updated':'업데이트','No animals found':'동물을 찾지 못했습니다','Try a different search or filter.':'다른 검색어나 필터를 사용해보세요.','Clear filters':'필터 초기화','In foster':'임보 중','In care':'보호 중','None':'없음','Review update':'업데이트 검토','Review record':'레코드 검토','Preview profile':'프로필 미리보기','View live profile':'게시 프로필 보기','Medical clearance':'의료 확인','New behavior update':'새 행동 업데이트','Today':'오늘','Yesterday':'어제','Just now':'방금 전','Male':'수컷','Female':'암컷','Unknown':'알 수 없음','Mixed breed':'믹스견','Labrador mix · Male · 2 years':'래브라도 믹스 · 수컷 · 2살','Terrier mix · Female · 1 year':'테리어 믹스 · 암컷 · 1살','Jindo mix · Male · 3 years':'진도 믹스 · 수컷 · 3살','Poodle mix · Female · 4 years':'푸들 믹스 · 암컷 · 4살','Mixed breed · Female · 2 years':'믹스견 · 암컷 · 2살',
   'PUBLISHING STATUS':'게시 상태','Ready now':'현재 준비 완료',"Due today":'오늘 마감','Action required':'조치 필요','All required information is complete and current.':'필수 정보가 모두 완료됐으며 최신 상태입니다.','Jamie’s submission may resolve the final blocker. Review it before the record changes.':'Jamie의 제출 내용으로 마지막 차단 항목이 해소될 수 있습니다. 레코드 변경 전 검토하세요.','Behavior information is outdated':'행동 정보가 오래되었습니다','Review Jamie’s update':'Jamie 업데이트 검토','Request behavior update':'행동 업데이트 요청','Open profile':'프로필 열기','Review submission':'제출 내용 검토','Send request':'요청 보내기','PUBLISHING REQUIREMENTS':'게시 요건','Health':'건강','Behavior':'행동','Media':'미디어','Documents':'문서','Public profile':'공개 프로필','RECENT ACTIVITY':'최근 활동','ANIMAL RECORD':'동물 레코드','Overview':'개요','Profile':'프로필','Check-ins':'체크인','Activity':'활동','Edit':'수정','Save profile':'프로필 저장','Draft autosaved a moment ago':'초안이 방금 자동 저장됨','All changes saved':'모든 변경사항 저장됨','About Milo':'Milo 소개','Internal notes are never included in the public profile.':'내부 메모는 공개 프로필에 포함되지 않습니다.','Public name':'공개 이름','Headline':'한 줄 소개','Adoption listing':'입양 소개','Adoption contact':'입양 문의','Best home':'적합한 가정','Adults or older children':'성인 또는 연령대가 높은 자녀가 있는 가정','MEDIA LIBRARY':'미디어 라이브러리','Choose which assets can appear on public adoption profiles.':'공개 입양 프로필에 사용할 사진을 선택합니다.','Cover photo':'대표 사진','Foster upload':'임보자 업로드','Public use':'공개 사용','Public media':'공개 미디어','Upload':'업로드','Add entry':'항목 추가','AUDIT TRAIL':'변경 이력','Requests, approvals, state changes, and publishing events.':'요청, 승인, 상태 변경, 게시 이력을 확인합니다.',
@@ -298,8 +298,8 @@ const KO_UI = {
   'NEW INTAKE':'신규 입소','Add an animal':'동물 추가','Create the record now. Complete the rest as care progresses.':'지금 레코드를 만들고 나머지는 보호 과정에서 보완합니다.','Animal':'동물','Intake':'입소','Initial state':'초기 상태','Primary photo':'대표 사진','Photo added':'사진 추가됨','Click to replace':'클릭하여 교체','Add a photo':'사진 추가','Name or temporary name':'이름 또는 임시 이름','Species':'동물 종류','Dog':'개','Cat':'고양이','Breed':'품종','Estimated age':'추정 나이','Intake type':'입소 유형','Owner surrender':'소유자 인계','Stray':'유기 동물','Transfer in':'기관 이관','Date & time':'일시','Source':'접수 경로','Community member':'지역 주민','Partner clinic':'협력 동물병원','Intake notes':'입소 메모','Does Coco need immediate medical attention?':'Coco에게 즉각적인 의료 조치가 필요한가요?','Does Coco need a foster placement?':'Coco에게 임보 배치가 필요한가요?','No':'아니요','Yes':'예','Record owner':'레코드 담당자','Priority':'우선순위','Normal':'보통','Urgent':'긴급','Ready to create Coco’s record':'Coco 레코드 생성 준비 완료','A five-section readiness checklist will be created automatically.':'5개 항목의 준비 체크리스트가 자동으로 생성됩니다.','Back':'이전','Continue':'계속','Save & open record':'저장 후 레코드 열기',
   'FOSTER PLACEMENT':'임보 배치','Foster placement':'임보 배치','Place in foster':'임보자 배정','Create a foster placement':'새 임보 배치','Choose an animal without a foster, then connect the foster person and update schedule.':'임보자가 배정되지 않은 동물을 선택한 뒤 임보자와 업데이트 일정을 연결합니다.','Animal without a foster placement':'임보자 미배정 동물','Foster person':'임보자','Start date':'시작일','Expected end date':'예상 종료일','Coordinator':'코디네이터','Check-in schedule':'체크인 일정','First check-in: Aug 16':'첫 체크인: 8월 16일','No foster people are currently available':'현재 배치 가능한 임보자가 없습니다','Choose an available foster person to continue.':'계속하려면 배치 가능한 임보자를 선택하세요.','All current animals have a foster placement':'현재 모든 동물에 임보자가 배정되어 있습니다','There are no unassigned animals in the named demo records. Add a new animal or end an existing placement first.':'이름이 표시된 데모 레코드에 임보자 미배정 동물이 없습니다. 동물을 추가하거나 기존 배치를 종료해 주세요.','Confirm placement':'배치 확정','Close':'닫기',
   'Request a foster update':'임보 업데이트 요청','Jamie gets a secure mobile link. No account or app is required.':'Jamie는 보안 모바일 링크를 받습니다. 계정이나 앱이 필요하지 않습니다.','Update form':'업데이트 양식','Send now':'지금 발송','Now · Email + SMS':'지금 · 이메일 + 문자','Schedule for tomorrow':'내일 예약','Due date':'마감일','Automatic reminder':'자동 리마인드','After 2 days · max 2':'2일 후 · 최대 2회','Ask for':'요청 항목','Medication':'투약','Photos':'사진','Notes':'메모','SMS + EMAIL PREVIEW':'문자 + 이메일 미리보기','See the exact message, secure link, and reminder schedule Jamie receives.':'Jamie가 받을 실제 메시지, 보안 링크, 리마인드 일정을 확인합니다.','Open preview':'미리보기 열기','Copy link':'링크 복사','Send request':'요청 보내기','ASSIGN NEXT ACTION':'다음 행동 배정','Choose an owner':'담당자 선택','Task':'업무','Note':'메모','Assign task':'업무 배정',
-  'RECIPIENT PREVIEW':'수신자 미리보기','What Jamie receives':'Jamie가 받는 내용','Preview the request before sending it by SMS and email.':'문자와 이메일로 보내기 전 요청 내용을 확인합니다.','Email':'이메일','Text message':'문자 메시지','Automatic follow-up':'자동 후속 연락','Reminder after 2 days if Jamie has not submitted. Maximum 2 reminders.':'Jamie가 제출하지 않으면 2일 후 리마인드합니다. 최대 2회 발송합니다.','Secure individual link':'개별 보안 링크','No account required. The link opens only Milo’s requested check-in form.':'계정이 필요 없으며 Milo의 요청된 체크인 양식만 열립니다.','AFTER JAMIE SUBMITS':'JAMIE 제출 후','Submitted':'제출됨','Approved record':'승인된 레코드','The submission does not overwrite Milo’s official record until a staff member approves it.':'직원이 승인하기 전에는 제출 내용이 Milo의 공식 레코드를 덮어쓰지 않습니다.','Back to request':'요청 화면으로 돌아가기','Open Jamie’s form preview':'Jamie 양식 미리보기 열기','FROM':'보낸 사람','TO':'받는 사람','Share Milo’s update':'Milo 업데이트 작성','No account or app is required. This secure link is unique to Milo.':'계정이나 앱이 필요하지 않습니다. Milo 전용 보안 링크입니다.',
-  'DEMO PRESENTER MODE':'데모 시연 모드','Choose the story you are demonstrating':'시연할 소재를 선택하세요','Each tour resets the sample data, opens the right starting screen, and provides a talk track with the exact next click.':'각 튜토리얼은 샘플 데이터를 초기화하고 시작 화면과 다음 클릭 위치를 안내합니다.','MATERIAL A · 12 STEPS':'소재 A · 12단계','Which dogs are ready to go?':'어떤 동물이 입양 준비를 마쳤을까?','Readiness overview → blocker → approval → Ready → publish':'준비 현황 → 차단 사유 → 승인 → 준비 완료 → 게시','Start Demo A':'데모 A 시작','Start Demo A ›':'데모 A 시작 ›','MATERIAL B-1 · 10 STEPS':'소재 B-1 · 10단계','Send one check-in request':'체크인 요청 한 건 보내기','Automatic daily care → request and track one weekly check-in':'일간 돌봄 자동 발송 → 주간 체크인 요청·추적','Start Demo B-1 ›':'데모 B-1 시작 ›','MATERIAL B-2 · 4 STEPS':'소재 B-2 · 4단계','What the foster receives':'임보자가 받는 화면','Open Jamie’s form and submit the check-in':'임보자 화면부터 보기','Start Demo B-2 ›':'데모 B-2 시작 ›','MATERIAL B-3 · 4 STEPS':'소재 B-3 · 4단계','Review and apply the check-in':'체크인 검토 및 반영','Review the submission before the record changes':'제출 검토부터 보기','Start Demo B-3 ›':'데모 B-3 시작 ›','NOTIFICATIONS':'알림','Notifications':'알림','New foster check-in':'새 임보자 체크인','Profile published':'프로필 게시 완료','Profile ready':'프로필 준비 완료','Mark all as read':'모두 읽음 처리','DETAILS':'상세','Prepared content':'준비된 콘텐츠','This interaction is represented in the pretotype.':'이 상호작용은 프리토타입에 준비된 상태로 구현되어 있습니다.','End tour':'튜토리얼 종료','Continue':'계속','Finish tutorial':'튜토리얼 완료','Click the highlighted control':'강조된 요소를 클릭하세요','Interactive product tutorial':'제품 인터랙티브 튜토리얼','Use highlighted control':'강조된 요소 사용','Exit tutorial':'튜토리얼 종료',
+  'RECIPIENT PREVIEW':'수신자 미리보기','What Jamie receives':'Jamie가 받는 내용','Preview the request before sending it by SMS and email.':'문자와 이메일로 보내기 전 요청 내용을 확인합니다.','Email':'이메일','Text message':'문자 메시지','Automatic follow-up':'자동 후속 연락','Reminder after 2 days if Jamie has not submitted. Maximum 2 reminders.':'Jamie가 제출하지 않으면 2일 후 리마인드합니다. 최대 2회 발송합니다.','Secure individual link':'개별 보안 링크','No account required. The link opens only Milo’s requested check-in form.':'계정이 필요 없으며 Milo의 요청된 체크인 양식만 열립니다.','AFTER JAMIE SUBMITS':'JAMIE 제출 후','Submitted':'제출됨','Approved record':'승인된 레코드','Nothing Jamie sends changes Milo’s official record until a staff member approves it.':'Jamie가 보낸 내용은 직원이 승인하기 전까지 Milo의 공식 레코드를 바꾸지 않습니다.','Back to request':'요청 화면으로 돌아가기','Open Jamie’s form preview':'Jamie 양식 미리보기 열기','FROM':'보낸 사람','TO':'받는 사람','Share Milo’s update':'Milo 업데이트 작성','No account or app is required. This secure link is unique to Milo.':'계정이나 앱이 필요하지 않습니다. Milo 전용 보안 링크입니다.',
+  'GUIDED DEMOS':'가이드 데모','Pick what you want to see':'보고 싶은 흐름을 선택하세요','Each tour resets the sample data, opens the right screen, and points to the next click.':'각 데모는 샘플 데이터를 초기화하고 시작 화면을 연 뒤, 다음에 누를 곳을 짚어 줍니다.','DEMO A · 12 STEPS':'데모 A · 12단계','Which dogs are ready to go?':'어떤 동물이 입양 준비를 마쳤을까?','Publishing requirements → what is missing → approve → Ready to publish → publish':'게시 요건 → 미충족 항목 → 승인 → 게시 준비 완료 → 게시','Start Demo A':'데모 A 시작','Start Demo A ›':'데모 A 시작 ›','DEMO B-1 · 10 STEPS':'데모 B-1 · 10단계','Send one check-in request':'체크인 요청 한 건 보내기','Automatic daily care → send and track one weekly check-in':'일간 돌봄 자동 발송 → 주간 체크인 요청·추적','Start Demo B-1 ›':'데모 B-1 시작 ›','DEMO B-2 · 4 STEPS':'데모 B-2 · 4단계','What the foster receives':'임보자가 받는 화면','Open Jamie’s form and send the check-in':'임보자 양식을 열고 체크인 보내기','Start Demo B-2 ›':'데모 B-2 시작 ›','DEMO B-3 · 4 STEPS':'데모 B-3 · 4단계','Review and apply the check-in':'체크인 검토 및 반영','Check the submission before the record changes':'기록이 바뀌기 전에 제출 내용 확인','Start Demo B-3 ›':'데모 B-3 시작 ›','NOTIFICATIONS':'알림','Notifications':'알림','New foster check-in':'새 임보자 체크인','Profile published':'프로필 게시 완료','Profile ready':'프로필 준비 완료','Mark all as read':'모두 읽음 처리','DETAILS':'상세','Prepared content':'준비된 콘텐츠','This interaction is represented in the pretotype.':'이 상호작용은 프리토타입에 준비된 상태로 구현되어 있습니다.','End tour':'튜토리얼 종료','Continue':'계속','Finish tutorial':'튜토리얼 완료','Click the highlighted area':'강조된 부분을 클릭하세요','Interactive product tutorial':'제품 인터랙티브 튜토리얼','Use highlighted control':'강조된 요소 사용','Exit tutorial':'튜토리얼 종료',
   'Demo reset to its starting state':'데모가 시작 상태로 초기화되었습니다','Coco’s record and readiness checklist were created':'Coco의 레코드와 준비 체크리스트가 생성되었습니다','Coco was placed with Casey · first check-in scheduled':'Coco가 Casey에게 배치됐고 첫 체크인이 예약되었습니다','Secure update link sent to Jamie by email and SMS':'Jamie에게 이메일과 문자로 보안 업데이트 링크를 보냈습니다','Secure foster link copied':'임보자용 보안 링크를 복사했습니다','3 photos uploaded':'사진 3장을 업로드했습니다','Draft saved · Jamie can return from the same link':'초안이 저장되었습니다. Jamie는 같은 링크에서 이어서 작성할 수 있습니다','Update approved · Milo is now ready to publish':'업데이트가 승인되어 Milo가 게시 준비 상태가 되었습니다','Behavior change approved · photos remain in review':'행동 변화가 승인됐으며 사진은 검토 중입니다','Clarification request sent to Jamie':'Jamie에게 보완 요청을 보냈습니다','Submission rejected · Jamie was notified':'제출을 거절했으며 Jamie에게 알림을 보냈습니다','Milo is already live on the shelter website':'Milo는 이미 쉘터 웹사이트에 게시되어 있습니다','Milo published to the shelter website':'Milo를 쉘터 웹사이트에 게시했습니다','Public profile saved':'공개 프로필을 저장했습니다','Task assigned to Morgan Kim':'Morgan Kim에게 업무를 배정했습니다','2 filters applied':'필터 2개를 적용했습니다','Channel status synced just now':'채널 상태를 방금 동기화했습니다','Activity refreshed':'활동 내역을 새로고침했습니다','All notifications marked as read':'모든 알림을 읽음 처리했습니다','Response saved automatically':'응답이 자동 저장되었습니다','All visible animals selected':'현재 보이는 동물을 모두 선택했습니다','Selection cleared':'선택을 해제했습니다','Photo approved for public use':'사진을 공개용으로 승인했습니다','Photo removed from public profile':'공개 프로필에서 사진을 제외했습니다','Demo export prepared':'데모 내보내기가 준비되었습니다',
   'Back to animals':'동물 목록으로','Back to publishing':'게시 목록으로','Main shelter':'메인 쉘터','Jamie Lee · Foster home':'Jamie Lee · 임보 가정','No foster assigned':'배정된 임보자 없음','Foster coordinator: Alex':'임보 코디네이터: Alex','Not ready · 1 check-in waiting for review':'게시 불가 · 검토 대기 체크인 1건','Not ready · 4 requirements incomplete':'게시 불가 · 미완료 요건 4개','Complete health, behavior, documents, and public profile information.':'건강, 행동, 문서, 공개 프로필 정보를 완료하세요.','Request a new foster check-in to confirm behavior before publishing.':'게시 전 행동 정보를 확인할 수 있도록 새 임보 체크인을 요청하세요.','Vaccinations and medical clearance complete':'예방접종 및 의료 확인 완료','Complete':'완료','Foster check-in applied today':'오늘 임보 체크인 반영','New foster check-in waiting for review':'새 임보 체크인 검토 대기','No behavior assessment':'행동 평가 없음','Last confirmed 18 days ago':'18일 전 마지막 확인','1 intake photo · 3 more recommended':'입소 사진 1장 · 3장 추가 권장','8 approved photos · 1 video':'승인된 사진 8장 · 영상 1개','In progress':'진행 중','Intake record only':'입소 기록만 있음','Description not started':'소개문 작성 전','Profile copy and adoption details complete':'프로필 소개 및 입양 정보 완료','Publish adoption profile':'입양 프로필 게시','Assign a foster home':'임보 가정 배정','Owner · Alex Rivera':'담당자 · Alex Rivera','Owner · Alex Rivera · Due today':'담당자 · Alex Rivera · 오늘 마감','Foster coordinator':'임보 코디네이터','Set placement':'임보 배치','Assign to someone else':'다른 담당자에게 배정','Check-in submitted by Jamie':'Jamie가 체크인 제출','Photos approved by Alex':'Alex가 사진 승인','3 new photos · behavior changed':'새 사진 3장 · 행동 변화','8 public photos ready':'공개 사진 8장 준비 완료','Medical clearance received':'의료 확인 접수','Added by Dr. Casey':'Dr. Casey 추가','RECORD':'레코드','Animal profile':'동물 프로필','Core identity and intake details':'기본 식별 및 입소 정보','Name':'이름','Intake source':'입소 경로','Intake date':'입소일','Foster home · Jamie Lee':'임보 가정 · Jamie Lee','Medical information required for publishing':'게시를 위해 필요한 의료 정보','Rabies vaccination':'광견병 예방접종','DHPP vaccination':'종합 예방접종','Spay / neuter':'중성화','Latest approved observations':'최근 승인된 관찰','People':'사람','Friendly and seeks attention':'친근하고 관심을 원함','Dogs':'다른 개','Needs slow introductions':'천천히 소개 필요','Cats':'고양이','Not tested':'확인 전','Next step required':'다음 단계 필요','Home notes':'가정 내 메모','Settles well after walks':'산책 후 안정적으로 지냄','Required records and approvals':'필수 기록 및 승인','Intake record':'입소 기록','Medical release':'의료 확인서','Behavior assessment':'행동 평가','Adoption disclosure':'입양 고지서','Every request, response, and approval stays with Milo’s record.':'모든 요청, 응답, 승인 내역이 Milo 레코드에 남습니다.','Weekly check-in submitted':'주간 체크인 제출','Jamie Lee · Behavior changed · 3 photos':'Jamie Lee · 행동 변화 · 사진 3장','Weekly check-in requested':'주간 체크인 요청','Email + SMS · Opened in 8 minutes':'이메일 + 문자 · 8분 만에 열람','First foster check-in applied':'첫 임보 체크인 반영','No health changes · 5 photos':'건강 변화 없음 · 사진 5장','Foster check-in submitted by Jamie Lee':'Jamie Lee 임보 체크인 제출','Weekly check-in opened':'주간 체크인 열람','Check-in reminder sent automatically':'체크인 리마인드 자동 발송','Medical clearance approved by Dr. Casey':'Dr. Casey 의료 확인 승인','Milo placed with Jamie Lee':'Milo를 Jamie Lee에게 배치','Animal record created at intake':'입소 시 동물 레코드 생성','System':'시스템',
   'FOSTER COMMUNICATION':'임보자 커뮤니케이션','Track requests, follow up automatically, and review structured submissions.':'요청을 추적하고 자동으로 후속 연락하며 구조화된 제출 내용을 검토합니다.','Open foster form':'임보자 양식 열기','Copy foster link':'임보자 링크 복사','Request check-in':'체크인 요청','Search check-ins':'체크인 검색','Applied to record':'레코드 반영 완료','Waiting for response':'응답 대기','Request not sent':'요청 미발송','WEEKLY CHECK-IN · DUE TODAY':'주간 체크인 · 오늘 마감','Last approved update was 7 days ago':'마지막 승인 업데이트는 7일 전입니다','Milo’s weekly update has not been requested':'Milo 주간 업데이트가 아직 요청되지 않았습니다','Send one structured request now. Petify will track delivery and follow up automatically.':'구조화된 요청을 한 번 보내면 Petify가 전달 상태를 추적하고 자동으로 후속 연락합니다.','FOSTER':'임보자','Active placement':'임보 진행 중','SCHEDULE':'일정','Due every Sunday':'매주 일요일 마감','LAST APPROVED':'최근 승인','REQUEST STATUS':'요청 상태','Not sent':'미발송','NEXT ACTION':'다음 행동','Request Milo’s weekly check-in':'Milo 주간 체크인 요청','Health, behavior, medication, photos, and notes':'건강, 행동, 투약, 사진, 메모','WEEKLY CHECK-IN · SENT JUST NOW':'주간 체크인 · 방금 발송','Waiting for Jamie':'Jamie 응답 대기','No manual follow-up is needed. Petify will remind Jamie in 2 days if the form is still incomplete.':'직접 독촉할 필요가 없습니다. 2일 후에도 미완료 상태이면 Petify가 Jamie에게 리마인드합니다.','Delivered':'전달 완료','DUE':'마감','3 days remaining':'3일 남음','NEXT REMINDER':'다음 리마인드','Automatic · 1 of 2':'자동 · 2회 중 1회','SECURE INDIVIDUAL LINK':'개별 보안 링크','No account required · Opens only Milo’s weekly check-in':'계정 불필요 · Milo 주간 체크인만 열림','Update approved and applied':'업데이트 승인 및 반영 완료','Milo’s behavior record and readiness checklist were updated.':'Milo의 행동 기록과 준비 체크리스트가 업데이트되었습니다','NEW MEDIA':'새 미디어','APPROVED MEDIA':'승인된 미디어','View request message':'요청 메시지 보기','Send reminder':'리마인드 보내기','Mark clarification received':'보완 내용 확인 완료','View approval history':'승인 이력 보기','Post-treatment recovery':'치료 후 회복','Weekly wellbeing':'주간 상태','No concerns reported':'특이사항 없음','Health follow-up needed':'건강 후속 확인 필요','Update approved and applied':'업데이트 승인 및 반영 완료','Search foster people':'임보자 검색','2 ending this month':'이번 달 2건 종료','4 match current needs':'현재 조건과 4명 일치','4 overdue':'4건 기한 초과','Shelter website live':'쉘터 웹사이트 게시 중','All requirements complete':'필수 항목 완료','Behavior update outdated':'행동 업데이트 오래됨','Medical clearance missing':'의료 확인 누락','24 live':'24건 게시 중','Live now':'현재 게시 중','2 years':'2살','52 lb':'52파운드','Brooklyn':'브루클린','Friendly on intake. No visible injury. Medical check requested.':'입소 시 친화적이었고 눈에 띄는 부상은 없습니다. 의료 확인을 요청했습니다.','Community member':'지역 주민','JPG or PNG · up to 10 MB':'JPG 또는 PNG · 최대 10MB','JPG, PNG, MP4 · Up to 10 files':'JPG, PNG, MP4 · 최대 10개','Choose photos or video':'사진 또는 영상 선택','Uploaded':'업로드 완료','Hi Jamie! How is Milo doing this week?':'안녕하세요, Jamie! 이번 주 Milo는 어떻게 지냈나요?','Share any health or behavior changes and add recent photos by Aug 12. It takes about 3 minutes.':'건강이나 행동 변화와 최근 사진을 8월 12일까지 공유해 주세요. 약 3분 정도 걸립니다.','Reply STOP to opt out.':'수신을 거부하려면 STOP이라고 답장해 주세요.',
@@ -506,8 +506,7 @@ function layout(content) {
     <div class="app-shell">
       <aside class="sidebar ${state.mobileNavOpen?'mobile-open':''}">
         <button class="brand" data-view="dashboard" aria-label="Petify for Shelters dashboard">
-          <span class="brand-mark"><b></b></span>
-          <span><strong>Petify</strong><small>for Shelters</small></span>
+          <img class="brand-logo" src="assets/petify-logo.png" alt="Petify for Shelters">
         </button>
         <div class="workspace-label">SECOND CHANCE RESCUE</div>
         <nav>${NAV.map(([id,ico,label]) => `<button class="nav-item ${section===id?'active':''}" data-view="${id}"><span>${ico}</span><b>${label}</b>${id==='updates'?'<em>2</em>':''}</button>`).join('')}</nav>
@@ -519,11 +518,11 @@ function layout(content) {
       ${state.mobileNavOpen?'<button class="mobile-nav-backdrop" data-action="close-nav" aria-label="Close navigation"></button>':''}
       <main class="main">
         <header class="topbar">
-          <button class="mobile-brand" data-action="open-nav" aria-label="Open navigation"><span class="mobile-menu-icon">☰</span><span class="brand-mark mobile-logo-mark"><b></b></span><span class="mobile-logo-type"><strong>Petify</strong><small>for Shelters</small></span></button>
+          <button class="mobile-brand" data-action="open-nav" aria-label="Open navigation"><span class="mobile-menu-icon">☰</span><img class="brand-logo mobile-logo" src="assets/petify-logo.png" alt="Petify for Shelters"></button>
           <label class="global-search"><span>⌕</span><input id="global-search" value="${state.search}" placeholder="Search animals, fosters, or records" aria-label="Search"></label>
           <div class="top-actions">
             ${languageSwitch()}
-            <button class="tutorial-launch" data-action="guide"><span>▶</span> Start tour</button>
+            <button class="tutorial-launch" data-action="guide"><span>▶</span> Guided demo</button>
             ${iconButton('◌','Notifications','notifications')}
             <button class="add-button" data-action="open-intake"><span>＋</span> Add animal</button>
           </div>
@@ -902,7 +901,7 @@ function fosterFormView() {
   const content=state.fosterFormMode==='daily'
     ? (state.dailyCareSubmitted?dailyCareSubmittedView():dailyCareView())
     : (state.fosterSubmitted?fosterSubmittedView():fosterQuestionView());
-  return `<section class="foster-form-page"><div class="foster-brand"><span class="brand-mark"><b></b></span><span class="foster-brand-name"><strong>Petify</strong><small>for Shelters</small></span><span class="foster-security">Secure foster link · No account required</span>${languageSwitch()}</div><nav class="foster-mode-switch" aria-label="Foster update type"><button class="${state.fosterFormMode==='daily'?'active':''}" data-foster-mode="daily"><small>TODAY</small>Daily care</button><button class="${state.fosterFormMode==='weekly'?'active':''}" data-foster-mode="weekly"><small>THIS WEEK</small>Weekly check-in</button></nav>${content}</section>`;
+  return `<section class="foster-form-page"><div class="foster-brand"><img class="brand-logo foster-logo" src="assets/petify-logo.png" alt="Petify for Shelters"><span class="foster-security">Secure foster link · No account required</span>${languageSwitch()}</div><nav class="foster-mode-switch" aria-label="Foster update type"><button class="${state.fosterFormMode==='daily'?'active':''}" data-foster-mode="daily"><small>TODAY</small>Daily care</button><button class="${state.fosterFormMode==='weekly'?'active':''}" data-foster-mode="weekly"><small>THIS WEEK</small>Weekly check-in</button></nav>${content}</section>`;
 }
 function dailyCareView() {
   const tasks=[
@@ -969,9 +968,9 @@ function requestModal() { return `<button class="modal-close" data-action="close
 function assignModal() { return `<button class="modal-close" data-action="close-modal">×</button><p class="kicker">ASSIGN NEXT ACTION</p><h2>Choose an owner</h2><div class="form-grid"><label class="full"><span>Task</span><input value="Review Milo’s foster update"></label><label><span>Owner</span><select><option>Morgan Kim</option><option>Alex Rivera</option><option>Sam Chen</option></select></label><label><span>Due date</span><input value="Today"></label><label class="full"><span>Note</span><textarea rows="3">Please compare the behavior change before approval.</textarea></label></div><div class="modal-actions"><button class="secondary-button" data-action="close-modal">Cancel</button><button class="primary-button" data-action="confirm-assign">Assign task</button></div>`; }
 
 function renderDrawer() {
-  if(state.drawer==='message-preview') return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer message-drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">RECIPIENT PREVIEW</p><h2>What Jamie receives</h2><p>Preview the request before sending it by SMS and email.</p><div class="message-tabs"><button class="${state.messageChannel==='sms'?'active':''}" data-message-channel="sms">SMS</button><button class="${state.messageChannel==='email'?'active':''}" data-message-channel="email">Email</button></div>${state.messageChannel==='sms'?smsPreview():emailPreview()}<div class="delivery-details"><div><span>↻</span><p><b>Automatic follow-up</b>Reminder after 2 days if Jamie has not submitted. Maximum 2 reminders.</p></div><div><span>⌁</span><p><b>Secure individual link</b>No account required. The link opens only Milo’s requested check-in form.</p></div></div><div class="preview-flow"><small>AFTER JAMIE SUBMITS</small><div><span><i>1</i><b>Submitted</b></span><em>›</em><span><i>2</i><b>Needs review</b></span><em>›</em><span><i>3</i><b>Applied</b></span></div><p>The submission does not overwrite Milo’s official record until a staff member applies it.</p></div><button class="primary-button full" data-action="return-request">Back to request</button><button class="text-button centered" data-action="open-form-from-preview">Open Jamie’s form preview</button></aside></div>`;
+  if(state.drawer==='message-preview') return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer message-drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">RECIPIENT PREVIEW</p><h2>What Jamie receives</h2><p>Preview the request before sending it by SMS and email.</p><div class="message-tabs"><button class="${state.messageChannel==='sms'?'active':''}" data-message-channel="sms">SMS</button><button class="${state.messageChannel==='email'?'active':''}" data-message-channel="email">Email</button></div>${state.messageChannel==='sms'?smsPreview():emailPreview()}<div class="delivery-details"><div><span>↻</span><p><b>Automatic follow-up</b>Reminder after 2 days if Jamie has not submitted. Maximum 2 reminders.</p></div><div><span>⌁</span><p><b>Secure individual link</b>No account required. The link opens only Milo’s requested check-in form.</p></div></div><div class="preview-flow"><small>AFTER JAMIE SUBMITS</small><div><span><i>1</i><b>Submitted</b></span><em>›</em><span><i>2</i><b>Needs review</b></span><em>›</em><span><i>3</i><b>Applied</b></span></div><p>Nothing Jamie sends changes Milo’s official record until a staff member approves it.</p></div><button class="primary-button full" data-action="return-request">Back to request</button><button class="text-button centered" data-action="open-form-from-preview">Open Jamie’s form preview</button></aside></div>`;
   if(state.drawer==='foster-detail') return fosterDetailDrawer();
-  if(state.drawer==='guide') return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer guide-drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">DEMO PRESENTER MODE</p><h2>Choose the story you are demonstrating</h2><p>Each tour resets the sample data, opens the right starting screen, and provides a talk track with the exact next click.</p><div class="tutorial-picker"><button class="tutorial-option" data-action="start-tutorial" data-tutorial="a"><small>MATERIAL A · ${TUTORIALS.a.steps.length} STEPS</small><b>Which dogs are ready to go?</b><span>Publishing requirements → unmet item → apply → Ready to publish → publish</span><em>Start Demo A ›</em></button><button class="tutorial-option" data-action="start-tutorial" data-tutorial="b1"><small>MATERIAL B-1 · ${TUTORIALS.b1.steps.length} STEPS</small><b>Send one check-in request</b><span>Automatic daily care → request and track one weekly check-in</span><em>Start Demo B-1 ›</em></button><button class="tutorial-option" data-action="start-tutorial" data-tutorial="b2"><small>MATERIAL B-2 · ${TUTORIALS.b2.steps.length} STEPS</small><b>What the foster receives</b><span>Open Jamie’s form and submit the check-in</span><em>Start Demo B-2 ›</em></button><button class="tutorial-option" data-action="start-tutorial" data-tutorial="b3"><small>MATERIAL B-3 · ${TUTORIALS.b3.steps.length} STEPS</small><b>Review and apply the check-in</b><span>Review the submission before the record changes</span><em>Start Demo B-3 ›</em></button></div></aside></div>`;
+  if(state.drawer==='guide') return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer guide-drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">GUIDED DEMOS</p><h2>Pick what you want to see</h2><p>Each tour resets the sample data, opens the right screen, and points to the next click.</p><div class="tutorial-picker"><button class="tutorial-option" data-action="start-tutorial" data-tutorial="a"><small>DEMO A · ${TUTORIALS.a.steps.length} STEPS</small><b>Which dogs are ready to go?</b><span>Publishing requirements → what is missing → approve → Ready to publish → publish</span><em>Start Demo A ›</em></button><button class="tutorial-option" data-action="start-tutorial" data-tutorial="b1"><small>DEMO B-1 · ${TUTORIALS.b1.steps.length} STEPS</small><b>Send one check-in request</b><span>Automatic daily care → send and track one weekly check-in</span><em>Start Demo B-1 ›</em></button><button class="tutorial-option" data-action="start-tutorial" data-tutorial="b2"><small>DEMO B-2 · ${TUTORIALS.b2.steps.length} STEPS</small><b>What the foster receives</b><span>Open Jamie’s form and send the check-in</span><em>Start Demo B-2 ›</em></button><button class="tutorial-option" data-action="start-tutorial" data-tutorial="b3"><small>DEMO B-3 · ${TUTORIALS.b3.steps.length} STEPS</small><b>Review and apply the check-in</b><span>Check the submission before the record changes</span><em>Start Demo B-3 ›</em></button></div></aside></div>`;
   if(state.drawer==='notifications') return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">NOTIFICATIONS</p><h2>Notifications</h2><div class="notification-list">${[['New foster check-in','Jamie submitted Milo’s weekly check-in','12 min'],['Profile published','Daisy is live on the shelter website','42 min'],['Profile ready to publish','Luna completed all publishing requirements','1 hr']].map(([a,b,c])=>`<button data-action="notification-item"><i></i><span><b>${a}</b><small>${b}</small></span><time>${c}</time></button>`).join('')}</div><button class="text-button centered" data-action="mark-read">Mark all as read</button></aside></div>`;
   return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">DETAILS</p><h2>Prepared content</h2><p>This interaction is represented in the pretotype.</p></aside></div>`;
 }
@@ -1004,7 +1003,7 @@ function renderTutorial() {
     <section class="tutorial-card">
       <div class="tutorial-card-head"><span>${tutorialLabel}</span><button data-action="exit-tutorial" aria-label="Exit tutorial">×</button></div>
       <small>STEP ${state.tutorialStep+1} OF ${steps.length}</small><h3>${stepTitle}</h3><p>${stepText}</p>
-      <div class="tutorial-card-actions"><button class="tutorial-back" data-action="tutorial-back" ${tutorialHistory.length===0?'disabled':''}>Back</button><button class="tutorial-exit" data-action="${step.next?'finish-tutorial':'exit-tutorial'}">End tour</button>${step.kind==='manual'?'<button class="tutorial-next" data-action="tutorial-next">Continue</button>':final?step.next?`<button class="tutorial-next" data-action="continue-tutorial" data-tutorial="${step.next}">${nextLabel}</button>`:'<button class="tutorial-next" data-action="finish-tutorial">Finish tutorial</button>':'<span>Click the highlighted control</span>'}</div>
+      <div class="tutorial-card-actions"><button class="tutorial-back" data-action="tutorial-back" ${tutorialHistory.length===0?'disabled':''}>Back</button><button class="tutorial-exit" data-action="${step.next?'finish-tutorial':'exit-tutorial'}">End tour</button>${step.kind==='manual'?'<button class="tutorial-next" data-action="tutorial-next">Continue</button>':final?step.next?`<button class="tutorial-next" data-action="continue-tutorial" data-tutorial="${step.next}">${nextLabel}</button>`:'<button class="tutorial-next" data-action="finish-tutorial">Finish tutorial</button>':'<span>Click the highlighted area</span>'}</div>
     </section>
   </div>`;
 }
@@ -1014,16 +1013,18 @@ function leaveTutorialSurface() {
   if(state.view==='fosterform'){state.view='updates';state.fosterFormMode='weekly';}
 }
 
-function positionTutorial() {
+function positionTutorial(options) {
+  // keepScroll: the viewport moved under us (user scrolled), so only re-measure — never scroll or steal focus
+  const keepScroll=options===true;
   if(state.tutorialStep===null) return;
   const step=tutorialSteps()[state.tutorialStep];
   const layer=document.querySelector('.tutorial-layer');
   const target=step&&document.querySelector(step.selector);
   if(!layer) return;
-  if(!target){window.scrollTo(0,0);layer.querySelectorAll('.tutorial-dim').forEach(el=>Object.assign(el.style,{width:'0px',height:'0px'}));const hl=layer.querySelector('.tutorial-highlight');if(hl)Object.assign(hl.style,{width:'0px',height:'0px',left:'0px',top:'0px'});const c=layer.querySelector('.tutorial-card');if(c)Object.assign(c.style,{left:'50%',top:'50%',transform:'translate(-50%,-50%)',visibility:'visible'});return;}
+  if(!target){if(!keepScroll)window.scrollTo(0,0);layer.querySelectorAll('.tutorial-dim').forEach(el=>Object.assign(el.style,{width:'0px',height:'0px'}));const hl=layer.querySelector('.tutorial-highlight');if(hl)Object.assign(hl.style,{width:'0px',height:'0px',left:'0px',top:'0px'});const c=layer.querySelector('.tutorial-card');if(c)Object.assign(c.style,{left:'50%',top:'50%',transform:'translate(-50%,-50%)',visibility:'visible'});return;}
   const viewport={w:window.innerWidth,h:window.innerHeight};
   const initial=target.getBoundingClientRect();
-  if(initial.top<12||initial.bottom>viewport.h-12) target.scrollIntoView({block:'center',inline:'nearest'});
+  if(!keepScroll&&(initial.top<12||initial.bottom>viewport.h-12)) target.scrollIntoView({block:'center',inline:'nearest'});
   requestAnimationFrame(()=>{
     if(!document.body.contains(target)) return;
     const rect=target.getBoundingClientRect();
@@ -1047,8 +1048,16 @@ function positionTutorial() {
     card.style.left=`${Math.max(12,Math.min(x,viewport.w-cardW-12))}px`;
     card.style.top=`${Math.max(12,Math.min(y,viewport.h-cardH-12))}px`;
     card.style.visibility='visible';
-    target.focus({preventScroll:true});
+    if(!keepScroll) target.focus({preventScroll:true});
   });
+}
+
+// The highlight, dim, and card are all viewport-fixed, so anything that scrolls under them
+// (window or an inner scroll container) has to trigger a re-measure.
+let tutorialFollowFrame=null;
+function followTutorialScroll() {
+  if(state.tutorialStep===null||tutorialFollowFrame) return;
+  tutorialFollowFrame=requestAnimationFrame(()=>{tutorialFollowFrame=null;positionTutorial(true);});
 }
 
 function tutorialMatches(kind,value) {
@@ -1230,6 +1239,7 @@ window.addEventListener('popstate',event=>{
   restoringNavigation=false;
 });
 window.addEventListener('resize',()=>{if(state.tutorialStep!==null)positionTutorial();});
+window.addEventListener('scroll',followTutorialScroll,{capture:true,passive:true});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.tutorialStep!==null){state.tutorialId=null;state.tutorialStep=null;render();}});
 
 restoreNavigation(history.state);
