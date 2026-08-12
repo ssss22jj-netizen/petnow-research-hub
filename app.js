@@ -27,9 +27,18 @@ nav.innerHTML = [...new Set(routes.map(([group]) => group))].map((group) =>
 document.querySelector("#build-time").textContent = `갱신 ${new Intl.DateTimeFormat("ko", { dateStyle: "short", timeStyle: "short" }).format(new Date(data.generatedAt))}`;
 document.querySelector("#menu-button").addEventListener("click", () => sidebar.classList.toggle("open"));
 
+// 문서 목록·링크를 Markdown 뷰 대신 사이트 내 전용 페이지로 연결 (2026-08-13, Track 2 기획안 시각본 대체)
+const docPageOverrides = new Map([
+  ["deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", "track2-plan.html"],
+]);
+
+function hrefForDoc(doc) {
+  return docPageOverrides.get(doc.path) ?? `#/doc/${doc.id}`;
+}
+
 function docLink(path, label, className = "") {
   const doc = byPath.get(path);
-  return doc ? `<a class="${className}" href="#/doc/${doc.id}">${label ?? doc.title}</a>` : label ?? path;
+  return doc ? `<a class="${className}" href="${hrefForDoc(doc)}">${label ?? doc.title}</a>` : label ?? path;
 }
 
 function pageHeader(eyebrow, title, lead) {
@@ -94,7 +103,7 @@ const documentVisualPages = new Map([
 function compactDocRow(doc, index) {
   const number = String(index + 1).padStart(2, "0");
   const externalUrl = externalDocumentUrls.get(doc.path);
-  const href = externalUrl ?? `#/doc/${doc.id}`;
+  const href = externalUrl ?? hrefForDoc(doc);
   const externalAttributes = externalUrl ? ' target="_blank" rel="noopener noreferrer"' : "";
   const rowClass = externalUrl ? "compact-doc-row external-doc-row" : "compact-doc-row";
   const arrow = externalUrl ? "↗" : "→";
@@ -317,7 +326,7 @@ function search(query) {
   const value = query.trim().toLocaleLowerCase("ko");
   if (!value) { searchPanel.classList.add("hidden"); return; }
   const results = docs.filter((doc) => `${doc.title} ${doc.description} ${doc.text}`.toLocaleLowerCase("ko").includes(value)).slice(0,12);
-  searchPanel.innerHTML = results.length ? results.map((doc) => `<a class="search-result" href="#/doc/${doc.id}"><strong>${doc.title}</strong><small>${doc.category} · ${doc.description}</small></a>`).join("") : `<div class="search-result"><strong>검색 결과 없음</strong><small>다른 검색어를 입력해 주세요.</small></div>`;
+  searchPanel.innerHTML = results.length ? results.map((doc) => `<a class="search-result" href="${hrefForDoc(doc)}"><strong>${doc.title}</strong><small>${doc.category} · ${doc.description}</small></a>`).join("") : `<div class="search-result"><strong>검색 결과 없음</strong><small>다른 검색어를 입력해 주세요.</small></div>`;
   searchPanel.classList.remove("hidden");
 }
 
