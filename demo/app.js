@@ -149,11 +149,11 @@ const TUTORIALS = {
       { selector:'.table-wrap', kind:'manual', title:'See where every animal stands', text:'One list shows who is ready to publish, what is still missing for everyone else, and who does the next step. Nobody has to ask around.' },
       { selector:'[data-animal-filter="review"]', kind:'animal-filter', value:'review', title:'Start with the ones waiting on you', text:'Filter to the animals whose newest information needs a staff decision.' },
       { selector:'[data-open-animal="milo"]', kind:'animal', value:'milo', title:'Open the record behind the status', text:'Open Milo and see what put him in Needs review.' },
-      { selector:'.status-banner.review', kind:'manual', title:'Why Milo is not ready yet', text:'The status names the reason, the action that clears it, and what it is holding up. Not just a colored label.' },
+      { selector:'.status-banner.review', kind:'manual', title:'See why Milo is not ready yet', text:'The status names the reason, the action that clears it, and what it is holding up. Not just a colored label.' },
       { selector:'.status-banner [data-action="review-milo"]', kind:'action', value:'review-milo', title:'Go straight to the next step', text:'Open the check-in that can clear Milo’s last open requirement.' },
       { selector:'.comparison', kind:'manual', title:'Compare before anything changes', text:'Jamie’s new check-in sits beside the current record, so you can see exactly what would change.' },
       { selector:'[data-action="approve-update"]', kind:'action', value:'approve-update', title:'Approve what you reviewed', text:'Only the information you just checked goes into the official record.' },
-      { selector:'.status-banner.ready', kind:'manual', title:'Milo turns ready on his own', text:'The open behavior requirement is now met, the checklist reads 5 of 5, and Milo moves to Ready to publish. No one edits a status by hand.' },
+      { selector:'.status-banner.ready', kind:'manual', title:'Watch Milo turn ready on his own', text:'The open behavior requirement is now met, the checklist reads 5 of 5, and Milo moves to Ready to publish. No one edits a status by hand.' },
       { selector:'.status-banner [data-action="open-profile"]', kind:'action', value:'open-profile', title:'Go straight to the result', text:'Open the profile adopters will see, from the same screen.' },
       { selector:'.publish-aside', kind:'manual', title:'One last check before publishing', text:'Confirm the public profile and the channel you can publish to today. Partner channels stay marked as planned.' },
       { selector:'.publish-aside [data-action="publish-now"]', kind:'action', value:'publish-now', title:'Publish to the shelter website', text:'Send the approved profile to your own adoption website.' },
@@ -164,8 +164,8 @@ const TUTORIALS = {
     label:'DEMO B-1 · CHECK-IN REQUEST',
     name:'Send one check-in request',
     steps:[
-      { selector:'.care-program', kind:'manual', nextView:'updates', title:'Daily care goes out on its own', text:'Jamie gets Milo’s daily care link at the scheduled time, automatically. Routine answers go straight to the care log, and only a missed medication or a reported concern reaches Alex.' },
-      { selector:'.update-metrics', kind:'manual', title:'Every follow-up in one place', text:'Requests, reminders, responses, and reviews all show up here, so nobody is tracking who still owes an update from memory.' },
+      { selector:'.care-program', kind:'manual', nextView:'updates', title:'See how daily care goes out on its own', text:'Jamie gets Milo’s daily care link at the scheduled time, automatically. Routine answers go straight to the care log, and only a missed medication or a reported concern reaches Alex.' },
+      { selector:'.update-metrics', kind:'manual', title:'See every follow-up in one place', text:'Requests, reminders, responses, and reviews all show up here, so nobody is tracking who still owes an update from memory.' },
       { selector:'.page-actions [data-action="request-update"]', kind:'action', value:'request-update', title:'Ask for exactly what you need', text:'Choose the health, behavior, medication, photo, and note fields the team needs this week.' },
       { selector:'.modal-card .form-grid', kind:'manual', title:'Set the follow-up once', text:'Pick the due date and the reminder rule. If Jamie does not answer, Petify follows up without you.' },
       { selector:'.modal-card [data-action="preview-message"]', kind:'action', value:'preview-message', title:'Check it before it goes out', text:'See the exact message and secure link Jamie will receive.' },
@@ -190,7 +190,7 @@ const TUTORIALS = {
     label:'DEMO B-3 · REVIEW & APPROVE',
     name:'Review and apply the check-in',
     steps:[
-      { selector:'.update-metrics', kind:'manual', title:'A new check-in arrived', text:'Jamie’s response is waiting in Check-ins. Staff look at it before the official record changes.' },
+      { selector:'.update-metrics', kind:'manual', title:'See the new check-in arrive', text:'Jamie’s response is waiting in Check-ins. Staff look at it before the official record changes.' },
       { selector:'.comparison', kind:'manual', title:'Review it side by side', text:'Petify marks the field that changed and leaves the official record untouched until someone approves it.' },
       { selector:'[data-action="approve-update"]', kind:'action', value:'approve-update', title:'Approve the check-in', text:'Jamie’s behavior update and the photos you selected go into the official record.' },
       { selector:'.review-panel', kind:'finish', next:'bpublish', nextLabel:'Continue to publishing', title:'The record is up to date', text:'Want to see what that approved information is used for next?' }
@@ -200,7 +200,7 @@ const TUTORIALS = {
     label:'DEMO B · PUBLISHING',
     name:'Continue to publishing',
     steps:[
-      { selector:'.status-banner.ready', kind:'manual', title:'The check-in moves the status', text:'Jamie’s latest information clears Milo’s last open requirement, and he moves to Ready to publish.' },
+      { selector:'.status-banner.ready', kind:'manual', title:'Watch the check-in move the status', text:'Jamie’s latest information clears Milo’s last open requirement, and he moves to Ready to publish.' },
       { selector:'.status-banner [data-action="open-profile"]', kind:'action', value:'open-profile', title:'Continue to the public profile', text:'Everything Jamie sent and you approved is already in place. Nothing to type again.' },
       { selector:'.publish-aside', kind:'manual', title:'Confirm the handoff', text:'The same approved record is ready for the shelter website. Petfinder and Adopt a Pet are shown separately as planned integrations.' },
       { selector:'.publish-aside [data-action="publish-now"]', kind:'action', value:'publish-now', title:'Publish the profile', text:'Send Milo to your own adoption website.' },
@@ -216,11 +216,11 @@ const KO_TUTORIALS = {
       ['모든 동물의 현재 상태 한눈에','누가 게시 준비를 마쳤는지, 나머지 동물은 무엇이 비어 있는지, 다음 행동은 누가 하는지가 한 목록에 있다. 따로 물어볼 필요가 없다.'],
       ['판단이 필요한 동물부터','최신 정보를 직원이 검토해야 하는 동물만 필터링한다.'],
       ['상태의 근거가 되는 레코드 열기','Milo를 열어 검토 필요 상태가 된 이유를 확인한다.'],
-      ['Milo가 아직 준비되지 않은 이유','상태의 이유, 해소할 행동, 그 때문에 막혀 있는 일까지 함께 보여준다. 단순한 색상 표시가 아니다.'],
+      ['Milo가 아직 준비되지 않은 이유 확인','상태의 이유, 해소할 행동, 그 때문에 막혀 있는 일까지 함께 보여준다. 단순한 색상 표시가 아니다.'],
       ['다음 행동으로 바로 이동','Milo의 마지막 미완료 요건을 해소할 수 있는 체크인을 연다.'],
       ['변경 전 비교','Jamie의 새 체크인이 현재 기록 옆에 나란히 놓여, 무엇이 바뀌는지 그대로 보인다.'],
       ['검토한 내용만 승인','방금 확인한 정보만 공식 기록에 반영된다.'],
-      ['Milo가 스스로 준비 완료로','미완료였던 행동 요건이 충족되고 체크리스트가 5/5가 되면서 Milo가 게시 준비 완료로 넘어간다. 상태를 손으로 바꾸는 사람은 없다.'],
+      ['Milo가 스스로 준비 완료로 바뀌는 순간','미완료였던 행동 요건이 충족되고 체크리스트가 5/5가 되면서 Milo가 게시 준비 완료로 넘어간다. 상태를 손으로 바꾸는 사람은 없다.'],
       ['결과 화면으로 바로 이동','같은 화면에서 입양자가 보게 될 프로필을 연다.'],
       ['게시 전 한 번만 확인','공개 프로필과 오늘 게시할 수 있는 채널을 확인한다. 제휴 채널은 지원 예정으로 구분돼 있다.'],
       ['쉘터 웹사이트에 게시','승인된 프로필을 쉘터 자체 입양 웹사이트에 게시한다.'],
@@ -231,8 +231,8 @@ const KO_TUTORIALS = {
     label:'데모 B-1 · 체크인 요청',
     nextLabel:'임보자 응답 이어보기',
     steps:[
-      ['일간 돌봄은 자동으로 나간다','Jamie는 정해진 시간에 Milo의 일간 돌봄 링크를 자동으로 받는다. 일상적인 응답은 돌봄 로그에 바로 저장되고, 투약 누락이나 우려 사항만 Alex에게 전달된다.'],
-      ['후속 연락이 한곳에','요청, 리마인드, 응답, 검토가 모두 여기에 보인다. 누가 아직 안 보냈는지 기억에 의존해 챙길 필요가 없다.'],
+      ['일간 돌봄이 자동으로 나가는 흐름 확인','Jamie는 정해진 시간에 Milo의 일간 돌봄 링크를 자동으로 받는다. 일상적인 응답은 돌봄 로그에 바로 저장되고, 투약 누락이나 우려 사항만 Alex에게 전달된다.'],
+      ['후속 연락을 한곳에서 확인','요청, 리마인드, 응답, 검토가 모두 여기에 보인다. 누가 아직 안 보냈는지 기억에 의존해 챙길 필요가 없다.'],
       ['필요한 항목만 지정해 요청','이번 주에 필요한 건강, 행동, 투약, 사진, 메모 항목을 선택한다.'],
       ['후속 연락 규칙은 한 번만','기한과 리마인드 규칙을 정한다. Jamie가 응답하지 않으면 Petify가 대신 후속 연락한다.'],
       ['나가기 전에 확인','Jamie가 받게 될 실제 문구와 보안 링크를 확인한다.'],
@@ -257,7 +257,7 @@ const KO_TUTORIALS = {
     label:'데모 B-3 · 검토 및 반영',
     nextLabel:'게시로 이어보기',
     steps:[
-      ['새 체크인 도착','Jamie의 응답이 체크인에 도착했다. 직원이 검토하기 전까지 공식 기록은 바뀌지 않는다.'],
+      ['새로 도착한 체크인 확인','Jamie의 응답이 체크인에 도착했다. 직원이 검토하기 전까지 공식 기록은 바뀌지 않는다.'],
       ['나란히 놓고 검토','변경된 항목을 표시해 주고, 누군가 승인하기 전까지 공식 기록은 그대로 둔다.'],
       ['체크인 승인','Jamie의 행동 변화와 선택한 사진이 공식 기록에 반영된다.'],
       ['레코드 업데이트 완료','승인된 정보가 다음 업무에 어떻게 쓰이는지 이어서 확인하시겠습니까?']
@@ -266,7 +266,7 @@ const KO_TUTORIALS = {
   bpublish: {
     label:'데모 B · 게시',
     steps:[
-      ['체크인이 상태를 바꾼다','Jamie의 최신 정보가 Milo의 마지막 미완료 요건을 해소하면서 게시 준비 완료로 넘어간다.'],
+      ['체크인이 상태를 바꾸는 순간','Jamie의 최신 정보가 Milo의 마지막 미완료 요건을 해소하면서 게시 준비 완료로 넘어간다.'],
       ['공개 프로필로 이어가기','Jamie가 보내고 승인된 정보가 이미 들어가 있다. 다시 입력할 것이 없다.'],
       ['게시 연결 확인','같은 승인 레코드가 쉘터 웹사이트 게시에 그대로 쓰인다. Petfinder와 Adopt a Pet은 지원 예정 연동으로 구분된다.'],
       ['프로필 게시','Milo를 쉘터 자체 입양 웹사이트에 게시한다.'],
