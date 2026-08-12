@@ -958,9 +958,76 @@ details[open] > .archive-toggle::before { content: "▾ "; }
 }
 .changelog-table th { color: var(--text-t); font-weight: 600; font-size: 11.5px; }
 .changelog-table td { color: var(--text-s); }
+
+/* === 우측 문서 목차 === */
+.doc-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 780px) 208px;
+  gap: 44px;
+  justify-content: center;
+  align-items: start;
+}
+.doc-shell > .page { max-width: none; padding-left: 0; padding-right: 0; }
+.doc-toc {
+  position: sticky;
+  top: 28px;
+  max-height: calc(100vh - 56px);
+  padding: 20px 0 20px 18px;
+  margin-top: 52px;
+  border-left: 1px solid var(--border);
+  overflow: hidden;
+}
+.toc-heading {
+  margin-bottom: 10px;
+  font-family: Georgia, serif;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal-mid);
+}
+.toc-links { max-height: calc(100vh - 116px); overflow-y: auto; scrollbar-width: thin; }
+.toc-link {
+  display: flex;
+  gap: 8px;
+  padding: 6px 9px;
+  margin: 1px 0 1px -10px;
+  border-left: 2px solid transparent;
+  border-radius: 0 6px 6px 0;
+  color: var(--text-s);
+  font-size: 12px;
+  line-height: 1.45;
+  text-decoration: none;
+  transition: color .15s, background .15s, border-color .15s;
+}
+.toc-link span {
+  flex: 0 0 auto;
+  color: var(--text-t);
+  font-family: Georgia, serif;
+  font-size: 10.5px;
+  font-variant-numeric: tabular-nums;
+}
+.toc-link:hover { color: var(--teal); background: var(--surface-2); }
+.toc-link.active {
+  border-left-color: var(--teal-mid);
+  background: var(--teal-light);
+  color: var(--teal);
+  font-weight: 700;
+}
+.toc-link.active span { color: var(--teal-mid); }
+.toc-link:focus-visible { outline: 2px solid var(--teal-mid); outline-offset: 1px; }
+.section { scroll-margin-top: 24px; }
+@media (max-width: 1120px) {
+  .doc-shell { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .doc-toc { display: none; }
+  .doc-shell > .page { padding-left: 36px; padding-right: 36px; }
+}
+@media (max-width: 560px) {
+  .doc-shell > .page { padding-left: 18px; padding-right: 18px; }
+}
 </style>
 
-<div class="page">
+<div class="doc-shell">
+<main class="page">
 
   <!-- HEADER -->
   <header class="doc-header">
@@ -977,7 +1044,7 @@ details[open] > .archive-toggle::before { content: "▾ "; }
   </header>
 
   <!-- 01 목적 및 방향 -->
-  <section class="section">
+  <section class="section" id="sec-01">
     <div class="section-label">01 · 목적 및 방향</div>
     <h2 class="section-title">인터뷰 대기 기간을 실험 기간으로 전환</h2>
     <div class="section-divider"></div>
@@ -997,7 +1064,7 @@ details[open] > .archive-toggle::before { content: "▾ "; }
   </section>
 
   <!-- 02 제약사항 -->
-  <section class="section">
+  <section class="section" id="sec-02">
     <div class="section-label">02 · 제약사항 및 보완</div>
     <h2 class="section-title">현재 상황의 한계와 대응 방향</h2>
     <div class="section-divider"></div>
@@ -1032,7 +1099,7 @@ details[open] > .archive-toggle::before { content: "▾ "; }
   </section>
 
   <!-- 03 실험 성공 기준 -->
-  <section class="section">
+  <section class="section" id="sec-03">
     <div class="section-label" id="success-criteria">03 · 실험 성공 기준</div>
     <h2 class="section-title">1.5× CTR 규칙 — 소구점 우세 소재를 이렇게 판단한다</h2>
     <div class="section-divider"></div>
@@ -1048,7 +1115,7 @@ details[open] > .archive-toggle::before { content: "▾ "; }
   </section>
 
   <!-- 04 LMF 단계 -->
-  <section class="section">
+  <section class="section" id="sec-04">
     <div class="section-label">04 · LMF 프레임 내 위치</div>
     <h2 class="section-title">현재: 2단계 발산형 진입</h2>
     <div class="section-divider"></div>
@@ -1079,7 +1146,7 @@ details[open] > .archive-toggle::before { content: "▾ "; }
   </section>
 
   <!-- 04 채널 선정 -->
-  <section class="section">
+  <section class="section" id="sec-05">
     <div class="section-label">05 · 채널 선정</div>
     <h2 class="section-title">Facebook 그룹 단독</h2>
     <div class="section-divider"></div>
@@ -1102,7 +1169,7 @@ details[open] > .archive-toggle::before { content: "▾ "; }
   </section>
 
   <!-- 05 캠페인 구조 -->
-  <section class="section">
+  <section class="section" id="sec-06">
     <div class="section-label">06 · 캠페인 구조</div>
     <h2 class="section-title">ICP → 퍼소나 → 소재 3종(집행 2종) → 랜딩페이지 3종</h2>
     <div class="section-divider"></div>
@@ -1216,7 +1283,7 @@ details[open] > .archive-toggle::before { content: "▾ "; }
   </section>
 
   <!-- 07 실행 전제 -->
-  <section class="section">
+  <section class="section" id="sec-07">
     <div class="section-label">07 · 실행 전제</div>
     <h2 class="section-title">플랫폼 · 계정 · 리드 대응</h2>
     <div class="section-divider"></div>
@@ -1275,7 +1342,7 @@ details[open] > .archive-toggle::before { content: "▾ "; }
   </section>
 
   <!-- 08 예산 -->
-  <section class="section">
+  <section class="section" id="sec-08">
     <div class="section-label">08 · 예산</div>
     <h2 class="section-title">1차 라운드 총 100만원 (정찰)</h2>
     <div class="section-divider"></div>
@@ -1347,7 +1414,7 @@ details[open] > .archive-toggle::before { content: "▾ "; }
   </section>
 
   <!-- 08 일정 -->
-  <section class="section">
+  <section class="section" id="sec-09">
     <div class="section-label">09 · 일정</div>
     <h2 class="section-title">4주 실험 로드맵 — 광고 집행은 W2 1주</h2>
     <div class="section-divider"></div>
@@ -1403,7 +1470,7 @@ details[open] > .archive-toggle::before { content: "▾ "; }
   </section>
 
   <!-- 별첨 · v1.0 보관본 -->
-  <section class="section">
+  <section class="section" id="sec-appendix">
     <div class="archive-box">
       <div class="archive-head">
         <span class="archive-tag">보관본 · 실행 안 함</span>
@@ -1492,6 +1559,48 @@ details[open] > .archive-toggle::before { content: "▾ "; }
     </div>
   </section>
 
+</main>
+
+<aside class="doc-toc" aria-label="문서 목차">
+  <p class="toc-heading">문서 목차</p>
+  <nav class="toc-links">
+      <a class="toc-link" href="#sec-01"><span>01</span>목적 및 방향</a>
+      <a class="toc-link" href="#sec-02"><span>02</span>제약사항 및 보완</a>
+      <a class="toc-link" href="#sec-03"><span>03</span>실험 성공 기준</a>
+      <a class="toc-link" href="#sec-04"><span>04</span>LMF 프레임 내 위치</a>
+      <a class="toc-link" href="#sec-05"><span>05</span>채널 선정</a>
+      <a class="toc-link" href="#sec-06"><span>06</span>캠페인 구조</a>
+      <a class="toc-link" href="#sec-07"><span>07</span>실행 전제</a>
+      <a class="toc-link" href="#sec-08"><span>08</span>예산</a>
+      <a class="toc-link" href="#sec-09"><span>09</span>일정</a>
+      <a class="toc-link" href="#sec-appendix"><span>별첨</span>변경 전 원문 (v1.0)</a>
+  </nav>
+</aside>
 </div>
+
+<script>
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll(".toc-link"));
+  if (!links.length) return;
+  var byId = {};
+  var targets = links.map(function (link) {
+    var el = document.getElementById(link.getAttribute("href").slice(1));
+    if (el) byId[el.id] = link;
+    return el;
+  }).filter(Boolean);
+  function activate(id) {
+    links.forEach(function (link) {
+      link.classList.toggle("active", link === byId[id]);
+    });
+  }
+  var observer = new IntersectionObserver(function (entries) {
+    var visible = entries.filter(function (e) { return e.isIntersecting; })
+      .sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top; })[0];
+    if (visible) activate(visible.target.id);
+  }, { rootMargin: "-10% 0px -70% 0px", threshold: 0 });
+  targets.forEach(function (el) { observer.observe(el); });
+  activate(targets[0].id);
+})();
+</script>
   </body>
 </html>
