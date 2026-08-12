@@ -82,8 +82,13 @@ const documentRoles = new Map([
   ["analysis/EBP_경쟁사_리뷰_데모_UIUX_전문가패널_20260728.md", "분석 검토"],
 ]);
 
-const externalDocumentUrls = new Map([
-  ["deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", "https://claude.ai/code/artifact/5293d79f-045f-4e27-899c-ca8e82726789"],
+// 외부 호스팅 문서만 여기에 둔다. Track 2 기획안 시각본은 사이트 내 track2-plan.html로 이전(2026-08-13)
+const externalDocumentUrls = new Map([]);
+
+// 문서 페이지에서 연결할 사이트 내 시각 페이지
+const documentVisualPages = new Map([
+  ["analysis/경쟁사_데모_UIUX_통합분석.md", ["demo-insights.html", "UI·UX 화면 분석 보기 →"]],
+  ["deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", ["track2-plan.html", "기획안 시각본 보기 →"]],
 ]);
 
 function compactDocRow(doc, index) {
@@ -256,7 +261,8 @@ function wireDocumentToc() {
 function renderDocument(id) {
   const doc = byId.get(id);
   if (!doc) return renderNotFound();
-  const visualAnalysisLink = doc.path === "analysis/경쟁사_데모_UIUX_통합분석.md" ? `<a class="document-visual-link" href="demo-insights.html">UI·UX 화면 분석 보기 →</a>` : "";
+  const visualPage = documentVisualPages.get(doc.path);
+  const visualAnalysisLink = visualPage ? `<a class="document-visual-link" href="${visualPage[0]}">${visualPage[1]}</a>` : "";
   const markdownUrl = new URL(doc.markdown, window.location.href).href;
   const downloadName = doc.path.split("/").pop();
   const bodyClass = doc.path === "deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md" ? " track2-plan" : "";

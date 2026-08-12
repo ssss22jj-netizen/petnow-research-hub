@@ -1,0 +1,1496 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Track 2 기획안 — LMF 소구점 검증 실험 · Petnow 문서 라이브러리</title>
+    <meta name="description" content="광고·랜딩페이지로 소재 A·B 2종의 소구점을 비교하는 4주 정찰 실험 기획안 (v1.1)" />
+  </head>
+  <body>
+    <p style="max-width:780px;margin:0 auto;padding:14px 36px 0;font:13px -apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;">
+      <a href="./" style="color:#1A9090;text-decoration:none;font-weight:600;">← Petnow 문서 라이브러리</a>
+    </p>
+<style>
+/* === TOKENS === */
+:root {
+  --bg: #F4F7F6;
+  --surface: #FFFFFF;
+  --surface-2: #EBF2F1;
+  --border: #CDD9D8;
+  --text-p: #152226;
+  --text-s: #4D6265;
+  --text-t: #8AA0A2;
+  --teal: #0F7070;
+  --teal-mid: #1A9090;
+  --teal-light: #D8EDEC;
+  --amber: #B86E1A;
+  --amber-light: #FBF0E3;
+  --radius: 6px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0F1C20;
+    --surface: #182830;
+    --surface-2: #1F333A;
+    --border: #2A4148;
+    --text-p: #E0ECEB;
+    --text-s: #8FAEB0;
+    --text-t: #5A7880;
+    --teal: #2AADAD;
+    --teal-mid: #3CC5C5;
+    --teal-light: #162E30;
+    --amber: #D4853A;
+    --amber-light: #251808;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F1C20; --surface: #182830; --surface-2: #1F333A;
+  --border: #2A4148; --text-p: #E0ECEB; --text-s: #8FAEB0;
+  --text-t: #5A7880; --teal: #2AADAD; --teal-mid: #3CC5C5;
+  --teal-light: #162E30; --amber: #D4853A; --amber-light: #251808;
+}
+:root[data-theme="light"] {
+  --bg: #F4F7F6; --surface: #FFFFFF; --surface-2: #EBF2F1;
+  --border: #CDD9D8; --text-p: #152226; --text-s: #4D6265;
+  --text-t: #8AA0A2; --teal: #0F7070; --teal-mid: #1A9090;
+  --teal-light: #D8EDEC; --amber: #B86E1A; --amber-light: #FBF0E3;
+}
+
+/* === BASE === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text-p);
+  font-family: -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+.page {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 52px 36px 96px;
+}
+
+/* === DOC HEADER === */
+.doc-header {
+  border-bottom: 2px solid var(--teal);
+  padding-bottom: 22px;
+  margin-bottom: 44px;
+}
+.doc-eyebrow {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal-mid);
+  margin-bottom: 10px;
+}
+.doc-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  color: var(--text-p);
+  margin-bottom: 14px;
+  text-wrap: balance;
+}
+.doc-meta {
+  display: flex;
+  gap: 6px 20px;
+  flex-wrap: wrap;
+}
+.doc-meta-item {
+  font-size: 13px;
+  color: var(--text-s);
+}
+.doc-meta-item strong { color: var(--text-p); font-weight: 600; }
+
+/* === SECTION === */
+.section { margin-bottom: 48px; }
+.section-label {
+  font-family: Georgia, serif;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal-mid);
+  margin-bottom: 5px;
+}
+.section-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text-p);
+  margin-bottom: 14px;
+  letter-spacing: -0.015em;
+}
+.section-divider {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 20px;
+}
+
+/* === GOAL BOX === */
+.goal-box {
+  background: var(--teal-light);
+  border-left: 3px solid var(--teal-mid);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: var(--text-p);
+  line-height: 1.6;
+}
+
+/* === BULLET LIST === */
+.bullet-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.bullet-list li {
+  display: flex;
+  gap: 9px;
+  font-size: 14px;
+  color: var(--text-s);
+  line-height: 1.55;
+}
+.bullet-list li::before {
+  content: '·';
+  color: var(--teal-mid);
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* === METRIC BOX === */
+.metric-box {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  background: var(--amber-light);
+  border: 1px solid var(--amber);
+  border-radius: var(--radius);
+  padding: 8px 14px;
+  font-size: 13px;
+  color: var(--amber);
+  margin-top: 14px;
+  flex-wrap: wrap;
+  line-height: 1.5;
+}
+.metric-box strong { font-weight: 700; }
+
+/* === LMF STAGES === */
+.lmf-stages {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.lmf-stage {
+  padding: 14px 14px 12px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+.lmf-stage:last-child { border-right: none; }
+.lmf-stage.active {
+  background: var(--teal-light);
+}
+.lmf-stage-num {
+  font-size: 10px;
+  color: var(--text-t);
+  font-family: Georgia, serif;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+.lmf-stage.active .lmf-stage-num { color: var(--teal-mid); }
+.lmf-stage-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-s);
+  line-height: 1.3;
+  margin-bottom: 3px;
+}
+.lmf-stage.active .lmf-stage-name { color: var(--teal); }
+.lmf-stage-desc {
+  font-size: 11px;
+  color: var(--text-t);
+  line-height: 1.4;
+}
+.lmf-stage.active .lmf-stage-desc { color: var(--teal-mid); }
+.lmf-now-tag {
+  display: inline-block;
+  font-size: 9.5px;
+  font-weight: 700;
+  background: var(--teal-mid);
+  color: #fff;
+  border-radius: 3px;
+  padding: 1px 6px;
+  margin-top: 5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* === CONSTRAINT TABLE === */
+.constraint-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+.constraint-table th {
+  text-align: left;
+  font-size: 10.5px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-t);
+  font-weight: 600;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+  font-family: Georgia, serif;
+}
+.constraint-table td {
+  padding: 13px 13px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--text-s);
+  line-height: 1.55;
+  background: var(--surface);
+}
+.constraint-table tr:last-child td { border-bottom: none; }
+.constraint-table td.label-cell {
+  font-weight: 700;
+  color: var(--text-p);
+  border-left: 3px solid var(--amber);
+  background: var(--surface);
+  width: 28%;
+}
+.constraint-table td.comp-cell {
+  background: var(--surface-2);
+}
+.supplement {
+  display: block;
+  color: var(--teal-mid);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* === CHANNEL CARDS === */
+.channel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.channel-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.channel-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--teal-mid);
+}
+.channel-name {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.channel-target {
+  font-size: 11.5px;
+  color: var(--teal);
+  background: var(--teal-light);
+  border-radius: 3px;
+  padding: 2px 7px;
+  font-weight: 500;
+}
+.channel-reason {
+  font-size: 13px;
+  color: var(--text-s);
+  line-height: 1.55;
+  margin-bottom: 10px;
+}
+.channel-creatives-label {
+  font-size: 11px;
+  color: var(--text-t);
+  margin-bottom: 4px;
+  font-family: Georgia, serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.badge-row { display: flex; gap: 5px; flex-wrap: wrap; }
+.badge {
+  display: inline-block;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11.5px;
+  color: var(--text-s);
+}
+
+/* === CAMPAIGN DIAGRAM === */
+.campaign-diagram {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 28px 24px;
+  overflow-x: auto;
+}
+.cd-row {
+  display: flex;
+  justify-content: center;
+}
+.cd-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 26px;
+  color: var(--teal-mid);
+  font-size: 17px;
+}
+
+/* ICP */
+.icp-box {
+  width: 100%;
+  max-width: 600px;
+  background: var(--teal-light);
+  border: 1.5px solid var(--teal-mid);
+  border-radius: var(--radius);
+  padding: 10px 18px;
+  text-align: center;
+}
+.icp-box strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--teal);
+  margin-bottom: 2px;
+}
+.icp-box small {
+  font-size: 12px;
+  color: var(--teal-mid);
+}
+
+/* Personas */
+.persona-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  max-width: 600px;
+  width: 100%;
+}
+.persona-box {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  text-align: center;
+}
+.persona-name {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-p);
+}
+.persona-role {
+  font-size: 11.5px;
+  color: var(--text-s);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+.persona-ch {
+  display: inline-block;
+  margin-top: 7px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--teal);
+  background: var(--teal-light);
+  border-radius: 3px;
+  padding: 2px 8px;
+}
+
+/* Creatives */
+.creative-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  max-width: 600px;
+  width: 100%;
+}
+.creative-box {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 12px;
+  text-align: center;
+  background: var(--surface);
+}
+.creative-tag {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-t);
+  font-family: Georgia, serif;
+  margin-bottom: 5px;
+}
+.creative-copy {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-p);
+  line-height: 1.35;
+  font-style: italic;
+  margin-bottom: 5px;
+}
+.creative-hypo {
+  font-size: 11px;
+  color: var(--teal-mid);
+  margin-bottom: 7px;
+}
+.ch-badges { display: flex; gap: 3px; justify-content: center; flex-wrap: wrap; }
+.ch-badge {
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 2px;
+  background: var(--surface-2);
+  color: var(--text-s);
+  border: 1px solid var(--border);
+}
+
+/* LPs */
+.lp-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  max-width: 600px;
+  width: 100%;
+}
+.lp-box {
+  border: 1.5px solid var(--teal-mid);
+  border-radius: var(--radius);
+  background: var(--teal-light);
+  padding: 12px 12px;
+  text-align: center;
+}
+.lp-tag {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal-mid);
+  font-family: Georgia, serif;
+  margin-bottom: 4px;
+}
+.lp-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--teal);
+  line-height: 1.3;
+}
+.lp-uc {
+  font-size: 11px;
+  color: var(--teal-mid);
+  margin-top: 3px;
+}
+
+/* CTA */
+.cta-box {
+  max-width: 600px;
+  width: 100%;
+  background: var(--teal);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 11px 20px;
+  text-align: center;
+  font-size: 13.5px;
+  font-weight: 700;
+}
+.cta-box small {
+  display: block;
+  font-weight: 400;
+  font-size: 11.5px;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+/* Diagram spacers */
+.cd-spacer { height: 12px; }
+
+/* === BUDGET TABLE === */
+.budget-wrap { overflow-x: auto; }
+.budget-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  font-variant-numeric: tabular-nums;
+}
+.budget-table th {
+  text-align: left;
+  font-size: 10.5px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-t);
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+  font-family: Georgia, serif;
+}
+.budget-table th:not(:first-child) { text-align: right; }
+.budget-table td {
+  padding: 11px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-s);
+  background: var(--surface);
+}
+.budget-table td:not(:first-child) { text-align: right; }
+.budget-table tr:last-child td { border-bottom: none; }
+.budget-table .total-row td {
+  font-weight: 700;
+  color: var(--text-p);
+  background: var(--surface-2);
+  border-top: 2px solid var(--border);
+}
+.budget-table .ch-row td {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--teal-mid);
+  background: var(--teal-light);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 6px 12px;
+}
+
+/* === TIMELINE === */
+.timeline { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.tl-week {
+  display: grid;
+  grid-template-columns: 78px 1fr;
+  border-bottom: 1px solid var(--border);
+}
+.tl-week:last-child { border-bottom: none; }
+.tl-label {
+  padding: 14px;
+  background: var(--surface-2);
+  border-right: 1px solid var(--border);
+}
+.tl-week-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--teal-mid);
+  font-family: Georgia, serif;
+  letter-spacing: 0.04em;
+}
+.tl-dates {
+  font-size: 11px;
+  color: var(--text-t);
+  margin-top: 1px;
+}
+.tl-tasks {
+  padding: 13px 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-content: flex-start;
+  background: var(--surface);
+}
+.pill {
+  display: inline-block;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-s);
+  line-height: 1.3;
+}
+.pill.focus {
+  background: var(--teal-light);
+  border-color: var(--teal-mid);
+  color: var(--teal);
+  font-weight: 600;
+}
+.pill.launch {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* VP FOOTNOTE */
+.vp-note {
+  font-size: 12px;
+  color: var(--text-t);
+  margin-top: 13px;
+  line-height: 1.5;
+}
+.vp-note em {
+  color: var(--teal-mid);
+  font-style: italic;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 560px) {
+  .page { padding: 28px 18px 64px; }
+  .lmf-stages { grid-template-columns: 1fr 1fr; }
+  .channel-grid { grid-template-columns: 1fr; }
+  .persona-row { grid-template-columns: 1fr; }
+  .creative-row { grid-template-columns: 1fr; }
+  .lp-row { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* === RATIONALE BOX === */
+.rationale-box {
+  margin-top: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+}
+.rationale-q {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-p);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.rationale-q::before {
+  content: 'Q';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  font-size: 10px;
+  font-family: Georgia, serif;
+  color: var(--text-t);
+  flex-shrink: 0;
+}
+.rationale-a {
+  font-size: 13px;
+  color: var(--text-s);
+  line-height: 1.6;
+  padding-left: 27px;
+}
+
+/* === SECTION 08 SETUP === */
+.setup-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.setup-item {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  border-bottom: 1px solid var(--border);
+}
+.setup-item:last-child { border-bottom: none; }
+.setup-label {
+  padding: 16px 16px;
+  background: var(--surface-2);
+  border-right: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-p);
+  display: flex;
+  align-items: flex-start;
+  line-height: 1.45;
+}
+.setup-content {
+  padding: 16px 18px;
+  background: var(--surface);
+  font-size: 13.5px;
+  color: var(--text-s);
+  line-height: 1.6;
+}
+.setup-content a {
+  color: var(--teal-mid);
+  text-decoration: none;
+  font-weight: 600;
+}
+.setup-content a:hover { text-decoration: underline; }
+.setup-sub {
+  display: block;
+  font-size: 12px;
+  color: var(--text-t);
+  margin-top: 4px;
+}
+.setup-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 3px;
+  margin-right: 4px;
+  margin-top: 6px;
+}
+.setup-tag.ok {
+  background: var(--teal-light);
+  color: var(--teal);
+  border: 1px solid var(--teal-mid);
+}
+.setup-tag.needed {
+  background: var(--amber-light);
+  color: var(--amber);
+  border: 1px solid var(--amber);
+}
+
+/* LEAD FLOW */
+.lead-flow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.flow-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+.flow-box {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 7px 10px;
+  font-size: 12px;
+  color: var(--text-p);
+  line-height: 1.4;
+  text-align: center;
+  min-width: 80px;
+}
+.flow-box small {
+  display: block;
+  font-size: 10.5px;
+  color: var(--text-t);
+  margin-top: 2px;
+}
+.flow-box.highlight {
+  background: var(--teal-light);
+  border-color: var(--teal-mid);
+  color: var(--teal);
+}
+.flow-arrow {
+  color: var(--text-t);
+  font-size: 14px;
+  padding: 8px 5px 0;
+  flex-shrink: 0;
+}
+
+/* CTR RULE */
+.ctr-rule {
+  background: var(--surface-2);
+  border-left: 3px solid var(--teal-mid);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-top: 14px;
+  font-size: 13.5px;
+  color: var(--text-s);
+  line-height: 1.6;
+}
+.ctr-rule strong { color: var(--text-p); }
+
+@media (max-width: 560px) {
+  .setup-item { grid-template-columns: 1fr; }
+  .setup-label { border-right: none; border-bottom: 1px solid var(--border); }
+  .lead-flow { gap: 4px; }
+}
+/* === EXCLUDED CREATIVE (1차 라운드 제외 소재) === */
+.spec-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-p);
+  margin: 26px 0 4px;
+}
+.spec-lead {
+  font-size: 12.5px;
+  color: var(--text-s);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+.spec-table th, .spec-table td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+.spec-table th {
+  width: 30%;
+  color: var(--text-s);
+  font-weight: 600;
+  background: var(--surface-2);
+}
+.spec-table td { color: var(--text-p); }
+.spec-table .manual td, .spec-table .manual th {
+  background: var(--amber-light);
+}
+.spec-note { font-size: 11.5px; color: var(--text-t); }
+.setup-row-excluded {
+  display: block;
+  margin-top: 6px;
+  padding: 7px 9px;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  background: var(--surface-2);
+  opacity: .5;
+  filter: grayscale(1);
+}
+.creative-box.excluded, .lp-box.excluded {
+  position: relative;
+  opacity: .5;
+  filter: grayscale(1);
+  border-style: dashed;
+}
+.creative-box.excluded .creative-copy { text-decoration: line-through; }
+.excluded-tag {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .03em;
+  color: var(--text-p);
+  background: var(--border);
+  border-radius: 3px;
+  padding: 2px 7px;
+}
+
+/* === ARCHIVE CALLOUT (v1.0 보관본) === */
+.archive-box {
+  margin-top: 34px;
+  padding: 18px 20px 20px;
+  background: var(--surface-2);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+.archive-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.archive-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--amber);
+  background: var(--amber-light);
+  border: 1px solid var(--amber);
+  border-radius: 3px;
+  padding: 2px 7px;
+}
+.archive-title { font-size: 14px; font-weight: 700; color: var(--text-s); }
+.archive-note { font-size: 12px; color: var(--text-t); line-height: 1.6; }
+.archive-body {
+  margin-top: 14px;
+  opacity: .55;
+  filter: saturate(.55);
+  font-size: 13px;
+  color: var(--text-s);
+}
+.archive-body h4 {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-t);
+  margin: 16px 0 6px;
+  letter-spacing: .02em;
+}
+.archive-body h4:first-child { margin-top: 0; }
+.archive-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+.archive-body th, .archive-body td {
+  border: 1px solid var(--border);
+  padding: 5px 8px;
+  text-align: left;
+  vertical-align: top;
+}
+.archive-body th { background: var(--surface); font-weight: 600; color: var(--text-t); }
+.archive-body p { margin-bottom: 6px; }
+.archive-body ul { margin: 0 0 6px 16px; }
+.archive-body li { margin-bottom: 3px; }
+.archive-toggle {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-s);
+  cursor: pointer;
+  padding: 6px 0;
+  list-style: none;
+}
+.archive-toggle::-webkit-details-marker { display: none; }
+.archive-toggle::before { content: "▸ "; color: var(--text-t); }
+details[open] > .archive-toggle::before { content: "▾ "; }
+.changelog-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  margin-top: 14px;
+}
+.changelog-table th, .changelog-table td {
+  border-bottom: 1px solid var(--border);
+  padding: 7px 9px;
+  text-align: left;
+  vertical-align: top;
+}
+.changelog-table th { color: var(--text-t); font-weight: 600; font-size: 11.5px; }
+.changelog-table td { color: var(--text-s); }
+</style>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="doc-header">
+    <div class="doc-eyebrow">Petnow Shelter CRM · M1 Track 2 기획안</div>
+    <h1 class="doc-title">LMF 소구점 검증 실험<br>광고·랜딩페이지 1차 라운드</h1>
+    <div class="doc-meta">
+      <span class="doc-meta-item"><strong>작성일</strong> 2026.08.05</span>
+      <span class="doc-meta-item"><strong>개정일</strong> 2026.08.12 (v1.1 · LinkedIn 채널 · 소재 C 제외)</span>
+      <span class="doc-meta-item"><strong>작성자</strong> 카야 (마켓핏랩)</span>
+      <span class="doc-meta-item"><strong>예산</strong> ~100만원 (정찰)</span>
+      <span class="doc-meta-item"><strong>실험 기간</strong> 4주</span>
+      <span class="doc-meta-item"><a href="./#/doc/ZGVsaXZlcmFibGVzL1RyYWNrMl9JQ1BfUGVyc29uYV_shozsnqxf7KCV7J2YX-q3vOqxsF8yMDI2MDgwNS5tZA" target="_blank" rel="noopener" style="color:var(--teal-mid);text-decoration:none;font-weight:600;">ICP·Persona·소재 정의 배경 →</a></span>
+    </div>
+  </header>
+
+  <!-- 01 목적 및 방향 -->
+  <section class="section">
+    <div class="section-label">01 · 목적 및 방향</div>
+    <h2 class="section-title">인터뷰 대기 기간을 실험 기간으로 전환</h2>
+    <div class="section-divider"></div>
+    <div class="goal-box">
+      인터뷰 섭외가 진행되는 4주 동안, <strong>광고 + 랜딩페이지 실험</strong>을 병행 운영해 미국 레스큐 운영자가 가장 강하게 반응하는 문제 소구점을 상대 CTR로 선별한다. 1차 라운드 집행 대상은 소재 A·B 2종이다.
+    </div>
+    <ul class="bullet-list">
+      <li>인터뷰를 기다리지 않고 시장 반응 데이터 먼저 확보 → M1 인사이트 생산 속도 유지</li>
+      <li>소구점 가설을 동시 집행 → 어느 메시지가 고객 언어에 맞는지 데이터로 판단</li>
+      <li>CTR 우세 소재에 <strong>집행 주 후반 예비 예산 집중</strong> + 후속 인터뷰 질문 보강</li>
+      <li>Track 1(인터뷰)과 완전 병행 · 대체 아님. 두 트랙은 상호 보완</li>
+    </ul>
+    <div class="metric-box">
+      <strong>1차 측정 지표: CTR (클릭률)</strong>
+      <span>— 어떤 소구점에 반응하는지 가장 빠르게 측정할 수 있는 신호. CTR이 오르면 같은 예산으로 랜딩 유입이 정비례 증가한다. 랜딩 전환율보다 반응 속도가 빠르고 예산 소진 전 방향 수정이 가능하다.</span>
+    </div>
+  </section>
+
+  <!-- 02 제약사항 -->
+  <section class="section">
+    <div class="section-label">02 · 제약사항 및 보완</div>
+    <h2 class="section-title">현재 상황의 한계와 대응 방향</h2>
+    <div class="section-divider"></div>
+    <div style="overflow-x:auto;">
+      <table class="constraint-table">
+        <thead>
+          <tr>
+            <th>제약</th>
+            <th>내용</th>
+            <th>보완 방법</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label-cell">고객 인터뷰 N=1<br><small style="font-weight:400;font-size:11px;color:var(--text-t);">Gina 인터뷰만 완료</small></td>
+            <td>고객 언어 풀이 좁아 카피 근거 빈약</td>
+            <td class="comp-cell">기확보 경쟁사 리뷰 리서치 활용. 이후 소재 개발 단계에서 합성소비자 인터뷰로 워딩 디벨롭<span class="supplement">→ 현 단계 카피 기반은 실험 가능 수준</span></td>
+          </tr>
+          <tr>
+            <td class="label-cell">Gina = 크로스보더<br><small style="font-weight:400;font-size:11px;color:var(--text-t);">KK9R, ICP와 맥락 차이</small></td>
+            <td>로컬 쉘터 직접 검증 미완. ICP(미국 내 운영 레스큐)와 맥락 차이 존재</td>
+            <td class="comp-cell">크로스보더 특수 요소 제거, 공통 pain point만 소구. CTR 자체가 로컬 관련성 검증 수단<span class="supplement">→ 이 실험이 곧 로컬 검증의 첫 스텝</span></td>
+          </tr>
+          <tr>
+            <td class="label-cell">소규모 예산<br><small style="font-weight:400;font-size:11px;color:var(--text-t);">~100만원, 1차 정찰</small></td>
+            <td>통계적 유의미성 확보 어려움. A/B 통제 변수 부족</td>
+            <td class="comp-cell">목적을 "정찰"로 명시. 절대 수치보다 <strong>상대적 우세</strong> 파악에 집중. 집행 주 후반에 예비 예산으로 우세 소재 추가 집중<span class="supplement">→ 방향성 탐색에는 충분한 규모</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 03 실험 성공 기준 -->
+  <section class="section">
+    <div class="section-label" id="success-criteria">03 · 실험 성공 기준</div>
+    <h2 class="section-title">1.5× CTR 규칙 — 소구점 우세 소재를 이렇게 판단한다</h2>
+    <div class="section-divider"></div>
+    <div class="ctr-rule" style="margin-bottom:14px;">
+      <strong>우열 판단 기준</strong>: 절대 수치가 아닌 소재 간 <strong>상대 비교</strong>. 최고 CTR 소재가 최저 소재의 <strong>1.5배 이상</strong>이면 "방향 있음"으로 판단 → 집행 주 후반 예비 예산은 우세 소재에 집중.
+    </div>
+    <ul class="bullet-list">
+      <li><strong>왜 1.5배인가</strong> — 예산 100만원·1주 집행 시 소재당 노출이 8,000~15,000회 수준으로, 통계적 유의성 확보가 불가능하다. 이 규모에서 CTR 무작위 변동은 ±20~30%가 일반적이다. 1.5배(+50%)는 그 노이즈를 넘는 최소 방향 신호로, "우연이 아닐 가능성"을 실용적으로 판단하는 기준이다. 2배는 이 예산에서 달성하기 어렵고, 1.2배는 노이즈와 구분이 어렵다.</li>
+      <li><strong>CTR은 소구점 반응 신호지 구매 의향이 아니다</strong> — 클릭은 "이 문제가 나한테 있다"는 초기 반응, 랜딩페이지 전환은 추가 정보를 남길 정도의 관심이다. 구매 의향은 후속 인터뷰와 3단계(수렴형) 실험에서 별도 확인한다.</li>
+      <li><strong>소재별 리드 직무 구성비도 기록한다</strong> — 같은 소재에 Diane 유형(대표·의사결정권자)과 Alex 유형(운영 실무자) 중 누가 더 많이 신청했는지를 랜딩 폼의 직무 응답으로 비교해 퍼소나 신호로 읽는다.</li>
+      <li><strong>이상 소재 조기 중단</strong> — 집행 4일 차 중간 점검에서 최저 CTR 소재가 최고 대비 50% 미만이면 즉시 예산 중단. 남은 3일간 우세 소재에 예비 예산 재배분.</li>
+    </ul>
+  </section>
+
+  <!-- 04 LMF 단계 -->
+  <section class="section">
+    <div class="section-label">04 · LMF 프레임 내 위치</div>
+    <h2 class="section-title">현재: 2단계 발산형 진입</h2>
+    <div class="section-divider"></div>
+    <div class="lmf-stages">
+      <div class="lmf-stage">
+        <div class="lmf-stage-num">1단계</div>
+        <div class="lmf-stage-name">준비하기</div>
+        <div class="lmf-stage-desc">ICP·Persona·VP·가설 도출 — 완료</div>
+      </div>
+      <div class="lmf-stage active">
+        <div class="lmf-stage-num">2단계</div>
+        <div class="lmf-stage-name">발산형</div>
+        <div class="lmf-stage-desc">가설 소재 캠페인 운영, 반응하는 소구점 탐색</div>
+        <div class="lmf-now-tag">현재 진입</div>
+      </div>
+      <div class="lmf-stage">
+        <div class="lmf-stage-num">3단계</div>
+        <div class="lmf-stage-name">수렴형</div>
+        <div class="lmf-stage-desc">우세 소구점으로 소재 고도화</div>
+      </div>
+      <div class="lmf-stage">
+        <div class="lmf-stage-num">4단계</div>
+        <div class="lmf-stage-name">LMF 적용</div>
+        <div class="lmf-stage-desc">검증된 언어 배포 전략 수립</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--text-t);margin-top:10px;">1단계 산출물 완료: ICP v1.1 · Persona 4종 · 가치 약속(Value Promise) · Use Case Map 16개 · ICE 우선순위 가설 5종</p>
+  </section>
+
+  <!-- 04 채널 선정 -->
+  <section class="section">
+    <div class="section-label">05 · 채널 선정</div>
+    <h2 class="section-title">Facebook 그룹 단독</h2>
+    <div class="section-divider"></div>
+    <div class="channel-grid">
+      <div class="channel-card">
+        <div class="channel-name">
+          Facebook 그룹
+          <span class="channel-target">Diane · Alex 공통 도달</span>
+        </div>
+        <div class="channel-reason">쉘터·레스큐 운영자 커뮤니티가 Facebook에 집중. 실무자와 소규모 조직 대표가 같은 그룹에서 활동해 두 퍼소나 모두 도달 가능. 저비용·고도달, 커뮤니티 언어 맥락 그대로 소구 가능. 퍼소나 구분은 랜딩 폼의 직무 응답으로 사후 수행.</div>
+        <div class="channel-creatives-label">집행 소재</div>
+        <div class="badge-row">
+          <span class="badge">소재 A</span>
+          <span class="badge">소재 B</span>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--text-t);margin-top:10px;"><strong style="color:var(--amber);">소재 C(Intake 간소화)는 1차 라운드 제외 (8/12 결정):</strong> 입력 속도 측면에서 경쟁 제품 대비 우위가 있다는 근거를 확보하지 못했다. 소구점이 성립하려면 비교 우위가 전제되어야 하나 현 단계에서 이를 뒷받침할 자료가 없어, 검증 가능한 A·B에 집중한다. /intake/ 랜딩페이지는 유지하되 집행하지 않는다.</p>
+    <p style="font-size:12px;color:var(--text-t);margin-top:10px;"><strong style="color:var(--amber);">LinkedIn은 1차 라운드 제외 (8/12 결정):</strong> Campaign Manager 실측 결과 예상 CPC $10.93~12.85로, 배정 예산 30만원의 예상 클릭이 17~20회에 그쳐 소구점 비교·퍼소나 정찰 모두 표본 미달. 광고 계정(Petify for Shelter, USD)은 확보 상태로 유지하며 3단계 수렴형에서 재검토. 실측 전문은 <code>analysis/LinkedIn_오디언스_실측_20260812.md</code>, 변경 전 채널 구성은 문서 하단 별첨 참조.<br>Reddit은 이번 라운드 제외: 익명성으로 리드 추적 어렵고 CPM 대비 타게팅 정확도 낮음.</p>
+  </section>
+
+  <!-- 05 캠페인 구조 -->
+  <section class="section">
+    <div class="section-label">06 · 캠페인 구조</div>
+    <h2 class="section-title">ICP → 퍼소나 → 소재 3종(집행 2종) → 랜딩페이지 3종</h2>
+    <div class="section-divider"></div>
+
+    <div class="campaign-diagram">
+
+      <div class="cd-row">
+        <div class="icp-box">
+          <strong>ICP: 미국 내 운영 민간 레스큐 조직 (국제 이송 없음)</strong>
+          <small>연간 50~300 입양 · 스태프 1~5명 · 임보자 20~80명 · 기존 CRM + 외부 리스팅 사이트 병행</small>
+        </div>
+      </div>
+
+      <div class="cd-arrow">↓</div>
+
+      <div class="cd-row">
+        <div class="persona-row">
+          <div class="persona-box">
+            <div class="persona-name">Diane</div>
+            <div class="persona-role">Executive Director<br>구매결정권자</div>
+            <div class="persona-ch">Facebook 공통 · 폼 응답으로 식별</div>
+          </div>
+          <div class="persona-box">
+            <div class="persona-name">Alex</div>
+            <div class="persona-role">시스템 운영 실무자<br>챔피언 (평가·추천)</div>
+            <div class="persona-ch">Facebook 공통 · 폼 응답으로 식별</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cd-arrow">↓</div>
+
+      <div class="cd-row">
+        <div class="creative-row">
+          <div class="creative-box">
+            <div class="creative-tag">소재 A</div>
+            <div class="creative-copy">"Which dogs are ready to go?"</div>
+            <div class="creative-hypo">준비 상태 판단 (H-A · ICE 240점)</div>
+            <div class="ch-badges">
+              <span class="ch-badge">Facebook</span>
+            </div>
+          </div>
+          <div class="creative-box">
+            <div class="creative-tag">소재 B</div>
+            <div class="creative-copy">"Stop texting your fosters for updates"</div>
+            <div class="creative-hypo">임보 독촉 해방 (H-B · ICE 336점)</div>
+            <div class="ch-badges">
+              <span class="ch-badge">Facebook</span>
+            </div>
+          </div>
+          <div class="creative-box excluded">
+            <div class="creative-tag">소재 C</div>
+            <div class="creative-copy">"8m44s. 37 fields. One intake."</div>
+            <div class="creative-hypo">Intake 간소화 (H-D · ICE 240점)</div>
+            <div class="excluded-tag">1차 라운드 제외 · 경쟁우위 근거 부재</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cd-arrow">↓</div>
+
+      <div class="cd-row">
+        <div class="lp-row">
+          <div class="lp-box">
+            <div class="lp-tag">LP 1</div>
+            <div class="lp-name">준비 상태 판단</div>
+            <div class="lp-uc">UC-11 · 입양 대기 단축</div>
+          </div>
+          <div class="lp-box">
+            <div class="lp-tag">LP 2</div>
+            <div class="lp-name">임보 독촉 해방</div>
+            <div class="lp-uc">UC-1 · 케어 루틴 자동화</div>
+          </div>
+          <div class="lp-box excluded">
+            <div class="lp-tag">LP 3</div>
+            <div class="lp-name">Intake 간소화</div>
+            <div class="lp-uc">UC-4 · 기록 시간 단축</div>
+            <div class="excluded-tag">집행 없이 유지</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cd-arrow">↓</div>
+
+      <div class="cd-row">
+        <div class="cta-box">
+          CTA: 데모 신청 / 얼리 액세스 등록
+          <small>각 LP에서 리드 수집 → 디스커버리 콜 연결 (Track 1 연계)</small>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="vp-note">
+      소재는 하나의 가치 약속 — <em>"어떤 개가 언제 준비되는지, 물어보지 않아도 안다"</em> — 에서 출발하되, 각각 다른 운영 마찰 지점(가설)으로 어떤 소구점에 반응하는지를 병렬로 측정한다. Use Case Map에서 마찰을 가설화하고 ICE(Impact·Confidence·Ease) 점수로 우선순위를 선정했다: H-B 독촉 없이 기록 수집(336점) · H-A 준비 상태 판단(240점) · H-D 신규 동물 등록 속도(240점). 1차 라운드 집행은 <strong>A·B 2종</strong>이며, 소재 C는 ICE 점수와 무관하게 경쟁우위 근거 부재로 제외했다(위 회색 표시). 소재 카피는 W1 확정 예정이며 집행 전 최종 검수.
+    </p>
+    <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <span style="font-size:12px;color:var(--text-t);">소재·ICP·퍼소나 선정 배경과 근거:</span>
+      <a href="./#/doc/ZGVsaXZlcmFibGVzL1RyYWNrMl9JQ1BfUGVyc29uYV_shozsnqxf7KCV7J2YX-q3vOqxsF8yMDI2MDgwNS5tZA" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:700;color:var(--teal);background:var(--teal-light);border:1px solid var(--teal-mid);border-radius:4px;padding:6px 13px;text-decoration:none;">
+        ICP · Persona · 소재 3종 — 정의 배경 및 근거 →
+      </a>
+    </div>
+
+    <div class="rationale-box">
+      <div class="rationale-q">퍼소나가 둘인데, 한 채널에 같은 소재를 노출해도 되나요?</div>
+      <div class="rationale-a">
+        1차 라운드 목적은 <strong>소구점 탐색</strong>이다. 퍼소나별로 메시지를 미리 분화하면 "소구점이 약해서 CTR이 낮은 건지, 카피가 나빠서인지"를 구분할 수 없다. 그래서 두 퍼소나를 나누지 않고 동일 소재를 동일 오디언스에 노출한다. 퍼소나별 반응 차이는 집행 전 타게팅이 아니라 <strong>랜딩 폼의 직무 응답</strong>으로 사후 확인한다. 소재 A에는 대표가, 소재 B에는 실무자가 몰리는 식의 편차가 나타나면 그것이 퍼소나 신호다. 이 방식은 채널을 나눴을 때와 달리 플랫폼 알고리즘·광고 포맷 차이가 개입하지 않아 해석이 오히려 깨끗하다. 퍼소나별 메시지 최적화는 소구점이 검증된 3단계(수렴형)에서 진행한다.<br><br>
+        랜딩 폼이 응답자 직무(<code>respondent_role</code>)와 조직 유형(<code>organization_type</code>)을 수집하므로 소재별 리드의 역할 구성비 비교가 가능하다(근거: 랜딩 구현 및 이벤트 정의서). 채널 축소로 구매 의사결정자 표본이 부족할 경우, Track 1 인터뷰(LinkedIn 후보 명단 직접 접촉, Gina 소개 네트워크)로 보완한다.
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 실행 전제 -->
+  <section class="section">
+    <div class="section-label">07 · 실행 전제</div>
+    <h2 class="section-title">플랫폼 · 계정 · 리드 대응</h2>
+    <div class="section-divider"></div>
+
+    <div class="setup-grid">
+      <div class="setup-item">
+        <div class="setup-label">LP 플랫폼</div>
+        <div class="setup-content">
+          Petnow 도메인 하위 경로 사용 권장<br>
+          예: petnow.ai/shelter-a, /shelter-b, /shelter-c
+          <span class="setup-sub">브랜드 신뢰도 유지 + 도메인 권한 활용 + 별도 인프라 불필요. LP 3개를 독립 경로로 운영해 소재별 UTM 추적.</span>
+        </div>
+      </div>
+      <div class="setup-item">
+        <div class="setup-label">광고 계정</div>
+        <div class="setup-content">
+          <span class="setup-tag ok">Meta</span> 마켓핏랩 계정 사용 · 권한 확보 완료
+          <span class="setup-sub">Pixel·CAPI·전환 이벤트 검증까지 완료 상태.</span>
+          <span class="setup-row-excluded">
+            <span class="setup-tag">LinkedIn</span> 계정 확보 완료 (Petify for Shelter · USD) — <strong>1차 라운드 집행 제외</strong> →
+            <a href="./#/doc/ZGVsaXZlcmFibGVzL1RyYWNrMl_qtJHqs6Dqs4TsoJVf7ISk7KCV6rCA7J2065OcX01ldGFfTGlua2VkSW5fMjAyNjA4MDUubWQ" target="_blank" rel="noopener">계정 설정 절차 ↗</a>
+            <span class="setup-sub">계정과 접근 권한은 유지하되 이번 라운드 예산 미배정. Insight Tag·Lead Conversion 미생성.</span>
+          </span>
+        </div>
+      </div>
+      <div class="setup-item">
+        <div class="setup-label">리드 대응<br>플로우</div>
+        <div class="setup-content">
+          <div class="lead-flow">
+            <div class="flow-step">
+              <div class="flow-box">CTA 데모 신청<small>LP 폼 제출</small></div>
+              <div class="flow-arrow">→</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-box highlight">Lead 전환 발생<small>ICP 자동 판정</small></div>
+              <div class="flow-arrow">→</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-box highlight">날짜 부킹<small>폴 캘린더 연동</small></div>
+              <div class="flow-arrow">→</div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-box highlight">부킹 완료 화면<small>확인 메일 자동 발송</small></div>
+            </div>
+          </div>
+          <span class="setup-sub" style="margin-top:8px;">
+            폼 제출 즉시 날짜 부킹 화면을 노출해 일정 조율 단계를 제거한다. 폼 응답으로 <strong>ICP 적합 여부를 자동 판정</strong>해 분기한다.<br>
+            · 적합 → 날짜 부킹(폴 캘린더 연동) → 부킹 완료 화면 + 확인 메일<br>
+            · 부적합 → 감사 화면 + 자료 안내 메일, 부킹 화면 미노출<br>
+            판정은 응답자 직무·조직 유형·연간 입양 수로 수행하며 사람이 개입하지 않는다. 폼은 핵심 3문항(연간 입양 수·현재 사용 툴·가장 큰 운영 문제)을 포함해 13개 항목을 수집하고, 퍼소나 사후 분류의 근거가 된다.<br>
+            전환 이벤트는 폼 제출 성공 시점의 <code>Lead</code>와 부킹 완료 시점의 <code>Schedule</code>을 분리해 기록한다. 광고 최적화는 <code>Lead</code>에 걸고, <code>Schedule</code>은 측정 전용으로 두며 리드 품질은 <code>Lead → Schedule</code> 전환율로 사후 확인한다.
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 예산 -->
+  <section class="section">
+    <div class="section-label">08 · 예산</div>
+    <h2 class="section-title">1차 라운드 총 100만원 (정찰)</h2>
+    <div class="section-divider"></div>
+    <div class="budget-wrap">
+      <table class="budget-table">
+        <thead>
+          <tr>
+            <th>항목</th>
+            <th>채널</th>
+            <th>기간</th>
+            <th>금액</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="ch-row">
+            <td colspan="4">Facebook 그룹 — Diane · Alex 공통</td>
+          </tr>
+          <tr>
+            <td>소재 A (준비 상태 판단)</td>
+            <td>Facebook</td>
+            <td>W2 (1주)</td>
+            <td>15만원</td>
+          </tr>
+          <tr>
+            <td>소재 B (임보 독촉 해방)</td>
+            <td>Facebook</td>
+            <td>W2 (1주)</td>
+            <td>15만원</td>
+          </tr>
+          <tr class="ch-row">
+            <td colspan="4">예비 예산 — 집행 주 후반 우세 소재 집중 (LinkedIn 30만원 · 소재 C 15만원 이월 포함)</td>
+          </tr>
+          <tr>
+            <td>우세 소재 추가 집행</td>
+            <td>Facebook</td>
+            <td>W2 후반</td>
+            <td>70만원</td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="3">합계</td>
+            <td>100만원</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:var(--text-t);margin-top:10px;">광고 집행은 W2 1주로 한정. 소재 A·B를 동시 런칭하고 <strong>집행 4일 차 중간 점검</strong>에서 열등 소재를 중단한 뒤, 남은 3일간 우세 소재에 예비 예산을 집중한다. 예비 예산 70만원은 기존 예비 25만원에 LinkedIn 배정분 30만원과 소재 C 배정분 15만원을 합산해 이월한 금액이며, 집행 소재는 이 중간 점검에서 결정한다. 1차 집행분을 미리 증액하지 않은 이유는 배분 근거를 중간 점검 데이터에서 확보하기 위함이며, Facebook은 CPC가 낮아 소재별 15만원으로도 4일 내 판정 표본 확보가 가능하다고 판단.</p>
+
+    <h3 class="spec-title">Meta 캠페인 세팅 조건</h3>
+    <p class="spec-lead">타기팅은 Meta 학습에 맡기고 수동 조건은 최소화한다. 정밀도는 상세 타기팅이 아니라 <strong>리드 최적화</strong>로 확보한다. 단, <strong>예산 배분과 크리에이티브 변형은 수동으로 고정</strong>한다(주황 행). 자동화하면 소재 간 비교가 성립하지 않는다.</p>
+    <table class="spec-table">
+      <tr><th>캠페인 목표</th><td>리드 · 전환 위치 웹사이트</td></tr>
+      <tr><th>최적화 이벤트</th><td>표준 이벤트 <code>Lead</code> (폼 제출 성공 시 1회). 부킹 완료 <code>Schedule</code>은 측정 전용 <span class="spec-note">전환량이 적어 최적화 기준으로 쓰면 학습 미진행</span></td></tr>
+      <tr><th>캠페인 구조</th><td>소재 A / 소재 B 광고 세트 2개로 분리. Meta A/B 테스트 기능으로 오디언스 무작위 분할(중복 노출 차단)</td></tr>
+      <tr class="manual"><th>예산 방식</th><td>광고 세트별 고정 예산(ABO). <span class="spec-note">CBO 미사용 — 알고리즘이 한쪽에 예산을 몰면 소재 비교 불가</span></td></tr>
+      <tr><th>오디언스</th><td>Advantage+ 오디언스. 상세 타기팅·관심사·행동 <strong>미설정</strong>. <span class="spec-note">타기팅 정밀도는 최적화 이벤트가 담당</span></td></tr>
+      <tr><th>지역 · 언어 · 연령</th><td>미국 / 영어 / 25~65+</td></tr>
+      <tr><th>노출 위치</th><td>Advantage+ 배치(자동)</td></tr>
+      <tr class="manual"><th>소재 구성</th><td>광고 세트당 크리에이티브 <strong>2개</strong>(동일 카피 · 이미지 2종). 헤드라인·본문 변형 없음</td></tr>
+      <tr class="manual"><th>Advantage+ 크리에이티브</th><td><strong>끄기</strong>. <span class="spec-note">문구를 자동 변형하면 어떤 소구점에 반응했는지 판별 불가</span></td></tr>
+      <tr><th>전환 추적</th><td>Pixel + CAPI 병행, 표준 이벤트 <code>Lead</code>, 동일 <code>event_id</code>로 중복 제거</td></tr>
+      <tr><th>어트리뷰션</th><td>7일 클릭 · 1일 조회</td></tr>
+      <tr><th>학습 단계 대응</th><td>광고 세트당 주 50전환 미만이면 학습이 종료되지 않아 단가가 흔들린다. 4일 차에 열등 소재를 끄고 예비 예산을 우세 소재 한 세트에 몰아 전환을 집중시킨다. <span class="spec-note">그래도 학습 완료는 어려우므로 단가 절대값이 아닌 소재 간 상대 비교로만 판정</span></td></tr>
+    </table>
+    <p style="margin-top:12px;">
+      <a href="#success-criteria" style="display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;color:var(--teal);background:var(--teal-light);border:1px solid var(--teal-mid);border-radius:4px;padding:6px 13px;text-decoration:none;">
+        광고 중단 · 성공 판단 기준 (03 섹션) ↑
+      </a>
+    </p>
+  </section>
+
+  <!-- 08 일정 -->
+  <section class="section">
+    <div class="section-label">09 · 일정</div>
+    <h2 class="section-title">4주 실험 로드맵 — 광고 집행은 W2 1주</h2>
+    <div class="section-divider"></div>
+    <div class="timeline">
+      <div class="tl-week">
+        <div class="tl-label">
+          <div class="tl-week-num">W1</div>
+          <div class="tl-dates">8/6–8/12</div>
+        </div>
+        <div class="tl-tasks">
+          <span class="pill focus">소재 A/B 제작</span>
+          <span class="pill focus">LP 1/2/3 구축</span>
+          <span class="pill">픽셀·추적 셋업</span>
+          <span class="pill">광고 계정 설정</span>
+        </div>
+      </div>
+      <div class="tl-week">
+        <div class="tl-label">
+          <div class="tl-week-num">W2</div>
+          <div class="tl-dates">8/13–8/19</div>
+        </div>
+        <div class="tl-tasks">
+          <span class="pill launch">캠페인 런칭 (8/13)</span>
+          <span class="pill">일별 CTR 모니터링</span>
+          <span class="pill focus">D+4 중간 점검 · 열등 소재 중단</span>
+          <span class="pill launch">우세 소재 예비 예산 집중</span>
+          <span class="pill launch">집행 종료 (8/19)</span>
+        </div>
+      </div>
+      <div class="tl-week">
+        <div class="tl-label">
+          <div class="tl-week-num">W3</div>
+          <div class="tl-dates">8/20–8/26</div>
+        </div>
+        <div class="tl-tasks">
+          <span class="pill focus">리드 스크리닝·인터뷰 연결</span>
+          <span class="pill">소재별 CTR·리드 직무 구성비 분석</span>
+          <span class="pill">Track 1 인터뷰 병행</span>
+        </div>
+      </div>
+      <div class="tl-week">
+        <div class="tl-label">
+          <div class="tl-week-num">W4</div>
+          <div class="tl-dates">8/27–9/2</div>
+        </div>
+        <div class="tl-tasks">
+          <span class="pill focus">결과 정리·소구점 순위 확정</span>
+          <span class="pill">인터뷰 질문 보강</span>
+          <span class="pill">3단계 수렴형 기획</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 별첨 · v1.0 보관본 -->
+  <section class="section">
+    <div class="archive-box">
+      <div class="archive-head">
+        <span class="archive-tag">보관본 · 실행 안 함</span>
+        <span class="archive-title">별첨. 변경 전 원문 (v1.0 · 2026-08-05)</span>
+      </div>
+      <p class="archive-note">
+        현재 유효한 계획은 위 본문(v1.1)이다. 아래는 LinkedIn 채널을 포함하던 v1.0 중 이번 개정으로 변경된 부분의 원문이며, 이력 확인 목적으로만 보관한다. 변경되지 않은 절은 수록하지 않았다.
+      </p>
+
+      <details>
+        <summary class="archive-toggle">v1.0 원문 펼쳐보기</summary>
+        <div class="archive-body">
+
+          <h4>03 · 실험 성공 기준 (해당 항목)</h4>
+          <ul>
+            <li><strong>Facebook vs LinkedIn CTR 차이도 기록한다</strong> — 동일 소재에서 채널 CTR 격차가 크면, 그 소구점이 Alex(Facebook)에게 더 반응하는지 Diane(LinkedIn)에게 더 반응하는지 퍼소나 신호로 읽는다.</li>
+          </ul>
+
+          <h4>05 · 채널 선정 — "Facebook 그룹 + LinkedIn"</h4>
+          <table>
+            <tr><th>채널</th><th>타겟</th><th>선정 이유</th><th>집행 소재</th></tr>
+            <tr>
+              <td>Facebook 그룹</td>
+              <td>Alex 타겟 (챔피언)</td>
+              <td>쉘터·레스큐 운영자 커뮤니티가 Facebook에 집중. Alex 페르소나(시스템 실무자)들이 그룹에서 활발히 활동. 저비용·고도달.</td>
+              <td>A · B · C</td>
+            </tr>
+            <tr>
+              <td>LinkedIn</td>
+              <td>Diane 타겟 (의사결정권자)</td>
+              <td>Shelter Director / Executive Director 직함·비영리 조직 타게팅 가능. CPM이 Facebook 대비 3~5배 높아 소재 수 제한 운영.</td>
+              <td>A · B</td>
+            </tr>
+          </table>
+
+          <h4>06 · 캠페인 구조 — 퍼소나별 채널</h4>
+          <table>
+            <tr><th>퍼소나</th><th>역할</th><th>주요 채널</th></tr>
+            <tr><td>Diane</td><td>Executive Director · 구매결정권자</td><td>LinkedIn</td></tr>
+            <tr><td>Alex</td><td>시스템 운영 실무자 · 챔피언</td><td>Facebook 그룹</td></tr>
+          </table>
+
+          <h4>06 · 소재별 집행 채널</h4>
+          <table>
+            <tr><th>소재</th><th>채널</th></tr>
+            <tr><td>A — "Which dogs are ready to go?"</td><td>Facebook · LinkedIn</td></tr>
+            <tr><td>B — "Stop texting your fosters for updates"</td><td>Facebook · LinkedIn</td></tr>
+            <tr><td>C — "8m44s. 37 fields. One intake."</td><td>Facebook</td></tr>
+          </table>
+
+          <h4>06 · 소재는 같고 채널만 다른데, 퍼소나가 다르면 메시지도 달라야 하지 않나요?</h4>
+          <p>1차 라운드 목적은 소구점 탐색이다. 이 실험에서는 퍼소나가 채널에 1:1로 대응한다(Diane→LinkedIn, Alex→Facebook). 따라서 채널별로 카피를 다르게 하는 것이 곧 퍼소나별로 메시지를 분화하는 것과 같다. 지금 그렇게 하면 "소구점이 약해서 CTR이 낮은 건지, 카피가 나빠서인지"를 구분할 수 없다. 같은 소재를 두 채널에 그대로 집행하면 이 소구점이 Diane과 Alex 중 누구에게 더 반응하는지도 참고 신호로 볼 수 있다. 다만 채널 간 CTR 차이는 플랫폼 알고리즘·광고 포맷·오디언스 밀도 차이와 뒤섞여 있어 퍼소나 반응 차이로 단정할 수는 없다.</p>
+
+          <h4>07 · 광고 계정 (해당 항목)</h4>
+          <p>LinkedIn — 신규 생성 필요. 회사 페이지 있을 경우 약 15분 소요. W1 첫날 완료 목표.</p>
+
+          <h4>08 · 예산</h4>
+          <table>
+            <tr><th>항목</th><th>채널</th><th>기간</th><th>금액</th></tr>
+            <tr><td>소재 A (준비 상태 판단)</td><td>Facebook</td><td>W2~W3</td><td>15만원</td></tr>
+            <tr><td>소재 B (임보 독촉 해방)</td><td>Facebook</td><td>W2~W3</td><td>15만원</td></tr>
+            <tr><td>소재 C (Intake 간소화)</td><td>Facebook</td><td>W2~W3</td><td>15만원</td></tr>
+            <tr><td>소재 A (준비 상태 판단)</td><td>LinkedIn</td><td>W2~W3</td><td>15만원</td></tr>
+            <tr><td>소재 B (임보 독촉 해방)</td><td>LinkedIn</td><td>W2~W3</td><td>15만원</td></tr>
+            <tr><td>우세 소재 추가 집행 (채널 TBD)</td><td>TBD</td><td>W3</td><td>25만원</td></tr>
+            <tr><td><strong>합계</strong></td><td></td><td></td><td><strong>100만원</strong></td></tr>
+          </table>
+          <p>예비 예산은 W2 말 CTR 중간 점검 후 배분 결정.</p>
+
+        </div>
+      </details>
+
+      <table class="changelog-table">
+        <tr><th>버전</th><th>일자</th><th>변경 내용</th></tr>
+        <tr>
+          <td>v1.0</td>
+          <td>2026-08-05</td>
+          <td>최초 작성. Facebook · LinkedIn 2채널 구성</td>
+        </tr>
+        <tr>
+          <td>v1.1</td>
+          <td>2026-08-12</td>
+          <td>LinkedIn 채널 제외(실측 CPC $10.93~12.85, 표본 미달). 퍼소나와 채널의 1:1 대응 폐기 후 랜딩 폼 직무 응답 기반 사후 분류로 전환. 소재 C(Intake 간소화) 제외 — 경쟁우위 근거 부재. 이월 예산 45만원(LinkedIn 30 · 소재 C 15)을 예비로 합산. 광고 집행 기간 2주 → <strong>1주(W2)</strong>, 중간 점검 시점 D+4로 변경. Meta 계정을 마켓핏랩 계정으로 확정</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+</div>
+  </body>
+</html>
