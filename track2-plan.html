@@ -1104,16 +1104,16 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--teal-mid); outl
   <!-- 03 실험 성공 기준 -->
   <section class="section" id="sec-03">
     <div class="section-label" id="success-criteria">03 · 실험 성공 기준</div>
-    <h2 class="section-title">총 광고비 15만원 기준 — 목표는 리드 3.6건, 판정은 CTR로</h2>
+    <h2 class="section-title">소재당 15만원 기준 — 목표는 리드 3.6건, 판정은 CTR로</h2>
     <div class="section-divider"></div>
 
     <div class="ctr-rule" style="margin-bottom:14px;">
-      <strong>목표 수준</strong>: 공개 벤치마크의 CTR·리드 제출률 구간을 총 광고비에 대입한 <strong>계획용 추정치</strong>. 집행 전 목표를 숫자로 합의하고, 집행 후 실측을 같은 표에 대입해 어느 구간인지 판정한다. <strong>목표치는 보통 구간의 리드 3.6건</strong>이며, 나머지 구간은 그에 대한 상대 표기다.
+      <strong>목표 수준</strong>: 공개 벤치마크의 CTR·리드 제출률 구간을 소재당 광고비에 대입한 <strong>계획용 추정치</strong>. 구간 판정이 소재별로 이루어지므로 환산도 <strong>소재 1종 단위</strong>로 맞췄다. 집행 전 목표를 숫자로 합의하고, 집행 후 실측을 같은 표에 대입해 어느 구간인지 판정한다. <strong>목표치는 보통 구간의 리드 3.6건</strong>이며, 나머지 구간은 그에 대한 상대 표기다.
     </div>
 
     <p class="assump-line">
-      <strong>전제</strong> — 총 광고비 15만원(Facebook 단독, 소재 A·B 2종 합산 기준 · 균등 배분 시 소재당 7.5만원) · 총 노출 11,250회(범위 8,000~15,000회) · CTR과 리드 제출률은 신규 가정 없이 공개 벤치마크 구간값만 조합<br>
-      <strong>산식</strong> — 클릭 = 노출 × CTR · 리드 = 클릭 × 제출률 · 리드당 비용 = 총 광고비 ÷ 리드
+      <strong>전제</strong> — 소재당 광고비 15만원(Facebook 단독 · 08 예산 절의 소재 A·B 각 15만원, 예비 70만원은 중간 점검 후 배분이라 환산 제외) · 소재당 노출 11,250회(범위 8,000~15,000회) · CTR과 리드 제출률은 신규 가정 없이 공개 벤치마크 구간값만 조합<br>
+      <strong>산식</strong> — 클릭 = 노출 × CTR · 리드 = 클릭 × 제출률 · 리드당 비용 = 소재당 광고비 ÷ 리드
     </p>
 
     <div class="budget-wrap">
@@ -1137,17 +1137,18 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--teal-mid); outl
           <tr><td>낮음</td><td>0.80%</td><td>2.0%</td><td>90</td><td>1,667원</td><td>1.8건</td><td>50%</td><td>83,333원</td></tr>
         </tbody>
       </table>
+      <p class="table-note" style="margin-top:6px;">위 값은 <strong>소재 1종 기준</strong>이다. 1차 라운드 캠페인 전체(소재 A·B 2종 · 30만원)는 두 배 — 아주 높음 18.4건 / 높음 12.0건 / 보통 7.2건 / 낮음 3.6건.</p>
     </div>
 
     <ul class="bullet-list" style="margin-top:12px;">
-      <li><strong>클릭당·리드당 비용은 예산 규모와 무관하게 동일하다</strong> — 광고비와 노출이 같은 비율로 움직이기 때문이다. 예산을 줄이면 달라지는 것은 절대 건수뿐이다.</li>
-      <li><strong>이 예산에서 리드 건수는 판정 지표가 아니다</strong> — 캠페인 전체 3.6건, 소재당 1.8건이라 리드 1건의 발생·미발생이 결과를 뒤집는다. 판정은 표본이 100건 단위로 쌓이는 클릭·CTR을 우선 사용한다.</li>
-      <li><strong>노출은 실측이 아닌 계획 가정</strong> — 하한 8,000회면 보통 구간 리드 2.6건(리드당 58,777원), 상한 15,000회면 4.8건(리드당 31,348원)으로 -29%~+33% 변동한다.</li>
+      <li><strong>클릭당·리드당 비용은 예산 규모와 무관하게 동일하다</strong> — 광고비와 노출이 같은 비율로 움직이기 때문이다. 예산이 달라지면 바뀌는 것은 절대 건수뿐이다.</li>
+      <li><strong>리드 건수는 단독 판정 지표가 아니다</strong> — 소재당 보통 구간 3.6건이라 리드 1건의 발생·미발생이 구간을 한 칸 옮긴다. 판정은 표본이 100건 단위로 쌓이는 클릭·CTR을 우선 사용한다.</li>
+      <li><strong>노출은 실측이 아닌 계획 가정</strong> — 소재당 하한 8,000회면 보통 구간 리드 2.6건(리드당 58,777원), 상한 15,000회면 4.8건(리드당 31,348원)으로 -29%~+33% 변동한다.</li>
+      <li><strong>예비 예산 70만원 투입 이후는 건수 비교가 성립하지 않는다</strong> — 우세 소재에 집중하면 소재 간 표본이 비대칭이 되므로, 그 시점부터 소재 비교는 CTR·제출률로만 한다.</li>
     </ul>
 
     <p class="table-note">
-      ※ 각 행의 조합 근거: 아주 높음 = Animals &amp; Pets CTR 중앙값 1.64% + 제출률 높음 구간 하한 5.0% / 높음 = CTR 높음 구간 하한 1.4% + SaaS 랜딩 전체 중앙값 3.8% / 보통 = CTR 보통 구간 중앙 1.1% + paid social 중앙값 2.9% / 낮음 = 두 지표의 보통 구간 하한. 출처는 WordStream Facebook Ads Benchmarks 2025, Unbounce SaaS Conversion Rate Benchmark.<br>
-      ※ 이 표의 전제는 <strong>총 광고비 15만원</strong>이다. 아래 08 예산 절(1차 정찰 + 예비 합계 100만원)과 기준이 다르므로, 집행 금액이 확정되면 양쪽을 맞춰야 한다.
+      ※ 각 행의 조합 근거: 아주 높음 = Animals &amp; Pets CTR 중앙값 1.64% + 제출률 높음 구간 하한 5.0% / 높음 = CTR 높음 구간 하한 1.4% + SaaS 랜딩 전체 중앙값 3.8% / 보통 = CTR 보통 구간 중앙 1.1% + paid social 중앙값 2.9% / 낮음 = 두 지표의 보통 구간 하한. 출처는 WordStream Facebook Ads Benchmarks 2025, Unbounce SaaS Conversion Rate Benchmark.
     </p>
 
     <a class="doc-btn" href="./#/doc/bWVldGluZ3MvMjAyNi0wOC0wN19UcmFjazJfTE1GX-2bhOyGjeq4sO2ajS5tZA">
@@ -1161,8 +1162,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--teal-mid); outl
       <strong>1.5× CTR 규칙</strong>: 최고 CTR 소재가 최저 소재의 <strong>1.5배 이상</strong>이면 "방향 있음"으로 판단 → 집행 주 후반 예비 예산은 우세 소재에 집중.
     </div>
     <ul class="bullet-list">
-      <li><strong>왜 1.5배인가</strong> — 이 규모에서는 통계적 유의성 확보가 불가능하고 CTR 무작위 변동이 ±20~30%다. 1.5배(+50%)는 그 노이즈를 넘는 최소 방향 신호다. 2배는 달성하기 어렵고 1.2배는 노이즈와 구분되지 않는다.</li>
-      <li><strong>단, 예산 15만원에서는 이 규칙이 경계선에 가깝다</strong> — 소재당 노출이 4,000~7,500회로 줄면 무작위 변동 폭이 약 1.4배 넓어진다. 1.5배 차이가 나도 "잠정 우세"로만 기록하고 확정 판단은 보류하는 편이 안전하다.</li>
+      <li><strong>왜 1.5배인가</strong> — 소재당 노출 8,000~15,000회 규모에서는 통계적 유의성 확보가 불가능하고 CTR 무작위 변동이 ±20~30%다. 1.5배(+50%)는 그 노이즈를 넘는 최소 방향 신호다. 2배는 달성하기 어렵고 1.2배는 노이즈와 구분되지 않는다.</li>
       <li><strong>CTR은 소구점 반응 신호지 구매 의향이 아니다</strong> — 구매 의향은 후속 인터뷰와 3단계(수렴형) 실험에서 별도로 확인한다.</li>
       <li><strong>리드 직무 구성비를 함께 기록한다</strong> — 소재별로 Diane 유형(대표·의사결정권자)과 Alex 유형(운영 실무자) 중 누가 더 신청했는지를 랜딩 폼의 직무 응답으로 비교해 퍼소나 신호로 읽는다.</li>
       <li><strong>이상 소재 조기 중단</strong> — 집행 4일 차 중간 점검에서 최저 CTR 소재가 최고 대비 50% 미만이면 즉시 예산 중단. 남은 3일간 우세 소재에 예비 예산 재배분.</li>
