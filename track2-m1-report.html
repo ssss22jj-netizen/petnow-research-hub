@@ -108,7 +108,13 @@ p.inline-warn{
   background:var(--warn-bg);border:1px solid var(--warn-line);color:var(--fg);
 }
 
-pre{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:14px 16px;overflow-x:auto;font-size:.85rem;line-height:1.65}
+/* 녹화 로그 등 기계 기록 — 콜아웃 박스로 감싸고 본문보다 흐리게 둔다 */
+pre{
+  margin:26px 0 20px;padding:14px 18px;overflow-x:auto;
+  background:var(--soft);border:0;border-left:3px solid var(--line);border-radius:0 8px 8px 0;
+  font-size:.82rem;line-height:1.6;color:var(--muted);opacity:.9;
+}
+pre code{color:inherit;background:none;border:0;padding:0}
 code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em}
 p code,li code,td code{background:var(--soft);padding:1px 5px;border-radius:4px;border:1px solid var(--line)}
 
@@ -167,10 +173,10 @@ h1#부록{font-size:1.35rem;margin:70px 0 8px;padding-top:34px;border-top:2px so
   <aside class="sidebar">
     <a class="brand" href="./">
       <span class="brand-mark">P</span>
-      <span><strong>Petnow</strong><small>문서 아카이브</small></span>
+      <span><strong>Petnow for shelters</strong><small>문서 라이브러리</small></span>
     </a>
     <nav aria-label="주요 메뉴"><div class="nav-section">문서 찾기</div><a class="nav-link" href="./"><span class="nav-icon">⌂</span>전체 문서</a><div class="nav-section">주제별 문서</div><a class="nav-link" href="./#/library/project"><span class="nav-icon">◷</span>프로젝트 계획·현황</a><a class="nav-link active" href="./#/library/results"><span class="nav-icon">◈</span>실험 결과 보고서</a><a class="nav-link" href="./#/library/interview"><span class="nav-icon">◎</span>고객 인터뷰</a><a class="nav-link" href="./#/library/workflow"><span class="nav-icon">◫</span>쉘터 업무 플로우</a><a class="nav-link" href="./#/library/competitors"><span class="nav-icon">▥</span>경쟁사 조사</a><a class="nav-link" href="./#/library/methods"><span class="nav-icon">▧</span>출처·분석 방법</a><a class="nav-link" href="./#/library/appendix"><span class="nav-icon">◇</span>별첨</a></nav>
-    <div class="sidebar-footer"><span class="status-dot"></span><span>M1 문서 아카이브</span></div>
+    <div class="sidebar-footer"><span class="status-dot"></span><span>문서 라이브러리</span></div>
   </aside>
   <main class="doc-layout">
     <article class="doc-main">
@@ -701,10 +707,11 @@ h1#부록{font-size:1.35rem;margin:70px 0 8px;padding-top:34px;border-top:2px so
 <h3>① 예약 화면에 선택지가 거의 없었다 (관찰)</h3>
 <p>신청서 4건 중 2건이 예약까지 가지 않았다. 그 두 건의 세션 녹화에 남은 화면은 이렇다.</p>
 <p><strong><a href="https://mixpanel.com/project/4053441/view/4549739/app/replay/73413829-ec99-4977-aa43-7622c8850233">첫 번째 이탈 건</a></strong> — 신청 직후 예약 화면에서 시간 버튼을 세 번 눌렀다.</p>
-<p><code>Tapped button "5:30 AM"
-Tapped button "6:30 AM"
-Tapped button "7:30 PM"
-(창을 닫고 나감)</code></p>
+<pre><code>Tapped button &quot;5:30 AM&quot;
+Tapped button &quot;6:30 AM&quot;
+Tapped button &quot;7:30 PM&quot;
+(창을 닫고 나감)
+</code></pre>
 <p>제시된 시간이 <strong>현지 새벽 5시 30분·6시 30분</strong>과 저녁 7시 30분뿐이었다. 셋 다 눌러 본 뒤 확정하지 않고 화면을 떠났다.</p>
 <p><strong><a href="https://mixpanel.com/project/4053441/view/4549739/app/replay/167c24d7-895c-427d-9d47-a8da7b400029">두 번째 이탈 건</a></strong> — 날짜 11개를 확인하고서 시간을 고르지 못한 채 나갔다.</p>
 <blockquote class="note">
@@ -851,7 +858,7 @@ Tapped button "7:30 PM"
 </tr>
 </tbody>
 </table></div>
-<p><em>(전체 목록: <a href="https://ssss22jj-netizen.github.io/petnow-research-hub/">문서 아카이브</a>)</em></p>
+<p><em>(전체 목록: <a href="https://ssss22jj-netizen.github.io/petnow-research-hub/">문서 라이브러리</a>)</em></p>
     </article>
     <aside class="toc"><strong>문서 목차</strong><div class="toc-links"></div></aside>
   </main>

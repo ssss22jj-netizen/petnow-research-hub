@@ -296,4 +296,4 @@ Tapped button "7:30 PM"
 | [Track 2 LMF 상세 기획 정리 (2026-08-07)](https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/bWVldGluZ3MvMjAyNi0wOC0wN19UcmFjazJfTE1GX-2bhOyGjeq4sO2ajS5tZA) | §5.1 운영 판단 · §5.2 정량 스펙트럼 · **§5.2.1 절대값 환산(목표 수치 출처)** · §5.3 판정 우선순위 |
 | [ICP·퍼소나·소재 정의 배경 및 근거 (2026-08-05)](https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/ZGVsaXZlcmFibGVzL1RyYWNrMl9JQ1BfUGVyc29uYV_shozsnqxf7KCV7J2YX-q3vOqxsF8yMDI2MDgwNS5tZA) | 2절 ICP 대조 기준 |
 
-*(전체 목록: [문서 아카이브](https://ssss22jj-netizen.github.io/petnow-research-hub/))*
+*(전체 목록: [문서 라이브러리](https://ssss22jj-netizen.github.io/petnow-research-hub/))*

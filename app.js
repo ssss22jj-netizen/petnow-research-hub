@@ -154,7 +154,7 @@ function docsForHome(key) {
 
 function renderLibrary(key = "all") {
   if (key === "all") {
-    app.innerHTML = `${pageHeader("문서 목록", "Petnow Shelter CRM 문서", "카테고리별 전체 문서와 각 문서의 역할을 한 화면에서 볼 수 있습니다.")}
+    app.innerHTML = `${pageHeader("문서 목록", "Petnow for shelters PMF 프로젝트 문서", "카테고리별 전체 문서와 각 문서의 역할을 한 화면에서 볼 수 있습니다.")}
       <div class="library-summary"><strong>원본 문서 ${docs.length}개</strong><span>상단 검색 또는 왼쪽 주제 메뉴에서 찾아보세요</span><a class="download-all" href="Petnow_Shelter_CRM_전체_Markdown.zip" download>전체 Markdown 다운로드 ↓</a></div>
       <div class="compact-library">${primaryGroups.map((groupKey, groupIndex) => { const group = collectionDefinitions[groupKey]; const groupDocs = docsForHome(groupKey); const isReference = ["methods", "appendix"].includes(groupKey); return `<section class="compact-section ${isReference ? "reference-section" : ""}"><div class="compact-section-head"><div><span>${String(groupIndex + 1).padStart(2, "0")}</span><h2>${group.title}</h2><b>${collectionCount(groupKey, groupDocs)}개</b></div>${isReference ? `<small class="section-tier">참고 자료</small>` : ""}<p>${group.homeLead ?? group.lead}</p><div class="compact-section-links"><a href="#/library/${groupKey}">섹션 열기 →</a></div></div><div class="compact-doc-list">${collectionRows(groupKey, groupDocs)}</div></section>`; }).join("")}</div>`;
     return;
