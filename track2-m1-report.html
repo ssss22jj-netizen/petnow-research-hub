@@ -12,6 +12,7 @@
   --ask:#1f5fd6; --ask-bg:#f2f6fd; --ask-line:#a9c4f0;
   --warn:#b02a37; --warn-bg:#fdf4f5; --warn-line:#eeb4ba;
   --observe:#0f766e; --observe-bg:#f1faf8; --observe-line:#a3d5cd;
+  --apx-bg:#f4f7fd; --apx-line:#dbe4f4; --apx-fg:#5d6879; --apx-head:#2f4f86; --apx-th:#e9eff9; --apx-strong:#3b4b63;
 }
 :root:not([data-theme="light"]) { }
 @media (prefers-color-scheme: dark){
@@ -22,6 +23,7 @@
     --ask:#7aa8f5; --ask-bg:#161f2e; --ask-line:#33507e;
     --warn:#f08c96; --warn-bg:#2a1a1d; --warn-line:#6b3b42;
     --observe:#5ec5b8; --observe-bg:#132623; --observe-line:#2f5b55;
+    --apx-bg:#141b26; --apx-line:#28374d; --apx-fg:#93a2b8; --apx-head:#8fb2f0; --apx-th:#1b2536; --apx-strong:#c3cfe0;
   }
 }
 :root[data-theme="dark"]{
@@ -31,6 +33,7 @@
   --ask:#7aa8f5; --ask-bg:#161f2e; --ask-line:#33507e;
   --warn:#f08c96; --warn-bg:#2a1a1d; --warn-line:#6b3b42;
   --observe:#5ec5b8; --observe-bg:#132623; --observe-line:#2f5b55;
+  --apx-bg:#141b26; --apx-line:#28374d; --apx-fg:#93a2b8; --apx-head:#8fb2f0; --apx-th:#1b2536; --apx-strong:#c3cfe0;
 }
 
 *{box-sizing:border-box}
@@ -118,7 +121,32 @@ pre code{color:inherit;background:none;border:0;padding:0}
 code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em}
 p code,li code,td code{background:var(--soft);padding:1px 5px;border-radius:4px;border:1px solid var(--line)}
 
-h1#부록{font-size:1.35rem;margin:70px 0 8px;padding-top:34px;border-top:2px solid var(--fg)}
+/* 부록·별첨 — 본문과 위계를 나눈 참고 영역 (허브 별첨 박스와 같은 형식, 파란톤) */
+.appendix{
+  margin:88px 0 0;padding:22px 26px 14px;
+  background:var(--apx-bg);border:1px solid var(--apx-line);border-radius:14px;
+  color:var(--apx-fg);font-size:.88rem;line-height:1.65;
+}
+.appendix h1#부록{
+  margin:0 0 16px;padding:0 0 10px;border-top:0;border-bottom:1px solid var(--apx-line);
+  color:var(--apx-head);font-size:1.12rem;
+}
+.appendix h2{margin:30px 0 10px;padding:0;border:0;color:var(--apx-head);font-size:1rem}
+.appendix h3{margin:22px 0 8px;color:var(--apx-head);font-size:.94rem}
+.appendix strong{color:var(--apx-strong)}
+.appendix a{color:var(--accent)}
+.appendix small{color:var(--apx-fg);opacity:.85}
+.appendix .tbl{margin:12px 0 18px;border-color:var(--apx-line)}
+.appendix table{background:var(--bg);font-size:.94em;min-width:460px}
+.appendix th,.appendix td{padding:8px 10px;border-color:var(--apx-line)}
+.appendix th{background:var(--apx-th);color:var(--apx-head)}
+.appendix blockquote{background:var(--bg);border-left-color:var(--apx-line)}
+.appendix blockquote.action{background:var(--action-bg);border-left-color:var(--action)}
+.appendix blockquote.ask{background:var(--ask-bg);border-left-color:var(--ask)}
+.appendix blockquote.warn{background:var(--warn-bg);border-left-color:var(--warn)}
+.appendix blockquote.observe{background:var(--observe-bg);border-left-color:var(--observe)}
+.appendix pre{background:var(--bg);border-left-color:var(--apx-line)}
+.appendix hr{border-top-color:var(--apx-line)}
 
 @media print{
   body{font-size:10.5pt}
@@ -591,7 +619,7 @@ h1#부록{font-size:1.35rem;margin:70px 0 8px;padding-top:34px;border-top:2px so
 <li><strong>종료일 표기</strong>: 문서마다 8/19와 8/20로 달라, 어느 쪽이 맞는지 확인해야 한다</li>
 <li><strong>일자별 추이</strong>: 현재 자료가 누계라, 격차가 어느 쪽으로 움직이는지 보려면 일자별 자료가 더 필요하다</li>
 </ul>
-<h1>부록</h1>
+<section class="appendix"><h1 id="부록">부록</h1>
 <h2>부록 A. 신청 조직 4곳 외부 조사</h2>
 <p>공개 자료(미국 국세청 비영리 등록, 카운티·언론 기록, 자체 웹사이트·SNS)로 대조했다.</p>
 <div class="tbl"><table>
@@ -858,7 +886,7 @@ Tapped button &quot;7:30 PM&quot;
 </tr>
 </tbody>
 </table></div>
-<p><em>(전체 목록: <a href="https://ssss22jj-netizen.github.io/petnow-research-hub/">문서 라이브러리</a>)</em></p>
+<p><em>(전체 목록: <a href="https://ssss22jj-netizen.github.io/petnow-research-hub/">문서 라이브러리</a>)</em></p></section>
     </article>
     <aside class="toc"><strong>문서 목차</strong><div class="toc-links"></div></aside>
   </main>
