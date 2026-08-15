@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Track 2 광고 실험 · 중간 보고</title>
+<style>
+:root{
+  --bg:#ffffff; --fg:#1a1d21; --muted:#5f6672; --line:#e3e6ea; --soft:#f6f7f9;
+  --accent:#1f5fd6; --accent-soft:#eef3fd;
+  --action:#b45309; --action-bg:#fffaf0; --action-line:#f0c78a;
+  --ask:#1f5fd6; --ask-bg:#f2f6fd; --ask-line:#a9c4f0;
+  --warn:#b02a37; --warn-bg:#fdf4f5; --warn-line:#eeb4ba;
+  --observe:#0f766e; --observe-bg:#f1faf8; --observe-line:#a3d5cd;
+}
+:root:not([data-theme="light"]) { }
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15181c; --fg:#e6e9ee; --muted:#98a1ae; --line:#2b3138; --soft:#1b1f24;
+    --accent:#7aa8f5; --accent-soft:#1b2536;
+    --action:#e5a457; --action-bg:#241d12; --action-line:#5c452a;
+    --ask:#7aa8f5; --ask-bg:#161f2e; --ask-line:#33507e;
+    --warn:#f08c96; --warn-bg:#2a1a1d; --warn-line:#6b3b42;
+    --observe:#5ec5b8; --observe-bg:#132623; --observe-line:#2f5b55;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15181c; --fg:#e6e9ee; --muted:#98a1ae; --line:#2b3138; --soft:#1b1f24;
+  --accent:#7aa8f5; --accent-soft:#1b2536;
+  --action:#e5a457; --action-bg:#241d12; --action-line:#5c452a;
+  --ask:#7aa8f5; --ask-bg:#161f2e; --ask-line:#33507e;
+  --warn:#f08c96; --warn-bg:#2a1a1d; --warn-line:#6b3b42;
+  --observe:#5ec5b8; --observe-bg:#132623; --observe-line:#2f5b55;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR",sans-serif;
+  font-size:15.5px; line-height:1.75;
+  word-break:keep-all; overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:900px;margin:0 auto;padding:56px 28px 100px}
+
+a.back{display:inline-block;margin-bottom:22px;font-size:.86rem;color:var(--muted);border:0}
+a.back:hover{color:var(--accent);border:0}
+header.doc{border-bottom:2px solid var(--fg);padding-bottom:20px;margin-bottom:40px}
+header.doc h1{font-size:1.85rem;line-height:1.35;margin:0 0 12px;letter-spacing:-.02em}
+header.doc .meta{color:var(--muted);font-size:.86rem;line-height:1.7}
+
+h2{
+  font-size:1.22rem;margin:52px 0 16px;padding-bottom:9px;
+  border-bottom:1px solid var(--line);letter-spacing:-.01em;
+}
+h2:first-of-type{margin-top:0}
+h3{font-size:1.02rem;margin:30px 0 12px;color:var(--fg)}
+p{margin:12px 0}
+strong{font-weight:650}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
+a:hover{border-bottom-color:var(--accent)}
+hr{border:0;border-top:1px solid var(--line);margin:44px 0}
+small{font-size:.83em;color:var(--muted);line-height:1.6}
+sup{font-size:.7em}
+
+ul,ol{padding-left:1.35em;margin:12px 0}
+li{margin:7px 0}
+li::marker{color:var(--muted)}
+
+/* 표 */
+.tbl{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:520px}
+th,td{padding:10px 13px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--soft);font-weight:650;white-space:nowrap;font-size:.85rem;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td small{display:block;margin-top:2px}
+tr.row-now{background:var(--accent-soft)}
+tr.row-now td{font-weight:600}
+
+/* 콜아웃 */
+blockquote{margin:22px 0;padding:16px 20px;border-left:3px solid var(--line);background:var(--soft);border-radius:0 8px 8px 0}
+blockquote p:first-child{margin-top:0}
+blockquote p:last-child{margin-bottom:0}
+blockquote h3{margin:0 0 12px;font-size:1rem}
+blockquote ul{margin:8px 0}
+
+blockquote.action{border-left-color:var(--action);background:var(--action-bg)}
+blockquote.action h3{color:var(--action)}
+blockquote.ask{border-left-color:var(--ask);background:var(--ask-bg)}
+blockquote.ask h3{color:var(--ask)}
+blockquote.warn{border-left-color:var(--warn);background:var(--warn-bg)}
+blockquote.observe{border-left-color:var(--observe);background:var(--observe-bg)}
+blockquote.observe h3{color:var(--observe)}
+p.inline-warn{
+  margin-top:14px;padding:11px 14px;border-radius:6px;
+  background:var(--warn-bg);border:1px solid var(--warn-line);color:var(--fg);
+}
+
+pre{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:14px 16px;overflow-x:auto;font-size:.85rem;line-height:1.65}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em}
+p code,li code,td code{background:var(--soft);padding:1px 5px;border-radius:4px;border:1px solid var(--line)}
+
+h1#부록{font-size:1.35rem;margin:70px 0 8px;padding-top:34px;border-top:2px solid var(--fg)}
+
+@media print{
+  body{font-size:10.5pt}
+  .wrap{padding:0;max-width:none}
+  h2{page-break-after:avoid}
+  .tbl,blockquote,pre{page-break-inside:avoid}
+}
+@media (max-width:640px){
+  .wrap{padding:32px 18px 70px}
+  header.doc h1{font-size:1.45rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="./">← 리서치 허브</a>
+<header class="doc">
+  <h1>Track 2 광고 실험 · 중간 보고</h1>
+  <div class="meta">2026-08-15 오전 · 광고 시작 3일 차<br>이번 보고서는 사전에 합의한 기준을 그대로 적용했고, 새 잣대는 도입하지 않았다.</div>
+</header>
+<h2>결론 — 세 줄</h2>
+<ol>
+<li><strong>광고는 목표를 웃도는 속도로 돌고 있다.</strong> 3일 만에 신청서가 4건 들어왔고, 사전 목표 페이스의 <strong>159%</strong>다. 두 문구 모두 반응률이 사전 '좋음' 구간에 들었다.
+<small><sup>주</sup> 159% 산출식: 목표 구간 7.2건 × 예산 소진률 34.9% = 기대 2.51건 → 실적 4건 ÷ 2.51건 = 159%. 예산 소진에 신청 건수가 선형 비례한다고 가정했다.</small></li>
+<li><strong>리드 4곳은 모두 실존하는 구조단체이고, 규모는 ICP 보다 한 체급 아래다.</strong> 외부 자료로 전수 대조한 결과 스팸이나 허위는 0건이었다. 다만 <strong>4곳 모두 연 총수입 5만 달러 미만 등급</strong>이다. 이 점은 관찰로만 기록해 두고, ICP 적합 여부는 미팅을 거친 뒤에 판단한다.</li>
+<li><strong>미팅 담당자를 교체해 예약 선택지를 60개에서 101개로 늘렸다.</strong> 리드제출 후 예약까지 즉시 이어지지 않아 세션리플레이 분석으로 슬롯이 부족해서임을 확인하여 해당 조치를 진행했다. 
+교체 후 리드 2건은 즉시 예약을 마쳤으나 <strong>교체 전후로 신청자 지역이 달라(서부2 → 동부2), 슬롯 변경과 즉시예약 사이의 인과는 확인되지 않았다.</strong> (근거는 부록 B)</li>
+</ol>
+<blockquote class="note">
+<p><strong>한 줄로</strong>: 유입은 목표를 넘겼고 예약 경로도 정비됐다. <strong>A·B 우열과 리드 적합성은 표본이 더 쌓인 뒤에 가린다.</strong> 첫 정성 데이터는 8/17 미팅에서 나온다.</p>
+</blockquote>
+<hr />
+<blockquote class="action">
+<h3>⚡ 빠른 액션 아이템</h3>
+<p><strong>펫나우 회신 (8/16까지)</strong>
+- <strong>#3 Blue Mountain Animal Rescue(Donna Crum) 리드가 미팅일을 9/8로 선택</strong> — 실험 기간 종료 이후다. <strong>인터뷰 일정을 앞당길지(권장) 판단 필요</strong>
+- <strong>예약 캘린더 오픈 기간을 8/31로 축소(권장)</strong> — 같은 문제의 재발 방지</p>
+<p><strong>8/17 미팅에서 답을 받아야 할 것</strong> — 3단계(해결 방식 수용)·4단계(지불 의향)의 첫 데이터다
+- ① 임시보호자가 없는데 왜 이 광고에 반응했는가 → B 소구점이 설계대로 읽혔는지 갈린다
+- ② 지금 이 일을 어떻게 처리하고 있고, 무엇이 가장 아픈가 → 만들 기능의 우선순위
+- ③ <strong>이런 도구에 돈을 낸다면 어떤 조건이어야 하는가</strong> → 지불 의향·가격대의 첫 실측
+- ④ 결정은 누가 하고 예산은 어디서 나오는가 → 판매 경로</p>
+<p><strong>마켓핏랩 진행분</strong> (별도 공유)
+- 광고 운영·예산 배분·측정 보완
+- <strong>다음 정기 점검은 예산 60% 소진 시점.</strong> 그 자리에서 예비 예산 배분 확정
+- 그때까지는 사전 규칙에 따라 중단 없이 잠정 우열만 기록</p>
+</blockquote>
+<hr />
+<h2>0. 매출까지 가는 길 — 지금 어디인가</h2>
+<blockquote class="note">
+<p><strong>광고비 35% 소진 시점이라 단계마다 신뢰도가 다르다.</strong> 단, 1단계는 검증 충분.</p>
+</blockquote>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>단계</th>
+<th>답해야 할 질문</th>
+<th>현재</th>
+<th>판단의 분모</th>
+<th>신뢰도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. 문제 인식</strong></td>
+<td>이 문제를 자기 얘기로 읽는가</td>
+<td><strong>확인</strong></td>
+<td>광고를 본 사람 <strong>2,029명</strong></td>
+<td><strong>충분.</strong> A·B 모두 기준선 초과가 통계적으로 확정</td>
+</tr>
+<tr>
+<td>2. 관심 강도</td>
+<td>시간을 내서 이야기할 만큼인가</td>
+<td>관찰 중</td>
+<td>신청 <strong>4건</strong> · 예약 <strong>2건</strong></td>
+<td><strong>부족.</strong> 방향만 읽는다</td>
+</tr>
+<tr>
+<td>3. 해결 방식 수용</td>
+<td>우리 방식을 답이라고 보는가</td>
+<td><strong>8/17 착수</strong></td>
+<td>미팅 0회</td>
+<td>—</td>
+</tr>
+<tr>
+<td>4. 지불 의향</td>
+<td>얼마를 낼 것인가</td>
+<td>미착수</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>5. 반복 가능성</td>
+<td>같은 조건의 조직에 계속 팔리는가</td>
+<td>미착수</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>1단계는 이미 답이 나왔다.</strong> 광고를 본 사람이 2,029명이라, 두 문구 모두 합격선을 넘겼다는 판정은 예산을 더 써도 뒤집히지 않는다(수치는 2절). 반면 <strong>2단계는 신청 4건이 분모라 비율의 신뢰구간이 0.2~10.2%로 벌어진다.</strong> 방향만 읽는 수준이다.</p>
+<blockquote class="note">
+<p>1·2단계는 광고가 답할 수 있고 3~5단계는 미팅만 답할 수 있다. <strong>남은 광고 예산으로 높일 수 있는 것은 "A와 B 중 어느 쪽인가"의 정밀도이지, "돈을 내는가"의 답이 아니다.</strong></p>
+</blockquote>
+<hr />
+<h2>1. 사전 목표/예산 대비 성과</h2>
+<p><strong>예산</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>구분</th>
+<th style="text-align: right;">금액</th>
+<th>상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1차 라운드 (A·B 각 15만원)</td>
+<td style="text-align: right;">30만원</td>
+<td><strong>집행 중 · 10.4만원 사용(35%)</strong></td>
+</tr>
+<tr>
+<td>예비 예산</td>
+<td style="text-align: right;">70만원</td>
+<td>미집행 · 중간 점검 후 배분</td>
+</tr>
+<tr>
+<td><strong>합계</strong></td>
+<td style="text-align: right;"><strong>100만원</strong></td>
+<td>전체의 10% 사용</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>실적</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th style="text-align: right;">실적</th>
+<th style="text-align: right;">직전 단계 대비 전환율 (A / B)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>광고를 본 사람</strong></td>
+<td style="text-align: right;"><strong>2,029명</strong> (1인당 평균 1.7회 노출)</td>
+<td style="text-align: right;">—</td>
+</tr>
+<tr>
+<td><strong>홈페이지에 들어온 사람</strong></td>
+<td style="text-align: right;"><strong>77명</strong></td>
+<td style="text-align: right;"><strong>3.8%</strong> <small>(A 3.04% / B 3.77%)</small></td>
+</tr>
+<tr>
+<td><strong>신청서 제출</strong></td>
+<td style="text-align: right;"><strong>4건</strong></td>
+<td style="text-align: right;"><strong>5.2%</strong> <small>(A 2.78% / B 7.32%)</small></td>
+</tr>
+<tr>
+<td>미팅 예약 확정</td>
+<td style="text-align: right;">2건 (8/17, 9/8)</td>
+<td style="text-align: right;"><strong>50.0%</strong> <small>(A 1/1 · B 1/3)</small></td>
+</tr>
+<tr>
+<td>미팅 실시</td>
+<td style="text-align: right;">0회 (8/17 시작)</td>
+<td style="text-align: right;">—</td>
+</tr>
+</tbody>
+</table></div>
+<p><small>A·B 도달을 더하면 2,272명이지만 243명이 양쪽 광고를 모두 봐서 중복 제거 합계는 2,029명이다. 신청서 → 예약 구간은 건수가 1~3건이라 비율로 읽지 않는다.</small></p>
+<p><strong>성과 스펙트럼 — 지금 어느 구간인가</strong></p>
+<p>소재 1종당 광고비 15만원, 예상 노출 11,250회를 기준으로 집행 전에 잡아 둔 표다(출처는 「상세 기획 정리」 §5.2.1). 마지막 두 줄이 현재 위치다.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>등급</th>
+<th style="text-align: right;">방문 비율</th>
+<th style="text-align: right;">신청 제출률</th>
+<th style="text-align: right;">소재당 신청서</th>
+<th style="text-align: right;">1차 라운드 A+B 합계</th>
+<th style="text-align: right;">신청 1건당 비용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>아주 좋음</td>
+<td style="text-align: right;">1.64%</td>
+<td style="text-align: right;">5.0%</td>
+<td style="text-align: right;">9.2건</td>
+<td style="text-align: right;">18.4건</td>
+<td style="text-align: right;">16,260원</td>
+</tr>
+<tr>
+<td>좋음</td>
+<td style="text-align: right;">1.40%</td>
+<td style="text-align: right;">3.8%</td>
+<td style="text-align: right;">6.0건</td>
+<td style="text-align: right;">12.0건</td>
+<td style="text-align: right;">25,063원</td>
+</tr>
+<tr>
+<td><strong>보통 = 목표</strong></td>
+<td style="text-align: right;"><strong>1.10%</strong></td>
+<td style="text-align: right;"><strong>2.9%</strong></td>
+<td style="text-align: right;"><strong>3.6건</strong></td>
+<td style="text-align: right;"><strong>7.2건</strong></td>
+<td style="text-align: right;"><strong>41,797원</strong></td>
+</tr>
+<tr>
+<td>나쁨</td>
+<td style="text-align: right;">0.80%</td>
+<td style="text-align: right;">2.0%</td>
+<td style="text-align: right;">1.8건</td>
+<td style="text-align: right;">3.6건</td>
+<td style="text-align: right;">83,333원</td>
+</tr>
+<tr class="row-now"><td><strong>▶ 현재</strong></td>
+<td style="text-align: right;"><strong>A 2.05%<br>B 2.73%</strong></td>
+<td style="text-align: right;"><strong>5.19%</strong></td>
+<td style="text-align: right;"><strong>A 2.9건<br>B 8.6건</strong></td>
+<td style="text-align: right;"><strong>11.5건</strong></td>
+<td style="text-align: right;"><strong>26,100원</strong></td>
+</tr>
+<tr class="row-now"><td><strong>▶ 구간</strong></td>
+<td style="text-align: right;"><strong>아주 좋음 초과</strong></td>
+<td style="text-align: right;"><strong>아주 좋음</strong></td>
+<td style="text-align: right;"><strong>A 보통 미달<br>B 좋음 초과</strong></td>
+<td style="text-align: right;"><strong>좋음 근접</strong></td>
+<td style="text-align: right;"><strong>좋음 근처</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><em>건수 항목(소재당 신청서·A+B 합계)은 현재 실적을 예산 전액 기준으로 환산한 값이다. 비율 항목은 환산 없이 그대로 비교된다.</em></p>
+<p><strong>요약</strong>
+- <strong>대부분의 지표가 목표를 넘어 '좋음' 이상 구간에 있다.</strong> 
+- 유일하게 A 소재의 신청서 건수만 목표에 못 미친다. 
+- 신청 1건당 광고비 26,100원은 목표(41,800원)보다 37% 낮고, 클릭 후 7일까지 신청이 집계되므로 더 낮아질 여지도 있다. 
+- 광고 1,000회 노출 비용(CPM)도 $21.79로 업계 참조 범위($26~40)보다 낮다.</p>
+<hr />
+<h2>2. A와 B 중 어느 쪽이 나은가</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align: right;">A (준비 상태 판단)</th>
+<th style="text-align: right;">B (임보자 독촉 해방)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>광고를 본 사람</td>
+<td style="text-align: right;">1,184명</td>
+<td style="text-align: right;">1,088명</td>
+</tr>
+<tr>
+<td><strong>홈페이지에 들어온 사람</strong></td>
+<td style="text-align: right;"><strong>36명</strong></td>
+<td style="text-align: right;"><strong>41명</strong></td>
+</tr>
+<tr>
+<td><strong>방문 비율</strong></td>
+<td style="text-align: right;"><strong>3.04%</strong></td>
+<td style="text-align: right;"><strong>3.77%</strong></td>
+</tr>
+<tr>
+<td>신청서</td>
+<td style="text-align: right;">1건</td>
+<td style="text-align: right;">3건</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>모두 고유 사용자 수 기준. 같은 사람이 여러 번 보거나 여러 번 눌러도 1로 센다.</em></p>
+<ul>
+<li>B의 CTR이 <strong>1.24배</strong> 앞서지만, 현 표본에서는 신뢰 구간이 <strong>B가 0.80배(오히려 열세)~ 1.92배(크게 우세)</strong>으로 정량적 우열은 정할 수 없다</li>
+<li>방향성 판단을 위한 내부 기준으로 삼은 1.5배에도 아직 도달하지 않아 우열을 판단하기 이르다.</li>
+</ul>
+<hr />
+<h2>3. 신청한 4곳은 어떤 조직인가</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th style="text-align: right;">#</th>
+<th>문구</th>
+<th>조직</th>
+<th>직급</th>
+<th>규모</th>
+<th>현재 도구</th>
+<th>미팅</th>
+<th><strong>ICP 적합성</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td>B</td>
+<td>Wishful Whiskers Rescue &amp; TNR</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>없음</td>
+<td>판정 불가<br><small>규모·도구 미수집</small></td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td>B</td>
+<td>Mizfit Muttz Rescue</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>없음</td>
+<td>판정 불가<br><small>규모·도구 미수집</small></td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td><strong>A</strong></td>
+<td>Blue Mountain Animal Rescue</td>
+<td><strong>대표</strong></td>
+<td>연 입양 50~150건</td>
+<td>종이 파일 캐비닛</td>
+<td>9/8</td>
+<td><strong>부분 충족</strong><br><small>규모 ○ · 기존 도구 ✗</small></td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td>B</td>
+<td>Simba's Pride Nursery</td>
+<td><strong>대표</strong></td>
+<td>임시보호 현재 0명</td>
+<td>Airtable·문자</td>
+<td>8/17</td>
+<td><strong>부분 충족</strong><br><small>도구 ○ · 임시보호자 ✗</small></td>
+</tr>
+</tbody>
+</table></div>
+<p><em>ICP 조건: 미국 민간 구조단체 / 연 입양 50~300건 / 상근 1~5명 / 임시보호자 20~80명 / 기존 CRM과 외부 게시 사이트 병용</em></p>
+<p><strong>진정성은 4곳 중 4곳에서 확인됐다.</strong> 4곳 모두 공개 자료에서 실존이 확인되는 미국 비영리 구조단체다. 담당자 이름도 조직과 연결된다. <strong>스팸·허위 신청은 한 건도 없다</strong>(상세는 부록 A). 정보를 남긴 2건은 신청자가 모두 <strong>대표 직급</strong>이라, 결재권자가 직접 신청한 셈이다.</p>
+<p><strong>조건별로 보면 4곳 전체가 이렇다.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>조건</th>
+<th>4곳 중 충족</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>미국 민간 레스큐</td>
+<td><strong>4 / 4</strong></td>
+</tr>
+<tr>
+<td>연 입양 50~300건</td>
+<td>자기보고 2곳 · 확인 불가 2곳</td>
+</tr>
+<tr>
+<td>상근 1~5명 · 임시보호자 20~80명</td>
+<td><strong>0 / 4</strong></td>
+</tr>
+<tr>
+<td>기존 CRM + 외부 게시 사이트 병용</td>
+<td><strong>0 / 4</strong> (1곳만 부분)</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="observe">
+<h3>관찰 — 카테고리는 맞고, 규모는 한 체급 아래다</h3>
+<p><strong>4곳 모두 레스큐 조직이 맞다.</strong> 다만 전부 연 총수입 5만 달러 미만 등급으로, ICP가 상정한 구간(연 예산 15만~50만 달러)보다 아래다. 유급 직원 증거는 한 곳에서도 나오지 않았다.</p>
+<p><strong>현재 소구점이 "종이·수기에서 벗어나기" 각도라 기존 시스템이 없는 조직에 강하게 닿은 결과</strong>로 보이나, <strong>표본 4건으로는 초기 편차인지 구조적 결과인지 갈리지 않는다.</strong></p>
+<p><strong>⚠️ 좌석 과금(per-seat pricing)을 전제하면 어긋날 수 있다.</strong> 신청서에 적힌 직함이 공개 자료에서는 자원봉사자로 확인된다.</p>
+</blockquote>
+<h3>4번 리드(Simba's Pride Nursery)에서 나온 의문</h3>
+<p>B 문구는 "임시보호자에게 업데이트 독촉하는 부담을 없앤다"는 소구점인데, <strong>이 조직은 임시보호자가 현재 0명이다.</strong> 해석은 두 갈래이고, 어느 쪽이든 다음 단계에 쓸 재료가 된다.</p>
+<ul>
+<li><strong>① 문구가 다른 의미로 읽혔다</strong> → B의 반응이 설계한 소구점과 다른 경로로 왔을 수 있다. 이 경우 문구를 더 다듬어야 한다</li>
+<li><strong>② 인접 문제가 존재한다</strong> → 새 소구점 후보다. "임시보호자를 곧 받을 예정" 상태의 니즈일 수 있다</li>
+</ul>
+<p><em>(각 조직의 외부 조사는 부록 A)</em></p>
+<hr />
+<h2>4. 예비 70만원 배분 — 판단 재료 (결정은 60% 소진 시점)</h2>
+<p>사전 합의 원칙은 "앞서는 문구에 집중"이다. <strong>지금은 배분을 확정하지 않는다.</strong> 우열이 안 갈렸고 조기 중단 조건에도 해당하지 않아 서두를 이유가 없다.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>배분안</th>
+<th>종료 시 우열 판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ⓐ B 집중</td>
+<td>가능 (사전 원칙)</td>
+</tr>
+<tr>
+<td>ⓑ 반반</td>
+<td>가능</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>지금 A를 끄는 선택지는 없다.</strong> 사전 규칙상 A를 중단하려면 A의 반응률이 B의 절반에 못 미쳐야 하는데, 현재 A는 B의 81% 수준이다. 그래서 규칙이 정한 중단 요건에는 해당하지 않는다.</p>
+<hr />
+<h2>5. 이 숫자를 읽을 때 감안할 것</h2>
+<p>지금 시점의 해석에 붙는 조건이며, 대부분 8/20 종료 시점에 풀린다.</p>
+<ul>
+<li><strong>표본</strong>: 3절의 ICP 대조 중 규모·도구 항목은 정보를 남긴 2건에만 근거한다</li>
+<li><strong>점검 시점</strong>: 사전에 설정한 시점은 광고비 10%·50%·100%이고 현재는 35%다. 그래서 중간 확인 결과는 잠정 기록으로 다룬다</li>
+<li><strong>오디언스 중복</strong>: 광고를 본 2,029명 중 243명(12%)이 A·B를 모두 봤다. 같은 사람이 두 문구를 다 보면 문구 간 차이가 실제보다 작게 나오므로, 실제 격차는 관측값보다 클 수 있다</li>
+<li><strong>종료일 표기</strong>: 문서마다 8/19와 8/20로 달라, 어느 쪽이 맞는지 확인해야 한다</li>
+<li><strong>일자별 추이</strong>: 현재 자료가 누계라, 격차가 어느 쪽으로 움직이는지 보려면 일자별 자료가 더 필요하다</li>
+</ul>
+<h1>부록</h1>
+<h2>부록 A. 신청 조직 4곳 외부 조사</h2>
+<p>공개 자료(미국 국세청 비영리 등록, 카운티·언론 기록, 자체 웹사이트·SNS)로 대조했다.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>Wishful Whiskers</th>
+<th>Mizfit Muttz</th>
+<th>Blue Mountain (BMARS)</th>
+<th>Simba's Pride</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>실재 확인</td>
+<td>확인됨</td>
+<td>확인됨</td>
+<td>확인됨</td>
+<td>확인됨</td>
+</tr>
+<tr>
+<td>비영리 등록</td>
+<td>2025.01</td>
+<td>2024.08</td>
+<td><strong>2014.02</strong></td>
+<td>2025.08</td>
+</tr>
+<tr>
+<td>업력</td>
+<td>1.5년</td>
+<td>2년</td>
+<td><strong>약 12년</strong></td>
+<td>1.3년</td>
+</tr>
+<tr>
+<td>소재</td>
+<td>San Tan Valley, AZ</td>
+<td>Reno, NV</td>
+<td>Palmerton·Stroudsburg, PA</td>
+<td>New Bern, NC</td>
+</tr>
+<tr>
+<td>대상 동물</td>
+<td>고양이·TNR</td>
+<td><strong>개</strong></td>
+<td>개+고양이</td>
+<td>고양이(자묘 육아)</td>
+</tr>
+<tr>
+<td>운영 형태</td>
+<td>가정 기반</td>
+<td>자택 켄넬+임시보호</td>
+<td><strong>임시보호 + 고양이 입양센터</strong></td>
+<td>단일 가정(부부 2인)</td>
+</tr>
+<tr>
+<td>자체 웹사이트</td>
+<td>무료호스팅·주요 페이지 없음</td>
+<td>공사중</td>
+<td><strong>도메인 상실</strong></td>
+<td>정상 운영</td>
+</tr>
+<tr>
+<td>외부 입양 게시</td>
+<td>없음</td>
+<td>없음</td>
+<td>없음</td>
+<td><strong>AdoptAPet 산발적</strong></td>
+</tr>
+<tr>
+<td>관리 도구</td>
+<td>없음(페이스북·메일)</td>
+<td>없음(페이스북)</td>
+<td><strong>종이</strong></td>
+<td><strong>Airtable+문자</strong></td>
+</tr>
+<tr>
+<td>재무 등급</td>
+<td>신고 이력 없음</td>
+<td><strong>990-N</strong></td>
+<td><strong>990-N</strong></td>
+<td>신고 이력 없음</td>
+</tr>
+<tr>
+<td>최근 활동</td>
+<td>활발(8월)</td>
+<td>활발(6·7월 보도)</td>
+<td>활발(1월 대형 구조 대응)</td>
+<td>활발(8월)</td>
+</tr>
+<tr>
+<td>공적 인증</td>
+<td>—</td>
+<td><strong>카운티 공식 레스큐 파트너</strong></td>
+<td>언론 다수 보도</td>
+<td>파트너십 1건</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="note">
+<p><strong>990-N</strong>은 미국 국세청이 <strong>연간 총수입 5만 달러 미만</strong> 비영리에 적용하는 간이 신고 등급이다.</p>
+</blockquote>
+<p><strong>조직별 요약</strong></p>
+<ul>
+<li><strong>Wishful Whiskers Rescue &amp; TNR</strong> (Patricia Ruberg, Owner): 2025년에 설립된 고양이 전문 단체로, Phoenix 동부권에서 TNR과 자묘 육아를 한다. 웹사이트는 아직 미완성이고, 입양 공고는 페이스북에만 올린다</li>
+<li><strong>Mizfit Muttz Rescue</strong> (Jodi Horner): 2024년에 설립된 개 전문 단체다. <strong>Washoe 카운티 공식 레스큐 파트너 31곳에 등재</strong>돼 공적 신뢰도가 4곳 중 가장 뚜렷하다. 강아지 19마리를 한꺼번에 인수한 사례처럼 실제 운영 규모도 언론에서 확인된다. 온라인 신청 폼이 없어 접수는 페이스북 메시지로만 받는다</li>
+<li><strong>Blue Mountain Animal Rescue Society</strong> (Donna Crum, 설립자·대표): <strong>업력 12년으로 4곳 중 최장이다.</strong> 2024년 Stroudsburg에 고양이 전용 입양센터를 열어 임시보호 네트워크와 함께 운영한다. 프로그램 8종(응급 수의 기금, 중성화 클리닉, 푸드뱅크 등)도 확인된다. <strong>자체 도메인이 만료돼 현재 입양 공고 채널은 페이스북 하나뿐</strong>이고, 본인 진술대로 종이로 운영한다</li>
+<li><strong>Simba's Pride Nursery</strong> (Eve Marquross-Parisee, 창립자): 2025년에 설립됐고, 부부 2인이 자택에서 자묘 육아를 전담한다. 자체 집계로는 15개월간 입양이 72건이다. <strong>4곳 중 유일하게 외부 입양 플랫폼(AdoptAPet)과 준CRM(Airtable)을 쓴다</strong></li>
+</ul>
+<p><strong>한계</strong>: 연간 입양 건수·임시보호자 수·유급 직원 수·예산액은 확인하지 못했다. 미국 국세청 상세 조회와 일부 SNS에 접근 제한이 걸려 있어서다. 조직이 숨긴 것이 아니라 공개 경로에서 확인이 안 된 것이다.</p>
+<h2>부록 B. 예약 단계에서 확인한 것</h2>
+<p><strong>예약 화면에 고를 시간이 거의 없던 것을 확인해 담당자를 교체했고, 선택지가 60개에서 101개로 늘었다. 다음 조치는 파트타임 인터뷰어의 시간도 미리 열어 두는 것이다</strong>(8/14 결정 사항). 신청이 늘면 담당자 한 명의 시간이 다시 병목이 된다.</p>
+<h3>① 예약 화면에 선택지가 거의 없었다 (관찰)</h3>
+<p>신청서 4건 중 2건이 예약까지 가지 않았다. 그 두 건의 세션 녹화에 남은 화면은 이렇다.</p>
+<p><strong><a href="https://mixpanel.com/project/4053441/view/4549739/app/replay/73413829-ec99-4977-aa43-7622c8850233">첫 번째 이탈 건</a></strong> — 신청 직후 예약 화면에서 시간 버튼을 세 번 눌렀다.</p>
+<p><code>Tapped button "5:30 AM"
+Tapped button "6:30 AM"
+Tapped button "7:30 PM"
+(창을 닫고 나감)</code></p>
+<p>제시된 시간이 <strong>현지 새벽 5시 30분·6시 30분</strong>과 저녁 7시 30분뿐이었다. 셋 다 눌러 본 뒤 확정하지 않고 화면을 떠났다.</p>
+<p><strong><a href="https://mixpanel.com/project/4053441/view/4549739/app/replay/167c24d7-895c-427d-9d47-a8da7b400029">두 번째 이탈 건</a></strong> — 날짜 11개를 확인하고서 시간을 고르지 못한 채 나갔다.</p>
+<blockquote class="note">
+<p>두 건 모두 <strong>시간 선택 화면까지 도달한 뒤 이탈</strong>했고, 그 화면에 뜬 시간은 현지 기준 새벽대였다. 관심이 없어 나간 것과는 다른 행동이다. 다만 이탈의 이유를 본인에게 확인한 것은 아니며, <strong>2건 관찰이다.</strong></p>
+</blockquote>
+<h3>② 담당자를 교체해 선택지를 60개에서 101개로 늘렸다 (실측)</h3>
+<p>8/14에 미팅 담당자를 폴에서 조니로 교체했다.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th></th>
+<th>예약 창</th>
+<th style="text-align: right;">이론 최대</th>
+<th style="text-align: right;"><strong>실제 선택지</strong></th>
+<th style="text-align: right;">개인 일정에 막힌 비율</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>폴</td>
+<td>KST 09~13 + 21~23</td>
+<td style="text-align: right;">132개</td>
+<td style="text-align: right;"><strong>60개</strong></td>
+<td style="text-align: right;"><strong>55%</strong></td>
+</tr>
+<tr>
+<td><strong>조니</strong></td>
+<td>KST 08~11 + 22~24</td>
+<td style="text-align: right;">110개</td>
+<td style="text-align: right;"><strong>101개</strong></td>
+<td style="text-align: right;"><strong>8%</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><em>8/17~8/31 기준. 폴은 구글 캘린더 실측, 조니는 예약 시스템 실측.</em></p>
+<p><strong>예약 창 자체는 폴이 더 넓었다</strong>(132개 대 110개). 그런데 폴의 개인 일정이 그중 절반 넘게를 막고 있었다.</p>
+<h3>③ 교체 후 신청 2건은 예약을 마쳤다 (관찰)</h3>
+<p><a href="https://mixpanel.com/project/4053441/view/4549739/app/replay/a18c368d-c7ea-45e6-a0e2-97a881c9be58">①</a> <a href="https://mixpanel.com/project/4053441/view/4549739/app/replay/ca62453e-8cc7-4796-8638-169a5e9016f6">②</a> 두 사람 모두 홈페이지에 들어온 지 1분 안에 신청서를 냈고, 2분 뒤 예약을 완료했다.</p>
+<blockquote class="note">
+<p><strong>②와 ③을 인과로 잇지 않는다.</strong> 전후 각 2건씩이라 표본이 판정에 못 미치고, 교체 전 2건은 서부·교체 후 2건은 동부라 신청자 지역도 함께 바뀌었다. 같은 날 예약 화면 구성(UI)도 바뀌었다. <strong>선택지를 늘린 것은 확인된 사실이고, 그것이 예약 성사에 얼마나 기여했는지는 이 데이터로 알 수 없다.</strong></p>
+</blockquote>
+<h2>부록 C. 홈페이지 내 행동 (참고)</h2>
+<p>방문자 77명 기준이라 통계적 차이를 판정할 표본은 아니며, 참고로만 둔다.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>구간</th>
+<th style="text-align: right;">A</th>
+<th style="text-align: right;">B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>방문</td>
+<td style="text-align: right;">37명</td>
+<td style="text-align: right;">40명</td>
+</tr>
+<tr>
+<td>문제 설명(상단) 도달</td>
+<td style="text-align: right;">24 (65%)</td>
+<td style="text-align: right;">24 (60%)</td>
+</tr>
+<tr>
+<td>효과 설명(중단) 도달</td>
+<td style="text-align: right;">16 (43%)</td>
+<td style="text-align: right;">14 (35%)</td>
+</tr>
+<tr>
+<td>신청서(하단) 도달</td>
+<td style="text-align: right;">12 (32%)</td>
+<td style="text-align: right;">10 (25%)</td>
+</tr>
+</tbody>
+</table></div>
+<p>세 구간 모두 우연 범위 내 차이다.</p>
+<ul>
+<li>내부 인원·테스트 접속은 제외했으며, 제외 전후 값이 같아(양쪽 77명) 오염이 없음을 확인했다. 내부자 식별 기능은 8/14 12:43에 적용해서 그 이전 구간은 사후 식별이 안 된다</li>
+<li>측정 기록(17건)과 실제 신청서(4건)의 차이는 8/20 이후에 맞춘다</li>
+</ul>
+<h2>부록 D. 용어</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>표현</th>
+<th>뜻</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LMF</td>
+<td>Language–Market Fit. 어떤 문제 언어에 시장이 반응하는지 확인하는 단계</td>
+</tr>
+<tr>
+<td>노출 / 도달</td>
+<td>광고가 화면에 뜬 <strong>횟수</strong> / 그 광고를 본 <strong>사람 수</strong></td>
+</tr>
+<tr>
+<td>방문 비율</td>
+<td>광고를 본 사람 중 홈페이지까지 들어온 비율 (업계 용어 CTR)</td>
+</tr>
+<tr>
+<td>신청서(리드)</td>
+<td>홈페이지 폼에 연락처를 남긴 것</td>
+</tr>
+<tr>
+<td>1,000회 노출 비용</td>
+<td>업계 용어 CPM. 실측 $21.79, 업계 참조 $26~40</td>
+</tr>
+<tr>
+<td>세션 녹화</td>
+<td>방문자의 화면 조작을 기록해 재생할 수 있는 로그</td>
+</tr>
+<tr>
+<td>A-1 / A-2 / B-1 / B-2</td>
+<td>각 문구 그룹의 이미지 소재. 그룹당 2개</td>
+</tr>
+<tr>
+<td>ICP</td>
+<td>Ideal Customer Profile. 우리가 목표로 하는 고객 조건</td>
+</tr>
+</tbody>
+</table></div>
+<h2>별첨. 참고 문서 (집행 전 합의본)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>문서</th>
+<th>이 보고서에서 쓰는 부분</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/ZGVsaXZlcmFibGVzL1RyYWNrMl9MTUZf7IaM6rWs7KCQX-qygOymnV_si6Ttl5hf6riw7ZqNXzIwMjYwODA1Lm1k">Track 2 LMF 소구점 검증 실험 기획안 (2026-08-05, v1.1)</a></td>
+<td>§3 성공 판단 기준 · §8 예산 구조 · §9 일정</td>
+</tr>
+<tr>
+<td><a href="https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/bWVldGluZ3MvMjAyNi0wOC0wN19UcmFjazJfTE1GX-2bhOyGjeq4sO2ajS5tZA">Track 2 LMF 상세 기획 정리 (2026-08-07)</a></td>
+<td>§5.1 운영 판단 · §5.2 정량 스펙트럼 · <strong>§5.2.1 절대값 환산(목표 수치 출처)</strong> · §5.3 판정 우선순위</td>
+</tr>
+<tr>
+<td><a href="https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/ZGVsaXZlcmFibGVzL1RyYWNrMl9JQ1BfUGVyc29uYV_shozsnqxf7KCV7J2YX-q3vOqxsF8yMDI2MDgwNS5tZA">ICP·퍼소나·소재 정의 배경 및 근거 (2026-08-05)</a></td>
+<td>2절 ICP 대조 기준</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>(전체 목록: <a href="https://ssss22jj-netizen.github.io/petnow-research-hub/">리서치 허브</a>)</em></p>
+</div>
+</body>
+</html>

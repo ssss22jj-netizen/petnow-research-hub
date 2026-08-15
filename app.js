@@ -30,6 +30,7 @@ document.querySelector("#menu-button").addEventListener("click", () => sidebar.c
 // 문서 목록·링크를 Markdown 뷰 대신 사이트 내 전용 페이지로 연결 (2026-08-13, Track 2 기획안 시각본 대체)
 const docPageOverrides = new Map([
   ["deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", "track2-plan.html"],
+  ["deliverables/Track2_M1_중간성과분석_20260815.md", "track2-m1-report.html"],
 ]);
 
 function hrefForDoc(doc) {
@@ -98,6 +99,7 @@ const externalDocumentUrls = new Map([]);
 const documentVisualPages = new Map([
   ["analysis/경쟁사_데모_UIUX_통합분석.md", ["demo-insights.html", "UI·UX 화면 분석 보기 →"]],
   ["deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", ["track2-plan.html", "기획안 시각본 보기 →"]],
+  ["deliverables/Track2_M1_중간성과분석_20260815.md", ["track2-m1-report.html", "중간 보고 시각본 보기 →"]],
 ]);
 
 function compactDocRow(doc, index) {
