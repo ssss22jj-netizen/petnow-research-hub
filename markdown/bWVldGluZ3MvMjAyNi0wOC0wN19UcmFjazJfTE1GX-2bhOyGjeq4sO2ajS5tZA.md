@@ -137,9 +137,16 @@ Track 2 LMF 캠페인에서는 하나의 제품에서 어떤 문제와 기능이
 
 > `낮음·보통·높음`은 예산 100% 소진 후 각 소재의 정량 결과를 분류하기 위한 잠정 스펙트럼임. 단일 지표만으로 문제 가설을 채택·기각하지 않으며, 지표 조합과 리드 품질을 함께 적용함.
 
+> **⚠️ CTR 정의 (2026-08-15 개정, 카야 확정)**
+> **본 문서의 모든 CTR은 `링크 클릭 CTR`(`inline_link_click_ctr`, 노출 대비 **링크 클릭**)을 뜻한다.** 메타가 함께 제공하는 전체 클릭 CTR(`ctr`)은 판정에 쓰지 않는다.
+> - **근거**: 링크 클릭 CTR이 업계 정론이다. 메타의 전체 클릭에는 본문 「더 보기」 펼침, 이미지 확대, 페이지명 클릭 등 **랜딩 방문으로 이어지지 않는 상호작용**이 포함돼, 소구점 반응의 지표로 쓰면 소재 간 비교가 왜곡된다.
+> - **실증**: M1 집행 3일차 실측에서 소재 B의 전체 클릭 우위(2.33배)는 **전부 비링크 클릭에서 발생**했고, 같은 기간 광고 반응(좋아요·댓글·저장)은 A 7건 · B 7건으로 동일했다. 전체 클릭 기준으로는 B가 1.89배 우세로 보이나 링크 클릭 기준으로는 1.33배로 우열 미확정이다. **지표 선택이 판정을 뒤집는다.**
+> - **부수 효과**: 아래 표의 출처(WordStream)는 전체 클릭 기준 표본이므로, 링크 클릭 실측을 이 구간에 대입하면 **판정이 보수적으로(낮게) 잡힌다.** 구간을 넘겼다면 실제로 넘긴 것이며, 이 보수성은 의도한 것이다.
+> - 이 정의는 기획안 §1의 "클릭률(CTR, 광고 노출 대비 클릭 비율)" 서술을 대체한다.
+
 | 지표 | 낮음 | 보통 | 높음 | 기준 및 근거 |
 | --- | ---: | ---: | ---: | --- |
-| **Meta Traffic CTR** | 0.8% 미만 | 0.8~1.4% | 1.4% 이상 | 공개 중앙값: Business Services 1.38%, Industrial & Commercial 1.36%, Animals & Pets 1.64%. 미국 Traffic 캠페인 554개, 2024년 4월 1일~2025년 6월 30일 표본. [WordStream, Facebook Ads Benchmarks 2025](https://www.wordstream.com/blog/facebook-ads-benchmarks-2025) |
+| **Meta 링크 클릭 CTR** | 0.8% 미만 | 0.8~1.4% | 1.4% 이상 | 공개 중앙값: Business Services 1.38%, Industrial & Commercial 1.36%, Animals & Pets 1.64%. 미국 Traffic 캠페인 554개, 2024년 4월 1일~2025년 6월 30일 표본. [WordStream, Facebook Ads Benchmarks 2025](https://www.wordstream.com/blog/facebook-ads-benchmarks-2025) ※ 출처는 전체 클릭 기준이므로 링크 클릭 대입 시 보수적으로 판정됨 |
 | **LinkedIn CTR** | 0.4% 미만 | 0.4~0.8% | 0.8% 이상 | 공개 관찰값: Q1 0.82%, Q3 0.96%(Q2·Q4 미제공). 70곳 이상 B2B SaaS 기업, 3년간 광고비 2,800만 달러 표본. [HockeyStack, 2025 LinkedIn Ads Benchmark Report](https://www.hockeystack.com/lab-blog-posts/linkedin-ads-benchmarks) |
 | **페이지 조회 → 리드 제출률** | 2% 미만 | 2~5% | 5% 이상 | 공개 중앙값: SaaS 랜딩페이지 전체 3.8%, paid social 2.9%, Facebook 3.5%. 데모·무료 체험·콘텐츠 등 여러 전환 목표가 포함된 수치이므로 리드 폼 제출률의 참고값으로만 사용. [Unbounce, SaaS Conversion Rate Benchmark](https://unbounce.com/conversion-benchmark-report/saas-conversion-rate/) |
 
