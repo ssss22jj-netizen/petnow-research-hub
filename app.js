@@ -12,6 +12,7 @@ const byPath = new Map(docs.map((doc) => [doc.path, doc]));
 const routes = [
   ["문서 찾기", "/", "⌂", "전체 문서"],
   ["주제별 문서", "/library/project", "◷", "프로젝트 계획·현황"],
+  ["주제별 문서", "/library/results", "◈", "실험 결과 보고서"],
   ["주제별 문서", "/library/interview", "◎", "고객 인터뷰"],
   ["주제별 문서", "/library/workflow", "◫", "쉘터 업무 플로우"],
   ["주제별 문서", "/library/competitors", "▥", "경쟁사 조사"],
@@ -48,6 +49,7 @@ function pageHeader(eyebrow, title, lead) {
 
 const collectionDefinitions = {
   project: { title: "프로젝트 계획·현황", lead: "프로젝트 배경과 M1·Track 2 실행 계획을 확인하는 문서입니다.", homeLead: "프로젝트 배경과 M1·Track 2 실행 계획을 확인하는 문서입니다.", paths: ["킥오프정리_노션용_v2.md", "deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", "meetings/2026-08-07_Track2_LMF_후속기획.md", "deliverables/Track2_LMF_가설_ICE_재스코어링_20260809.md", "deliverables/Petify_for_Shelters_PRD_v0.1_20260809.md", "deliverables/Track2_LMF_데모_팀피드백_반영결과_20260811.md"], homePaths: ["킥오프정리_노션용_v2.md", "deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", "meetings/2026-08-07_Track2_LMF_후속기획.md", "deliverables/Track2_LMF_가설_ICE_재스코어링_20260809.md", "deliverables/Petify_for_Shelters_PRD_v0.1_20260809.md", "deliverables/Track2_LMF_데모_팀피드백_반영결과_20260811.md"] },
+  results: { title: "실험 결과 보고서", lead: "집행한 실험의 성과를 사전 판정 기준으로 대조해 정리한 보고서입니다.", homeLead: "집행한 실험의 성과를 사전 판정 기준으로 대조해 정리한 보고서입니다.", paths: ["deliverables/Track2_M1_중간성과분석_20260815.md"], homePaths: ["deliverables/Track2_M1_중간성과분석_20260815.md"] },
   interview: { title: "고객 인터뷰", lead: "Gina 인터뷰 계획과 확인된 인사이트, 미국 로컬 쉘터 후속 인터뷰 자료입니다.", paths: ["지나인터뷰_계획.md", "deliverables/중간점검_2_Gina_인터뷰_인사이트_202608.md"] },
   workflow: { title: "쉘터 업무 플로우", lead: "미국 동물보호소·레스큐의 조직 유형과 구조부터 입양까지의 업무 흐름을 정리한 문서입니다.", paths: ["미국쉘터_구조부터입양까지_업무플로우_딥리서치_20260725.md"] },
   competitors: { title: "경쟁사 조사", lead: "경쟁 4사의 제품·가격·기능, 사용자 리뷰와 4개 제품 데모 UI·UX 검증 자료입니다.", paths: ["경쟁4사_검증본_M1실무요약_20260726.md", "경쟁4사_딥리서치_20260725.md", "경쟁4사_리뷰40개_파일럿코딩_20260726.md"] },
@@ -55,7 +57,7 @@ const collectionDefinitions = {
   appendix: { title: "별첨", lead: "실행에 필요한 설정 가이드와 Shelter CRM 본 조사 범위 밖의 참고 자료입니다.", paths: ["펫나우_비문인식_현재기능_검증_20260726.md", "deliverables/Track2_광고계정_설정가이드_Meta_LinkedIn_20260805.md", "deliverables/Track2_LMF_랜딩_구현_및_이벤트_정의서_20260810.md"] },
 };
 
-const primaryGroups = ["project", "interview", "workflow", "competitors", "methods", "appendix"];
+const primaryGroups = ["project", "results", "interview", "workflow", "competitors", "methods", "appendix"];
 
 const externalCollectionDocs = {
   interview: [{
@@ -72,6 +74,7 @@ const documentRoles = new Map([
   ["가설_근거_반증실험_보드.md", "가설 관리"],
   ["지나인터뷰_계획.md", "인터뷰 설계"],
   ["deliverables/중간점검_2_Gina_인터뷰_인사이트_202608.md", "인터뷰 결과"],
+  ["deliverables/Track2_M1_중간성과분석_20260815.md", "중간 성과 보고"],
   ["deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", "Track 2 계획"],
   ["meetings/2026-08-07_Track2_LMF_후속기획.md", "상세 기획"],
   ["deliverables/Track2_ICP_Persona_소재_정의_근거_20260805.md", "기획 근거"],

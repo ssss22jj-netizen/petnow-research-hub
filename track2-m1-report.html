@@ -42,6 +42,7 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 .wrap{max-width:900px;margin:0 auto;padding:56px 28px 100px}
+.doc-main{max-width:900px}
 
 a.back{display:inline-block;margin-bottom:22px;font-size:.86rem;color:var(--muted);border:0}
 a.back:hover{color:var(--accent);border:0}
@@ -123,16 +124,62 @@ h1#부록{font-size:1.35rem;margin:70px 0 8px;padding-top:34px;border-top:2px so
   .wrap{padding:32px 18px 70px}
   header.doc h1{font-size:1.45rem}
 }
+
+.app-shell{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;padding:22px 16px;background:#123d2d;color:#eaf6ef;display:flex;flex-direction:column;overflow-y:auto}
+.brand{display:flex;gap:12px;align-items:center;padding:0 10px 24px;text-decoration:none;color:inherit;border:0}
+.brand:hover{border:0}
+.brand-mark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:#68d29e;color:#0d3a29;font-weight:800}
+.brand strong,.brand small{display:block}
+.brand small{margin-top:2px;color:#a9c8b8;font-size:11px;text-transform:uppercase;letter-spacing:.11em}
+.nav-section{margin:9px 0 3px;padding:0 12px;color:#88ad9a;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.nav-link{display:flex;align-items:center;gap:10px;padding:10px 12px;margin:2px 0;color:#cfe2d8;text-decoration:none;border-radius:10px;font-size:14px;border:0}
+.nav-link:hover,.nav-link.active{color:#fff;background:rgba(255,255,255,.1);border:0}
+.nav-icon{width:20px;text-align:center;opacity:.9}
+.sidebar-footer{margin-top:auto;padding:13px 12px 0;border-top:1px solid rgba(255,255,255,.12);color:#a9c8b8;font-size:12px}
+.status-dot{display:inline-block;width:7px;height:7px;margin-right:7px;border-radius:50%;background:#68d29e}
+
+.doc-layout{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:32px;align-items:start;
+  max-width:1240px;margin:0 auto;padding:44px 36px 90px}
+.toc{position:sticky;top:44px;max-height:calc(100vh - 80px);padding:16px;overflow:hidden;border-left:1px solid var(--line)}
+.toc strong{display:block;margin-bottom:10px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.toc-links{max-height:calc(100vh - 130px);overflow-y:auto;scrollbar-width:thin}
+.toc-link{display:block;margin:1px 0;padding:6px 8px;border-left:2px solid transparent;border-radius:0 7px 7px 0;
+  color:var(--muted);font-size:12px;line-height:1.4;text-decoration:none;transition:color .15s,background .15s,border-color .15s}
+.toc-link:hover{color:var(--accent);background:var(--soft);border-left-color:transparent}
+.toc-link.active{border-left-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:750}
+.toc-link.toc-sub{padding-left:18px;font-size:11px}
+.doc-main{min-width:0}
+
+@media (max-width:1100px){
+  .app-shell{grid-template-columns:1fr}
+  .sidebar{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;gap:4px;padding:14px 16px}
+  .sidebar .nav-section,.sidebar-footer{display:none}
+  .brand{padding:0 12px 0 0}
+  .doc-layout{grid-template-columns:1fr;gap:0;padding:28px 18px 70px}
+  .toc{display:none}
+}
+@media print{ .sidebar,.toc{display:none} .app-shell,.doc-layout{display:block} .doc-layout{padding:0;max-width:none} }
 </style>
 </head>
 <body>
-<div class="wrap">
-<a class="back" href="./">← 문서 아카이브</a>
-<header class="doc">
-  <h1>Track 2 광고 실험 · 중간 보고</h1>
-  <div class="meta">2026-08-15 오전 · 광고 시작 3일 차<br>이번 보고서는 사전에 합의한 기준을 그대로 적용했고, 새 잣대는 도입하지 않았다.</div>
-</header>
-<h2>결론 — 세 줄</h2>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="./">
+      <span class="brand-mark">P</span>
+      <span><strong>Petnow</strong><small>문서 아카이브</small></span>
+    </a>
+    <nav aria-label="주요 메뉴"><div class="nav-section">문서 찾기</div><a class="nav-link" href="./"><span class="nav-icon">⌂</span>전체 문서</a><div class="nav-section">주제별 문서</div><a class="nav-link" href="./#/library/project"><span class="nav-icon">◷</span>프로젝트 계획·현황</a><a class="nav-link active" href="./#/library/results"><span class="nav-icon">◈</span>실험 결과 보고서</a><a class="nav-link" href="./#/library/interview"><span class="nav-icon">◎</span>고객 인터뷰</a><a class="nav-link" href="./#/library/workflow"><span class="nav-icon">◫</span>쉘터 업무 플로우</a><a class="nav-link" href="./#/library/competitors"><span class="nav-icon">▥</span>경쟁사 조사</a><a class="nav-link" href="./#/library/methods"><span class="nav-icon">▧</span>출처·분석 방법</a><a class="nav-link" href="./#/library/appendix"><span class="nav-icon">◇</span>별첨</a></nav>
+    <div class="sidebar-footer"><span class="status-dot"></span><span>M1 문서 아카이브</span></div>
+  </aside>
+  <main class="doc-layout">
+    <article class="doc-main">
+      <a class="back" href="./#/library/results">← 실험 결과 보고서</a>
+      <header class="doc">
+        <h1>Track 2 광고 실험 · 중간 보고</h1>
+        <div class="meta">2026-08-15 오전 · 광고 시작 3일 차<br>이번 보고서는 사전에 합의한 기준을 그대로 적용했고, 새 잣대는 도입하지 않았다.</div>
+      </header>
+      <h2>결론 — 세 줄</h2>
 <ol>
 <li>
 <p><strong>광고는 목표를 웃도는 속도로 돌고 있다.</strong><br />
@@ -805,6 +852,31 @@ Tapped button "7:30 PM"
 </tbody>
 </table></div>
 <p><em>(전체 목록: <a href="https://ssss22jj-netizen.github.io/petnow-research-hub/">문서 아카이브</a>)</em></p>
+    </article>
+    <aside class="toc"><strong>문서 목차</strong><div class="toc-links"></div></aside>
+  </main>
 </div>
+<script>
+(function(){
+  var main=document.querySelector('.doc-main');
+  var heads=main.querySelectorAll('h2, h1#부록');
+  var box=document.querySelector('.toc-links');
+  if(!heads.length){document.querySelector('.toc').style.display='none';return;}
+  var links=[];
+  heads.forEach(function(h,i){
+    if(!h.id) h.id='sec-'+i;
+    var a=document.createElement('a');
+    a.className='toc-link'+(h.tagName==='H1'?'':' toc-sub');
+    a.href='#'+h.id; a.textContent=h.textContent.trim();
+    box.appendChild(a); links.push([h,a]);
+  });
+  function sync(){
+    var y=window.scrollY+120, cur=links[0];
+    links.forEach(function(p){ if(p[0].getBoundingClientRect().top+window.scrollY<=y) cur=p; });
+    links.forEach(function(p){ p[1].classList.toggle('active', p===cur); });
+  }
+  sync(); window.addEventListener('scroll',sync,{passive:true});
+})();
+</script>
 </body>
 </html>
