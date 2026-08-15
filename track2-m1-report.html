@@ -84,6 +84,16 @@ blockquote p:last-child{margin-bottom:0}
 blockquote h3{margin:0 0 12px;font-size:1rem}
 blockquote ul{margin:8px 0}
 
+/* 콜아웃 안의 하위 묶음 — 별개 액션이 아니라 한 덩어리로 읽히게 */
+blockquote ul.sub{
+  list-style:none;margin:9px 0 2px;padding:2px 0 2px 14px;
+  border-left:2px solid var(--line);font-size:.94em;
+}
+blockquote ul.sub li{margin:5px 0;text-indent:-1.25em;padding-left:1.25em}
+blockquote.action ul.sub{border-left-color:var(--action-line)}
+blockquote.ask ul.sub{border-left-color:var(--ask-line)}
+blockquote.observe ul.sub{border-left-color:var(--observe-line)}
+
 blockquote.action{border-left-color:var(--action);background:var(--action-bg)}
 blockquote.action h3{color:var(--action)}
 blockquote.ask{border-left-color:var(--ask);background:var(--ask-bg)}
@@ -146,7 +156,7 @@ h1#부록{font-size:1.35rem;margin:70px 0 8px;padding-top:34px;border-top:2px so
 <li><strong>파트타임 인터뷰어의 예약 가능 시간도 미리 열어 두기(권장)</strong> — 8/14 결정 사항. 신청이 늘면 담당자 한 명의 시간이 다시 병목이 된다</li>
 </ul>
 <p><strong>8/17 첫 미팅 — #4 Simba's Pride Nursery(Eve, B 소재)</strong> · 3단계(해결 방식 수용)·4단계(지불 의향)의 첫 데이터다</p>
-<ul>
+<ul class="sub">
 <li>① 임시보호자가 없는데 왜 이 광고에 반응했는가 → B 소구점이 설계대로 읽혔는지 갈린다</li>
 <li>② 지금 이 일을 어떻게 처리하고 있고, 무엇이 가장 아픈가 → 만들 기능의 우선순위</li>
 <li>③ <strong>이런 도구에 돈을 낸다면 어떤 조건이어야 하는가</strong> → 지불 의향·가격대의 첫 실측</li>
