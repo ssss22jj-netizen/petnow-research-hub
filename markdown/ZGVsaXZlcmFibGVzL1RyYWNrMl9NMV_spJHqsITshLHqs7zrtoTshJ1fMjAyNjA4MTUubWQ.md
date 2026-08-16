@@ -120,6 +120,8 @@
 - B의 CTR이 **1.24배** 앞서지만, 현 표본에서는 신뢰 구간이 **B가 0.80배(오히려 열세)~ 1.92배(크게 우세)**으로 정량적 우열은 정할 수 없다
 - 방향성 판단을 위한 내부 기준으로 삼은 1.5배에도 아직 도달하지 않아 우열을 판단하기 이르다.
 
+<small>1.5배 기준을 어떻게 잡았는지는 [기획안 §3 실험 성공 기준](https://ssss22jj-netizen.github.io/petnow-research-hub/track2-plan.html#sec-03)에 정리돼 있다.</small>
+
 ---
 
 ## 3. 신청한 4곳은 어떤 조직인가
@@ -294,7 +296,7 @@ Tapped button "7:30 PM"
 
 | 문서 | 이 보고서에서 쓰는 부분 |
 | --- | --- |
-| [Track 2 LMF 소구점 검증 실험 기획안 (2026-08-05, v1.1)](https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/ZGVsaXZlcmFibGVzL1RyYWNrMl9MTUZf7IaM6rWs7KCQX-qygOymnV_si6Ttl5hf6riw7ZqNXzIwMjYwODA1Lm1k) | §3 성공 판단 기준 · §8 예산 구조 · §9 일정 |
+| [Track 2 LMF 소구점 검증 실험 기획안 (2026-08-05, v1.2)](https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/ZGVsaXZlcmFibGVzL1RyYWNrMl9MTUZf7IaM6rWs7KCQX-qygOymnV_si6Ttl5hf6riw7ZqNXzIwMjYwODA1Lm1k) | §3 성공 판단 기준 · §8 예산 구조 · §9 일정 |
 | [Track 2 LMF 상세 기획 정리 (2026-08-07)](https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/bWVldGluZ3MvMjAyNi0wOC0wN19UcmFjazJfTE1GX-2bhOyGjeq4sO2ajS5tZA) | §5.1 운영 판단 · §5.2 정량 스펙트럼 · **§5.2.1 절대값 환산(목표 수치 출처)** · §5.3 판정 우선순위 |
 | [ICP·퍼소나·소재 정의 배경 및 근거 (2026-08-05)](https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/ZGVsaXZlcmFibGVzL1RyYWNrMl9JQ1BfUGVyc29uYV_shozsnqxf7KCV7J2YX-q3vOqxsF8yMDI2MDgwNS5tZA) | 2절 ICP 대조 기준 |
 
