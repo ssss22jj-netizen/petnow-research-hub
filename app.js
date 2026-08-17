@@ -116,7 +116,7 @@ function compactDocRow(doc, index) {
   const externalAttributes = externalUrl ? ' target="_blank" rel="noopener noreferrer"' : "";
   const rowClass = externalUrl ? "compact-doc-row external-doc-row" : "compact-doc-row";
   const arrow = externalUrl ? "↗" : "→";
-  return `<a class="${rowClass}" href="${href}"${externalAttributes}><span class="compact-doc-number">${number}</span><span class="compact-doc-copy"><strong>${doc.title}</strong><small>${doc.description}</small></span><span class="compact-doc-role">${documentRoles.get(doc.path) ?? doc.category}</span><span class="compact-doc-arrow">${arrow}</span></a>`;
+  return `<a class="${rowClass}" href="${href}"${externalAttributes}><span class="compact-doc-number">${number}</span><span class="compact-doc-copy"><strong>${milestoneTag(doc)}${doc.title}</strong><small>${doc.description}</small></span><span class="compact-doc-role">${documentRoles.get(doc.path) ?? doc.category}</span><span class="compact-doc-arrow">${arrow}</span></a>`;
 }
 
 function visualAnalysisRow(index) {
@@ -127,6 +127,10 @@ function visualAnalysisRow(index) {
 function externalDocRow(doc, index) {
   const number = String(index + 1).padStart(2, "0");
   return `<a class="compact-doc-row external-doc-row" href="${doc.url}" target="_blank" rel="noopener noreferrer"><span class="compact-doc-number">${number}</span><span class="compact-doc-copy"><strong>${doc.title}</strong><small>${doc.description}</small></span><span class="compact-doc-role">${doc.role}</span><span class="compact-doc-arrow">↗</span></a>`;
+}
+
+function milestoneTag(doc) {
+  return doc?.milestone ? `<span class="ms-tag ms-${doc.milestone.toLowerCase()}">${doc.milestone}</span>` : "";
 }
 
 function collectionRows(key, selectedDocs) {
@@ -284,7 +288,7 @@ function renderDocument(id) {
   const markdownUrl = new URL(doc.markdown, window.location.href).href;
   const downloadName = doc.path.split("/").pop();
   const bodyClass = doc.path === "deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md" ? " track2-plan" : "";
-  app.innerHTML = `<div class="doc-layout"><article class="document${bodyClass}"><header class="document-header"><div class="evidence-meta"><span class="tag">${doc.category}</span></div><h1>${doc.title}</h1><div class="source-path">${doc.path}</div><div class="document-actions" aria-label="원본 Markdown 공유"><a href="${doc.markdown}" target="_blank" rel="noopener">Markdown 열기 ↗</a><a href="${doc.markdown}" download="${downloadName}">Markdown 다운로드 ↓</a><button type="button" data-copy-markdown="${markdownUrl}">AI용 링크 복사</button></div><p class="document-actions-help">SPA 화면 대신 원본 Markdown 주소를 AI 도구에 전달할 수 있습니다.</p>${visualAnalysisLink}</header><div class="markdown-body">${doc.html}</div></article><aside class="toc"><strong>문서 목차</strong></aside></div>`;
+  app.innerHTML = `<div class="doc-layout"><article class="document${bodyClass}"><header class="document-header"><div class="evidence-meta"><span class="tag ms-tag-lg ms-${doc.milestone?.toLowerCase() ?? "m1"}">${doc.milestone ?? "M1"}</span><span class="tag">${doc.category}</span></div><h1>${doc.title}</h1><div class="source-path">${doc.path}</div><div class="document-actions" aria-label="원본 Markdown 공유"><a href="${doc.markdown}" target="_blank" rel="noopener">Markdown 열기 ↗</a><a href="${doc.markdown}" download="${downloadName}">Markdown 다운로드 ↓</a><button type="button" data-copy-markdown="${markdownUrl}">AI용 링크 복사</button></div><p class="document-actions-help">SPA 화면 대신 원본 Markdown 주소를 AI 도구에 전달할 수 있습니다.</p>${visualAnalysisLink}</header><div class="markdown-body">${doc.html}</div></article><aside class="toc"><strong>문서 목차</strong></aside></div>`;
   app.querySelector("[data-copy-markdown]")?.addEventListener("click", async (event) => {
     const button = event.currentTarget;
     const originalLabel = button.textContent;
@@ -335,7 +339,7 @@ function search(query) {
   const value = query.trim().toLocaleLowerCase("ko");
   if (!value) { searchPanel.classList.add("hidden"); return; }
   const results = docs.filter((doc) => `${doc.title} ${doc.description} ${doc.text}`.toLocaleLowerCase("ko").includes(value)).slice(0,12);
-  searchPanel.innerHTML = results.length ? results.map((doc) => `<a class="search-result" href="${hrefForDoc(doc)}"><strong>${doc.title}</strong><small>${doc.category} · ${doc.description}</small></a>`).join("") : `<div class="search-result"><strong>검색 결과 없음</strong><small>다른 검색어를 입력해 주세요.</small></div>`;
+  searchPanel.innerHTML = results.length ? results.map((doc) => `<a class="search-result" href="${hrefForDoc(doc)}"><strong>${milestoneTag(doc)}${doc.title}</strong><small>${doc.category} · ${doc.description}</small></a>`).join("") : `<div class="search-result"><strong>검색 결과 없음</strong><small>다른 검색어를 입력해 주세요.</small></div>`;
   searchPanel.classList.remove("hidden");
 }
 

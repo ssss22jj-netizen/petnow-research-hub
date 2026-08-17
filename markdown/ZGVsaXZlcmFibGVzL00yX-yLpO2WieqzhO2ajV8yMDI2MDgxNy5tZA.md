@@ -30,7 +30,7 @@ M1의 1차 LMF(기존 Track2)에서 시장의 페인포인트 존재를 확인�
 
 ### 왜 이렇게 가는가
 
-중간 보고서 §0 「매출까지 가는 길」의 5단계로 보면 M2의 위치가 분명해진다.
+[Track 2 광고 실험 중간 보고](https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/ZGVsaXZlcmFibGVzL1RyYWNrMl9NMV_spJHqsITshLHqs7zrtoTshJ1fMjAyNjA4MTUubWQ) §0 「매출까지 가는 길」의 5단계로 보면 M2의 위치가 분명해진다.
 
 <div class="stage-ladder">
 <div class="stage-ladder-head"><strong>매출까지 가는 길 — 지금 어디인가</strong><span>2026-08-17 기준</span></div>
