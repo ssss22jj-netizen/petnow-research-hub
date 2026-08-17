@@ -22,11 +22,29 @@ M1의 1차 LMF(기존 Track2)에서 시장의 페인포인트 존재를 확인�
 
 ## 2. M2 트랙 정의
 
-| 트랙 | 프로젝트에서의 역할 | 목적 | 방법 |
-| --- | --- | --- | --- |
-| **Track 1** | **수익화 가능성 태핑** — LMF의 다음 단계 | 1차 LMF에서 확인한 페인포인트에 대해 **지불 의향과 실제 구매 전환**을 확인 | 리드 데모 콜 → PoC 유도 → 정규 계약 전환 |
-| **Track 2** | **VP 다지기** — 제품 경쟁력 강화 | 1차와 결이 다른 소재로 **또다른 축의 페인포인트** 존재 여부 검증 | 1차 LMF 프로세스 그대로 차용, 소재만 교체 |
-| **별도 트랙** | **지자체 관계 구축** — 공공 판로 확보 | 산타바바라 카운티와 관계를 형성하고 실제 프로젝트로 연결 | 사전조사 기반 미팅 → 수요 파악 → 후속 미팅·파일럿 논의 |
+<div class="track-cards">
+<section class="track-card tc-1">
+  <header><div class="tc-name">TRACK 1</div><div class="tc-role">수익화 가능성 태핑</div><div class="tc-sub">LMF의 다음 단계</div></header>
+  <dl>
+    <div><dt>목적</dt><dd>1차 LMF에서 확인한 페인포인트에 대해 <b>지불 의향과 실제 구매 전환</b>을 확인</dd></div>
+    <div><dt>방법</dt><dd class="tc-how">리드 데모 콜 → PoC 유도 → 정규 계약 전환</dd></div>
+  </dl>
+</section>
+<section class="track-card tc-2">
+  <header><div class="tc-name">TRACK 2</div><div class="tc-role">VP 다지기</div><div class="tc-sub">제품 경쟁력 강화</div></header>
+  <dl>
+    <div><dt>목적</dt><dd>1차와 결이 다른 소재로 <b>또다른 축의 페인포인트</b> 존재 여부 검증</dd></div>
+    <div><dt>방법</dt><dd class="tc-how">1차 LMF 프로세스 그대로 차용, 소재만 교체</dd></div>
+  </dl>
+</section>
+<section class="track-card tc-3">
+  <header><div class="tc-name">별도 트랙</div><div class="tc-role">지자체 관계 구축</div><div class="tc-sub">공공 판로 확보</div></header>
+  <dl>
+    <div><dt>목적</dt><dd>산타바바라 카운티와 관계를 형성하고 <b>실제 프로젝트로 연결</b></dd></div>
+    <div><dt>방법</dt><dd class="tc-how">사전조사 기반 미팅 → 수요 파악 → 후속 미팅·파일럿 논의</dd></div>
+  </dl>
+</section>
+</div>
 
 ### 왜 이렇게 가는가
 
@@ -105,6 +123,8 @@ M1의 1차 LMF(기존 Track2)에서 시장의 페인포인트 존재를 확인�
 
 ### 3.3 미리 고민하면 좋을 것 (PoC 관련)
 
+<div class="decision-box">
+
 데모 콜 CTA의 최상위 제안이 PoC이나 제공 범위가 미정의. 펫나우가 PoC를 설계할 때 고려할 사항:
 
 - **PoC의 목적은 실제 매출 발생 실현이다.** PoC 자체는 무료로 제공하되, 착수 시 정규 계약 조건(가격·기간)을 함께 제시해 PoC 종료 시점이 곧 계약 결정 시점이 되도록 설계한다. 범위·기간·가격 설계 전부를 '매출 전환'이 성립하도록 맞춘다.
@@ -112,6 +132,8 @@ M1의 1차 LMF(기존 Track2)에서 시장의 페인포인트 존재를 확인�
 - **PoC용 필수 스펙과 개발 기간을 먼저 산정한다.** 데모에서 제시하는 스펙을 기준으로 실개발 스펙을 팀 내에서 합의하여 최소 형태로 스펙을 정한다. 개발 기간이 PoC 착수 시점을 결정하므로 데모 콜 진행과 병렬로 산정 권장
 - **PoC 기간 정의 필요.** 임보자 체크인이 주 단위이므로 3회 이상 관측되도록 4주 권장
 - **정규 계약 가격은 대표 전결 범위 안에서 정하고 데모 콜 "현재 지출" 답변으로 보정한다.** 벤치마크는 Shelterluv 입양당 $2 · Petstablished 월 $49 · 기존 가설 월 $99. 참고로 합성 소비자 인터뷰(Jeanine, 7/29)에서는 월 $99 이하가 대표 단독 결정선이고, **연 단위 일시불이 오히려 승인이 쉽다**는 합성인터뷰 발언이 있었다 — 소프트웨어를 운영비가 아니라 Petco Love·Maddie's Fund 등 보조금으로 사는데, 보조금은 월 구독이 아니라 일회성 지출에 나오기 때문. 합성 인터뷰라 근거 수준은 낮으며 데모 콜에서 확인할 항목
+
+</div>
 
 ## 4. Track 2 — 또다른 페인포인트 축 검증 (제품 VP 다지기)
 
