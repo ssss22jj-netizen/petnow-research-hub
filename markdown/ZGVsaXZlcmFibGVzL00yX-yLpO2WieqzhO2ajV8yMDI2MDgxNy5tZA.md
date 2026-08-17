@@ -30,11 +30,13 @@ M1의 1차 LMF(기존 Track2)에서 시장의 페인포인트 존재를 확인�
 
 ### 왜 이렇게 가는가
 
-- **Track 1**: 본 프로젝트에서 실질적인 수익화 가능성을 최초로 검증하는 단계다. 1차 LMF로 문제 인식은 확인됐고, 지불 의향과 구매 전환은 리드 대상 데모 콜·PoC로만 확인 가능하다. M1 미확인 사항 3건(초기 고객군·유료 진입 기능·지불 의향)도 이 단계에서 확정된다
-- **Track 2**: A·B는 "내부 운영 정보의 자동 취합"이라는 단일 축이다. 결이 다른 축까지 동일 방식으로 검증하면 총 4종의 가설 상대 강도가 드러나, 단일 축에 국한되지 않고 다른 관점에서 VP를 다질 수 있고, 제품 경쟁력의 근거가 확충된다. 실험 인프라가 이미 갖춰져 있어 소재 추가 비용은 낮다
-    - 두 트랙은 투입 자원이 다르고, Track 2 유입 리드가 Track 1로 이어져 상호 보완된다
+중간 보고서 §0 「매출까지 가는 길」의 5단계로 보면 M2의 위치가 분명해진다. 1단계(문제 인식)는 확인됐고 2단계(관심 강도)는 신청 9건·예약 3건으로 관찰 중이며, **3~5단계는 미착수다.**
+
+- **Track 1**: 3단계(해결 방식 수용) → 4단계(지불 의향) → 5단계(반복 가능성)를 밀어 올린다. 이 세 단계는 광고로 닿을 수 없고 데모 콜·PoC만 답을 준다. M1 미확인 사항 3건(초기 고객군·유료 진입 기능·지불 의향)도 여기서 확정된다
+- **Track 2**: 1단계를 다른 축에서 다시 확인한다. 지금 확인된 1단계는 "내부 운영 정보의 자동 취합"이라는 단일 축이므로, 결이 다른 축까지 동일 방식으로 검증하면 가설 4종의 상대 강도가 드러나 단일 축에 국한되지 않고 다른 관점에서 VP를 다질 수 있다. 실험 인프라가 이미 갖춰져 있어 소재 추가 비용은 낮다
+- 두 트랙은 맡는 단계가 다르고 투입 자원도 달라(콜 시간 대 광고비) 병행이 가능하며, Track 2가 확보한 리드가 Track 1의 3~5단계 표본이 된다
 - **별도 트랙**: 지자체 컨택 포인트는 사업 관점에서 그 자체가 자산이다. 위로는 주·연방 단위 공공 사업과 정책 채택으로, 옆으로는 인근 카운티와 전국 구조 네트워크로 뻗을 수 있는 노드이며, CRM에 국한되지 않고 비문 인식 등 다른 사업의 판로로도 열릴 수 있다. 따라서 이번 건은 검증 대상이 아니라 **어떤 형태로든 관계를 다지고 실제 프로젝트를 만들어 내는 것**을 목표로 별도 운영한다
-    - 참고: [산타바바라 카운티 사전조사](https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/YW5hbHlzaXMvU2FudGFCYXJiYXJhX-y5tOyatO2LsF_sgqzsoITsobDsgqxfMjAyNjA4MTcubWQ) · [리드 인터뷰 가이드](https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/ZGVsaXZlcmFibGVzL1RyYWNrMl_rpqzrk5zsnbjthLDrt7Bf6rCA7J2065OcXzIwMjYwODE3Lm1k) 산타바바라 커스텀 절
+- 참고: [산타바바라 카운티 사전조사](https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/YW5hbHlzaXMvU2FudGFCYXJiYXJhX-y5tOyatO2LsF_sgqzsoITsobDsgqxfMjAyNjA4MTcubWQ) · [리드 인터뷰 가이드](https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/ZGVsaXZlcmFibGVzL1RyYWNrMl_rpqzrk5zsnbjthLDrt7Bf6rCA7J2065OcXzIwMjYwODE3Lm1k) 산타바바라 커스텀 절
 
 ## 3. Track 1 — 지불 의향·구매 전환
 
