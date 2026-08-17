@@ -1,6 +1,6 @@
 # Eve 인터뷰 인사이트
 
-> 2026-08-17 · 43분 · 인터뷰어 조니 · 녹취록: [Eve 인터뷰 녹취록](../analysis/Eve인터뷰_녹취록_20260817.md)
+> 2026-08-17 · 43분 · 인터뷰어 조니
 
 ## 한 줄 결론
 
@@ -101,3 +101,8 @@
 
 - Craven County 셸터는 산타바바라와 같은 **카운티 정부 산하 공공 구조**다. 다만 위탁 프로그램이 공식화되지 않았고 예산도 없어 도입 예산 확보 난이도는 더 높을 수 있다
 - 셸터가 PetPoint를 쓰는 것으로 확인되면, PetPoint는 신규 기능 개발이 종료되고 후속 제품(24PetShelter)으로 마이그레이션이 예고된 상태다. 도구명 확인이 선행돼야 의미가 있다
+
+### C. 녹취록
+
+- 콜 전문(43분): [Eve 인터뷰 녹취록](https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/YW5hbHlzaXMvRXZl7J247YSw67ewX-uFuey3qOuhnV8yMDI2MDgxNy5tZA)
+- 자동 전사본이라 문장부호·고유명사에 오인식이 있다. 인용 전 원본 영상 확인 권장
