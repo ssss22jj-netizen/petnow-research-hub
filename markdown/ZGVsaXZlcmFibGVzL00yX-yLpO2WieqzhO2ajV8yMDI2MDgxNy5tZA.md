@@ -12,41 +12,73 @@ M1의 1차 LMF(기존 Track2)에서 시장의 페인포인트 존재를 확인�
 
 네트워크 인터뷰(기존 Track1)는 보조 수단으로 전환한다.
 
-## 1. M1 결과 정리
+## 1. M1에서 M2로 — 트랙 재편
 
-| M1 트랙 | 목표 | 결과 | M2 처리 |
-| --- | --- | --- | --- |
-| **1. 네트워크·LinkedIn 인터뷰** | 페인포인트 수집 | 인터뷰이 모집 난항. LinkedIn 후보 46명 정리·발송에도 성사 건수 미미, 네트워크 소개 의존 | **보조 수단으로 전환.** 소개 유입은 수용하되 적극적 탐색은 중단 |
-| **2. 리드 기반 VP 검증 (LMF 1차)** | 데스크 리서치(&Gina) 가설 검증 | 소재 A·B 모두 CTR "매우 좋음". 리드 9건(8/17), 계속 유입 중. 규모 스펙트럼이 부부 2인 조직부터 카운티 정부 기관까지 넓음. A·B 우열은 미확정 | **강화.** 두 트랙으로 분리해 진행 |
+M1은 두 트랙으로 진행했다. **네트워크·LinkedIn 인터뷰**는 후보 46명을 정리해 발송했으나 인터뷰이 모집이 어려워 성사 건수가 미미했고, **리드 기반 VP 검증(1차 LMF)**은 소재 A·B 모두 CTR "매우 좋음"으로 시장에 페인포인트가 존재함을 확인했다.
 
+M2는 여기서 갈린다. 모집이 막힌 인터뷰 트랙은 **보조 수단으로 내리고**, 성과가 확인된 리드 기반 축을 **강화해 두 트랙으로 나눈다.** 하나는 확인된 페인포인트를 매출까지 밀어 올리고(Track 1), 다른 하나는 결이 다른 축에서 페인포인트를 더 찾는다(Track 2). 여기에 카운티 정부 기관 리드가 유입돼 지자체 관계 구축을 별도 트랙으로 둔다.
 
-## 2. M2 트랙 정의
-
-<div class="track-cards">
-<section class="track-card tc-1">
-  <header><div class="tc-name">TRACK 1</div><div class="tc-role">수익화 가능성 태핑</div><div class="tc-sub">LMF의 다음 단계</div></header>
-  <dl>
-    <div><dt>목적</dt><dd>1차 LMF에서 확인한 페인포인트에 대해 <b>지불 의향과 실제 구매 전환</b>을 확인</dd></div>
-    <div><dt>방법</dt><dd class="tc-how">리드 데모 콜 → PoC 유도 → 정규 계약 전환</dd></div>
-  </dl>
-</section>
-<section class="track-card tc-2">
-  <header><div class="tc-name">TRACK 2</div><div class="tc-role">VP 다지기</div><div class="tc-sub">제품 경쟁력 강화</div></header>
-  <dl>
-    <div><dt>목적</dt><dd>1차와 결이 다른 소재로 <b>또다른 축의 페인포인트</b> 존재 여부 검증</dd></div>
-    <div><dt>방법</dt><dd class="tc-how">1차 LMF 프로세스 그대로 차용, 소재만 교체</dd></div>
-  </dl>
-</section>
-<section class="track-card tc-3">
-  <header><div class="tc-name">별도 트랙</div><div class="tc-role">지자체 관계 구축</div><div class="tc-sub">공공 판로 확보</div></header>
-  <dl>
-    <div><dt>목적</dt><dd>산타바바라 카운티와 관계를 형성하고 <b>실제 프로젝트로 연결</b></dd></div>
-    <div><dt>방법</dt><dd class="tc-how">사전조사 기반 미팅 → 수요 파악 → 후속 미팅·파일럿 논의</dd></div>
-  </dl>
-</section>
+<div class="track-flow">
+<svg viewBox="0 0 920 356" role="img" aria-label="M1 두 트랙에서 M2 세 트랙으로 재편되는 흐름" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="fa" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 z" fill="#8d9791"/>
+    </marker>
+    <marker id="fad" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 z" fill="#b7c0ba"/>
+    </marker>
+  </defs>
+  <text x="8" y="20" class="fl-col">M1 · 완료</text>
+  <text x="600" y="20" class="fl-col">M2 · 진행</text>
+  <rect x="8" y="36" width="290" height="98" rx="10" fill="#f3f7f4" stroke="#dce5df"/>
+  <text x="24" y="58" class="fl-kicker">M1 TRACK 1</text>
+  <text x="24" y="80" class="fl-title">네트워크·LinkedIn 인터뷰</text>
+  <text x="24" y="101" class="fl-line">목표 · 페인포인트 수집</text>
+  <text x="24" y="121" class="fl-line">결과 · 인터뷰이 모집 난항</text>
+  <rect x="8" y="164" width="290" height="126" rx="10" fill="#dff4e9" stroke="#b9e3cd"/>
+  <text x="24" y="186" class="fl-kicker">M1 TRACK 2</text>
+  <text x="24" y="208" class="fl-title">리드 기반 VP 검증 (1차 LMF)</text>
+  <text x="24" y="229" class="fl-line">목표 · 데스크리서치 가설 검증</text>
+  <text x="24" y="249" class="fl-line">결과 · 소재 A·B 모두 CTR 매우 좋음</text>
+  <text x="24" y="269" class="fl-line">리드 9건 · 예약 3건, 계속 유입</text>
+  <path d="M298,85 H450 V60 H588" fill="none" stroke="#b7c0ba" stroke-width="1.4"
+        stroke-dasharray="5 4" marker-end="url(#fad)"/>
+  <text x="366" y="78" class="fl-edge fl-edge-dim">격하</text>
+  <path d="M298,227 H452" fill="none" stroke="#8d9791" stroke-width="1.6"/>
+  <path d="M452,146 V308" fill="none" stroke="#8d9791" stroke-width="1.6"/>
+  <path d="M452,146 H588" fill="none" stroke="#8d9791" stroke-width="1.6" marker-end="url(#fa)"/>
+  <path d="M452,227 H588" fill="none" stroke="#8d9791" stroke-width="1.6" marker-end="url(#fa)"/>
+  <path d="M452,308 H588" fill="none" stroke="#8d9791" stroke-width="1.6" marker-end="url(#fa)"/>
+  <text x="352" y="219" class="fl-edge">강화 · 분기</text>
+  <rect x="592" y="36" width="320" height="52" rx="10" fill="#fff" stroke="#e3e9e5" stroke-dasharray="5 4"/>
+  <text x="610" y="59" class="fl-title fl-dim">보조 수단으로 전환</text>
+  <text x="610" y="78" class="fl-line fl-dim">소개 유입만 수용 · 적극 탐색 중단</text>
+  <rect x="592" y="112" width="320" height="68" rx="10" fill="#e8f1fa" stroke="#a9c4e2"/>
+  <text x="610" y="134" class="fl-kicker fl-blue">M2 TRACK 1</text>
+  <text x="610" y="155" class="fl-title fl-blue">수익화 가능성 태핑</text>
+  <text x="610" y="173" class="fl-line">지불 의향 · 실제 구매 전환 확인</text>
+  <rect x="592" y="193" width="320" height="68" rx="10" fill="#dff4e9" stroke="#b9e3cd"/>
+  <text x="610" y="215" class="fl-kicker fl-green">M2 TRACK 2</text>
+  <text x="610" y="236" class="fl-title fl-green">VP 다지기</text>
+  <text x="610" y="254" class="fl-line">또다른 축의 페인포인트 검증</text>
+  <rect x="592" y="274" width="320" height="68" rx="10" fill="#fff3dc" stroke="#f0d6a4"/>
+  <text x="610" y="296" class="fl-kicker fl-amber">별도 트랙</text>
+  <text x="610" y="317" class="fl-title fl-amber">지자체 관계 구축</text>
+  <text x="610" y="335" class="fl-line">산타바바라 카운티 · 공공 판로</text>
+</svg>
+<ul class="track-flow-alt">
+  <li><b>M1 Track 1 · 네트워크·LinkedIn 인터뷰</b> → 보조 수단으로 전환 (소개 유입만 수용)</li>
+  <li><b>M1 Track 2 · 리드 기반 VP 검증</b> → 강화 후 3개로 분기
+    <ul>
+      <li>M2 Track 1 · 수익화 가능성 태핑 — 지불 의향·구매 전환 확인</li>
+      <li>M2 Track 2 · VP 다지기 — 또다른 축의 페인포인트 검증</li>
+      <li>별도 트랙 · 지자체 관계 구축 — 산타바바라 카운티</li>
+    </ul>
+  </li>
+</ul>
 </div>
 
-### 왜 이렇게 가는가
+## 2. 왜 이렇게 가는가
 
 [Track 2 광고 실험 중간 보고](https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/ZGVsaXZlcmFibGVzL1RyYWNrMl9NMV_spJHqsITshLHqs7zrtoTshJ1fMjAyNjA4MTUubWQ) §0 「매출까지 가는 길」의 5단계로 보면 M2의 위치가 분명해진다.
 
