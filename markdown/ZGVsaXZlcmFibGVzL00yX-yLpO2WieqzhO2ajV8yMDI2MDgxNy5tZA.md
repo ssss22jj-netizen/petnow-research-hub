@@ -14,9 +14,12 @@ M1의 1차 LMF(기존 Track2)에서 시장의 페인포인트 존재를 확인�
 
 ## 1. M1에서 M2로 — 트랙 재편
 
-M1은 두 트랙으로 진행했다. **네트워크·LinkedIn 인터뷰**는 후보 46명을 정리해 발송했으나 인터뷰이 모집이 어려워 성사 건수가 미미했고, **리드 기반 VP 검증(1차 LMF)**은 소재 A·B 모두 CTR "매우 좋음"으로 시장에 페인포인트가 존재함을 확인했다.
+- M1은 두 트랙으로 진행했다. **네트워크·LinkedIn 인터뷰**는 후보 46명을 정리해 발송했으나 인터뷰이 모집이 어려워 성사 건수가 미미했고,
+- <strong>리드 기반 VP 검증(1차 LMF)</strong>은 소재 A·B 모두 CTR "매우 좋음"으로 시장에 페인포인트가 존재함을 확인했다.
 
-M2는 여기서 갈린다. 모집이 막힌 인터뷰 트랙은 **보조 수단으로 내리고**, 성과가 확인된 리드 기반 축을 **강화해 두 트랙으로 나눈다.** 하나는 확인된 페인포인트를 매출까지 밀어 올리고(Track 1), 다른 하나는 결이 다른 축에서 페인포인트를 더 찾는다(Track 2). 여기에 카운티 정부 기관 리드가 유입돼 지자체 관계 구축을 별도 트랙으로 둔다.
+- M2는 여기서 갈린다. 모집이 막힌 인터뷰 트랙은 **보조 수단으로 내리고**, 성과가 확인된 리드 기반 축을 **강화해 두 트랙으로 나눈다.**
+- 하나는 확인된 페인포인트를 매출까지 밀어 올리고(Track 1), 다른 하나는 결이 다른 축에서 페인포인트를 더 찾는다(Track 2).
+- 여기에 카운티 정부 기관 리드가 유입돼 지자체 관계 구축을 별도 트랙으로 둔다.
 
 <div class="track-flow">
 <svg viewBox="0 0 920 356" role="img" aria-label="M1 두 트랙에서 M2 세 트랙으로 재편되는 흐름" xmlns="http://www.w3.org/2000/svg">
@@ -125,11 +128,11 @@ M2는 여기서 갈린다. 모집이 막힌 인터뷰 트랙은 **보조 수단�
 </div>
 
 
-- **Track 1**: 본 프로젝트에서 실질적인 수익화 가능성을 최초로 검증하는 단계다. 1차 LMF로 문제 인식은 확인됐고, 지불 의향과 구매 전환은 리드 대상 데모 콜·PoC로만 확인 가능하다.
-- **Track 2**: 소재 A·B는 "내부 운영 정보의 자동 취합"이라는 단일 축이다. 결이 다른 축까지 동일 방식으로 검증하면 총 4종의 가설 상대 강도가 드러나, 단일 축에 국한되지 않고 다른 관점에서 VP를 다질 수 있고, 제품 경쟁력의 근거가 확충된다. 실험 인프라가 이미 갖춰져 있어 소재 추가 비용은 낮다
+- **Track 1**: 본 프로젝트에서 실질적인 수익화 가능성을 최초로 검증하는 단계다. 1차 LMF로 문제 인식은 확인됐고, 리드 대상 데모 콜 지속과 PoC 유도를 통해 지불 의향과 구매 전환을 도모한다.
+- **Track 2**: 소재 A·B는 "내부 운영 정보의 자동 취합"이라는 단일 축이다. 결이 다른 축까지 동일 방식으로 검증하면 총 4종의 가설 상대 강도가 드러나, 단일 축에 국한되지 않고 다른 관점에서 VP를 다질 수 있고, 제품 경쟁력의 근거가 확충된다.
 - 두 트랙은 투입 자원이 다르고, Track 2 유입 리드가 Track 1로 이어져 상호 보완된다
-- **별도 트랙**: 지자체 컨택 포인트는 사업 관점에서 그 자체가 자산이다. 위로는 주·연방 단위 공공 사업과 정책 채택으로, 옆으로는 인근 카운티와 전국 구조 네트워크로 뻗을 수 있는 노드이며, CRM에 국한되지 않고 비문 인식 등 다른 사업의 판로로도 열릴 수 있다. 따라서 이번 건은 검증 대상이 아니라 **어떤 형태로든 관계를 다지고 실제 프로젝트를 만들어 내는 것**을 목표로 별도 운영한다
-- 참고: [산타바바라 카운티 사전조사](https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/YW5hbHlzaXMvU2FudGFCYXJiYXJhX-y5tOyatO2LsF_sgqzsoITsobDsgqxfMjAyNjA4MTcubWQ) · [리드 인터뷰 가이드](https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/ZGVsaXZlcmFibGVzL1RyYWNrMl_rpqzrk5zsnbjthLDrt7Bf6rCA7J2065OcXzIwMjYwODE3Lm1k) 산타바바라 커스텀 절
+- **별도 트랙**: 사업 관점에서 **지자체 컨택 포인트**는 **그 자체가 자산**이다. 위로는 주·연방 단위 공공 사업과 정책 채택으로, 옆으로는 인근 카운티와 전국 구조 네트워크로 뻗을 수 있는 노드이며, CRM에 국한되지 않고 비문 인식 등 다른 사업의 판로로도 열릴 수 있다. 따라서 이번 건은 검증 대상이 아니라 **어떤 형태로든 관계를 다지고 실제 프로젝트를 만들어 내는 것**을 목표로 별도 운영한다
+    - 참고: [산타바바라 카운티 사전조사](https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/YW5hbHlzaXMvU2FudGFCYXJiYXJhX-y5tOyatO2LsF_sgqzsoITsobDsgqxfMjAyNjA4MTcubWQ) · [리드 인터뷰 가이드](https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/ZGVsaXZlcmFibGVzL1RyYWNrMl_rpqzrk5zsnbjthLDrt7Bf6rCA7J2065OcXzIwMjYwODE3Lm1k) 산타바바라 커스텀 절
 
 ## 2. Track 1 — 지불 의향·구매 전환
 
@@ -142,16 +145,15 @@ M2는 여기서 갈린다. 모집이 막힌 인터뷰 트랙은 **보조 수단�
 
 ### 2.2 답할 것
 
-| 질문 | 수집 지점 |
+| 필수 질문 | 수집 지점 |
 | --- | --- |
-| 광고에서 반응한 통증이 실제 업무 사례로 확인되는가 | 가이드 §2 |
-| 데모가 해당 통증을 해소한다고 판단하는가 | 가이드 §5 |
-| 지불 의향과 가격 범위 | 가이드 §5 (현재 지출 앵커 후 질문) |
+| 광고에서 반응한 통증이 실제 업무 사례로 확인되는가 | [가이드](https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/ZGVsaXZlcmFibGVzL1RyYWNrMl_rpqzrk5zsnbjthLDrt7Bf6rCA7J2065OcXzIwMjYwODE3Lm1k) §2 |
+| 데모가 해당 통증을 해소한다고 판단하는가 | [가이드](https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/ZGVsaXZlcmFibGVzL1RyYWNrMl_rpqzrk5zsnbjthLDrt7Bf6rCA7J2065OcXzIwMjYwODE3Lm1k) §5 |
+| 지불 의향과 가격 범위 | [가이드](https://ssss22jj-netizen.github.io/petnow-research-hub/#/doc/ZGVsaXZlcmFibGVzL1RyYWNrMl_rpqzrk5zsnbjthLDrt7Bf6rCA7J2065OcXzIwMjYwODE3Lm1k) §5 (현재 지출 앵커 후 질문) |
 | PoC 참여 의사 | CTA "뜨거움" 분기 |
 
 - 성공 기준(데모 콜 N건 중 PoC 진입·정규 계약 전환 M건)은 리드 유입 속도를 확인한 뒤 펫나우와 합의해 확정한다
     -  (지금 생각으론 데모 이후 PoC 전환 30%? 대신 ICP 규모 고려 필요)
-- 결과는 가설 보드 §6 갱신표와 M1 종합 보고서 부록 D에 반영한다
 
 ### 2.3 미리 고민하면 좋을 것 (PoC 관련)
 

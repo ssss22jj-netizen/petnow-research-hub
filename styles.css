@@ -188,9 +188,9 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .markdown-body table { display: block; width: 100%; margin: 16px 0 24px; overflow-x: auto; border-collapse: collapse; font-size: 13px; }
 .markdown-body th, .markdown-body td { min-width: 110px; padding: 11px 13px; border: 1px solid var(--line); vertical-align: top; text-align: left; line-height: 1.62; word-break: keep-all; overflow-wrap: break-word; }
 .markdown-body th { background: var(--soft); font-size: 12.5px; letter-spacing: .01em; }
-/* 첫 열이 항목명 역할일 때 구분되게 (2026-08-17) */
-.markdown-body tbody tr:nth-child(even) td { background: #fbfdfc; }
-.markdown-body tbody td:first-child { background: var(--soft); font-weight: 600; color: var(--ink); }
+/* 본문 셀은 전부 흰 배경, 배경 구분은 헤더만 (2026-08-17 카야 지시) */
+.markdown-body tbody td { background: var(--paper); }
+.markdown-body tbody td:first-child { font-weight: 600; color: var(--ink); }
 .markdown-body tbody td:first-child strong { font-weight: 700; }
 .markdown-body .cell-list { min-width: 150px; margin: 0; padding-left: 17px; }
 .markdown-body .cell-list li { margin: 0 0 5px; padding-left: 2px; line-height: 1.5; }
