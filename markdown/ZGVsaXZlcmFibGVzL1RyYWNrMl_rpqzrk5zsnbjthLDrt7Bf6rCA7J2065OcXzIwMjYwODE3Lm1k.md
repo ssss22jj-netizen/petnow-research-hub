@@ -11,7 +11,7 @@
 
 ## 흐름
 
-인트로 2' → 광고 반응·통증·신청 동기 5' → 데모 5' → 데모 반응·지불 의향 10' → CTA 3' → 버퍼 5'
+인트로 2' → 광고 반응·통증·신청 동기 5' → 데모 10' → 데모 반응·지불 의향 5' → CTA 3' → 버퍼 5'
 
 ## 1. 인트로 (2')
 
@@ -26,18 +26,26 @@
 
 ## 2. 광고 반응 · 통증 · 신청 동기(5')
 
+소재 실물. 콜에서 **리드가 클릭한 쪽**을 화면에 띄우고 시작한다.
+
+| 소재 A-1 | 소재 A-2 | 소재 B-1 | 소재 B-2 |
+| --- | --- | --- | --- |
+| <img src="assets/ad-creatives/ad-A-1.png" width="150" alt="소재 A-1"> | <img src="assets/ad-creatives/ad-A-2.png" width="150" alt="소재 A-2"> | <img src="assets/ad-creatives/ad-B-1.png" width="150" alt="소재 B-1"> | <img src="assets/ad-creatives/ad-B-2.png" width="150" alt="소재 B-2"> |
+| 랜딩 [/ready/](https://petify-for-shelters.pages.dev/ready/) | 랜딩 [/ready/](https://petify-for-shelters.pages.dev/ready/) | 랜딩 [/fosters/](https://petify-for-shelters.pages.dev/fosters/) | 랜딩 [/fosters/](https://petify-for-shelters.pages.dev/fosters/) |
+
 - 처음에 광고를 보셨을 때. 왜 클릭하게 되셨어요? '내 얘기다' 싶은 부분이 있었나요?
 - "페이지 들어가보셨을 때, 광고 보고 기대하신 그 내용이었어요?"
 - "어느 부분이 마음이 움직여서 콜까지 잡으신 거예요?, 최근에 이런 게 필요다고 느낀 사건이 있었나요?"
 - **문제의 값어치** (금액은 아직 묻지 않는다) — "그건 돈을 내서라도 해결하고 싶은 문제인가요, 아니면 그냥 해결되면 좀 나아지는 정도인가요?"
 
-## 3. 데모 (5')
+## 3. 데모 (10')
+- 데모: https://petify-for-shelters.pages.dev/demo/
 - "그렇군요. 감사해요. 이제 데모로 넘어가 볼게요."
 - 설명은 최소로, 전체 구성을 간단히 설명한 후 튜토리얼로 간다.
 - 반응이나 표정이 나오면 **즉시 멈추고 듣는다.** 시연을 끝까지 미는 것보다 중간 반응의 가치가 크다
 - 기능 나열 금지. 2번에서 들은 그 사람의 사례에 대응하는 화면부터 연다
 
-## 4. 데모 반응 · 지불 의향 (10')
+## 4. 데모 반응 · 지불 의향 (5')
 
 - "지금 보신 게 아까 말씀하신 그 문제를 풀어줄 것 같나요?"
 - "어느 화면이 제일 값어치 있어 보이셨어요?"
