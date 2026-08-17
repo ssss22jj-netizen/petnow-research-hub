@@ -26,17 +26,17 @@
 
 ## 2. 광고 반응 · 통증 · 신청 동기(5')
 
-소재 실물. 콜에서 **리드가 클릭한 쪽**을 화면에 띄우고 시작한다.
+- 처음에 광고를 보셨을 때. 왜 클릭하게 되셨어요? '내 얘기다' 싶은 부분이 있었나요?
+- "페이지 들어가보셨을 때, 광고 보고 기대하신 그 내용이었어요?"
+- "어느 부분이 마음이 움직여서 콜까지 잡으신 거예요?, 최근에 이런 게 필요다고 느낀 사건이 있었나요?"
+- **문제의 값어치** (금액은 아직 묻지 않는다) — "그건 돈을 내서라도 해결하고 싶은 문제인가요, 아니면 그냥 해결되면 좀 나아지는 정도인가요?"
+
+<sub>아래는 인터뷰어 참조용 소재. **콜에서 리드에게 다시 보여주지 않는다** — 다시 보면 반응이 새로 만들어지고, 우리가 들어야 할 건 기억에 남아 있는 인상 그대로다.</sub>
 
 | 소재 A-1 | 소재 A-2 | 소재 B-1 | 소재 B-2 |
 | --- | --- | --- | --- |
 | <img src="assets/ad-creatives/ad-A-1.png" width="150" alt="소재 A-1"> | <img src="assets/ad-creatives/ad-A-2.png" width="150" alt="소재 A-2"> | <img src="assets/ad-creatives/ad-B-1.png" width="150" alt="소재 B-1"> | <img src="assets/ad-creatives/ad-B-2.png" width="150" alt="소재 B-2"> |
 | 랜딩 [/ready/](https://petify-for-shelters.pages.dev/ready/) | 랜딩 [/ready/](https://petify-for-shelters.pages.dev/ready/) | 랜딩 [/fosters/](https://petify-for-shelters.pages.dev/fosters/) | 랜딩 [/fosters/](https://petify-for-shelters.pages.dev/fosters/) |
-
-- 처음에 광고를 보셨을 때. 왜 클릭하게 되셨어요? '내 얘기다' 싶은 부분이 있었나요?
-- "페이지 들어가보셨을 때, 광고 보고 기대하신 그 내용이었어요?"
-- "어느 부분이 마음이 움직여서 콜까지 잡으신 거예요?, 최근에 이런 게 필요다고 느낀 사건이 있었나요?"
-- **문제의 값어치** (금액은 아직 묻지 않는다) — "그건 돈을 내서라도 해결하고 싶은 문제인가요, 아니면 그냥 해결되면 좀 나아지는 정도인가요?"
 
 ## 3. 데모 (10')
 - 데모: https://petify-for-shelters.pages.dev/demo/
