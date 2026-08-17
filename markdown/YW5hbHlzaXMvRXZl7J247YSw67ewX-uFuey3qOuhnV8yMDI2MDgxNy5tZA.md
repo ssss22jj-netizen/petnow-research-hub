@@ -7,6 +7,8 @@
 
 > **판본 주의.** tl;dv 자동 전사본을 추출한 것으로, 화자 라벨이 앞부분만 남아 있어 **나머지는 문맥으로 복원**했다. 발언 내용은 원문 그대로 두고 라벨과 문단만 넣었으므로, 전사 자체의 오인식(고유명사·문장 경계)은 남아 있다. 화자 경계가 불확실한 곳은 `[화자 불확실]`로 표시했다. **인용·수치 확인이 필요하면 원본 영상이나 tl;dv 원문을 볼 것.**
 >
+> **tl;dv 화자 라벨은 경계를 한 구절씩 늦게 잡는다.** 각 블록 끝에 다음 화자의 첫 말이 붙어 있어, 원문 화면과 대조할 때 그 점을 감안해야 한다. 이 판본은 문맥으로 경계를 다시 잡은 것이다.
+>
 > 전사 오인식으로 확인된 것 — `Symbus Pride Nursery`는 Simba's Pride Nursery, `wetsuit`은 wet food, `pet points`는 PetPoint, `shelter love / established politics`는 Shelterluv / Petstablished 추정, `tan luke test`는 FeLV 계열 검사 추정.
 
 ---
@@ -201,10 +203,10 @@ mm-hmm okay yeah i'm trying to think if there's if i have an example specificall
 
 or um initiate like hey you you say you're concerned about this we're gonna ask that you bring in uh you know so uh just kind of like how you you have the mobile check-in have the same thing of like hey this is due um tell me when you're planning on coming in you know maybe maybe a schedule section like this is an agreed-upon appointments or agreed-upon vaccines for like when you're coming in
 
-or um even maybe a supplies section like hey this specific dog or cat needs um diapers so do you need more diapers uh do you have enough diapers yeah do you need to request diapers you know something like that um i think that's very important it it looks miscellaneous but very important to the foster care
+or um even maybe a supplies section like hey this specific dog or cat needs um diapers so do you need more diapers uh do you have enough diapers
 
 **Johnny**
-yeah yeah okay um anything you want to add um just in general um uh around this demo um you i mean you already mentioned that um it's mobile friendly so that's the best part um but anything like like it quite likes like this um um if if you if you if you if you can't find one that's also fine
+yeah do you need to request diapers you know something like that um i think that's very important it it looks miscellaneous but very important to the foster care yeah yeah okay um anything you want to add um just in general um uh around this demo um you i mean you already mentioned that um it's mobile friendly so that's the best part um but anything like like it quite likes like this um um if if you if you if you if you can't find one that's also fine
 
 **Eve**
 yeah i'm sorry my coffee hasn't fully hit my brains
