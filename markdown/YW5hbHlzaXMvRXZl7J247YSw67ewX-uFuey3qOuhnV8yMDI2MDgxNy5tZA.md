@@ -177,7 +177,7 @@ um so uh any first impression i know that was very quick um also very specifical
 **Eve**
 it looks great i love the ease of you that fosters can check in with that is actually exactly why i even end up for the gym with these guys is because i know our foster program you know our foster lead has trouble getting fosters to check in and provide the right information provide the right details provide what's needed to keep their um records up to date um no i love that part uh that's great yeah
 
-> 전사 오인식 구간. `the ease of you that` 는 the ease that, `i even end up for the gym with these guys` 는 신청 경위를 말한 대목으로 "I signed up with these guys" 계열 표현으로 추정. **인용 전 영상 확인 필요.**
+> 전사 오인식 구간. `the ease of you that` 는 the ease that, `i even end up for the gym with these guys` 는 "I signed up with these guys" 로, 데모를 신청한 경위를 가리킨다.
 
 **Johnny**
 uh can you compare it to so so you so you're personally subscribing air table um and you you you you you record all those notes and records through the air table like compared to your current software uh what would be the best um pros or cons anything um that you can compare to
