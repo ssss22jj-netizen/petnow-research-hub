@@ -1,0 +1,19 @@
+# 리서치 허브는 검색 등재 대상이 아니다. 링크를 받은 사람만 열도록 운영한다.
+# 마크다운 원본과 data.json 까지 포함해 전 경로를 차단한다.
+User-agent: *
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
