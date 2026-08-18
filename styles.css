@@ -556,3 +556,8 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
   .track-flow-alt > li { margin-bottom: 10px; }
   .track-flow-alt ul { margin: 6px 0 0; padding-left: 16px; color: var(--muted); }
 }
+
+/* 문서 하단에 쌓는 하위 문서 카드 목록 (홈 카드 UI 재사용) */
+.document-children { margin: 44px 0 8px; padding-top: 28px; border-top: 1px solid var(--line, #e3e9e5); }
+.document-children > h2 { margin: 0 0 6px; font-size: 1.05rem; }
+.document-children-lead { margin: 0 0 16px; font-size: .9rem; color: var(--ink-4, #6b7671); }
