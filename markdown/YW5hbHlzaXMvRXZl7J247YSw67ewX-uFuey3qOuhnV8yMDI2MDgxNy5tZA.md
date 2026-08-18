@@ -2,7 +2,8 @@
 
 - Track 2 LMF 첫 리드 인터뷰. Simba's Pride Nursery(Eve Marquross-Parisee, 창립자·디렉터) · B 소재 리드
 - 예약 23:30 KST / 현지 10:30 ET · 43분 · 인터뷰어 Johnny Shin
-- 원본 영상: `/Users/kaya/Downloads/5ddc062c-2f60-4495-ad61-7dae1da016cf.mp4`
+- [인터뷰 영상](https://app.notion.com/p/petnow/2026-08-17-Eve-Simba-s-Pride-Nursery-3c0a083a5cff80abbc8cc9cd1a41ba1a?source=copy_link)
+- 로컬 원본: `/Users/kaya/Downloads/5ddc062c-2f60-4495-ad61-7dae1da016cf.mp4`
 - tl;dv: https://tldv.io/app/meetings/6a831afa3fc883001385e15f
 
 > **판본 주의.** tl;dv 자동 전사본을 추출한 것으로, 화자 라벨이 앞부분만 남아 있어 **나머지는 문맥으로 복원**했다. 발언 내용은 원문 그대로 두고 라벨과 문단만 넣었으므로, 전사 자체의 오인식(고유명사·문장 경계)은 남아 있다. 화자 경계가 불확실한 곳은 `[화자 불확실]`로 표시했다. **인용·수치 확인이 필요하면 원본 영상이나 tl;dv 원문을 볼 것.**

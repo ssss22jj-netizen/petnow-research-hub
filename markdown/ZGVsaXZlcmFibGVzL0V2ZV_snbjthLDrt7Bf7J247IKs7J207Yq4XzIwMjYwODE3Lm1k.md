@@ -1,6 +1,6 @@
 # Eve 인터뷰 인사이트
 
-> 2026-08-17 · 43분 · 인터뷰어 조니
+> 2026-08-17 · 43분 · 인터뷰어 조니 · [인터뷰 영상](https://app.notion.com/p/petnow/2026-08-17-Eve-Simba-s-Pride-Nursery-3c0a083a5cff80abbc8cc9cd1a41ba1a?source=copy_link)
 
 ## 결론 요약
 
