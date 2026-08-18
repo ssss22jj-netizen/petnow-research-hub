@@ -64,7 +64,7 @@
 | 현행 대비 `32:10` | 지금 쓰는 도구와의 가장 큰 차이로 모바일 대응을 꼽았다. 다만 이는 Airtable이 구조적으로 못 하는 일이어서가 아니라 **응답자가 아직 인터페이스를 만들어 두지 않았기 때문**이다 — `mainly because i haven't built some of the interfaces... i could fix that i just haven't done it` |
 | 당장 전환 `37:15` | **아니오.** 기존 도구와 병행하는 보완재로 쓰겠다고 답했다 — `it's close but i would supplement` |
 | 전환을 막은 갭 `33:43` | ①생후 3개월 미만 개체의 **일일 체중 추적** ②개체마다 다른 항목을 넣을 수 있는 **커스터마이즈 필드** |
-| 지불 의향 | 확인하지 못했다 |
+| 지불 의향 | 묻지 않았다. 당장 쓰겠느냐는 질문에 아니라고 답해 가격까지 전개하지 않았다 |
 | 마무리 | 제품이 나오기를 기다리는 쪽에 가까운 인사로 끝났다 — `i'm really looking forward to seeing what you guys make` |
 
 ## 5. 발언 뒤에 있는 것
