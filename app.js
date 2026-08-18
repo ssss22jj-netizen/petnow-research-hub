@@ -33,6 +33,7 @@ document.querySelector("#menu-button").addEventListener("click", () => sidebar.c
 const docPageOverrides = new Map([
   ["deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", "track2-plan.html"],
   ["deliverables/Track2_M1_중간성과분석_20260815.md", "track2-m1-report.html"],
+  ["deliverables/Track2_최종성과분석_20260818.md", "track2-final-report.html"],
 ]);
 
 function hrefForDoc(doc) {
@@ -51,7 +52,7 @@ function pageHeader(eyebrow, title, lead) {
 const collectionDefinitions = {
   m2: { title: "M2 계획·현황", lead: "M2 실행 계획과 진행 중인 트랙별 산출물입니다.", homeLead: "M2 실행 계획과 진행 중인 트랙별 산출물입니다.", paths: ["deliverables/M2_실행계획_20260817.md"], homePaths: ["deliverables/M2_실행계획_20260817.md"] },
   m1: { title: "M1 계획·산출물", lead: "프로젝트 배경과 M1 실행 계획, Track 2 LMF 1차 라운드의 기획 산출물입니다.", homeLead: "프로젝트 배경과 M1 실행 계획, Track 2 LMF 1차 라운드의 기획 산출물입니다.", paths: ["킥오프정리_노션용_v2.md", "deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", "meetings/2026-08-07_Track2_LMF_후속기획.md", "deliverables/Track2_LMF_가설_ICE_재스코어링_20260809.md", "deliverables/Petify_for_Shelters_PRD_v0.1_20260809.md"], homePaths: ["킥오프정리_노션용_v2.md", "deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", "meetings/2026-08-07_Track2_LMF_후속기획.md", "deliverables/Track2_LMF_가설_ICE_재스코어링_20260809.md", "deliverables/Petify_for_Shelters_PRD_v0.1_20260809.md"] },
-  results: { title: "실험 결과 보고서", lead: "집행한 실험의 성과를 사전 판정 기준으로 대조해 정리한 보고서입니다.", homeLead: "집행한 실험의 성과를 사전 판정 기준으로 대조해 정리한 보고서입니다.", paths: ["deliverables/Track2_M1_중간성과분석_20260815.md"], homePaths: ["deliverables/Track2_M1_중간성과분석_20260815.md"] },
+  results: { title: "실험 결과 보고서", lead: "집행한 실험의 성과를 사전 판정 기준으로 대조해 정리한 보고서입니다.", homeLead: "집행한 실험의 성과를 사전 판정 기준으로 대조해 정리한 보고서입니다.", paths: ["deliverables/Track2_최종성과분석_20260818.md", "deliverables/Track2_M1_중간성과분석_20260815.md"], homePaths: ["deliverables/Track2_최종성과분석_20260818.md", "deliverables/Track2_M1_중간성과분석_20260815.md"] },
   interview: { title: "고객 인터뷰", lead: "데모 콜 진행 가이드와 사전조사, 콜별 인사이트를 모은 보드입니다.", paths: ["지나인터뷰_계획.md", "deliverables/중간점검_2_Gina_인터뷰_인사이트_202608.md", "deliverables/Track2_리드인터뷰_가이드_20260817.md", "analysis/SantaBarbara_카운티_사전조사_20260817.md", "deliverables/M2_데모콜_인사이트보드.md"] },
   workflow: { title: "쉘터 업무 플로우", lead: "미국 동물보호소·레스큐의 조직 유형과 구조부터 입양까지의 업무 흐름을 정리한 문서입니다.", paths: ["미국쉘터_구조부터입양까지_업무플로우_딥리서치_20260725.md"] },
   competitors: { title: "경쟁사 조사", lead: "경쟁 4사의 제품·가격·기능, 사용자 리뷰와 4개 제품 데모 UI·UX 검증 자료입니다.", paths: ["경쟁4사_검증본_M1실무요약_20260726.md", "경쟁4사_딥리서치_20260725.md", "경쟁4사_리뷰40개_파일럿코딩_20260726.md"] },
@@ -80,6 +81,7 @@ const documentRoles = new Map([
   ["analysis/SantaBarbara_카운티_사전조사_20260817.md", "인터뷰 사전조사"],
   ["deliverables/M2_데모콜_인사이트보드.md", "콜 보드"],
   ["deliverables/Eve_인터뷰_인사이트_20260817.md", "인터뷰 결과"],
+  ["deliverables/Track2_최종성과분석_20260818.md", "최종 성과 보고"],
   ["deliverables/Track2_M1_중간성과분석_20260815.md", "중간 성과 보고"],
   ["deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", "Track 2 계획"],
   ["meetings/2026-08-07_Track2_LMF_후속기획.md", "상세 기획"],
@@ -109,6 +111,7 @@ const documentVisualPages = new Map([
   ["analysis/경쟁사_데모_UIUX_통합분석.md", ["demo-insights.html", "UI·UX 화면 분석 보기 →"]],
   ["deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", ["track2-plan.html", "기획안 시각본 보기 →"]],
   ["deliverables/Track2_M1_중간성과분석_20260815.md", ["track2-m1-report.html", "중간 보고 시각본 보기 →"]],
+  ["deliverables/Track2_최종성과분석_20260818.md", ["track2-final-report.html", "최종 보고 시각본 보기 →"]],
 ]);
 
 /* 문서 하단에 홈과 같은 카드 UI로 쌓을 하위 문서. 콜이 늘면 여기에 경로를 추가한다 */
