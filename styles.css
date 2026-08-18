@@ -568,8 +568,12 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .markdown-body .table-scroll table { display: table; width: max-content; min-width: 100%; margin: 0; font-size: 12.5px; }
 .markdown-body .table-scroll th,
 .markdown-body .table-scroll td { min-width: 120px; }
+.markdown-body .table-scroll th:nth-child(1),
+.markdown-body .table-scroll td:nth-child(1) { min-width: 62px; white-space: nowrap; }
 .markdown-body .table-scroll th:nth-child(2),
-.markdown-body .table-scroll td:nth-child(2) { min-width: 170px; }
+.markdown-body .table-scroll td:nth-child(2) { min-width: 148px; }
+.markdown-body .table-scroll th:nth-child(3),
+.markdown-body .table-scroll td:nth-child(3) { min-width: 48px; white-space: nowrap; }
 .markdown-body .table-scroll th:nth-child(4),
 .markdown-body .table-scroll td:nth-child(4),
 .markdown-body .table-scroll th:nth-child(8),
