@@ -298,7 +298,10 @@ function renderDocument(id) {
   const visualAnalysisLink = visualPage ? `<a class="document-visual-link" href="${visualPage[0]}">${visualPage[1]}</a>` : "";
   const markdownUrl = new URL(doc.markdown, window.location.href).href;
   const downloadName = doc.path.split("/").pop();
-  const bodyClass = doc.path === "deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md" ? " track2-plan" : "";
+  const bodyClasses = [];
+  if (doc.path === "deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md") bodyClasses.push("track2-plan");
+  if (doc.path === "deliverables/M2_데모콜_인사이트보드.md") bodyClasses.push("call-board");
+  const bodyClass = bodyClasses.length ? ` ${bodyClasses.join(" ")}` : "";
   const children = documentChildren.get(doc.path);
   const childDocs = children ? children.paths.map((path) => docs.find((item) => item.path === path)).filter(Boolean) : [];
   const childSection = childDocs.length

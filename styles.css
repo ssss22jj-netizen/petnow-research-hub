@@ -561,3 +561,21 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .document-children { margin: 44px 0 8px; padding-top: 28px; border-top: 1px solid var(--line, #e3e9e5); }
 .document-children > h2 { margin: 0 0 6px; font-size: 1.05rem; }
 .document-children-lead { margin: 0 0 16px; font-size: .9rem; color: var(--ink-4, #6b7671); }
+
+/* 데모 콜 보드 — 열이 많아 균등 분배되면 한국어가 잘게 쪼개진다. 내용 폭을 확보하고 가로 스크롤로 넘긴다 */
+.document.call-board .markdown-body table { width: max-content; min-width: 100%; font-size: 12.5px; }
+.document.call-board .markdown-body th,
+.document.call-board .markdown-body td { min-width: 120px; max-width: 300px; }
+.document.call-board .markdown-body th:nth-child(2),
+.document.call-board .markdown-body td:nth-child(2) { min-width: 160px; }
+.document.call-board .markdown-body th:nth-child(4),
+.document.call-board .markdown-body td:nth-child(4),
+.document.call-board .markdown-body th:nth-child(8),
+.document.call-board .markdown-body td:nth-child(8) { min-width: 170px; }
+.document.call-board .markdown-body th:nth-child(6),
+.document.call-board .markdown-body td:nth-child(6),
+.document.call-board .markdown-body th:nth-child(7),
+.document.call-board .markdown-body td:nth-child(7),
+.document.call-board .markdown-body th:nth-child(9),
+.document.call-board .markdown-body td:nth-child(9) { min-width: 300px; max-width: 340px; }
+.document.call-board .markdown-body td strong:first-child { display: inline-block; margin-bottom: 4px; }
