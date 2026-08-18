@@ -562,25 +562,27 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .document-children > h2 { margin: 0 0 6px; font-size: 1.05rem; }
 .document-children-lead { margin: 0 0 16px; font-size: .9rem; color: var(--ink-4, #6b7671); }
 
-/* 데모 콜 보드 — 열이 많아 균등 분배되면 한국어가 잘게 쪼개진다.
-   표를 감싼 래퍼가 가로 스크롤을 맡고, 표 자체는 내용 폭을 가진다 */
+/* 데모 콜 보드 — 판정 두 열(통증 강도·솔루션 적합)이 가로 스크롤 전에 보이도록 앞에 두고,
+   한 열이 지나치게 넓어지지 않게 상한을 건다. 래퍼가 가로 스크롤을 맡는다 */
 .table-scroll { margin: 16px 0 24px; overflow-x: auto; }
 .markdown-body .table-scroll table { display: table; width: max-content; min-width: 100%; margin: 0; font-size: 12.5px; }
 .markdown-body .table-scroll th,
-.markdown-body .table-scroll td { min-width: 120px; }
+.markdown-body .table-scroll td { min-width: 120px; max-width: 260px; }
 .markdown-body .table-scroll th:nth-child(1),
-.markdown-body .table-scroll td:nth-child(1) { min-width: 62px; white-space: nowrap; }
+.markdown-body .table-scroll td:nth-child(1) { min-width: 62px; max-width: 62px; white-space: nowrap; }
 .markdown-body .table-scroll th:nth-child(2),
-.markdown-body .table-scroll td:nth-child(2) { min-width: 148px; }
+.markdown-body .table-scroll td:nth-child(2) { min-width: 140px; max-width: 150px; }
 .markdown-body .table-scroll th:nth-child(3),
-.markdown-body .table-scroll td:nth-child(3) { min-width: 48px; white-space: nowrap; }
+.markdown-body .table-scroll td:nth-child(3) { min-width: 48px; max-width: 48px; white-space: nowrap; }
 .markdown-body .table-scroll th:nth-child(4),
 .markdown-body .table-scroll td:nth-child(4),
-.markdown-body .table-scroll th:nth-child(8),
-.markdown-body .table-scroll td:nth-child(8) { min-width: 180px; }
+.markdown-body .table-scroll th:nth-child(5),
+.markdown-body .table-scroll td:nth-child(5) { min-width: 260px; max-width: 280px; }
 .markdown-body .table-scroll th:nth-child(6),
 .markdown-body .table-scroll td:nth-child(6),
+.markdown-body .table-scroll th:nth-child(8),
+.markdown-body .table-scroll td:nth-child(8) { min-width: 150px; max-width: 170px; }
 .markdown-body .table-scroll th:nth-child(7),
-.markdown-body .table-scroll td:nth-child(7),
+.markdown-body .table-scroll td:nth-child(7) { min-width: 120px; max-width: 140px; }
 .markdown-body .table-scroll th:nth-child(9),
-.markdown-body .table-scroll td:nth-child(9) { min-width: 300px; }
+.markdown-body .table-scroll td:nth-child(9) { min-width: 240px; max-width: 260px; }
