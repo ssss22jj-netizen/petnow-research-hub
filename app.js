@@ -120,7 +120,7 @@ const documentChildren = new Map([
   ["deliverables/M2_데모콜_인사이트보드.md", {
     title: "콜별 인사이트",
     lead: "각 데모 콜의 상세 정리입니다.",
-    paths: ["deliverables/Eve_인터뷰_인사이트_20260817.md"],
+    paths: ["deliverables/Eve_인터뷰_인사이트_20260817.md", "deliverables/Amy_인터뷰_인사이트_Hearts_Bones_20260818.md"],
   }],
 ]);
 
