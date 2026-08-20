@@ -16,7 +16,7 @@
 | 항목 | 내용 | 출처 |
 |---|---|---|
 | 소속 | 독립 비영리 501(c)(3). 워싱턴 카운티 정부와 Animal Control 서비스 계약 | GuideStar, FAQ |
-| 쉘터 | 1곳 — 13011 Maugansville Rd, Hagerstown MD 21740 (13,200 sq ft + 2015 입양·수의 센터 6,800 sq ft) | About |
+| 쉘터 | 1곳 —, Hagerstown MD 21740 (13,200 sq ft + 2015 입양·수의 센터 6,800 sq ft) | About |
 | 성격 | 비영리 운영 + 카운티 단속 대행. 유기동물 보호·입양·교육·TNR 병행 | About |
 | 서비스 권역 | Washington County (MD) 전역 | FAQ |
 | 인력 | 필드팀: 감독관 1 + 오피서 3 + 디스패처 1. 수의사 2명 상근. 전체 직원 수 **미확인** | FAQ |

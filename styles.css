@@ -595,3 +595,39 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .markdown-body .table-scroll td:nth-child(9) { min-width: 120px; max-width: 140px; }
 .markdown-body .table-scroll th:nth-child(11),
 .markdown-body .table-scroll td:nth-child(11) { min-width: 240px; max-width: 260px; }
+
+
+/* ── Track 2 리드 판정 보드 (7열) ──
+   콜 직전에 훑는 표라 세로로 짧아야 한다. # 은 최소로 줄이고 조직은 이름만
+   들어갈 만큼만 준 뒤, 남는 폭을 판단이 실린 다섯 열에 몰아준다.
+
+   white-space 를 열마다 다시 지정하는 이유: 이 표는 .table-scroll 을 함께 쓰는데
+   그쪽 11열용 규칙이 1·2·4열에 nowrap 을 걸어 둔다. 선택자 특정도가 더 높아서
+   .lead-board 의 공통 규칙으로는 못 덮고, 안 덮으면 조직명과 조달 항목이 칸 밖으로
+   흘러 옆 열 위에 겹쳐 그려진다 (2026-08-20). */
+.markdown-body .lead-board th,
+.markdown-body .lead-board td {
+  min-width: 240px; max-width: 300px; vertical-align: top;
+  white-space: normal; word-break: keep-all; overflow-wrap: break-word;
+}
+.markdown-body .lead-board th:nth-child(1),
+.markdown-body .lead-board td:nth-child(1) { min-width: 28px; max-width: 28px; white-space: nowrap; padding-right: 4px; color: var(--ink-4); }
+.markdown-body .lead-board th:nth-child(2),
+.markdown-body .lead-board td:nth-child(2) { min-width: 132px; max-width: 132px; white-space: normal; }
+.markdown-body .lead-board th:nth-child(3),
+.markdown-body .lead-board td:nth-child(3) { min-width: 262px; max-width: 262px; white-space: normal; }
+.markdown-body .lead-board th:nth-child(4),
+.markdown-body .lead-board td:nth-child(4) { min-width: 262px; max-width: 262px; white-space: normal; }
+.markdown-body .lead-board th:nth-child(5),
+.markdown-body .lead-board td:nth-child(5) { min-width: 300px; max-width: 300px; white-space: normal; }
+.markdown-body .lead-board th:nth-child(6),
+.markdown-body .lead-board td:nth-child(6) { min-width: 248px; max-width: 248px; white-space: normal; }
+.markdown-body .lead-board th:nth-child(7),
+.markdown-body .lead-board td:nth-child(7) { min-width: 272px; max-width: 272px; white-space: normal; }
+.markdown-body .lead-board .cell-list { margin: 0; padding-left: 15px; }
+.markdown-body .lead-board .cell-list li { margin: 0 0 5px; line-height: 1.5; }
+.markdown-body .lead-board .cell-list li:last-child { margin-bottom: 0; }
+.markdown-body .lead-board code { font-size: 10.5px; padding: 1px 4px; }
+
+/* 문서 첨부 박스는 본문 흐름 안에 놓이므로 위아래 여백을 따로 준다 */
+.markdown-body .compact-doc-list { margin: 22px 0 26px; }

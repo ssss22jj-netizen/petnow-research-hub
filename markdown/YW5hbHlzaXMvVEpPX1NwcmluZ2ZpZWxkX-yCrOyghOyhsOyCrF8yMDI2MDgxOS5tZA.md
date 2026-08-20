@@ -16,7 +16,7 @@
 | 항목 | 내용 | 출처 |
 |---|---|---|
 | 소속 | Springfield 시 **Health and Human Services 부서** 산하 division | 2021 감사보고서 |
-| 주소 | 627 Cottage St, Springfield MA 01104 | 공식 사이트 |
+| 주소 |, Springfield MA 01104 | 공식 사이트 |
 | 서비스 권역 | Springfield + Chicopee + Holyoke 3개 도시 (3년 계약, FY26 갱신) | FY26 예산 |
 | 성격 | 시립 Animal Control + 입양 병행. 시립 기관 중 full-service 입양이 드문 케이스 | 공식 사이트 |
 | 인력 | **16 FTE (FY2019 감사 기준)**. 현재 수치 미확인 | 2021 감사보고서 |

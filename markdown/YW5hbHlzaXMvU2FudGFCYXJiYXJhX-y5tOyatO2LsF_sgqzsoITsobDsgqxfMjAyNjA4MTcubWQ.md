@@ -16,7 +16,7 @@
 | 항목 | 내용 | 출처 |
 | --- | --- | --- |
 | 소속 | Santa Barbara County **Public Health Department** 산하 division (채용 공고 표기는 County Health Department) | [County 공식](https://www.countyofsb.org/phd/animal), [채용 공고](https://www.governmentjobs.com/careers/sbcounty/jobs/newprint/4804876) |
-| 쉘터 | 3곳: Santa Maria (548 W. Foster Rd), Lompoc (1501 W. Central Ave), Goleta/Santa Barbara (5473 Overpass Rd, 본부 캠퍼스) | [211 SB County](https://211santabarbaracounty.org/hygiene-household/pet-services/animal-shelters-adoption/) |
+| 쉘터 | 3곳: Santa Maria, Lompoc, Goleta/Santa Barbara (본부 캠퍼스) | [211 SB County](https://211santabarbaracounty.org/hygiene-household/pet-services/animal-shelters-adoption/) |
 | 성격 | 카운티 유일의 open-admission 쉘터. Santa Maria·Lompoc·Solvang·Buellton·Guadalupe·Goleta·Chumash Tribe·비법인 지역에 단속(enforcement)·등록(licensing)·보호(sheltering) 제공 | 상동 |
 | 서비스 범위 | 2,700 sq mi, 인구 약 50만, 연 6,000마리 | [Maddie's Fund Forum](https://forum.maddiesfund.org/discussion/beyond-the-shelter-expanding-capacity-with-foster-innovation-at-sbcas-january-2025-in-maddies-monthly-foster-connection) |
 | 인력 | Animal Control Officer 10명(2024-06 보도). 전체 직원 수는 **미확인**. 자원봉사 연 22,014시간(FY24-25, 4년 연속 증가)을 법정 의무 이행과 커뮤니티 기대 대응에 투입 | [SB Independent 2024-06](https://www.independent.com/2024/06/05/inside-santa-barbara-county-animal-services/), [FY24-25 연차보고서](https://content.civicplus.com/api/assets/7c668124-8990-4336-a3e3-9e1a6ef46a64) |
