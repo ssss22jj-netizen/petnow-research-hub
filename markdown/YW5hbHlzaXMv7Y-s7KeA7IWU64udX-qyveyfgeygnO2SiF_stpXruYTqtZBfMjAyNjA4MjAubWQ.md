@@ -1,4 +1,4 @@
-# 포지셔닝 축 비교 — Chameleon · 24PetShelter · Petify 데모
+# Petify for Shelters 포지셔닝 정의 — Chameleon · 24PetShelter(경쟁사 신규 제품) 대비
 
 - 작성일: 2026.08.20
 - 성격: 경쟁 포지셔닝 판단 자료 (내부 검토용)
