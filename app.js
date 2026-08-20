@@ -34,6 +34,8 @@ const docPageOverrides = new Map([
   ["deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", "track2-plan.html"],
   ["deliverables/Track2_M1_중간성과분석_20260815.md", "track2-m1-report.html"],
   ["deliverables/Track2_최종성과분석_20260818.md", "track2-final-report.html"],
+  ["analysis/Chameleon_UIUX_분석_20260820.md", "chameleon-screens.html"],
+  ["analysis/포지셔닝_경쟁제품_축비교_20260820.md", "positioning-axes.html"],
 ]);
 
 function hrefForDoc(doc) {
