@@ -1,8 +1,8 @@
-# Petify 알파 MVP 개발 원페이저
+# Petify for Shelters 알파 MVP 개발 원페이저
 
 작성일: 2026-08-21 / 작성: 마켓핏랩 / 수신: 펫나우 제품팀 / 성격: 개발 방향 합의용
 
-> 함께 검토: [Petify for shelters 포지셔닝 정의](../analysis/포지셔닝_경쟁제품_축비교_20260820.md) · [데모 UI 전수와 기획 의도](../analysis/데모_UI전수와_기획의도_20260820.md)
+> 함께 검토: [Petify for Shelters 포지셔닝 정의](../analysis/포지셔닝_경쟁제품_축비교_20260820.md) · [데모 UI 전수와 기획 의도](../analysis/데모_UI전수와_기획의도_20260820.md)
 
 ---
 
