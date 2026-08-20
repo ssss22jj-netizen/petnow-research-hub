@@ -113,6 +113,8 @@ const documentVisualPages = new Map([
   ["deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", ["track2-plan.html", "기획안 시각본 보기 →"]],
   ["deliverables/Track2_M1_중간성과분석_20260815.md", ["track2-m1-report.html", "중간 보고 시각본 보기 →"]],
   ["deliverables/Track2_최종성과분석_20260818.md", ["track2-final-report.html", "최종 보고 시각본 보기 →"]],
+  ["analysis/Chameleon_UIUX_분석_20260820.md", ["chameleon-screens.html", "화면 판독 시각본 보기 →"]],
+  ["analysis/포지셔닝_경쟁제품_축비교_20260820.md", ["positioning-axes.html", "포지셔닝 축 시각본 보기 →"]],
 ]);
 
 /* 문서 하단에 홈과 같은 카드 UI로 쌓을 하위 문서. 콜이 늘면 여기에 경로를 추가한다 */
