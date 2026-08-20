@@ -302,6 +302,11 @@ function wireDocumentToc() {
 function renderDocument(id) {
   const doc = byId.get(id);
   if (!doc) return renderNotFound();
+  /* 시각본이 있는 문서는 #/doc/ 주소로 들어와도 시각본을 보여준다.
+     목록 클릭만 시각본으로 보내면, 예전에 공유한 #/doc/ 링크로 들어온 사람은
+     계속 Markdown 뷰를 보게 된다 (2026-08-21) */
+  const overridePage = docPageOverrides.get(doc.path);
+  if (overridePage) return window.location.replace(overridePage);
   const visualPage = documentVisualPages.get(doc.path);
   const visualAnalysisLink = visualPage ? `<a class="document-visual-link" href="${visualPage[0]}">${visualPage[1]}</a>` : "";
   const markdownUrl = new URL(doc.markdown, window.location.href).href;
