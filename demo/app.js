@@ -521,7 +521,7 @@ function layout(content) {
           <button class="mobile-brand" data-action="open-nav" aria-label="Open navigation"><span class="mobile-menu-icon">☰</span><img class="brand-logo mobile-logo" src="assets/petify-logo.png" alt="Petify for Shelters"></button>
           <label class="global-search"><span>⌕</span><input id="global-search" value="${state.search}" placeholder="Search animals, fosters, or records" aria-label="Search"></label>
           <div class="top-actions">
-            ${languageSwitch()}
+            ${window.demoRef?`<button class="secondary-button" data-action="demo-share" style="gap:6px;display:flex;align-items:center;">🔗 Share demo</button>`:''}
             <button class="tutorial-launch" data-action="guide"><span>▶</span> Guided demo</button>
             ${iconButton('◌','Notifications','notifications')}
             <button class="add-button" data-action="open-intake"><span>＋</span> Add animal</button>
@@ -901,7 +901,7 @@ function fosterFormView() {
   const content=state.fosterFormMode==='daily'
     ? (state.dailyCareSubmitted?dailyCareSubmittedView():dailyCareView())
     : (state.fosterSubmitted?fosterSubmittedView():fosterQuestionView());
-  return `<section class="foster-form-page"><div class="foster-brand"><img class="brand-logo foster-logo" src="assets/petify-logo.png" alt="Petify for Shelters"><span class="foster-security">Secure foster link · No account required</span>${languageSwitch()}</div><nav class="foster-mode-switch" aria-label="Foster update type"><button class="${state.fosterFormMode==='daily'?'active':''}" data-foster-mode="daily"><small>TODAY</small>Daily care</button><button class="${state.fosterFormMode==='weekly'?'active':''}" data-foster-mode="weekly"><small>THIS WEEK</small>Weekly check-in</button></nav>${content}</section>`;
+  return `<section class="foster-form-page"><div class="foster-brand"><img class="brand-logo foster-logo" src="assets/petify-logo.png" alt="Petify for Shelters"><span class="foster-security">Secure foster link · No account required</span></div><nav class="foster-mode-switch" aria-label="Foster update type"><button class="${state.fosterFormMode==='daily'?'active':''}" data-foster-mode="daily"><small>TODAY</small>Daily care</button><button class="${state.fosterFormMode==='weekly'?'active':''}" data-foster-mode="weekly"><small>THIS WEEK</small>Weekly check-in</button></nav>${content}</section>`;
 }
 function dailyCareView() {
   const tasks=[
@@ -1127,21 +1127,37 @@ function bind() {
   document.querySelectorAll('[data-form-choice]').forEach(el=>el.addEventListener('click',()=>{const value=el.dataset.formChoice;if(state.tutorialStep!==null&&!tutorialMatches('choice',value))return;state.formChoice=value;advanceTutorial('choice',value);state.toast='Response saved automatically';render();clearTimeout(toastTimer);toastTimer=setTimeout(()=>{state.toast='';render();},2300);}));
 }
 
+var TRACKED_BUTTONS = {
+  'open-intake':         {button_name:'Add animal',         section:'Animals'},
+  'save-intake':         {button_name:'Save intake',        section:'Intake modal'},
+  'request-update':      {button_name:'Request check-in',   section:'Check-ins'},
+  'send-request':        {button_name:'Send request',       section:'Request modal'},
+  'place-foster':        {button_name:'Place in foster',    section:'Animal detail'},
+  'save-placement':      {button_name:'Save placement',     section:'Placement modal'},
+  'approve-update':      {button_name:'Approve update',     section:'Check-ins'},
+  'partial-approve':     {button_name:'Partial approve',    section:'Check-ins'},
+  'open-profile':        {button_name:'Open profile',       section:'Animal detail'},
+  'publish-now':         {button_name:'Publish',            section:'Profile preview'},
+  'preview-foster-form': {button_name:'Open foster form',   section:'Check-ins'},
+  'submit-foster':       {button_name:'Submit check-in',    section:'Foster form'},
+  'submit-daily-care':   {button_name:'Submit daily care',  section:'Foster form'},
+};
 function handleAction(action, el) {
   const modalOpen = m => {state.modal=m;render();};
   const drawerOpen = d => {state.drawer=d;render();};
   const shouldAdvance=tutorialMatches('action',action);
+  if(window.demoTrack&&TRACKED_BUTTONS[action]){var tb=TRACKED_BUTTONS[action];window.demoTrack('Demo Button Clicked',{button_name:tb.button_name,section:tb.section,language:state.language});}
   switch(action) {
     case 'open-intake': state.intakeStep=1;state.modal='intake';render();break;
     case 'close-modal': state.modal=null;render();break;
     case 'close-drawer': state.drawer=null;render();break;
     case 'guide': drawerOpen('guide');break;
-    case 'exit-tutorial': tutorialHistory=[];state.tutorialId=null;state.tutorialStep=null;leaveTutorialSurface();render();break;
+    case 'exit-tutorial': {const _eid=state.tutorialId,_es=state.tutorialStep||0;tutorialHistory=[];state.tutorialId=null;state.tutorialStep=null;leaveTutorialSurface();render();if(window.demoTrack)window.demoTrack('Demo Tutorial Exited',{tutorial_id:_eid,steps_completed:_es,language:state.language});break;}
     case 'tutorial-back': if(!tutorialHistory.length)return;state=tutorialHistory.pop();render();break;
     case 'tutorial-target': document.querySelector(tutorialSteps()[state.tutorialStep]?.selector)?.click();break;
     case 'tutorial-next': {const currentStep=tutorialSteps()[state.tutorialStep];tutorialHistory.push(JSON.parse(JSON.stringify(state)));if(currentStep?.nextView){state.view=currentStep.nextView;state.modal=null;state.drawer=null;state.mobileNavOpen=false;}state.tutorialStep=Math.min(tutorialSteps().length-1,state.tutorialStep+1);render();break;}
     case 'continue-tutorial': {const nextId=el.dataset.tutorial;tutorialHistory=[];Object.assign(state,TOUR_SETUP[nextId]||{});state.modal=null;state.drawer=null;state.tutorialId=nextId;state.tutorialStep=0;render();break;}
-    case 'finish-tutorial': {const name=TUTORIALS[state.tutorialId]?.name||'Demo';tutorialHistory=[];state.tutorialId=null;state.tutorialStep=null;leaveTutorialSurface();toast(`${name} · tutorial complete`);break;}
+    case 'finish-tutorial': {const _fid=state.tutorialId,_fs=(state.tutorialStep||0)+1;const name=TUTORIALS[state.tutorialId]?.name||'Demo';tutorialHistory=[];state.tutorialId=null;state.tutorialStep=null;leaveTutorialSurface();toast(`${name} · tutorial complete`);if(window.demoTrack)window.demoTrack('Demo Tutorial Completed',{tutorial_id:_fid,steps_completed:_fs,language:state.language});break;}
     case 'notifications': drawerOpen('notifications');break;
     case 'reset-demo': modalOpen('confirm-reset');break;
     case 'confirm-reset': {const language=state.language;state=INITIAL(language);toast('Demo reset to its starting state');break;}
@@ -1174,7 +1190,8 @@ function handleAction(action, el) {
     case 'preview-foster-form': state.drawer=null;state.fosterFormMode='weekly';state.fosterSubmitted=false;state.fosterSubmittedNow=false;state.formChoice='same';state.uploads=0;state.view='fosterform';render();break;
     case 'open-weekly-checkin': state.fosterFormMode='weekly';state.fosterSubmitted=false;state.fosterSubmittedNow=false;state.formChoice='same';state.uploads=0;state.view='fosterform';render();break;
     case 'open-daily-care': state.fosterFormMode='daily';state.dailyCareSubmitted=false;state.view='fosterform';render();break;
-    case 'start-tutorial': {const id=el.dataset.tutorial;const language=state.language;tutorialHistory=[];state=INITIAL(language);Object.assign(state,TOUR_SETUP[id]);state.tutorialId=id;state.tutorialStep=0;render();break;}
+    case 'demo-share': {if(window.demoHandleShare)window.demoHandleShare();toast('Link copied to clipboard');break;}
+    case 'start-tutorial': {const id=el.dataset.tutorial;const language=state.language;tutorialHistory=[];state=INITIAL(language);Object.assign(state,TOUR_SETUP[id]);state.tutorialId=id;state.tutorialStep=0;render();if(window.demoTrack)window.demoTrack('Demo Tutorial Started',{tutorial_id:id,language:language});break;}
     case 'copy-link': navigator.clipboard?.writeText('https://petnow.link/milo-checkin');toast('Secure foster link copied');break;
     case 'foster-upload': state.uploads=3;toast('3 photos uploaded');break;
     case 'save-foster-draft': toast('Draft saved · Jamie can return from the same link');break;
@@ -1240,7 +1257,7 @@ window.addEventListener('popstate',event=>{
 });
 window.addEventListener('resize',()=>{if(state.tutorialStep!==null)positionTutorial();});
 window.addEventListener('scroll',followTutorialScroll,{capture:true,passive:true});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.tutorialStep!==null){state.tutorialId=null;state.tutorialStep=null;render();}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.tutorialStep!==null){const _eid=state.tutorialId,_es=state.tutorialStep||0;state.tutorialId=null;state.tutorialStep=null;render();if(window.demoTrack)window.demoTrack('Demo Tutorial Exited',{tutorial_id:_eid,steps_completed:_es,language:state.language});}});
 
 restoreNavigation(history.state);
 render();
