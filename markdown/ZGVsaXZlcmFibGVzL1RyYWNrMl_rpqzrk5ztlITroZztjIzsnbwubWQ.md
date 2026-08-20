@@ -21,25 +21,25 @@
 
 ## 2. 리드 전량
 
-| # | 일자 | 소재 | 조직 | 담당자 | 의향 | 조직 유형 | 직급 | 규모 | 도구 | 미팅 | 조사 |
-| ---: | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 8/13 | B | Wishful Whiskers Rescue & TNR | Patricia Ruberg | 예약 신청 | — | — | — | — | 없음 | 미조사 |
-| 2 | 8/14 | B | Mizfit Muttz Rescue | Jodi Horner | 예약 신청 | — | — | — | — | 없음 | 미조사 |
-| 3 | 8/15 | **A** | Blue Mountain Animal Rescue | Donna Crum | 예약 신청 | 레스큐 | 대표 | 연 입양 50~150건 | 종이 | **9/8** | 미조사 |
-| 4 | 8/15 | B | Simba's Pride Nursery | Eve | 예약 신청 | 임보 기반 레스큐 | 대표 | 임시보호자 0명 | Airtable | **8/17** | **인터뷰 완료** |
-| 5 | 8/15 | B | SFC Virginia | Ryan Barker | **소식만** | — | — | — | — | 없음 | 미조사 |
-| 6 | 8/16 | **A** | Santa Barbara County | Sarah Aguilar | 예약 신청 | 쉘터 | 대표 | 연 입양 300건 초과 | **Chameleon**·화이트보드·스프레드시트 | **8/20** | **심층조사** |
-| 7 | 8/16 | **A** | Kat Vet Spay Neuter & Rescue | Kathleen Elstrott | **소식만** | — | — | — | — | 없음 | 미조사 |
-| 8 | 8/17 | B | Washington Ferret Rescue & Shelter | Vondelle | **소식만** | — | — | — | — | 없음 | 미조사 |
-| 9 | 8/17 | B | Wilkes Rescue Group | Elizabeth Conrad | 예약 신청 | — | — | — | — | 없음 | 미조사 |
-| 10 | 8/18 | **A** | Paws Place Rescue Inc. | Denise | 예약 신청 | 레스큐 | 대표 | 연 입양 150~300건 | **ShelterLuv** | **8/19** | 미조사 |
-| 11 | 8/18 | B | North Texas Australian Shepherd Rescue | Samantha | 예약 신청 | 레스큐 | 미상 | 임시보호자 30명 초과 | **Pawlytics** | 없음 | 미조사 |
-| 12 | 8/18 | **A** | North County Paws Cause | Liz Gillingham | 예약 신청 | 임보 기반 레스큐 | 자원봉사자 | 연 입양 50~150건 | — | **8/21** | 미조사 |
-| 13 | 8/19 | **A** | Little Traverse Bay Humane Society | — | 예약 신청 | — | — | — | — | 없음 | 미조사 |
-| 14 | 8/19 | **A** | Humane Society of Washington County | Colin Berry* | 예약 신청 | 쉘터 | 대표 | 연 입양 300건 초과 | **Chameleon**·구글시트·Airtable | **8/28** | **심층조사** |
-| 15 | 8/19 | **A** | Thomas J O Connor Animal Control | Heather Cahillane* | 예약 신청 | 쉘터 | 대표 | 연 입양 300건 초과 | **Chameleon** | **8/21** | **심층조사** |
+| # | 일자 | 소재 | 조직 | 의향 | 조직 유형 | 직급 | 규모 | 도구 | 미팅 | 조사 |
+| ---: | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 8/13 | B | Wishful Whiskers Rescue & TNR | 예약 신청 | — | — | — | — | 없음 | 미조사 |
+| 2 | 8/14 | B | Mizfit Muttz Rescue | 예약 신청 | — | — | — | — | 없음 | 미조사 |
+| 3 | 8/15 | **A** | Blue Mountain Animal Rescue | 예약 신청 | 레스큐 | 대표 | 연 입양 50~150건 | 종이 | **9/8** | 미조사 |
+| 4 | 8/15 | B | Simba's Pride Nursery | 예약 신청 | 임보 기반 레스큐 | 대표 | 임시보호자 0명 | Airtable | **8/17** | **인터뷰 완료** |
+| 5 | 8/15 | B | SFC Virginia | **소식만** | — | — | — | — | 없음 | 미조사 |
+| 6 | 8/16 | **A** | Santa Barbara County | 예약 신청 | 쉘터 | 대표 | 연 입양 300건 초과 | **Chameleon**·화이트보드·스프레드시트 | **8/20** | **심층조사** |
+| 7 | 8/16 | **A** | Kat Vet Spay Neuter & Rescue | **소식만** | — | — | — | — | 없음 | 미조사 |
+| 8 | 8/17 | B | Washington Ferret Rescue & Shelter | **소식만** | — | — | — | — | 없음 | 미조사 |
+| 9 | 8/17 | B | Wilkes Rescue Group | 예약 신청 | — | — | — | — | 없음 | 미조사 |
+| 10 | 8/18 | **A** | Paws Place Rescue Inc. | 예약 신청 | 레스큐 | 대표 | 연 입양 150~300건 | **ShelterLuv** | **8/19** | 미조사 |
+| 11 | 8/18 | B | North Texas Australian Shepherd Rescue | 예약 신청 | 레스큐 | 미상 | 임시보호자 30명 초과 | **Pawlytics** | 없음 | 미조사 |
+| 12 | 8/18 | **A** | North County Paws Cause | 예약 신청 | 임보 기반 레스큐 | 자원봉사자 | 연 입양 50~150건 | — | **8/21** | 미조사 |
+| 13 | 8/19 | **A** | Little Traverse Bay Humane Society | 예약 신청 | — | — | — | — | 없음 | 미조사 |
+| 14 | 8/19 | **A** | Humane Society of Washington County | 예약 신청 | 쉘터 | 대표 | 연 입양 300건 초과 | **Chameleon**·구글시트·Airtable | **8/28** | **심층조사** |
+| 15 | 8/19 | **A** | Thomas J O Connor Animal Control | 예약 신청 | 쉘터 | 대표 | 연 입양 300건 초과 | **Chameleon** | **8/21** | **심층조사** |
 
-`*` 담당자명이 폼 응답이 아니라 사전조사에서 확인한 대표자다. 실제 신청자와 다를 수 있어 콜 초반에 확인이 필요하다.
+담당자명은 이 표에 싣지 않는다 — 공개 문서라 개인 식별정보를 최소로 둔다. 이름은 리드 시트와 `analysis/raw/leads.json` 에 있고, 사전조사·인터뷰 기록이 있는 리드만 아래 3장에 담당자를 표기한다.
 
 ---
 
