@@ -580,7 +580,8 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 
 /* 통증 강도 뱃지 — 표를 세로로 훑을 때 등급이 먼저 잡히게 한다 (2026-08-25 카야 지시).
    등급어는 뱃지에, 판단 기준(사고 발생·본인 통증 등)은 아래 줄에 병기한다 */
-.markdown-body .pain-badge {
+.markdown-body .pain-badge,
+.markdown-body .fit-badge {
   display: inline-block; padding: 3px 9px; border-radius: 999px;
   font-size: 11px; font-weight: 750; letter-spacing: .01em; white-space: nowrap;
 }
@@ -588,6 +589,11 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .markdown-body .pain-badge.high     { background: #fdeed6; color: #96591a; border: 1px solid #f2d6ad; }
 .markdown-body .pain-badge.mixed    { background: #fdf6d3; color: #7a6414; border: 1px solid #eee0a4; }
 .markdown-body .pain-badge.indirect { background: #eceff0; color: #5d686c; border: 1px solid #d9dfe0; }
+/* 판정 뱃지 — 적합 여부·지불 의향. 통증과 달리 높을수록 좋은 축이라 색 계열을 분리한다 */
+.markdown-body .fit-badge.good    { background: #e2f2e8; color: #226845; border: 1px solid #b9d9c8; }
+.markdown-body .fit-badge.partial { background: #fdf6d3; color: #7a6414; border: 1px solid #eee0a4; }
+.markdown-body .fit-badge.weak    { background: #eceff0; color: #5d686c; border: 1px solid #d9dfe0; }
+.markdown-body .fit-badge.unknown { background: #f5f7f7; color: #7c8689; border: 1px dashed #cfd7d8; }
 
 /* 데모 콜 보드 첫 표 — 종합 판독. 아래 데이터 표들과 성격이 달라 카드형으로 구분한다 (2026-08-25 카야 지시) */
 .board-synthesis { margin: 18px 0 32px; padding: 3px; border: 1px solid #b9d9c8; border-radius: 14px; background: #f4faf6; }
@@ -623,6 +629,9 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .markdown-body .table-scroll td:nth-child(2) { min-width: 30px; max-width: 36px; padding-left: 4px; padding-right: 4px; text-align: center; }
 .markdown-body .table-scroll th:nth-child(3),
 .markdown-body .table-scroll td:nth-child(3) { min-width: 132px; max-width: 148px; }
+/* 4열은 전 표에서 판정 열(강도·적합·지불) 또는 후속이다. 표끼리 세로로 맞춰 보이도록 폭을 고정한다 */
+.markdown-body .table-scroll th:nth-child(4),
+.markdown-body .table-scroll td:nth-child(4) { min-width: 106px; max-width: 124px; }
 /* 5열은 각 표에서 가장 긴 서술 열(근거·결정 구조·특이사항), 6열은 표 2의 현재 도구뿐이다.
    7~11열 규칙은 11열 단일표 시절의 잔재라 제거했다 — 특정도가 높아 위의 240px 상한을 덮고 있었다 */
 .markdown-body .table-scroll th:nth-child(5),
