@@ -620,7 +620,7 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .markdown-body .table-scroll th:nth-child(1),
 .markdown-body .table-scroll td:nth-child(1) { min-width: 26px; max-width: 30px; padding-right: 6px; text-align: right; color: var(--ink-4); }
 .markdown-body .table-scroll th:nth-child(2),
-.markdown-body .table-scroll td:nth-child(2) { min-width: 42px; max-width: 50px; text-align: center; }
+.markdown-body .table-scroll td:nth-child(2) { min-width: 30px; max-width: 36px; padding-left: 4px; padding-right: 4px; text-align: center; }
 .markdown-body .table-scroll th:nth-child(3),
 .markdown-body .table-scroll td:nth-child(3) { min-width: 132px; max-width: 148px; }
 /* 5열은 각 표에서 가장 긴 서술 열(근거·결정 구조·특이사항), 6열은 표 2의 현재 도구뿐이다.
