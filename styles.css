@@ -578,6 +578,17 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .document-children > h2 { margin: 0 0 6px; font-size: 1.05rem; }
 .document-children-lead { margin: 0 0 16px; font-size: .9rem; color: var(--ink-4, #6b7671); }
 
+/* 통증 강도 뱃지 — 표를 세로로 훑을 때 등급이 먼저 잡히게 한다 (2026-08-25 카야 지시).
+   등급어는 뱃지에, 판단 기준(사고 발생·본인 통증 등)은 아래 줄에 병기한다 */
+.markdown-body .pain-badge {
+  display: inline-block; padding: 3px 9px; border-radius: 999px;
+  font-size: 11px; font-weight: 750; letter-spacing: .01em; white-space: nowrap;
+}
+.markdown-body .pain-badge.critical { background: #fbe4e0; color: #a3341f; border: 1px solid #f0c3ba; }
+.markdown-body .pain-badge.high     { background: #fdeed6; color: #96591a; border: 1px solid #f2d6ad; }
+.markdown-body .pain-badge.mixed    { background: #fdf6d3; color: #7a6414; border: 1px solid #eee0a4; }
+.markdown-body .pain-badge.indirect { background: #eceff0; color: #5d686c; border: 1px solid #d9dfe0; }
+
 /* 데모 콜 보드 첫 표 — 종합 판독. 아래 데이터 표들과 성격이 달라 카드형으로 구분한다 (2026-08-25 카야 지시) */
 .board-synthesis { margin: 18px 0 32px; padding: 3px; border: 1px solid #b9d9c8; border-radius: 14px; background: #f4faf6; }
 .markdown-body .board-synthesis table { display: table; width: 100%; table-layout: fixed; margin: 0; border-collapse: separate; border-spacing: 0; background: transparent; font-size: 12.5px; }
@@ -600,32 +611,24 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
    남는 폭이 한 열에 몰려 빈 열처럼 보이는 사고가 났다 (2026-08-25 kaya-e2 발견) */
 .table-scroll { margin: 16px 0 24px; overflow-x: auto; scrollbar-width: thin; }
 /* macOS 는 스크롤바를 숨기므로 항상 보이게 둔다 */
-.table-scroll::-webkit-scrollbar { height: 10px; }
-.table-scroll::-webkit-scrollbar-track { background: rgba(15,45,33,.06); border-radius: 5px; }
-.table-scroll::-webkit-scrollbar-thumb { background: rgba(15,45,33,.26); border-radius: 5px; }
+.table-scroll::-webkit-scrollbar { height: 12px; }
+.table-scroll::-webkit-scrollbar-track { background: rgba(15,45,33,.10); border-radius: 6px; }
+.table-scroll::-webkit-scrollbar-thumb { background: rgba(15,45,33,.42); border-radius: 6px; }
 .markdown-body .table-scroll table { display: table; width: max-content; min-width: 100%; margin: 0; font-size: 12.5px; }
 .markdown-body .table-scroll th,
-.markdown-body .table-scroll td { min-width: 96px; max-width: 300px; padding: 9px 11px; word-break: break-word; overflow-wrap: anywhere; }
+.markdown-body .table-scroll td { min-width: 92px; max-width: 240px; padding: 9px 11px; word-break: break-word; overflow-wrap: anywhere; }
 .markdown-body .table-scroll th:nth-child(1),
 .markdown-body .table-scroll td:nth-child(1) { min-width: 26px; max-width: 30px; padding-right: 6px; text-align: right; color: var(--ink-4); }
 .markdown-body .table-scroll th:nth-child(2),
 .markdown-body .table-scroll td:nth-child(2) { min-width: 42px; max-width: 50px; text-align: center; }
 .markdown-body .table-scroll th:nth-child(3),
-.markdown-body .table-scroll td:nth-child(3) { min-width: 112px; max-width: 134px; }
+.markdown-body .table-scroll td:nth-child(3) { min-width: 132px; max-width: 148px; }
+/* 5열은 각 표에서 가장 긴 서술 열(근거·결정 구조·특이사항), 6열은 표 2의 현재 도구뿐이다.
+   7~11열 규칙은 11열 단일표 시절의 잔재라 제거했다 — 특정도가 높아 위의 240px 상한을 덮고 있었다 */
 .markdown-body .table-scroll th:nth-child(5),
-.markdown-body .table-scroll td:nth-child(5),
+.markdown-body .table-scroll td:nth-child(5) { min-width: 220px; max-width: 260px; }
 .markdown-body .table-scroll th:nth-child(6),
-.markdown-body .table-scroll td:nth-child(6) { min-width: 300px; max-width: 320px; }
-.markdown-body .table-scroll th:nth-child(7),
-.markdown-body .table-scroll td:nth-child(7) { min-width: 170px; max-width: 190px; }
-.markdown-body .table-scroll th:nth-child(8),
-.markdown-body .table-scroll td:nth-child(8),
-.markdown-body .table-scroll th:nth-child(10),
-.markdown-body .table-scroll td:nth-child(10) { min-width: 150px; max-width: 170px; }
-.markdown-body .table-scroll th:nth-child(9),
-.markdown-body .table-scroll td:nth-child(9) { min-width: 120px; max-width: 140px; }
-.markdown-body .table-scroll th:nth-child(11),
-.markdown-body .table-scroll td:nth-child(11) { min-width: 240px; max-width: 260px; }
+.markdown-body .table-scroll td:nth-child(6) { min-width: 92px; max-width: 104px; }
 
 
 /* ── Track 2 리드 판정 보드 (7열) ──
