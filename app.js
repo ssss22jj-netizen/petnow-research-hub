@@ -110,7 +110,6 @@ const collectionDefinitions = {
     paths: [
       "analysis/포지셔닝_경쟁제품_축비교_20260820.md",
       "Petszel_경쟁조사_20260825.md",
-      "analysis/Petszel_UIUX_분석_20260825.md",
       "analysis/Chameleon_UIUX_분석_20260820.md",
       "경쟁4사_검증본_M1실무요약_20260726.md",
       "경쟁4사_딥리서치_20260725.md",
@@ -236,7 +235,6 @@ const documentRoles = new Map([
   ["analysis/포지셔닝_경쟁제품_축비교_20260820.md", "포지셔닝 판단"],
   ["경쟁4사_검증본_M1실무요약_20260726.md", "먼저 읽기"],
   ["analysis/Chameleon_UIUX_분석_20260820.md", "화면 판독"],
-  ["analysis/Petszel_UIUX_분석_20260825.md", "화면 판독"],
   ["경쟁4사_딥리서치_20260725.md", "상세 자료"],
   ["경쟁4사_리뷰40개_파일럿코딩_20260726.md", "분석 근거"],
   ["sources/source-index.md", "리뷰 출처"],
@@ -245,7 +243,7 @@ const documentRoles = new Map([
   ["EBP_ShelterCRM_2주계획검토.md", "계획 검토"],
   ["펫나우_비문인식_현재기능_검증_20260726.md", "참고 자료"],
   ["analysis/EBP_경쟁사_리뷰_데모_UIUX_전문가패널_20260728.md", "분석 검토"],
-  ["Petszel_경쟁조사_20260825.md", "제품 조사"],
+  ["Petszel_경쟁조사_20260825.md", "화면 판독"],
   ["deliverables/M2_제품조사_종합_20260825.md", "제품 조사 종합"],
 ]);
 
@@ -514,7 +512,7 @@ function renderDocument(id) {
   const bodyClasses = [];
   if (doc.path === "deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md") bodyClasses.push("track2-plan");
   if (doc.path === "deliverables/M2_데모콜_인사이트보드.md") bodyClasses.push("call-board");
-  if (["analysis/포지셔닝_경쟁제품_축비교_20260820.md", "analysis/Chameleon_UIUX_분석_20260820.md", "analysis/Petszel_UIUX_분석_20260825.md"].includes(doc.path)) bodyClasses.push("visual-doc");
+  if (["analysis/포지셔닝_경쟁제품_축비교_20260820.md", "analysis/Chameleon_UIUX_분석_20260820.md", "Petszel_경쟁조사_20260825.md"].includes(doc.path)) bodyClasses.push("visual-doc");
   const bodyClass = bodyClasses.length ? ` ${bodyClasses.join(" ")}` : "";
   const children = documentChildren.get(doc.path);
   const childDocs = children ? children.paths.map((path) => docs.find((item) => item.path === path)).filter(Boolean) : [];

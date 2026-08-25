@@ -4,7 +4,7 @@
 >
 > **표를 판정 항목별로 분리한 이유** — 한 표에 전 항목을 담으면 열 폭이 커져 콜 간 세로 비교가 불가능하다. 전 표의 앞 3열(`#`·소재·조직)을 동일하게 두어 항목별로만 대조되게 했다.
 >
-> 콜 원문은 `sources/interview-reports/` 정리본에 있다.
+> 콜 원문은 `sources/interview-reports/` 정리본에 있다. 콜별 인사이트 문서를 포함한 **인터뷰 자료 전체는 [고객 인터뷰](#/library/interview) 페이지**에서 본다.
 
 ## 1. 통증 강도
 
@@ -133,4 +133,4 @@
 5. `20260820_Citizens_for_Animal_Protection_Jared_Carroll.pdf`
 6. `20260824_Little_Traverse_Bay_Humane_Society_Sarah_Schertel.pdf`
 
-1·2번은 마켓핏랩 정리본이 별도로 있으며 문서 라이브러리에 등재되어 있다. 3~6번은 현재 PDF만 존재한다.
+1·2번은 마켓핏랩 정리본이 별도로 있으며 [고객 인터뷰](#/library/interview) 페이지에 등재되어 있다. 3~6번은 현재 PDF만 존재한다.
