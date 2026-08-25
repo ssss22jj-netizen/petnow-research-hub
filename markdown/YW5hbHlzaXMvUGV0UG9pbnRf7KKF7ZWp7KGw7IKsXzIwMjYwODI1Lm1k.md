@@ -21,6 +21,7 @@
 | 진짜 수익 지렛대 | Advantage Program — 24Petwatch 마이크로칩 도입 시 소프트웨어 할인. **소프트웨어가 마이크로칩·보험 판매의 종속 변수** [검증됨·L0 / 해석 의견·L4] |
 | 임보(PetPoint) | `Foster Operation` 레코드로 존재하나, 대량 업데이트(`Follow Up for Foster`)는 **Enterprise 등급 전용** [검증됨·L0] |
 | 임보(24PetShelter) | **모듈이 없음. 동물에 붙는 태그 하나(`Foster`)** [검증됨·L0 — 데모영상 대시보드] |
+| 임보의 화면상 자리 | `Stage` 드롭다운 값 하나(`Foster Program`) + `Location` 이지선다(`Shelter`/`Foster`). **누가 데리고 있는지는 화면에 없음** [검증됨·L0 — 2012년판 매뉴얼] |
 | 실사용자 평가 | "단계가 너무 많다" · 스프레드시트 병행 · location/sublocation만 사용 · ShelterLuv 이탈 사례 [검증됨·L0 — 실명 포럼] |
 
 **한 줄** — PetPoint는 유지보수 국면에 들어간 레거시이고, 후속 제품은 임보를 **태그 한 칸**으로 축소했다. 소재 B(임보 체크인)의 빈자리가 Chameleon 조사에 이어 **같은 회사의 신제품에서도 재확인**됐다.
@@ -38,9 +39,10 @@
 
 ## 2. 조사 방법과 한계
 
-- **PetPoint 인앱 화면은 확보하지 못했다.** 계정이 필요하고, 가짜 쉘터로 가입하지 않았다
+- **현행 PetPoint 인앱 화면은 확보하지 못했다.** 계정이 필요하고, 가짜 쉘터로 가입하지 않았다
 - 공식 온라인 헬프(`help.petpoint.com`)가 **오프라인**이라 벤더 배포 스크린샷 경로가 막혔다. 웹 아카이브에 2017~2021 스냅샷이 남아 있으나 **본문 이미지가 크롤되지 않아** 텍스트만 복원됨
-- 따라서 PetPoint 화면 근거는 **로그인 화면(실측)** 과 **아카이브 헬프의 화면 구성·필드명 텍스트**뿐이다
+- 대신 **제3자 쉘터가 공개한 자체 매뉴얼**(Independent Cat Society, 2012.10, 54쪽)에서 실제 화면 다수를 확보했다. **2012년판 UI이며 2018년 홈·로그인 리디자인 이후와 다르다** — 시점을 반드시 함께 읽을 것
+- 따라서 PetPoint 화면 근거는 ①로그인 화면(2026 실측) ②ICS 매뉴얼(2012) ③아카이브 헬프의 텍스트(2017~2021) 세 갈래다
 - 반면 후속 제품 24PetShelter는 공식 데모영상(91초)에서 실제 UI를 확보했다
 - 리뷰 플랫폼 근거도 얇다 — Capterra·Software Advice 각 **리뷰 1건**. 정량 비교 불가
 - 근거 등급: 화면 구조·필드명·과금 조건은 `[검증됨·L0]`. 제품 수명주기·전략 해석은 `[의견·L4]`
@@ -100,6 +102,43 @@
 
 **판독** — 신제품의 완결점은 **결제**다. Chameleon 조사에서 확인된 "입양은 케어의 종결이 아니라 금전 거래의 종결" 이라는 모델링이 신제품에서도 유지된다 `[의견·L4]`
 
+### 4.5 PetPoint 실제 화면 — 2012년판 매뉴얼
+
+Independent Cat Society가 공개한 자체 PetPoint 매뉴얼(2012.10)에서 판독 `[검증됨·L0 / 시점 2012]`
+
+**홈·메뉴 구조**
+
+- 상단 녹색 메뉴바 7개: `Intake` `Outcome` `Edit` `Reports` `Admin` `Help` `Community`
+- 홈 화면은 카드 6장(`Intake` `Edit` `Services` `Care` `Admin` `Reports`)에 하위 항목을 나열하는 방식
+- `Intake` 하위 9개: `Search` `Stray` `Owner/Guardian Surrender` `Return` `Transfer` `Wildlife` `Clinic` `Seized/Custody` `Service` — **입소 유형별로 화면이 갈라진다**
+
+**동물 레코드 — 탭 10개**
+
+`Animal Search` | `Express` | `Details` | `Photos/Videos` | `Profile` | `Memos` | `Identifications` | `Vouchers/Waivers` | `Holds` | `Stage/Location`
+
+- `Express` 탭 한 화면에 **필드 21개**: `Animal #` `Reference#` `Name` `Type` `Species` `Primary Breed` `Purebred` `Secondary Breed` `Age` `Est. Birthdate` `Age Group` `Gender` `Spayed/Neutered` `Size` `Weight` `Animal Condition` `Asilomar Status` `Primary Color` `Secondary Color` `Color Pattern` `Bitten Status`
+- 사진은 **`Photo 1` `Photo 2` `Photo 3` 고정 3슬롯**. 각각 캡션·`Do Not Show on Website` 체크박스·`Browse`
+- 검색 결과 그리드 컬럼 18개(`ARN` `Status` `Stage` `Species` `Primary Breed` … `On Hold` `Memo` `Location` `Sub Location`)
+
+**판독** — 웹 기반이지만 밀도와 어휘는 Chameleon과 같은 계열이다. 한 화면에 20개 넘는 필드를 세우고, `Asilomar Status` 같은 업계 코드값을 담당자가 알아야 한다. 사진이 3장으로 고정된 것은 **레코드가 케어 기록이 아니라 게시·식별용으로 설계**됐음을 보여준다 `[의견·L4]`
+
+### 4.6 임보가 화면에 나타나는 자리
+
+`Stage/Location` 탭이 결정적이다. 매뉴얼의 설명은 **"고양이가 임보로 가거나 다른 방으로 옮길 때 Stage를 바꾸는 데 사용"** 이다.
+
+| 필드 | 값 |
+| --- | --- |
+| `Stage` | Available · Evaluate · New Arrival · On Hold · Pending Medical Assessment · Pending Behavioral Assessment · Behavioral Treatment · Bite Quarantine · Medical Quarantine · Medical Treatment · Pending Hearing · Protective Custody · **Foster Program** · Waiting for Pick Up |
+| `Location` | **`Shelter` 또는 `Foster` 이지선다** |
+| `Sub Location` | 방(room) 선택 |
+
+**판독** `[검증됨·L0]`
+
+- 임보는 **Stage 드롭다운의 값 하나**와 **Location 이지선다**로 표현된다
+- **누가 데리고 있는지, 이번 주에 어떤지는 이 화면에 자리가 없다**
+- 이것이 Maddie's Fund에서 Licking County가 말한 *"`location`·`sublocation` 에 임보로 표시하는 용도로만 쓴다"* 의 실물이다
+- 매뉴얼 목차 자체에도 임보 전용 절이 없다(동물 입력 / 동물 편집 / 사람 생성 / 입양 처리 / 단축키)
+
 ## 5. 임보 기능 실태
 
 ### 5.1 PetPoint — 있지만 등급이 걸려 있다
@@ -155,7 +194,7 @@
 | PetPoint 실제 견적 수준 | 데모콜 리드에게 질문 |
 | Enterprise 등급의 범위와 가격 | 동일 |
 | 24PetShelter 대규모 조직 개방 시점 | 벤더 공지 |
-| PetPoint 인앱 화면 | 사용 조직 데모콜에서 화면 공유 요청 |
+| **현행** PetPoint 인앱 화면 | 확보분은 2012년판. 2018 리디자인 이후 화면은 사용 조직 데모콜에서 화면 공유 요청 |
 | 24PetShelter의 임보 로드맵 | 벤더 문의 또는 사용 조직 |
 | PetPoint 단독 도입 조직 수 | 공개 자료 없음(24Pet 합산치만 공표) |
 
@@ -174,12 +213,17 @@
 | `07-animal-profile.jpg` | 모바일 동물 프로필 | 데모영상 |
 | `08-adoption-checkout.jpg` | 디지털 입양 체크아웃 | 데모영상 |
 | `09-network-brands.jpg` | 24Pet 브랜드 네트워크 | 데모영상 |
+| `10-petpoint-home-2012.jpg` | PetPoint 홈·메뉴 구조 | ICS 매뉴얼 2012.10 |
+| `11-petpoint-search-2012.jpg` | 동물 검색·결과 그리드 | 동일 |
+| `12-petpoint-express-2012.jpg` | Express 탭 필드 21개·사진 3슬롯 | 동일 |
+| `13-petpoint-stage-location-2012.jpg` | Stage/Location 탭 — 임보가 나타나는 자리 | 동일 |
 
 ## 출처
 
 - 벤더: `24pet.com/products/petpoint` · `24pet.com/products/24petshelter` 브라우저 렌더링(2026-08-25) · PetPoint 로그인 `sms.petpoint.com/sms3` 실측
 - 공식 데모영상: `vimeo.com/1187343400`(24PetShelter, 91초) 프레임 직접 판독
 - 웹 아카이브: `help.petpoint.com` 2017~2021 스냅샷 — `Redesigned_PetPoint_Login_and_Home_Screens.htm` · `intake_owner_surrender.htm` · `iphone/edit_follow_up_foster.htm`
+- 제3자 매뉴얼: [Independent Cat Society — PetPoint Manual (2012.10, 54쪽)](https://www.catsociety.org/images/ICSPetPointManual.pdf)
 - 실무자 포럼: [Maddie's Fund — Using PetPoint to track and manage foster animals](https://forum.maddiesfund.org/discussion/using-petpoint-to-track-and-manage-foster-animals)
 - 보도자료: [24PetShelter 출시(2026.04)](https://www.prnewswire.com/news-releases/24pet-by-petplace-launches-24petshelter-introducing-a-more-powerful-way-to-support-shelters-302735199.html) · [24PetShelter 계획 발표](https://www.prnewswire.com/news-releases/24pet-by-petplace-announces-plans-for-24petshelter-an-innovative-software-evolution-designed-to-better-assist-animal-welfare-organizations-302482877.html)
 - 리뷰 플랫폼: [Capterra](https://www.capterra.com/p/232708/PetPoints/) · [Software Advice](https://www.softwareadvice.com/data-management/petpoints-profile/)
