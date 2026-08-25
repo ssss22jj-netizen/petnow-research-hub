@@ -14,6 +14,8 @@ const routes = [
   ["주제별 문서", "/library/m2", "◐", "M2 계획·현황"],
   ["주제별 문서", "/library/results", "◈", "실험 결과 보고서"],
   ["주제별 문서", "/library/interview", "◎", "고객 인터뷰"],
+  /* 콜별 인터뷰 정리본 PDF 모음 (2026-08-25 카야 지시) */
+  ["주제별 문서", "/library/reports", "↳", "인터뷰 정리본", true],
   ["주제별 문서", "/library/workflow", "◫", "쉘터 업무 플로우"],
   ["주제별 문서", "/library/competitors", "▥", "경쟁사 조사"],
   /* M1 은 종료된 마일스톤이라 참고 자료 바로 위로 내렸다 (2026-08-25 카야 지시) */
@@ -97,6 +99,12 @@ const collectionDefinitions = {
       "deliverables/중간점검_2_Gina_인터뷰_인사이트_202608.md",
     ],
   },
+  reports: {
+    title: "인터뷰 정리본",
+    parent: "interview",
+    lead: "펫나우 팀이 작성한 콜별 인터뷰 정리본 원본(PDF)입니다. 제목을 누르면 새 탭에서 열립니다.",
+    paths: [],
+  },
   workflow: {
     title: "쉘터 업무 플로우",
     lead: "미국 동물보호소·레스큐의 조직 유형과 구조부터 입양까지의 업무 흐름을 정리한 문서입니다.",
@@ -110,6 +118,7 @@ const collectionDefinitions = {
     paths: [
       "analysis/포지셔닝_경쟁제품_축비교_20260820.md",
       "Petszel_경쟁조사_20260825.md",
+      "analysis/PetPoint_종합조사_20260825.md",
       "analysis/Chameleon_UIUX_분석_20260820.md",
       "경쟁4사_검증본_M1실무요약_20260726.md",
       "경쟁4사_딥리서치_20260725.md",
@@ -182,6 +191,14 @@ const primaryGroups = ["m2", "results", "interview", "workflow", "competitors", 
    (2026-08-25: 라벨 없는 행을 없애기 위해 milestone 을 필수로 부여) */
 const collectionExtras = {
   interview: [{
+    kind: "collection",
+    collectionKey: "reports",
+    title: "인터뷰 정리본",
+    description: "펫나우 팀이 작성한 콜별 인터뷰 정리본 원본(PDF) 모음",
+    role: "모아 보기",
+    milestone: "M2",
+    date: "2026-08-24",
+  }, {
     kind: "external",
     title: "인터뷰 후보·섭외 현황",
     description: "인터뷰 후보, 우선순위, 연락 진행 상태를 관리하는 Google Sheet",
@@ -190,6 +207,14 @@ const collectionExtras = {
     date: "2026-08-04",
     url: "https://docs.google.com/spreadsheets/d/1wkeSUFVlOBCDuR5_GCHLElfhQyS0cTswEWkXcaSp1Ho/edit?pli=1&gid=0#gid=0",
   }],
+  reports: [
+    { kind: "page", newTab: true, title: "Little Traverse Bay Humane Society — Sarah Schertel", description: "2026-08-24 데모 콜 정리본", role: "정리본 PDF", milestone: "M2", date: "2026-08-24", url: "assets/interview-reports/20260824_Little_Traverse_Bay_Humane_Society_Sarah_Schertel.pdf" },
+    { kind: "page", newTab: true, title: "Citizens for Animal Protection — Jared Carroll", description: "2026-08-20 데모 콜 정리본", role: "정리본 PDF", milestone: "M2", date: "2026-08-20", url: "assets/interview-reports/20260820_Citizens_for_Animal_Protection_Jared_Carroll.pdf" },
+    { kind: "page", newTab: true, title: "Kzoo Cat Cafe and Rescue — Abbey Thompson", description: "2026-08-20 데모 콜 정리본", role: "정리본 PDF", milestone: "M2", date: "2026-08-20", url: "assets/interview-reports/20260820_Kzoo_Cat_Cafe_and_Rescue_Abbey_Thompson.pdf" },
+    { kind: "page", newTab: true, title: "Santa Barbara County Animal Services — Sarah Aguilar", description: "2026-08-20 데모 콜 정리본", role: "정리본 PDF", milestone: "M2", date: "2026-08-20", url: "assets/interview-reports/20260820_Santa_Barbara_County_Animal_Services_Sarah_Aguilar.pdf" },
+    { kind: "page", newTab: true, title: "Hearts & Bones — Amy", description: "2026-08-18 데모 콜 정리본", role: "정리본 PDF", milestone: "M2", date: "2026-08-18", url: "assets/interview-reports/20260818_Hearts_and_Bones_Amy.pdf" },
+    { kind: "page", newTab: true, title: "Simba’s Pride Nursery — Eve Parisee", description: "2026-08-17 데모 콜 정리본", role: "정리본 PDF", milestone: "M2", date: "2026-08-17", url: "assets/interview-reports/20260817_Simbas_Pride_Nursery_Eve_Parisee.pdf" },
+  ],
   competitors: [{
     kind: "page",
     title: "경쟁사 데모 제품 UI·UX 시각 분석",
@@ -244,6 +269,7 @@ const documentRoles = new Map([
   ["펫나우_비문인식_현재기능_검증_20260726.md", "참고 자료"],
   ["analysis/EBP_경쟁사_리뷰_데모_UIUX_전문가패널_20260728.md", "분석 검토"],
   ["Petszel_경쟁조사_20260825.md", "화면 판독"],
+  ["analysis/PetPoint_종합조사_20260825.md", "화면 판독"],
   ["deliverables/M2_제품조사_종합_20260825.md", "제품 조사 종합"],
 ]);
 
@@ -284,12 +310,13 @@ function compactDocRow(doc, index) {
 function listRow(entry, index, extraClass = "") {
   const number = String(index + 1).padStart(2, "0");
   const isExternal = entry.kind === "external";
+  const newTab = isExternal || entry.newTab;
   const classes = ["compact-doc-row"];
   if (extraClass) classes.push(extraClass);
   if (isExternal) classes.push("external-doc-row");
   if (entry.kind === "collection") classes.push("collection-link-row");
-  const attributes = isExternal ? ' target="_blank" rel="noopener noreferrer"' : "";
-  const arrow = isExternal ? "↗" : "→";
+  const attributes = newTab ? ' target="_blank" rel="noopener noreferrer"' : "";
+  const arrow = newTab ? "↗" : "→";
   const badges = `${milestoneTag(entry)}${trackTag(entry)}`;
   const suffix = entry.count ? `<span class="row-count">${entry.count}건</span>` : "";
   return `<a class="${classes.join(" ")}" href="${entry.href}"${attributes}><span class="compact-doc-number">${number}</span><span class="compact-doc-copy"><strong>${badges}${entry.title}${suffix}</strong><small>${entry.description}</small></span><span class="compact-doc-role">${entry.role}</span><span class="compact-doc-arrow">${arrow}</span></a>`;
@@ -512,7 +539,7 @@ function renderDocument(id) {
   const bodyClasses = [];
   if (doc.path === "deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md") bodyClasses.push("track2-plan");
   if (doc.path === "deliverables/M2_데모콜_인사이트보드.md") bodyClasses.push("call-board");
-  if (["analysis/포지셔닝_경쟁제품_축비교_20260820.md", "analysis/Chameleon_UIUX_분석_20260820.md", "Petszel_경쟁조사_20260825.md"].includes(doc.path)) bodyClasses.push("visual-doc");
+  if (["analysis/포지셔닝_경쟁제품_축비교_20260820.md", "analysis/Chameleon_UIUX_분석_20260820.md", "Petszel_경쟁조사_20260825.md", "analysis/PetPoint_종합조사_20260825.md"].includes(doc.path)) bodyClasses.push("visual-doc");
   const bodyClass = bodyClasses.length ? ` ${bodyClasses.join(" ")}` : "";
   const children = documentChildren.get(doc.path);
   const childDocs = children ? children.paths.map((path) => docs.find((item) => item.path === path)).filter(Boolean) : [];

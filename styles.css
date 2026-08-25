@@ -578,38 +578,40 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .document-children > h2 { margin: 0 0 6px; font-size: 1.05rem; }
 .document-children-lead { margin: 0 0 16px; font-size: .9rem; color: var(--ink-4, #6b7671); }
 
+/* 데모 콜 보드 첫 표 — 종합 판독. 아래 데이터 표들과 성격이 달라 카드형으로 구분한다 (2026-08-25 카야 지시) */
+.board-synthesis { margin: 18px 0 32px; padding: 3px; border: 1px solid #b9d9c8; border-radius: 14px; background: #f4faf6; }
+.markdown-body .board-synthesis table { display: table; width: 100%; table-layout: fixed; margin: 0; border-collapse: separate; border-spacing: 0; background: transparent; font-size: 12.5px; }
+.markdown-body .board-synthesis th { padding: 11px 15px 9px; border: 0; border-bottom: 1px solid #b9d9c8; background: transparent; color: #2f6b4e; font-size: 11.5px; letter-spacing: .02em; }
+.markdown-body .board-synthesis td { padding: 14px 15px; border: 0; border-top: 1px solid rgba(15,45,33,.1); background: transparent; line-height: 1.68; word-break: break-word; overflow-wrap: anywhere; }
+.markdown-body .board-synthesis tbody tr:first-child td { border-top: 0; }
+.markdown-body .board-synthesis th:nth-child(1),
+.markdown-body .board-synthesis td:nth-child(1) { width: 216px; color: var(--ink); }
+@media (max-width: 860px) {
+  .markdown-body .board-synthesis table { table-layout: auto; }
+  .markdown-body .board-synthesis th:nth-child(1),
+  .markdown-body .board-synthesis td:nth-child(1) { width: auto; }
+}
+
 /* 데모 콜 보드 — 표를 판정 항목별로 분리한 뒤의 열 구조에 맞춘다 (2026-08-25 재작성).
-   공통 앞 3열: 1번호 2소재 3조직·응답자. 4열은 판정, 5열은 서술(가장 넓게), 6열은 표 1의 현재 도구.
-   table-layout:fixed + overflow-wrap:anywhere 로 셀 밖 텍스트 이탈을 구조적으로 차단한다.
-   이전 판은 1·2열에 white-space:nowrap 과 고정 max-width 를 걸어, 내용이 폭을 넘으면 반드시 삐져나왔다 */
+   공통 앞 3열: 1번호 2소재 3조직·응답자. 나머지는 내용 길이에 따라 자동 배분한다.
+   셀 밖 텍스트 이탈의 원인은 이전 판의 white-space:nowrap + 고정 max-width 였다. nowrap 을 없애고
+   overflow-wrap:anywhere 로 긴 토큰까지 강제 줄바꿈시킨다.
+   table-layout:fixed 는 쓰지 않는다 — 표마다 열 수(5·6)가 달라, 지정 폭의 합이 안 맞으면
+   남는 폭이 한 열에 몰려 빈 열처럼 보이는 사고가 났다 (2026-08-25 kaya-e2 발견) */
 .table-scroll { margin: 16px 0 24px; overflow-x: auto; scrollbar-width: thin; }
 /* macOS 는 스크롤바를 숨기므로 항상 보이게 둔다 */
 .table-scroll::-webkit-scrollbar { height: 10px; }
 .table-scroll::-webkit-scrollbar-track { background: rgba(15,45,33,.06); border-radius: 5px; }
 .table-scroll::-webkit-scrollbar-thumb { background: rgba(15,45,33,.26); border-radius: 5px; }
-.markdown-body .table-scroll table { display: table; width: 100%; table-layout: fixed; margin: 0; font-size: 12.5px; }
+.markdown-body .table-scroll table { display: table; width: max-content; min-width: 100%; margin: 0; font-size: 12.5px; }
 .markdown-body .table-scroll th,
-.markdown-body .table-scroll td { min-width: 0; max-width: none; padding: 9px 10px; word-break: break-word; overflow-wrap: anywhere; }
+.markdown-body .table-scroll td { min-width: 96px; max-width: 300px; padding: 9px 11px; word-break: break-word; overflow-wrap: anywhere; }
 .markdown-body .table-scroll th:nth-child(1),
-.markdown-body .table-scroll td:nth-child(1) { width: 26px; padding-right: 6px; text-align: right; color: var(--ink-4); }
+.markdown-body .table-scroll td:nth-child(1) { min-width: 26px; max-width: 30px; padding-right: 6px; text-align: right; color: var(--ink-4); }
 .markdown-body .table-scroll th:nth-child(2),
-.markdown-body .table-scroll td:nth-child(2) { width: 44px; text-align: center; }
+.markdown-body .table-scroll td:nth-child(2) { min-width: 42px; max-width: 50px; text-align: center; }
 .markdown-body .table-scroll th:nth-child(3),
-.markdown-body .table-scroll td:nth-child(3) { width: 118px; }
-.markdown-body .table-scroll th:nth-child(4),
-.markdown-body .table-scroll td:nth-child(4) { width: 96px; }
-.markdown-body .table-scroll th:nth-child(6),
-.markdown-body .table-scroll td:nth-child(6) { width: 116px; }
-/* 좁은 화면에서는 고정 폭을 풀고 래퍼의 가로 스크롤에 맡긴다 */
-@media (max-width: 860px) {
-  .markdown-body .table-scroll table { table-layout: auto; width: max-content; min-width: 100%; }
-  .markdown-body .table-scroll th,
-  .markdown-body .table-scroll td { min-width: 92px; }
-  .markdown-body .table-scroll th:nth-child(1),
-  .markdown-body .table-scroll td:nth-child(1) { min-width: 26px; }
-  .markdown-body .table-scroll th:nth-child(2),
-  .markdown-body .table-scroll td:nth-child(2) { min-width: 44px; }
-}
+.markdown-body .table-scroll td:nth-child(3) { min-width: 112px; max-width: 134px; }
 .markdown-body .table-scroll th:nth-child(5),
 .markdown-body .table-scroll td:nth-child(5),
 .markdown-body .table-scroll th:nth-child(6),
