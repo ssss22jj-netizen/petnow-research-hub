@@ -88,8 +88,6 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .compact-section-head b { padding: 3px 7px; border-radius: 999px; background: var(--soft); color: var(--muted); font-size: 10px; }
 .compact-section-head p { margin: 9px 0 13px; color: var(--muted); font-size: 12px; line-height: 1.55; }
 .compact-section-head a { color: var(--green); font-size: 12px; font-weight: 700; text-decoration: none; }
-.compact-section-links { display: flex; flex-wrap: wrap; gap: 8px 14px; }
-.compact-section-links .visual-link { color: var(--blue); }
 .compact-doc-list { display: grid; gap: 7px; }
 .compact-doc-row { display: grid; grid-template-columns: 34px minmax(0, 1fr) 90px 18px; gap: 12px; align-items: center; padding: 13px 14px; border: 1px solid var(--line); border-radius: 11px; background: white; text-decoration: none; transition: border-color .15s, transform .15s; }
 .compact-doc-row:hover { border-color: #8fc5aa; transform: translateX(2px); }
@@ -580,25 +578,38 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .document-children > h2 { margin: 0 0 6px; font-size: 1.05rem; }
 .document-children-lead { margin: 0 0 16px; font-size: .9rem; color: var(--ink-4, #6b7671); }
 
-/* 데모 콜 보드 — 판정 세 열(통증 강도·솔루션 적합 여부·지불 의향)이 가로 스크롤 전에 보이도록 앞에 두고,
-   한 열이 지나치게 넓어지지 않게 상한을 건다. 래퍼가 가로 스크롤을 맡는다
-   열 순서 — 1번호 2일자 3조직 4소재 5통증강도 6솔루션적합여부 7지불의향 8응답자 9현재도구 10후속 11비고 */
+/* 데모 콜 보드 — 표를 판정 항목별로 분리한 뒤의 열 구조에 맞춘다 (2026-08-25 재작성).
+   공통 앞 3열: 1번호 2소재 3조직·응답자. 4열은 판정, 5열은 서술(가장 넓게), 6열은 표 1의 현재 도구.
+   table-layout:fixed + overflow-wrap:anywhere 로 셀 밖 텍스트 이탈을 구조적으로 차단한다.
+   이전 판은 1·2열에 white-space:nowrap 과 고정 max-width 를 걸어, 내용이 폭을 넘으면 반드시 삐져나왔다 */
 .table-scroll { margin: 16px 0 24px; overflow-x: auto; scrollbar-width: thin; }
 /* macOS 는 스크롤바를 숨기므로 항상 보이게 둔다 */
 .table-scroll::-webkit-scrollbar { height: 10px; }
 .table-scroll::-webkit-scrollbar-track { background: rgba(15,45,33,.06); border-radius: 5px; }
 .table-scroll::-webkit-scrollbar-thumb { background: rgba(15,45,33,.26); border-radius: 5px; }
-.markdown-body .table-scroll table { display: table; width: max-content; min-width: 100%; margin: 0; font-size: 12.5px; }
+.markdown-body .table-scroll table { display: table; width: 100%; table-layout: fixed; margin: 0; font-size: 12.5px; }
 .markdown-body .table-scroll th,
-.markdown-body .table-scroll td { min-width: 120px; max-width: 260px; }
+.markdown-body .table-scroll td { min-width: 0; max-width: none; padding: 9px 10px; word-break: break-word; overflow-wrap: anywhere; }
 .markdown-body .table-scroll th:nth-child(1),
-.markdown-body .table-scroll td:nth-child(1) { min-width: 34px; max-width: 34px; white-space: nowrap; color: var(--ink-4); }
+.markdown-body .table-scroll td:nth-child(1) { width: 26px; padding-right: 6px; text-align: right; color: var(--ink-4); }
 .markdown-body .table-scroll th:nth-child(2),
-.markdown-body .table-scroll td:nth-child(2) { min-width: 62px; max-width: 62px; white-space: nowrap; }
+.markdown-body .table-scroll td:nth-child(2) { width: 44px; text-align: center; }
 .markdown-body .table-scroll th:nth-child(3),
-.markdown-body .table-scroll td:nth-child(3) { min-width: 140px; max-width: 150px; }
+.markdown-body .table-scroll td:nth-child(3) { width: 118px; }
 .markdown-body .table-scroll th:nth-child(4),
-.markdown-body .table-scroll td:nth-child(4) { min-width: 48px; max-width: 48px; white-space: nowrap; }
+.markdown-body .table-scroll td:nth-child(4) { width: 96px; }
+.markdown-body .table-scroll th:nth-child(6),
+.markdown-body .table-scroll td:nth-child(6) { width: 116px; }
+/* 좁은 화면에서는 고정 폭을 풀고 래퍼의 가로 스크롤에 맡긴다 */
+@media (max-width: 860px) {
+  .markdown-body .table-scroll table { table-layout: auto; width: max-content; min-width: 100%; }
+  .markdown-body .table-scroll th,
+  .markdown-body .table-scroll td { min-width: 92px; }
+  .markdown-body .table-scroll th:nth-child(1),
+  .markdown-body .table-scroll td:nth-child(1) { min-width: 26px; }
+  .markdown-body .table-scroll th:nth-child(2),
+  .markdown-body .table-scroll td:nth-child(2) { min-width: 44px; }
+}
 .markdown-body .table-scroll th:nth-child(5),
 .markdown-body .table-scroll td:nth-child(5),
 .markdown-body .table-scroll th:nth-child(6),
