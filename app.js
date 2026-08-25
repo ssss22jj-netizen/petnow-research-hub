@@ -61,7 +61,6 @@ const collectionDefinitions = {
     paths: [
       "deliverables/M2_실행계획_20260817.md",
       "deliverables/M2_소재H_소구점_정의_및_근거_20260823.md",
-      "deliverables/M2_산타바바라_데모미팅_전략_20260818.md",
       "deliverables/M2_Petify_알파MVP_개발원페이저_20260821.md",
       "analysis/포지셔닝_경쟁제품_축비교_20260820.md",
     ],
@@ -123,8 +122,10 @@ const collectionDefinitions = {
   },
   methods: {
     title: "출처·분석 방법",
+    homeLimit: 4,
     lead: "리뷰 출처와 데모 접근 경로, 인터뷰 녹취록, 기획·분석의 근거를 정리한 문서입니다. 리드 사전조사는 하위 페이지에 모았습니다.",
     paths: [
+      "analysis/데모_UI전수와_기획의도_20260820.md",
       "analysis/Eve인터뷰_녹취록_20260817.md",
       "EBP_산타바바라_데모미팅전략.md",
       "sources/source-index.md",
@@ -135,12 +136,6 @@ const collectionDefinitions = {
       "analysis/EBP_경쟁사_리뷰_데모_UIUX_전문가패널_20260728.md",
       "EBP_경쟁4사_리뷰전수_질적분석.md",
       "EBP_ShelterCRM_2주계획검토.md",
-    ],
-    homePaths: [
-      "analysis/Eve인터뷰_녹취록_20260817.md",
-      "EBP_산타바바라_데모미팅전략.md",
-      "sources/source-index.md",
-      "deliverables/Track2_ICP_Persona_소재_정의_근거_20260805.md",
     ],
   },
   leads: {
@@ -167,8 +162,9 @@ const collectionDefinitions = {
   appendix: {
     title: "별첨",
     lead: "인터뷰 진행 가이드·체크리스트, 실행에 필요한 설정 가이드, 그리고 Shelter CRM 본 조사 범위 밖의 참고 자료입니다.",
+    homeLimit: 4,
     paths: [
-      "analysis/데모_UI전수와_기획의도_20260820.md",
+      "deliverables/M2_산타바바라_데모미팅_전략_20260818.md",
       "deliverables/Track2_리드인터뷰_가이드_20260817.md",
       "deliverables/Track2_LMF_랜딩_최종QA_20260813.md",
       "deliverables/Track2_LMF_데모_팀피드백_반영결과_20260811.md",
@@ -177,12 +173,6 @@ const collectionDefinitions = {
       "deliverables/Track2_광고계정_설정가이드_Meta_LinkedIn_20260805.md",
       "지나인터뷰_계획.md",
       "펫나우_비문인식_현재기능_검증_20260726.md",
-    ],
-    homePaths: [
-      "analysis/데모_UI전수와_기획의도_20260820.md",
-      "deliverables/Track2_리드인터뷰_가이드_20260817.md",
-      "deliverables/Track2_LMF_랜딩_최종QA_20260813.md",
-      "지나인터뷰_계획.md",
     ],
   },
 };
@@ -353,7 +343,10 @@ function entriesFor(key, { home = false } = {}) {
   const paths = home ? (definition.homePaths ?? definition.paths) : definition.paths;
   const docEntries = paths.map((path) => byPath.get(path)).filter(Boolean).map(docEntry);
   const extras = (collectionExtras[key] ?? []).map(extraEntry);
-  return sortEntries([...docEntries, ...extras]);
+  const sorted = sortEntries([...docEntries, ...extras]);
+  /* homeLimit 은 정렬 후 상위 N개만 홈에 낸다. homePaths 처럼 손으로 고른 목록이 아니라서
+     문서가 늘어도 홈이 저절로 최신 N개를 보여준다 (2026-08-25) */
+  return home && definition.homeLimit ? sorted.slice(0, definition.homeLimit) : sorted;
 }
 
 function collectionRows(key, entries) {
