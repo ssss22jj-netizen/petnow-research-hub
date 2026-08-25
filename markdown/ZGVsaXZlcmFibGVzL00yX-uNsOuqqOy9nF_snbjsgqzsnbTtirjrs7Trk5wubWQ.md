@@ -29,23 +29,23 @@
 
 | # | 소재 | 조직 · 응답자 | 강도 | 근거 | 현재 도구 |
 | ---: | :---: | --- | --- | --- | --- |
-| 1 | B | **Simba's Pride Nursery**<br>Eve · 창립자<br>상시 10~20두 | <span class="pain-badge mixed">혼재</span><br>본인 낮음<br>전언 높음 | · 본인 업무는 **Airtable로 처리**, 개체 유입 급증 시에만 부담<br>· 셸터 위탁 담당자는 **체크인 회수 및 백신 예정일 일괄 조회**에 애로 — 소재 B 겨냥 지점과 동일 축<br>· **물품 부족분을 임보자 사비로 충당** 중. 기존 가설 외 신규 축 | Airtable |
-| 2 | T1 | **Hearts & Bones**<br>Amy · 벤더 선정<br>실무자 아님 | <span class="pain-badge indirect">간접 증언</span><br>상시 사용자 아님 | · 임보자 사진·상태 회수를 위한 **반복 독려 필요**<br>· 의료기록 지연은 **파트너 셸터 프로세스에 기인**, SW 해결 가능성 본인도 불확실<br>· 주간 이송 규제는 통상 시 부담 크지 않다고 진술 — **관련 가설 약화** | Shelterluv<br>Airtable<br>Slack |
-| 3 | A | **Santa Barbara County Animal Services**<br>Sarah Aguilar · 국장<br>연 6,000두 · 셸터 3개소 | <span class="pain-badge high">강함</span><br>본인 통증 | · 제품 설명 이전 선제기 — 개체 이동 지속 및 **Days of Care 단축**<br>· 30일 이상 체류견 검토 회의가 **업무량 과다로 상시 취소**<br>· 회의 결정 사항이 **차주 회의까지 미확인**되는 상황 반복<br>· **조치 1건 누락 = 개체 체류일 증가**로 규정. 행정 문제가 아닌 운영 지표 문제로 인식 | Chameleon<br>DocuPet<br>스프레드시트<br>화이트보드 |
-| 4 | B | **Kzoo Cat Cafe and Rescue**<br>Abbey Thompson · 창립자<br>임보 10~15개소 | <span class="pain-badge high">강함</span><br>본인 통증 | · **광고 클릭·미팅 신청 동기 자체가 임보자 커뮤니케이션.** 무제한 1개 개선 질문에도 동일 응답<br>· 그룹챗 미확인자를 **본인 기억으로 관리 후 개별 재연락**<br>· **현 방식 유지 시 임보 확장 불가**로 직접 진단<br>· 월간 체중 회수율 저조, 사진은 **과거 그룹챗 역추적** 필요 | 스프레드시트<br>Facebook 그룹챗 |
-| 5 | B | **Citizens for Animal Protection**<br>Jared Carroll · 수의 진료 총괄<br>연 4,000두 · 임보 비중 1/3 | <span class="pain-badge high">강함</span><br>본인 통증 | · 임보자 연락이 전화·이메일·Facebook·개인 문자·사설 웹으로 **분산**<br>· **공식 문자 회선 부재로 코디네이터가 개인 휴대폰 사용.** 이력이 개인 기기에 잔류, 타 직원 맥락 파악 불가, 담당자 교체 시 **연속성 단절**<br>· 조직 전체 1순위는 **부서 간 커뮤니케이션**(정보 공백이 실제 오류로 연결)이나 현 제품 범위 외 | PetPoint<br>Pulse<br>Petszel<br>개인 SMS |
-| 6 | A | **Little Traverse Bay Humane Society**<br>Sarah Schertel · 운영 총괄<br>연 1,000두 | <span class="pain-badge critical">매우 강함</span><br>사고 발생 | · **종이와 PetPoint가 동시 정본**으로 기능, 처치 상태 불일치<br>· 수의사가 1시간 전 출력물을 근거로 **이미 완료된 백신·구충 재시행.** 인터뷰 중 동일 폴더 추가 발견<br>· 결과 — **의료 자원 및 수의사 시간 낭비**<br>· **데모 이전부터 존재한 통증.** 동료의 광고 체크리스트 소재 공유가 유입 경로 | PetPoint<br>Petszel<br>종이 체크리스트 |
+| 1 | B | **Simba's Pride Nursery**<br>Eve · 창립자<br>상시 10~20두 | <span class="pain-badge mixed">혼재</span><br>본인 낮음 | · 본인 업무는 **Airtable로 처리**, 개체 유입 급증 시에만 부담<br>· 셸터 위탁 담당자는 **체크인 회수 및 백신 예정일 일괄 조회**에 애로 — 소재 B 겨냥 지점과 동일 축<br>· **물품 부족분을 임보자 사비로 충당** 중. 기존 가설 외 신규 축 | Airtable |
+| 2 | T1 | **Hearts & Bones**<br>Amy · 벤더 선정<br>실무자 아님 | <span class="pain-badge indirect">간접</span><br>전언 | · 임보자 사진·상태 회수를 위한 **반복 독려 필요**<br>· 의료기록 지연은 **파트너 셸터 프로세스에 기인**, SW 해결 가능성 본인도 불확실<br>· 주간 이송 규제는 통상 시 부담 크지 않다고 진술 — **관련 가설 약화** | Shelterluv<br>Airtable<br>Slack |
+| 3 | A | **Santa Barbara County Animal Services**<br>Sarah Aguilar · 국장<br>연 6,000두 · 셸터 3개소 | <span class="pain-badge high">강함</span><br>본인 | · 제품 설명 이전 선제기 — 개체 이동 지속 및 **Days of Care 단축**<br>· 30일 이상 체류견 검토 회의가 **업무량 과다로 상시 취소**<br>· 회의 결정 사항이 **차주 회의까지 미확인**되는 상황 반복<br>· **조치 1건 누락 = 개체 체류일 증가**로 규정. 행정 문제가 아닌 운영 지표 문제로 인식 | Chameleon<br>DocuPet<br>스프레드시트<br>화이트보드 |
+| 4 | B | **Kzoo Cat Cafe and Rescue**<br>Abbey Thompson · 창립자<br>임보 10~15개소 | <span class="pain-badge high">강함</span><br>본인 | · **광고 클릭·미팅 신청 동기 자체가 임보자 커뮤니케이션.** 무제한 1개 개선 질문에도 동일 응답<br>· 그룹챗 미확인자를 **본인 기억으로 관리 후 개별 재연락**<br>· **현 방식 유지 시 임보 확장 불가**로 직접 진단<br>· 월간 체중 회수율 저조, 사진은 **과거 그룹챗 역추적** 필요 | 스프레드시트<br>Facebook 그룹챗 |
+| 5 | B | **Citizens for Animal Protection**<br>Jared Carroll · 수의 진료 총괄<br>연 4,000두 · 임보 비중 1/3 | <span class="pain-badge high">강함</span><br>본인 | · 임보자 연락이 전화·이메일·Facebook·개인 문자·사설 웹으로 **분산**<br>· **공식 문자 회선 부재로 코디네이터가 개인 휴대폰 사용.** 이력이 개인 기기에 잔류, 타 직원 맥락 파악 불가, 담당자 교체 시 **연속성 단절**<br>· 조직 전체 1순위는 **부서 간 커뮤니케이션**(정보 공백이 실제 오류로 연결)이나 현 제품 범위 외 | PetPoint<br>Pulse<br>Petszel<br>개인 SMS |
+| 6 | A | **Little Traverse Bay Humane Society**<br>Sarah Schertel · 운영 총괄<br>연 1,000두 | <span class="pain-badge critical">매우 강함</span><br>사고 | · **종이와 PetPoint가 동시 정본**으로 기능, 처치 상태 불일치<br>· 수의사가 1시간 전 출력물을 근거로 **이미 완료된 백신·구충 재시행.** 인터뷰 중 동일 폴더 추가 발견<br>· 결과 — **의료 자원 및 수의사 시간 낭비**<br>· **데모 이전부터 존재한 통증.** 동료의 광고 체크리스트 소재 공유가 유입 경로 | PetPoint<br>Petszel<br>종이 체크리스트 |
 
 ## 3. 솔루션 적합 여부
 
 | # | 소재 | 조직 | 판정 | 근거 |
 | ---: | :---: | --- | --- | --- |
 | 1 | B | **Simba's Pride Nursery**<br>Eve · 창립자<br>상시 10~20두 | <span class="fit-badge partial">부분</span> | · 체크인 방식 자체는 적합, **데모 신청 동기와 일치**<br>· 기록 항목 부족으로 기존 도구 병행 **보완재** 사용 의사<br>· 전환 저해 요인 2건 — **일일 체중 추적**, **개체별 커스터마이즈 필드** |
-| 2 | T1 | **Hearts & Bones**<br>Amy · 벤더 선정<br>실무자 아님 | <span class="fit-badge weak">낮음</span><br>관심 수준 | · 모바일 체크인·분산 데이터 연결 방향에 관심, 마이크로 커스터마이제이션에 "helpful" 평가<br>· 전환 가능성 낮음 — **미국 고객 레퍼런스 부재**, 시간대 지원 미확인, **이관 부담**, Salesforce 이관 중단 이력<br>· **명확한 운영 가치 또는 낮은 이관 비용 중 1건이 필수**라고 직접 확인 |
-| 3 | A | **Santa Barbara County Animal Services**<br>Sarah Aguilar · 국장<br>연 6,000두 · 셸터 3개소 | <span class="fit-badge good">높음</span><br>스프레드시트<br>대체 | · 희망 형태를 자체 구체화 — `specific to-do list`, `giant checklist`, 당일 필요 조치 조회<br>· Needs Attention 최초 화면에서 **"I love it already"** 반응<br>· **Chameleon은 단속·배차·클리닉 연계로 대체 불가** 명시, Petify는 공백 보완용 병행 가능으로 판단<br>· 유용성 판단에 **커스터마이즈 범위** 단서 부가 |
-| 4 | B | **Kzoo Cat Cafe and Rescue**<br>Abbey Thompson · 창립자<br>임보 10~15개소 | <span class="fit-badge good">높음</span><br>스프레드시트<br>존치 | · **자동·개별 리마인더**, 월간 체중·사진 수집, 커스터마이즈 체크인 4건에 구체적 긍정<br>· 스프레드시트 존치 사유는 관성이 아닌 **전 개체 일괄 조회 화면**<br>· 기존 셸터 SW 미사용 사유가 복잡성·조직 부적합 — **커스터마이즈는 부가 요소가 아닌 도입 조건** |
-| 5 | B | **Citizens for Animal Protection**<br>Jared Carroll · 수의 진료 총괄<br>연 4,000두 · 임보 1/3 | <span class="fit-badge good">높음</span><br>6건 중 최상 | · **역할 분담 구조를 본인이 직접 설계** — PetPoint = 일정·정본 / Petify = 임보·의료 커뮤니케이션 / 퇴소 시 PDF 취합 후 차트 첨부<br>· 백신 만기·재검·투약·행동·사진 요청으로 **즉시 자기 업무에 대입**<br>· **PDF 기록 내보내기는 미제안 항목을 선요구.** 근거는 "의료기록 미기재 = 미시행" 원칙<br>· **공개 콘텐츠 승인 게이트**도 선질문 |
-| 6 | A | **Little Traverse Bay Humane Society**<br>Sarah Schertel · 운영 총괄<br>연 1,000두 | <span class="fit-badge good">높음</span><br>셸터 메디신 | · 화면에서 `View Audit Trail`을 **선발견**, 이력 조회 가능 여부 질의<br>· `Requested / Overdue / In Progress / Needs Review` 구조를 **광견병 접종 워크플로에 즉시 대입**<br>· 필요 요건은 to-do 목록이 아닌 **조치·담당자·상태의 동시 조회**<br>· 임보 기능도 선요청 후 긍정, 단 **우선순위는 하위** |
+| 2 | T1 | **Hearts & Bones**<br>Amy · 벤더 선정<br>실무자 아님 | <span class="fit-badge weak">낮음</span> | · 모바일 체크인·분산 데이터 연결 방향에 관심, 마이크로 커스터마이제이션에 "helpful" 평가<br>· 전환 가능성 낮음 — **미국 고객 레퍼런스 부재**, 시간대 지원 미확인, **이관 부담**, Salesforce 이관 중단 이력<br>· **명확한 운영 가치 또는 낮은 이관 비용 중 1건이 필수**라고 직접 확인 |
+| 3 | A | **Santa Barbara County Animal Services**<br>Sarah Aguilar · 국장<br>연 6,000두 · 셸터 3개소 | <span class="fit-badge good">높음</span> | · 희망 형태를 자체 구체화 — `specific to-do list`, `giant checklist`, 당일 필요 조치 조회<br>· Needs Attention 최초 화면에서 **"I love it already"** 반응<br>· **Chameleon은 단속·배차·클리닉 연계로 대체 불가** 명시, Petify는 공백 보완용 병행 가능으로 판단<br>· 유용성 판단에 **커스터마이즈 범위** 단서 부가 |
+| 4 | B | **Kzoo Cat Cafe and Rescue**<br>Abbey Thompson · 창립자<br>임보 10~15개소 | <span class="fit-badge good">높음</span> | · **자동·개별 리마인더**, 월간 체중·사진 수집, 커스터마이즈 체크인 4건에 구체적 긍정<br>· 스프레드시트 존치 사유는 관성이 아닌 **전 개체 일괄 조회 화면**<br>· 기존 셸터 SW 미사용 사유가 복잡성·조직 부적합 — **커스터마이즈는 부가 요소가 아닌 도입 조건** |
+| 5 | B | **Citizens for Animal Protection**<br>Jared Carroll · 수의 진료 총괄<br>연 4,000두 · 임보 1/3 | <span class="fit-badge good">높음</span> | · **역할 분담 구조를 본인이 직접 설계** — PetPoint = 일정·정본 / Petify = 임보·의료 커뮤니케이션 / 퇴소 시 PDF 취합 후 차트 첨부<br>· 백신 만기·재검·투약·행동·사진 요청으로 **즉시 자기 업무에 대입**<br>· **PDF 기록 내보내기는 미제안 항목을 선요구.** 근거는 "의료기록 미기재 = 미시행" 원칙<br>· **공개 콘텐츠 승인 게이트**도 선질문 |
+| 6 | A | **Little Traverse Bay Humane Society**<br>Sarah Schertel · 운영 총괄<br>연 1,000두 | <span class="fit-badge good">높음</span> | · 화면에서 `View Audit Trail`을 **선발견**, 이력 조회 가능 여부 질의<br>· `Requested / Overdue / In Progress / Needs Review` 구조를 **광견병 접종 워크플로에 즉시 대입**<br>· 필요 요건은 to-do 목록이 아닌 **조치·담당자·상태의 동시 조회**<br>· 임보 기능도 선요청 후 긍정, 단 **우선순위는 하위** |
 
 ## 4. 지불 의향 및 결정 구조
 
@@ -54,8 +54,8 @@
 | 1 | B | **Simba's Pride Nursery**<br>Eve · 창립자<br>상시 10~20두 | <span class="fit-badge unknown">미확인</span> | 즉시 사용 의사 부재로 **가격 미전개.** 창립자 본인이 결정권자이나 **협력 셸터 SW 접근권 없음** |
 | 2 | T1 | **Hearts & Bones**<br>Amy · 벤더 선정<br>실무자 아님 | <span class="fit-badge unknown">미확인</span> | $99/월 기준선에 이의 없었으나 가격 구조 미확정. **Amy는 게이트키퍼**이며 최종 결정은 Whitney(President)·Kevin(CFO) |
 | 3 | A | **Santa Barbara County Animal Services**<br>Sarah Aguilar · 국장<br>연 6,000두 · 셸터 3개소 | <span class="fit-badge partial">초기 신호</span> | `depending on the cost` 전제하 유용성 인정, 실증 시 **재원 확보 경로 탐색 의사.** 가격대·예산·결재자·조달 절차 전부 미확인 |
-| 4 | B | **Kzoo Cat Cafe and Rescue**<br>Abbey Thompson · 창립자<br>임보 10~15개소 | <span class="fit-badge partial">조건부</span><br>중간 이하 | **4개 조건 충족 시** 일부 예산 배정 가능 — 가격 적정·워크플로 적합·임보자 사용·Medical Director 동의. 부담 기준 가격 미제시, 기존 SW도 무료·기본형 위주. **단독 결재 아님** |
-| 5 | B | **Citizens for Animal Protection**<br>Jared Carroll · 수의 진료 총괄<br>연 4,000두 · 임보 1/3 | <span class="fit-badge good">중상</span><br>전제 미확인 | **도구 비용 < 해결 대상 문제의 비용** 원칙을 자체 제시, 인건비 회수를 절감으로 규정. 부서 한정 도구는 본인 예산 범위 내일 경우 승인 가능으로 판단<br>· 단 **"부서 한정 도구 = Jared 예산" 전제 자체가 미확인**(5절 특이사항 참조). 부서장 **전결 한도**도 비공개 `[미확인]` |
+| 4 | B | **Kzoo Cat Cafe and Rescue**<br>Abbey Thompson · 창립자<br>임보 10~15개소 | <span class="fit-badge partial">조건부</span> | **4개 조건 충족 시** 일부 예산 배정 가능 — 가격 적정·워크플로 적합·임보자 사용·Medical Director 동의. 부담 기준 가격 미제시, 기존 SW도 무료·기본형 위주. **단독 결재 아님** |
+| 5 | B | **Citizens for Animal Protection**<br>Jared Carroll · 수의 진료 총괄<br>연 4,000두 · 임보 1/3 | <span class="fit-badge good">중상</span><br>`전제` | **도구 비용 < 해결 대상 문제의 비용** 원칙을 자체 제시, 인건비 회수를 절감으로 규정. 부서 한정 도구는 본인 예산 범위 내일 경우 승인 가능으로 판단<br>· 단 **"부서 한정 도구 = Jared 예산" 전제 자체가 미확인**(5절 특이사항 참조). 부서장 **전결 한도**도 비공개 `[미확인]` |
 | 6 | A | **Little Traverse Bay Humane Society**<br>Sarah Schertel · 운영 총괄<br>연 1,000두 | <span class="fit-badge unknown">미검증</span> | 가격·예산·결재 라인 **미질의.** 기능 중복 시 Pet Academy(유료) 해지 후 Petszel(무료) 존치 이력 — **동등 가치 시 가격이 선택 좌우** |
 
 ## 5. 후속 조치 및 특이사항
@@ -74,6 +74,7 @@
 - **1절 종합 판독이 결론, 2~5절 표가 근거다.** 판독이 흔들리면 해당 근거 표의 열을 세로로 다시 훑는다
 - **2·3절을 우선 대조한다.** 통증 강도가 낮으면 제품 개선으로도 판매되지 않고, 솔루션 적합이 낮으면 통증 규모와 무관하게 자사 제품으로 해결되지 않는다. 두 항목이 동시에 높은 콜의 조건(소재·응답자 프로필)이 곧 ICP다
 - 「소재」 열의 `A`·`B` 는 M1 광고 소재, `T1` 은 트랙 1(네트워크 소개 유입)이다
+- 판정 열은 등급만 싣는다. 그 등급의 근거와 단서(무엇을 대체하는가·전제가 무엇인가)는 바로 오른쪽 열에 있다
 - **통증 강도는 판단 기준 주체를 함께 표기한다.** 응답자 본인의 통증과 전언으로 옮긴 제3자의 통증은 가중치가 다르다
 - **2·5절 표는 본문 폭을 넘어 가로로 스크롤된다.** 오른쪽 끝에서 잘린 열이 있으면 표 아래 스크롤바로 이동한다
 - 5절 「특이사항」이 특정 콜에서만 비대해지면, 해당 콜의 인사이트 문서를 별도로 분리한다

@@ -631,7 +631,7 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .markdown-body .table-scroll td:nth-child(3) { min-width: 132px; max-width: 148px; }
 /* 4열은 전 표에서 판정 열(강도·적합·지불) 또는 후속이다. 표끼리 세로로 맞춰 보이도록 폭을 고정한다 */
 .markdown-body .table-scroll th:nth-child(4),
-.markdown-body .table-scroll td:nth-child(4) { min-width: 76px; max-width: 126px; }
+.markdown-body .table-scroll td:nth-child(4) { min-width: 62px; max-width: 118px; }
 /* 5열은 각 표에서 가장 긴 서술 열(근거·결정 구조·특이사항), 6열은 표 2의 현재 도구뿐이다.
    7~11열 규칙은 11열 단일표 시절의 잔재라 제거했다 — 특정도가 높아 위의 240px 상한을 덮고 있었다 */
 .markdown-body .table-scroll th:nth-child(5),
