@@ -55,7 +55,7 @@ const collectionDefinitions = {
   results: { title: "실험 결과 보고서", lead: "집행한 실험의 성과를 사전 판정 기준으로 대조해 정리한 보고서입니다.", homeLead: "집행한 실험의 성과를 사전 판정 기준으로 대조해 정리한 보고서입니다.", paths: ["deliverables/Track2_최종성과분석_20260818.md", "deliverables/Track2_M1_중간성과분석_20260815.md"], homePaths: ["deliverables/Track2_최종성과분석_20260818.md", "deliverables/Track2_M1_중간성과분석_20260815.md"] },
   interview: { title: "고객 인터뷰", lead: "데모 콜 진행 가이드와 사전조사, 콜별 인사이트를 모은 보드입니다.", paths: ["deliverables/Track2_리드판정보드.md", "지나인터뷰_계획.md", "deliverables/중간점검_2_Gina_인터뷰_인사이트_202608.md", "deliverables/중간점검_3_Track2_광고_랜딩_준비안_202608.md", "deliverables/중간점검_4_조니_직접인터뷰_수행준비_202608.md", "deliverables/Track2_리드인터뷰_가이드_20260817.md", "deliverables/M2_데모콜_인사이트보드.md", "analysis/Eve인터뷰_녹취록_20260817.md"] },
   workflow: { title: "쉘터 업무 플로우", lead: "미국 동물보호소·레스큐의 조직 유형과 구조부터 입양까지의 업무 흐름을 정리한 문서입니다.", paths: ["미국쉘터_구조부터입양까지_업무플로우_딥리서치_20260725.md"] },
-  competitors: { title: "경쟁사 조사", lead: "자사 포지셔닝 정의와 경쟁 4사·Chameleon·24PetShelter의 제품·가격·기능, 사용자 리뷰와 화면 검증 자료입니다.", homeLead: "자사 포지셔닝 정의와 경쟁 제품의 화면·기능 검증 자료입니다.", paths: ["analysis/포지셔닝_경쟁제품_축비교_20260820.md", "경쟁4사_검증본_M1실무요약_20260726.md", "analysis/Chameleon_UIUX_분석_20260820.md", "경쟁4사_딥리서치_20260725.md", "경쟁4사_리뷰40개_파일럿코딩_20260726.md", "analysis/Pawlytics_정식계정_과업재검증_20260729.md", "analysis/Petstablished_전체제품_UIUX_검증_20260729.md", "Petszel_경쟁조사_20260825.md"], homePaths: ["경쟁4사_검증본_M1실무요약_20260726.md", "analysis/Chameleon_UIUX_분석_20260820.md", "Petszel_경쟁조사_20260825.md"] },
+  competitors: { title: "경쟁사 조사", lead: "자사 포지셔닝 정의와 경쟁 4사·Chameleon·24PetShelter의 제품·가격·기능, 사용자 리뷰와 화면 검증 자료입니다.", homeLead: "자사 포지셔닝 정의와 경쟁 제품의 화면·기능 검증 자료입니다.", paths: ["analysis/포지셔닝_경쟁제품_축비교_20260820.md", "경쟁4사_검증본_M1실무요약_20260726.md", "analysis/Chameleon_UIUX_분석_20260820.md", "경쟁4사_딥리서치_20260725.md", "경쟁4사_리뷰40개_파일럿코딩_20260726.md", "analysis/Pawlytics_정식계정_과업재검증_20260729.md", "analysis/Petstablished_전체제품_UIUX_검증_20260729.md", "Petszel_경쟁조사_20260825.md", "analysis/Petszel_UIUX_분석_20260825.md"], homePaths: ["경쟁4사_검증본_M1실무요약_20260726.md", "analysis/Chameleon_UIUX_분석_20260820.md", "Petszel_경쟁조사_20260825.md", "analysis/Petszel_UIUX_분석_20260825.md"] },
   methods: { title: "출처·분석 방법", lead: "리뷰 출처, 데모 접근 경로와 기획·분석의 근거를 정리한 문서입니다.", paths: ["EBP_ShelterCRM_2주계획검토.md", "EBP_산타바바라_데모미팅전략.md", "analysis/SantaBarbara_카운티_사전조사_20260817.md", "analysis/HSWC_Maryland_사전조사_20260819.md", "analysis/TJO_Springfield_사전조사_20260819.md", "analysis/Wishful_Whiskers_Rescue_TNR_사전조사_20260820.md", "analysis/Mizfit_Muttz_Rescue_사전조사_20260820.md", "analysis/Blue_Mountain_Animal_Rescue_사전조사_20260820.md", "analysis/Wilkes_Rescue_Group_사전조사_20260820.md", "analysis/Paws_Place_Rescue_Inc_사전조사_20260820.md", "analysis/North_Texas_Australian_Shepherd_Rescue_사전조사_20260820.md", "analysis/North_County_Paws_Cause_사전조사_20260820.md", "analysis/Kzoo_Cat_Cafe_and_Rescue_사전조사_20260820.md", "analysis/Citizens_for_Animal_Protection_사전조사_20260820.md", "analysis/Humane_Society_사전조사_20260820.md", "sources/source-index.md", "EBP_경쟁4사_리뷰전수_질적분석.md", "sources/competitor-demo-access.md", "analysis/EBP_경쟁사_리뷰_데모_UIUX_전문가패널_20260728.md", "deliverables/Track2_ICP_Persona_소재_정의_근거_20260805.md", "analysis/소재C_인테이크필드_재검증_20260809.md", "analysis/EBP_초보_인터뷰어용_디스커버리_인터뷰_설계_202608.md", "analysis/Little_Traverse_Bay_Humane_Society_사전조사_20260820.md"] },
   appendix: { title: "별첨", lead: "실행에 필요한 설정 가이드와 Shelter CRM 본 조사 범위 밖의 참고 자료입니다.", paths: ["펫나우_비문인식_현재기능_검증_20260726.md", "deliverables/Track2_광고계정_설정가이드_Meta_LinkedIn_20260805.md", "deliverables/Track2_LMF_랜딩_구현_및_이벤트_정의서_20260810.md", "deliverables/Track2_LMF_데모_팀피드백_반영결과_20260811.md", "deliverables/Track2_LMF_랜딩_최종QA_20260813.md"] },
 };
@@ -96,6 +96,7 @@ const documentRoles = new Map([
   ["analysis/포지셔닝_경쟁제품_축비교_20260820.md", "포지셔닝 판단"],
   ["경쟁4사_검증본_M1실무요약_20260726.md", "먼저 읽기"],
   ["analysis/Chameleon_UIUX_분석_20260820.md", "화면 판독"],
+  ["analysis/Petszel_UIUX_분석_20260825.md", "화면 판독"],
   ["경쟁4사_딥리서치_20260725.md", "상세 자료"],
   ["경쟁4사_리뷰40개_파일럿코딩_20260726.md", "분석 근거"],
   ["sources/source-index.md", "리뷰 출처"],
@@ -319,7 +320,7 @@ function renderDocument(id) {
   const bodyClasses = [];
   if (doc.path === "deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md") bodyClasses.push("track2-plan");
   if (doc.path === "deliverables/M2_데모콜_인사이트보드.md") bodyClasses.push("call-board");
-  if (["analysis/포지셔닝_경쟁제품_축비교_20260820.md", "analysis/Chameleon_UIUX_분석_20260820.md"].includes(doc.path)) bodyClasses.push("visual-doc");
+  if (["analysis/포지셔닝_경쟁제품_축비교_20260820.md", "analysis/Chameleon_UIUX_분석_20260820.md", "analysis/Petszel_UIUX_분석_20260825.md"].includes(doc.path)) bodyClasses.push("visual-doc");
   const bodyClass = bodyClasses.length ? ` ${bodyClasses.join(" ")}` : "";
   const children = documentChildren.get(doc.path);
   const childDocs = children ? children.paths.map((path) => docs.find((item) => item.path === path)).filter(Boolean) : [];

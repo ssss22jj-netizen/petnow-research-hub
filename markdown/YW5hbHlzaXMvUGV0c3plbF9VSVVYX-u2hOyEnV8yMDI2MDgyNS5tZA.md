@@ -1,0 +1,180 @@
+# Petszel 화면 판독 — 입양자 앱 UI·정보구조·수익 지점
+
+- 조사일: 2026.08.25 / 조사자: 흰둥이
+- 방법: ①벤더 공식 데모영상(2026-02-25 업로드, 2분 9초) 프레임 직접 판독 ②마케팅 3개 페이지 브라우저 렌더링 ③지원문서 60여 편 전수. **쉘터 계정은 만들지 않음**(가짜 조직 등록 회피) — 로그인 뒤의 쉘터 대시보드는 미확인
+- 화면 이미지는 `analysis/assets/petszel-ui-web/`
+- 선행 문서: `Petszel_경쟁조사_20260825.md`(사업 모델·연동·규모·위협 판정)
+- 근거 등급: 화면 구조·라벨·탭 구성은 영상 프레임 직접 판독 [검증됨·L0]. 대시보드 구조·설문 응답률·과금 단가는 미확인. 설계 의도 해석은 [의견·L4]
+
+## 0. 결론
+
+| 항목 | 판정 |
+| --- | --- |
+| 제품 형태 | 입양자용 **웹앱**(설치 없음) + 쉘터 대시보드. 쉘터 관리 시스템 대체가 아님 [검증됨·L0] |
+| 주 사용자 | 화면의 거의 전부가 **입양자**용. 쉘터 직원이 보는 것은 이메일 알림 한 장 |
+| 브랜딩 | 상단에 쉘터 로고, Petszel은 이메일 하단 `Powered by Petszel` 각주로만 노출 |
+| 정보 구조 | 하단 5탭 `Profile` `Guide` `(동물이름)` `Pet Care` `Folder` — **가운데 탭이 동물 이름** |
+| 첫 화면 | 환영 문구 + **3개짜리 온보딩 체크리스트**. 각 항목에 소요시간(`2m onboarding` `2m survey` `2m read`) 표기 |
+| 수익 지점 | 화면 안에 5개 — 병원 예약 배너·추천 병원 목록·파트너 제품·기부 폼·TeleAdvice 통화 |
+| 설문의 위치 | 별도 채널이 아니라 **체크리스트 항목**으로 앱 안에 들어가 있음 |
+| 디자인 밀도 | 한 화면에 카드 3~5개. 필드 입력을 요구하는 화면은 기부 폼 하나뿐 |
+| 미확인 | 쉘터 대시보드 전 화면, 설문 결과 뷰, 프로바이더 등록 화면 |
+
+**한 줄** — 입양자에게 **읽을 것과 연결할 곳**을 주는 앱이다. 입양자가 무언가를 기록하게 만드는 앱이 아니다. [의견·L4]
+
+## 1. 조사 한계
+
+- 쉘터 대시보드·설문 결과 화면은 계정이 있어야 접근 가능. 가짜 쉘터로 가입하지 않음
+- 지원문서 60여 편에 **제품 UI 스크린샷이 한 장도 없음** — 벤더가 화면으로 팔지 않음
+- 마케팅 페이지의 이미지는 대부분 스톡 사진. 실제 UI는 히어로 목업 1장과 데모영상뿐
+- 따라서 아래 판독은 **입양자 앱에 한정**되며, 쉘터 측 사용성은 판정하지 않음
+
+## 2. 판독한 화면 목록
+
+| 파일 | 화면 | 출처 |
+| --- | --- | --- |
+| `01-flow-shelter-to-home.jpg` | 쉘터 → 가정 연결 도식 | 데모영상 00:50 |
+| `02-app-home.jpg` | 앱 홈 — 환영 + 온보딩 체크리스트 | 데모영상 01:00 |
+| `03-app-folder.jpg` | Folder 탭 — 의료기록·입양 서류·아티클 | 데모영상 01:57 |
+| `04-article-detail.jpg` | 아티클 상세 — Rule of Three | 데모영상 01:11 |
+| `05-providers-map.jpg` | Pet Care 탭 — 지역 병원 지도 | 데모영상 01:20 |
+| `06-app-spread.jpg` | 5개 화면 스프레드(홈·프로필·TeleAdvice·Pet Care) | 데모영상 01:53 |
+| `07-donation.jpg` | 기부 폼 | 데모영상 01:33 |
+| `08-staff-alert.jpg` | 쉘터 직원이 받는 알림 | 데모영상 01:47 |
+| `09-partner-products.jpg` | 파트너 제품 연결 도식 | 데모영상 01:28 |
+| `10-three-phones.jpg` | 의료 요약 PDF·홈·입양자 이메일 | 데모영상 00:02 |
+| `11-web-shelters-hero.jpg` | 쉘터용 랜딩 상단 | 렌더링 2026-08-25 |
+| `12-web-hills-hero.jpg` | 힐스 전용 랜딩 상단 | 동일 |
+| `13-web-hills-steps.jpg` | 힐스 온보딩 3단계 | 동일 |
+| `14-web-hero-phone.jpg` | 히어로 앱 목업 확대 | 동일 |
+
+## 3. 입양자 앱 화면 판독
+
+### 3.1 홈 — 체크리스트가 첫 화면이다
+
+- 상단: 쉘터 로고(`Springfield Animal Shelter`) + Petszel 컬러바. 좌측 햄버거, 우측 `Switch Pet`
+- 좌상단 `Check-Ins` 아이콘에 **빨간 배지 1** — 미처리 체크인 수를 뱃지로 알림
+- 동물 아바타 + `Welcome home, Daisy!` + 2줄 안내문
+- **온보딩 체크리스트 3항목**
+  - `Let's get acquainted` — `2m onboarding` (완료, 체크됨)
+  - `Check-In: Day One` — `2m survey`
+  - `Read: "Rule of 3" article` — `2m read`
+- 하단에 `Easy Vet Care` 배너(예약 유도), `Pet Care Providers` 카드
+- 하단 탭 5개: `Profile` `Guide` `Daisy` `Pet Care` `Folder`
+
+**판독** — 설문을 이메일로 따로 보내는 구조가 아니라 **앱 첫 화면의 할 일 목록에 얹었다.** 각 항목에 예상 소요시간을 붙여 심리적 진입장벽을 낮춤. 가운데 탭에 동물 이름을 넣어 앱 전체를 한 마리 중심으로 묶음 [의견·L4]
+
+### 3.2 Folder — 서류 보관함
+
+- `Daisy's Folder` 아래 접이식 2개
+  - `Medical Records`
+  - `Adoption Packet` — `Adoption Contract (PDF)` · `Dog Adoption Guide` · `Adopter Resources`
+- 그 아래 `Articles` 카드 3개(`Rule of 3 for Dogs`, `Heartworms: The Hidden Threat Every Dog Faces`, `Puppy Vaccines: What you need to know!`) — 일부는 영상 재생 아이콘
+
+**판독** — 종이 입양 패킷을 그대로 디지털로 옮긴 화면. 별도 화면 `10-three-phones.jpg`에서 `DaisyMedRecs.pdf` 라는 **의료 요약 PDF 다운로드**가 확인됨. 기록을 앱 안에 가두지 않고 PDF로 내보내는 설계 [검증됨·L0]
+
+### 3.3 아티클 상세
+
+- 상단 이미지 + 집필자 배지(`Dr. Mike Greenberg` — Petszel Chief Veterinary Officer)
+- 제목 `Rule of Three`, 부제 `Milestones for dogs acclimating to their new homes`
+- 우측 `Video Version ▶` 토글 — 같은 콘텐츠를 글/영상 둘 중 하나로 선택
+
+**판독** — 콘텐츠에 수의사 실명을 붙여 신뢰를 만들고, 읽기·보기 선택지를 준다
+
+### 3.4 Pet Care — 지역 병원 지도
+
+- 지도 위 핀 + 반경 원, 우측에 병원 카드 목록(별점·주소·전화·`BOOK ONLINE NOW` 버튼)
+- 상단 `Find a Veterinarian` 검색 + 필터
+- 영상 자막: `Veterinary recommendations based on the adopter's location`
+
+**판독** — 지원문서상 이 목록은 **쉘터가 직접 등록**하는 항목이며, 추천(❤️)·오퍼·차단 상태를 쉘터가 지정한다. 화면에서는 그 통제가 보이지 않고 자연스러운 추천으로 보임 [검증됨·L0 문서 / 의견·L4 해석]
+
+### 3.5 TeleAdvice — 영상 상담
+
+- 전체화면 영상통화 UI. 하단 3버튼(스피커·카메라·종료)
+- 상단 `Teleadvice` 라벨 + 쉘터 로고 유지
+
+**판독** — 입양 후 30일 무료, 이후 입양자 월 구독. **쉘터 브랜드 화면 안에서 유료 전환이 일어난다** [검증됨·L0]
+
+### 3.6 기부 폼
+
+- `One Time` / `Monthly` 토글, 금액 버튼(`$5` `$15` `$20` `$30` `$50`) + 직접 입력
+- 이름·이메일·전화·카드 정보 → `MAKE A DONATION`
+- 영상 자막: `Highlight donation opportunities`
+
+**판독** — 앱 전체에서 **입양자가 키보드를 쓰는 유일한 화면이 기부 폼이다.** 상태 보고·기록 입력을 요구하는 화면은 없음
+
+### 3.7 입양자에게 가는 이메일
+
+- 발신 `Springfield Animal Shelter`, 본문 상단에 쉘터 로고 + 작게 `Powered by Petszel`
+- 축하 문구 + 동물 사진 + `VIEW DAISY'S APP` 버튼
+
+**판독** — 입양자 시점에서 이것은 **쉘터가 보낸 메일**이다. Petszel은 각주 크기로만 등장
+
+## 4. 쉘터가 보는 화면
+
+- 확인된 것은 **이메일 알림 한 장**뿐
+- 화면 내용: `New message!` / `Rachel Smith · Kit · Challenges With Pet Introductions` / `Open` 버튼
+- 제목 규칙은 지원문서와 일치 — 주제 유형(행동·의료·일반) + 입양 지점을 제목에 넣어 수신함 필터로 팀 라우팅
+
+**판독** — 쉘터 직원의 일상 진입점이 대시보드가 아니라 **메일함**으로 설계돼 있음. 새 도구에 로그인하는 습관을 요구하지 않는 구조 [의견·L4]
+
+## 5. 화면에 드러난 수익 지점
+
+| 지점 | 화면 근거 | 성격 |
+| --- | --- | --- |
+| 병원 예약 | 홈 `Easy Vet Care` 배너, 병원 카드 `BOOK ONLINE NOW` | 병원 송객 |
+| 추천 병원 목록 | Pet Care 탭 지도·목록 | 쉘터가 등록, 오퍼 노출 가능 |
+| 파트너 제품 | 쉘터를 가운데 두고 Hill's 사료·NexGard·Heartgard 제품을 연결하는 도식 | 브랜드 노출 |
+| 기부 | 기부 폼 | 쉘터 수입(간접 가치) |
+| TeleAdvice | 영상통화 화면 | 입양자 구독 |
+
+**판독** — 무료의 재원이 화면에 그대로 보인다. `09-partner-products.jpg` 도식은 쉘터 건물 옆에 돼지저금통을 두고 사료·구충제 브랜드를 양쪽에 배치한 그림으로, **제품 노출이 곁가지가 아니라 구조의 일부**임을 벤더 스스로 표현함 [검증됨·L0]
+
+## 6. 마케팅 페이지 판독
+
+### 6.1 쉘터용 랜딩
+
+- 히어로: `Shelter-branded post-adoption app` + `BOOK A WALK-THROUGH` / `SIGN UP NOW`
+- 중단 카피: **`Get started in minutes. No downloads. It's free.`**
+- 기능 4개(입양자 여정·설문 인사이트·연동·파트너 혜택)를 글머리표로만 나열. **대시보드 스크린샷 없음**
+- 실명 후기: San Diego Humane(Director of Operational Programs), Deputy Director 등
+
+### 6.2 힐스 전용 랜딩 — 실제 유입 경로
+
+- 헤드라인: `You care for the pets. We'll handle the paperwork and reporting.`
+- 도식: `Your adopter spreadsheet → Now automated by Petszel → sent to Hill's`
+- 온보딩 3단계
+  1. `Check the fit—no commitment needed`
+  2. `Connect—zero tech headaches` — **설문 하나 채우면 벤더가 쉘터 소프트웨어를 연결**
+  3. `Set it and forget it`
+- 효익: **`Save 10+ hours per month`**, 데이터 입력 불필요, 힐스 요건 자동 준수
+- 실명 후기: Louisiana SPCA COO — "직원 한 명을 다른 데이터 업무로 돌릴 수 있었다"
+- 입양 후 지원은 페이지 하단에 **`Optional`** 로 분리 배치
+
+**판독** — 힐스 월간 보고 자동화가 문을 열고, 입양 후 지원은 옵션으로 얹는 구조. 그리고 **셋업 노동을 벤더가 흡수한다고 명시**한다. 도입이 오래 걸린다면 기술 난이도 때문이 아니라는 방증 [검증됨·L0]
+
+## 7. Petify for Shelters 함의
+
+- **겹치지 않는다** — Petszel 화면은 전부 입양 이후, 사용자는 입양자다. 보호 중 동물의 상태·잔여 과업, 임보자 체크인 화면은 존재하지 않음
+- **차용할 것 ①: 소요시간 표기.** `2m survey` 처럼 걸리는 시간을 항목마다 붙여 응답 저항을 낮추는 방식은 임보 체크인에 그대로 옮길 수 있음
+- **차용할 것 ②: 메일함을 진입점으로 두기.** 담당자가 새 대시보드에 로그인하는 습관을 만들지 않아도 되게 알림 제목에 유형·대상을 넣어 필터 가능하게 설계
+- **차용할 것 ③: 기록의 출구를 PDF로.** 앱 안에 기록을 가두지 않고 요약 PDF로 내보내는 구조는 Jared가 요구한 `Petify → PDF → PetPoint` 인계와 같은 형태
+- **대조점** — Petszel 입양자 앱에는 **사용자가 정보를 넣는 화면이 사실상 없다**(기부 폼 제외). 임보 체크인은 반대로 임보자가 매주 정보를 넣어야 성립함. 같은 "간단한 링크 하나" 로 보여도 요구하는 행동의 무게가 다르므로, Petszel의 응답률을 우리 기준선으로 삼을 수 없음 [의견·L4]
+- **세일즈 화법** — CAP처럼 Petszel을 이미 쓰는 조직에는 "Petszel이 입양 후에 하는 일을 보호·임보 기간에 하는 도구" 라는 설명이 이미 통했음(Jared 인터뷰에서 본인이 먼저 그렇게 정리)
+
+## 8. 후속 확인 항목
+
+1. 쉘터 대시보드 실제 화면 — CAP·산타바바라 등 사용 조직 데모콜에서 화면 공유 요청
+2. 입양자 체크인 실제 응답률 — 대시보드에 표시되는 수치
+3. 추천 병원·오퍼 등록 화면의 조작 난도 — 쉘터가 실제로 유지하는지
+4. TeleAdvice 월 구독 단가와 전환율
+5. 힐스 자동 보고를 쓰는 조직이 입양 후 지원까지 켜는 비율
+
+---
+
+### 출처
+
+- Petszel 공식 데모영상 — `vimeo.com/1168139246` (Petszel Inc., 2026-02-25 업로드, 129초). 프레임 직접 판독
+- petszel.com — 홈 / `for-shelters-and-rescues` / `for-hills-shelters` 브라우저 렌더링 (2026-08-25)
+- support.petszel.com — 쉘터·입양자 지원문서 전수 (2026-08-25)
