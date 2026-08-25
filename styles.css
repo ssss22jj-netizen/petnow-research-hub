@@ -607,6 +607,15 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
   .markdown-body .board-synthesis table { table-layout: auto; }
   .markdown-body .board-synthesis th:nth-child(1),
   .markdown-body .board-synthesis td:nth-child(1) { width: auto; }
+  /* 좁은 화면에서는 고정 폭을 풀고 래퍼의 가로 스크롤에 맡긴다 — 138px 고정을 유지하면
+     서술 열이 90px 아래로 내려가 읽을 수 없다 */
+  .markdown-body .table-scroll table { table-layout: auto; width: max-content; min-width: 100%; }
+  .markdown-body .table-scroll th,
+  .markdown-body .table-scroll td { min-width: 96px; }
+  .markdown-body .table-scroll th:nth-child(1),
+  .markdown-body .table-scroll td:nth-child(1) { min-width: 28px; }
+  .markdown-body .table-scroll th:nth-child(2),
+  .markdown-body .table-scroll td:nth-child(2) { min-width: 34px; }
 }
 
 /* 데모 콜 보드 — 표를 판정 항목별로 분리한 뒤의 열 구조에 맞춘다 (2026-08-25 재작성).
@@ -620,24 +629,22 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .table-scroll::-webkit-scrollbar { height: 12px; }
 .table-scroll::-webkit-scrollbar-track { background: rgba(15,45,33,.10); border-radius: 6px; }
 .table-scroll::-webkit-scrollbar-thumb { background: rgba(15,45,33,.42); border-radius: 6px; }
-.markdown-body .table-scroll table { display: table; width: max-content; min-width: 100%; margin: 0; font-size: 12.5px; }
+.markdown-body .table-scroll table { display: table; width: 100%; table-layout: fixed; margin: 0; font-size: 12.5px; }
 .markdown-body .table-scroll th,
-.markdown-body .table-scroll td { min-width: 92px; max-width: 240px; padding: 9px 11px; word-break: break-word; overflow-wrap: anywhere; }
+.markdown-body .table-scroll td { min-width: 0; max-width: none; padding: 9px 11px; word-break: break-word; overflow-wrap: anywhere; }
+/* fixed 레이아웃에서는 width 만 쓴다. min-width 를 함께 걸면 그것이 width 처럼 굳어
+   모든 열이 고정되고, 폭 합이 컨테이너와 어긋나면 빈 열이 생긴다 (2026-08-25 사고 원인) */
 .markdown-body .table-scroll th:nth-child(1),
-.markdown-body .table-scroll td:nth-child(1) { min-width: 26px; max-width: 30px; padding-right: 6px; text-align: right; color: var(--ink-4); }
+.markdown-body .table-scroll td:nth-child(1) { width: 28px; padding-right: 6px; text-align: right; color: var(--ink-4); }
 .markdown-body .table-scroll th:nth-child(2),
-.markdown-body .table-scroll td:nth-child(2) { min-width: 30px; max-width: 36px; padding-left: 4px; padding-right: 4px; text-align: center; }
+.markdown-body .table-scroll td:nth-child(2) { width: 34px; padding-left: 4px; padding-right: 4px; text-align: center; }
 .markdown-body .table-scroll th:nth-child(3),
-.markdown-body .table-scroll td:nth-child(3) { min-width: 132px; max-width: 148px; }
-/* 4열은 전 표에서 판정 열(강도·적합·지불) 또는 후속이다. 표끼리 세로로 맞춰 보이도록 폭을 고정한다 */
+.markdown-body .table-scroll td:nth-child(3) { width: 138px; }
 .markdown-body .table-scroll th:nth-child(4),
-.markdown-body .table-scroll td:nth-child(4) { min-width: 62px; max-width: 118px; }
-/* 5열은 각 표에서 가장 긴 서술 열(근거·결정 구조·특이사항), 6열은 표 2의 현재 도구뿐이다.
-   7~11열 규칙은 11열 단일표 시절의 잔재라 제거했다 — 특정도가 높아 위의 240px 상한을 덮고 있었다 */
-.markdown-body .table-scroll th:nth-child(5),
-.markdown-body .table-scroll td:nth-child(5) { min-width: 220px; max-width: 260px; }
+.markdown-body .table-scroll td:nth-child(4) { width: 68px; }
+/* 6열은 표 2의 현재 도구뿐. 5열은 지정하지 않아 남는 폭을 전부 가져간다 */
 .markdown-body .table-scroll th:nth-child(6),
-.markdown-body .table-scroll td:nth-child(6) { min-width: 92px; max-width: 104px; }
+.markdown-body .table-scroll td:nth-child(6) { width: 92px; }
 
 
 /* ── Track 2 리드 판정 보드 (7열) ──
