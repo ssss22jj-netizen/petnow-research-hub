@@ -127,6 +127,5 @@
 
 ## 9. 관련 문서
 
-- `analysis/Chameleon_UIUX_분석_20260820.md` — 화면 10점 판독 결과
-- `analysis/Chameleon_실사용동작_조사_20260820.md` — 파일 흐름·운영 실태
+- `analysis/Chameleon_UIUX_분석_20260820.md` — 화면 10점 판독 결과와 파일 흐름·운영 실태 종합
 - `analysis/데모_UI전수와_기획의도_20260820.md` — 자사 데모 화면 전수와 기획 의도
