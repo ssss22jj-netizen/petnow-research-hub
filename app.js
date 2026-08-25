@@ -12,11 +12,12 @@ const byPath = new Map(docs.map((doc) => [doc.path, doc]));
 const routes = [
   ["문서 찾기", "/", "⌂", "전체 문서"],
   ["주제별 문서", "/library/m2", "◐", "M2 계획·현황"],
-  ["주제별 문서", "/library/m1", "◷", "M1 계획·산출물"],
   ["주제별 문서", "/library/results", "◈", "실험 결과 보고서"],
   ["주제별 문서", "/library/interview", "◎", "고객 인터뷰"],
   ["주제별 문서", "/library/workflow", "◫", "쉘터 업무 플로우"],
   ["주제별 문서", "/library/competitors", "▥", "경쟁사 조사"],
+  /* M1 은 종료된 마일스톤이라 참고 자료 바로 위로 내렸다 (2026-08-25 카야 지시) */
+  ["주제별 문서", "/library/m1", "◷", "M1 계획·산출물"],
   ["주제별 문서", "/library/methods", "▧", "출처·분석 방법"],
   /* 사전조사 14건은 출처·분석 방법 아래 한 단계 들어간 페이지에 모은다 (2026-08-25 카야 지시).
      홈·상위 목록에 전부 늘어놓으면 나머지 문서가 묻힌다 */
@@ -53,7 +54,8 @@ function pageHeader(eyebrow, title, lead) {
 }
 
 /* 컬렉션 정의. paths 순서는 화면 순서가 아니다 — 표시 순서는 sortEntries() 가
-   「M2 먼저 · 최신순」으로 정한다 (2026-08-25 카야 지시). homePaths 는 홈에만 노출할 부분집합. */
+   「M2 먼저 · 최신순」으로 정한다 (2026-08-25 카야 지시).
+   homeLimit 은 홈에서 먼저 보일 개수 — 나머지는 「더보기」로 그 자리에서 펼쳐진다. */
 const collectionDefinitions = {
   m2: {
     title: "M2 계획·현황",
@@ -86,10 +88,12 @@ const collectionDefinitions = {
   },
   interview: {
     title: "고객 인터뷰",
-    lead: "리드 판정 보드와 콜별 인사이트를 모은 화면입니다. 진행 가이드·체크리스트는 별첨, 녹취록은 출처·분석 방법에 있습니다.",
+    lead: "리드 판정 보드와 콜별 인사이트를 모은 화면입니다. 콜 전 사전조사는 출처·분석 방법의 리드 사전조사, 진행 가이드·체크리스트는 별첨, 녹취록은 출처·분석 방법에 있습니다.",
     paths: [
       "deliverables/Track2_리드판정보드.md",
       "deliverables/M2_데모콜_인사이트보드.md",
+      "deliverables/Eve_인터뷰_인사이트_20260817.md",
+      "deliverables/Amy_인터뷰_인사이트_Hearts_Bones_20260818.md",
       "deliverables/중간점검_2_Gina_인터뷰_인사이트_202608.md",
     ],
   },
@@ -102,6 +106,7 @@ const collectionDefinitions = {
     title: "경쟁사 조사",
     lead: "자사 포지셔닝 정의와 경쟁 4사·Chameleon·24PetShelter·Petszel의 제품·가격·기능, 사용자 리뷰와 화면 검증 자료입니다.",
     homeLead: "자사 포지셔닝 정의와 경쟁 제품의 화면·기능 검증 자료입니다.",
+    homeLimit: 4,
     paths: [
       "analysis/포지셔닝_경쟁제품_축비교_20260820.md",
       "Petszel_경쟁조사_20260825.md",
@@ -112,12 +117,6 @@ const collectionDefinitions = {
       "경쟁4사_리뷰40개_파일럿코딩_20260726.md",
       "analysis/Pawlytics_정식계정_과업재검증_20260729.md",
       "analysis/Petstablished_전체제품_UIUX_검증_20260729.md",
-    ],
-    homePaths: [
-      "analysis/포지셔닝_경쟁제품_축비교_20260820.md",
-      "Petszel_경쟁조사_20260825.md",
-      "analysis/Petszel_UIUX_분석_20260825.md",
-      "analysis/Chameleon_UIUX_분석_20260820.md",
     ],
   },
   methods: {
@@ -177,7 +176,7 @@ const collectionDefinitions = {
   },
 };
 
-const primaryGroups = ["m2", "m1", "results", "interview", "workflow", "competitors", "methods", "appendix"];
+const primaryGroups = ["m2", "results", "interview", "workflow", "competitors", "m1", "methods", "appendix"];
 
 /* Markdown 문서가 아닌 목록 항목 — 외부 시트·사이트 내 시각 페이지·하위 컬렉션.
    문서 행과 같은 줄에 섞여 정렬되므로 milestone·date 를 문서와 동일하게 갖는다.
@@ -284,10 +283,11 @@ function compactDocRow(doc, index) {
 }
 
 /* 목록의 한 줄. 문서·외부 시트·시각 페이지·하위 컬렉션이 모두 같은 형태로 나온다 */
-function listRow(entry, index) {
+function listRow(entry, index, extraClass = "") {
   const number = String(index + 1).padStart(2, "0");
   const isExternal = entry.kind === "external";
   const classes = ["compact-doc-row"];
+  if (extraClass) classes.push(extraClass);
   if (isExternal) classes.push("external-doc-row");
   if (entry.kind === "collection") classes.push("collection-link-row");
   const attributes = isExternal ? ' target="_blank" rel="noopener noreferrer"' : "";
@@ -337,20 +337,19 @@ function extraEntry(extra) {
   return { ...extra, href: `#/library/${extra.collectionKey}`, count: target ? target.paths.length : 0 };
 }
 
-function entriesFor(key, { home = false } = {}) {
+function entriesFor(key) {
   const definition = collectionDefinitions[key];
   if (!definition) return [];
-  const paths = home ? (definition.homePaths ?? definition.paths) : definition.paths;
-  const docEntries = paths.map((path) => byPath.get(path)).filter(Boolean).map(docEntry);
+  const docEntries = definition.paths.map((path) => byPath.get(path)).filter(Boolean).map(docEntry);
   const extras = (collectionExtras[key] ?? []).map(extraEntry);
-  const sorted = sortEntries([...docEntries, ...extras]);
-  /* homeLimit 은 정렬 후 상위 N개만 홈에 낸다. homePaths 처럼 손으로 고른 목록이 아니라서
-     문서가 늘어도 홈이 저절로 최신 N개를 보여준다 (2026-08-25) */
-  return home && definition.homeLimit ? sorted.slice(0, definition.homeLimit) : sorted;
+  return sortEntries([...docEntries, ...extras]);
 }
 
-function collectionRows(key, entries) {
-  return entries.map((entry, index) => listRow(entry, index)).join("");
+/* homeLimit 이 있으면 홈에서 상위 N개만 보이고 나머지는 「더보기」로 그 자리에서 펼친다.
+   섹션 페이지로 튕겨 보내는 대신 아코디언으로 여는 방식 (2026-08-25 카야 지시) */
+function collectionRows(key, entries, limit = 0) {
+  return entries.map((entry, index) =>
+    listRow(entry, index, limit > 0 && index >= limit ? "is-collapsed" : "")).join("");
 }
 
 /* 개수는 홈에서도 컬렉션 전체 기준으로 표시한다 — 홈은 일부만 보여주므로 (2026-08-25) */
@@ -358,11 +357,31 @@ function collectionCount(key) {
   return entriesFor(key).length;
 }
 
+function moreToggle(hiddenCount) {
+  if (hiddenCount <= 0) return "";
+  return `<button type="button" class="more-toggle" data-more aria-expanded="false">더보기 <b>${hiddenCount}개</b> <span class="more-caret">⌄</span></button>`;
+}
+
+/* 홈의 더보기 버튼 — 같은 섹션 안의 숨은 줄만 펼치고 접는다 */
+function wireMoreToggles() {
+  app.querySelectorAll("[data-more]").forEach((button) => button.addEventListener("click", () => {
+    const section = button.closest(".compact-section");
+    const rows = section.querySelectorAll(".compact-doc-row.is-collapsed");
+    const expanded = section.classList.toggle("more-open");
+    button.setAttribute("aria-expanded", String(expanded));
+    const hidden = rows.length;
+    button.innerHTML = expanded
+      ? `접기 <span class="more-caret">⌃</span>`
+      : `더보기 <b>${hidden}개</b> <span class="more-caret">⌄</span>`;
+  }));
+}
+
 function renderLibrary(key = "all") {
   if (key === "all") {
     app.innerHTML = `${pageHeader("문서 목록", "Petnow for shelters PMF 프로젝트 문서", "카테고리별 전체 문서와 각 문서의 역할을 한 화면에서 볼 수 있습니다.")}
       <div class="library-summary"><strong>원본 문서 ${docs.length}개</strong><span>상단 검색 또는 왼쪽 주제 메뉴에서 찾아보세요</span><a class="download-all" href="Petnow_Shelter_CRM_전체_Markdown.zip" download>전체 Markdown 다운로드 ↓</a></div>
-      <div class="compact-library">${primaryGroups.map((groupKey, groupIndex) => { const group = collectionDefinitions[groupKey]; const homeEntries = entriesFor(groupKey, { home: true }); const total = collectionCount(groupKey); const hidden = total - homeEntries.length; const isReference = ["methods", "appendix"].includes(groupKey); return `<section class="compact-section ${isReference ? "reference-section" : ""}"><div class="compact-section-head"><div><span>${String(groupIndex + 1).padStart(2, "0")}</span><h2>${group.title}</h2><b>${total}개</b></div>${isReference ? `<small class="section-tier">참고 자료</small>` : ""}<p>${group.homeLead ?? group.lead}</p><div class="compact-section-links"><a href="#/library/${groupKey}">${hidden > 0 ? `나머지 ${hidden}개 포함 섹션 열기 →` : "섹션 열기 →"}</a></div></div><div class="compact-doc-list">${collectionRows(groupKey, homeEntries)}</div></section>`; }).join("")}</div>`;
+      <div class="compact-library">${primaryGroups.map((groupKey, groupIndex) => { const group = collectionDefinitions[groupKey]; const entries = entriesFor(groupKey); const limit = group.homeLimit ?? 0; const hidden = limit > 0 ? Math.max(0, entries.length - limit) : 0; const isReference = ["methods", "appendix"].includes(groupKey); return `<section class="compact-section ${isReference ? "reference-section" : ""}"><div class="compact-section-head"><div><span>${String(groupIndex + 1).padStart(2, "0")}</span><h2>${group.title}</h2><b>${entries.length}개</b></div>${isReference ? `<small class="section-tier">참고 자료</small>` : ""}<p>${group.homeLead ?? group.lead}</p><div class="compact-section-links"><a href="#/library/${groupKey}">섹션 열기 →</a></div></div><div class="compact-doc-list">${collectionRows(groupKey, entries, limit)}${moreToggle(hidden)}</div></section>`; }).join("")}</div>`;
+    wireMoreToggles();
     return;
   }
   const definition = collectionDefinitions[key];
