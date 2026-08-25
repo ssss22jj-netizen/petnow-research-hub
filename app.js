@@ -18,12 +18,15 @@ const routes = [
   ["주제별 문서", "/library/workflow", "◫", "쉘터 업무 플로우"],
   ["주제별 문서", "/library/competitors", "▥", "경쟁사 조사"],
   ["주제별 문서", "/library/methods", "▧", "출처·분석 방법"],
+  /* 사전조사 14건은 출처·분석 방법 아래 한 단계 들어간 페이지에 모은다 (2026-08-25 카야 지시).
+     홈·상위 목록에 전부 늘어놓으면 나머지 문서가 묻힌다 */
+  ["주제별 문서", "/library/leads", "↳", "리드 사전조사", true],
   ["주제별 문서", "/library/appendix", "◇", "별첨"],
 ];
 
 nav.innerHTML = [...new Set(routes.map(([group]) => group))].map((group) =>
-  `<div class="nav-section">${group}</div>${routes.filter(([item]) => item === group).map(([, path, icon, label]) =>
-    `<a class="nav-link" data-route="${path}" href="#${path}"><span class="nav-icon">${icon}</span>${label}</a>`).join("")}`
+  `<div class="nav-section">${group}</div>${routes.filter(([item]) => item === group).map(([, path, icon, label, isSub]) =>
+    `<a class="nav-link${isSub ? " nav-link-sub" : ""}" data-route="${path}" href="#${path}"><span class="nav-icon">${icon}</span>${label}</a>`).join("")}`
 ).join("");
 
 document.querySelector("#build-time").textContent = `갱신 ${new Intl.DateTimeFormat("ko", { dateStyle: "short", timeStyle: "short" }).format(new Date(data.generatedAt))}`;
@@ -49,25 +52,173 @@ function pageHeader(eyebrow, title, lead) {
   return `<p class="eyebrow">${eyebrow}</p><h1 class="page-title">${title}</h1><p class="page-lead">${lead}</p>`;
 }
 
+/* 컬렉션 정의. paths 순서는 화면 순서가 아니다 — 표시 순서는 sortEntries() 가
+   「M2 먼저 · 최신순」으로 정한다 (2026-08-25 카야 지시). homePaths 는 홈에만 노출할 부분집합. */
 const collectionDefinitions = {
-  m2: { title: "M2 계획·현황", lead: "M2 실행 계획과 진행 중인 트랙별 산출물입니다.", homeLead: "M2 실행 계획과 진행 중인 트랙별 산출물입니다.", paths: ["deliverables/M2_실행계획_20260817.md", "deliverables/M2_소재H_소구점_정의_및_근거_20260823.md", "deliverables/M2_산타바바라_데모미팅_전략_20260818.md", "deliverables/M2_Petify_알파MVP_개발원페이저_20260821.md", "deliverables/M2_제품조사_종합_20260825.md", "analysis/포지셔닝_경쟁제품_축비교_20260820.md", "analysis/데모_UI전수와_기획의도_20260820.md"], homePaths: ["deliverables/M2_실행계획_20260817.md", "deliverables/M2_소재H_소구점_정의_및_근거_20260823.md", "deliverables/M2_산타바바라_데모미팅_전략_20260818.md", "deliverables/M2_Petify_알파MVP_개발원페이저_20260821.md", "deliverables/M2_제품조사_종합_20260825.md", "analysis/포지셔닝_경쟁제품_축비교_20260820.md"] },
-  m1: { title: "M1 계획·산출물", lead: "프로젝트 배경과 M1 실행 계획, Track 2 LMF 1차 라운드의 기획 산출물입니다.", homeLead: "프로젝트 배경과 M1 실행 계획, Track 2 LMF 1차 라운드의 기획 산출물입니다.", paths: ["킥오프정리_노션용_v2.md", "deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", "meetings/2026-08-07_Track2_LMF_후속기획.md", "deliverables/Track2_LMF_가설_ICE_재스코어링_20260809.md", "deliverables/Petify_for_Shelters_PRD_v0.1_20260809.md"], homePaths: ["킥오프정리_노션용_v2.md", "deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", "meetings/2026-08-07_Track2_LMF_후속기획.md", "deliverables/Track2_LMF_가설_ICE_재스코어링_20260809.md", "deliverables/Petify_for_Shelters_PRD_v0.1_20260809.md"] },
-  results: { title: "실험 결과 보고서", lead: "집행한 실험의 성과를 사전 판정 기준으로 대조해 정리한 보고서입니다.", homeLead: "집행한 실험의 성과를 사전 판정 기준으로 대조해 정리한 보고서입니다.", paths: ["deliverables/Track2_최종성과분석_20260818.md", "deliverables/Track2_M1_중간성과분석_20260815.md"], homePaths: ["deliverables/Track2_최종성과분석_20260818.md", "deliverables/Track2_M1_중간성과분석_20260815.md"] },
-  interview: { title: "고객 인터뷰", lead: "데모 콜 진행 가이드와 사전조사, 콜별 인사이트를 모은 보드입니다.", paths: ["deliverables/Track2_리드판정보드.md", "지나인터뷰_계획.md", "deliverables/중간점검_2_Gina_인터뷰_인사이트_202608.md", "deliverables/중간점검_3_Track2_광고_랜딩_준비안_202608.md", "deliverables/중간점검_4_조니_직접인터뷰_수행준비_202608.md", "deliverables/Track2_리드인터뷰_가이드_20260817.md", "deliverables/M2_데모콜_인사이트보드.md", "analysis/Eve인터뷰_녹취록_20260817.md"] },
-  workflow: { title: "쉘터 업무 플로우", lead: "미국 동물보호소·레스큐의 조직 유형과 구조부터 입양까지의 업무 흐름을 정리한 문서입니다.", paths: ["미국쉘터_구조부터입양까지_업무플로우_딥리서치_20260725.md"] },
-  competitors: { title: "경쟁사 조사", lead: "자사 포지셔닝 정의와 경쟁 4사·Chameleon·24PetShelter의 제품·가격·기능, 사용자 리뷰와 화면 검증 자료입니다.", homeLead: "자사 포지셔닝 정의와 경쟁 제품의 화면·기능 검증 자료입니다.", paths: ["analysis/포지셔닝_경쟁제품_축비교_20260820.md", "경쟁4사_검증본_M1실무요약_20260726.md", "analysis/Chameleon_UIUX_분석_20260820.md", "경쟁4사_딥리서치_20260725.md", "경쟁4사_리뷰40개_파일럿코딩_20260726.md", "analysis/Pawlytics_정식계정_과업재검증_20260729.md", "analysis/Petstablished_전체제품_UIUX_검증_20260729.md", "Petszel_경쟁조사_20260825.md", "analysis/Petszel_UIUX_분석_20260825.md"], homePaths: ["경쟁4사_검증본_M1실무요약_20260726.md", "analysis/Chameleon_UIUX_분석_20260820.md", "Petszel_경쟁조사_20260825.md", "analysis/Petszel_UIUX_분석_20260825.md"] },
-  methods: { title: "출처·분석 방법", lead: "리뷰 출처, 데모 접근 경로와 기획·분석의 근거를 정리한 문서입니다.", paths: ["EBP_ShelterCRM_2주계획검토.md", "EBP_산타바바라_데모미팅전략.md", "analysis/SantaBarbara_카운티_사전조사_20260817.md", "analysis/HSWC_Maryland_사전조사_20260819.md", "analysis/TJO_Springfield_사전조사_20260819.md", "analysis/Wishful_Whiskers_Rescue_TNR_사전조사_20260820.md", "analysis/Mizfit_Muttz_Rescue_사전조사_20260820.md", "analysis/Blue_Mountain_Animal_Rescue_사전조사_20260820.md", "analysis/Wilkes_Rescue_Group_사전조사_20260820.md", "analysis/Paws_Place_Rescue_Inc_사전조사_20260820.md", "analysis/North_Texas_Australian_Shepherd_Rescue_사전조사_20260820.md", "analysis/North_County_Paws_Cause_사전조사_20260820.md", "analysis/Kzoo_Cat_Cafe_and_Rescue_사전조사_20260820.md", "analysis/Citizens_for_Animal_Protection_사전조사_20260820.md", "analysis/Humane_Society_사전조사_20260820.md", "sources/source-index.md", "EBP_경쟁4사_리뷰전수_질적분석.md", "sources/competitor-demo-access.md", "analysis/EBP_경쟁사_리뷰_데모_UIUX_전문가패널_20260728.md", "deliverables/Track2_ICP_Persona_소재_정의_근거_20260805.md", "analysis/소재C_인테이크필드_재검증_20260809.md", "analysis/EBP_초보_인터뷰어용_디스커버리_인터뷰_설계_202608.md", "analysis/Little_Traverse_Bay_Humane_Society_사전조사_20260820.md"] },
-  appendix: { title: "별첨", lead: "실행에 필요한 설정 가이드와 Shelter CRM 본 조사 범위 밖의 참고 자료입니다.", paths: ["펫나우_비문인식_현재기능_검증_20260726.md", "deliverables/Track2_광고계정_설정가이드_Meta_LinkedIn_20260805.md", "deliverables/Track2_LMF_랜딩_구현_및_이벤트_정의서_20260810.md", "deliverables/Track2_LMF_데모_팀피드백_반영결과_20260811.md", "deliverables/Track2_LMF_랜딩_최종QA_20260813.md"] },
+  m2: {
+    title: "M2 계획·현황",
+    lead: "M2 실행 계획과 진행 중인 트랙별 산출물입니다.",
+    paths: [
+      "deliverables/M2_실행계획_20260817.md",
+      "deliverables/M2_소재H_소구점_정의_및_근거_20260823.md",
+      "deliverables/M2_산타바바라_데모미팅_전략_20260818.md",
+      "deliverables/M2_Petify_알파MVP_개발원페이저_20260821.md",
+      "analysis/포지셔닝_경쟁제품_축비교_20260820.md",
+    ],
+  },
+  m1: {
+    title: "M1 계획·산출물",
+    lead: "프로젝트 배경과 M1 실행 계획, Track 2 LMF 1차 라운드의 기획 산출물입니다.",
+    paths: [
+      "킥오프정리_노션용_v2.md",
+      "deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md",
+      "meetings/2026-08-07_Track2_LMF_후속기획.md",
+      "deliverables/Track2_LMF_가설_ICE_재스코어링_20260809.md",
+      "deliverables/Petify_for_Shelters_PRD_v0.1_20260809.md",
+    ],
+  },
+  results: {
+    title: "실험 결과 보고서",
+    lead: "집행한 실험의 성과를 사전 판정 기준으로 대조해 정리한 보고서입니다.",
+    paths: [
+      "deliverables/Track2_최종성과분석_20260818.md",
+      "deliverables/Track2_M1_중간성과분석_20260815.md",
+    ],
+  },
+  interview: {
+    title: "고객 인터뷰",
+    lead: "리드 판정 보드와 콜별 인사이트를 모은 화면입니다. 진행 가이드·체크리스트는 별첨, 녹취록은 출처·분석 방법에 있습니다.",
+    paths: [
+      "deliverables/Track2_리드판정보드.md",
+      "deliverables/M2_데모콜_인사이트보드.md",
+      "deliverables/중간점검_2_Gina_인터뷰_인사이트_202608.md",
+    ],
+  },
+  workflow: {
+    title: "쉘터 업무 플로우",
+    lead: "미국 동물보호소·레스큐의 조직 유형과 구조부터 입양까지의 업무 흐름을 정리한 문서입니다.",
+    paths: ["미국쉘터_구조부터입양까지_업무플로우_딥리서치_20260725.md"],
+  },
+  competitors: {
+    title: "경쟁사 조사",
+    lead: "자사 포지셔닝 정의와 경쟁 4사·Chameleon·24PetShelter·Petszel의 제품·가격·기능, 사용자 리뷰와 화면 검증 자료입니다.",
+    homeLead: "자사 포지셔닝 정의와 경쟁 제품의 화면·기능 검증 자료입니다.",
+    paths: [
+      "analysis/포지셔닝_경쟁제품_축비교_20260820.md",
+      "Petszel_경쟁조사_20260825.md",
+      "analysis/Petszel_UIUX_분석_20260825.md",
+      "analysis/Chameleon_UIUX_분석_20260820.md",
+      "경쟁4사_검증본_M1실무요약_20260726.md",
+      "경쟁4사_딥리서치_20260725.md",
+      "경쟁4사_리뷰40개_파일럿코딩_20260726.md",
+      "analysis/Pawlytics_정식계정_과업재검증_20260729.md",
+      "analysis/Petstablished_전체제품_UIUX_검증_20260729.md",
+    ],
+    homePaths: [
+      "analysis/포지셔닝_경쟁제품_축비교_20260820.md",
+      "Petszel_경쟁조사_20260825.md",
+      "analysis/Petszel_UIUX_분석_20260825.md",
+      "analysis/Chameleon_UIUX_분석_20260820.md",
+    ],
+  },
+  methods: {
+    title: "출처·분석 방법",
+    lead: "리뷰 출처와 데모 접근 경로, 인터뷰 녹취록, 기획·분석의 근거를 정리한 문서입니다. 리드 사전조사는 하위 페이지에 모았습니다.",
+    paths: [
+      "analysis/Eve인터뷰_녹취록_20260817.md",
+      "EBP_산타바바라_데모미팅전략.md",
+      "sources/source-index.md",
+      "deliverables/Track2_ICP_Persona_소재_정의_근거_20260805.md",
+      "analysis/소재C_인테이크필드_재검증_20260809.md",
+      "analysis/EBP_초보_인터뷰어용_디스커버리_인터뷰_설계_202608.md",
+      "sources/competitor-demo-access.md",
+      "analysis/EBP_경쟁사_리뷰_데모_UIUX_전문가패널_20260728.md",
+      "EBP_경쟁4사_리뷰전수_질적분석.md",
+      "EBP_ShelterCRM_2주계획검토.md",
+    ],
+    homePaths: [
+      "analysis/Eve인터뷰_녹취록_20260817.md",
+      "EBP_산타바바라_데모미팅전략.md",
+      "sources/source-index.md",
+      "deliverables/Track2_ICP_Persona_소재_정의_근거_20260805.md",
+    ],
+  },
+  leads: {
+    title: "리드 사전조사",
+    parent: "methods",
+    lead: "데모 콜 전에 공개 자료만으로 확인한 조직별 사전조사입니다. 조직 구조·재원·사용 도구·조달 경로와 담당자 프로필을 같은 틀로 정리했습니다.",
+    paths: [
+      "analysis/SantaBarbara_카운티_사전조사_20260817.md",
+      "analysis/HSWC_Maryland_사전조사_20260819.md",
+      "analysis/TJO_Springfield_사전조사_20260819.md",
+      "analysis/Wishful_Whiskers_Rescue_TNR_사전조사_20260820.md",
+      "analysis/Mizfit_Muttz_Rescue_사전조사_20260820.md",
+      "analysis/Blue_Mountain_Animal_Rescue_사전조사_20260820.md",
+      "analysis/Wilkes_Rescue_Group_사전조사_20260820.md",
+      "analysis/Paws_Place_Rescue_Inc_사전조사_20260820.md",
+      "analysis/North_Texas_Australian_Shepherd_Rescue_사전조사_20260820.md",
+      "analysis/North_County_Paws_Cause_사전조사_20260820.md",
+      "analysis/Kzoo_Cat_Cafe_and_Rescue_사전조사_20260820.md",
+      "analysis/Citizens_for_Animal_Protection_사전조사_20260820.md",
+      "analysis/Humane_Society_사전조사_20260820.md",
+      "analysis/Little_Traverse_Bay_Humane_Society_사전조사_20260820.md",
+    ],
+  },
+  appendix: {
+    title: "별첨",
+    lead: "인터뷰 진행 가이드·체크리스트, 실행에 필요한 설정 가이드, 그리고 Shelter CRM 본 조사 범위 밖의 참고 자료입니다.",
+    paths: [
+      "analysis/데모_UI전수와_기획의도_20260820.md",
+      "deliverables/Track2_리드인터뷰_가이드_20260817.md",
+      "deliverables/Track2_LMF_랜딩_최종QA_20260813.md",
+      "deliverables/Track2_LMF_데모_팀피드백_반영결과_20260811.md",
+      "deliverables/Track2_LMF_랜딩_구현_및_이벤트_정의서_20260810.md",
+      "deliverables/중간점검_4_조니_직접인터뷰_수행준비_202608.md",
+      "deliverables/Track2_광고계정_설정가이드_Meta_LinkedIn_20260805.md",
+      "지나인터뷰_계획.md",
+      "펫나우_비문인식_현재기능_검증_20260726.md",
+    ],
+    homePaths: [
+      "analysis/데모_UI전수와_기획의도_20260820.md",
+      "deliverables/Track2_리드인터뷰_가이드_20260817.md",
+      "deliverables/Track2_LMF_랜딩_최종QA_20260813.md",
+      "지나인터뷰_계획.md",
+    ],
+  },
 };
 
 const primaryGroups = ["m2", "m1", "results", "interview", "workflow", "competitors", "methods", "appendix"];
 
-const externalCollectionDocs = {
+/* Markdown 문서가 아닌 목록 항목 — 외부 시트·사이트 내 시각 페이지·하위 컬렉션.
+   문서 행과 같은 줄에 섞여 정렬되므로 milestone·date 를 문서와 동일하게 갖는다.
+   (2026-08-25: 라벨 없는 행을 없애기 위해 milestone 을 필수로 부여) */
+const collectionExtras = {
   interview: [{
+    kind: "external",
     title: "인터뷰 후보·섭외 현황",
     description: "인터뷰 후보, 우선순위, 연락 진행 상태를 관리하는 Google Sheet",
     role: "섭외 현황",
+    milestone: "M1",
+    date: "2026-08-04",
     url: "https://docs.google.com/spreadsheets/d/1wkeSUFVlOBCDuR5_GCHLElfhQyS0cTswEWkXcaSp1Ho/edit?pli=1&gid=0#gid=0",
+  }],
+  competitors: [{
+    kind: "page",
+    title: "경쟁사 데모 제품 UI·UX 시각 분석",
+    description: "4개 제품 데모의 과업별 검증 결과와 화면 증거",
+    role: "화면 검증",
+    milestone: "M1",
+    date: "2026-07-29",
+    url: "demo-insights.html",
+  }],
+  methods: [{
+    kind: "collection",
+    collectionKey: "leads",
+    title: "리드 사전조사",
+    description: "데모 콜 전 공개 자료로 확인한 조직별 사전조사 — 조직 구조·재원·도구·조달과 담당자 프로필",
+    role: "모아 보기",
+    milestone: "M2",
+    date: "2026-08-20",
   }],
 };
 
@@ -130,23 +281,30 @@ const documentChildren = new Map([
 ]);
 
 function compactDocRow(doc, index) {
-  const number = String(index + 1).padStart(2, "0");
   const externalUrl = externalDocumentUrls.get(doc.path);
-  const href = externalUrl ?? hrefForDoc(doc);
-  const externalAttributes = externalUrl ? ' target="_blank" rel="noopener noreferrer"' : "";
-  const rowClass = externalUrl ? "compact-doc-row external-doc-row" : "compact-doc-row";
-  const arrow = externalUrl ? "↗" : "→";
-  return `<a class="${rowClass}" href="${href}"${externalAttributes}><span class="compact-doc-number">${number}</span><span class="compact-doc-copy"><strong>${milestoneTag(doc)}${trackTag(doc)}${doc.title}</strong><small>${doc.description}</small></span><span class="compact-doc-role">${documentRoles.get(doc.path) ?? doc.category}</span><span class="compact-doc-arrow">${arrow}</span></a>`;
+  return listRow({
+    kind: externalUrl ? "external" : "doc",
+    href: externalUrl ?? hrefForDoc(doc),
+    milestone: doc.milestone,
+    track: doc.track,
+    title: doc.title,
+    description: doc.description,
+    role: documentRoles.get(doc.path) ?? doc.category,
+  }, index);
 }
 
-function visualAnalysisRow(index) {
+/* 목록의 한 줄. 문서·외부 시트·시각 페이지·하위 컬렉션이 모두 같은 형태로 나온다 */
+function listRow(entry, index) {
   const number = String(index + 1).padStart(2, "0");
-  return `<a class="compact-doc-row" href="demo-insights.html"><span class="compact-doc-number">${number}</span><span class="compact-doc-copy"><strong>경쟁사 데모 제품 UI·UX 시각 분석</strong><small>4개 제품 데모의 과업별 검증 결과와 화면 증거</small></span><span class="compact-doc-role">화면 검증</span><span class="compact-doc-arrow">→</span></a>`;
-}
-
-function externalDocRow(doc, index) {
-  const number = String(index + 1).padStart(2, "0");
-  return `<a class="compact-doc-row external-doc-row" href="${doc.url}" target="_blank" rel="noopener noreferrer"><span class="compact-doc-number">${number}</span><span class="compact-doc-copy"><strong>${doc.title}</strong><small>${doc.description}</small></span><span class="compact-doc-role">${doc.role}</span><span class="compact-doc-arrow">↗</span></a>`;
+  const isExternal = entry.kind === "external";
+  const classes = ["compact-doc-row"];
+  if (isExternal) classes.push("external-doc-row");
+  if (entry.kind === "collection") classes.push("collection-link-row");
+  const attributes = isExternal ? ' target="_blank" rel="noopener noreferrer"' : "";
+  const arrow = isExternal ? "↗" : "→";
+  const badges = `${milestoneTag(entry)}${trackTag(entry)}`;
+  const suffix = entry.count ? `<span class="row-count">${entry.count}건</span>` : "";
+  return `<a class="${classes.join(" ")}" href="${entry.href}"${attributes}><span class="compact-doc-number">${number}</span><span class="compact-doc-copy"><strong>${badges}${entry.title}${suffix}</strong><small>${entry.description}</small></span><span class="compact-doc-role">${entry.role}</span><span class="compact-doc-arrow">${arrow}</span></a>`;
 }
 
 function milestoneTag(doc) {
@@ -158,46 +316,70 @@ function trackTag(doc) {
   return doc?.track ? `<span class="ms-tag ms-track">${doc.track}</span>` : "";
 }
 
-function collectionRows(key, selectedDocs) {
-  const externalDocs = externalCollectionDocs[key] ?? [];
-  if (key !== "competitors") return [
-    ...externalDocs.map(externalDocRow),
-    ...selectedDocs.map((doc, index) => compactDocRow(doc, index + externalDocs.length)),
-  ].join("");
-  return [
-    compactDocRow(selectedDocs[0], 0),
-    visualAnalysisRow(1),
-    ...selectedDocs.slice(1).map((doc, index) => compactDocRow(doc, index + 2)),
-  ].join("");
+/* 표시 순서 — M2 를 먼저, 그 안에서 최신순 (2026-08-25 카야 지시).
+   날짜는 build.mjs 의 docDate() 가 파일명·docDates 에서 뽑아 doc.date 로 넣는다.
+   문서가 아닌 항목(외부 시트·시각 페이지·하위 컬렉션)도 같은 기준으로 섞여 정렬된다. */
+function sortEntries(entries) {
+  const rank = (entry) => (entry.milestone === "M2" ? 0 : 1);
+  return [...entries].sort((a, b) =>
+    rank(a) - rank(b)
+    || (b.date ?? "").localeCompare(a.date ?? "")
+    || (a.title ?? "").localeCompare(b.title ?? "", "ko"));
 }
 
-function collectionCount(key, selectedDocs) {
-  return selectedDocs.length + (externalCollectionDocs[key]?.length ?? 0) + (key === "competitors" ? 1 : 0);
+function docEntry(doc) {
+  const externalUrl = externalDocumentUrls.get(doc.path);
+  return {
+    kind: externalUrl ? "external" : "doc",
+    href: externalUrl ?? hrefForDoc(doc),
+    milestone: doc.milestone,
+    track: doc.track,
+    date: doc.date,
+    title: doc.title,
+    description: doc.description,
+    role: documentRoles.get(doc.path) ?? doc.category,
+  };
 }
 
-function docsForCollection(key) {
+function extraEntry(extra) {
+  if (extra.kind !== "collection") return { ...extra, href: extra.url };
+  const target = collectionDefinitions[extra.collectionKey];
+  return { ...extra, href: `#/library/${extra.collectionKey}`, count: target ? target.paths.length : 0 };
+}
+
+function entriesFor(key, { home = false } = {}) {
   const definition = collectionDefinitions[key];
-  return definition.paths.map((path) => byPath.get(path)).filter(Boolean);
+  if (!definition) return [];
+  const paths = home ? (definition.homePaths ?? definition.paths) : definition.paths;
+  const docEntries = paths.map((path) => byPath.get(path)).filter(Boolean).map(docEntry);
+  const extras = (collectionExtras[key] ?? []).map(extraEntry);
+  return sortEntries([...docEntries, ...extras]);
 }
 
-function docsForHome(key) {
-  const definition = collectionDefinitions[key];
-  return (definition.homePaths ?? definition.paths).map((path) => byPath.get(path)).filter(Boolean);
+function collectionRows(key, entries) {
+  return entries.map((entry, index) => listRow(entry, index)).join("");
+}
+
+/* 개수는 홈에서도 컬렉션 전체 기준으로 표시한다 — 홈은 일부만 보여주므로 (2026-08-25) */
+function collectionCount(key) {
+  return entriesFor(key).length;
 }
 
 function renderLibrary(key = "all") {
   if (key === "all") {
     app.innerHTML = `${pageHeader("문서 목록", "Petnow for shelters PMF 프로젝트 문서", "카테고리별 전체 문서와 각 문서의 역할을 한 화면에서 볼 수 있습니다.")}
       <div class="library-summary"><strong>원본 문서 ${docs.length}개</strong><span>상단 검색 또는 왼쪽 주제 메뉴에서 찾아보세요</span><a class="download-all" href="Petnow_Shelter_CRM_전체_Markdown.zip" download>전체 Markdown 다운로드 ↓</a></div>
-      <div class="compact-library">${primaryGroups.map((groupKey, groupIndex) => { const group = collectionDefinitions[groupKey]; const groupDocs = docsForHome(groupKey); const isReference = ["methods", "appendix"].includes(groupKey); return `<section class="compact-section ${isReference ? "reference-section" : ""}"><div class="compact-section-head"><div><span>${String(groupIndex + 1).padStart(2, "0")}</span><h2>${group.title}</h2><b>${collectionCount(groupKey, groupDocs)}개</b></div>${isReference ? `<small class="section-tier">참고 자료</small>` : ""}<p>${group.homeLead ?? group.lead}</p><div class="compact-section-links"><a href="#/library/${groupKey}">섹션 열기 →</a></div></div><div class="compact-doc-list">${collectionRows(groupKey, groupDocs)}</div></section>`; }).join("")}</div>`;
+      <div class="compact-library">${primaryGroups.map((groupKey, groupIndex) => { const group = collectionDefinitions[groupKey]; const homeEntries = entriesFor(groupKey, { home: true }); const total = collectionCount(groupKey); const hidden = total - homeEntries.length; const isReference = ["methods", "appendix"].includes(groupKey); return `<section class="compact-section ${isReference ? "reference-section" : ""}"><div class="compact-section-head"><div><span>${String(groupIndex + 1).padStart(2, "0")}</span><h2>${group.title}</h2><b>${total}개</b></div>${isReference ? `<small class="section-tier">참고 자료</small>` : ""}<p>${group.homeLead ?? group.lead}</p><div class="compact-section-links"><a href="#/library/${groupKey}">${hidden > 0 ? `나머지 ${hidden}개 포함 섹션 열기 →` : "섹션 열기 →"}</a></div></div><div class="compact-doc-list">${collectionRows(groupKey, homeEntries)}</div></section>`; }).join("")}</div>`;
     return;
   }
   const definition = collectionDefinitions[key];
   if (!definition) return renderNotFound();
-  const selectedDocs = docsForCollection(key);
-  app.innerHTML = `${pageHeader("문서 분류", definition.title, definition.lead)}
-    <div class="collection-list-head"><strong>문서 목록</strong><span>${collectionCount(key, selectedDocs)}개</span></div>
-    <div class="collection-doc-list">${collectionRows(key, selectedDocs)}</div>`;
+  const entries = entriesFor(key);
+  const parent = definition.parent ? collectionDefinitions[definition.parent] : null;
+  const backLink = parent ? `<a class="collection-back" href="#/library/${definition.parent}">← ${parent.title}</a>` : "";
+  app.innerHTML = `${backLink}${pageHeader(parent ? `문서 분류 · ${parent.title}` : "문서 분류", definition.title, definition.lead)}
+    <div class="collection-list-head"><strong>문서 목록</strong><span>${entries.length}개</span></div>
+    <div class="collection-doc-list">${collectionRows(key, entries)}</div>`;
 }
 
 const evidence = [
@@ -362,7 +544,7 @@ function route() {
   let activePath = path;
   if (path.startsWith("/doc/")) {
     const currentDoc = byId.get(path.split("/")[2]);
-    const groupKey = currentDoc && primaryGroups.find((key) => collectionDefinitions[key].paths.includes(currentDoc.path));
+    const groupKey = currentDoc && Object.keys(collectionDefinitions).find((key) => collectionDefinitions[key].paths.includes(currentDoc.path));
     if (groupKey) activePath = `/library/${groupKey}`;
   }
   document.querySelectorAll(".nav-link").forEach((link) => link.classList.toggle("active", activePath === link.dataset.route || (link.dataset.route !== "/" && activePath.startsWith(link.dataset.route + "/"))));

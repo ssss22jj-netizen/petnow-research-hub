@@ -21,7 +21,8 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; min-width: 320px; }
+/* 한국어 어절이 아무 글자에서나 끊기지 않게 — 브라우저 기본값은 마지막 한 글자만 넘기는 사고를 낸다 */
+body { margin: 0; min-width: 320px; word-break: keep-all; overflow-wrap: break-word; }
 a { color: inherit; }
 button, input { font: inherit; }
 .hidden { display: none !important; }
@@ -35,6 +36,8 @@ button, input { font: inherit; }
 .nav-section { margin: 9px 0 3px; padding: 0 12px; color: #88ad9a; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 .nav-link { display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin: 2px 0; color: #cfe2d8; text-decoration: none; border-radius: 10px; font-size: 14px; }
 .nav-link:hover, .nav-link.active { color: white; background: rgba(255,255,255,.1); }
+/* 한 단계 들어간 하위 컬렉션 메뉴 (리드 사전조사) */
+.nav-link-sub { margin-left: 14px; font-size: 13px; color: #b6cfc3; }
 .nav-icon { width: 20px; text-align: center; opacity: .9; }
 .sidebar-footer { margin-top: auto; padding: 13px 12px 0; border-top: 1px solid rgba(255,255,255,.12); color: #a9c8b8; font-size: 12px; }
 .status-dot { display: inline-block; width: 7px; height: 7px; margin-right: 7px; border-radius: 50%; background: #68d29e; }
@@ -92,6 +95,12 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .compact-doc-row:hover { border-color: #8fc5aa; transform: translateX(2px); }
 .external-doc-row { border-style: dashed; background: #f8fbf9; }
 .external-doc-row .compact-doc-arrow { color: var(--blue); }
+/* 하위 컬렉션으로 들어가는 줄 — 문서가 아니라 묶음이라는 것을 배경으로 구분 */
+.collection-link-row { background: var(--mint); border-color: #b7dcc6; }
+.collection-link-row:hover { border-color: var(--green-2); }
+.row-count { margin-left: 7px; padding: 1px 7px; border-radius: 999px; background: white; border: 1px solid #b7dcc6; color: var(--green); font-family: ui-monospace, monospace; font-size: 10.5px; font-weight: 700; vertical-align: 1px; }
+.collection-back { display: inline-block; margin-bottom: 14px; color: var(--green); font-size: 12.5px; font-weight: 700; text-decoration: none; }
+.collection-back:hover { text-decoration: underline; }
 .compact-doc-number { color: #9aaba2; font-size: 11px; font-weight: 800; }
 .compact-doc-copy strong, .compact-doc-copy small { display: block; }
 .compact-doc-copy strong { font-size: 14px; line-height: 1.35; }
@@ -683,3 +692,14 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .markdown-body .pv-card-val { font-size: 14px; line-height: 1.65; }
 .markdown-body .pv-fig figcaption ul { margin: 9px 0 0; padding-left: 18px; }
 .markdown-body .pv-fig figcaption li { margin-bottom: 5px; font-size: 13px; line-height: 1.65; }
+
+/* 시간축 스트립 — 입소~입양 후 전 구간에서 각 제품의 주무대 위치 (2026-08-25, M2 제품조사 종합 병합) */
+.markdown-body .pv-axis { display: grid; gap: 10px; margin: 18px 0 6px; }
+@media (min-width: 860px) { .markdown-body .pv-axis { grid-template-columns: repeat(4, 1fr); gap: 0; } }
+.markdown-body .pv-axis-seg { position: relative; padding: 15px 16px; border: 1px solid var(--line); border-top: 3px solid var(--c); border-radius: 12px; background: var(--paper); box-shadow: var(--shadow); }
+@media (min-width: 860px) { .markdown-body .pv-axis-seg { border-radius: 0; margin-left: -1px; } .markdown-body .pv-axis-seg:first-child { border-radius: 12px 0 0 12px; margin-left: 0; } .markdown-body .pv-axis-seg:last-child { border-radius: 0 12px 12px 0; } }
+.markdown-body .pv-ax1 { --c: var(--blue); } .markdown-body .pv-ax2 { --c: var(--amber); } .markdown-body .pv-ax3 { --c: var(--muted); }
+.markdown-body .pv-ax-own { --c: var(--green-2); background: var(--mint); z-index: 1; }
+.markdown-body .pv-axis-t { display: block; margin-bottom: 6px; color: var(--muted); font-family: ui-monospace, monospace; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; }
+.markdown-body .pv-axis-seg b { display: block; margin-bottom: 5px; font-size: 15px; font-weight: 800; line-height: 1.35; color: var(--c); }
+.markdown-body .pv-axis-seg small { display: block; font-size: 12.5px; line-height: 1.6; color: var(--ink); }
