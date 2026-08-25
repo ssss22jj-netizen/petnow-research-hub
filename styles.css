@@ -582,8 +582,8 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
    등급어는 뱃지에, 판단 기준(사고 발생·본인 통증 등)은 아래 줄에 병기한다 */
 .markdown-body .pain-badge,
 .markdown-body .fit-badge {
-  display: inline-block; padding: 3px 9px; border-radius: 999px;
-  font-size: 11px; font-weight: 750; letter-spacing: .01em; white-space: nowrap;
+  display: inline-block; padding: 2px 7px; border-radius: 999px;
+  font-size: 10.5px; font-weight: 750; letter-spacing: 0; white-space: nowrap;
 }
 .markdown-body .pain-badge.critical { background: #fbe4e0; color: #a3341f; border: 1px solid #f0c3ba; }
 .markdown-body .pain-badge.high     { background: #fdeed6; color: #96591a; border: 1px solid #f2d6ad; }
@@ -631,7 +631,7 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .markdown-body .table-scroll td:nth-child(3) { min-width: 132px; max-width: 148px; }
 /* 4열은 전 표에서 판정 열(강도·적합·지불) 또는 후속이다. 표끼리 세로로 맞춰 보이도록 폭을 고정한다 */
 .markdown-body .table-scroll th:nth-child(4),
-.markdown-body .table-scroll td:nth-child(4) { min-width: 106px; max-width: 124px; }
+.markdown-body .table-scroll td:nth-child(4) { min-width: 76px; max-width: 126px; }
 /* 5열은 각 표에서 가장 긴 서술 열(근거·결정 구조·특이사항), 6열은 표 2의 현재 도구뿐이다.
    7~11열 규칙은 11열 단일표 시절의 잔재라 제거했다 — 특정도가 높아 위의 240px 상한을 덮고 있었다 */
 .markdown-body .table-scroll th:nth-child(5),
