@@ -25,7 +25,10 @@
   var via = params.get('via') || '';
 
   mixpanel.init(MP_TOKEN, { debug: true });
-  mixpanel.register({ referrer_id: ref });
+  /* 리퍼럴 링크로 온 사람에게만 붙인다. 랜딩에서 넘어온 방문자는 ref 가 없는데,
+     빈 문자열을 등록하면 「식별자가 빈 사람」이 모든 이벤트에 남아 「식별자가 없는 사람」과
+     구분되지 않는다. 속성은 빼는 게 빈 값을 넣는 것보다 낫다. */
+  if (ref) mixpanel.register({ referrer_id: ref });
 
   /* app.js reads this synchronously to decide whether to render the Share button */
   window.demoRef = ref;
