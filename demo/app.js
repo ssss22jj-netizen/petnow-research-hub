@@ -47,12 +47,14 @@ const INITIAL = (language='en') => ({
   dailyCareSubmitted: false,
   dailyTasks: {breakfast:true,morningWalk:true,medication:false,dinner:false,eveningWalk:false},
   mobileNavOpen: false,
-  applicationOpen: { luna: true, maple: true },
+  applicationOpen: {},
   applicationId: 'rivera',
   appSent: {},
   appItems: {},
   appLog: {},
   appNotes: {},
+  appContacts: {},
+  contactEditing: null,
   appItemOpen: null,
   applicantSubmitted: false,
   applicantUploads: 0,
@@ -61,6 +63,13 @@ const INITIAL = (language='en') => ({
   checklistName: {},
   checklistNote: {},
   checklistAdded: [],
+  auditAnimal: 'all',
+  auditActor: 'all',
+  auditArea: 'all',
+  auditPeriod: 'all',
+  auditFrom: '',
+  auditTo: '',
+  auditSort: 'newest',
   checklistEditing: null,
   checklistSnapshot: null
 });
@@ -69,7 +78,7 @@ let state = INITIAL(localStorage.getItem('petify-language') || 'en');
 
 /* 랜딩 소재별 CTA는 데모의 대시보드가 아니라 그 소재의 화면으로 떨어져야 한다.
    ?screen=applications · ?tour=h1 두 가지만 받는다. */
-const START_SCREENS = ['dashboard','animals','applications','application','applicantform','updates','fosters','publishing','settings'];
+const START_SCREENS = ['dashboard','animals','applications','application','applicantform','updates','fosters','publishing','audit','settings'];
 function applyStartParams(){
   const params = new URLSearchParams(location.search);
   const screen = params.get('screen');
@@ -85,7 +94,7 @@ let tutorialStepSnapshotKey = null;
 let lastRenderedView = null;
 const app = document.querySelector('#app');
 
-const NAVIGATION_KEYS = ['view','animalId','detailTab','animalFilter','updateFilter','fosterFilter','publishFilter','settingsTab','selectedUpdate','selectedFoster','fosterFormMode','search','applicationId'];
+const NAVIGATION_KEYS = ['view','animalId','detailTab','animalFilter','updateFilter','fosterFilter','publishFilter','settingsTab','selectedUpdate','selectedFoster','fosterFormMode','search','applicationId','auditAnimal','auditActor','auditArea','auditPeriod','auditFrom','auditTo','auditSort'];
 let restoringNavigation = false;
 let lastNavigationSignature = null;
 
@@ -162,7 +171,7 @@ const APPLICATIONS = [
   {id:'rivera', animalId:'luna', name:'M. Rivera', initials:'MR', email:'m.rivera@example.com', phone:'(917) 555-0148',
    received:'Aug 3', days:6, sent:false,
    items:{reference:'done'},
-   contacts:{landlord:{name:'B. Halvorsen (landlord)',phone:'(917) 555-0231'},vet:{name:'Parkside Veterinary',phone:'(917) 555-0288'},reference:{name:'T. Okafor',phone:'(917) 555-0106'}},
+   contacts:{landlord:{name:'B. Halvorsen (landlord)',phone:'(917) 555-0231'},reference:{name:'T. Okafor',phone:'(917) 555-0106'}},
    log:{reference:{who:'K. Chen', when:'4 days ago', note:'Spoke with both references listed.'}}},
   {id:'kchen', animalId:'luna', name:'K. Chen', initials:'KC', email:'k.chen@example.com', phone:'(917) 555-0192',
    received:'Aug 6', days:3, sent:true,
@@ -331,6 +340,138 @@ function applicationRowMarkup({app, waiting, lead}) {
   </div>`;
 }
 
+/* ── 감사 추적 · 전 소재 이력을 한 화면에 ─────────────────────────
+ * 데모 콜 2건에서 독립 발생한 요구 — 컴플라이언스가 아니라 「누가 이미 수행했는가」다.
+ * 동물 상세의 Activity 탭과 신청 상세의 이력은 각자 한 레코드만 보여주므로,
+ * 조직 전체를 시간축으로 훑는 자리를 따로 둔다. */
+const AUDIT_EVENTS = [
+  {date:'2026-08-09', time:'10:12', animal:'milo', actor:'Jamie Lee', kind:'check-in', title:'Foster check-in submitted', note:'Weekly check-in · Behavior changed · 3 photos'},
+  {date:'2026-08-09', time:'09:58', animal:'milo', actor:'A. Rivera', kind:'check-in', title:'Weekly check-in requested', note:'Email + SMS · Reminder after 2 days'},
+  {date:'2026-08-09', time:'09:31', animal:'luna', actor:'A. Rivera', kind:'application', title:'Landlord check attempted · K. Chen', note:'Left a voicemail. Will try again Monday.'},
+  {date:'2026-08-08', time:'16:44', animal:'maple', actor:'S. Chen', kind:'application', title:'Vet reference completed · J. Whitaker', note:'Cedar Creek confirmed vaccinations current.'},
+  {date:'2026-08-08', time:'11:02', animal:'luna', actor:'A. Rivera', kind:'application', title:'Vet reference completed · K. Chen', note:'Riverside Animal Hospital confirmed care through 2025.'},
+  {date:'2026-08-07', time:'15:20', animal:'luna', actor:'K. Chen', kind:'application', title:'Signed agreement received · K. Chen', note:'adoption-agreement-signed.pdf · 1.2 MB'},
+  {date:'2026-08-07', time:'15:19', animal:'luna', actor:'K. Chen', kind:'application', title:'Photos of the home received · K. Chen', note:'3 photos · 4.8 MB'},
+  {date:'2026-08-07', time:'08:00', animal:'milo', actor:'System', kind:'check-in', title:'Check-in reminder sent automatically', note:'Reminder 1 of 2'},
+  {date:'2026-08-06', time:'14:20', animal:'milo', actor:'Dr. Casey', kind:'record', title:'Medical clearance approved', note:'Added to the health record'},
+  {date:'2026-08-06', time:'09:15', animal:'luna', actor:'A. Rivera', kind:'application', title:'Request sent to K. Chen', note:'One link · 3 adopter items'},
+  {date:'2026-08-06', time:'09:04', animal:'luna', actor:'System', kind:'application', title:'Application received · K. Chen', note:'Through the Petify application form'},
+  {date:'2026-08-05', time:'13:37', animal:'maple', actor:'System', kind:'application', title:'Application received · J. Whitaker', note:'Through the Petify application form'},
+  {date:'2026-08-05', time:'10:41', animal:'luna', actor:'M. Kim', kind:'application', title:'Landlord check completed · D. Alvarez', note:'Landlord confirmed dogs under 40 lb are allowed.'},
+  {date:'2026-08-03', time:'17:26', animal:'luna', actor:'System', kind:'application', title:'Application received · M. Rivera', note:'Through the Petify application form'},
+  {date:'2026-08-02', time:'11:10', animal:'daisy', actor:'A. Rivera', kind:'publishing', title:'Profile published to shelter website', note:'Live on secondchance.org/adopt'},
+  {date:'2026-07-31', time:'14:52', animal:'luna', actor:'System', kind:'application', title:'Application received · D. Alvarez', note:'Through the Petify application form'},
+  {date:'2026-07-20', time:'09:00', animal:'milo', actor:'System', kind:'record', title:'Placed with Jamie Lee', note:'Foster placement started'},
+  {date:'2026-07-18', time:'08:30', animal:'milo', actor:'A. Rivera', kind:'record', title:'Animal record created at intake', note:'Owner surrender'}
+];
+
+const AUDIT_TODAY = '2026-08-09';
+
+/* 사용자가 이번 세션에서 기록한 통화·회수도 같은 축에 올린다. 화면에서 한 일이
+   이력에 안 남으면 「기록이 남는다」는 말을 데모가 스스로 어긴다. */
+function auditEvents() {
+  const live = Object.entries(state.appLog).map(([key, log]) => {
+    const [appId, itemId] = key.split(':');
+    const app = APPLICATIONS.find(a => a.id === appId);
+    const item = checklist().find(i => i.id === itemId);
+    if (!app || !item) return null;
+    const status = state.appItems[key];
+    const who = log.who || 'A. Rivera';
+    const title = item.by === 'adopter'
+      ? `${item.name} received · ${app.name}`
+      : `${item.name} ${status === 'done' ? 'completed' : 'attempted'} · ${app.name}`;
+    return {date: AUDIT_TODAY, time: 'just now', animal: app.animalId, actor: who,
+            kind: 'application', title, note: log.note || log.file || '', live: true};
+  }).filter(Boolean);
+  return [...live, ...AUDIT_EVENTS];
+}
+
+const AUDIT_AREAS = {application:'Applications', 'check-in':'Check-ins', record:'Animals', publishing:'Publishing'};
+
+/* 날짜 입력은 브라우저 UI 언어를 따라가 한국어로 표시된다(`lang` 으로도 안 바뀜).
+   기간은 프리셋으로 두고, 직접 지정할 때만 텍스트로 받는다. */
+function auditRange() {
+  if(state.auditPeriod==='custom') return [state.auditFrom, state.auditTo];
+  if(state.auditPeriod==='all') return ['',''];
+  const days={today:0, '7':6, '30':29}[state.auditPeriod];
+  const [y,m,d]=AUDIT_TODAY.split('-').map(Number);
+  const from=new Date(Date.UTC(y,m-1,d-days));
+  return [from.toISOString().slice(0,10), AUDIT_TODAY];
+}
+
+function auditParseDate(value) {
+  const match=String(value||'').match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if(!match) return '';
+  const [,mm,dd,yy]=match;
+  return `${yy}-${mm.padStart(2,'0')}-${dd.padStart(2,'0')}`;
+}
+
+function auditAnimalName(id) {
+  const named = [...APPLICATION_ANIMALS, ...BASE_ANIMALS].find(a => a.id === id);
+  return named ? named.name : id;
+}
+
+function auditFiltered() {
+  const [from,to]=auditRange();
+  const fromISO=state.auditPeriod==='custom'?auditParseDate(from):from;
+  const toISO=state.auditPeriod==='custom'?auditParseDate(to):to;
+  const rows = auditEvents().filter(event => {
+    if (state.auditAnimal !== 'all' && event.animal !== state.auditAnimal) return false;
+    if (state.auditActor !== 'all' && event.actor !== state.auditActor) return false;
+    if (state.auditArea !== 'all' && event.kind !== state.auditArea) return false;
+    if (fromISO && event.date < fromISO) return false;
+    if (toISO && event.date > toISO) return false;
+    return true;
+  });
+  const key = event => `${event.date} ${event.time === 'just now' ? '23:59' : event.time}`;
+  rows.sort((a, b) => state.auditSort === 'oldest' ? key(a).localeCompare(key(b)) : key(b).localeCompare(key(a)));
+  return rows;
+}
+
+function auditView() {
+  const rows = auditFiltered();
+  const animals = [...new Set(auditEvents().map(e => e.animal))];
+  const actors = [...new Set(auditEvents().map(e => e.actor))].sort();
+  const filtered = state.auditAnimal !== 'all' || state.auditActor !== 'all' || state.auditArea !== 'all' || state.auditPeriod !== 'all';
+  const groups = [];
+  rows.forEach(event => {
+    const last = groups[groups.length - 1];
+    if (last && last.date === event.date) last.rows.push(event);
+    else groups.push({date: event.date, rows: [event]});
+  });
+  return `<section class="content">
+    ${pageHeader('AUDIT TRAIL', 'Activity', 'Every request, response, and recorded action across the shelter, with who did it.', `${filtered ? '<button class="secondary-button" data-action="clear-audit">Clear filters</button>' : ''}<button class="primary-button" data-action="export-activity">Export</button>`)}
+    <section class="surface audit-filters">
+      <label><span>Animal</span><select data-audit-filter="animal"><option value="all"${state.auditAnimal === 'all' ? ' selected' : ''}>All animals</option>${animals.map(id => `<option value="${id}"${state.auditAnimal === id ? ' selected' : ''}>${auditAnimalName(id)}</option>`).join('')}</select></label>
+      <label><span>Who</span><select data-audit-filter="actor"><option value="all"${state.auditActor === 'all' ? ' selected' : ''}>Anyone</option>${actors.map(name => `<option value="${name}"${state.auditActor === name ? ' selected' : ''}>${name}</option>`).join('')}</select></label>
+      <label><span>Menu</span><select data-audit-filter="area"><option value="all"${state.auditArea === 'all' ? ' selected' : ''}>All menus</option>${Object.entries(AUDIT_AREAS).map(([key,label]) => `<option value="${key}"${state.auditArea === key ? ' selected' : ''}>${label}</option>`).join('')}</select></label>
+      <label><span>Period</span><select data-audit-filter="period">${[['all','All time'],['today','Today'],['7','Last 7 days'],['30','Last 30 days'],['custom','Custom range']].map(([key,label]) => `<option value="${key}"${state.auditPeriod === key ? ' selected' : ''}>${label}</option>`).join('')}</select></label>
+      <label><span>Order</span><select data-audit-filter="sort"><option value="newest"${state.auditSort === 'newest' ? ' selected' : ''}>Newest first</option><option value="oldest"${state.auditSort === 'oldest' ? ' selected' : ''}>Oldest first</option></select></label>
+      ${state.auditPeriod === 'custom' ? `<label><span>From</span><input type="text" value="${state.auditFrom}" data-audit-filter="from" placeholder="mm/dd/yyyy"></label><label><span>To</span><input type="text" value="${state.auditTo}" data-audit-filter="to" placeholder="mm/dd/yyyy"></label>` : ''}
+    </section>
+    <div class="update-context"><span>${rows.length} ${rows.length === 1 ? 'entry' : 'entries'}</span><small>Nothing here is typed by hand — each line is written when the action happens.</small></div>
+    ${rows.length ? `<section class="surface audit-list"><div class="audit-head"><span>Time</span><span>Activity</span><span>Menu</span><span>Animal</span><span>Who</span></div>${groups.map(group => `<div class="audit-day"><p class="audit-date">${auditDateLabel(group.date)}</p>${group.rows.map(auditRow).join('')}</div>`).join('')}</section>`
+      : `<section class="surface audit-empty"><b>No activity matches these filters</b><p>Widen the date range or clear the filters.</p><button class="secondary-button" data-action="clear-audit">Clear filters</button></section>`}
+  </section>`;
+}
+
+function auditDateLabel(date) {
+  if (date === AUDIT_TODAY) return 'Today';
+  const [y, m, d] = date.split('-').map(Number);
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  return `${months[m - 1]} ${d}, ${y}`;
+}
+
+function auditRow(event) {
+  return `<div class="audit-row${event.live ? ' live' : ''}">
+    <span class="audit-time">${event.time}</span>
+    <span class="audit-body"><b>${event.title}</b>${event.note ? `<small>${event.note}</small>` : ''}</span>
+    <span class="audit-area">${AUDIT_AREAS[event.kind] || ''}</span>
+    <span class="audit-animal">${auditAnimalName(event.animal)}</span>
+    <span class="audit-actor">${event.actor}</span>
+  </div>`;
+}
+
 /* ── S3 신청 상세 ─────────────────────────────────────────────
  * 동물 상세(animalView)와 같은 뼈대를 쓴다 — 같은 제품의 다른 레코드로 읽혀야 한다. */
 function applicationView() {
@@ -368,7 +509,7 @@ function applicationView() {
         </section>
         <section class="surface apl-side">
           <div class="section-head"><div><p class="kicker">RECENT ACTIVITY</p><h2>Latest on this application</h2></div></div>
-          <div class="foster-activity">${applicationActivity(app,items).map(([title,note])=>`<p><i></i><b>${title}</b><small>${note}</small></p>`).join('')}</div>
+          <div class="foster-activity">${applicationActivity(app,items).map(([title,note])=>`<p><i></i><b>${title}</b><small>${note}</small></p>`).join('')}</div><button class="text-button centered" data-action="view-application-history">View full history</button>
         </section>
       </aside>
     </div>
@@ -376,16 +517,17 @@ function applicationView() {
 }
 
 /* 이 신청 건에서 실제로 일어난 일만 모은다 — 회신과 통화 결과가 곧 활동 기록이다 */
-function applicationActivity(app, items) {
+function applicationActivity(app, items, full=false) {
   const rows=items.map(item=>{
     const log=itemLog(app,item);
     if(!log) return null;
     const status=itemState(app,item);
-    if(item.by==='adopter') return [`${item.name} received`, `${log.file||'Uploaded'} · ${log.when||''}`];
-    return [`${item.name} ${status==='done'?'completed':'attempted'}`, `${log.who||'your team'} · ${log.when||''}${log.note?` · ${log.note}`:''}`];
+    if(item.by==='adopter') return [`${item.name} received`, `${log.file||'Uploaded'} · ${log.when||''}`, app.name];
+    return [`${item.name} ${status==='done'?'completed':'attempted'}`, `${log.who||'your team'} · ${log.when||''}${log.note?` · ${log.note}`:''}`, log.who||'Your team'];
   }).filter(Boolean);
-  rows.unshift(['Application received', `${app.name} applied for ${applicationAnimal(app.animalId).name} · ${app.received}`]);
-  return rows.slice(0,5);
+  if(applicationSent(app)) rows.push(['Request sent to the adopter', `One link · ${app.days} days ago`, 'A. Rivera']);
+  rows.unshift(['Application received', `${app.name} applied for ${applicationAnimal(app.animalId).name} · ${app.received}`, 'System']);
+  return full?rows:rows.slice(0,5);
 }
 
 function applicationItemRow(app, item) {
@@ -416,12 +558,28 @@ function applicationItemBody(app, item, status, log) {
   const done=status==='done';
   const tried=status==='tried';
   const contact=app.contacts?.[item.id];
-  return `${contact?`<div class="apl-contact"><span><small>WHO TO CALL</small><b>${contact.name}</b></span><span class="apl-phone">${contact.phone}</span></div>`:''}
+  return `${contactBlock(app,item,contact)}
     ${log?`<div class="apl-response"><span class="apl-file">☎</span><span><b>${done?'Completed':'Call attempted'} by ${log.who||'your team'}</b><small>${log.when||''}${log.note?` · ${log.note}`:''}</small></span></div>${log.history?.length?`<div class="apl-history"><small>EARLIER ATTEMPTS</small>${log.history.map(entry=>`<p><b>${entry.who||'your team'}</b> · ${entry.when||''}${entry.note?` · ${entry.note}`:''}</p>`).join('')}</div>`:''}`:'<p class="apl-trace">Your team makes this call. Petify keeps it on the list until someone records the result.</p>'}
     <label class="apl-note-field"><span>Note (optional)</span><input value="${state.appNotes[`${app.id}:${item.id}`]||''}" data-application-note="${app.id}:${item.id}" placeholder="What did the call confirm?"></label>
     <div class="apl-actions">
       ${done?`<button class="secondary-button" data-action="reopen-item" data-item="${app.id}:${item.id}">Reopen</button>`:`<button class="primary-button" data-action="mark-item-done" data-item="${app.id}:${item.id}">Mark as done</button><button class="secondary-button" data-action="mark-item-tried" data-item="${app.id}:${item.id}">${tried?'Log another attempt':'Could not reach'}</button>`}
     </div>`;
+}
+
+/* 연락처의 출처를 화면이 밝힌다 — 신청서에서 온 값인지, 팀이 채운 값인지.
+   신청서에 없으면 비어 있다고 말하고 그 자리에서 넣게 한다. */
+function contactBlock(app, item, base) {
+  const key=`${app.id}:${item.id}`;
+  const override=state.appContacts[key];
+  const contact=override||base;
+  const source=override?'Added by your team':'From the application';
+  if(state.contactEditing===key) {
+    return `<div class="apl-contact editing"><span class="apl-contact-fields"><small>WHO TO CALL</small><input value="${contact?.name||''}" data-contact-field="${key}:name" placeholder="Who are you calling? e.g. B. Halvorsen (landlord)"><input value="${contact?.phone||''}" data-contact-field="${key}:phone" placeholder="Phone number"></span><span class="apl-edit-actions"><button class="secondary-button small" data-action="cancel-contact">Cancel</button><button class="primary-button small" data-action="save-contact">Save</button></span></div>`;
+  }
+  if(!contact||!contact.name) {
+    return `<button class="apl-contact missing" data-contact-edit="${key}"><span><small>WHO TO CALL</small><b>Not on the application</b></span><span class="apl-contact-add">Add a contact</span></button>`;
+  }
+  return `<button class="apl-contact" data-contact-edit="${key}"><span><small>WHO TO CALL · ${source}</small><b>${contact.name}</b></span><span class="apl-phone">${contact.phone||'No number'}</span></button>`;
 }
 
 /* ── S4 신청자 응답 화면 · 계정 불요 ─────────────────────────── */
@@ -455,6 +613,18 @@ function checklistRow(item) {
 
 function checklistEditRow(item) {
   return `<div class="editing"><span class="drag">⋮⋮</span><span class="apl-checklist-edit"><input value="${item.name||''}" data-checklist-field="${item.id}:name" placeholder="What do you require? e.g. Home visit"><input value="${item.note||''}" data-checklist-field="${item.id}:note" placeholder="Describe it in a few words"></span><span class="apl-owner-switch">${['adopter','staff'].map(by=>`<button class="${item.by===by?'active':''}" data-checklist-by="${item.id}:${by}">${by==='adopter'?'Adopter sends':'Your team completes'}</button>`).join('')}</span><span class="apl-edit-actions"><button class="secondary-button small" data-action="cancel-checklist-item">Cancel</button><button class="primary-button small" data-action="save-checklist-item">Save</button></span></div>`;
+}
+
+/* 신청이 어디로 들어오든 한 목록에 모인다. 세 경로를 다 받는다 — 조직마다 접수
+   경로가 다르고, 이미 쓰는 폼을 버리라고 하면 그게 도입 장벽이 된다. */
+function intakePanel() {
+  return `<div class="section-head"><div><p class="kicker">APPLICATION INTAKE</p><h2>Where applications come from</h2><p>However an application reaches you, it lands in the same list with the same checklist attached.</p></div></div>
+    <div class="apl-intake">
+      <div class="apl-intake-card"><div class="apl-intake-head"><span><small>OPTION 1 · READY NOW</small><b>Petify application form</b></span>${statusPill('ready','Active')}</div><p>Put this link on your website or your Petfinder and Adopt-a-Pet profiles. Adopters fill it in without an account.</p><div class="apl-intake-value"><code>petify.link/second-chance/apply</code><button class="secondary-button small" data-action="copy-link">Copy link</button></div><div class="apl-actions"><button class="secondary-button small" data-action="preview-intake-form">Preview form ↗</button><button class="secondary-button small" data-action="embed-code">Embed on your site</button></div></div>
+      <div class="apl-intake-card planned"><div class="apl-intake-head"><span><small>OPTION 2 · IN DESIGN</small><b>Keep the form you already use</b></span>${statusPill('neutral','Planned')}</div><p>Most teams already take applications through Google Forms, their own website, or email, and we want those to arrive here too. How we take them in — and what setting it up would involve — is what we are working out with the shelters we are talking to.</p><div class="apl-intake-ask"><span>?</span><p>What are you using today? That answer shapes what we build next.</p></div></div>
+      <div class="apl-intake-card"><div class="apl-intake-head"><span><small>OPTION 3 · BY HAND</small><b>Add an application yourself</b></span></div><p>For phone calls and walk-ins. Type in what you have and the checklist attaches the same way.</p><div class="apl-actions"><button class="secondary-button small" data-action="add-application">＋ Add an application</button></div></div>
+    </div>
+    <div class="settings-note"><span>i</span><p><b>The checklist does not change</b>Whichever way an application arrives, it gets the items you set in Adoption checklist. Nothing is filed twice.</p></div>`;
 }
 
 /* ── S1 요구 항목 설정 · Settings 안에 둔다(§2.3) ──────────────── */
@@ -729,6 +899,12 @@ const TOUR_SETUP = {
 };
 
 const KO_UI = {
+  'See what is missing in Animals ›':'동물 화면에서 부족한 항목 보기 ›','Nothing is ready to publish right now':'지금 게시할 수 있는 동물이 없습니다','Animals appear here the moment their profile has everything it needs.':'프로필에 필요한 항목이 모두 채워지면 이 목록에 나타납니다.','Open Animals':'동물 화면 열기','Profiles that are complete and ready to go live, plus everything already published. Partner channels are shown as planned integrations.':'게시 준비가 끝난 프로필과 이미 게시된 프로필입니다. 제휴 채널은 지원 예정으로 표시됩니다.',
+  'Every animal is here. The ones you cannot publish yet say what is missing.':'모든 동물이 여기 있습니다. 아직 게시할 수 없는 동물은 무엇이 비어 있는지 함께 표시됩니다.','New intake · requirements not started':'신규 입소 · 게시 요건 미착수','Publishing requirements not complete':'게시 요건 미충족',
+  'View full history':'전체 이력 보기','Every request, response, and recorded call on this application, with who did it.':'이 신청 건의 모든 요청·회신·통화 기록과 처리자입니다.','Request sent to the adopter':'신청자에게 요청 발송','Export':'내보내기',
+  'OPTION 2 · IN DESIGN':'방법 2 · 설계 중','Keep the form you already use':'쓰던 폼 그대로 사용','Planned':'지원 예정','Most teams already take applications through Google Forms, their own website, or email, and we want those to arrive here too. How we take them in — and what setting it up would involve — is what we are working out with the shelters we are talking to.':'대부분의 조직이 구글폼·자체 웹사이트·이메일로 신청을 받고 있고, 그 신청도 여기로 들어오게 하려 합니다. 어떤 방식으로 받을지와 설정에 무엇이 필요한지는 대화 중인 쉘터들과 함께 정하고 있습니다.','What are you using today? That answer shapes what we build next.':'지금은 어떤 방식으로 받고 계신가요? 그 답이 다음에 만들 것을 정합니다.',
+  'Application intake':'신청 접수','APPLICATION INTAKE':'신청 접수','Where applications come from':'신청이 들어오는 경로','However an application reaches you, it lands in the same list with the same checklist attached.':'어느 경로로 들어오든 같은 목록에 모이고 같은 요구 항목이 붙습니다.','OPTION 1 · READY NOW':'방법 1 · 바로 사용','Petify application form':'Petify 신청 폼','Put this link on your website or your Petfinder and Adopt-a-Pet profiles. Adopters fill it in without an account.':'이 링크를 웹사이트나 Petfinder·Adopt-a-Pet 프로필에 넣습니다. 신청자는 계정 없이 작성합니다.','Copy link':'링크 복사','Preview form ↗':'폼 미리보기 ↗','Embed on your site':'웹사이트에 삽입','OPTION 2 · KEEP YOUR FORM':'방법 2 · 쓰던 폼 유지','Forward from the form you already use':'쓰던 폼에서 전달받기','Already collecting applications through Google Forms, your website, or email? Send the responses to this address and they arrive here as applications.':'구글폼·웹사이트·이메일로 신청을 받고 있다면, 응답을 이 주소로 보내면 신청 건으로 들어옵니다.','Copy address':'주소 복사','Not set up':'미설정','Active':'사용 중','OPTION 3 · BY HAND':'방법 3 · 직접 입력','Add an application yourself':'신청 직접 추가','For phone calls and walk-ins. Type in what you have and the checklist attaches the same way.':'전화·현장 접수용입니다. 받은 내용을 입력하면 요구 항목이 같은 방식으로 붙습니다.','＋ Add an application':'＋ 신청 추가','The checklist does not change':'요구 항목은 달라지지 않습니다','Whichever way an application arrives, it gets the items you set in Adoption checklist. Nothing is filed twice.':'어느 경로로 들어오든 요구 항목 설정에서 정한 항목이 붙습니다. 두 번 정리할 일이 없습니다.','Application form preview opened':'신청 폼 미리보기 열림','Embed code copied':'삽입 코드 복사됨','Manual application form opened':'직접 입력 화면 열림',
+  'From the application':'신청서에서','Added by your team':'담당자가 추가','Not on the application':'신청서에 없음','Add a contact':'연락처 추가','No number':'번호 없음','Who are you calling? e.g. B. Halvorsen (landlord)':'누구에게 연락하나요? 예: B. Halvorsen (집주인)','Phone number':'전화번호','Add a name first':'이름을 먼저 입력하세요','Contact saved to this item':'연락처를 이 항목에 저장했습니다',
   'Dog status':'동물 상태',
   'Dog status without asking around':'묻고 다니지 않아도 아는 동물 상태','Foster check-ins without texting':'문자하지 않아도 들어오는 임보 근황','Adoption paperwork without chasing':'쫓아다니지 않아도 걷히는 입양 서류',
   'Ready without asking':'묻지 않아도 아는 게시 준비','Updates without texting':'문자 없이 들어오는 임보 근황','Paperwork without chasing':'쫓아다니지 않아도 걷히는 서류',
@@ -778,7 +954,7 @@ const KO_UI = {
   ,'Send check-in requests, follow up automatically, and review foster check-ins in one place.':'체크인 요청 발송, 자동 후속 연락, 임보자 체크인 검토를 한곳에서 관리합니다.','Copy check-in link':'체크인 링크 복사','1 change to review':'검토할 변경사항 1건','NEW FOSTER CHECK-IN':'새 임보자 체크인','Compare the current behavior note with Jamie’s new check-in before updating the record.':'레코드를 업데이트하기 전에 현재 행동 메모와 Jamie의 새 체크인을 비교합니다.','Compare the current record with Jamie’s new check-in before anything changes.':'변경사항을 반영하기 전에 현재 레코드와 Jamie의 새 체크인을 비교합니다.','Use on public profile':'공개 프로필에 사용'
   ,'Manage foster placements, contact details, care logs, and check-in schedules in one place.':'임보 배치, 연락처, 돌봄 기록, 체크인 일정을 한곳에서 관리합니다.','FOSTER OVERVIEW':'임보 현황','CARE & CHECK-IN SCHEDULE':'돌봄 및 체크인 일정','Daily care and weekly check-ins':'일간 돌봄과 주간 체크인','Routine care is logged each day. Health, behavior, and adoption photos are reviewed in the weekly check-in.':'일상 돌봄은 매일 기록하고, 건강·행동·입양 사진은 주간 체크인에서 검토합니다.','Preview Jamie’s foster view':'Jamie의 임보자 화면 미리보기','Behavior updates, health changes, and photos':'행동 업데이트·건강 변화·사진','NEEDS STAFF ATTENTION':'직원 확인 필요','Alex is alerted to missed medications or reported concerns.':'투약 누락이나 접수된 우려 사항은 Alex에게 알립니다.'
   ,'Sent automatically at 8:00 AM':'오전 8시 자동 발송','Sent automatically today at 8:00 AM':'오늘 오전 8시 자동 발송'
-  ,'Publish ready profiles to your shelter website. Partner channels are shown as planned integrations.':'준비된 프로필을 쉘터 웹사이트에 게시합니다. 제휴 채널은 지원 예정 연동으로 표시됩니다.','Sync now':'지금 동기화','↻ Sync now':'↻ 지금 동기화','Live on shelter website':'쉘터 웹사이트 게시 중','Connected':'연결됨'
+  ,'Sync now':'지금 동기화','↻ Sync now':'↻ 지금 동기화','Live on shelter website':'쉘터 웹사이트 게시 중','Connected':'연결됨'
   ,'Petify marks a profile ready to publish when all required information is complete and up to date.':'필수 정보가 모두 완료되고 최신 상태이면 Petify가 프로필을 게시 준비 완료로 표시합니다.','Required · Updated within the last 30 days':'필수 · 최근 30일 이내 업데이트','Required · Updated within the last 14 days':'필수 · 최근 14일 이내 업데이트','At least 3 photos approved for public use':'공개 사용이 승인된 사진 최소 3장','“Ready to publish” means the profile has all information required for publishing in Petify. Medical and legal decisions remain with your team.':'“게시 준비 완료”는 Petify에서 게시에 필요한 정보가 프로필에 모두 갖춰졌음을 의미합니다. 의료 및 법적 판단은 담당 팀이 결정합니다.','Start tour':'튜토리얼 시작'
   ,'Nothing else to fill in':'더 작성할 내용이 없습니다','This week’s check-in will be logged for Milo. Staff will not be asked to review it.':'이번 주 체크인은 Milo의 레코드에 기록됩니다. 직원에게 검토를 요청하지 않습니다.'
   ,'What do you need help with?':'어떤 도움이 필요한가요?','Alex will be notified right away.':'Alex에게 즉시 알립니다.','Alex was notified right away':'Alex에게 즉시 알렸습니다'
@@ -821,6 +997,12 @@ function translateText(value) {
       [/^For (.+) · (\d+) items? requested$/,(_,who,n)=>`${who} · 요청 항목 ${n}개`],
       [/^(\d+) of (\d+) sent$/,(_,a,b)=>`${b}개 중 ${a}개 전송 완료`],
       [/^(\d+) items attached · Sent just now$/,(_,a)=>`항목 ${a}개 첨부 · 방금 전송`],
+      [/^WHO TO CALL · (.+)$/,(_,a)=>`연락 대상 · ${a}`],
+      [/^One link · (\d+) days ago$/,(_,a)=>`링크 하나 · ${a}일 전`],
+      [/^(\d+) ready or published$/,(_,a)=>`게시 가능·완료 ${a}건`],
+      [/^(\d+) more animals are still being prepared\.$/,(_,a)=>`준비 중인 동물이 ${a}마리 더 있습니다.`],
+      [/^All (\d+) animals$/,(_,a)=>`동물 ${a}마리 전체`],
+      [/^(\d+) of (\d+) animals$/,(_,a,b)=>`동물 ${b}마리 중 ${a}마리`],
       [/^(\d+) steps$/,(_,a)=>`${a}단계`],
       [/^(\d+) parts$/,(_,a)=>`${a}편`],
       [/^(\d+) items in one link$/,(_,a)=>`링크 하나에 ${a}개 항목`],
@@ -997,6 +1179,8 @@ function listingStatus(animal) {
 
 function currentAnimal() { return animals().find(a => a.id === state.animalId) || animals()[0]; }
 function statusPill(type, label) { return `<span class="pill ${type}"><i></i>${label}</span>`; }
+const BELL_ICON = `<svg viewBox="0 0 18 18" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2.2a4.4 4.4 0 0 0-4.4 4.4c0 2.9-.6 4.1-1.4 5-.3.4-.1.9.4.9h10.8c.5 0 .7-.5.4-.9-.8-.9-1.4-2.1-1.4-5A4.4 4.4 0 0 0 9 2.2Z"/><path d="M7.2 14.8a1.9 1.9 0 0 0 3.6 0"/></svg>`;
+
 function iconButton(icon, label, action) { return `<button class="icon-button" data-action="${action}" aria-label="${label}"><span>${icon}</span><em>${label}</em></button>`; }
 function formatCount(n) { return `<strong class="metric-number">${n}</strong>`; }
 function languageSwitch() { return `<div class="language-switch" role="group" aria-label="Language"><button class="${state.language==='ko'?'active':''}" data-language="ko">한국어</button><button class="${state.language==='en'?'active':''}" data-language="en">English</button></div>`; }
@@ -1012,7 +1196,7 @@ function layout(content) {
         <div class="workspace-label">SECOND CHANCE RESCUE</div>
         <nav>${NAV.map(([id,ico,label]) => `<button class="nav-item ${section===id?'active':''}" data-view="${id}"><span>${ico}</span><b>${label}</b>${id==='updates'?'<em>2</em>':''}</button>`).join('')}</nav>
         <div class="sidebar-bottom">
-          <button class="demo-reset" data-action="reset-demo"><span>↺</span><b>Reset demo</b></button>
+          <button class="nav-item ${section==='audit'?'active':''}" data-view="audit"><span>◷</span><b>Audit trail</b></button>
           <button class="account" data-action="account-menu"><span class="avatar">AR</span><span><b>Alex Rivera</b><small>Administrator</small></span><i>⌄</i></button>
         </div>
       </aside>
@@ -1023,8 +1207,9 @@ function layout(content) {
           <label class="global-search"><span>⌕</span><input id="global-search" value="${state.search}" placeholder="Search animals, fosters, or records" aria-label="Search"></label>
           <div class="top-actions">
             ${window.demoRef?`<button class="secondary-button" data-action="demo-share" style="gap:6px;display:flex;align-items:center;">🔗 Share demo</button>`:''}
+            <button class="demo-reset topbar-reset" data-action="reset-demo"><span>↺</span><b>Reset demo</b></button>
             <button class="tutorial-launch" data-action="guide"><span>▶</span> Guided demo</button>
-            ${iconButton('◌','Notifications','notifications')}
+            ${iconButton(BELL_ICON,'Notifications','notifications')}
             <button class="add-button" data-action="open-intake"><span>＋</span> Add animal</button>
           </div>
         </header>
@@ -1279,7 +1464,7 @@ function reviewPanel(item) {
   const effectiveType = approved ? 'complete' : item.statusType;
   return `<article class="review-panel">
     <div class="review-head"><div><p class="kicker">WEEKLY CHECK-IN · ${item.time.toUpperCase()}</p><h2>${item.name} · submitted by ${item.foster}</h2><p>${item.flag} · ${item.photoCount} photos attached</p></div>${statusPill(effectiveType,effectiveStatus)}</div>
-    <div class="change-summary ${effectiveMode==='approved'?'success':item.summaryType==='alert'?'alert':''}"><span>${effectiveMode==='approved'?'✓':effectiveMode==='requested'?'!':'↻'}</span><div><b>${approved?'Check-in applied to record':item.summaryTitle}</b><p>${approved?'Milo’s behavior record and publishing requirements were updated.':item.summaryText}</p></div><button data-action="review-help">${effectiveMode==='requested'?'View request':effectiveMode==='approved'?'View audit trail':'How review works'}</button></div>
+    <div class="change-summary ${effectiveMode==='approved'?'success':item.summaryType==='alert'?'alert':''}"><span>${effectiveMode==='approved'?'✓':effectiveMode==='requested'?'!':'↻'}</span><div><b>${approved?'Check-in applied to record':item.summaryTitle}</b><p>${approved?'Milo’s behavior record and publishing requirements were updated.':item.summaryText}</p></div>${effectiveMode==='approved'?`<button data-action="view-audit-trail" data-animal="${item.id}">View audit trail</button>`:`<button data-action="review-help">${effectiveMode==='requested'?'View request':'How review works'}</button>`}</div>
     <div class="comparison"><div><small>CURRENT OFFICIAL RECORD</small><b>${item.field}</b><p>${item.current}</p><em>${item.currentMeta}</em></div><div class="new ${effectiveMode==='approved'?'approved':''}"><small>${effectiveMode==='approved'?'APPLIED FOSTER CHECK-IN':'NEW FOSTER CHECK-IN'}</small><b>${item.field}</b><p>${item.incoming}</p><em>${item.incomingMeta}</em>${effectiveMode==='review'?'<label><input type="checkbox" checked> Apply this change</label>':''}</div></div>
     <div class="attachment-panel"><div><small>${effectiveMode==='approved'?'APPLIED MEDIA':'NEW MEDIA'}</small><b>${item.photoCount} photos from ${item.foster.split(' ')[0]}</b></div><div class="review-photos">${item.photos.map((x,i)=>`<button data-action="preview-photo"><img src="${x}" alt="${item.name} foster check-in photo ${i+1}"><span>⌕</span><label><input type="checkbox" ${effectiveMode==='approved'||i<2?'checked':''} ${effectiveMode==='approved'?'disabled':''}> ${effectiveMode==='approved'?'Public media':'Use on public profile'}</label></button>`).join('')}</div></div>
     ${effectiveMode==='review'?`<div class="review-actions"><button class="danger-text" data-action="reject-update">Reject</button><span></span><button class="secondary-button" data-action="request-changes">Request changes</button><button class="secondary-button" data-action="partial-approve">Apply selected</button><button class="primary-button" data-action="approve-update">Apply all to record</button></div>`:effectiveMode==='requested'?`<div class="review-actions resolved"><button class="secondary-button" data-action="view-message">View request message</button><span></span><button class="secondary-button" data-action="send-reminder">Send reminder</button><button class="primary-button" data-action="mark-resolved">Mark clarification received</button></div>`:`<div class="review-actions resolved"><button class="secondary-button" data-action="view-history">View application history</button><span></span><button class="primary-button" data-action="open-update-animal" data-animal-id="${item.id}">Open ${item.name}’s record</button></div>`}
@@ -1370,28 +1555,46 @@ function fosterDetailDrawer() {
 }
 
 function publishingView() {
-  let rows = [
-    {id:'milo',name:'Milo',img:'assets/dog1.png',state:state.published?'published':state.miloReady?'ready':'blocked',status:state.published?'Published':state.miloReady?'Ready to publish':'Not ready',detail:state.published?'Live on shelter website':state.miloReady?'All requirements complete':'Behavior information outdated',updated:'Just now'},
-    {id:'luna',name:'Luna',img:'assets/dog2.png',state:'ready',status:'Ready to publish',detail:'All requirements complete',updated:'42 min ago'},
-    {id:'buddy',name:'Buddy',img:'assets/dog3.png',state:'blocked',status:'Not ready',detail:'Medical review pending',updated:'Yesterday'},
-    {id:'daisy',name:'Daisy',img:'assets/dog4.png',state:'published',status:'Published',detail:'Live on shelter website',updated:'Aug 7'}
-  ];
+  /* 게시 상태가 붙은 동물만 보이던 화면이었다. 나머지 일곱 마리가 어디 있는지
+     설명이 없어 「전체 11마리인데 왜 4마리인가」가 됐다. 전부 싣고, 아직 게시할 수
+     없는 동물은 무엇이 막고 있는지 줄에 적는다. */
+  const allRows = animals().map(animal => {
+    const isMilo = animal.id === 'milo';
+    const readiness = isMilo ? (state.published ? 'published' : state.miloReady ? 'ready' : 'review') : animal.readiness;
+    const blocked = readiness !== 'ready' && readiness !== 'published';
+    const detail = readiness === 'published' ? 'Live on shelter website'
+      : readiness === 'ready' ? 'All requirements complete'
+      : isMilo ? 'Behavior information outdated'
+      : animal.blocker && animal.blocker !== 'None' ? animal.blocker
+      : animal.queue === 'new' ? 'New intake · requirements not started'
+      : 'Publishing requirements not complete';
+    return {id:animal.id, name:animal.name, img:animal.img,
+            state: blocked ? 'blocked' : readiness,
+            status: readiness === 'published' ? 'Published' : readiness === 'ready' ? 'Ready to publish' : 'Not ready',
+            detail, updated: isMilo ? 'Just now' : animal.updated};
+  });
+  const publishable = allRows.filter(row => row.state === 'ready' || row.state === 'published');
+  const notReady = allRows.length - publishable.length;
+  let rows = publishable;
+  const total = publishable.length;
   if(state.publishFilter!=='all') rows=rows.filter(r=>r.state===state.publishFilter);
   return `<section class="content">
-    ${pageHeader('ADOPTION CHANNELS','Publishing','Publish ready profiles to your shelter website. Partner channels are shown as planned integrations.',`<button class="secondary-button" data-action="sync-status">↻ Sync now</button><button class="primary-button" data-action="open-channel-settings">Manage channels</button>`)}
+    ${pageHeader('ADOPTION CHANNELS','Publishing','Profiles that are complete and ready to go live, plus everything already published. Partner channels are shown as planned integrations.',`<button class="secondary-button" data-action="sync-status">↻ Sync now</button><button class="primary-button" data-action="open-channel-settings">Manage channels</button>`)}
     <div class="channel-summary"><button data-action="channel-summary"><span class="channel-logo website">S</span><span><b>Shelter website</b><small>24 live</small></span>${statusPill('ready','Connected')}<i>›</i></button><button class="planned" disabled><span class="channel-logo petfinder" role="img" aria-label="Petfinder"></span><span><b>Petfinder</b><small>Partner integration required</small></span>${statusPill('neutral','Planned')}<i>›</i></button><button class="planned" disabled><span class="channel-logo adoptapet" role="img" aria-label="Adopt a Pet"></span><span><b>Adopt a Pet</b><small>Partner integration required</small></span>${statusPill('neutral','Planned')}<i>›</i></button></div>
-    <section class="surface table-surface"><div class="table-toolbar"><div class="filter-tabs">${[['all','All'],['ready','Ready to publish'],['blocked','Not ready'],['published','Published']].map(([id,l])=>`<button class="${state.publishFilter===id?'active':''}" data-publish-filter="${id}">${l}</button>`).join('')}</div><button class="filter-button" data-action="publishing-filter">☷ Filters</button></div><div class="publish-list">${rows.map(r=>`<div class="publish-row"><div class="animal-cell"><img src="${r.img}" alt=""><span><b>${r.name}</b><small>${r.detail}</small></span></div>${statusPill(r.state,r.status)}<div class="channel-dots"><i class="on">S</i><i class="planned">P</i><i class="planned">A</i></div><span>${r.updated}</span><button class="${r.state==='ready'?'primary-button':'secondary-button'}" data-publish-action="${r.id}">${r.state==='ready'?'Preview & publish':'Open profile'}</button><button class="kebab" data-publish-menu="${r.id}">•••</button></div>`).join('')}</div></section>
+    <div class="update-context"><span>${total} ready or published</span><small>${notReady} more animals are still being prepared. <button class="text-button" data-view="animals">See what is missing in Animals ›</button></small></div>
+    <section class="surface table-surface"><div class="table-toolbar"><div class="filter-tabs">${[['all',`All ${total}`],['ready',`Ready to publish ${publishable.filter(r=>r.state==='ready').length}`],['published',`Published ${publishable.filter(r=>r.state==='published').length}`]].map(([id,l])=>`<button class="${state.publishFilter===id?'active':''}" data-publish-filter="${id}">${l}</button>`).join('')}</div><button class="filter-button" data-action="publishing-filter">☷ Filters</button></div><div class="publish-list">${rows.length?rows.map(r=>`<div class="publish-row"><div class="animal-cell"><img src="${r.img}" alt=""><span><b>${r.name}</b><small>${r.detail}</small></span></div>${statusPill(r.state,r.status)}<div class="channel-dots"><i class="on">S</i><i class="planned">P</i><i class="planned">A</i></div><span>${r.updated}</span><button class="${r.state==='ready'?'primary-button':'secondary-button'}" data-publish-action="${r.id}">${r.state==='ready'?'Preview & publish':'Open profile'}</button><button class="kebab" data-publish-menu="${r.id}">•••</button></div>`).join(''):'<div class="publish-empty"><b>Nothing is ready to publish right now</b><p>Animals appear here the moment their profile has everything it needs.</p><button class="secondary-button" data-view="animals">Open Animals</button></div>'}</div></section>
   </section>`;
 }
 
 function settingsView() {
   return `<section class="content settings-content">
     ${pageHeader('WORKSPACE','Settings','Set the organization rules that drive publishing requirements, check-ins, and publishing.',`<button class="primary-button" data-action="save-settings">${state.settingsSaved?'Saved ✓':'Save changes'}</button>`)}
-    <div class="settings-layout"><nav class="settings-nav">${[['readiness','Publishing requirements'],['checklist','Adoption checklist'],['forms','Check-in forms'],['channels','Publishing channels'],['team','Team & roles'],['notifications','Notifications']].map(([id,l])=>`<button class="${state.settingsTab===id?'active':''}" data-settings-tab="${id}">${l}<span>›</span></button>`).join('')}</nav><section class="surface settings-panel">${settingsPanel()}</section></div>
+    <div class="settings-layout"><nav class="settings-nav">${[['readiness','Publishing requirements'],['forms','Check-in forms'],['channels','Publishing channels'],['intake','Application intake'],['checklist','Adoption checklist'],['team','Team & roles'],['notifications','Notifications']].map(([id,l])=>`<button class="${state.settingsTab===id?'active':''}" data-settings-tab="${id}">${l}<span>›</span></button>`).join('')}</nav><section class="surface settings-panel">${settingsPanel()}</section></div>
   </section>`;
 }
 
 function settingsPanel() {
+  if(state.settingsTab==='intake') return intakePanel();
   if(state.settingsTab==='checklist') return checklistPanel();
   if(state.settingsTab==='readiness') return `<div class="section-head"><div><p class="kicker">ORGANIZATION RULES</p><h2>Publishing requirements</h2><p>Petify marks a profile ready to publish when all required information is complete and up to date.</p></div><button class="secondary-button" data-action="add-check">＋ Add section</button></div><div class="settings-list">${[['Health','Required · Updated within the last 30 days',true],['Behavior','Required · Updated within the last 14 days',true],['Media','At least 3 photos approved for public use',true],['Documents','All required documents approved',true],['Public profile','Description and adoption contact',true]].map(([a,b,on])=>`<div><span class="drag">⋮⋮</span><span><b>${a}</b><small>${b}</small></span><button class="toggle ${on?'on':''}" data-action="toggle-setting"><i></i></button><button class="kebab" data-action="edit-setting">•••</button></div>`).join('')}</div><div class="settings-note"><span>i</span><p><b>What “Ready to publish” means</b>“Ready to publish” means the profile has all information required for publishing in Petify. Medical and legal decisions remain with your team.</p></div>`;
   if(state.settingsTab==='forms') return `<div class="section-head"><div><p class="kicker">FOSTER EXPERIENCE</p><h2>Daily care and weekly check-in</h2><p>Keep routine care lightweight while sending meaningful changes to staff for review.</p></div></div><div class="form-template-grid"><button data-action="open-daily-care"><span class="care-icon">☀</span><span><small>EVERY DAY</small><b>Daily care</b><em>Meals, walks, and medication</em><p>Routine completions save to the care log. Missed medication and concerns alert the coordinator.</p></span><i>Preview ›</i></button><button data-action="preview-foster-form"><span class="care-icon weekly">↻</span><span><small>EVERY WEEK</small><b>Weekly check-in</b><em>Health, behavior, photos, and notes</em><p>Meaningful changes enter the staff review queue before the official record changes.</p></span><i>Preview ›</i></button></div><div class="settings-note"><span>i</span><p><b>Two different records</b>Daily care confirms that routines happened. Weekly check-ins capture observations that may affect Milo’s shelter record or adoption profile.</p></div>`;
@@ -1485,6 +1688,12 @@ function renderDrawer() {
     const animal=applicationAnimal(app.animalId);
     const count=checklist().filter(item=>item.by==='adopter'&&!itemSettled(itemState(app,item))).length;
     return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer message-drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">RECIPIENT PREVIEW</p><h2>What ${app.name} receives</h2><p>Preview the request before it goes out by SMS and email.</p><div class="message-tabs"><button class="${state.messageChannel==='sms'?'active':''}" data-message-channel="sms">SMS</button><button class="${state.messageChannel==='email'?'active':''}" data-message-channel="email">Email</button></div>${state.messageChannel==='sms'?applicantSmsPreview(app,animal):applicantEmailPreview(app,animal)}<div class="delivery-details"><div><span>▤</span><p><b>${count} items in one link</b>Everything you asked for opens on one page. ${app.name} can send them in any order.</p></div><div><span>⌁</span><p><b>Secure individual link</b>No account required. The link opens only this application.</p></div></div><div class="preview-flow"><small>AFTER ${app.name.toUpperCase()} SENDS</small><div><span><i>1</i><b>Received</b></span><em>›</em><span><i>2</i><b>Attached to the application</b></span><em>›</em><span><i>3</i><b>Off your list</b></span></div><p>Each item leaves the waiting list the moment it comes back. Nothing has to be filed by hand.</p></div><button class="primary-button full" data-action="return-application-request">Back to request</button><button class="text-button centered" data-action="preview-applicant-form">Open ${app.name}’s screen</button></aside></div>`;
+  }
+  if(state.drawer==='application-history') {
+    const app=applicationById(state.applicationId);
+    const animal=applicationAnimal(app.animalId);
+    const rows=applicationActivity(app,checklist(),true);
+    return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer message-drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">AUDIT TRAIL</p><h2>${app.name} · ${animal.name}</h2><p>Every request, response, and recorded call on this application, with who did it.</p><div class="foster-activity apl-history-full">${rows.map(([title,note,who])=>`<p><i></i><b>${title}</b><small>${note}</small>${who?`<em>${who}</em>`:''}</p>`).join('')}</div><button class="secondary-button full" data-action="export-activity">Export</button></aside></div>`;
   }
   if(state.drawer==='foster-detail') return fosterDetailDrawer();
   if(state.drawer==='guide') return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer guide-drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">GUIDED DEMOS</p><h2>Pick what you want to see</h2><p>Each tour resets the sample data, opens the right screen, and points to the next click.</p>${TOUR_GROUPS.map(group=>`<section class="tour-group"><p class="tour-group-label">${group.label}${group.tours.length>1?`<em>${group.tours.length} parts</em>`:''}</p><div class="tour-list">${group.tours.map(id=>`<button class="tour-item" data-action="start-tutorial" data-tutorial="${id}"><span class="tour-num">${id.toUpperCase().replace(/^([A-Z])(\d)$/,'$1-$2')}</span><b>${TUTORIALS[id].name}</b><small>${TUTORIALS[id].steps.length} steps</small><i>›</i></button>`).join('')}</div></section>`).join('')}</aside></div>`;
@@ -1635,7 +1844,7 @@ function render() {
   lastRenderedView=state.view;
   if(viewChanged) window.scrollTo(0,0);
   syncNavigationHistory();
-  const views = {dashboard:dashboardView,animals:animalsView,animal:animalView,applications:applicationsView,application:applicationView,updates:updatesView,fosters:fostersView,publishing:publishingView,settings:settingsView,fosterform:fosterFormView,applicantform:applicantFormView,profilepreview:profilePreviewView};
+  const views = {dashboard:dashboardView,animals:animalsView,animal:animalView,applications:applicationsView,application:applicationView,audit:auditView,updates:updatesView,fosters:fostersView,publishing:publishingView,settings:settingsView,fosterform:fosterFormView,applicantform:applicantFormView,profilepreview:profilePreviewView};
   app.innerHTML = state.view==='applicantform'
     ? `${applicantFormView()}${state.tutorialStep!==null?renderTutorial():''}${state.toast?`<div class="toast"><span>✓</span>${state.toast}</div>`:''}`
     : state.view==='fosterform'
@@ -1692,11 +1901,16 @@ function bind() {
   document.querySelectorAll('[data-application-animal]').forEach(el=>el.addEventListener('click',()=>{const value=el.dataset.applicationAnimal;if(state.tutorialStep!==null&&!tutorialMatches('application-animal',value))return;state.applicationOpen={...state.applicationOpen,[value]:!state.applicationOpen[value]};advanceTutorial('application-animal',value);render();}));
   document.querySelectorAll('[data-open-application]').forEach(el=>el.addEventListener('click',e=>{if(e.target.closest('button'))return;const value=el.dataset.openApplication;if(state.tutorialStep!==null&&!tutorialMatches('application',value))return;state.applicationId=value;state.appItemOpen=null;state.view='application';advanceTutorial('application',value);render();}));
   document.querySelectorAll('[data-application-item]').forEach(el=>el.addEventListener('click',()=>{const value=el.dataset.applicationItem;if(state.tutorialStep!==null&&!tutorialMatches('application-item',value))return;state.appItemOpen=state.appItemOpen===value?null:value;advanceTutorial('application-item',value);render();}));
+  document.querySelectorAll('[data-contact-edit]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();const key=el.dataset.contactEdit;state.contactSnapshot=state.appContacts[key];state.contactEditing=key;render();}));
+  document.querySelectorAll('[data-contact-field]').forEach(el=>el.addEventListener('input',()=>{const raw=el.dataset.contactField;const at=raw.lastIndexOf(':');const key=raw.slice(0,at),field=raw.slice(at+1);const app=applicationById(state.applicationId);const item=checklist().find(x=>`${app.id}:${x.id}`===key);const base=app.contacts?.[item?.id]||{};const current=state.appContacts[key]||{...base};state.appContacts={...state.appContacts,[key]:{...current,[field]:el.value}};}));
+  if(state.contactEditing){const first=document.querySelector(`[data-contact-field="${state.contactEditing}:name"]`);if(first&&document.activeElement!==first){first.focus();first.setSelectionRange(first.value.length,first.value.length);}}
   document.querySelectorAll('[data-application-note]').forEach(el=>el.addEventListener('input',()=>{state.appNotes={...state.appNotes,[el.dataset.applicationNote]:el.value};}));
   document.querySelectorAll('[data-checklist-edit]').forEach(el=>el.addEventListener('click',()=>{const id=el.dataset.checklistEdit;const item=checklist().find(x=>x.id===id);state.checklistSnapshot={id,isNew:false,name:item?.name,note:item?.note};state.checklistEditing=id;render();}));
   document.querySelectorAll('[data-checklist-field]').forEach(el=>el.addEventListener('input',()=>{const [id,field]=el.dataset.checklistField.split(':');if(field==='name')state.checklistName={...state.checklistName,[id]:el.value};else state.checklistNote={...state.checklistNote,[id]:el.value};}));
   if(state.checklistEditing){const first=document.querySelector(`[data-checklist-field="${state.checklistEditing}:name"]`);if(first&&document.activeElement!==first){first.focus();first.setSelectionRange(first.value.length,first.value.length);}}
   document.querySelectorAll('[data-checklist-by]').forEach(el=>el.addEventListener('click',()=>{const [id,by]=el.dataset.checklistBy.split(':');state.checklistBy={...state.checklistBy,[id]:by};render();}));
+  document.querySelectorAll('[data-audit-filter]').forEach(el=>el.addEventListener('change',()=>{const field=el.dataset.auditFilter;const map={animal:'auditAnimal',actor:'auditActor',area:'auditArea',period:'auditPeriod',from:'auditFrom',to:'auditTo',sort:'auditSort'};state[map[field]]=el.value;render();}));
+  document.querySelectorAll('[data-audit-filter="from"],[data-audit-filter="to"]').forEach(el=>el.addEventListener('input',()=>{state[el.dataset.auditFilter==='from'?'auditFrom':'auditTo']=el.value;}));
   document.querySelectorAll('[data-settings-tab]').forEach(el=>el.addEventListener('click',()=>{state.settingsTab=el.dataset.settingsTab;render();}));
   document.querySelectorAll('[data-foster-mode]').forEach(el=>el.addEventListener('click',()=>{state.fosterFormMode=el.dataset.fosterMode;state.dailyCareSubmitted=false;if(state.fosterFormMode==='weekly')state.fosterSubmitted=false;render();}));
   document.querySelectorAll('[data-daily-task]').forEach(el=>el.addEventListener('click',()=>{const task=el.dataset.dailyTask;state.dailyTasks={...state.dailyTasks,[task]:!state.dailyTasks[task]};render();}));
@@ -1764,6 +1978,14 @@ function handleAction(action, el) {
     case 'edit-applicant': state.applicantSubmitted=false;render();break;
     case 'return-applications': state.view='application';state.appItemOpen=null;render();break;
     case 'finalize-adoption': toast('Adoption finalized · every item came back');break;
+    case 'save-contact': {const key=state.contactEditing;const c=state.appContacts[key];if(!c||!c.name?.trim()){toast('Add a name first');break;}state.contactEditing=null;toast('Contact saved to this item');break;}
+    case 'cancel-contact': {const key=state.contactEditing;const restored={...state.appContacts};if(state.contactSnapshot===undefined)delete restored[key];else restored[key]=state.contactSnapshot;state.appContacts=restored;state.contactEditing=null;state.contactSnapshot=undefined;render();break;}
+    case 'preview-intake-form': genericPrepared('Application form preview opened');break;
+    case 'embed-code': genericPrepared('Embed code copied');break;
+    case 'add-application': genericPrepared('Manual application form opened');break;
+    case 'view-audit-trail': openAnimal(el.dataset.animal||'milo','activity');break;
+    case 'view-application-history': state.drawer='application-history';render();break;
+    case 'clear-audit': state.auditAnimal='all';state.auditActor='all';state.auditArea='all';state.auditPeriod='all';state.auditFrom='';state.auditTo='';render();break;
     case 'open-attachment': genericPrepared('Attachment opened');break;
     case 'resend-item': toast('Reminder sent');break;
     case 'notifications': drawerOpen('notifications');break;
