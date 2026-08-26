@@ -65,7 +65,7 @@ let state = INITIAL(localStorage.getItem('petify-language') || 'en');
 
 /* 랜딩 소재별 CTA는 데모의 대시보드가 아니라 그 소재의 화면으로 떨어져야 한다.
    ?screen=applications · ?tour=h1 두 가지만 받는다. */
-const START_SCREENS = ['dashboard','animals','applications','updates','fosters','publishing','settings'];
+const START_SCREENS = ['dashboard','animals','applications','application','updates','fosters','publishing','settings'];
 function applyStartParams(){
   const params = new URLSearchParams(location.search);
   const screen = params.get('screen');
@@ -644,7 +644,7 @@ const TOUR_SETUP = {
   bpublish: {view:'animal', animalId:'milo', detailTab:'overview', requestSent:true, fosterSubmitted:true, updateApproved:true, miloReady:true},
   h1: {view:'settings', settingsTab:'checklist', applicationOpen:{luna:true}, applicationId:'rivera'},
   h2: {view:'applicantform', applicationId:'rivera', appSent:{rivera:true}, applicantSubmitted:false, applicantUploads:0, applicationOpen:{luna:true}},
-  h3: {view:'application', applicationId:'kchen', applicationOpen:{luna:true}, appItemOpen:null}
+  h3: {view:'application', applicationId:'kchen', applicationOpen:{luna:true}, appItemOpen:'kchen:landlord'}
 };
 
 const KO_UI = {
