@@ -152,22 +152,10 @@ const collectionDefinitions = {
     title: "리드 사전조사",
     parent: "methods",
     lead: "데모 콜 전에 공개 자료만으로 확인한 조직별 사전조사입니다. 조직 구조·재원·사용 도구·조달 경로와 담당자 프로필을 같은 틀로 정리했습니다.",
-    paths: [
-      "analysis/SantaBarbara_카운티_사전조사_20260817.md",
-      "analysis/HSWC_Maryland_사전조사_20260819.md",
-      "analysis/TJO_Springfield_사전조사_20260819.md",
-      "analysis/Wishful_Whiskers_Rescue_TNR_사전조사_20260820.md",
-      "analysis/Mizfit_Muttz_Rescue_사전조사_20260820.md",
-      "analysis/Blue_Mountain_Animal_Rescue_사전조사_20260820.md",
-      "analysis/Wilkes_Rescue_Group_사전조사_20260820.md",
-      "analysis/Paws_Place_Rescue_Inc_사전조사_20260820.md",
-      "analysis/North_Texas_Australian_Shepherd_Rescue_사전조사_20260820.md",
-      "analysis/North_County_Paws_Cause_사전조사_20260820.md",
-      "analysis/Kzoo_Cat_Cafe_and_Rescue_사전조사_20260820.md",
-      "analysis/Citizens_for_Animal_Protection_사전조사_20260820.md",
-      "analysis/Humane_Society_사전조사_20260820.md",
-      "analysis/Little_Traverse_Bay_Humane_Society_사전조사_20260820.md",
-    ],
+    /* 경로 패턴으로 잡는다 — 조사 세션이 콜마다 새 문서를 만들기 때문에 개별 등재를 요구하면
+       그때마다 빌드가 죽는다. build.mjs 의 leadResearchPattern 과 짝이다 (2026-08-26) */
+    match: /_사전조사_\d{6,8}\.md$/,
+    paths: [],
   },
   appendix: {
     title: "별첨",
@@ -363,10 +351,17 @@ function extraEntry(extra) {
   return { ...extra, href: `#/library/${extra.collectionKey}`, count: target ? entriesFor(extra.collectionKey).length : 0 };
 }
 
+function docsIn(definition) {
+  const listed = definition.paths.map((path) => byPath.get(path)).filter(Boolean);
+  if (!definition.match) return listed;
+  const matched = docs.filter((doc) => definition.match.test(doc.path) && !definition.paths.includes(doc.path));
+  return [...listed, ...matched];
+}
+
 function entriesFor(key) {
   const definition = collectionDefinitions[key];
   if (!definition) return [];
-  const docEntries = definition.paths.map((path) => byPath.get(path)).filter(Boolean).map(docEntry);
+  const docEntries = docsIn(definition).map(docEntry);
   const extras = (collectionExtras[key] ?? []).map(extraEntry);
   return sortEntries([...docEntries, ...extras]);
 }
@@ -582,7 +577,10 @@ function route() {
   let activePath = path;
   if (path.startsWith("/doc/")) {
     const currentDoc = byId.get(path.split("/")[2]);
-    const groupKey = currentDoc && Object.keys(collectionDefinitions).find((key) => collectionDefinitions[key].paths.includes(currentDoc.path));
+    const groupKey = currentDoc && Object.keys(collectionDefinitions).find((key) => {
+      const definition = collectionDefinitions[key];
+      return definition.paths.includes(currentDoc.path) || (definition.match && definition.match.test(currentDoc.path));
+    });
     if (groupKey) activePath = `/library/${groupKey}`;
   }
   document.querySelectorAll(".nav-link").forEach((link) => link.classList.toggle("active", activePath === link.dataset.route || (link.dataset.route !== "/" && activePath.startsWith(link.dataset.route + "/"))));
