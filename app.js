@@ -15,7 +15,7 @@ const routes = [
   ["주제별 문서", "/library/results", "◈", "실험 결과 보고서"],
   ["주제별 문서", "/library/interview", "◎", "고객 인터뷰"],
   /* 콜별 인터뷰 정리본 PDF 모음 (2026-08-25 카야 지시) */
-  ["주제별 문서", "/library/reports", "↳", "인터뷰 정리본", true],
+  ["주제별 문서", "/library/reports", "↳", "인터뷰 모음집", true],
   ["주제별 문서", "/library/workflow", "◫", "쉘터 업무 플로우"],
   ["주제별 문서", "/library/competitors", "▥", "경쟁사 조사"],
   /* M1 은 종료된 마일스톤이라 참고 자료 바로 위로 내렸다 (2026-08-25 카야 지시) */
@@ -90,20 +90,23 @@ const collectionDefinitions = {
   },
   interview: {
     title: "고객 인터뷰",
-    lead: "리드 판정 보드와 콜별 인사이트를 모은 화면입니다. 콜 전 사전조사는 출처·분석 방법의 리드 사전조사, 진행 가이드·체크리스트는 별첨, 녹취록은 출처·분석 방법에 있습니다.",
+    lead: "콜 전체를 가로지르는 판정 보드입니다. 콜별 인터뷰 자료는 인터뷰 모음집에, 콜 전 사전조사는 출처·분석 방법의 리드 사전조사, 진행 가이드·체크리스트는 별첨, 녹취록은 출처·분석 방법에 있습니다.",
     paths: [
       "deliverables/Track2_리드판정보드.md",
       "deliverables/M2_데모콜_인사이트보드.md",
-      "deliverables/Eve_인터뷰_인사이트_20260817.md",
-      "deliverables/Amy_인터뷰_인사이트_Hearts_Bones_20260818.md",
-      "deliverables/중간점검_2_Gina_인터뷰_인사이트_202608.md",
     ],
   },
+  /* 콜별 인터뷰 자료를 한자리에 — 인사이트 정리 문서와 원본 정리본 PDF 를 같이 둔다.
+     상위 「고객 인터뷰」에는 보드 2종만 남기고 콜 단위 자료는 전부 여기로 (2026-08-26 카야 지시) */
   reports: {
-    title: "인터뷰 정리본",
+    title: "인터뷰 모음집",
     parent: "interview",
-    lead: "펫나우 팀이 작성한 콜별 인터뷰 정리본 원본(PDF)입니다. 제목을 누르면 새 탭에서 열립니다.",
-    paths: [],
+    lead: "콜별 인터뷰 자료를 최신순으로 모았습니다. 인사이트 정리 문서와, 펫나우 팀이 작성한 원본 정리본(PDF)이 함께 있습니다. PDF 는 새 탭에서 열립니다.",
+    paths: [
+      "deliverables/Amy_인터뷰_인사이트_Hearts_Bones_20260818.md",
+      "deliverables/Eve_인터뷰_인사이트_20260817.md",
+      "deliverables/중간점검_2_Gina_인터뷰_인사이트_202608.md",
+    ],
   },
   workflow: {
     title: "쉘터 업무 플로우",
@@ -193,8 +196,8 @@ const collectionExtras = {
   interview: [{
     kind: "collection",
     collectionKey: "reports",
-    title: "인터뷰 정리본",
-    description: "펫나우 팀이 작성한 콜별 인터뷰 정리본 원본(PDF) 모음",
+    title: "인터뷰 모음집",
+    description: "콜별 인사이트 정리 문서와 원본 정리본(PDF)을 최신순으로 모은 페이지",
     role: "모아 보기",
     milestone: "M2",
     date: "2026-08-24",
@@ -284,14 +287,11 @@ const documentVisualPages = new Map([
   ["deliverables/Track2_최종성과분석_20260818.md", ["track2-final-report.html", "최종 보고 시각본 보기 →"]],
 ]);
 
-/* 문서 하단에 홈과 같은 카드 UI로 쌓을 하위 문서. 콜이 늘면 여기에 경로를 추가한다 */
-const documentChildren = new Map([
-  ["deliverables/M2_데모콜_인사이트보드.md", {
-    title: "콜별 인사이트",
-    lead: "각 데모 콜의 상세 정리입니다.",
-    paths: ["deliverables/Eve_인터뷰_인사이트_20260817.md", "deliverables/Amy_인터뷰_인사이트_Hearts_Bones_20260818.md"],
-  }],
-]);
+/* 문서 하단에 홈과 같은 카드 UI로 쌓을 하위 문서.
+   2026-08-26 비움 — 콜 단위 자료는 전부 「인터뷰 모음집」(#/library/reports)으로 모으라는
+   카야 지시에 따라 데모 콜 보드 하위의 Eve·Amy 카드를 제거했다. 보드 헤더에 모음집 링크가 있다.
+   다시 쓸 일이 생기면 여기에 경로를 추가하면 된다 */
+const documentChildren = new Map([]);
 
 function compactDocRow(doc, index) {
   const externalUrl = externalDocumentUrls.get(doc.path);
@@ -358,8 +358,9 @@ function docEntry(doc) {
 
 function extraEntry(extra) {
   if (extra.kind !== "collection") return { ...extra, href: extra.url };
+  /* 개수는 문서 수가 아니라 그 페이지에 실제로 뜨는 줄 수 — PDF 같은 비문서 항목도 포함한다 */
   const target = collectionDefinitions[extra.collectionKey];
-  return { ...extra, href: `#/library/${extra.collectionKey}`, count: target ? target.paths.length : 0 };
+  return { ...extra, href: `#/library/${extra.collectionKey}`, count: target ? entriesFor(extra.collectionKey).length : 0 };
 }
 
 function entriesFor(key) {

@@ -631,20 +631,16 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .table-scroll::-webkit-scrollbar-thumb { background: rgba(15,45,33,.42); border-radius: 6px; }
 .markdown-body .table-scroll table { display: table; width: 100%; table-layout: fixed; margin: 0; font-size: 12.5px; }
 .markdown-body .table-scroll th,
-.markdown-body .table-scroll td { min-width: 0; max-width: none; padding: 9px 11px; word-break: break-word; overflow-wrap: anywhere; }
-/* fixed 레이아웃에서는 width 만 쓴다. min-width 를 함께 걸면 그것이 width 처럼 굳어
-   모든 열이 고정되고, 폭 합이 컨테이너와 어긋나면 빈 열이 생긴다 (2026-08-25 사고 원인) */
-.markdown-body .table-scroll th:nth-child(1),
-.markdown-body .table-scroll td:nth-child(1) { width: 28px; padding-right: 6px; text-align: right; color: var(--ink-4); }
-.markdown-body .table-scroll th:nth-child(2),
-.markdown-body .table-scroll td:nth-child(2) { width: 34px; padding-left: 4px; padding-right: 4px; text-align: center; }
-.markdown-body .table-scroll th:nth-child(3),
-.markdown-body .table-scroll td:nth-child(3) { width: 138px; }
-.markdown-body .table-scroll th:nth-child(4),
-.markdown-body .table-scroll td:nth-child(4) { width: 68px; }
-/* 6열은 표 2의 현재 도구뿐. 5열은 지정하지 않아 남는 폭을 전부 가져간다 */
-.markdown-body .table-scroll th:nth-child(6),
-.markdown-body .table-scroll td:nth-child(6) { width: 92px; }
+.markdown-body .table-scroll td { min-width: 0; max-width: none; padding: 9px 11px; word-break: break-word; overflow-wrap: break-word; }
+/* 폭은 열 번호가 아니라 열의 의미로 준다 — build.mjs 가 헤더를 읽어 클래스를 붙인다.
+   fixed 레이아웃에서는 width 만 쓴다. min-width 를 함께 걸면 그것이 width 처럼 굳는다 */
+.markdown-body .table-scroll .col-num     { width: 28px; padding-right: 6px; text-align: right; color: var(--ink-4); }
+.markdown-body .table-scroll .col-track   { width: 34px; padding-left: 4px; padding-right: 4px; text-align: center; }
+.markdown-body .table-scroll .col-org     { width: 138px; }
+.markdown-body .table-scroll .col-verdict { width: 68px; }
+.markdown-body .table-scroll .col-tool    { width: 92px; }
+.markdown-body .table-scroll .col-follow  { width: 168px; }
+/* col-detail 은 폭을 주지 않는다 — 남는 폭을 전부 가져가는 서술 열이다 */
 
 
 /* ── Track 2 리드 판정 보드 (7열) ──
