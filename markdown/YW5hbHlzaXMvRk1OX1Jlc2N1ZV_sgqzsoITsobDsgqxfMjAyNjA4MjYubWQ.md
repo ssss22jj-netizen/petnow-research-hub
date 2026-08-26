@@ -12,7 +12,7 @@
 |---|---|---|---|
 | 법인 | Forget-Me-Not Animal Rescue (통칭 FMN), EIN 92-3387399, North Pole, AK. 501(c)(3), 면세승인 2023-05, NTEE D20 | 확정 | ProPublica |
 | 약칭 근거 | 자체 도메인 `fmnrescue.org`, Instagram `@fmn.rescue`, X `@fmnrescue`. 리드 폼의 "FMN Rescue"와 일치 | 확정 | 조직 공식 사이트, Instagram |
-| 이메일 도메인 | 조직 공식 연락처가 **F***@gmail.com** (`ForgetMeNotRescueAK@gmail.com`) — 리드 폼의 gmail.com과 일치. 별도로 `hello@fmnrescue.org`도 병용 | 확정 | 조직 공식 사이트 |
+| 이메일 도메인 | 조직 공식 연락처가 **F***@gmail.com** (`F***@gmail.com`) — 리드 폼의 gmail.com과 일치. 별도로 `h***@fmnrescue.org`도 병용 | 확정 | 조직 공식 사이트 |
 | **신청자 Michelle Kougl** | **창립자 겸 이사장(Board President)**. 지역 언론 2건이 직책을 명시했고, FY2024·FY2025 Form 990 임원란에 President로 등재 | **확정** | webcenterfairbanks(2023-04-18, 2024-02-02), ProPublica |
 | 폼 응답 정합 | `org_type`(Foster-based rescue)·`role`(ED/founder) 모두 공개 자료와 일치. 조직이 스스로를 "entirely volunteer-ran, foster-based"로 표기 | 확정 | 조직 공식 사이트 |
 | 동명 조직 배제 | IRS BMF에 "Forget Me Not + Animal"로 검색되는 법인 7곳 중 알래스카 소재는 이 1곳뿐. 배제 대상: Forget Me Not Animal Rescue(Manhattan IL, 81-5228992), Forget-me-not Animal Rescue(Pleasant View TN, 26-2132121), Forget Me Not Animal Rescue Inc(Strongsville OH, 45-4196515), Forget Me Not Animal Sanctuary of Las Vegas(NV, 81-1271781), Forget Me Not Animal Shelter of Ferry County(Republic WA, 91-1996344), Forget Me Not Farm(Wellington FL, 82-4466341) | 확정 | ProPublica |
@@ -50,7 +50,7 @@
 | 창립 인력 배경 | 조직 자체 표기: business administration, rescue protocols, adoption coordination, fundraising, veterinary medicine, fostering, animal behavior | 조직 공식 사이트(Our Mission) |
 | 자원봉사 | 프로그램 존재 확인(계약·교육·문자 알림 체계 보유). **인원 규모 미확인** | 조직 공식 사이트(onboard) |
 | 포스터 가정 수 | **미확인** | — |
-| 연락 | F***@gmail.com / hello@fmnrescue.org / (907)371-4550 (**문자 선호** 명시) | 조직 공식 사이트 |
+| 연락 | F***@gmail.com / h***@fmnrescue.org / (907)371-4550 (**문자 선호** 명시) | 조직 공식 사이트 |
 | 채널 | 웹(Squarespace), Facebook `fmnrescue`, Instagram `@fmn.rescue`(팔로워 약 2,760), X `@fmnrescue`, Linktree | 각 채널 직접 조회 |
 | 지역 협력 | 2024-02 "Meet the Rescues" 합동 행사 — Straw for Dogs, Best Friends Animal Rescue, The August Fund, Arctic German Shepherd, **FNSB Animal Control**과 공동 | webcenterfairbanks(2024-02-02) |
 | 등재 플랫폼 | **Adopt-a-Pet 등재 확인**(shelter 280022). Petfinder 조직 페이지는 확인 못 함 | Adopt-a-Pet |

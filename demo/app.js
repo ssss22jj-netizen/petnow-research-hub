@@ -46,17 +46,40 @@ const INITIAL = (language='en') => ({
   fosterFormMode: 'weekly',
   dailyCareSubmitted: false,
   dailyTasks: {breakfast:true,morningWalk:true,medication:false,dinner:false,eveningWalk:false},
-  mobileNavOpen: false
+  mobileNavOpen: false,
+  applicationOpen: { luna: true },
+  applicationId: 'rivera',
+  appSent: {},
+  appItems: {},
+  appLog: {},
+  appNotes: {},
+  appItemOpen: null,
+  applicantSubmitted: false,
+  applicantUploads: 0,
+  checklistOff: {},
+  checklistBy: {},
+  checklistAdded: []
 });
 
 let state = INITIAL(localStorage.getItem('petify-language') || 'en');
+
+/* 랜딩 소재별 CTA는 데모의 대시보드가 아니라 그 소재의 화면으로 떨어져야 한다.
+   ?screen=applications · ?tour=h1 두 가지만 받는다. */
+const START_SCREENS = ['dashboard','animals','applications','updates','fosters','publishing','settings'];
+function applyStartParams(){
+  const params = new URLSearchParams(location.search);
+  const screen = params.get('screen');
+  if(screen && START_SCREENS.includes(screen)) state.view = screen;
+  const tour = params.get('tour');
+  if(tour && TOUR_SETUP[tour]) { Object.assign(state, TOUR_SETUP[tour]); state.tutorialId = tour; state.tutorialStep = 0; }
+}
 let tutorialHistory = [];
 let tutorialStepSnapshot = null;
 let tutorialStepSnapshotKey = null;
 let lastRenderedView = null;
 const app = document.querySelector('#app');
 
-const NAVIGATION_KEYS = ['view','animalId','detailTab','animalFilter','updateFilter','fosterFilter','publishFilter','settingsTab','selectedUpdate','selectedFoster','fosterFormMode','search'];
+const NAVIGATION_KEYS = ['view','animalId','detailTab','animalFilter','updateFilter','fosterFilter','publishFilter','settingsTab','selectedUpdate','selectedFoster','fosterFormMode','search','applicationId'];
 let restoringNavigation = false;
 let lastNavigationSignature = null;
 
@@ -109,6 +132,272 @@ const BASE_ANIMALS = [
   { id:'nori', name:'Nori', img:'assets/nori.png', meta:'Corgi mix · Female · 3 years', queue:'care', stage:'In care', readiness:'neutral', blocker:'None', next:'Open record', owner:'Alex Rivera', updated:'38 min ago' }
 ];
 
+/* ────────────────────────────────────────── 소재 H · 입양 신청 서류 회수
+ * S1 요구 항목 설정 · S2 신청 목록 · S3 신청 상세 · S4 신청자 응답 화면.
+ * 정의: deliverables/M2_소재H_소구점_정의_및_근거_20260823.md §2·§5
+ * 경과일은 항목별이 아니라 신청 접수 시점 기준 단일 축이다(§5.2).
+ */
+const CHECKLIST_BASE = [
+  {id:'agreement', name:'Signed agreement', by:'adopter', note:'Adoption contract, signed'},
+  {id:'housing', name:'Proof of housing', by:'adopter', note:'Lease, deed, or utility bill'},
+  {id:'homephoto', name:'Photos of the home', by:'adopter', note:'Yard, fencing, and living space'},
+  {id:'landlord', name:'Landlord check', by:'staff', note:'Call to confirm pets are allowed'},
+  {id:'vet', name:'Vet reference', by:'staff', note:'Call the current or previous vet'},
+  {id:'reference', name:'Personal reference', by:'staff', note:'Call one listed reference'}
+];
+
+const APPLICATION_ANIMALS = [
+  {id:'luna', name:'Luna', img:'assets/dog2.png', meta:'Terrier mix · Female · 1 year'},
+  {id:'maple', name:'Maple', img:'assets/maple.png', meta:'Shepherd mix · Female · 2 years'},
+  {id:'daisy', name:'Daisy', img:'assets/dog4.png', meta:'Poodle mix · Female · 4 years'}
+];
+
+const APPLICATIONS = [
+  {id:'rivera', animalId:'luna', name:'M. Rivera', initials:'MR', email:'m.rivera@example.com', phone:'(917) 555-0148',
+   received:'Aug 3', days:6, sent:false,
+   items:{reference:'done'},
+   log:{reference:{who:'K. Chen', when:'4 days ago', note:'Spoke with both references listed.'}}},
+  {id:'kchen', animalId:'luna', name:'K. Chen', initials:'KC', email:'k.chen@example.com', phone:'(917) 555-0192',
+   received:'Aug 6', days:3, sent:true,
+   items:{agreement:'received', homephoto:'received', landlord:'tried', vet:'done', reference:'done'},
+   log:{agreement:{when:'2 days ago', file:'adoption-agreement-signed.pdf', size:'1.2 MB'},
+        homephoto:{when:'2 days ago', file:'3 photos', size:'4.8 MB'},
+        landlord:{who:'M. Kim', when:'yesterday', note:'Left a voicemail. Will try again Monday.'},
+        vet:{who:'A. Rivera', when:'2 days ago', note:'Riverside Animal Hospital confirmed care through 2025.'},
+        reference:{who:'A. Rivera', when:'2 days ago', note:'Reference confirmed.'}}},
+  {id:'alvarez', animalId:'luna', name:'D. Alvarez', initials:'DA', email:'d.alvarez@example.com', phone:'(917) 555-0117',
+   received:'Jul 31', days:9, sent:true,
+   items:{agreement:'received', housing:'received', homephoto:'received', landlord:'done', vet:'done', reference:'done'},
+   log:{agreement:{when:'6 days ago', file:'adoption-agreement-signed.pdf', size:'1.1 MB'},
+        housing:{when:'6 days ago', file:'lease-2026.pdf', size:'740 KB'},
+        homephoto:{when:'6 days ago', file:'4 photos', size:'6.1 MB'},
+        landlord:{who:'M. Kim', when:'5 days ago', note:'Landlord confirmed dogs under 40 lb are allowed.'},
+        vet:{who:'A. Rivera', when:'5 days ago', note:'Vet confirmed vaccinations current.'},
+        reference:{who:'A. Rivera', when:'5 days ago', note:'Reference confirmed.'}}},
+  {id:'whitaker', animalId:'maple', name:'J. Whitaker', initials:'JW', email:'j.whitaker@example.com', phone:'(646) 555-0130',
+   received:'Aug 5', days:4, sent:true,
+   items:{agreement:'received', landlord:'done', reference:'done'},
+   log:{agreement:{when:'3 days ago', file:'adoption-agreement-signed.pdf', size:'1.0 MB'},
+        landlord:{who:'S. Chen', when:'3 days ago', note:'Owns the home. No landlord check needed.'},
+        reference:{who:'S. Chen', when:'3 days ago', note:'Reference confirmed.'}}},
+  {id:'brooks', animalId:'daisy', name:'T. Brooks', initials:'TB', email:'t.brooks@example.com', phone:'(718) 555-0166',
+   received:'Aug 1', days:8, sent:true,
+   items:{agreement:'received', housing:'received', homephoto:'received', landlord:'done', vet:'done', reference:'done'},
+   log:{agreement:{when:'7 days ago', file:'adoption-agreement-signed.pdf', size:'1.3 MB'},
+        housing:{when:'7 days ago', file:'utility-bill.pdf', size:'320 KB'},
+        homephoto:{when:'7 days ago', file:'5 photos', size:'7.4 MB'},
+        landlord:{who:'M. Kim', when:'6 days ago', note:'Landlord confirmed.'},
+        vet:{who:'M. Kim', when:'6 days ago', note:'Vet confirmed.'},
+        reference:{who:'M. Kim', when:'6 days ago', note:'Reference confirmed.'}}},
+  {id:'osei', animalId:'daisy', name:'L. Osei', initials:'LO', email:'l.osei@example.com', phone:'(718) 555-0184',
+   received:'Aug 2', days:7, sent:true,
+   items:{agreement:'received', housing:'received', homephoto:'received', landlord:'done', vet:'done', reference:'done'},
+   log:{agreement:{when:'5 days ago', file:'adoption-agreement-signed.pdf', size:'1.1 MB'},
+        housing:{when:'5 days ago', file:'lease-2026.pdf', size:'690 KB'},
+        homephoto:{when:'5 days ago', file:'3 photos', size:'3.9 MB'},
+        landlord:{who:'S. Chen', when:'4 days ago', note:'Landlord confirmed.'},
+        vet:{who:'S. Chen', when:'4 days ago', note:'Vet confirmed.'},
+        reference:{who:'S. Chen', when:'4 days ago', note:'Reference confirmed.'}}}
+];
+
+/* S1에서 조직이 항목을 켜고 끄고 담당을 바꾸므로, 화면은 항상 이 함수를 거쳐 읽는다. */
+function checklist() {
+  return CHECKLIST_BASE
+    .filter(item=>!state.checklistOff[item.id])
+    .map(item=>({...item, by:state.checklistBy[item.id]||item.by}))
+    .concat(state.checklistAdded);
+}
+
+function applicationById(id) { return APPLICATIONS.find(a=>a.id===id)||APPLICATIONS[0]; }
+function applicationAnimal(id) { return APPLICATION_ANIMALS.find(a=>a.id===id)||APPLICATION_ANIMALS[0]; }
+function applicationSent(app) { return state.appSent[app.id]!==undefined?state.appSent[app.id]:app.sent; }
+
+/* 항목 하나의 상태. 신청자 항목은 요청 발송 여부를 따라가고, 담당자 항목은 개별로 움직인다. */
+function itemState(app, item) {
+  const override=state.appItems[`${app.id}:${item.id}`];
+  if(override) return override;
+  const base=app.items?.[item.id];
+  if(base) return base;
+  if(item.by==='adopter') return applicationSent(app)?'sent':'notsent';
+  return 'open';
+}
+
+function itemLog(app, item) {
+  return state.appLog[`${app.id}:${item.id}`]||app.log?.[item.id]||null;
+}
+
+function itemSettled(status) { return status==='received'||status==='done'; }
+
+function itemLabel(app, item) {
+  const status=itemState(app,item);
+  if(status==='received') return ['complete','Received'];
+  if(status==='done') return ['complete','Done'];
+  if(status==='tried') return ['review',`Tried · ${app.days} days`];
+  if(status==='sent') return ['neutral',`Sent · ${app.days} days`];
+  if(status==='notsent') return ['blocked',`Not sent · ${app.days} days`];
+  return ['blocked',`Not called · ${app.days} days`];
+}
+
+/* 목록에 필요한 계산은 한곳에서 끝낸다 — 대기 항목, 대표 항목, +N (§5.2) */
+function applicationRow(app) {
+  const items=checklist();
+  const waiting=items.filter(item=>!itemSettled(itemState(app,item)));
+  return {app, animal:applicationAnimal(app.animalId), items, waiting, lead:waiting[0]||null, extra:Math.max(0,waiting.length-1)};
+}
+
+function applicationRows(animalId) {
+  return APPLICATIONS.filter(a=>a.animalId===animalId).map(applicationRow)
+    .sort((a,b)=>(b.waiting.length?1:0)-(a.waiting.length?1:0)||b.app.days-a.app.days);
+}
+
+function applicationAnimalRows() {
+  return APPLICATION_ANIMALS.map(animal=>{
+    const rows=applicationRows(animal.id);
+    const waiting=rows.reduce((sum,row)=>sum+row.waiting.length,0);
+    const oldest=rows.filter(row=>row.waiting.length).reduce((max,row)=>Math.max(max,row.app.days),0);
+    return {animal, rows, waiting, oldest};
+  }).sort((a,b)=>b.oldest-a.oldest);
+}
+
+function applicationTotals() {
+  const rows=APPLICATIONS.map(applicationRow);
+  const adopter=rows.reduce((sum,row)=>sum+row.waiting.filter(i=>i.by==='adopter').length,0);
+  const staff=rows.reduce((sum,row)=>sum+row.waiting.filter(i=>i.by==='staff').length,0);
+  const oldest=rows.filter(row=>row.waiting.length).reduce((max,row)=>Math.max(max,row.app.days),0);
+  const ready=rows.filter(row=>!row.waiting.length).length;
+  return {adopter, staff, oldest, ready};
+}
+
+/* ── S2 신청 목록 ─────────────────────────────────────────────
+ * 동물 → 지원자 2층 아코디언, 항목은 S3로 넘긴다(§5.3). */
+function applicationsView() {
+  const totals=applicationTotals();
+  const groups=applicationAnimalRows();
+  return `<section class="content">
+    ${pageHeader('ADOPTION APPLICATIONS','Applications','Every application shows what is still out and how long it has been waiting.','<button class="secondary-button" data-action="open-checklist">Adoption checklist</button><button class="primary-button" data-action="send-all-requests">Send open requests</button>')}
+    <div class="update-context"><span>WHAT IS STILL OUT</span><small>Completed items leave the list. What remains is what still needs attention.</small></div>
+    <div class="update-metrics apl-metrics">${[['Waiting on adopters',totals.adopter,'overdue'],['Waiting on your team',totals.staff,'progress'],['Longest wait',`${totals.oldest} days`,'sent'],['Ready to finalize',totals.ready,'review']].map(([label,value,tone])=>`<button class="static"><small>${label}</small><b>${value}</b><i class="${tone}"></i></button>`).join('')}</div>
+    <section class="surface apl-list">
+      <div class="section-head"><div><p class="kicker">OPEN APPLICATIONS</p><h2>By animal</h2><p>Open an animal to see who applied, then open an applicant to see every item.</p></div></div>
+      <div class="apl-groups">${groups.map(applicationGroup).join('')}</div>
+    </section>
+  </section>`;
+}
+
+function applicationGroup({animal, rows, waiting}) {
+  const open=!!state.applicationOpen[animal.id];
+  const summary=waiting?`${rows.length} ${rows.length===1?'applicant':'applicants'} · ${waiting} items waiting`:`${rows.length} ${rows.length===1?'applicant':'applicants'} · none waiting`;
+  return `<div class="apl-group ${open?'open':''}">
+    <button class="apl-animal" data-application-animal="${animal.id}" aria-expanded="${open}">
+      <span class="apl-caret">${open?'▾':'▸'}</span>
+      <img src="${animal.img}" alt="">
+      <span class="apl-animal-name"><b>${animal.name}</b><small>${animal.meta}</small></span>
+      <span class="apl-summary ${waiting?'':'clear'}">${waiting?'':'✓ '}${summary}</span>
+    </button>
+    ${open?`<div class="apl-applicants">${rows.map(applicationRowMarkup).join('')}</div>`:''}
+  </div>`;
+}
+
+function applicationRowMarkup({app, waiting, lead, extra}) {
+  const [tone,label]=lead?itemLabel(app,lead):['complete','All items in'];
+  const sent=applicationSent(app);
+  return `<div class="apl-applicant ${waiting.length?'':'settled'}" data-open-application="${app.id}">
+    <span class="avatar">${app.initials}</span>
+    <span class="apl-applicant-name"><b>${app.name}</b><small>Applied ${app.received} · ${app.days} days ago</small></span>
+    <span class="apl-lead">${lead?`${lead.name}${extra?`<em class="apl-plus">+${extra}</em>`:''}`:''}</span>
+    ${statusPill(tone,label)}
+    ${waiting.length&&!sent?`<button class="primary-button small" data-action="send-application-request" data-application="${app.id}">Send request</button>`:'<span class="apl-spacer"></span>'}
+    <i>›</i>
+  </div>`;
+}
+
+/* ── S3 신청 상세 ───────────────────────────────────────────── */
+function applicationView() {
+  const app=applicationById(state.applicationId);
+  const animal=applicationAnimal(app.animalId);
+  const {items, waiting}=applicationRow(app);
+  const sent=applicationSent(app);
+  const adopterOpen=waiting.filter(i=>i.by==='adopter');
+  return `<section class="content">
+    <button class="apl-back" data-view="applications">‹ Applications</button>
+    <div class="page-header"><div><p class="kicker">APPLICATION</p><h1>${app.name}</h1><p class="page-description">Applying for ${animal.name} · Applied ${app.received} · ${app.days} days ago</p></div><div class="page-actions">${adopterOpen.length?`<button class="${sent?'secondary-button':'primary-button'}" data-action="send-application-request" data-application="${app.id}">${sent?'Resend request':`Send request · ${adopterOpen.length} items`}</button>`:''}${!waiting.length?'<button class="primary-button" data-action="finalize-adoption">Finalize adoption</button>':'<button class="secondary-button" data-action="preview-applicant-form">Open adopter link ↗</button>'}</div></div>
+    <div class="apl-detail-bar ${waiting.length?'':'clear'}">
+      <span class="apl-detail-figure"><b>${waiting.length}</b><small>of ${items.length} items still open</small></span>
+      <span class="apl-detail-note">${waiting.length?`${waiting.filter(i=>i.by==='adopter').length} waiting on ${app.name} · ${waiting.filter(i=>i.by==='staff').length} waiting on your team`:'Everything requested has come back. This application is ready to finalize.'}</span>
+      ${sent?`<span class="apl-detail-sent">Request sent · ${app.days} days ago</span>`:'<span class="apl-detail-sent warn">Request not sent yet</span>'}
+    </div>
+    <section class="surface apl-items">
+      <div class="section-head"><div><p class="kicker">ADOPTION CHECKLIST</p><h2>${animal.name} · ${app.name}</h2><p>Every response stays with this application. Open an item to see what came back.</p></div><button class="secondary-button" data-action="open-checklist">Edit checklist</button></div>
+      <div class="apl-item-list">${items.map(item=>applicationItemRow(app,item)).join('')}</div>
+    </section>
+  </section>`;
+}
+
+function applicationItemRow(app, item) {
+  const status=itemState(app,item);
+  const [tone,label]=itemLabel(app,item);
+  const key=`${app.id}:${item.id}`;
+  const open=state.appItemOpen===key;
+  const log=itemLog(app,item);
+  const icon=itemSettled(status)?'✓':status==='tried'?'↻':'!';
+  return `<div class="apl-item ${open?'open':''}">
+    <button class="apl-item-head" data-application-item="${key}" aria-expanded="${open}">
+      <span class="check-icon ${itemSettled(status)?'complete':status==='tried'?'review':'blocked'}">${icon}</span>
+      <span class="apl-item-name"><b>${item.name}</b><small>${item.note}</small></span>
+      <span class="apl-owner ${item.by}">${item.by==='adopter'?'Adopter':'You'}</span>
+      ${statusPill(tone,label)}
+      <i>${open?'⌃':'⌄'}</i>
+    </button>
+    ${open?`<div class="apl-item-body">${applicationItemBody(app,item,status,log)}</div>`:''}
+  </div>`;
+}
+
+function applicationItemBody(app, item, status, log) {
+  if(item.by==='adopter') {
+    if(status==='received') return `<div class="apl-response"><span class="apl-file">▤</span><span><b>${log?.file||'Uploaded file'}</b><small>${log?.size||''} · Received ${log?.when||'recently'}</small></span><button class="secondary-button" data-action="open-attachment">Open</button></div><p class="apl-trace">Attached to this application. Nothing else has to be filed.</p>`;
+    if(status==='sent') return `<p class="apl-trace">Requested ${app.days} days ago in the same link as the other adopter items. Nothing has come back yet.</p><div class="apl-actions"><button class="secondary-button" data-action="resend-item">Send a reminder</button><button class="text-button" data-action="copy-link">Copy adopter link</button></div>`;
+    return `<p class="apl-trace">This item has not been requested yet. It goes out with the other adopter items in one link.</p><div class="apl-actions"><button class="primary-button" data-action="send-application-request" data-application="${app.id}">Send request</button></div>`;
+  }
+  const done=status==='done';
+  const tried=status==='tried';
+  return `${log?`<div class="apl-response"><span class="apl-file">☎</span><span><b>${done?'Completed':'Call attempted'} by ${log.who||'your team'}</b><small>${log.when||''}${log.note?` · ${log.note}`:''}</small></span></div>`:'<p class="apl-trace">Your team makes this call. Petify keeps it on the list until someone records the result.</p>'}
+    <label class="apl-note-field"><span>Note (optional)</span><input value="${state.appNotes[`${app.id}:${item.id}`]||''}" data-application-note="${app.id}:${item.id}" placeholder="What did the call confirm?"></label>
+    <div class="apl-actions">
+      ${done?`<button class="secondary-button" data-action="reopen-item" data-item="${app.id}:${item.id}">Reopen</button>`:`<button class="primary-button" data-action="mark-item-done" data-item="${app.id}:${item.id}">Mark as done</button>${tried?'':`<button class="secondary-button" data-action="mark-item-tried" data-item="${app.id}:${item.id}">Could not reach</button>`}`}
+    </div>`;
+}
+
+/* ── S4 신청자 응답 화면 · 계정 불요 ─────────────────────────── */
+function applicantFormView() {
+  const app=applicationById(state.applicationId);
+  const animal=applicationAnimal(app.animalId);
+  const items=checklist().filter(item=>item.by==='adopter'&&!itemSettled(itemState(app,item)));
+  const content=state.applicantSubmitted?applicantSubmittedView(app,animal,items):applicantQuestionView(app,animal,items);
+  return `<section class="foster-form-page"><div class="foster-brand"><img class="brand-logo foster-logo" src="assets/petify-logo.png" alt="Petify for Shelters"><span class="foster-security">Secure adopter link · No account required</span></div>${content}</section>`;
+}
+
+function applicantQuestionView(app, animal, items) {
+  const uploaded=state.applicantUploads;
+  return `<div class="foster-form-card"><div class="foster-pet"><img src="${animal.img}" alt="${animal.name}"><span><small>SECOND CHANCE RESCUE</small><h1>Adoption paperwork for ${animal.name}</h1><p>For ${app.name} · ${items.length} items requested</p></span></div>
+    <div class="autosave"><i></i> Your progress is saved automatically</div>
+    <div class="apl-adopter-list">${items.map((item,index)=>`<div class="apl-adopter-item ${index<uploaded?'complete':''}"><span class="apl-adopter-index">${index<uploaded?'✓':index+1}</span><span><b>${item.name}</b><small>${item.note}</small></span>${index<uploaded?'<em>Attached</em>':`<button class="secondary-button" data-action="applicant-upload">Upload</button>`}</div>`).join('')}</div>
+    <div class="daily-care-note"><span>i</span><p><b>One link for everything</b>No app, no account, no login. Everything you send goes straight to your application.</p></div>
+    <div class="foster-form-actions"><button class="secondary-button" data-action="save-applicant-draft">Save &amp; finish later</button><button class="primary-button" data-action="submit-applicant">Send ${uploaded>=items.length?'everything':`${uploaded} of ${items.length}`}</button></div>
+    <p class="form-help"><button data-action="contact-shelter">Questions? Contact the shelter</button></p></div>`;
+}
+
+function applicantSubmittedView(app, animal, items) {
+  return `<div class="foster-form-card success-screen"><span class="success-icon">✓</span><h1>Your documents were sent</h1><p>Thanks, ${app.name}. Second Chance Rescue can see everything you sent for ${animal.name}. You do not need to email anything separately.</p><div class="submission-summary"><img src="${animal.img}" alt="${animal.name}"><span><b>${animal.name} · Adoption paperwork</b><small>${state.applicantUploads} items attached · Sent just now</small></span></div><button class="primary-button full" data-action="return-applications">Return to staff demo</button><button class="text-button" data-action="edit-applicant">Edit what I sent</button></div>`;
+}
+
+/* ── S1 요구 항목 설정 · Settings 안에 둔다(§2.3) ──────────────── */
+function checklistPanel() {
+  const items=checklist();
+  return `<div class="section-head"><div><p class="kicker">ORGANIZATION RULES</p><h2>Adoption checklist</h2><p>Every shelter asks for something different. Add the documents and checks your team requires, then choose who each one comes from.</p></div><button class="secondary-button" data-action="add-checklist-item">＋ Add item</button></div>
+    <div class="settings-list apl-checklist">${items.map(item=>`<div><span class="drag">⋮⋮</span><span><b>${item.name}</b><small>${item.note}</small></span><span class="apl-owner-switch">${['adopter','staff'].map(by=>`<button class="${item.by===by?'active':''}" data-checklist-by="${item.id}:${by}">${by==='adopter'?'Adopter sends':'You complete'}</button>`).join('')}</span><button class="kebab" data-action="remove-checklist-item" data-item="${item.id}" aria-label="Remove item">×</button></div>`).join('')}</div>
+    <div class="settings-note"><span>i</span><p><b>Who does what</b>Adopter items go out in one link the applicant can answer without an account. Items your team completes — reference and landlord calls — stay on the list until someone records the result.</p></div>`;
+}
+
 const FOSTER_PEOPLE = [
   {id:'casey',name:'Casey Brooks',initials:'CB'},
   {id:'riley',name:'Riley Park',initials:'RP'}
@@ -130,6 +419,7 @@ function availablePlacementFosters() {
 const NAV = [
   ['dashboard','⌂','Dashboard'],
   ['animals','◫','Animals'],
+  ['applications','▤','Applications'],
   ['updates','↻','Check-ins'],
   ['fosters','♧','Fosters'],
   ['publishing','↗','Publishing'],
@@ -206,6 +496,42 @@ const TUTORIALS = {
       { selector:'.publish-aside [data-action="publish-now"]', kind:'action', value:'publish-now', title:'Publish the profile', text:'Send Milo to your own adoption website.' },
       { selector:'.publish-aside', kind:'finish', title:'That is the whole loop', text:'One request became a reviewed record, a ready status, and a live profile on the shelter website. Nobody had to chase it along the way.' }
     ]
+  },
+  h1: {
+    label:'DEMO H-1 · REQUEST',
+    name:'Send one request for everything',
+    steps:[
+      { selector:'.apl-checklist', kind:'manual', nextView:'applications', title:'Decide what you ask for', text:'Every shelter asks for something different. Add the documents and checks your team requires, and set whether each one comes from the adopter or from your staff.' },
+      { selector:'.apl-metrics', kind:'manual', title:'The screen keeps the count', text:'What is still out, who it is waiting on, and how long it has been. Nobody has to hold this in their head.' },
+      { selector:'.apl-group', kind:'manual', title:'One animal, several applicants', text:'Luna has three applications. Each one carries its own set of documents and calls.' },
+      { selector:'.apl-applicant[data-open-application="rivera"] [data-action="send-application-request"]', kind:'action', value:'send-application-request', title:'Send it once', text:'Every item the adopter has to send goes out in a single link. No separate emails per document.' },
+      { selector:'.apl-applicant[data-open-application="rivera"]', kind:'manual', title:'Now you are waiting, not chasing', text:'The row keeps counting the days. When something comes back it drops off the list on its own.' },
+      { selector:'.apl-applicant[data-open-application="rivera"]', kind:'finish', next:'h2', nextLabel:'See what the adopter receives', title:'The request is out', text:'Want to see the screen M. Rivera opens?' }
+    ]
+  },
+  h2: {
+    label:'DEMO H-2 · ADOPTER RESPONSE',
+    name:'What the adopter receives',
+    steps:[
+      { selector:'.foster-form-card', kind:'manual', title:'No app. No account. No login.', text:'M. Rivera opens one link and sees exactly what Second Chance Rescue asked for — nothing else.' },
+      { selector:'.apl-adopter-item:not(.complete) [data-action="applicant-upload"]', kind:'action', value:'applicant-upload', title:'Attach the first item', text:'The signed agreement goes straight to this application.' },
+      { selector:'.apl-adopter-item:not(.complete) [data-action="applicant-upload"]', kind:'action', value:'applicant-upload', title:'And the next one', text:'Proof of housing. Same link, same application.' },
+      { selector:'.apl-adopter-item:not(.complete) [data-action="applicant-upload"]', kind:'action', value:'applicant-upload', title:'Photos of the home', text:'Everything the shelter asked for is in one place before it is sent.' },
+      { selector:'[data-action="submit-applicant"]', kind:'action', value:'submit-applicant', title:'Send it all at once', text:'One submission covers every item that was requested.' },
+      { selector:'.success-screen', kind:'finish', next:'h3', nextLabel:'See it land on the staff side', title:'Sent', text:'Nothing has to be filed by hand. Want to see where it lands?' }
+    ]
+  },
+  h3: {
+    label:'DEMO H-3 · WHAT IS STILL OPEN',
+    name:'Track what stays open',
+    steps:[
+      { selector:'.apl-detail-bar', kind:'manual', title:'Only what is unfinished needs you', text:'What came back is received. What is still out is counted, in days, without anyone tracking it.' },
+      { selector:'.apl-item-list', kind:'manual', title:'Every response sits with the application', text:'Uploads, call results, and notes stay on the item they belong to. No reopening email threads to check what arrived.' },
+      { selector:'[data-application-item="kchen:landlord"]', kind:'application-item', value:'kchen:landlord', title:'Your team owns the calls', text:'Petify does not call the landlord. It keeps the item on the list, with who tried and when, so nobody repeats a call a colleague already made.' },
+      { selector:'.apl-item.open [data-action="mark-item-done"]', kind:'action', value:'mark-item-done', title:'Record the result', text:'Your name and the time are saved with it. The item leaves the waiting list.' },
+      { selector:'.apl-detail-bar', kind:'manual', nextView:'applications', title:'One fewer thing out', text:'The count drops as soon as the result is recorded.' },
+      { selector:'.apl-group', kind:'finish', title:'What is left is what still needs attention', text:'Completed items are gone from the list. Everything still showing is genuinely open.' }
+    ]
   }
 };
 
@@ -272,6 +598,41 @@ const KO_TUTORIALS = {
       ['프로필 게시','Milo를 쉘터 자체 입양 웹사이트에 게시한다.'],
       ['이게 전체 흐름이다','한 번의 요청이 검토된 레코드, 게시 준비 완료 상태, 쉘터 웹사이트 게시까지 이어졌다. 중간에 독촉한 사람은 없었다.']
     ]
+  },
+  h1: {
+    label:'데모 H-1 · 요청 발신',
+    nextLabel:'신청자가 받는 화면 이어보기',
+    steps:[
+      ['무엇을 받을지 조직이 정한다','쉘터마다 요구하는 서류가 다르다. 필요한 서류와 확인 항목을 추가하고, 각 항목을 신청자가 제출할지 담당자가 확인할지 지정한다.'],
+      ['숫자는 화면이 센다','무엇이 아직 안 왔는지, 누구를 기다리는지, 며칠 지났는지. 기억에 의존할 필요가 없다.'],
+      ['동물 한 마리에 신청 여러 건','Luna에게는 신청이 세 건 들어와 있다. 각 신청마다 서류와 확인 통화가 따로 붙는다.'],
+      ['요청은 한 번에 나간다','신청자가 제출할 항목 전부가 링크 하나로 나간다. 서류마다 메일을 따로 보내지 않는다.'],
+      ['이제 쫓아다니지 않고 기다린다','경과일은 계속 카운트된다. 회수된 항목은 목록에서 알아서 빠진다.'],
+      ['요청 발송 완료','M. Rivera가 여는 화면을 이어서 확인하시겠습니까?']
+    ]
+  },
+  h2: {
+    label:'데모 H-2 · 신청자 응답',
+    nextLabel:'담당자 화면에서 확인하기',
+    steps:[
+      ['앱도 계정도 로그인도 없다','M. Rivera는 링크 하나를 열고 Second Chance Rescue가 요청한 항목만 본다.'],
+      ['첫 항목 첨부','서명한 계약서가 이 신청 건에 바로 붙는다.'],
+      ['다음 항목','주거 증빙. 같은 링크, 같은 신청 건이다.'],
+      ['집 사진','쉘터가 요청한 항목이 발송 전에 한 화면에 모인다.'],
+      ['한 번에 제출','요청받은 항목 전부가 한 번의 제출로 처리된다.'],
+      ['제출 완료','손으로 정리할 것이 없다. 이 내용이 어디로 들어가는지 확인하시겠습니까?']
+    ]
+  },
+  h3: {
+    label:'데모 H-3 · 회수 상태 확인',
+    steps:[
+      ['미완료 항목만 담당자 몫','돌아온 항목은 회수 완료로 남고, 아직 안 온 항목만 경과일과 함께 센다.'],
+      ['회신은 그 신청 건에 붙는다','업로드, 통화 결과, 메모가 해당 항목에 그대로 남는다. 메일 스레드를 다시 열어 확인할 일이 없다.'],
+      ['확인 통화는 담당자가 한다','Petify가 집주인에게 전화하지 않는다. 누가 언제 시도했는지와 함께 항목을 목록에 남겨, 동료가 이미 건 전화를 다시 걸지 않게 한다.'],
+      ['결과를 기록','처리자 이름과 시각이 함께 저장되고, 항목은 대기 목록에서 빠진다.'],
+      ['미회수 한 건 감소','결과를 기록하는 즉시 카운트가 줄어든다.'],
+      ['남은 것이 실제로 남은 일','완료된 항목은 목록에 없다. 화면에 보이는 것이 곧 처리할 일이다.']
+    ]
   }
 };
 
@@ -280,10 +641,14 @@ const TOUR_SETUP = {
   b1: {view:'fosters', requestSent:false, fosterSubmitted:false, updateApproved:false, miloReady:false},
   b2: {view:'updates', requestSent:true, fosterSubmitted:false, updateApproved:false, miloReady:false},
   b3: {view:'updates', requestSent:true, fosterSubmitted:true, updateApproved:false, miloReady:false, selectedUpdate:'milo', formChoice:'change'},
-  bpublish: {view:'animal', animalId:'milo', detailTab:'overview', requestSent:true, fosterSubmitted:true, updateApproved:true, miloReady:true}
+  bpublish: {view:'animal', animalId:'milo', detailTab:'overview', requestSent:true, fosterSubmitted:true, updateApproved:true, miloReady:true},
+  h1: {view:'settings', settingsTab:'checklist', applicationOpen:{luna:true}, applicationId:'rivera'},
+  h2: {view:'applicantform', applicationId:'rivera', appSent:{rivera:true}, applicantSubmitted:false, applicantUploads:0, applicationOpen:{luna:true}},
+  h3: {view:'application', applicationId:'kchen', applicationOpen:{luna:true}, appItemOpen:null}
 };
 
 const KO_UI = {
+  'Applications':'입양 신청','ADOPTION APPLICATIONS':'입양 신청','Every application shows what is still out and how long it has been waiting.':'신청 건별로 무엇이 아직 안 왔고 며칠 지났는지 표시합니다.','WHAT IS STILL OUT':'미회수 현황','Completed items leave the list. What remains is what still needs attention.':'회수된 항목은 목록에서 빠집니다. 남아 있는 것이 처리할 일입니다.','Waiting on adopters':'신청자 대기','Waiting on your team':'담당자 대기','Longest wait':'최장 경과','Ready to finalize':'확정 가능','OPEN APPLICATIONS':'진행 중인 신청','By animal':'동물별','Open an animal to see who applied, then open an applicant to see every item.':'동물을 펼치면 신청자 목록이, 신청자를 열면 항목 전체가 보입니다.','Adoption checklist':'요구 항목 설정','Send open requests':'미발송 요청 일괄 발신','All items in':'전체 회수 완료','‹ Applications':'‹ 입양 신청','APPLICATION':'신청 건','Resend request':'요청 재발송','Finalize adoption':'입양 확정','Open adopter link ↗':'신청자 화면 열기 ↗','Everything requested has come back. This application is ready to finalize.':'요청한 항목이 모두 회수됐습니다. 입양 확정이 가능합니다.','Request not sent yet':'요청 미발송','ADOPTION CHECKLIST':'요구 항목','Every response stays with this application. Open an item to see what came back.':'모든 회신은 이 신청 건에 남습니다. 항목을 펼치면 회신 내용이 보입니다.','Edit checklist':'항목 설정','Signed agreement':'서명한 입양 계약서','Adoption contract, signed':'서명이 완료된 입양 계약서','Proof of housing':'주거 증빙','Lease, deed, or utility bill':'임대차계약서, 등기부, 공과금 고지서','Photos of the home':'집 사진','Yard, fencing, and living space':'마당, 울타리, 생활 공간','Landlord check':'집주인 확인','Call to confirm pets are allowed':'반려동물 허용 여부 통화 확인','Vet reference':'수의사 조회','Call the current or previous vet':'현재 또는 이전 담당 수의사 통화','Personal reference':'추천인 확인','Call one listed reference':'기재된 추천인 1인 통화','Home visit':'가정 방문','Added by your team':'직접 추가한 항목','Adopter':'신청자','You':'담당자','Received':'회수 완료','Done':'처리 완료','Open':'열기','Reopen':'되돌리기','Mark as done':'처리 완료로 기록','Could not reach':'연결 실패','Note (optional)':'메모 (선택)','What did the call confirm?':'통화에서 확인한 내용','Attached to this application. Nothing else has to be filed.':'이 신청 건에 첨부됐습니다. 따로 정리할 것이 없습니다.','Send a reminder':'리마인드 보내기','Copy adopter link':'신청자 링크 복사','This item has not been requested yet. It goes out with the other adopter items in one link.':'아직 요청하지 않은 항목입니다. 다른 신청자 항목과 함께 링크 하나로 나갑니다.','Your team makes this call. Petify keeps it on the list until someone records the result.':'이 통화는 담당자가 합니다. 결과를 기록할 때까지 항목은 목록에 남습니다.','Spoke with both references listed.':'기재된 추천인 두 명과 통화 완료.','Left a voicemail. Will try again Monday.':'음성사서함에 메시지를 남겼습니다. 월요일에 다시 시도 예정.','Riverside Animal Hospital confirmed care through 2025.':'Riverside Animal Hospital에서 2025년까지 진료 이력을 확인했습니다.','Reference confirmed.':'추천인 확인 완료.','Landlord confirmed dogs under 40 lb are allowed.':'집주인이 18kg 미만 반려견 허용을 확인했습니다.','Vet confirmed vaccinations current.':'수의사가 예방접종 최신 여부를 확인했습니다.','Owns the home. No landlord check needed.':'자가 거주로 집주인 확인이 필요하지 않습니다.','Landlord confirmed.':'집주인 확인 완료.','Vet confirmed.':'수의사 확인 완료.','Could not reach. Will try again.':'연결되지 않았습니다. 다시 시도 예정.','3 photos':'사진 3장','4 photos':'사진 4장','5 photos':'사진 5장','Secure adopter link · No account required':'안전한 신청자 링크 · 계정 불필요','Your progress is saved automatically':'작성 내용이 자동 저장됩니다','Attached':'첨부 완료','One link for everything':'링크 하나로 전부','No app, no account, no login. Everything you send goes straight to your application.':'앱도 계정도 로그인도 필요하지 않습니다. 보내신 자료는 신청 건에 바로 첨부됩니다.','Send everything':'전부 보내기','Questions? Contact the shelter':'문의가 있으신가요? 쉘터에 연락하기','Your documents were sent':'자료가 전송되었습니다','Return to staff demo':'직원용 데모로 돌아가기','Edit what I sent':'보낸 내용 수정','Every shelter asks for something different. Add the documents and checks your team requires, then choose who each one comes from.':'쉘터마다 요구 항목이 다릅니다. 필요한 서류와 확인 항목을 추가하고, 각 항목을 누가 처리할지 지정합니다.','＋ Add item':'＋ 항목 추가','Adopter sends':'신청자 제출','You complete':'담당자 확인','Remove item':'항목 삭제','Who does what':'항목별 처리 주체','Adopter items go out in one link the applicant can answer without an account. Items your team completes — reference and landlord calls — stay on the list until someone records the result.':'신청자 항목은 계정 없이 응답할 수 있는 링크 하나로 나갑니다. 담당자가 확인하는 항목(추천인·집주인 통화)은 결과를 기록할 때까지 목록에 남습니다.','Request sent · one link for every adopter item':'요청 발송 완료 · 신청자 항목 전체가 링크 하나로','Every application already has its request out':'모든 신청 건에 요청이 이미 발송돼 있습니다','Marked as done · A. Rivera, just now':'처리 완료 기록 · A. Rivera, 방금','Saved · the item stays on the list':'저장 완료 · 항목은 목록에 남습니다','Item added to your checklist':'요구 항목에 추가됐습니다','Item removed from your checklist':'요구 항목에서 삭제됐습니다','Saved. The same link reopens where you left off':'저장했습니다. 같은 링크로 이어서 작성할 수 있습니다','Adoption finalized · every item came back':'입양 확정 · 전 항목 회수 완료','Reminder sent':'리마인드 발송 완료','Attachment opened':'첨부 파일 열기','Send one request for everything':'요청 한 번으로 전부','Set the adoption checklist → send every adopter item in one link':'요구 항목 설정 → 신청자 항목 전체를 링크 하나로 발송','Start Demo H-1 ›':'데모 H-1 시작 ›','What the adopter receives':'신청자가 받는 화면','Open the link M. Rivera (adopter) gets and send the documents':'M. Rivera(신청자)가 받는 링크를 열고 서류 제출','Start Demo H-2 ›':'데모 H-2 시작 ›','Track what stays open':'미회수 항목 추적','See what is still out, and record a reference call your team made':'안 온 항목을 확인하고 담당자 통화 결과를 기록','Start Demo H-3 ›':'데모 H-3 시작 ›','DEMO H-1 · 6 STEPS':'데모 H-1 · 6단계','DEMO H-2 · 6 STEPS':'데모 H-2 · 6단계','DEMO H-3 · 6 STEPS':'데모 H-3 · 6단계',
   'Beagle mix · Male · 4 years':'비글 믹스 · 수컷 · 4살','Shepherd mix · Female · 2 years':'셰퍼드 믹스 · 암컷 · 2살','Corgi mix · Female · 3 years':'코기 믹스 · 암컷 · 3살','Check-in overdue · 5 days':'체크인 기한 초과 · 5일','Follow up with foster':'임보자에게 후속 연락','Open record':'레코드 열기','2 hr ago':'2시간 전','38 min ago':'38분 전',
   'Petify for Shelters':'쉘터용 Petify','Dashboard':'대시보드','Animals':'동물','Check-ins':'체크인','Fosters':'임보자','Publishing':'게시','Settings':'설정','Reset demo':'데모 초기화','Administrator':'관리자','Search animals, fosters, or records':'동물, 임보자 또는 기록 검색','Search':'검색','Demo tours':'데모 튜토리얼','Guided demo':'가이드 데모','Notifications':'알림','Add animal':'동물 추가','Language':'언어 선택',
   'SUNDAY, AUGUST 9':'8월 9일 일요일','Good morning, Alex':'좋은 아침이에요, Alex','Here is what needs attention across your shelter today.':'오늘 쉘터에서 확인해야 할 업무입니다.','Export report':'보고서 내보내기','New intake':'신규 입소','In care':'보호 중','Needs review':'검토 필요','Ready to publish':'게시 준비 완료','Published':'게시 완료','Shelter website':'쉘터 웹사이트','Updates waiting':'대기 중인 업데이트','Milo is now ready':'Milo 게시 준비 완료','3 ready to publish this week':'이번 주 게시 준비 완료 3마리','6 in foster homes':'6마리 임보 중','+1 this week':'이번 주 +1','ANIMAL STATUS':'동물 상태','NEEDS ATTENTION':'확인 필요','LISTING STATUS':'게시 상태','Each animal appears in one status queue. Select a card to open the matching list.':'각 동물은 하나의 상태 목록에만 포함됩니다. 카드를 누르면 해당 목록이 열립니다.','Animal records':'동물 레코드','ANIMALS NEEDING ATTENTION':'확인이 필요한 동물','Review the animal, reason, and next action':'동물별 사유와 다음 행동 확인','New behavior update needs review':'새 행동 업데이트 검토 필요','Jamie Lee · Submitted 12 min ago':'Jamie Lee · 12분 전 제출','Review Milo':'Milo 검토','Medical clearance needs review':'의료 확인 검토 필요','Morgan Kim · Updated yesterday':'Morgan Kim · 어제 업데이트','Review Buddy':'Buddy 검토','Profile ready to publish':'프로필 게시 준비 완료','Open Luna':'Luna 열기','Open Milo':'Milo 열기','EXCEPTIONS':'확인 필요','Needs your attention':'확인이 필요한 항목','View all':'전체 보기','4 foster updates are overdue':'임보 업데이트 4건 기한 초과','Oldest request is 5 days late':'가장 오래된 요청은 5일 지연','Open overdue requests':'기한 초과 요청 열기','3 animals have outdated information':'동물 3마리의 정보가 오래됨','1 animal has outdated information':'동물 1마리의 정보가 오래됨','Behavior or health details are older than 14 days':'행동 또는 건강 정보가 14일 이상 지남','View blocked animals':'차단된 동물 보기','2 profiles are ready to publish':'프로필 2건 게시 준비 완료','Shelter website publishing is available':'쉘터 웹사이트에 게시 가능','Open publishing queue':'게시 대기열 열기','2 blockers have no owner':'차단 항목 2건의 담당자 없음','Assign the next action to a teammate':'다음 행동을 팀원에게 배정','Assign owners':'담당자 배정','LIVE ACTIVITY':'최근 활동','Recent changes':'최근 변경','Milo became ready to publish':'Milo 게시 준비 완료','Jamie submitted an update for Milo':'Jamie가 Milo 업데이트 제출','Behavior update approved by Alex':'Alex가 행동 업데이트 승인','Behavior changes · 3 new photos':'행동 변화 · 새 사진 3장','Luna’s profile is ready':'Luna 프로필 준비 완료','All 5 publishing requirements complete':'게시 요건 5개 모두 충족','Medical clearance added for Buddy':'Buddy 의료 확인 추가','Submitted by Morgan Kim':'Morgan Kim 제출','Daisy published to shelter website':'Daisy 쉘터 웹사이트 게시 완료','Published by Alex Rivera':'Alex Rivera 게시','Open full activity log':'전체 활동 기록 열기','QUICK START':'빠른 실행','Move work forward':'다음 업무 진행','Create a record':'레코드 생성','Review updates':'업데이트 검토','Review animal records':'동물 레코드 검토','Resolve blockers':'차단 항목 해결','Publish profiles':'프로필 게시','2 waiting':'2건 대기','8 animals':'동물 8마리','12 ready':'12마리 준비 완료','Dashboard and list counts use the same animal status.':'대시보드와 목록이 동일한 동물 상태 기준을 사용합니다.',
@@ -365,6 +730,30 @@ function translateText(value) {
       [/^(\d+) of 5 care tasks logged · medication due$/,(_,a)=>`돌봄 할 일 5개 중 ${a}개 기록 · 투약 예정`],
       [/^Sent automatically at 8:00 AM · (\d+) of 5 care tasks logged · medication due$/,(_,a)=>`오전 8시 자동 발송 · 돌봄 할 일 5개 중 ${a}개 기록 · 투약 예정`],
       [/^(\d+) of 5 care tasks logged · Saved just now$/,(_,a)=>`돌봄 할 일 5개 중 ${a}개 기록 · 방금 저장`],
+      [/^Applied (.+) · (\d+) days ago$/,(_,d,n)=>`${d} 신청 · ${n}일 경과`],
+      [/^Applying for (.+) · Applied (.+) · (\d+) days ago$/,(_,animal,d,n)=>`${animal} 지원 · ${d} 신청 · ${n}일 경과`],
+      [/^(\d+) applicants? · (\d+) items waiting$/,(_,a,b)=>`신청 ${a}건 · 미회수 ${b}개`],
+      [/^(\d+) applicants? · none waiting$/,(_,a)=>`신청 ${a}건 · 미회수 없음`],
+      [/^Not sent · (\d+) days$/,(_,a)=>`미발송 · ${a}일`],
+      [/^Sent · (\d+) days$/,(_,a)=>`발송됨 · ${a}일`],
+      [/^Tried · (\d+) days$/,(_,a)=>`시도함 · ${a}일`],
+      [/^Not called · (\d+) days$/,(_,a)=>`미확인 · ${a}일`],
+      [/^Send request · (\d+) items$/,(_,a)=>`요청 보내기 · ${a}개 항목`],
+      [/^of (\d+) items still open$/,(_,a)=>`전체 ${a}개 항목 중 미회수`],
+      [/^(\d+) waiting on (.+) · (\d+) waiting on your team$/,(_,a,who,b)=>`${who} 대기 ${a}개 · 담당자 대기 ${b}개`],
+      [/^Request sent · (\d+) days ago$/,(_,a)=>`요청 발송 · ${a}일 경과`],
+      [/^Requested (\d+) days ago in the same link as the other adopter items\. Nothing has come back yet\.$/,(_,a)=>`${a}일 전 다른 신청자 항목과 같은 링크로 요청했습니다. 아직 회신이 없습니다.`],
+      [/^Completed by (.+)$/,(_,a)=>`${a} 처리 완료`],
+      [/^Call attempted by (.+)$/,(_,a)=>`${a} 통화 시도`],
+      [/^Adoption paperwork for (.+)$/,(_,a)=>`${a} 입양 서류`],
+      [/^For (.+) · (\d+) items requested$/,(_,who,n)=>`${who} · 요청 항목 ${n}개`],
+      [/^Send (\d+) of (\d+)$/,(_,a,b)=>`${b}개 중 ${a}개 보내기`],
+      [/^Thanks, (.+)\. Second Chance Rescue can see everything you sent for (.+)\. You do not need to email anything separately\.$/,(_,who,animal)=>`감사합니다, ${who}. Second Chance Rescue에서 ${animal} 관련 제출 자료를 모두 확인할 수 있습니다. 따로 메일을 보내실 필요가 없습니다.`],
+      [/^(.+) · Adoption paperwork$/,(_,a)=>`${a} · 입양 서류`],
+      [/^(\d+) items attached · Sent just now$/,(_,a)=>`항목 ${a}개 첨부 · 방금 전송`],
+      [/^(\d+) requests? sent$/,(_,a)=>`요청 ${a}건 발송 완료`],
+      [/^(\d+) photos$/,(_,a)=>`사진 ${a}장`],
+      [/^(.+) · (\d+) days ago$/,(_,a,n)=>`${a} · ${n}일 전`],
       [/^(\d+) min ago$/,(_,a)=>`${a}분 전`],
       [/^(\d+) minutes ago$/,(_,a)=>`${a}분 전`],
       [/^(\d+) days ago$/,(_,a)=>`${a}일 전`],
@@ -501,7 +890,7 @@ function formatCount(n) { return `<strong class="metric-number">${n}</strong>`; 
 function languageSwitch() { return `<div class="language-switch" role="group" aria-label="Language"><button class="${state.language==='ko'?'active':''}" data-language="ko">한국어</button><button class="${state.language==='en'?'active':''}" data-language="en">English</button></div>`; }
 
 function layout(content) {
-  const section = state.view === 'animal' ? 'animals' : state.view === 'fosterform' ? 'updates' : state.view;
+  const section = state.view === 'animal' ? 'animals' : state.view === 'fosterform' ? 'updates' : (state.view === 'application' || state.view === 'applicantform') ? 'applications' : state.view;
   return `
     <div class="app-shell">
       <aside class="sidebar ${state.mobileNavOpen?'mobile-open':''}">
@@ -886,11 +1275,12 @@ function publishingView() {
 function settingsView() {
   return `<section class="content settings-content">
     ${pageHeader('WORKSPACE','Settings','Set the organization rules that drive publishing requirements, check-ins, and publishing.',`<button class="primary-button" data-action="save-settings">${state.settingsSaved?'Saved ✓':'Save changes'}</button>`)}
-    <div class="settings-layout"><nav class="settings-nav">${[['readiness','Publishing requirements'],['forms','Check-in forms'],['channels','Publishing channels'],['team','Team & roles'],['notifications','Notifications']].map(([id,l])=>`<button class="${state.settingsTab===id?'active':''}" data-settings-tab="${id}">${l}<span>›</span></button>`).join('')}</nav><section class="surface settings-panel">${settingsPanel()}</section></div>
+    <div class="settings-layout"><nav class="settings-nav">${[['readiness','Publishing requirements'],['checklist','Adoption checklist'],['forms','Check-in forms'],['channels','Publishing channels'],['team','Team & roles'],['notifications','Notifications']].map(([id,l])=>`<button class="${state.settingsTab===id?'active':''}" data-settings-tab="${id}">${l}<span>›</span></button>`).join('')}</nav><section class="surface settings-panel">${settingsPanel()}</section></div>
   </section>`;
 }
 
 function settingsPanel() {
+  if(state.settingsTab==='checklist') return checklistPanel();
   if(state.settingsTab==='readiness') return `<div class="section-head"><div><p class="kicker">ORGANIZATION RULES</p><h2>Publishing requirements</h2><p>Petify marks a profile ready to publish when all required information is complete and up to date.</p></div><button class="secondary-button" data-action="add-check">＋ Add section</button></div><div class="settings-list">${[['Health','Required · Updated within the last 30 days',true],['Behavior','Required · Updated within the last 14 days',true],['Media','At least 3 photos approved for public use',true],['Documents','All required documents approved',true],['Public profile','Description and adoption contact',true]].map(([a,b,on])=>`<div><span class="drag">⋮⋮</span><span><b>${a}</b><small>${b}</small></span><button class="toggle ${on?'on':''}" data-action="toggle-setting"><i></i></button><button class="kebab" data-action="edit-setting">•••</button></div>`).join('')}</div><div class="settings-note"><span>i</span><p><b>What “Ready to publish” means</b>“Ready to publish” means the profile has all information required for publishing in Petify. Medical and legal decisions remain with your team.</p></div>`;
   if(state.settingsTab==='forms') return `<div class="section-head"><div><p class="kicker">FOSTER EXPERIENCE</p><h2>Daily care and weekly check-in</h2><p>Keep routine care lightweight while sending meaningful changes to staff for review.</p></div></div><div class="form-template-grid"><button data-action="open-daily-care"><span class="care-icon">☀</span><span><small>EVERY DAY</small><b>Daily care</b><em>Meals, walks, and medication</em><p>Routine completions save to the care log. Missed medication and concerns alert the coordinator.</p></span><i>Preview ›</i></button><button data-action="preview-foster-form"><span class="care-icon weekly">↻</span><span><small>EVERY WEEK</small><b>Weekly check-in</b><em>Health, behavior, photos, and notes</em><p>Meaningful changes enter the staff review queue before the official record changes.</p></span><i>Preview ›</i></button></div><div class="settings-note"><span>i</span><p><b>Two different records</b>Daily care confirms that routines happened. Weekly check-ins capture observations that may affect Milo’s shelter record or adoption profile.</p></div>`;
   if(state.settingsTab==='channels') return `<div class="section-head"><div><p class="kicker">PUBLISHING CHANNELS</p><h2>Publishing channels</h2><p>The shelter website is available now. Partner channels require future integration agreements.</p></div></div><div class="settings-list channel-settings"><div><span class="channel-logo website">S</span><span><b>Shelter website</b><small>petnow-demo.org/adopt</small></span>${statusPill('ready','Connected')}<button class="secondary-button" data-action="channel-configure">Configure</button></div><div class="planned"><span class="channel-logo petfinder" role="img" aria-label="Petfinder"></span><span><b>Petfinder</b><small>Partner integration required</small></span>${statusPill('neutral','Planned')}<button class="secondary-button" disabled>Not available</button></div><div class="planned"><span class="channel-logo adoptapet" role="img" aria-label="Adopt a Pet"></span><span><b>Adopt a Pet</b><small>Partner integration required</small></span>${statusPill('neutral','Planned')}<button class="secondary-button" disabled>Not available</button></div></div>`;
@@ -970,7 +1360,7 @@ function assignModal() { return `<button class="modal-close" data-action="close-
 function renderDrawer() {
   if(state.drawer==='message-preview') return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer message-drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">RECIPIENT PREVIEW</p><h2>What Jamie receives</h2><p>Preview the request before sending it by SMS and email.</p><div class="message-tabs"><button class="${state.messageChannel==='sms'?'active':''}" data-message-channel="sms">SMS</button><button class="${state.messageChannel==='email'?'active':''}" data-message-channel="email">Email</button></div>${state.messageChannel==='sms'?smsPreview():emailPreview()}<div class="delivery-details"><div><span>↻</span><p><b>Automatic follow-up</b>Reminder after 2 days if Jamie has not submitted. Maximum 2 reminders.</p></div><div><span>⌁</span><p><b>Secure individual link</b>No account required. The link opens only Milo’s requested check-in form.</p></div></div><div class="preview-flow"><small>AFTER JAMIE SUBMITS</small><div><span><i>1</i><b>Submitted</b></span><em>›</em><span><i>2</i><b>Needs review</b></span><em>›</em><span><i>3</i><b>Applied</b></span></div><p>Nothing Jamie sends changes Milo’s official record until a staff member approves it.</p></div><button class="primary-button full" data-action="return-request">Back to request</button><button class="text-button centered" data-action="open-form-from-preview">Open Jamie’s form preview</button></aside></div>`;
   if(state.drawer==='foster-detail') return fosterDetailDrawer();
-  if(state.drawer==='guide') return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer guide-drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">GUIDED DEMOS</p><h2>Pick what you want to see</h2><p>Each tour resets the sample data, opens the right screen, and points to the next click.</p><div class="tutorial-picker"><button class="tutorial-option" data-action="start-tutorial" data-tutorial="a"><small>DEMO A · ${TUTORIALS.a.steps.length} STEPS</small><b>Which dogs are ready to go?</b><span>Publishing requirements → what is missing → approve → Ready to publish → publish</span><em>Start Demo A ›</em></button><button class="tutorial-option" data-action="start-tutorial" data-tutorial="b1"><small>DEMO B-1 · ${TUTORIALS.b1.steps.length} STEPS</small><b>Send one check-in request</b><span>Automatic daily care → send and track one weekly check-in</span><em>Start Demo B-1 ›</em></button><button class="tutorial-option" data-action="start-tutorial" data-tutorial="b2"><small>DEMO B-2 · ${TUTORIALS.b2.steps.length} STEPS</small><b>What the foster receives</b><span>Open the form Jamie (foster) receives and send the check-in</span><em>Start Demo B-2 ›</em></button><button class="tutorial-option" data-action="start-tutorial" data-tutorial="b3"><small>DEMO B-3 · ${TUTORIALS.b3.steps.length} STEPS</small><b>Review and apply the check-in</b><span>Check the submission before the record changes</span><em>Start Demo B-3 ›</em></button></div></aside></div>`;
+  if(state.drawer==='guide') return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer guide-drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">GUIDED DEMOS</p><h2>Pick what you want to see</h2><p>Each tour resets the sample data, opens the right screen, and points to the next click.</p><div class="tutorial-picker"><button class="tutorial-option" data-action="start-tutorial" data-tutorial="a"><small>DEMO A · ${TUTORIALS.a.steps.length} STEPS</small><b>Which dogs are ready to go?</b><span>Publishing requirements → what is missing → approve → Ready to publish → publish</span><em>Start Demo A ›</em></button><button class="tutorial-option" data-action="start-tutorial" data-tutorial="b1"><small>DEMO B-1 · ${TUTORIALS.b1.steps.length} STEPS</small><b>Send one check-in request</b><span>Automatic daily care → send and track one weekly check-in</span><em>Start Demo B-1 ›</em></button><button class="tutorial-option" data-action="start-tutorial" data-tutorial="b2"><small>DEMO B-2 · ${TUTORIALS.b2.steps.length} STEPS</small><b>What the foster receives</b><span>Open the form Jamie (foster) receives and send the check-in</span><em>Start Demo B-2 ›</em></button><button class="tutorial-option" data-action="start-tutorial" data-tutorial="b3"><small>DEMO B-3 · ${TUTORIALS.b3.steps.length} STEPS</small><b>Review and apply the check-in</b><span>Check the submission before the record changes</span><em>Start Demo B-3 ›</em></button><button class="tutorial-option" data-action="start-tutorial" data-tutorial="h1"><small>DEMO H-1 · ${TUTORIALS.h1.steps.length} STEPS</small><b>Send one request for everything</b><span>Set the adoption checklist → send every adopter item in one link</span><em>Start Demo H-1 ›</em></button><button class="tutorial-option" data-action="start-tutorial" data-tutorial="h2"><small>DEMO H-2 · ${TUTORIALS.h2.steps.length} STEPS</small><b>What the adopter receives</b><span>Open the link M. Rivera (adopter) gets and send the documents</span><em>Start Demo H-2 ›</em></button><button class="tutorial-option" data-action="start-tutorial" data-tutorial="h3"><small>DEMO H-3 · ${TUTORIALS.h3.steps.length} STEPS</small><b>Track what stays open</b><span>See what is still out, and record a reference call your team made</span><em>Start Demo H-3 ›</em></button></div></aside></div>`;
   if(state.drawer==='notifications') return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">NOTIFICATIONS</p><h2>Notifications</h2><div class="notification-list">${[['New foster check-in','Jamie submitted Milo’s weekly check-in','12 min'],['Profile published','Daisy is live on the shelter website','42 min'],['Profile ready to publish','Luna completed all publishing requirements','1 hr']].map(([a,b,c])=>`<button data-action="notification-item"><i></i><span><b>${a}</b><small>${b}</small></span><time>${c}</time></button>`).join('')}</div><button class="text-button centered" data-action="mark-read">Mark all as read</button></aside></div>`;
   return `<div class="drawer-backdrop" data-action="close-drawer"><aside class="drawer" onclick="event.stopPropagation()"><button class="modal-close" data-action="close-drawer">×</button><p class="kicker">DETAILS</p><h2>Prepared content</h2><p>This interaction is represented in the pretotype.</p></aside></div>`;
 }
@@ -1011,6 +1401,7 @@ function renderTutorial() {
 function leaveTutorialSurface() {
   state.modal=null;state.drawer=null;
   if(state.view==='fosterform'){state.view='updates';state.fosterFormMode='weekly';}
+  if(state.view==='applicantform'){state.view='application';}
 }
 
 function positionTutorial(options) {
@@ -1079,8 +1470,10 @@ function render() {
   lastRenderedView=state.view;
   if(viewChanged) window.scrollTo(0,0);
   syncNavigationHistory();
-  const views = {dashboard:dashboardView,animals:animalsView,animal:animalView,updates:updatesView,fosters:fostersView,publishing:publishingView,settings:settingsView,fosterform:fosterFormView,profilepreview:profilePreviewView};
-  app.innerHTML = state.view==='fosterform'
+  const views = {dashboard:dashboardView,animals:animalsView,animal:animalView,applications:applicationsView,application:applicationView,updates:updatesView,fosters:fostersView,publishing:publishingView,settings:settingsView,fosterform:fosterFormView,applicantform:applicantFormView,profilepreview:profilePreviewView};
+  app.innerHTML = state.view==='applicantform'
+    ? `${applicantFormView()}${state.tutorialStep!==null?renderTutorial():''}${state.toast?`<div class="toast"><span>✓</span>${state.toast}</div>`:''}`
+    : state.view==='fosterform'
     ? `${fosterFormView()}${state.tutorialStep!==null?renderTutorial():''}${state.toast?`<div class="toast"><span>✓</span>${state.toast}</div>`:''}`
     : layout((views[state.view] || dashboardView)());
   applyLanguage();
@@ -1111,6 +1504,11 @@ function bind() {
   document.querySelectorAll('[data-select-foster]').forEach(el=>el.addEventListener('click',e=>{if(e.target.closest('button'))return;state.selectedFoster=el.dataset.selectFoster;state.drawer='foster-detail';render();}));
   document.querySelectorAll('[data-placement-animal]').forEach(el=>el.addEventListener('click',()=>{state.placementAnimalId=el.dataset.placementAnimal;render();}));
   document.querySelectorAll('[data-placement-foster]').forEach(el=>el.addEventListener('change',()=>{state.placementFosterId=el.value;render();}));
+  document.querySelectorAll('[data-application-animal]').forEach(el=>el.addEventListener('click',()=>{const value=el.dataset.applicationAnimal;if(state.tutorialStep!==null&&!tutorialMatches('application-animal',value))return;state.applicationOpen={...state.applicationOpen,[value]:!state.applicationOpen[value]};advanceTutorial('application-animal',value);render();}));
+  document.querySelectorAll('[data-open-application]').forEach(el=>el.addEventListener('click',e=>{if(e.target.closest('button'))return;const value=el.dataset.openApplication;if(state.tutorialStep!==null&&!tutorialMatches('application',value))return;state.applicationId=value;state.appItemOpen=null;state.view='application';advanceTutorial('application',value);render();}));
+  document.querySelectorAll('[data-application-item]').forEach(el=>el.addEventListener('click',()=>{const value=el.dataset.applicationItem;if(state.tutorialStep!==null&&!tutorialMatches('application-item',value))return;state.appItemOpen=state.appItemOpen===value?null:value;advanceTutorial('application-item',value);render();}));
+  document.querySelectorAll('[data-application-note]').forEach(el=>el.addEventListener('input',()=>{state.appNotes={...state.appNotes,[el.dataset.applicationNote]:el.value};}));
+  document.querySelectorAll('[data-checklist-by]').forEach(el=>el.addEventListener('click',()=>{const [id,by]=el.dataset.checklistBy.split(':');state.checklistBy={...state.checklistBy,[id]:by};render();}));
   document.querySelectorAll('[data-settings-tab]').forEach(el=>el.addEventListener('click',()=>{state.settingsTab=el.dataset.settingsTab;render();}));
   document.querySelectorAll('[data-foster-mode]').forEach(el=>el.addEventListener('click',()=>{state.fosterFormMode=el.dataset.fosterMode;state.dailyCareSubmitted=false;if(state.fosterFormMode==='weekly')state.fosterSubmitted=false;render();}));
   document.querySelectorAll('[data-daily-task]').forEach(el=>el.addEventListener('click',()=>{const task=el.dataset.dailyTask;state.dailyTasks={...state.dailyTasks,[task]:!state.dailyTasks[task]};render();}));
@@ -1158,6 +1556,23 @@ function handleAction(action, el) {
     case 'tutorial-next': {const currentStep=tutorialSteps()[state.tutorialStep];tutorialHistory.push(JSON.parse(JSON.stringify(state)));if(currentStep?.nextView){state.view=currentStep.nextView;state.modal=null;state.drawer=null;state.mobileNavOpen=false;}state.tutorialStep=Math.min(tutorialSteps().length-1,state.tutorialStep+1);render();break;}
     case 'continue-tutorial': {const nextId=el.dataset.tutorial;tutorialHistory=[];Object.assign(state,TOUR_SETUP[nextId]||{});state.modal=null;state.drawer=null;state.tutorialId=nextId;state.tutorialStep=0;render();break;}
     case 'finish-tutorial': {const _fid=state.tutorialId,_fs=(state.tutorialStep||0)+1;const name=TUTORIALS[state.tutorialId]?.name||'Demo';tutorialHistory=[];state.tutorialId=null;state.tutorialStep=null;leaveTutorialSurface();toast(`${name} · tutorial complete`);if(window.demoTrack)window.demoTrack('Demo Tutorial Completed',{tutorial_id:_fid,steps_completed:_fs,language:state.language});break;}
+    case 'open-checklist': state.view='settings';state.settingsTab='checklist';render();break;
+    case 'send-application-request': {const id=el.dataset.application||state.applicationId;state.appSent={...state.appSent,[id]:true};toast('Request sent · one link for every adopter item');break;}
+    case 'send-all-requests': {const pending={};APPLICATIONS.forEach(app=>{if(!applicationSent(app))pending[app.id]=true;});const count=Object.keys(pending).length;if(!count){toast('Every application already has its request out');break;}state.appSent={...state.appSent,...pending};toast(`${count} request${count>1?'s':''} sent`);break;}
+    case 'mark-item-done': {const key=el.dataset.item;state.appItems={...state.appItems,[key]:'done'};state.appLog={...state.appLog,[key]:{who:'A. Rivera',when:'just now',note:state.appNotes[key]||''}};toast('Marked as done · A. Rivera, just now');break;}
+    case 'mark-item-tried': {const key=el.dataset.item;state.appItems={...state.appItems,[key]:'tried'};state.appLog={...state.appLog,[key]:{who:'A. Rivera',when:'just now',note:state.appNotes[key]||'Could not reach. Will try again.'}};toast('Saved · the item stays on the list');break;}
+    case 'reopen-item': {const key=el.dataset.item;state.appItems={...state.appItems,[key]:'open'};const log={...state.appLog};delete log[key];state.appLog=log;render();break;}
+    case 'add-checklist-item': {const index=state.checklistAdded.length+1;state.checklistAdded=[...state.checklistAdded,{id:`custom${index}`,name:`Home visit ${index>1?index:''}`.trim(),by:'staff',note:'Added by your team'}];toast('Item added to your checklist');break;}
+    case 'remove-checklist-item': {const id=el.dataset.item;if(String(id).startsWith('custom')){state.checklistAdded=state.checklistAdded.filter(item=>item.id!==id);}else{state.checklistOff={...state.checklistOff,[id]:true};}toast('Item removed from your checklist');break;}
+    case 'preview-applicant-form': state.applicantSubmitted=false;state.applicantUploads=0;state.view='applicantform';render();break;
+    case 'applicant-upload': {const app=applicationById(state.applicationId);const total=checklist().filter(item=>item.by==='adopter'&&!itemSettled(itemState(app,item))).length;state.applicantUploads=Math.min(total,state.applicantUploads+1);render();break;}
+    case 'save-applicant-draft': toast('Saved. The same link reopens where you left off');break;
+    case 'submit-applicant': {const app=applicationById(state.applicationId);const pending=checklist().filter(item=>item.by==='adopter'&&!itemSettled(itemState(app,item)));const sent=pending.slice(0,state.applicantUploads||pending.length);const items={...state.appItems};const log={...state.appLog};sent.forEach(item=>{items[`${app.id}:${item.id}`]='received';log[`${app.id}:${item.id}`]={when:'just now',file:item.id==='homephoto'?'3 photos':`${item.name.toLowerCase().replace(/ /g,'-')}.pdf`,size:item.id==='homephoto'?'4.4 MB':'1.1 MB'};});state.appItems=items;state.appLog=log;state.applicantUploads=sent.length;state.applicantSubmitted=true;render();break;}
+    case 'edit-applicant': state.applicantSubmitted=false;render();break;
+    case 'return-applications': state.view='application';state.appItemOpen=null;render();break;
+    case 'finalize-adoption': toast('Adoption finalized · every item came back');break;
+    case 'open-attachment': genericPrepared('Attachment opened');break;
+    case 'resend-item': toast('Reminder sent');break;
     case 'notifications': drawerOpen('notifications');break;
     case 'reset-demo': modalOpen('confirm-reset');break;
     case 'confirm-reset': {const language=state.language;state=INITIAL(language);toast('Demo reset to its starting state');break;}
@@ -1260,4 +1675,5 @@ window.addEventListener('scroll',followTutorialScroll,{capture:true,passive:true
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.tutorialStep!==null){const _eid=state.tutorialId,_es=state.tutorialStep||0;state.tutorialId=null;state.tutorialStep=null;render();if(window.demoTrack)window.demoTrack('Demo Tutorial Exited',{tutorial_id:_eid,steps_completed:_es,language:state.language});}});
 
 restoreNavigation(history.state);
+applyStartParams();
 render();

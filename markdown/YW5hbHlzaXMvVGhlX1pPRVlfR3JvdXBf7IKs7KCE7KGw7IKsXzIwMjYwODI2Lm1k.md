@@ -11,7 +11,7 @@
 | 확인 축 | 내용 | 판정 | 출처 |
 |---|---|---|---|
 | 법인 | Zoey Group, EIN 99-1342280, Tomball TX, 501(c)(3), NTEE D20(동물 보호·복지) | 확정 | ProPublica(IRS BMF) |
-| 이메일 도메인 | 리드 폼 도메인 `thezoeygroup.com` 이 조직 공식 사이트 도메인과 동일. 사이트 연락처 adopt@thezoeygroup.com·info@theZOEYgroup.com | 확정 | thezoeygroup.com 직접 조회 |
+| 이메일 도메인 | 리드 폼 도메인 `thezoeygroup.com` 이 조직 공식 사이트 도메인과 동일. 사이트 연락처 a***@thezoeygroup.com·i***@theZOEYgroup.com | 확정 | thezoeygroup.com 직접 조회 |
 | 신청자 연결 | **GuideStar 프로필(EIN 99-1342280)의 Principal Officer 가 Angelica Chavez-Etchechury**, 기재 전화 (832) 533-6049 | 확정 | GuideStar 프로필 |
 | 전화 교차 확인 | 조직 기부 결제 링크 `pay.thezoeygroup.com` 의 가맹점 설정 JSON 에 `businessPhone: (832) 533-6049` 가 그대로 박혀 있음 — GuideStar 대표자 전화와 일치 | 확정 | 직접 조회(GoDaddy Payments paylink 설정값) |
 | 조직 성격 | 폼 자기보고 "Rescue" 와 일치. 시설 없는 개·고양이 구조·포스터·입양 단체 | 확정 | thezoeygroup.com, Petfinder |
@@ -45,9 +45,9 @@
 | 이송 운영 | "고양이·새끼고양이·개·강아지를 정기적으로 Seattle WA 및 Vancouver BC 로 이송"하며 Petfinder 안내문이 "여러분 지역으로 **날아가는** 동물들"이라 표기 — 항공 이송 | Wayback(2021-06-29) |
 | 임원·이사회 | Principal Officer **Angelica Chavez-Etchechury**. 그 외 명단 **미확인** (990 제출 이력 없음). 구 포스터 신청서 문구에 "directors or core members" 표현 존재 → 이사 + 핵심 멤버 구조 존재 | GuideStar, Wayback |
 | 유급 직원 | **미확인.** 조직이 스스로 "all-volunteer, non-profit"이라 표기 | JotForm 신청서 상단 문구 |
-| 제2 담당자 | **Carla** — Petfinder 리스팅의 입양 문의 창구(carla@thezoeygroup.com / 281-914-8121). 시애틀 소재 동물 리스팅의 연락처이나 전화 지역번호는 휴스턴권(281) | Petfinder |
+| 제2 담당자 | **Carla** — Petfinder 리스팅의 입양 문의 창구(c***@thezoeygroup.com / 281-914-8121). 시애틀 소재 동물 리스팅의 연락처이나 전화 지역번호는 휴스턴권(281) | Petfinder |
 | 자원봉사 | 프로그램 존재. 구 사이트에 VOLUNTEER 신청 페이지가 있었으나 **현 사이트에는 없음** | Wayback, thezoeygroup.com |
-| 연락 | adopt@thezoeygroup.com, info@theZOEYgroup.com, (832) 533-6049 | thezoeygroup.com, GuideStar |
+| 연락 | a***@thezoeygroup.com, i***@theZOEYgroup.com, (832) 533-6049 | thezoeygroup.com, GuideStar |
 | 채널 | Facebook /RescuedZOEY, Instagram @thezoeygroup (팔로워 약 1,4xx, 게시물 약 1,045) | Instagram |
 | 외부 협력 | Romayor Strays / Laura's Community Cat Project (Romayor TX, "Tomball 에서 차로 한 시간") — 이 조직 기부 페이지가 **파트너 단체 캠페인을 대신 걸어주고 있음** | thezoeygroup.com/donate-campaigns-1 |
 
@@ -94,7 +94,7 @@
 | 포스터 신청 폼 | **현재 공개된 것이 없음.** 사이트에 FOSTER/VOLUNTEER 메뉴 자체가 없고, JotForm 커스텀 슬러그 `/FOSTER`·`/VOLUNTEER` 는 **404**(직접 확인) | 직접 조회 |
 | 과거 포스터 폼 | 구 사이트에는 WordPress **WPForms** 기반 "Foster Application"(문항 10개: 이름·전화·이메일·직업·보유 반려동물·중성화 여부·백신 여부·마당 형태·**병원/행사 이동 가능 여부**·지원 사유·재산 손괴 면책 동의)과 VOLUNTEER 페이지가 존재 | Wayback(2021-06-29) |
 | 입양 플랫폼 | **Petfinder** 조직 ID `TX1956` / **Adopt-a-Pet** 조직 레코드 **3개** — 88846(The ZOEY Group, Tomball TX) · 93418(In the name of ZOEY - PNW Transport, Arlington WA) · 280512(The ZOEY Group - Seattle WA Foster Location) | Petfinder, Adopt-a-Pet |
-| 플랫폼 상태 | Petfinder 리스팅 본문에 **"PetFinder 문의 시스템이 제대로 작동하지 않으니 carla@thezoeygroup.com 으로 직접 메일 달라"**는 안내가 붙어 있음 | Petfinder |
+| 플랫폼 상태 | Petfinder 리스팅 본문에 **"PetFinder 문의 시스템이 제대로 작동하지 않으니 c***@thezoeygroup.com 으로 직접 메일 달라"**는 안내가 붙어 있음 | Petfinder |
 | 결제·기부 | GoDaddy Payments(Poynt) 커스텀 도메인 결제 링크 + PayPal 버튼 + Givebutter 위젯 — **3중 병렬** | 직접 조회 |
 | 과거 스택 | WordPress + Elementor + WPForms + MonsterInsights(구글 애널리틱스 미연동 상태) + PayPal.me | Wayback(2023-05-15) |
 | 커뮤니케이션 | 도메인 이메일 3개(adopt@ / info@ / carla@), 휴대전화 2개, Facebook, Instagram | 전 채널 |

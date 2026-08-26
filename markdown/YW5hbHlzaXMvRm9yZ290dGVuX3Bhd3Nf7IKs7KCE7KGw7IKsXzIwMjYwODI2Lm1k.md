@@ -16,7 +16,7 @@
 | 직책 교차확인 | 웹 개발사 Warstler Digital Solutions 고객 후기란에 **"Anna Watkins — Vice President, Forgotten Paws of NWA"** 실명·직책 기재 | 확정 | warstlerdigital.com |
 | 법인 | FOR LUV OF FORGOTTEN PAWS (DBA Forgotten Paws of NWA), EIN 39-4747707, Tontitown, AR | 확정 | ProPublica, 조직 사이트 |
 | 조직 성격 | 폼 자기보고 "Rescue"와 일치 — NTEE **D20**(Animal Protection and Welfare), 개 대상 구조·보호 | 확정 | ProPublica, CauseIQ |
-| 이메일 도메인 | 조직 공식 연락처가 **forgottenpawsnwa@gmail.com** — 리드 폼의 gmail.com 과 일치. 단 gmail 은 식별력이 낮아 단독 근거로는 쓰지 않음 | 참고 | 조직 사이트 |
+| 이메일 도메인 | 조직 공식 연락처가 **f***@gmail.com** — 리드 폼의 gmail.com 과 일치. 단 gmail 은 식별력이 낮아 단독 근거로는 쓰지 않음 | 참고 | 조직 사이트 |
 | 창업자 일치 | 조직 About 페이지가 창업자를 **"Anna and Heather"** 로 명기. 폼의 "Executive director or founder" 자기보고와 정합 | 확정 | 조직 사이트 |
 | 언론 확인 | KNWA/FOX24 2026-04 기사에서 Anna Watkins 를 **co-founder** 로, 2026-07 기사에서 **Vice President** 로 인용 | 확정 | KNWA(AOL 전재), nwahomepage |
 | 동명 배제 | 나머지 11곳 중 Anna Watkins 와 연결되는 조직 없음. 같은 AR 주 소재 **Tails of the Forgotten Paws Inc**(Batesville, EIN 82-5382304)는 소재지·법인명·운영 형태 모두 상이하여 배제 | 확정 | ProPublica, adoptapet |
@@ -52,7 +52,7 @@
 | 자원봉사 역할 | ①견 케어·사회화 ②이송(병원·임보처·입양행사) ③행사 지원 ④**행정 지원 — 소셜미디어·데이터 입력·그랜트 작성·사무** | 조직 사이트 |
 | 이사회 | **미확인.** 990 제출 이력이 없어 공개 명단 없음 | ProPublica |
 | 창업자 | **Anna 와 Heather** (사이트 사진 캡션 "Our founders Anna and Heather") | 조직 사이트 |
-| 연락 | forgottenpawsnwa@gmail.com / 479-422-3577 | 조직 사이트 |
+| 연락 | f***@gmail.com / 479-422-3577 | 조직 사이트 |
 | 채널 | 자체 사이트 forgottenpawsnwa.org, Facebook, Instagram(팔로워 177), LinkedIn 회사 페이지, TikTok | 조직 사이트, Instagram |
 | 외부 협력 | 애니멀 컨트롤, 지역 수의사, 지역 소상공인. **Tontitown 시(시장 Angela Russell)와 조례 제정 파트너십** | 조직 사이트, KNWA |
 | 외주 파트너 | **Warstler Digital Solutions**(Bentonville, 대표 Clayton Warstler) — 웹사이트·Google 비즈니스 프로필 구축 | warstlerdigital.com |
