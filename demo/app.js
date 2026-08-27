@@ -40,6 +40,8 @@ const INITIAL = (language='en') => ({
   channels: { website: true, petfinder: false, adoptapet: false },
   settingsTab: 'readiness',
   settingsSaved: false,
+  settingsToggles: {},
+  notificationsRead: false,
   draftSaved: true,
   exceptionDone: false,
   taskAssigned: false,
@@ -55,6 +57,7 @@ const INITIAL = (language='en') => ({
   appNotes: {},
   appContacts: {},
   contactEditing: null,
+  previewReturn: 'application-request',
   appItemOpen: null,
   applicantSubmitted: false,
   applicantUploads: 0,
@@ -200,6 +203,11 @@ const APPLICATIONS = [
         landlord:{who:'S. Chen', when:'3 days ago', note:'Owns the home. No landlord check needed.'},
         vet:{who:'S. Chen', when:'2 days ago', note:'Cedar Creek confirmed vaccinations current.'},
         reference:{who:'S. Chen', when:'3 days ago', note:'Reference confirmed.'}}},
+  {id:'ferraro', animalId:'maple', name:'P. Ferraro', initials:'PF', email:'p.ferraro@example.com', phone:'(646) 555-0155',
+   received:'Aug 8', days:1, sent:false,
+   items:{},
+   contacts:{landlord:{name:'Anselmo Property Group',phone:'(646) 555-0288'},vet:{name:'Willow Bend Animal Clinic',phone:'(646) 555-0341'},reference:{name:'R. Okonkwo',phone:'(646) 555-0119'}},
+   log:{}},
   {id:'brooks', animalId:'daisy', name:'T. Brooks', initials:'TB', email:'t.brooks@example.com', phone:'(718) 555-0166',
    received:'Aug 1', days:8, sent:true,
    items:{agreement:'received', housing:'received', homephoto:'received', landlord:'done', vet:'done', reference:'done'},
@@ -232,6 +240,9 @@ function checklist() {
     .concat(state.checklistAdded.map(resolve));
 }
 
+/* 접수 당일 신청이 생기면서 `1 days` 가 나왔다. 날짜 표기는 한 곳을 거친다. */
+function dayCount(n) { return `${n} ${n===1?'day':'days'}`; }
+
 function applicationById(id) { return APPLICATIONS.find(a=>a.id===id)||APPLICATIONS[0]; }
 function applicationAnimal(id) { return APPLICATION_ANIMALS.find(a=>a.id===id)||APPLICATION_ANIMALS[0]; }
 function applicationSent(app) { return state.appSent[app.id]!==undefined?state.appSent[app.id]:app.sent; }
@@ -254,11 +265,11 @@ function itemSettled(status) { return status==='received'||status==='done'; }
 
 function itemLabel(app, item, withDays=true) {
   const status=itemState(app,item);
-  const days=withDays?` · ${app.days} days`:'';
+  const days=withDays?` · ${dayCount(app.days)}`:'';
   if(status==='received') return ['complete','Received'];
   if(status==='done') return ['complete','Complete'];
   if(status==='tried') return ['review',`Tried${days}`];
-  if(status==='sent') return ['neutral',`Sent${days}`];
+  if(status==='sent') return ['neutral',`Awaiting response${days}`];
   if(status==='notsent') return ['blocked',`Not sent${days}`];
   return ['blocked',`Not called${days}`];
 }
@@ -300,9 +311,9 @@ function applicationsView() {
   const groups=applicationAnimalRows();
   const unsent=APPLICATIONS.filter(app=>!applicationSent(app)&&applicationRow(app).waiting.some(item=>item.by==='adopter')).length;
   return `<section class="content apl-page">
-    ${pageHeader('ADOPTION APPLICATIONS','Applications','Every application shows what is still out and how long it has been waiting.',`<button class="secondary-button" data-action="open-checklist">Checklist settings ↗</button>${unsent?`<button class="primary-button" data-action="send-all-requests">Send ${unsent} unsent request${unsent>1?'s':''}</button>`:'<button class="primary-button" disabled>No unsent requests</button>'}`)}
-    <div class="update-context"><span>WHAT IS STILL OUT</span><small>Completed items leave the list. What remains is what still needs attention.</small></div>
-    <div class="update-metrics apl-metrics">${[['Items with adopters',totals.adopter,'overdue'],['Items with your team',totals.staff,'progress'],['Oldest still waiting',`${totals.oldest} days`,'sent'],['Applications ready',totals.ready,'ready']].map(([label,value,tone])=>`<button class="static"><small>${label}</small><b>${value}</b><i class="${tone}"></i></button>`).join('')}</div>
+    ${pageHeader('ADOPTION APPLICATIONS','Applications','See what’s pending, who it’s waiting on, and for how long.',`<button class="secondary-button" data-action="open-checklist">Checklist settings ↗</button>${unsent?`<button class="primary-button" data-action="send-all-requests">Send ${unsent} unsent request${unsent>1?'s':''}</button>`:'<button class="primary-button" disabled>All requests sent</button>'}`)}
+    <div class="update-context"><span>PENDING ITEMS</span><small>Completed items leave the list. What remains is what still needs attention.</small></div>
+    <div class="update-metrics apl-metrics">${[['Waiting on adopters',totals.adopter,'overdue'],['Waiting on your team',totals.staff,'progress'],['Longest pending',dayCount(totals.oldest),'sent'],['Ready for review',totals.ready,'ready']].map(([label,value,tone])=>`<button class="static"><small>${label}</small><b>${value}</b><i class="${tone}"></i></button>`).join('')}</div>
     <section class="surface apl-list">
       <div class="section-head"><div><p class="kicker">OPEN APPLICATIONS</p><h2>By animal</h2><p>Open an animal to see who applied, then open an applicant to see every item.</p></div></div>
       <div class="apl-groups">${groups.map(applicationGroup).join('')}</div>
@@ -318,21 +329,21 @@ function applicationGroup({animal, rows, waiting}) {
       <span class="apl-caret">${open?'▾':'▸'}</span>
       <img src="${animal.img}" alt="">
       <span class="apl-animal-name"><b>${animal.name}</b><small>${animal.meta}</small></span>
-      <span class="apl-summary"><em>${applicants}</em>${waiting?`<b class="apl-count">${waiting} items still out</b>`:'<b class="apl-count done">✓ All items in</b>'}</span>
+      <span class="apl-summary"><em>${applicants}</em>${waiting?`<b class="apl-count">${waiting} ${waiting===1?'item':'items'} pending</b>`:'<b class="apl-count done">✓ Checklist complete</b>'}</span>
     </button>
     ${open?`<div class="apl-applicants">${rows.map(applicationRowMarkup).join('')}</div>`:''}
   </div>`;
 }
 
 function applicationRowMarkup({app, waiting, lead}) {
-  const [tone,label]=lead?itemLabel(app,lead):['complete','All items in'];
+  const [tone,label]=lead?itemLabel(app,lead):['complete','Checklist complete'];
   const sent=applicationSent(app);
   return `<div class="apl-applicant ${waiting.length?'':'settled'}" data-open-application="${app.id}">
     <span class="avatar">${app.initials}</span>
-    <span class="apl-applicant-name"><b>${app.name}</b><small>Applied ${app.received} · ${app.days} days ago</small></span>
+    <span class="apl-applicant-name"><b>${app.name}</b><small>Applied ${app.received} · ${dayCount(app.days)} ago</small></span>
     <span class="apl-chips">${['adopter','staff'].map(by=>{
       const group=waiting.filter(item=>item.by===by);
-      return `<span class="apl-chiprow ${by}"><small>${by==='adopter'?'Adopter':'Your team'}</small><span class="apl-chipset">${group.length?group.map(item=>`<em class="apl-chip ${by}">${item.name}</em>`).join(''):'<em class="apl-chip clear">✓ Nothing left</em>'}</span></span>`;
+      return `<span class="apl-chiprow ${by}"><small>${by==='adopter'?'Adopter':'Your team'}</small><span class="apl-chipset">${group.length?group.map(item=>`<em class="apl-chip ${by}">${item.name}</em>`).join(''):'<em class="apl-chip clear">✓ Complete</em>'}</span></span>`;
     }).join('')}</span>
     ${statusPill(tone,label)}
     ${waiting.length&&!sent?`<button class="primary-button small" data-action="send-application-request" data-application="${app.id}">Send request</button>`:'<span class="apl-spacer"></span>'}
@@ -485,18 +496,18 @@ function applicationView() {
   return `<section class="content detail-content apl-page">
     <button class="back-link" data-view="applications">‹ Back to applications</button>
     <div class="animal-header surface">
-      <img src="${animal.img}" alt="${animal.name}"><div class="animal-title"><div><h1>${app.name}</h1>${statusPill(clear?'ready':'blocked',clear?'All items in':`${waiting.length} items still out`)}</div><p>Applying for ${animal.name} · Applied ${app.received} · ${app.days} days ago</p><div class="animal-facts"><span>✉ ${app.email}</span><span>☎ ${app.phone}</span></div></div>
+      <img src="${animal.img}" alt="${animal.name}"><div class="animal-title"><div><h1>${app.name}</h1>${statusPill(clear?'ready':'blocked',clear?'Checklist complete':`${waiting.length} ${waiting.length===1?'item':'items'} pending`)}</div><p>Applied for ${animal.name} · ${app.received} · ${dayCount(app.days)} ago</p><div class="animal-facts"><span>✉ ${app.email}</span><span>☎ ${app.phone}</span></div></div>
       <div class="header-actions"><button class="secondary-button" data-action="application-more">•••</button><button class="secondary-button" data-action="preview-applicant-form">Preview adopter link ↗</button>${clear?'<button class="primary-button" data-action="finalize-adoption">Finalize adoption</button>':`<button class="primary-button" data-action="send-application-request" data-application="${app.id}">${sent?'Resend request':`Send request · ${adopterOpen.length} items`}</button>`}</div>
     </div>
     <div class="detail-grid">
       <div class="detail-main">
         <section class="surface status-banner ${clear?'ready':'blocked'}">
           <div class="status-symbol">${clear?'✓':'!'}</div>
-          <div><p class="kicker">APPLICATION STATUS</p><h2>${clear?'Everything is in':`${waiting.length} of ${items.length} items still out`}</h2><p>${clear?'Every requested item came back. This application is ready to finalize.':`${adopterOpen.length} waiting on ${app.name} · ${teamOpen.length} waiting on your team. ${sent?`Request sent ${app.days} days ago.`:'The request has not been sent yet.'}`}</p></div>
+          <div><p class="kicker">APPLICATION STATUS</p><h2>${clear?'Everything is in':`${waiting.length} of ${items.length} items pending`}</h2><p>${clear?'Every requested item came back. This application is ready to finalize.':`${adopterOpen.length?`${adopterOpen.length} waiting on ${app.name}`:`none waiting on ${app.name}`} · ${teamOpen.length?`${teamOpen.length} waiting on your team`:'none waiting on your team'}. ${sent?`Request sent ${dayCount(app.days)} ago.`:'The request has not been sent yet.'}`}</p></div>
           ${clear?'<button class="primary-button" data-action="finalize-adoption">Finalize adoption <span>›</span></button>':`<button class="${sent?'secondary-button':'primary-button'}" data-action="send-application-request" data-application="${app.id}">${sent?'Resend request':'Send request'} <span>›</span></button>`}
         </section>
         <section class="surface apl-items">
-          <div class="section-head"><div><p class="kicker">ADOPTION CHECKLIST</p><h2>${animal.name} · ${app.name}</h2><p>Every response stays with this application. Open an item to see what came back.</p></div><button class="secondary-button" data-action="open-checklist">Checklist settings ↗</button></div>
+          <div class="section-head"><div><p class="kicker">ADOPTION CHECKLIST</p><h2>${animal.name} · ${app.name}</h2><p>Every response is saved with this application. Open an item to view the response.</p></div><button class="secondary-button" data-action="open-checklist">Checklist settings ↗</button></div>
           <div class="apl-item-list">${items.map(item=>applicationItemRow(app,item)).join('')}</div>
         </section>
       </div>
@@ -504,8 +515,8 @@ function applicationView() {
         <section class="surface apl-side">
           <p class="kicker">NEXT STEP</p>
           <h2>${clear?'Finalize the adoption':adopterOpen.length&&!sent?'Send the request':adopterOpen.length?`Waiting on ${app.name}`:'Finish your team’s calls'}</h2>
-          <p>${clear?'Nothing is outstanding on this application.':adopterOpen.length&&!sent?`${adopterOpen.length} items go out in one link. Nothing has been requested yet.`:adopterOpen.length?`${adopterOpen.length} items requested ${app.days} days ago. Petify keeps counting until they come back.`:`${teamOpen.length} calls left. Record the result and the item leaves the list.`}</p>
-          <div class="apl-side-split"><span><small>WITH ${app.name.toUpperCase()}</small><b>${adopterOpen.length}</b></span><span><small>WITH YOUR TEAM</small><b>${teamOpen.length}</b></span></div>
+          <p>${clear?'Nothing is outstanding on this application.':adopterOpen.length&&!sent?`${adopterOpen.length} ${adopterOpen.length===1?'item goes':'items go'} out in one link. Nothing has been requested yet.`:adopterOpen.length?`${adopterOpen.length} ${adopterOpen.length===1?'item has':'items have'} been awaiting a response for ${dayCount(app.days)}. Petify tracks how long each request remains pending.`:`${teamOpen.length} calls left. Record the result and the item leaves the list.`}</p>
+          <div class="apl-side-split"><span><small>WAITING ON ${app.name.toUpperCase()}</small><b>${adopterOpen.length}</b></span><span><small>WAITING ON YOUR TEAM</small><b>${teamOpen.length}</b></span></div>
         </section>
         <section class="surface apl-side">
           <div class="section-head"><div><p class="kicker">RECENT ACTIVITY</p><h2>Latest on this application</h2></div></div>
@@ -552,7 +563,7 @@ function applicationItemRow(app, item) {
 function applicationItemBody(app, item, status, log) {
   if(item.by==='adopter') {
     if(status==='received') return `<div class="apl-response"><span class="apl-file">▤</span><span><b>${log?.file||'Uploaded file'}</b><small>${log?.size||''} · Received ${log?.when||'recently'}</small></span><button class="secondary-button" data-action="open-attachment">Open</button></div><p class="apl-trace">Attached to this application. Nothing else has to be filed.</p>`;
-    if(status==='sent') return `<p class="apl-trace">Requested ${app.days} days ago in the same link as the other adopter items. Nothing has come back yet.</p><div class="apl-actions"><button class="secondary-button" data-action="resend-item">Send a reminder</button><button class="text-button" data-action="copy-link">Copy adopter link</button></div>`;
+    if(status==='sent') return `<p class="apl-trace">Requested ${dayCount(app.days)} ago in the same link as the other adopter items. Nothing has come back yet.</p><div class="apl-actions"><button class="secondary-button" data-action="resend-item">Send a reminder</button><button class="text-button" data-action="copy-link">Copy adopter link</button></div>`;
     return `<p class="apl-trace">This item has not been requested yet. It goes out with the other adopter items in one link.</p><div class="apl-actions"><button class="primary-button" data-action="send-application-request" data-application="${app.id}">Send request</button></div>`;
   }
   const done=status==='done';
@@ -762,10 +773,10 @@ const TUTORIALS = {
     ]
   },
   h3: {
-    label:'DEMO H-3 · WHAT IS STILL OUT',
+    label:'DEMO H-3 · PENDING ITEMS',
     name:'Track what stays open',
     steps:[
-      { selector:'.status-banner', kind:'manual', title:'Only what is unfinished needs you', text:'What came back is received. What is still out is counted, in days, without anyone tracking it.' },
+      { selector:'.status-banner', kind:'manual', title:'Only what is unfinished needs you', text:'What came back is marked received. What is still pending is counted, in days, without anyone tracking it.' },
       { selector:'.apl-item-list', kind:'manual', title:'Every response sits with the application', text:'Uploads, call results, and notes stay on the item they belong to. No reopening email threads to check what arrived.' },
       { selector:'[data-application-item="kchen:landlord"]', kind:'application-item', value:'kchen:landlord', title:'Your team owns the calls', text:'Petify does not call the landlord. It keeps the item on the list, with who tried and when, so nobody repeats a call a colleague already made.' },
       { selector:'.apl-item.open [data-action="mark-item-done"]', kind:'action', value:'mark-item-done', title:'Record the result', text:'Your name and the time are saved with it. The item leaves the waiting list.' },
@@ -869,7 +880,7 @@ const KO_TUTORIALS = {
   h3: {
     label:'데모 H-3 · 회수 상태 확인',
     steps:[
-      ['미완료 항목만 담당자 몫','돌아온 항목은 회수 완료로 남고, 아직 안 온 항목만 경과일과 함께 센다.'],
+      ['미회수 항목만 담당자 몫','돌아온 항목은 회수 완료로 남고, 아직 안 온 항목만 경과일과 함께 센다.'],
       ['회신은 그 신청 건에 붙는다','업로드, 통화 결과, 메모가 해당 항목에 그대로 남는다. 메일 스레드를 다시 열어 확인할 일이 없다.'],
       ['확인 통화는 담당자가 한다','Petify가 집주인에게 전화하지 않는다. 누가 언제 시도했는지와 함께 항목을 목록에 남겨, 동료가 이미 건 전화를 다시 걸지 않게 한다.'],
       ['결과를 기록','처리자 이름과 시각이 함께 저장되고, 항목은 대기 목록에서 빠진다.'],
@@ -899,6 +910,10 @@ const TOUR_SETUP = {
 };
 
 const KO_UI = {
+  'Not required':'선택','Suspended':'비활성','Off':'꺼짐','Workspace settings saved':'워크스페이스 설정 저장 완료',
+  'See what one of these looks like':'한 건이 어떻게 나가는지 보기',
+  'Each adopter gets their own link with only the items still pending on their application. Nobody sees anyone else’s.':'각 신청자는 자기 신청 건에 남은 항목만 담긴 링크를 받습니다. 다른 사람의 내용은 보이지 않습니다.','Items your team completes are not included. They stay on the list until someone records the result.':'담당자가 확인하는 항목은 포함되지 않습니다. 결과를 기록할 때까지 목록에 남습니다.',
+  'See what’s pending, who it’s waiting on, and for how long.':'무엇이 남았고 누구를 기다리며 며칠 지났는지 보여줍니다.','PENDING ITEMS':'미회수 항목','Waiting on adopters':'신청자 대기','Waiting on your team':'담당자 대기','Longest pending':'최장 경과','Ready for review':'검토 가능','✓ Checklist complete':'✓ 요구 항목 완료','Checklist complete':'요구 항목 완료','✓ Complete':'✓ 완료','All requests sent':'요청 전부 발송됨','Every response is saved with this application. Open an item to view the response.':'모든 회신은 이 신청 건에 저장됩니다. 항목을 열면 회신 내용을 볼 수 있습니다.',
   'See what is missing in Animals ›':'동물 화면에서 부족한 항목 보기 ›','Nothing is ready to publish right now':'지금 게시할 수 있는 동물이 없습니다','Animals appear here the moment their profile has everything it needs.':'프로필에 필요한 항목이 모두 채워지면 이 목록에 나타납니다.','Open Animals':'동물 화면 열기','Profiles that are complete and ready to go live, plus everything already published. Partner channels are shown as planned integrations.':'게시 준비가 끝난 프로필과 이미 게시된 프로필입니다. 제휴 채널은 지원 예정으로 표시됩니다.',
   'Every animal is here. The ones you cannot publish yet say what is missing.':'모든 동물이 여기 있습니다. 아직 게시할 수 없는 동물은 무엇이 비어 있는지 함께 표시됩니다.','New intake · requirements not started':'신규 입소 · 게시 요건 미착수','Publishing requirements not complete':'게시 요건 미충족',
   'View full history':'전체 이력 보기','Every request, response, and recorded call on this application, with who did it.':'이 신청 건의 모든 요청·회신·통화 기록과 처리자입니다.','Request sent to the adopter':'신청자에게 요청 발송','Export':'내보내기',
@@ -1005,6 +1020,32 @@ function translateText(value) {
       [/^(\d+) of (\d+) animals$/,(_,a,b)=>`동물 ${b}마리 중 ${a}마리`],
       [/^(\d+) steps$/,(_,a)=>`${a}단계`],
       [/^(\d+) parts$/,(_,a)=>`${a}편`],
+      [/^Shown for (.+)\. Everyone gets the same message with their own items and link\.$/,(_,a)=>`${a} 기준입니다. 모두 같은 문구에 각자의 항목과 링크가 담겨 나갑니다.`],
+      [/^Send (\d+) requests$/,(_,a)=>`요청 ${a}건 보내기`],
+      [/^(\d+) items in (\d+) links$/,(_,a,b)=>`링크 ${b}개에 항목 ${a}개`],
+      [/^(.+) · applied (.+)$/,(_,animal,d)=>`${animal} · ${d} 신청`],
+      [/^Not sent · (\d+) days?$/,(_,a)=>`미발송 · ${a}일`],
+      [/^Awaiting response · (\d+) days?$/,(_,a)=>`회신 대기 · ${a}일`],
+      [/^Tried · (\d+) days?$/,(_,a)=>`시도함 · ${a}일`],
+      [/^Not called · (\d+) days?$/,(_,a)=>`미확인 · ${a}일`],
+      [/^Applied (.+) · (\d+) days? ago$/,(_,d,n)=>`${d} 신청 · ${n}일 경과`],
+      [/^Applied for (.+) · (.+) · (\d+) days? ago$/,(_,animal,d,n)=>`${animal} 지원 · ${d} 신청 · ${n}일 경과`],
+      [/^(\d+) days?$/,(_,a)=>`${a}일`],
+      [/^(\d+) items? pending$/,(_,a)=>`미회수 ${a}개`],
+      [/^(\d+) applicants? · (\d+) items? pending$/,(_,a,b)=>`신청 ${a}건 · 미회수 ${b}개`],
+      [/^(\d+) of (\d+) items? pending$/,(_,a,b)=>`전체 ${b}개 중 ${a}개 미회수`],
+      [/^Awaiting response · (\d+) days$/,(_,a)=>`회신 대기 · ${a}일`],
+      [/^Awaiting response$/,()=>`회신 대기`],
+      [/^Applied for (.+) · (.+) · (\d+) days ago$/,(_,animal,d,n)=>`${animal} 지원 · ${d} 신청 · ${n}일 경과`],
+      [/^(\d+) waiting on (.+) · (\d+) waiting on your team\. Request sent (\d+) days ago\.$/,(_,a,who,b,d)=>`${who} 대기 ${a}개 · 담당자 대기 ${b}개. ${d}일 전 요청 발송.`],
+      [/^(\d+) waiting on (.+) · none waiting on your team\. Request sent (\d+) days ago\.$/,(_,a,who,d)=>`${who} 대기 ${a}개 · 담당자 대기 없음. ${d}일 전 요청 발송.`],
+      [/^none waiting on (.+) · (\d+) waiting on your team\. Request sent (\d+) days ago\.$/,(_,who,b,d)=>`${who} 대기 없음 · 담당자 대기 ${b}개. ${d}일 전 요청 발송.`],
+      [/^(\d+) waiting on (.+) · (\d+) waiting on your team\. The request has not been sent yet\.$/,(_,a,who,b)=>`${who} 대기 ${a}개 · 담당자 대기 ${b}개. 아직 요청을 보내지 않았습니다.`],
+      [/^(\d+) waiting on (.+) · none waiting on your team\. The request has not been sent yet\.$/,(_,a,who)=>`${who} 대기 ${a}개 · 담당자 대기 없음. 아직 요청을 보내지 않았습니다.`],
+      [/^(\d+) items? (?:has|have) been awaiting a response for (\d+) days\. Petify tracks how long each request remains pending\.$/,(_,a,d)=>`${a}개 항목이 ${d}일째 회신을 기다리고 있습니다. Petify 가 각 요청의 경과를 추적합니다.`],
+      [/^(\d+) items? goes? out in one link\. Nothing has been requested yet\.$/,(_,a)=>`${a}개 항목이 링크 하나로 나갑니다. 아직 요청하지 않았습니다.`],
+      [/^(\d+) items? go out in one link\. Nothing has been requested yet\.$/,(_,a)=>`${a}개 항목이 링크 하나로 나갑니다. 아직 요청하지 않았습니다.`],
+      [/^WAITING ON (.+)$/,(_,a)=>`${a} 대기`],
       [/^(\d+) items in one link$/,(_,a)=>`링크 하나에 ${a}개 항목`],
       [/^Everything you asked for opens on one page\. (.+) can send them in any order\.$/,(_,a)=>`요청한 항목이 한 페이지에서 열립니다. ${a}님은 순서에 관계없이 보낼 수 있습니다.`],
       [/^(\d+) items stay with your team$/,(_,a)=>`${a}개 항목은 담당자 몫`],
@@ -1185,6 +1226,12 @@ function iconButton(icon, label, action) { return `<button class="icon-button" d
 function formatCount(n) { return `<strong class="metric-number">${n}</strong>`; }
 function languageSwitch() { return `<div class="language-switch" role="group" aria-label="Language"><button class="${state.language==='ko'?'active':''}" data-language="ko">한국어</button><button class="${state.language==='en'?'active':''}" data-language="en">English</button></div>`; }
 
+/* 「방금 생긴 일」이 있는지만 알린다. 몇 건인지는 각 화면이 센다 —
+   상시 노출되는 자리에 숫자를 두면 세어주는 게 아니라 압박이 된다. */
+function hasUnread() {
+  return !state.notificationsRead;
+}
+
 function layout(content) {
   const section = state.view === 'animal' ? 'animals' : state.view === 'fosterform' ? 'updates' : (state.view === 'application' || state.view === 'applicantform') ? 'applications' : state.view;
   return `
@@ -1194,7 +1241,7 @@ function layout(content) {
           <img class="brand-logo" src="assets/petify-logo.png" alt="Petify for Shelters">
         </button>
         <div class="workspace-label">SECOND CHANCE RESCUE</div>
-        <nav>${NAV.map(([id,ico,label]) => `<button class="nav-item ${section===id?'active':''}" data-view="${id}"><span>${ico}</span><b>${label}</b>${id==='updates'?'<em>2</em>':''}</button>`).join('')}</nav>
+        <nav>${NAV.map(([id,ico,label]) => `<button class="nav-item ${section===id?'active':''}" data-view="${id}"><span>${ico}</span><b>${label}</b></button>`).join('')}</nav>
         <div class="sidebar-bottom">
           <button class="nav-item ${section==='audit'?'active':''}" data-view="audit"><span>◷</span><b>Audit trail</b></button>
           <button class="account" data-action="account-menu"><span class="avatar">AR</span><span><b>Alex Rivera</b><small>Administrator</small></span><i>⌄</i></button>
@@ -1209,7 +1256,7 @@ function layout(content) {
             ${window.demoRef?`<button class="secondary-button" data-action="demo-share" style="gap:6px;display:flex;align-items:center;">🔗 Share demo</button>`:''}
             <button class="demo-reset topbar-reset" data-action="reset-demo"><span>↺</span><b>Reset demo</b></button>
             <button class="tutorial-launch" data-action="guide"><span>▶</span> Guided demo</button>
-            ${iconButton(BELL_ICON,'Notifications','notifications')}
+            <span class="bell-wrap${hasUnread()?' unread':''}">${iconButton(BELL_ICON,'Notifications','notifications')}</span>
             <button class="add-button" data-action="open-intake"><span>＋</span> Add animal</button>
           </div>
         </header>
@@ -1593,13 +1640,16 @@ function settingsView() {
   </section>`;
 }
 
+/* 기본값은 켜짐. 끈 것만 상태에 남긴다. */
+function settingOn(key) { return state.settingsToggles[key] !== false; }
+
 function settingsPanel() {
   if(state.settingsTab==='intake') return intakePanel();
   if(state.settingsTab==='checklist') return checklistPanel();
-  if(state.settingsTab==='readiness') return `<div class="section-head"><div><p class="kicker">ORGANIZATION RULES</p><h2>Publishing requirements</h2><p>Petify marks a profile ready to publish when all required information is complete and up to date.</p></div><button class="secondary-button" data-action="add-check">＋ Add section</button></div><div class="settings-list">${[['Health','Required · Updated within the last 30 days',true],['Behavior','Required · Updated within the last 14 days',true],['Media','At least 3 photos approved for public use',true],['Documents','All required documents approved',true],['Public profile','Description and adoption contact',true]].map(([a,b,on])=>`<div><span class="drag">⋮⋮</span><span><b>${a}</b><small>${b}</small></span><button class="toggle ${on?'on':''}" data-action="toggle-setting"><i></i></button><button class="kebab" data-action="edit-setting">•••</button></div>`).join('')}</div><div class="settings-note"><span>i</span><p><b>What “Ready to publish” means</b>“Ready to publish” means the profile has all information required for publishing in Petify. Medical and legal decisions remain with your team.</p></div>`;
+  if(state.settingsTab==='readiness') return `<div class="section-head"><div><p class="kicker">ORGANIZATION RULES</p><h2>Publishing requirements</h2><p>Petify marks a profile ready to publish when all required information is complete and up to date.</p></div><button class="secondary-button" data-action="add-check">＋ Add section</button></div><div class="settings-list">${[['health','Health','Updated within the last 30 days'],['behavior','Behavior','Updated within the last 14 days'],['media','Media','At least 3 photos approved for public use'],['documents','Documents','All required documents approved'],['public','Public profile','Description and adoption contact']].map(([id,name,note])=>{const on=settingOn(`req:${id}`);return `<div class="${on?'':'off'}"><span class="drag">⋮⋮</span><span><b>${name}</b><small>${on?'Required':'Not required'} · ${note}</small></span><button class="toggle ${on?'on':''}" data-setting-toggle="req:${id}" role="switch" aria-checked="${on}" aria-label="${name}"><i></i></button><button class="kebab" data-action="edit-setting">•••</button></div>`}).join('')}</div><div class="settings-note"><span>i</span><p><b>What “Ready to publish” means</b>“Ready to publish” means the profile has all information required for publishing in Petify. Medical and legal decisions remain with your team.</p></div>`;
   if(state.settingsTab==='forms') return `<div class="section-head"><div><p class="kicker">FOSTER EXPERIENCE</p><h2>Daily care and weekly check-in</h2><p>Keep routine care lightweight while sending meaningful changes to staff for review.</p></div></div><div class="form-template-grid"><button data-action="open-daily-care"><span class="care-icon">☀</span><span><small>EVERY DAY</small><b>Daily care</b><em>Meals, walks, and medication</em><p>Routine completions save to the care log. Missed medication and concerns alert the coordinator.</p></span><i>Preview ›</i></button><button data-action="preview-foster-form"><span class="care-icon weekly">↻</span><span><small>EVERY WEEK</small><b>Weekly check-in</b><em>Health, behavior, photos, and notes</em><p>Meaningful changes enter the staff review queue before the official record changes.</p></span><i>Preview ›</i></button></div><div class="settings-note"><span>i</span><p><b>Two different records</b>Daily care confirms that routines happened. Weekly check-ins capture observations that may affect Milo’s shelter record or adoption profile.</p></div>`;
   if(state.settingsTab==='channels') return `<div class="section-head"><div><p class="kicker">PUBLISHING CHANNELS</p><h2>Publishing channels</h2><p>The shelter website is available now. Partner channels require future integration agreements.</p></div></div><div class="settings-list channel-settings"><div><span class="channel-logo website">S</span><span><b>Shelter website</b><small>petnow-demo.org/adopt</small></span>${statusPill('ready','Connected')}<button class="secondary-button" data-action="channel-configure">Configure</button></div><div class="planned"><span class="channel-logo petfinder" role="img" aria-label="Petfinder"></span><span><b>Petfinder</b><small>Partner integration required</small></span>${statusPill('neutral','Planned')}<button class="secondary-button" disabled>Not available</button></div><div class="planned"><span class="channel-logo adoptapet" role="img" aria-label="Adopt a Pet"></span><span><b>Adopt a Pet</b><small>Partner integration required</small></span>${statusPill('neutral','Planned')}<button class="secondary-button" disabled>Not available</button></div></div>`;
-  return `<div class="section-head"><div><p class="kicker">WORKSPACE SETTINGS</p><h2>${state.settingsTab==='team'?'Team & roles':'Notifications'}</h2><p>${state.settingsTab==='team'?'Control who can review records and publish profiles.':'Choose which events your team receives by email.'}</p></div><button class="primary-button" data-action="invite-team">${state.settingsTab==='team'?'+ Invite member':'Save preferences'}</button></div><div class="settings-list">${(state.settingsTab==='team'?['Alex Rivera · Administrator','Morgan Kim · Reviewer','Sam Chen · Publisher']:['Overdue foster requests','New submissions','Publishing status changes','Publishing failures']).map(x=>`<div><span class="avatar">${x.split(' ').slice(0,2).map(y=>y[0]).join('')}</span><span><b>${x}</b><small>${state.settingsTab==='team'?'Active':'Email + in-app'}</small></span><button class="toggle on" data-action="toggle-setting"><i></i></button></div>`).join('')}</div>`;
+  return `<div class="section-head"><div><p class="kicker">WORKSPACE SETTINGS</p><h2>${state.settingsTab==='team'?'Team & roles':'Notifications'}</h2><p>${state.settingsTab==='team'?'Control who can review records and publish profiles.':'Choose which events your team receives by email.'}</p></div><button class="primary-button" data-action="invite-team">${state.settingsTab==='team'?'+ Invite member':'Save preferences'}</button></div><div class="settings-list">${(state.settingsTab==='team'?['Alex Rivera · Administrator','Morgan Kim · Reviewer','Sam Chen · Publisher']:['Overdue foster requests','New submissions','Publishing status changes','Publishing failures']).map(x=>{const key=`${state.settingsTab}:${x}`;const on=settingOn(key);return `<div class="${on?'':'off'}"><span class="avatar">${x.split(' ').slice(0,2).map(y=>y[0]).join('')}</span><span><b>${x}</b><small>${state.settingsTab==='team'?(on?'Active':'Suspended'):(on?'Email + in-app':'Off')}</small></span><button class="toggle ${on?'on':''}" data-setting-toggle="${key}" role="switch" aria-checked="${on}" aria-label="${x}"><i></i></button></div>`}).join('')}</div>`;
 }
 
 function fosterFormView() {
@@ -1651,6 +1701,7 @@ function renderModal() {
   if(state.modal==='placement') return wrap(placementModal());
   if(state.modal==='request') return wrap(requestModal());
   if(state.modal==='application-request') return wrap(applicationRequestModal());
+  if(state.modal==='bulk-request') return wrap(bulkRequestModal());
   if(state.modal==='assign') return wrap(assignModal());
   if(state.modal==='confirm-reset') return wrap(`<button class="modal-close" data-action="close-modal">×</button><p class="kicker">RESET PRETOTYPE</p><h2>Start the demo over?</h2><p>This only resets the sample data in your browser. Nothing external is changed.</p><div class="modal-actions"><button class="secondary-button" data-action="close-modal">Cancel</button><button class="danger-button" data-action="confirm-reset">Reset demo</button></div>`);
   if(state.modal==='filters') return wrap(`<button class="modal-close" data-action="close-modal">×</button><p class="kicker">ANIMAL FILTERS</p><h2>Focus the workspace</h2><div class="form-grid"><label><span>Current location</span><select><option>All locations</option><option>Foster homes</option><option>Main shelter</option></select></label><label><span>Owner</span><select><option>All owners</option><option>Alex Rivera</option><option>Morgan Kim</option></select></label><label><span>Information age</span><select><option>Any age</option><option>Older than 14 days</option></select></label><label><span>Stage</span><select><option>Any stage</option><option>In foster</option><option>Ready to publish</option></select></label></div><div class="modal-actions"><button class="text-button" data-action="clear-filters">Clear</button><span></span><button class="secondary-button" data-action="close-modal">Cancel</button><button class="primary-button" data-action="apply-filters">Apply filters</button></div>`);
@@ -1671,6 +1722,17 @@ function placementModal() {
   return `<button class="modal-close" data-action="close-modal">×</button><p class="kicker">FOSTER PLACEMENT</p><h2>Create a foster placement</h2><p>Choose an animal without a foster, then connect the foster person and update schedule.</p><div class="form-grid"><div class="placement-animal-field full"><span>Animal without a foster placement</span><small>${candidates.length} animals are waiting for a foster placement.</small><div class="placement-animal-grid" role="radiogroup" aria-label="Animal without a foster placement">${candidates.map(animal=>`<button type="button" class="placement-animal-card ${animal.id===selectedAnimal.id?'selected':''}" data-placement-animal="${animal.id}" role="radio" aria-checked="${animal.id===selectedAnimal.id}" aria-label="Select ${animal.name}"><img src="${animal.img}" alt="${animal.name}"><span><b>${animal.name}</b><small>${animal.meta}</small><em>${animal.stage}</em></span><i>${animal.id===selectedAnimal.id?'✓':''}</i></button>`).join('')}</div></div><label class="full"><span>Foster person</span><select data-placement-foster ${availableFosters.length?'':'disabled'}>${availableFosters.length?availableFosters.map(person=>`<option value="${person.id}" ${person.id===selectedFoster?.id?'selected':''}>${person.name} · Available</option>`).join(''):'<option>No foster people are currently available</option>'}</select></label><label><span>Start date</span><input value="Aug 10, 2026"></label><label><span>Expected end date</span><input value="Sep 10, 2026"></label><label><span>Coordinator</span><select><option>Alex Rivera</option></select></label><label><span>Care schedule</span><select><option>Daily care + weekly check-in</option><option>Weekly check-in only</option><option>Every 2 weeks</option></select></label><div class="intake-result full"><span>↻</span><p><b>Daily care starts Aug 10 · first check-in Aug 16</b>${selectedFoster?`${selectedFoster.name} will receive a secure form link for ${selectedAnimal.name}. Reminder after 2 days.`:'Choose an available foster person to continue.'}</p></div></div><div class="modal-actions"><button class="secondary-button" data-action="close-modal">Cancel</button><button class="primary-button" data-action="save-placement" ${selectedFoster?'':'disabled'}>Confirm placement</button></div>`;
 }
 function requestModal() { return `<button class="modal-close" data-action="close-modal">×</button><p class="kicker">MILO · JAMIE LEE</p><h2>Request a foster check-in</h2><p>Jamie gets a secure mobile link. No account or app is required.</p><div class="form-grid"><label class="full"><span>Check-in form</span><select><option>Weekly check-in</option></select></label><label><span>Send now</span><select><option>Now · Email + SMS</option><option>Schedule for tomorrow</option></select></label><label><span>Due date</span><input value="Aug 12, 2026"></label><label><span>Automatic reminder</span><select><option>After 2 days · max 2</option></select></label><label><span>Coordinator</span><select><option>Alex Rivera</option></select></label><fieldset class="full"><legend>Ask for</legend><div class="check-options">${['Health','Behavior','Medication','Weight','Photos','Notes'].map((x,i)=>`<label><input type="checkbox" ${i!==3?'checked':''}> ${x}</label>`).join('')}</div></fieldset><button class="message-preview full" data-action="preview-message"><small>SMS + EMAIL PREVIEW</small><b>How is Milo doing this week?</b><span>See the exact message, secure link, and reminder schedule Jamie receives.</span><i>Open preview ›</i></button></div><div class="modal-actions"><button class="secondary-button" data-action="copy-link">Copy link</button><span></span><button class="secondary-button" data-action="close-modal">Cancel</button><button class="primary-button" data-action="send-request">Send request</button></div>`; }
+function bulkRequestModal() {
+  const unsent=APPLICATIONS.filter(app=>!applicationSent(app)&&applicationRow(app).waiting.some(item=>item.by==='adopter'));
+  const rows=unsent.map(app=>({app, animal:applicationAnimal(app.animalId), items:applicationRow(app).waiting.filter(item=>item.by==='adopter')}));
+  const totalItems=rows.reduce((sum,row)=>sum+row.items.length,0);
+  return `<button class="modal-close" data-action="close-modal">×</button><p class="kicker">ADOPTION APPLICATIONS</p><h2>Send ${rows.length} requests</h2><p>Each adopter gets their own link with only the items still pending on their application. Nobody sees anyone else’s.</p>
+    <div class="bulk-list">${rows.map(row=>`<div class="bulk-row"><span class="avatar">${row.app.initials}</span><span><b>${row.app.name}</b><small>${row.animal.name} · applied ${row.app.received}</small></span><span class="bulk-items">${row.items.map(item=>`<em class="apl-chip adopter">${item.name}</em>`).join('')}</span></div>`).join('')}</div>
+    <div class="daily-care-note full"><span>i</span><p><b>${totalItems} items in ${rows.length} links</b>Items your team completes are not included. They stay on the list until someone records the result.</p></div>
+    <button class="message-preview full" data-action="preview-bulk-message"><small>SMS + EMAIL PREVIEW</small><b>See what one of these looks like</b><span>Shown for ${rows[0].app.name}. Everyone gets the same message with their own items and link.</span><i>Open preview ›</i></button>
+    <div class="modal-actions"><button class="secondary-button" data-action="close-modal">Cancel</button><span></span><button class="primary-button" data-action="confirm-bulk-request">Send ${rows.length} requests</button></div>`;
+}
+
 function applicationRequestModal() {
   const app=applicationById(state.applicationId);
   const animal=applicationAnimal(app.animalId);
@@ -1911,6 +1973,7 @@ function bind() {
   document.querySelectorAll('[data-checklist-by]').forEach(el=>el.addEventListener('click',()=>{const [id,by]=el.dataset.checklistBy.split(':');state.checklistBy={...state.checklistBy,[id]:by};render();}));
   document.querySelectorAll('[data-audit-filter]').forEach(el=>el.addEventListener('change',()=>{const field=el.dataset.auditFilter;const map={animal:'auditAnimal',actor:'auditActor',area:'auditArea',period:'auditPeriod',from:'auditFrom',to:'auditTo',sort:'auditSort'};state[map[field]]=el.value;render();}));
   document.querySelectorAll('[data-audit-filter="from"],[data-audit-filter="to"]').forEach(el=>el.addEventListener('input',()=>{state[el.dataset.auditFilter==='from'?'auditFrom':'auditTo']=el.value;}));
+  document.querySelectorAll('[data-setting-toggle]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();const key=el.dataset.settingToggle;const next=!settingOn(key);state.settingsToggles={...state.settingsToggles,[key]:next};state.settingsSaved=false;render();}));
   document.querySelectorAll('[data-settings-tab]').forEach(el=>el.addEventListener('click',()=>{state.settingsTab=el.dataset.settingsTab;render();}));
   document.querySelectorAll('[data-foster-mode]').forEach(el=>el.addEventListener('click',()=>{state.fosterFormMode=el.dataset.fosterMode;state.dailyCareSubmitted=false;if(state.fosterFormMode==='weekly')state.fosterSubmitted=false;render();}));
   document.querySelectorAll('[data-daily-task]').forEach(el=>el.addEventListener('click',()=>{const task=el.dataset.dailyTask;state.dailyTasks={...state.dailyTasks,[task]:!state.dailyTasks[task]};render();}));
@@ -1960,10 +2023,14 @@ function handleAction(action, el) {
     case 'finish-tutorial': {const _fid=state.tutorialId,_fs=(state.tutorialStep||0)+1;const name=TUTORIALS[state.tutorialId]?.name||'Demo';tutorialHistory=[];state.tutorialId=null;state.tutorialStep=null;leaveTutorialSurface();toast(`${name} · tutorial complete`);if(window.demoTrack)window.demoTrack('Demo Tutorial Completed',{tutorial_id:_fid,steps_completed:_fs,language:state.language});break;}
     case 'open-checklist': state.view='settings';state.settingsTab='checklist';render();break;
     case 'send-application-request': {state.applicationId=el.dataset.application||state.applicationId;state.modal='application-request';render();break;}
-    case 'preview-application-message': state.messageChannel='sms';state.drawer='application-message';render();break;
-    case 'return-application-request': state.drawer=null;state.modal='application-request';render();break;
+    case 'preview-application-message': state.messageChannel='sms';state.previewReturn='application-request';state.drawer='application-message';render();break;
+    case 'preview-bulk-message': {const unsent=APPLICATIONS.filter(app=>!applicationSent(app)&&applicationRow(app).waiting.some(item=>item.by==='adopter'));if(unsent.length)state.applicationId=unsent[0].id;state.messageChannel='sms';state.previewReturn='bulk-request';state.drawer='application-message';render();break;}
+    case 'return-application-request': state.drawer=null;state.modal=state.previewReturn;render();break;
     case 'confirm-application-request': {const id=state.applicationId;state.appSent={...state.appSent,[id]:true};state.modal=null;state.drawer=null;toast('Request sent · one link for every adopter item');break;}
-    case 'send-all-requests': {const pending={};APPLICATIONS.forEach(app=>{if(!applicationSent(app))pending[app.id]=true;});const count=Object.keys(pending).length;if(!count){toast('Every application already has its request out');break;}state.appSent={...state.appSent,...pending};toast(`${count} request${count>1?'s':''} sent`);break;}
+    case 'send-all-requests': {const unsent=APPLICATIONS.filter(app=>!applicationSent(app)&&applicationRow(app).waiting.some(item=>item.by==='adopter'));if(!unsent.length){toast('Every application already has its request out');break;}
+      if(unsent.length===1){state.applicationId=unsent[0].id;state.modal='application-request';render();break;}
+      state.modal='bulk-request';render();break;}
+    case 'confirm-bulk-request': {const pending={};APPLICATIONS.forEach(app=>{if(!applicationSent(app)&&applicationRow(app).waiting.some(item=>item.by==='adopter'))pending[app.id]=true;});const count=Object.keys(pending).length;state.appSent={...state.appSent,...pending};state.modal=null;toast(`${count} request${count>1?'s':''} sent`);break;}
     case 'mark-item-done': {const key=el.dataset.item;const app=applicationById(state.applicationId);const previous=state.appLog[key]||app.log?.[key];const history=[...(previous?.history||[]),...(previous?[{who:previous.who,when:previous.when,note:previous.note}]:[])];state.appItems={...state.appItems,[key]:'done'};state.appLog={...state.appLog,[key]:{who:'A. Rivera',when:'just now',note:state.appNotes[key]||'',history}};toast('Marked as done · A. Rivera, just now');break;}
     case 'mark-item-tried': {const key=el.dataset.item;const app=applicationById(state.applicationId);const previous=state.appLog[key]||app.log?.[key];const history=[...(previous?.history||[]),...(previous?[{who:previous.who,when:previous.when,note:previous.note}]:[])];state.appItems={...state.appItems,[key]:'tried'};state.appLog={...state.appLog,[key]:{who:'A. Rivera',when:'just now',note:state.appNotes[key]||'Could not reach. Will try again.',history}};state.appNotes={...state.appNotes,[key]:''};toast(`Attempt ${history.length+1} saved · the item stays on the list`);break;}
     case 'reopen-item': {const key=el.dataset.item;state.appItems={...state.appItems,[key]:'open'};const log={...state.appLog};delete log[key];state.appLog=log;render();break;}
@@ -1988,7 +2055,7 @@ function handleAction(action, el) {
     case 'clear-audit': state.auditAnimal='all';state.auditActor='all';state.auditArea='all';state.auditPeriod='all';state.auditFrom='';state.auditTo='';render();break;
     case 'open-attachment': genericPrepared('Attachment opened');break;
     case 'resend-item': toast('Reminder sent');break;
-    case 'notifications': drawerOpen('notifications');break;
+    case 'notifications': state.notificationsRead=true;drawerOpen('notifications');break;
     case 'reset-demo': modalOpen('confirm-reset');break;
     case 'confirm-reset': {const language=state.language;state=INITIAL(language);toast('Demo reset to its starting state');break;}
     case 'intake-upload': state.intakePhoto=true;render();break;
