@@ -651,13 +651,18 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .lead-board::-webkit-scrollbar { height: 12px; }
 .lead-board::-webkit-scrollbar-track { background: rgba(15,45,33,.10); border-radius: 6px; }
 .lead-board::-webkit-scrollbar-thumb { background: rgba(15,45,33,.42); border-radius: 6px; }
-.markdown-body .lead-board table { display: table; width: max-content; table-layout: fixed; margin: 0; font-size: 12px; }
+/* 폭 합계를 테이블 width 로 못박는다 — 24+30+94+188×5 = 1088px.
+   table-layout:fixed 는 지정 width 를 쓰되 테이블 폭이 지정 합보다 크면 남는 폭을
+   모든 열에 비례 배분한다. width:max-content 를 주면 콘텐츠가 테이블 폭을 정해 버려
+   지정값이 전부 부풀어 오른다 (2026-08-26: 24/30/94 지정이 46/98/235 로 렌더됨).
+   열 폭을 바꾸면 이 합계도 함께 고쳐야 한다 */
+.markdown-body .lead-board table { display: table; width: 1088px; table-layout: fixed; margin: 0; font-size: 12px; }
 .markdown-body .lead-board th,
 .markdown-body .lead-board td { min-width: 0; max-width: none; padding: 9px 11px; vertical-align: top; line-height: 1.6; word-break: break-word; overflow-wrap: break-word; }
 .markdown-body .lead-board .col-num   { position: sticky; left: 0;    z-index: 2; width: 24px; padding: 9px 4px; text-align: right; color: var(--ink-4); }
 .markdown-body .lead-board .col-track { position: sticky; left: 24px; z-index: 2; width: 30px; padding: 9px 3px; text-align: center; }
 .markdown-body .lead-board .col-org   { position: sticky; left: 54px; z-index: 2; width: 94px; padding-left: 8px; padding-right: 8px; box-shadow: 1px 0 0 var(--line); }
-.markdown-body .lead-board .col-axis  { width: 208px; }
+.markdown-body .lead-board .col-axis  { width: 188px; }
 /* sticky 열은 배경이 없으면 뒤 열이 비쳐 겹쳐 보인다 */
 .markdown-body .lead-board tbody .col-num,
 .markdown-body .lead-board tbody .col-track,
