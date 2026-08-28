@@ -596,6 +596,9 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .markdown-body .fit-badge.partial { background: #fdf6d3; color: #7a6414; border: 1px solid #eee0a4; }
 .markdown-body .fit-badge.weak    { background: #eceff0; color: #5d686c; border: 1px solid #d9dfe0; }
 .markdown-body .fit-badge.unknown { background: #f5f7f7; color: #7c8689; border: 1px dashed #cfd7d8; }
+/* 신규 리드가 자동으로 보드에 오를 때 판정이 아직 없는 상태. 행을 안 만들면 리드가
+   보드에서 통째로 빠져 자동 반영이 무의미해지므로, 행은 만들고 미판정임을 표시한다 */
+.markdown-body .fit-badge.pending { background: #fff4e8; color: #8a5a22; border: 1px dashed #e8c9a4; }
 
 /* 데모 콜 보드 첫 표 — 종합 판독. 아래 데이터 표들과 성격이 달라 카드형으로 구분한다 (2026-08-25 카야 지시) */
 .board-synthesis { margin: 18px 0 32px; padding: 3px; border: 1px solid #b9d9c8; border-radius: 14px; background: #f4faf6; }

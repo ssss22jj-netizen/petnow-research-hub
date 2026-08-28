@@ -90,6 +90,7 @@ const collectionDefinitions = {
   },
   interview: {
     title: "고객 인터뷰",
+    pin: ["deliverables/M2_데모콜_인사이트보드.md"],
     lead: "콜 전체를 가로지르는 판정 보드입니다. 콜별 인터뷰 자료는 인터뷰 모음집에, 콜 전 사전조사는 출처·분석 방법의 리드 사전조사, 진행 가이드·체크리스트는 별첨, 녹취록은 출처·분석 방법에 있습니다.",
     paths: [
       "deliverables/Track2_리드판정보드.md",
@@ -335,6 +336,7 @@ function sortEntries(entries) {
 function docEntry(doc) {
   const externalUrl = externalDocumentUrls.get(doc.path);
   return {
+    key: doc.path,
     kind: externalUrl ? "external" : "doc",
     href: externalUrl ?? hrefForDoc(doc),
     milestone: doc.milestone,
@@ -347,10 +349,10 @@ function docEntry(doc) {
 }
 
 function extraEntry(extra) {
-  if (extra.kind !== "collection") return { ...extra, href: extra.url };
+  if (extra.kind !== "collection") return { ...extra, key: extra.url, href: extra.url };
   /* 개수는 문서 수가 아니라 그 페이지에 실제로 뜨는 줄 수 — PDF 같은 비문서 항목도 포함한다 */
   const target = collectionDefinitions[extra.collectionKey];
-  return { ...extra, href: `#/library/${extra.collectionKey}`, count: target ? entriesFor(extra.collectionKey).length : 0 };
+  return { ...extra, key: `collection:${extra.collectionKey}`, href: `#/library/${extra.collectionKey}`, count: target ? entriesFor(extra.collectionKey).length : 0 };
 }
 
 function docsIn(definition) {
@@ -365,7 +367,15 @@ function entriesFor(key) {
   if (!definition) return [];
   const docEntries = docsIn(definition).map(docEntry);
   const extras = (collectionExtras[key] ?? []).map(extraEntry);
-  return sortEntries([...docEntries, ...extras]);
+  const sorted = sortEntries([...docEntries, ...extras]);
+  /* pin 에 적힌 항목은 날짜와 무관하게 적힌 순서대로 맨 앞에 온다.
+     자동 재생성되는 문서(리드 판정 보드처럼 기준일이 계속 갱신되는 것)가 정렬만으로는
+     영구 1번이 되어버리는 경우를 위한 장치다. 날짜를 손으로 만지는 방식은 생성물을 못 따라간다.
+     키는 문서 경로, 또는 비문서 항목의 url·`collection:<키>` 다 (2026-08-28 카야 지시) */
+  const pin = definition.pin ?? [];
+  if (!pin.length) return sorted;
+  const pinned = pin.map((k) => sorted.find((entry) => entry.key === k)).filter(Boolean);
+  return [...pinned, ...sorted.filter((entry) => !pinned.includes(entry))];
 }
 
 /* homeLimit 이 있으면 홈에서 상위 N개만 보이고 나머지는 「더보기」로 그 자리에서 펼친다.
