@@ -103,6 +103,7 @@ const collectionDefinitions = {
     parent: "interview",
     lead: "콜별 인터뷰 자료를 최신순으로 모았습니다. 인사이트 정리 문서와, 펫나우 팀이 작성한 원본 정리본(PDF)이 함께 있습니다. PDF 는 새 탭에서 열립니다.",
     paths: [
+      "deliverables/Carlee_인터뷰_인사이트_Beatrice_Humane_Society_20260827.md",
       "deliverables/Amy_인터뷰_인사이트_Hearts_Bones_20260818.md",
       "deliverables/Eve_인터뷰_인사이트_20260817.md",
       "deliverables/중간점검_2_Gina_인터뷰_인사이트_202608.md",
@@ -199,6 +200,7 @@ const collectionExtras = {
     url: "https://docs.google.com/spreadsheets/d/1wkeSUFVlOBCDuR5_GCHLElfhQyS0cTswEWkXcaSp1Ho/edit?pli=1&gid=0#gid=0",
   }],
   reports: [
+    { kind: "page", newTab: true, title: "Beatrice Humane Society — Carlee Fiddes", description: "2026-08-27 데모 콜 정리본", role: "정리본 PDF", milestone: "M2", date: "2026-08-27", url: "assets/interview-reports/20260827_Beatrice_Humane_Society_Carlee_Fiddes.pdf" },
     { kind: "page", newTab: true, title: "Little Traverse Bay Humane Society — Sarah Schertel", description: "2026-08-24 데모 콜 정리본", role: "정리본 PDF", milestone: "M2", date: "2026-08-24", url: "assets/interview-reports/20260824_Little_Traverse_Bay_Humane_Society_Sarah_Schertel.pdf" },
     { kind: "page", newTab: true, title: "Citizens for Animal Protection — Jared Carroll", description: "2026-08-20 데모 콜 정리본", role: "정리본 PDF", milestone: "M2", date: "2026-08-20", url: "assets/interview-reports/20260820_Citizens_for_Animal_Protection_Jared_Carroll.pdf" },
     { kind: "page", newTab: true, title: "Kzoo Cat Cafe and Rescue — Abbey Thompson", description: "2026-08-20 데모 콜 정리본", role: "정리본 PDF", milestone: "M2", date: "2026-08-20", url: "assets/interview-reports/20260820_Kzoo_Cat_Cafe_and_Rescue_Abbey_Thompson.pdf" },

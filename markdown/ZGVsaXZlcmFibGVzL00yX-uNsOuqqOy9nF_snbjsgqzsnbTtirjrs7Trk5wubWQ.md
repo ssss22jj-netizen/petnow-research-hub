@@ -35,6 +35,7 @@
 | 4 | B | **Kzoo Cat Cafe and Rescue**<br>Abbey Thompson · 창립자<br>임보 10~15개소 | <span class="pain-badge high">강함</span><br>본인 | · **광고 클릭·미팅 신청 동기 자체가 임보자 커뮤니케이션.** 무제한 1개 개선 질문에도 동일 응답<br>· 그룹챗 미확인자를 **본인 기억으로 관리 후 개별 재연락**<br>· **현 방식 유지 시 임보 확장 불가**로 직접 진단<br>· 월간 체중 회수율 저조, 사진은 **과거 그룹챗 역추적** 필요 | 스프레드시트<br>Facebook 그룹챗 |
 | 5 | B | **Citizens for Animal Protection**<br>Jared Carroll · 수의 진료 총괄<br>연 4,000두 · 임보 비중 1/3 | <span class="pain-badge high">강함</span><br>본인 | · 임보자 연락이 전화·이메일·Facebook·개인 문자·사설 웹으로 **분산**<br>· **공식 문자 회선 부재로 코디네이터가 개인 휴대폰 사용.** 이력이 개인 기기에 잔류, 타 직원 맥락 파악 불가, 담당자 교체 시 **연속성 단절**<br>· 조직 전체 1순위는 **부서 간 커뮤니케이션**(정보 공백이 실제 오류로 연결)이나 현 제품 범위 외 | PetPoint<br>Pulse<br>Petszel<br>개인 SMS |
 | 6 | A | **Little Traverse Bay Humane Society**<br>Sarah Schertel · 운영 총괄<br>연 1,000두 | <span class="pain-badge critical">매우 강함</span><br>사고 | · **종이와 PetPoint가 동시 정본**으로 기능, 처치 상태 불일치<br>· 수의사가 1시간 전 출력물을 근거로 **이미 완료된 백신·구충 재시행.** 인터뷰 중 동일 폴더 추가 발견<br>· 결과 — **의료 자원 및 수의사 시간 낭비**<br>· **데모 이전부터 존재한 통증.** 동료의 광고 체크리스트 소재 공유가 유입 경로 | PetPoint<br>Petszel<br>종이 체크리스트 |
+| 7 | B | **Beatrice Humane Society**<br>Carlee Fiddes · ED<br>연 ~700두 · 임보 풀 ~60 | <span class="pain-badge high">강함</span><br>본인 | · Foster check-in 누락 — 계획 대비 **2~3주 늦게 발견**하는 사례<br>· staff 시간 부족으로 check-in 자체가 생략됨<br>· JTBD — **"시스템이 정기적으로 실행하고 누락을 보여줬으면"** | PetPoint<br>Facebook Messenger<br>Email |
 
 ## 3. 솔루션 적합 여부
 
@@ -46,6 +47,7 @@
 | 4 | B | **Kzoo Cat Cafe and Rescue**<br>Abbey Thompson · 창립자<br>임보 10~15개소 | <span class="fit-badge good">높음</span> | · **자동·개별 리마인더**, 월간 체중·사진 수집, 커스터마이즈 체크인 4건에 구체적 긍정<br>· 스프레드시트 존치 사유는 관성이 아닌 **전 개체 일괄 조회 화면**<br>· 기존 셸터 SW 미사용 사유가 복잡성·조직 부적합 — **커스터마이즈는 부가 요소가 아닌 도입 조건** |
 | 5 | B | **Citizens for Animal Protection**<br>Jared Carroll · 수의 진료 총괄<br>연 4,000두 · 임보 1/3 | <span class="fit-badge good">높음</span> | · **역할 분담 구조를 본인이 직접 설계** — PetPoint = 일정·정본 / Petify = 임보·의료 커뮤니케이션 / 퇴소 시 PDF 취합 후 차트 첨부<br>· 백신 만기·재검·투약·행동·사진 요청으로 **즉시 자기 업무에 대입**<br>· **PDF 기록 내보내기는 미제안 항목을 선요구.** 근거는 "의료기록 미기재 = 미시행" 원칙<br>· **공개 콘텐츠 승인 게이트**도 선질문 |
 | 6 | A | **Little Traverse Bay Humane Society**<br>Sarah Schertel · 운영 총괄<br>연 1,000두 | <span class="fit-badge good">높음</span> | · 화면에서 `View Audit Trail`을 **선발견**, 이력 조회 가능 여부 질의<br>· `Requested / Overdue / In Progress / Needs Review` 구조를 **광견병 접종 워크플로에 즉시 대입**<br>· 필요 요건은 to-do 목록이 아닌 **조치·담당자·상태의 동시 조회**<br>· 임보 기능도 선요청 후 긍정, 단 **우선순위는 하위** |
+| 7 | B | **Beatrice Humane Society**<br>Carlee Fiddes · ED<br>연 ~700두 · 임보 풀 ~60 | <span class="fit-badge good">높음</span><br>add-on | · **PetPoint 연동이 도입 핵심 조건**으로 명시<br>· Petify → PetPoint full sync가 어렵더라도 JPEG·텍스트 수동 업로드는 **"10-second problem"으로 감당 가능** 판단<br>· Full CRM 교체 신호 없음 — PetPoint 존치 전제<br>· PoC·파일럿 협력 의사 명확 |
 
 ## 4. 지불 의향 및 결정 구조
 
@@ -57,6 +59,7 @@
 | 4 | B | **Kzoo Cat Cafe and Rescue**<br>Abbey Thompson · 창립자<br>임보 10~15개소 | <span class="fit-badge partial">조건부</span> | **4개 조건 충족 시** 일부 예산 배정 가능 — 가격 적정·워크플로 적합·임보자 사용·Medical Director 동의. 부담 기준 가격 미제시, 기존 SW도 무료·기본형 위주. **단독 결재 아님** |
 | 5 | B | **Citizens for Animal Protection**<br>Jared Carroll · 수의 진료 총괄<br>연 4,000두 · 임보 1/3 | <span class="fit-badge good">중상</span><br>`전제` | **도구 비용 < 해결 대상 문제의 비용** 원칙을 자체 제시, 인건비 회수를 절감으로 규정. 부서 한정 도구는 본인 예산 범위 내일 경우 승인 가능으로 판단<br>· 단 **"부서 한정 도구 = Jared 예산" 전제 자체가 미확인**(5절 특이사항 참조). 부서장 **전결 한도**도 비공개 `[미확인]` |
 | 6 | A | **Little Traverse Bay Humane Society**<br>Sarah Schertel · 운영 총괄<br>연 1,000두 | <span class="fit-badge unknown">미검증</span> | 가격·예산·결재 라인 **미질의.** 기능 중복 시 Pet Academy(유료) 해지 후 Petszel(무료) 존치 이력 — **동등 가치 시 가격이 선택 좌우** |
+| 7 | B | **Beatrice Humane Society**<br>Carlee Fiddes · ED<br>연 ~700두 · 임보 풀 ~60 | <span class="fit-badge partial">초기-중간</span> | ROI 논리 매우 강함 — Foster Coordinator 추가 채용 회피를 소프트웨어 비용 정당화 구조로 자체 제시. Carlee가 ED로 예산 결정권 추정이나 범위·한도 미확인 |
 
 ## 5. 후속 조치 및 특이사항
 
@@ -68,6 +71,7 @@
 | 4 | B | **Kzoo Cat Cafe and Rescue**<br>Abbey Thompson · 창립자<br>임보 10~15개소 | · Medical Director에 데모 공유<br>· 완성 후 사용 의사 재확인 | · **자원봉사자 UX가 실질 도입 조건.** 리마인더 증가가 응답률 개선으로 직결되지 않음<br>· 장기 신뢰 임보자는 **2개월 무연락도 정상 판단** — 전원 동일 주기 강제는 부적합<br>· **물품 관리 통증 없음.** 카페 상비 후 임보자 직접 수령 (1번 건과 정반대)<br>· PoC·디자인 파트너 적합도 높음, **단기 유료 매력도 낮음** |
 | 5 | B | **Citizens for Animal Protection**<br>Jared Carroll · 수의 진료 총괄<br>연 4,000두 · 임보 1/3 | · 파일럿·심층 인터뷰 협력 의사 | · **임보 관할 범위 자료 간 불일치** `[미확인]` — 본인은 직할로 진술하나, 사전조사 조직도상 임보 전담은 Barbara Fitzgerald → Jessica Ellis → Sandi Mercado이며 공식 직책은 클리닉 운영 총괄. **콜 1차 목표였던 프로세스 소유자 확인이 보고서에 부재**<br>· **`기존 CRM 사용 시 2차 도구 미도입` 가설이 본 조직에서 약화** — PetPoint + Petszel 수용 선례<br>· 고정 주간 체크인보다 **의료 마일스톤 기반 발송**(투약 3일차·URI 10일차·백신 부스터)이 적합<br>· 임보자의 부적절 링크 삽입 사고 — **정보 제공자이되 게시 권한자일 필요 없음**<br>· SMS는 **전용 번호·양방향·FCC 절차**까지 구현 단계 질의<br>· Petszel 경쟁 검토 완료 — **기능 미중복, 단 구매자·연동 표면·과금 앵커 중복** |
 | 6 | A | **Little Traverse Bay Humane Society**<br>Sarah Schertel · 운영 총괄<br>연 1,000두 | · 베타 일정 선질문<br>· **Michigan Pet Alliance·10월 컨퍼런스·카운티 담당자 연결 자발 제안** | · **경쟁 대상은 타 SaaS가 아니라 종이 체크리스트**<br>· PetPoint가 **신규 SW 별도 개발 방침을 통보**해 스택 재검토 창이 평시보다 개방. 단 교체 결정도, Petify를 대체재로 본 것도 아님<br>· add-on 조건 — 연동, 중복 입력 제거, 비중복 가치, 가격. Petszel 존치 사유가 직접 연동이므로 **중복 입력 제거가 채택의 실질 기준**<br>· **plug-and-play 선호.** 개발 중 기능이 섞인 데모에 아쉬움 표명<br>· **소재 H 대상 기능이 본 조직 수요와 부합할 것으로 예상** (카야 판정 2026-08-25)<br>· dog licensing은 **별도 B2G 트랙.** 셸터 제품 논의와 단일 의제로 통합 금지 |
+| 7 | B | **Beatrice Humane Society**<br>Carlee Fiddes · ED<br>연 ~700두 · 임보 풀 ~60 | · PoC·파일럿 협력 의사 ("I would be interested in seeing that")<br>· Design Partner 후보 | · **Shelter-to-Shelter Record Portability** — 개체 이관 시 기존 medical·admin 기록 재입력 필요, 신규 통증 축 발견<br>· **PetPoint 연동이 실질 도입 조건** — full sync가 어렵더라도 수동 업로드는 "10-second problem"으로 허용<br>· 입양 공고 우선순위 낮음 (PetPoint가 이미 실시간 업데이트)<br>· Lincoln 임보자 기반(45분 거리) — 물품 수급·이동 인접 통증<br>· **소재 PDF 미명시 — 내용 기반 B 추정** |
 
 ## 읽는 법
 
