@@ -41,6 +41,7 @@ const docPageOverrides = new Map([
   ["deliverables/Track2_M1_중간성과분석_20260815.md", "track2-m1-report.html"],
   ["deliverables/Track2_최종성과분석_20260818.md", "track2-final-report.html"],
   ["deliverables/M2_소재H_중간성과분석_20260831.md", "track2-m2-h-report.html"],
+  ["deliverables/M2_소재H_중간성과분석_20260902.md", "track2-m2-h-report-2.html"],
 ]);
 
 function hrefForDoc(doc) {
@@ -65,6 +66,7 @@ const collectionDefinitions = {
     lead: "M2 실행 계획과 진행 중인 트랙별 산출물입니다.",
     paths: [
       "deliverables/M2_실행계획_20260817.md",
+      "deliverables/Track2_ICP_v1.2_20260902.md",
       "deliverables/M2_소재H_소구점_정의_및_근거_20260823.md",
       "deliverables/M2_Petify_알파MVP_개발원페이저_20260821.md",
       "analysis/포지셔닝_경쟁제품_축비교_20260820.md",
@@ -85,6 +87,7 @@ const collectionDefinitions = {
     title: "실험 결과 보고서",
     lead: "집행한 실험의 성과를 사전 판정 기준으로 대조해 정리한 보고서입니다.",
     paths: [
+      "deliverables/M2_소재H_중간성과분석_20260902.md",
       "deliverables/M2_소재H_중간성과분석_20260831.md",
       "deliverables/Track2_최종성과분석_20260818.md",
       "deliverables/Track2_M1_중간성과분석_20260815.md",
@@ -242,11 +245,13 @@ const documentRoles = new Map([
   ["deliverables/M2_산타바바라_데모미팅_전략_20260818.md", "콜 전략"],
   ["deliverables/M2_데모콜_인사이트보드.md", "콜 보드"],
   ["deliverables/Eve_인터뷰_인사이트_20260817.md", "인터뷰 결과"],
-  ["deliverables/M2_소재H_중간성과분석_20260831.md", "M2 중간 성과 보고"],
+  ["deliverables/M2_소재H_중간성과분석_20260902.md", "M2 2차 중간 성과 보고"],
+  ["deliverables/M2_소재H_중간성과분석_20260831.md", "M2 1차 중간 성과 보고"],
   ["deliverables/Track2_최종성과분석_20260818.md", "최종 성과 보고"],
   ["deliverables/Track2_M1_중간성과분석_20260815.md", "중간 성과 보고"],
   ["deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", "Track 2 계획"],
   ["meetings/2026-08-07_Track2_LMF_후속기획.md", "상세 기획"],
+  ["deliverables/Track2_ICP_v1.2_20260902.md", "ICP 개정"],
   ["deliverables/Track2_ICP_Persona_소재_정의_근거_20260805.md", "기획 근거"],
   ["analysis/소재C_인테이크필드_재검증_20260809.md", "추가 검증 근거"],
   ["deliverables/Track2_LMF_가설_ICE_재스코어링_20260809.md", "ICE 재평가"],
@@ -279,7 +284,8 @@ const documentVisualPages = new Map([
   ["deliverables/Track2_LMF_소구점_검증_실험_기획_20260805.md", ["track2-plan.html", "기획안 시각본 보기 →"]],
   ["deliverables/Track2_M1_중간성과분석_20260815.md", ["track2-m1-report.html", "중간 보고 시각본 보기 →"]],
   ["deliverables/Track2_최종성과분석_20260818.md", ["track2-final-report.html", "최종 보고 시각본 보기 →"]],
-  ["deliverables/M2_소재H_중간성과분석_20260831.md", ["track2-m2-h-report.html", "소재 H 중간 보고 시각본 보기 →"]],
+  ["deliverables/M2_소재H_중간성과분석_20260831.md", ["track2-m2-h-report.html", "소재 H 1차 중간 보고 시각본 보기 →"]],
+  ["deliverables/M2_소재H_중간성과분석_20260902.md", ["track2-m2-h-report-2.html", "소재 H 2차 중간 보고 시각본 보기 →"]],
 ]);
 
 /* 문서 하단에 홈과 같은 카드 UI로 쌓을 하위 문서.

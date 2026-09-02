@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>M2 Track 2 · 소재 H 2차 중간 보고 (예산 81% 소진 시점)</title>
+<style>
+:root{
+  --bg:#ffffff; --fg:#1a1d21; --muted:#5f6672; --line:#e3e6ea; --soft:#f6f7f9;
+  --accent:#1f5fd6; --accent-soft:#eef3fd;
+  --action:#b45309; --action-bg:#fffaf0; --action-line:#f0c78a;
+  --ask:#1f5fd6; --ask-bg:#f2f6fd; --ask-line:#a9c4f0;
+  --warn:#b02a37; --warn-bg:#fdf4f5; --warn-line:#eeb4ba;
+  --observe:#0f766e; --observe-bg:#f1faf8; --observe-line:#a3d5cd;
+  --apx-bg:#f4f7fd; --apx-line:#dbe4f4; --apx-fg:#5d6879; --apx-head:#2f4f86; --apx-th:#e9eff9; --apx-strong:#3b4b63;
+}
+:root:not([data-theme="light"]) { }
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15181c; --fg:#e6e9ee; --muted:#98a1ae; --line:#2b3138; --soft:#1b1f24;
+    --accent:#7aa8f5; --accent-soft:#1b2536;
+    --action:#e5a457; --action-bg:#241d12; --action-line:#5c452a;
+    --ask:#7aa8f5; --ask-bg:#161f2e; --ask-line:#33507e;
+    --warn:#f08c96; --warn-bg:#2a1a1d; --warn-line:#6b3b42;
+    --observe:#5ec5b8; --observe-bg:#132623; --observe-line:#2f5b55;
+    --apx-bg:#141b26; --apx-line:#28374d; --apx-fg:#93a2b8; --apx-head:#8fb2f0; --apx-th:#1b2536; --apx-strong:#c3cfe0;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15181c; --fg:#e6e9ee; --muted:#98a1ae; --line:#2b3138; --soft:#1b1f24;
+  --accent:#7aa8f5; --accent-soft:#1b2536;
+  --action:#e5a457; --action-bg:#241d12; --action-line:#5c452a;
+  --ask:#7aa8f5; --ask-bg:#161f2e; --ask-line:#33507e;
+  --warn:#f08c96; --warn-bg:#2a1a1d; --warn-line:#6b3b42;
+  --observe:#5ec5b8; --observe-bg:#132623; --observe-line:#2f5b55;
+  --apx-bg:#141b26; --apx-line:#28374d; --apx-fg:#93a2b8; --apx-head:#8fb2f0; --apx-th:#1b2536; --apx-strong:#c3cfe0;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR",sans-serif;
+  font-size:15.5px; line-height:1.75;
+  word-break:keep-all; overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:900px;margin:0 auto;padding:56px 28px 100px}
+.doc-main{max-width:900px}
+
+a.back{display:inline-block;margin-bottom:22px;font-size:.86rem;color:var(--muted);border:0}
+a.back:hover{color:var(--accent);border:0}
+header.doc{border-bottom:2px solid var(--fg);padding-bottom:20px;margin-bottom:40px}
+header.doc h1{font-size:1.85rem;line-height:1.35;margin:0 0 12px;letter-spacing:-.02em}
+header.doc .meta{color:var(--muted);font-size:.86rem;line-height:1.7}
+
+h2{
+  font-size:1.22rem;margin:52px 0 16px;padding-bottom:9px;
+  border-bottom:1px solid var(--line);letter-spacing:-.01em;
+}
+h2:first-of-type{margin-top:0}
+h3{font-size:1.02rem;margin:30px 0 12px;color:var(--fg)}
+p{margin:12px 0}
+strong{font-weight:650}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
+a:hover{border-bottom-color:var(--accent)}
+hr{border:0;border-top:1px solid var(--line);margin:44px 0}
+small{font-size:.83em;color:var(--muted);line-height:1.6}
+sup{font-size:.7em}
+
+ul,ol{padding-left:1.35em;margin:12px 0}
+li{margin:7px 0}
+li::marker{color:var(--muted)}
+
+/* 표 */
+.tbl{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:520px}
+th,td{padding:10px 13px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--soft);font-weight:650;white-space:nowrap;font-size:.85rem;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td small{display:block;margin-top:2px}
+tr.row-now{background:var(--accent-soft)}
+tr.row-now td{font-weight:600}
+
+/* 결론·권장 절의 위계 — 번호 문단은 키우고 하위 근거는 들여쓰기·톤다운 */
+p.lead-h{
+  font-size:16.5px;font-weight:700;line-height:1.5;letter-spacing:-.2px;
+  margin:30px 0 11px;padding-left:13px;border-left:3px solid var(--accent);
+  word-break:keep-all;overflow-wrap:break-word;
+}
+p.lead-h + ul{margin:0 0 8px}
+
+/* 각주 — 본문 흐름에서 물러나게 */
+p.fn{
+  margin:16px 0 0;padding:11px 15px;
+  background:var(--soft);border-left:2px solid var(--line);border-radius:0 6px 6px 0;
+  font-size:12px;line-height:1.8;color:var(--muted);
+  word-break:keep-all;overflow-wrap:break-word;
+}
+p.fn small{font-size:inherit;color:inherit}
+p.fn strong{font-weight:600;color:var(--fg)}
+p.fn sup{color:var(--accent);font-weight:700;margin-right:1px}
+p.fn code{font-size:11px}
+
+/* 콜아웃 */
+blockquote{margin:22px 0;padding:16px 20px;border-left:3px solid var(--line);background:var(--soft);border-radius:0 8px 8px 0}
+blockquote p:first-child{margin-top:0}
+blockquote p:last-child{margin-bottom:0}
+blockquote h3{margin:0 0 12px;font-size:1rem}
+blockquote ul{margin:8px 0}
+
+/* 콜아웃 안의 하위 묶음 — 별개 액션이 아니라 한 덩어리로 읽히게 */
+blockquote ul.sub{
+  list-style:none;margin:9px 0 2px;padding:2px 0 2px 14px;
+  border-left:2px solid var(--line);
+  font-size:.88em;line-height:1.55;opacity:.82;
+}
+blockquote ul.sub li{margin:3px 0;text-indent:-1.25em;padding-left:1.25em}
+blockquote.action ul.sub{border-left-color:var(--action-line)}
+blockquote.ask ul.sub{border-left-color:var(--ask-line)}
+blockquote.observe ul.sub{border-left-color:var(--observe-line)}
+
+blockquote.action{border-left-color:var(--action);background:var(--action-bg)}
+blockquote.action h3{color:var(--action)}
+blockquote.ask{border-left-color:var(--ask);background:var(--ask-bg)}
+blockquote.ask h3{color:var(--ask)}
+blockquote.warn{border-left-color:var(--warn);background:var(--warn-bg)}
+blockquote.observe{border-left-color:var(--observe);background:var(--observe-bg)}
+blockquote.observe h3{color:var(--observe)}
+p.inline-warn{
+  margin-top:14px;padding:11px 14px;border-radius:6px;
+  background:var(--warn-bg);border:1px solid var(--warn-line);color:var(--fg);
+}
+
+/* 녹화 로그 등 기계 기록 — 콜아웃 박스로 감싸고 본문보다 흐리게 둔다 */
+pre{
+  margin:26px 0 20px;padding:14px 18px;overflow-x:auto;
+  background:var(--soft);border:0;border-left:3px solid var(--line);border-radius:0 8px 8px 0;
+  font-size:.82rem;line-height:1.6;color:var(--muted);opacity:.9;
+}
+pre code{color:inherit;background:none;border:0;padding:0}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em}
+p code,li code,td code{background:var(--soft);padding:1px 5px;border-radius:4px;border:1px solid var(--line)}
+
+/* 부록·별첨 — 본문과 위계를 나눈 참고 영역 (허브 별첨 박스와 같은 형식, 파란톤) */
+.appendix{
+  margin:88px 0 0;padding:22px 26px 14px;
+  background:var(--apx-bg);border:1px solid var(--apx-line);border-radius:14px;
+  color:var(--apx-fg);font-size:.88rem;line-height:1.65;
+}
+.appendix h1#부록{
+  margin:0 0 16px;padding:0 0 10px;border-top:0;border-bottom:1px solid var(--apx-line);
+  color:var(--apx-head);font-size:1.12rem;
+}
+.appendix h2{margin:30px 0 10px;padding:0;border:0;color:var(--apx-head);font-size:1rem}
+.appendix h3{margin:22px 0 8px;color:var(--apx-head);font-size:.94rem}
+.appendix strong{color:var(--apx-strong)}
+.appendix a{color:var(--accent)}
+.appendix small{color:var(--apx-fg);opacity:.85}
+.appendix .tbl{margin:12px 0 18px;border-color:var(--apx-line)}
+.appendix table{background:var(--bg);font-size:.94em;min-width:460px}
+.appendix th,.appendix td{padding:8px 10px;border-color:var(--apx-line)}
+.appendix th{background:var(--apx-th);color:var(--apx-head)}
+.appendix blockquote{background:var(--bg);border-left-color:var(--apx-line)}
+.appendix blockquote.action{background:var(--action-bg);border-left-color:var(--action)}
+.appendix blockquote.ask{background:var(--ask-bg);border-left-color:var(--ask)}
+.appendix blockquote.warn{background:var(--warn-bg);border-left-color:var(--warn)}
+.appendix blockquote.observe{background:var(--observe-bg);border-left-color:var(--observe)}
+.appendix pre{background:var(--bg);border-left-color:var(--apx-line)}
+.appendix hr{border-top-color:var(--apx-line)}
+
+@media print{
+  body{font-size:10.5pt}
+  .wrap{padding:0;max-width:none}
+  h2{page-break-after:avoid}
+  .tbl,blockquote,pre{page-break-inside:avoid}
+}
+@media (max-width:640px){
+  .wrap{padding:32px 18px 70px}
+  header.doc h1{font-size:1.45rem}
+}
+
+.app-shell{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;padding:22px 16px;background:#123d2d;color:#eaf6ef;display:flex;flex-direction:column;overflow-y:auto}
+.brand{display:flex;gap:12px;align-items:center;padding:0 10px 24px;text-decoration:none;color:inherit;border:0}
+.brand:hover{border:0}
+.brand-mark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:#68d29e;color:#0d3a29;font-weight:800}
+.brand strong,.brand small{display:block}
+.brand small{margin-top:2px;color:#a9c8b8;font-size:11px;text-transform:uppercase;letter-spacing:.11em}
+.nav-section{margin:9px 0 3px;padding:0 12px;color:#88ad9a;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.nav-link{display:flex;align-items:center;gap:10px;padding:10px 12px;margin:2px 0;color:#cfe2d8;text-decoration:none;border-radius:10px;font-size:14px;border:0}
+.nav-link:hover,.nav-link.active{color:#fff;background:rgba(255,255,255,.1);border:0}
+.nav-icon{width:20px;text-align:center;opacity:.9}
+.sidebar-footer{margin-top:auto;padding:13px 12px 0;border-top:1px solid rgba(255,255,255,.12);color:#a9c8b8;font-size:12px}
+.status-dot{display:inline-block;width:7px;height:7px;margin-right:7px;border-radius:50%;background:#68d29e}
+
+.doc-layout{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:32px;align-items:start;
+  max-width:1240px;margin:0 auto;padding:44px 36px 90px}
+.toc{position:sticky;top:44px;max-height:calc(100vh - 80px);padding:16px;overflow:hidden;border-left:1px solid var(--line)}
+.toc strong{display:block;margin-bottom:10px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.toc-links{max-height:calc(100vh - 130px);overflow-y:auto;scrollbar-width:thin}
+.toc-link{display:block;margin:1px 0;padding:6px 8px;border-left:2px solid transparent;border-radius:0 7px 7px 0;
+  color:var(--muted);font-size:12px;line-height:1.4;text-decoration:none;transition:color .15s,background .15s,border-color .15s}
+.toc-link:hover{color:var(--accent);background:var(--soft);border-left-color:transparent}
+.toc-link.active{border-left-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:750}
+.toc-link.toc-sub{padding-left:18px;font-size:11px}
+.doc-main{min-width:0}
+
+@media (max-width:1100px){
+  .app-shell{grid-template-columns:1fr}
+  .sidebar{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;gap:4px;padding:14px 16px}
+  .sidebar .nav-section,.sidebar-footer{display:none}
+  .brand{padding:0 12px 0 0}
+  .doc-layout{grid-template-columns:1fr;gap:0;padding:28px 18px 70px}
+  .toc{display:none}
+}
+@media print{ .sidebar,.toc{display:none} .app-shell,.doc-layout{display:block} .doc-layout{padding:0;max-width:none} }
+</style>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="./">
+      <span class="brand-mark">P</span>
+      <span><strong>Petnow for shelters</strong><small>문서 라이브러리</small></span>
+    </a>
+    <nav aria-label="주요 메뉴"><div class="nav-section">문서 찾기</div><a class="nav-link" href="./"><span class="nav-icon">⌂</span>전체 문서</a><div class="nav-section">주제별 문서</div><a class="nav-link" href="./#/library/project"><span class="nav-icon">◷</span>프로젝트 계획·현황</a><a class="nav-link active" href="./#/library/results"><span class="nav-icon">◈</span>실험 결과 보고서</a><a class="nav-link" href="./#/library/interview"><span class="nav-icon">◎</span>고객 인터뷰</a><a class="nav-link" href="./#/library/workflow"><span class="nav-icon">◫</span>쉘터 업무 플로우</a><a class="nav-link" href="./#/library/competitors"><span class="nav-icon">▥</span>경쟁사 조사</a><a class="nav-link" href="./#/library/methods"><span class="nav-icon">▧</span>출처·분석 방법</a><a class="nav-link" href="./#/library/appendix"><span class="nav-icon">◇</span>별첨</a></nav>
+    <div class="sidebar-footer"><span class="status-dot"></span><span>문서 라이브러리</span></div>
+  </aside>
+  <main class="doc-layout">
+    <article class="doc-main">
+      <a class="back" href="./#/library/results">← 실험 결과 보고서</a>
+      <header class="doc">
+        <h1>M2 Track 2 · 소재 H 2차 중간 보고 (예산 81% 소진 시점)</h1>
+        <div class="meta">데이터 기준 2026-09-02 11:16 KST 광고 콘솔 원자료 · 소재 H 집행 8/28 00:00 ~ 9/4 종료 예정 (예산은 9/3 중 소진 전망)<br>1차 중간 보고(8/31) 이후 갱신본이다. <strong>소재 A·B의 동시기 원자료가 확보돼, 1차에서 한계로 적어 둔 시차 대조를 동시 대조로 교체했다.</strong><br><strong>이 문서는 실측값과 함께 「참값이 있을 만한 범위」를 같이 적는다.</strong> 표본이 작을수록 범위가 넓어지고, <strong>범위 안에 들어오는 값은 「아니다」라고 말할 수 없다.</strong> <strong>「알 수 없다」와 「아니다」는 다르다</strong> — 이 문서가 「알 수 없다」로 적은 항목은 아직 답이 없다는 뜻이지, 답이 부정이라는 뜻이 아니다.</div>
+      </header>
+      <h2>0. 지금 비교되고 있는 세 축</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>소재</th>
+<th>소구축</th>
+<th>랜딩</th>
+<th>집행</th>
+<th style="text-align: right;">동시기 클릭률</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A</strong></td>
+<td>입양 준비 상태 판단</td>
+<td><code>/ready/</code></td>
+<td>8/13 ~ <strong>9/3 01:30 종료</strong></td>
+<td style="text-align: right;">1.245%</td>
+</tr>
+<tr>
+<td><strong>B</strong></td>
+<td>임시보호자 업데이트</td>
+<td><code>/fosters/</code></td>
+<td>8/13 ~ <strong>9/3 01:30 종료</strong></td>
+<td style="text-align: right;"><strong>1.558%</strong></td>
+</tr>
+<tr>
+<td><strong>H</strong></td>
+<td>입양 서류 회수</td>
+<td><code>/adopters/</code></td>
+<td>8/28 ~ 9/4 종료 예정</td>
+<td style="text-align: right;"><strong>1.043%</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>M2 Track 2가 묻는 것은 <strong>A·B와 결이 다른 축(H)에서도 통증이 존재하는지</strong>다. 「매출까지 가는 길」 5단계 중 1단계(문제 인식)를 새 축에서 다시 밟는 자리이며, 2단계 이후는 데모 콜이 답한다.</p>
+<hr />
+<h2>결론</h2>
+<p class="lead-h"><strong>1. 확실한 것은 「H는 「아주 좋음」(1.64%) 수준이 아니다」 하나다.</strong></p>
+<ul>
+<li>실측 <strong>1.043%</strong>, 참값 범위 <strong>0.778~1.397%</strong></li>
+<li>이 범위가 「좋음」(1.40%)·「보통=목표」(1.10%)·「나쁨」(0.80%)을 모두 걸친다 → <strong>셋 중 어디인지는 이 광고로 정해지지 않는다</strong></li>
+</ul>
+<p class="lead-h"><strong>2. 사전 기준(소재 간 1.5배)으로는 소재 우열이 확인되지 않는다.</strong></p>
+<ul>
+<li>최고 B(1.558%) ÷ 최저 H(1.043%) = <strong>1.495배</strong> — 기준에 <strong>0.005 차이로 미달</strong></li>
+<li>B와 견주면 H가 낮지만, <strong>A와 견주면 정해지지 않는다</strong> (1.194배, 범위 0.821~1.735배)</li>
+</ul>
+<p class="lead-h"><strong>3. 권장 — 축 우열 판정을 광고에서 데모 콜로 넘긴다.</strong></p>
+<ul>
+<li>9/3 중 예산 소진. 잔여 노출 약 1,000회로는 목표선 위아래가 갈리지 않는다</li>
+<li>추가 집행은 <strong>같은 설계로도, 설계를 바꿔서도 권하지 않는다</strong> (§3)</li>
+<li><strong>H를 A와 같은 강도일 가능성으로 열어둔 채, 9/7 데모 콜부터 세 축의 우선순위를 확인한다</strong></li>
+</ul>
+<blockquote class="note">
+<p><strong>한 줄로</strong>: 소재 H는 최고 소재 B보다 낮게 나왔으나 <strong>사전 기준(1.5배)에는 0.005 차이로 미달</strong>했고, 그 차이가 소구력에서 온 것인지 광고 배분에서 온 것인지 이 설계로는 갈리지 않는다. <strong>축 우열 판정을 광고에서 접고, H를 A와 같은 강도일 가능성으로 열어둔 채 9/7 데모 콜부터 세 축의 우선순위를 확인한다.</strong></p>
+</blockquote>
+<hr />
+<blockquote class="action">
+<h3>⚡ 액션 아이템</h3>
+<p><strong>9/7 데모 콜 — Fawns Small Dog Rescue(Dawn Anderson, 대표).</strong> 연 입양 50–150건으로 ICP 규모 구간 안이고, 전용 관리 도구 없이 이메일로 운영한다. 소재 H로 들어온 유일한 리드이며, <strong>광고 표본이 답하지 못한 축을 물을 자리다.</strong></p>
+<ul>
+<li>입양 신청자에게 서류를 받는 일이 <strong>지금 실제로 어떻게 굴러가고 무엇이 아픈가</strong></li>
+<li>소재 A·B의 두 축(입양 준비 상태 판단 · 임시보호자 업데이트)과 <strong>나란히 제시했을 때 어느 쪽을 먼저 고르는가</strong> — 축 간 상대 강도의 첫 정성 데이터</li>
+</ul>
+</blockquote>
+<hr />
+<h2>1. 판정 지표 — 사전 스펙트럼 대비</h2>
+<p><strong>소재 H의 실측은 1.043%(4,220 노출 · 44 링크 클릭)이고, 참값은 0.778~1.397% 사이 어딘가다.</strong><br />
+→ 사전 등급 네 개를 이 범위에 얹으면 아래와 같다.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>등급</th>
+<th style="text-align: right;">등급 기준값</th>
+<th>참값 범위(0.778~1.397%)와의 관계</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>아주 좋음</td>
+<td style="text-align: right;">1.64%</td>
+<td><strong>범위 밖 — H는 이 등급이 아니다</strong></td>
+</tr>
+<tr>
+<td>좋음</td>
+<td style="text-align: right;">1.40%</td>
+<td><strong>범위 끝에 종이 한 장 차이로 걸침</strong>(1.397%) — 아니라고 보기 쉬우나 확실하지 않다</td>
+</tr>
+<tr>
+<td><strong>보통 = 목표</strong></td>
+<td style="text-align: right;"><strong>1.10%</strong></td>
+<td>범위 안 — <strong>알 수 없다</strong></td>
+</tr>
+<tr>
+<td>나쁨</td>
+<td style="text-align: right;">0.80%</td>
+<td>범위 안 — <strong>알 수 없다</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>「좋음」이 확실하지 않은 이유는 둘이다.</strong> ① 네 등급을 한꺼번에 따지면 그중 하나쯤은 우연히 범위 밖으로 나오기 쉬워, 그 점을 감안해 더 엄격히 보면 「아니다」라고 할 만큼 확실하지 않다 ② 남은 집행에서 성과가 오르면 H의 값이 올라가 1.40%와 가까워진다.</p>
+<p class="fn"><small><sup>주1</sup> 1차 보고(8/31, 2,552 노출)에서는 실측 1.215%에 「나쁨」만 범위 밖이었고 그 위 세 등급이 범위 안이었다. 당시 「나쁨」이 범위 끝에 아슬아슬하게 걸쳐 있어 <strong>종료 시점에 달라질 수 있다고 적어 뒀고, 표본이 쌓이며 실제로 범위 안으로 돌아왔다. 지금의 「좋음」은 그때보다 더 아슬아슬하다.</strong><br />
+<sup>주2</sup> 판정 단위는 소재 합계다. <code>H-1</code> 단독은 실측이 1.082%로 더 높지만 표본이 작아 범위가 넓고(2,311 노출), 「아주 좋음」만 범위 밖이다.<br />
+<sup>주3</sup> 등급 기준값은 노출 규모와 무관한 비율이므로 중간 시점에도 그대로 적용된다.<br />
+<sup>주4</sup> 각 등급의 통계 수치는 부록 「집계 기준」에 실었다.</small></p>
+<hr />
+<h2>2. 소재 간 대조 — B와 비교하면 H가 낮고, A와 비교하면 우열을 판정할 수 없다</h2>
+<p><strong>사전 기준(§3.1)은 「동시 집행 소재 중 최고 클릭률이 최저의 1.5배 이상이면 소구점 방향성이 확인된 것으로 본다」이다.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>동시기 8/28~9/2</th>
+<th style="text-align: right;">노출</th>
+<th style="text-align: right;">링크 클릭</th>
+<th style="text-align: right;">클릭률</th>
+<th style="text-align: right;">H와의 비율</th>
+<th>참값 범위</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>B (최고)</strong></td>
+<td style="text-align: right;">6,224</td>
+<td style="text-align: right;">97</td>
+<td style="text-align: right;"><strong>1.558%</strong></td>
+<td style="text-align: right;"><strong>1.495배</strong></td>
+<td>1.049~2.130배</td>
+<td><strong>H보다 높다</strong> — 다만 사전 기준 1.5배에 <strong>0.005 차이로 미달</strong></td>
+</tr>
+<tr>
+<td>A</td>
+<td style="text-align: right;">5,705</td>
+<td style="text-align: right;">71</td>
+<td style="text-align: right;">1.245%</td>
+<td style="text-align: right;">1.194배</td>
+<td>0.821~1.735배</td>
+<td><strong>정해지지 않는다</strong> — 범위가 「같다」(1.0)를 걸친다</td>
+</tr>
+<tr>
+<td><strong>H (최저)</strong></td>
+<td style="text-align: right;">4,220</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;"><strong>1.043%</strong></td>
+<td style="text-align: right;">—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="note">
+<p><strong>사전 기준으로는 소구점 방향성이 확인되지 않는다.</strong> 판정 대상인 최고 대 최저(B ÷ H)가 1.5배에 0.005 차이로 못 미친다.</p>
+</blockquote>
+<hr />
+<h2>3. 권장 조치</h2>
+<p><strong>결론: 소구축 우선순위는 데모 콜로 확인한다. 광고 추가 집행은 권장하지 않는다.</strong></p>
+<p class="lead-h"><strong>① 권장 — 세 소구축의 우선순위를 데모 콜에서 확인</strong></p>
+<ul>
+<li><strong>A ÷ H가 1.194배(0.821~1.735배)로 우열이 판정되지 않는다</strong>(§2). <strong>H가 A와 같은 강도일 가능성은 배제되지 않는다</strong></li>
+<li>클릭률 순위는 B &gt; A &gt; H이나, 데모 콜에서 반복 확인된 축은 <strong>소재 A가 겨냥한 영역의 후단</strong>(만기·지연·다음 조치·담당자)이다. 축 선택을 클릭률로 정하면 정성 신호를 덮는다</li>
+<li><strong>9/7 콜부터 세 축을 나란히 제시하고 우선순위를 확인한다</strong></li>
+</ul>
+<p class="lead-h"><strong>② 비권장 — 광고 추가 집행</strong></p>
+<ul>
+<li><strong>같은 설계로 증액</strong> — 「나쁨」(0.80%)이 아니라고 말하려면 노출 <strong>7,269회(약 22만원)</strong>, A·B보다 낮다고 말하려면 <strong>10,013회(약 30만원)</strong> 가 든다. 목표선(1.10%) 판정은 25만 회가 필요해 사실상 불가능하다 <small>(현 클릭률 유지 가정. 최근 구간 실측 0.779% 기준이면 어떤 예산으로도 판정되지 않는다)</small></li>
+<li><strong>설계 변경</strong> — 한 세트에 광고를 여러 장 넣으면 메타가 한 장에 몰아준다(M1 실측 <code>A-1</code> 98.58% · <code>B-2</code> 99.70%). 비교가 더 어려워진다. 소재 효과를 분리하려면 오디언스를 무작위로 나눠 배정하는 별도 라운드가 필요하고 예산·기간이 새로 든다</li>
+<li><strong>판단 근거</strong> — 1단계(문제 인식)는 A·B에서 이미 통과했고, 현재 병목은 데모 콜 → PoC → 지불 의향 구간이다</li>
+</ul>
+<hr />
+<h2>4. 소재 A·B 추세 (1차 분석 이후)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>구간</th>
+<th style="text-align: right;">노출</th>
+<th style="text-align: right;">클릭률</th>
+<th style="text-align: right;">신청</th>
+<th style="text-align: right;">신청 / 클릭</th>
+<th style="text-align: right;">신청 1건당</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>본집행 8/13~8/19</td>
+<td style="text-align: right;">10,122</td>
+<td style="text-align: right;">2.420%</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">5.71%</td>
+<td style="text-align: right;">21,172원</td>
+</tr>
+<tr>
+<td>연장 8/20~8/27</td>
+<td style="text-align: right;">17,161</td>
+<td style="text-align: right;">1.713%</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">5.10%</td>
+<td style="text-align: right;">22,430원</td>
+</tr>
+<tr>
+<td><strong>동시기 8/28~9/2</strong></td>
+<td style="text-align: right;"><strong>11,929</strong></td>
+<td style="text-align: right;"><strong>1.408%</strong></td>
+<td style="text-align: right;"><strong>10</strong></td>
+<td style="text-align: right;"><strong>5.95%</strong></td>
+<td style="text-align: right;"><strong>23,494원</strong></td>
+</tr>
+<tr>
+<td><strong>누적 8/13~9/2</strong></td>
+<td style="text-align: right;"><strong>39,212</strong></td>
+<td style="text-align: right;"><strong>1.803%</strong></td>
+<td style="text-align: right;"><strong>39</strong></td>
+<td style="text-align: right;"><strong>5.52%</strong></td>
+<td style="text-align: right;"><strong>22,251원</strong></td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>클릭률은 세 구간 연속 하락하나, 소재 번아웃 신호는 아니다.</strong> 같은 사람에게 반복 노출해 반응이 죽는 현상이라면 빈도가 올라가고 도달이 정체돼야 하는데 실제는 반대다 — 일별 도달은 979명(8/13~15)에서 1,362명(8/31~9/2)으로 늘었고, 일별 빈도는 1.28~1.51에서 1.31~1.36으로 내려왔다. <strong>도달이 넓어질수록 반응률이 낮아지는 통상적인 흐름에 가깝다.</strong> 다만 하락 원인 자체는 이 데이터로 확정되지 않는다</li>
+<li><strong>신청 제출률은 5.10~5.95%로 관측됐으나, 구간이 3~10%대로 겹쳐 변화 여부를 판정할 수 없다</strong>(분자 14·15·10건)</li>
+<li><strong>신청 1건당 비용 23,494원은 사전 목표(41,797원)보다 44% 낮다.</strong> M1 최종 판정(18,985원) 대비로는 24% 올랐다</li>
+<li>동시기 <strong>B ÷ A는 1.252배</strong>(0.924~1.697배)로, M1 최종 판정의 <strong>「A·B 무승부」가 유지된다</strong></li>
+<li><strong>A·B는 9/3 01:30 종료 예정이다</strong></li>
+</ul>
+<hr />
+<h2>5. 이 숫자를 읽을 때 감안할 것</h2>
+<ul>
+<li><strong>소재 효과와 광고 배분 효과가 분리되지 않는다.</strong> 세 소재가 같은 오디언스를 놓고 경매로 경쟁하고 있고, 세 세트 모두 메타의 배분 학습이 끝나지 않은 상태다. <strong>이 보고서에서 가장 큰 제약이다</strong></li>
+<li><strong>소재 H의 클릭률이 소구축 때문인지 크리에이티브·랜딩 때문인지도 분리되지 않는다.</strong> 이미지·랜딩이 A·B와 다르다</li>
+<li><strong>노출 이력이 다르다.</strong> A·B는 8/13부터 3주간 노출이 쌓였고, H는 8/28에 새로 들어갔다</li>
+<li><strong>실제 중복 도달 수치는 조회되지 않는다.</strong> 타겟팅이 동일하다는 것은 확인됐으나, 몇 명이 실제로 겹쳤는지는 리포트에 나오지 않는다</li>
+<li><strong>랜딩이 다르다</strong> — H는 <code>/adopters/</code>, A·B는 <code>/ready/</code>·<code>/fosters/</code>다. 판정 지표는 랜딩 도달 이전 단계라 영향이 없고, 랜딩 이후 구간 비교에만 걸린다</li>
+<li><strong>위에 적은 참값 범위는 표본이 작아서 생기는 흔들림만 담는다.</strong> 이 절의 항목들은 그 범위 밖의 불확실성이라 숫자로 잡히지 않는다</li>
+</ul>
+<hr />
+<section class="appendix"><h1 id="부록">부록</h1>
+<h2>부록. 1차 보고의 종료 시점 결정표 — 무효화</h2>
+<p>1차 보고 §0은 종료 시점 결정 규칙을 사전에 표로 뒀다. 그 중 「종료 시점 <code>H-1</code> 실측 <strong>1.3% 이하</strong> → A·B 대비 열세 확정 → <strong>H 축을 접고 A·B 축에 제품 언어 고정</strong>」 칸에 현재 <code>H-1</code> 실측(1.082%)이 들어간다.</p>
+<p><strong>이 표는 적용하지 않으며, 사유를 밝힌다.</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>표의 전제</td>
+<td>「A·B 대비 열세」의 대조 상대가 <strong>M1 스냅샷(2.500%)</strong> 이었다</td>
+</tr>
+<tr>
+<td>전제가 깨진 지점</td>
+<td>동시기 원자료 확보로 대조를 교체하자, <code>H-1</code> 단독도 <strong>A+B 합산의 0.768배(범위 0.506~1.166배)로 「같다」를 걸쳐 정해지지 않는다.</strong> 표가 「확정된다」고 전제한 조건이 성립하지 않는다</td>
+</tr>
+<tr>
+<td>추가 사유</td>
+<td>같은 오디언스를 놓고 벌어지는 경매 경쟁과 배분 학습 미완료가 1차 시점에는 확인되지 않았다</td>
+</tr>
+<tr>
+<td>대신 적용하는 것</td>
+<td>소재 단위 판정(§1·§2)과 §3의 판단</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>사전에 세운 규칙을 결과를 보고 바꾸는 것은 기준 관리상 가장 위험한 조작이므로, 폐기 사유를 근거와 함께 남긴다.</strong></p>
+<h2>부록. 집계 기준</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>기준</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>판정 지표</td>
+<td><strong>랜딩 링크 클릭률</strong> — 노출 대비 랜딩 페이지 링크 클릭 비율. 전체 클릭 CTR은 사전 합의에 따라 판정 대상에서 제외됐다</td>
+</tr>
+<tr>
+<td>판정 단위</td>
+<td><strong>소재.</strong> 사전 기준 §3.1(소재 간 1.5배)은 소재 단위 규정이다</td>
+</tr>
+<tr>
+<td>대조 상대</td>
+<td>정본에 단일 소재의 성과 대조군 규정이 없어 <strong>동시기 A·B 실측을 선택했다.</strong> 상대에 따라 판정이 달라지므로 A 단독·B 단독·합산 세 경우를 모두 실었다</td>
+</tr>
+<tr>
+<td>성과 스펙트럼</td>
+<td>집행 전 합의한 표(「상세 기획 정리」 §5.2.1)</td>
+</tr>
+<tr>
+<td>조기 중단 기준</td>
+<td>기획안 §3.2 (v1.3 개정 포함). <strong>v1.3은 2026-08-31 개정으로 집행 시작 이후에 이뤄졌다</strong></td>
+</tr>
+<tr>
+<td>참값 범위</td>
+<td>95% 신뢰 구간. 단일 비율은 Wilson 구간, 비율 간 비교는 로그 변환 비율비 구간</td>
+</tr>
+<tr>
+<td>스펙트럼 p값</td>
+<td>아주 좋음 p=0.002 · 좋음 p=0.048 · 보통 p=0.72 · 나쁨 p=0.077. 4등급을 함께 검정한 점을 Bonferroni로 보정하면 아주 좋음 0.009 · 좋음 0.19로, 「좋음」은 범위 밖이라 하기 어려워진다</td>
+</tr>
+<tr>
+<td>그 밖의 p값</td>
+<td>H÷B 0.025 · 랜딩 도달률 차이 0.123</td>
+</tr>
+<tr>
+<td>데이터 출처</td>
+<td><strong>광고 콘솔 원자료 2026-09-02 11:16 KST, 3레벨(캠페인·광고세트·광고) 일자별.</strong> 판정 지표와 보조 지표가 모두 같은 시각 기준이다. 타겟팅·예산·종료 시각은 같은 날 09:00 캠페인 조회분</td>
+</tr>
+<tr>
+<td>M1 본집행 실측</td>
+<td><strong>2.420%</strong>(10,122 노출 / 245 클릭, 현 원자료 8/13~8/19 재집계). 1차 보고와 M1 최종 보고가 쓴 2.500%는 예산 95% 소진 시점 스냅샷이며 노출이 803회 적다</td>
+</tr>
+<tr>
+<td>예산</td>
+<td>소재 H 광고 세트 전체 기간 $108.47 (15만원 · 1,383원/달러). 9/2 11:16 기준 $87.78 소진(80.9%)</td>
+</tr>
+<tr>
+<td>리드 상세</td>
+<td>Google Sheet <code>Petify lead list</code> 2026-09-02 조회분</td>
+</tr>
+</tbody>
+</table></div>
+<h2>부록. 랜딩 이후 구간 (참고)</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align: right;">링크 클릭</th>
+<th style="text-align: right;">랜딩 도달</th>
+<th style="text-align: right;">도달률</th>
+<th style="text-align: right;">신청</th>
+<th style="text-align: right;">클릭 대비</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>소재 H</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">86.4%</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.27%</td>
+</tr>
+<tr>
+<td>소재 A · 동시기</td>
+<td style="text-align: right;">71</td>
+<td style="text-align: right;">67</td>
+<td style="text-align: right;">94.4%</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4.23%</td>
+</tr>
+<tr>
+<td>소재 B · 동시기</td>
+<td style="text-align: right;">97</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">92.8%</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">7.22%</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>신청 건수는 판정 지표가 아니라 참고값이다.</strong> 이 예산 규모에서는 신청 1건이 성과 등급을 바꾸기 때문에, 사전 합의대로 판정은 비율 지표로만 한다</li>
+<li>소재 H의 신청 제출률은 A·B의 0.382배지만 <strong>참값 범위가 0.05~2.90배로 아무것도 말하지 않는다.</strong> 분자가 1건이다. 랜딩 도달 38건에 A·B의 전환율을 그대로 적용하면 기대값이 2.42건이고, 1건이 나올 확률이 29%다</li>
+<li>랜딩 도달률 차이(86.4% 대 93.5%)는 분모 44로는 정해지지 않는다</li>
+</ul>
+<h2>부록. 이번 표본이 답하지 않는 것</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H 축 통증 강도의 절대 위치</td>
+<td><strong>알 수 없다.</strong> 목표선(1.10%) 위아래는 종료 시점에도 갈리지 않는다</td>
+</tr>
+<tr>
+<td>H가 「좋음」(1.40%)인지</td>
+<td><strong>아니라고 보기 쉬우나 확실하지 않다.</strong> 네 등급을 함께 따지면 「아니다」라 할 만큼 확실하지 않고, 잔여 클릭률이 1.30% 수준이면 종료 시점에도 뒤집힌다</td>
+</tr>
+<tr>
+<td>H가 「나쁨」(0.80%)인지</td>
+<td><strong>아니라고 말하려면 아슬아슬하다.</strong> 잔여 클릭률이 현 누적(1.04%) 이상일 때만 「아니다」라고 할 수 있다</td>
+</tr>
+<tr>
+<td>소재 우열</td>
+<td><strong>사전 기준(1.5배)으로 미확인</strong>(1.495배). B와 견주면 H가 낮고, A와 견주면 정해지지 않는다</td>
+</tr>
+<tr>
+<td>성과 격차의 원인</td>
+<td><strong>소구력인지 광고 배분·학습 상태인지 갈리지 않는다.</strong> 이 설계로는 표본을 늘려도 갈리지 않는다</td>
+</tr>
+<tr>
+<td>실제 중복 도달 규모</td>
+<td>캠페인이 분리돼 조회되지 않는다</td>
+</tr>
+<tr>
+<td>신청 이후 구간</td>
+<td>리드 1건. <strong>9/7 데모 콜이 첫 정성 데이터다</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h2>별첨. 참고 문서</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>문서</th>
+<th>이 보고서에서 쓰는 부분</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Track 2 LMF 소구점 검증 실험 기획안 (v1.3)</td>
+<td>§3.1 소재 간 1.5배 기준 · §3.2 조기 중단 기준과 적용 단위 개정</td>
+</tr>
+<tr>
+<td>Track 2 LMF 상세 기획 정리 (2026-08-07)</td>
+<td>§5.2 CTR 정의 · §5.2.1 정량 스펙트럼과 절대값 환산</td>
+</tr>
+<tr>
+<td>Track 2 광고 실험 최종 보고 (2026-08-18)</td>
+<td>소재 A·B M1 실측 · 판정 지표 정의</td>
+</tr>
+<tr>
+<td>M2 소재 H 중간 보고 1차 (2026-08-31)</td>
+<td>갱신 대상 · 종료 시점 결정표(무효화)</td>
+</tr>
+<tr>
+<td>M2 소재 H 리드 신조 — 카니발 가설 점검 (2026-09-02)</td>
+<td>타겟팅 동일성 · 배분 학습 상태</td>
+</tr>
+<tr>
+<td>M2 실행 계획안 (v1.3)</td>
+<td>§3 Track 2 검증 가설 · §5 예산</td>
+</tr>
+</tbody>
+</table></div></section>
+    </article>
+    <aside class="toc"><strong>문서 목차</strong><div class="toc-links"></div></aside>
+  </main>
+</div>
+<script>
+(function(){
+  var main=document.querySelector('.doc-main');
+  var heads=main.querySelectorAll('h2, h1#부록');
+  var box=document.querySelector('.toc-links');
+  if(!heads.length){document.querySelector('.toc').style.display='none';return;}
+  var links=[];
+  heads.forEach(function(h,i){
+    if(!h.id) h.id='sec-'+i;
+    var a=document.createElement('a');
+    a.className='toc-link'+(h.tagName==='H1'?'':' toc-sub');
+    a.href='#'+h.id; a.textContent=h.textContent.trim();
+    box.appendChild(a); links.push([h,a]);
+  });
+  function sync(){
+    var y=window.scrollY+120, cur=links[0];
+    links.forEach(function(p){ if(p[0].getBoundingClientRect().top+window.scrollY<=y) cur=p; });
+    links.forEach(function(p){ p[1].classList.toggle('active', p===cur); });
+  }
+  sync(); window.addEventListener('scroll',sync,{passive:true});
+})();
+</script>
+</body>
+</html>
