@@ -126,6 +126,7 @@ const collectionDefinitions = {
     homeLead: "자사 포지셔닝 정의와 경쟁 제품의 화면·기능 검증 자료입니다.",
     homeLimit: 4,
     paths: [
+      "analysis/Pawsitive_Foster_경쟁조사_20260911.md",
       "analysis/포지셔닝_경쟁제품_축비교_20260820.md",
       "Petszel_경쟁조사_20260825.md",
       "analysis/PetPoint_종합조사_20260825.md",

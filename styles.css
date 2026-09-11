@@ -773,3 +773,25 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .markdown-body .pv-axis-t { display: block; margin-bottom: 6px; color: var(--muted); font-family: ui-monospace, monospace; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; }
 .markdown-body .pv-axis-seg b { display: block; margin-bottom: 5px; font-size: 15px; font-weight: 800; line-height: 1.35; color: var(--c); }
 .markdown-body .pv-axis-seg small { display: block; font-size: 12.5px; line-height: 1.6; color: var(--ink); }
+
+/* Pawsitive Foster report: archive tokens, scoped to its HTML fragment. */
+.markdown-body .pf-report .pf-meta { display: flex; flex-wrap: wrap; gap: 8px 22px; padding: 0; margin: 4px 0 24px; list-style: none; color: var(--muted); font-size: 12px; }
+.markdown-body .pf-report .pf-meta li:last-child { flex-basis: 100%; }
+.markdown-body .pf-report .pf-summary { list-style: none; counter-reset: pf-point; padding: 0; margin: 16px 0 28px; }
+.markdown-body .pf-report .pf-summary > li { counter-increment: pf-point; position: relative; padding: 18px 18px 18px 54px; margin: 0; border-bottom: 1px solid var(--line); }
+.markdown-body .pf-report .pf-summary > li::before { content: counter(pf-point, decimal-leading-zero); position: absolute; left: 12px; top: 18px; color: var(--green-2); font-weight: 750; font-size: 15px; }
+.markdown-body .pf-report .pf-summary > li > strong:first-child { display: block; margin-bottom: 6px; color: var(--green); }
+.markdown-body .pf-report .pf-summary > li:last-child { background: var(--soft); border-radius: 0 0 10px 10px; }
+.markdown-body .pf-report .pf-evidence { color: var(--muted); font-size: .85em; white-space: nowrap; }
+.markdown-body .pf-report .pf-table-wrap { overflow-x: auto; margin: 16px 0 24px; border: 1px solid var(--line); border-radius: 8px; }
+.markdown-body .pf-report table.pf-table { display: table; width: 100%; margin: 0; }
+.markdown-body .pf-report .pf-table th, .markdown-body .pf-report .pf-table td { min-width: 0; }
+.markdown-body .pf-report .pf-table .cell-list { min-width: 0; }
+.markdown-body .pf-report .pf-comparison { min-width: 780px; table-layout: fixed; }
+.markdown-body .pf-report .pf-comparison th:nth-child(1) { width: 14%; }
+.markdown-body .pf-report .pf-comparison th:nth-child(2) { width: 20%; }
+.markdown-body .pf-report .pf-comparison th:nth-child(3) { width: 27%; }
+.markdown-body .pf-report .pf-comparison th:nth-child(4) { width: 25%; }
+.markdown-body .pf-report .pf-comparison th:nth-child(5) { width: 14%; }
+.markdown-body .pf-report .pf-table td:last-child > strong { color: var(--green); }
+@media (max-width: 700px) { .markdown-body .pf-report .pf-summary > li { padding-right: 8px; } .markdown-body .pf-report .pf-table { min-width: 640px; } }
