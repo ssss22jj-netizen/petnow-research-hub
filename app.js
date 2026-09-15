@@ -65,7 +65,6 @@ const collectionDefinitions = {
     title: "M2 계획·현황",
     lead: "M2 실행 계획과 진행 중인 트랙별 산출물입니다.",
     paths: [
-      "analysis/비문_wants_수익화_검증계획_20260915.md",
       "deliverables/M2_실행계획_20260817.md",
       "deliverables/Track2_ICP_v1.2_20260902.md",
       "deliverables/M2_소재H_소구점_정의_및_근거_20260823.md",
