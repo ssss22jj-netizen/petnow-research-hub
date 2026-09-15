@@ -2,7 +2,7 @@
 
 > 콜 종료 시마다 각 표에 한 행씩 추가한다. 이 보드의 판정 대상은 두 가지다 — **①지불 가능한 수준의 통증인가 ②자사 제품을 해답으로 인식하는가.**
 >
-> **1절이 판정, 2~5절이 근거다.** 표는 판정 항목별로 분리하고 앞 3열(`#`·소재·조직)을 공통 배치했다. 콜 간 대조는 각 표를 세로로 훑어 수행한다.
+> **1절이 판정, 2~5절이 근거다.** 판독별 근거 해설은 6절, 미결은 7절로 뺐다. 표는 판정 항목별로 분리하고 앞 3열(`#`·소재·조직)을 공통 배치했다. 콜 간 대조는 각 표를 세로로 훑어 수행한다.
 >
 > 콜별 인터뷰 자료는 [인터뷰 모음집](#/library/reports) 페이지에 있다 — 펫나우 팀 원본 정리본(PDF)과 콜별 인사이트 문서를 함께 수록.
 
@@ -10,36 +10,18 @@
 
 ## 1. 종합 판독
 
-| 판독 | 근거 · 함의 |
-| --- | --- |
-| **① 통증의 소재는 '입양 준비 판정'이 아니라 정보 단절과 기억 의존이다** | · 준비 완료 판정을 첫 통증으로 진술한 응답자 **26건 중 전건 없음.** 반복 확인된 축은 만기·지연·차기 조치·담당자 — 게시 차단 안전장치는 NKA만 3순위 수요로 언급<br>· 소형 임보 조직은 **체크인 실행이 사람의 기억에 의존** — Noah's(같은 가정에 3년째 있는 고양이를 "잊힌다"고 표현), Black Dog(정책은 있으나 바쁘면 실행을 잊음), SPACAR(체계 자체가 없음), Cape Ann(반응형 구조라 3주 정보 공백)<br>· 대형·시설형은 사람 사이 인계에서 끊긴다 — SBCAS 실무진 8인 공통, Black Dog `임보자 → 직원 A → 직원 B → 기록`, LTBHS 종이·전산 병행, NKA 담당자 부재일 누락 |
-| **② 경쟁 대상은 기존 도구 조합이고, 교체 의향은 26건 중 3건뿐이다** | · 기준 시스템 폐기 의사를 밝힌 곳은 **PAWS & More**(장기 전면 교체)·**Final Victory**(불만은 강하나 웹사이트·결제까지 묶여 전환 난도 높음)·**Second Chance**(시스템 없음) — 나머지 전건은 존치 + 상위 레이어<br>· 판정 기준은 도구 수의 실질 감축 여부 — Asheville "거미줄", Saving Great "**새 시스템이 하나 더 생기면 안 된다**", Final Victory `Buzz + Digitail + Sheets + Petify` 위험을 본인이 인지<br>· 기능 유무보다 실제 사용 여부가 경쟁력 — Final Victory는 기능이 있어도 느려서 직원이 다른 도구로 이탈, Paws and Whiskers·Black Dog는 경쟁 제품 포털이 로그인 마찰로 사장 |
-| **③ 기존 시스템 자동 연동이 '장점'에서 '파일럿 선결조건'으로 격상됐다** | · LTBHS "API 없이는 실험 수준도 불가"·CSV 수동 업로드 거부, Saving Great "자동화를 위해 먼저 수작업을 해야 한다면 가치 없음"(양방향 + 입양 완료 자동 제외), Noah's·Asheville은 연동이 파일럿 실효성을 결정<br>· 연동 대상 분포 — **Shelterluv**(Asheville·NKA·Black Dog·Paws and Whiskers·LTBHS 차기·Second Chance 검토) > PetPoint(LTBHS·Cape Ann·PAWS & More·LifeLine·Beatrice) > Rescue Groups·Shelter Manager·Pulse·Petstablished·Chameleon·Buzz 각 1<br>· 전 콜에서 연동은 Johnny가 계획으로 설명했고 **기술 검증된 것은 없다.** LTBHS가 PetPoint 구제품 종료 예고를 근거로 Shelterluv 우선을 직접 조언 |
-| **④ 제품 기본값은 조직 규모·동물 유형·트리거에 따라 갈린다** | · 체크인 주기는 동물 stage·유형별 — Black Dog(신규 주간·장기 격주·새끼 주간), Saving Great(성견 3~4일·강아지 격일), Paws and Whiskers(노령묘 개입 1/3 vs 젖병 수유 75%), Cape Ann(젖병 수유·행동관찰 개 우선). 대형은 예외 건만 상신(LifeLine)<br>· **날짜가 아닌 이벤트가 다음 업무를 만든다** — 체중 3lb 도달 → 중성화(Noah's·Paws and Whiskers), 의료 예정일 → 임보자 연락·예약(Cape Ann), 배치 10일 → 성격 양식(Black Dog)<br>· 입력·배정 단위는 개체·개인이 아니다 — 한배·가정 단위 소통(HSGS·PawSafe), 일괄 처리(LTBHS), 역할·팀 단위 배정(LTBHS·SBCAS), 임보자 역량·가용성 매칭(NKA·SPACAR·Black Dog) |
-| **⑤ 가격 저항선과 수용선이 함께 확인됐고, 결정권자의 직접 응답은 소수다** | · 저항 — Noah's "**Probably not**"($99~149, 임보 7~12가정·Director 사비 운영), Maybel's 지속 불가. 수용 — NKA "가격에 따라, 여러 문제를 풀면 정당화 가능", Second Chance "Yes", Asheville은 가격보다 대체 여부<br>· 체감 가치는 전체 동물 수가 아니라 **임보 가정 수·소통량**에 좌우(Noah's 166두이나 임보 12가정) — 입양 건당 과금 거부(PAWS & More), 사용자 수 과금은 공동 운영 조직과 상충(Maybel's) → 규모별 구간 필요<br>· **파일럿 확정 0건.** 계약·데이터 제공까지 간 곳은 SBCAS 1건, 나머지는 결정권자 미참석(HSGS·SPACAR·Noah's·Black Dog)이거나 실무에서 떨어진 창립자(NKA·Final Victory) — 후속은 실사용자 라운드테이블 |
-| **⑥ 임보자는 링크, 직원은 대시보드 — 접점 설계가 양쪽에서 반복 검증됐다** | · 앱·로그인 없는 문자 링크가 임보자 쪽 결정적 적합 요소 — Paws and Whiskers(노년층), SPACAR 2인, Noah's "Okay, perfect", Black Dog(Maddie's Pet Assistant 로그인 마찰이 직원 업무로 되돌아옴)<br>· 직원 쪽은 **개인 휴대전화 경계와 채널 추가 반대** — LTBHS(개인 문자·별도 메시지함 반대, 대시보드 선호), Black Dog(일반/긴급 2회선 분리), Saving Great·Paws and Whiskers(밤 시간 개인폰 사진)<br>· 함의 — 소통 편의보다 **업무 정보와 사담을 분리하고 긴급/비긴급을 구분**하는 경계 설계가 기능 요건 |
+판정 여섯 줄이다. 오른쪽 번호는 2~5절 표의 행 번호이며, 각 판독의 근거를 풀어 쓴 것은 6절, 미결·검증 공백은 7절에 있다.
 
-**미결 — 알파 MVP 설계 대기 항목**
+| | 판독 | 근거 행 |
+| :---: | --- | --- |
+| ① | 통증은 '입양 준비 판정'이 아니라 **정보 단절과 기억 의존**에 있다 — 준비 판정을 첫 통증으로 든 곳은 26건 중 없음 | 3·13·22 (인계 단절) · 24·25·21·19 (기억 의존) |
+| ② | 경쟁 상대는 기존 도구 조합이고 **기준 시스템 교체 의향은 26건 중 3건**뿐이다 — 나머지는 존치 + 상위 레이어 | 14·18·23 (교체) · 12·26 (존치 조건) |
+| ③ | **기존 시스템 자동 연동이 파일럿 선결조건**으로 격상됐다 — 연동 없이는 실험도 거부, 1순위 대상은 Shelterluv, 기술 검증은 0건 | 22·26·24·12 |
+| ④ | 제품 기본값은 **조직 규모·동물 유형·이벤트 트리거**로 갈린다 — 체크인 주기·입력 단위·배정 단위가 조직마다 다르다 | 25·26·16·19 (주기) · 24·16 (트리거) · 15·22·13 (단위) |
+| ⑤ | 가격 **저항선과 수용선이 함께 확인**됐고 결정권자 직접 응답은 소수다 — **파일럿 확정 0건**, 계약 논의는 SBCAS 1건 | 24·11 (저항) · 20·23·14 (수용) · 13 (계약) |
+| ⑥ | **임보자는 앱 없는 링크, 직원은 대시보드** — 접점 설계가 양쪽에서 반복 검증됐다 | 16·21·24·25 (임보자) · 22·25·26 (직원) |
 
-- **적용 범위 확정** — 세 갈래로 확인됨: 셸터 워크플로우(LTBHS·SBCAS·PAWS & More·Second Chance), 임보 소통 레이어(HSGS·Noah's·Black Dog·Saving Great·SPACAR·Paws and Whiskers·NKA·Cape Ann), 크로스보더(SPCAI). Saving Great가 제안한 모듈 ON/OFF 구조로 묶을 것인가, 별도 라인으로 갈 것인가. SBCAS 의료팀이 제기한 검사·재진 종료 전 조기 이동은 **별도 사안** 유지
-- **규모별·유형별 기본값 분기** — 전건 검토가 부담으로 전환되는 임보자 규모, stage별 주기 자동 변경, 이벤트 트리거(체중·의료 예정일·배치 경과일) 지원 여부
-- **배정·입력 단위** — 팀·역할 단위 배정과 역할별 화면·권한(LTBHS·SBCAS·Final Victory), 일괄 처리(LTBHS), 한배·가정 단위 소통(HSGS). 사용자별 과금 구조는 공동 운영자 4인이 동일 권한인 조직(Maybel's)과 상충
-- **일정 확정 흐름** — `의료 예정일 → 자동 연락 → 시간 수집 → 예약 확정`(Cape Ann)과 수술 일정(SBCAS)은 현 데모 범위 밖
-- **임보자 매칭·가용성** — 역량(젖병·이유식·질병 대응)·가정 조건·"언제 다시 받을 수 있나"(NKA·SPACAR·Black Dog)
-- **영상 업로드 경로** — Maybel's·Cape Ann 요구 사항에 사진과 영상이 함께 포함되나 데모는 사진만 구현
-- **임보자 발신 이슈 채널** — 직원이 보내는 체크인 외에 임보자가 먼저 제출하는 상시 채널(Noah's)
-
-**검증 공백 — 판독 확정에 필요한 항목**
-
-- **연동 범위와 기술 가능 여부** — Shelterluv(Asheville·NKA·Black Dog·Paws and Whiskers), PetPoint(LTBHS·Cape Ann), Rescue Groups(Saving Great), Shelter Manager(Noah's), Pulse(SPACAR), Maddie's Pet Assistant(Black Dog). 전부 미검증이며 LTBHS·Saving Great·Noah's는 이것이 Go/No-Go
-- **가격·예산 소유자·결재 절차** — 질의 사례가 생겼으나(Noah's·NKA·Second Chance·Maybel's·PAWS & More) 대부분 결정권자 부재 상태의 답변. Cape Ann·SPACAR는 가격 반응 없음, Black Dog·Saving Great·Final Victory·LTBHS는 미논의
-- **CAP** — 9/9 Pawsitive Foster 무료판 시험 사용 통보로 기존 검증 항목(전결 한도·Jared의 임보 프로세스 소유 여부) 보류. 경쟁 비교와 재문의 대응은 `analysis/Pawsitive_Foster_경쟁조사_20260911.md`
-
-**별도 조사**
-
-- **뉴욕주 임보 기록 의무의 법적 실체** — 조항·적용 범위·타 주 유사 규정. 규제 대응을 시장 진입 논리로 활용하려면 선행 검증이 필요하다
-- **크로스보더 라인** — SPCAI Patriot Pets의 실제 업무 흐름 인터뷰(접수·문서·인계·Salesforce 안팎 정보), SPCAI 추천 단체 3~5곳에서 같은 문제 반복 확인. KK9R 특화 항목과 공통 필요 기능 분리
-- **보험 BD** — Final Victory Katy Cowan의 겸직처 Rainwalk Technology(API 내장형 보험). 가입 시 생체 ID 등록 → 청구 시 동일 동물 확인 가설, 수요 미검증. 담당자 소개 제안 확보
+이번 갱신(13 → 26건)에서 ③·⑥이 새로 섰고, ①·②·④는 13건 판독이 그대로 유지됐으며, ⑤에 첫 가격 거부 사례(Noah's)가 들어갔다.
 
 ## 2. 통증 강도
 
@@ -165,9 +147,46 @@
 | 25 | B | **Black Dog Animal Rescue**<br>Amira Spargo | · Director와 가까이 일하는 동료에게 데모 시연·질문 수집<br>· Maddie's Pet Assistant API 가능 여부 확인 필요 | · **Google Voice 일반/긴급 2회선처럼 잘 작동하는 연락 경계**를 통합이 해치면 안 됨 — 개인 번호 미사용 이유는 24/7 연락 가능한 사람으로 보이지 않기 위함<br>· 동물 stage에 따라 체크인 주기가 자동 변경되는 구조(배치 후 2주 주간 → 안정화 격주 → 의료 문제 시 임시 일간)는 가설<br>· 임보 매칭 정보(다른 동물·아이·고양이 유무)는 Sheets로 별도 관리 중 |
 | 26 | B | **Saving Great Animals**<br>Jacintha Sayed · Director | · "we pilot this" 발언, 팀에 데모 공유, 자사 커뮤니티 사이트를 보여주며 제품 방향 논의 의사<br>· Go/No-Go는 **Rescue Groups API·자동 데이터 수신·입양 완료 자동 반영** 가능 여부 | · 최소 파일럿 범위는 `Rescue Groups 동기화 → 일정 기반 자동 체크인(성견 3~4일·강아지 격일) → 임보자 응답 → 직원 검토 → Rescue Groups 갱신`<br>· Paw.com 외부 입양 포털 거부감의 본질은 AI가 아니라 **업무를 줄이지 않고 하나 더 생기는 포털** — 배경 자동화는 환영<br>· 사진 요청에 가이드(얼굴·전신·밝은 곳)를 포함하면 결과물 개선 가능(가설) |
 
+## 6. 판독 근거 상세
+
+1절 각 판독의 근거와 함의를 풀어 쓴 것이다. 조직명은 2~5절 표의 행과 같다.
+
+| 판독 | 근거 · 함의 |
+| --- | --- |
+| **① 통증의 소재는 '입양 준비 판정'이 아니라 정보 단절과 기억 의존이다** | · 준비 완료 판정을 첫 통증으로 진술한 응답자 **26건 중 전건 없음.** 반복 확인된 축은 만기·지연·차기 조치·담당자 — 게시 차단 안전장치는 NKA만 3순위 수요로 언급<br>· 소형 임보 조직은 **체크인 실행이 사람의 기억에 의존** — Noah's(같은 가정에 3년째 있는 고양이를 "잊힌다"고 표현), Black Dog(정책은 있으나 바쁘면 실행을 잊음), SPACAR(체계 자체가 없음), Cape Ann(반응형 구조라 3주 정보 공백)<br>· 대형·시설형은 사람 사이 인계에서 끊긴다 — SBCAS 실무진 8인 공통, Black Dog `임보자 → 직원 A → 직원 B → 기록`, LTBHS 종이·전산 병행, NKA 담당자 부재일 누락 |
+| **② 경쟁 대상은 기존 도구 조합이고, 교체 의향은 26건 중 3건뿐이다** | · 기준 시스템 폐기 의사를 밝힌 곳은 **PAWS & More**(장기 전면 교체)·**Final Victory**(불만은 강하나 웹사이트·결제까지 묶여 전환 난도 높음)·**Second Chance**(시스템 없음) — 나머지 전건은 존치 + 상위 레이어<br>· 판정 기준은 도구 수의 실질 감축 여부 — Asheville "거미줄", Saving Great "**새 시스템이 하나 더 생기면 안 된다**", Final Victory `Buzz + Digitail + Sheets + Petify` 위험을 본인이 인지<br>· 기능 유무보다 실제 사용 여부가 경쟁력 — Final Victory는 기능이 있어도 느려서 직원이 다른 도구로 이탈, Paws and Whiskers·Black Dog는 경쟁 제품 포털이 로그인 마찰로 사장 |
+| **③ 기존 시스템 자동 연동이 '장점'에서 '파일럿 선결조건'으로 격상됐다** | · LTBHS "API 없이는 실험 수준도 불가"·CSV 수동 업로드 거부, Saving Great "자동화를 위해 먼저 수작업을 해야 한다면 가치 없음"(양방향 + 입양 완료 자동 제외), Noah's·Asheville은 연동이 파일럿 실효성을 결정<br>· 연동 대상 분포 — **Shelterluv**(Asheville·NKA·Black Dog·Paws and Whiskers·LTBHS 차기·Second Chance 검토) > PetPoint(LTBHS·Cape Ann·PAWS & More·LifeLine·Beatrice) > Rescue Groups·Shelter Manager·Pulse·Petstablished·Chameleon·Buzz 각 1<br>· 전 콜에서 연동은 Johnny가 계획으로 설명했고 **기술 검증된 것은 없다.** LTBHS가 PetPoint 구제품 종료 예고를 근거로 Shelterluv 우선을 직접 조언 |
+| **④ 제품 기본값은 조직 규모·동물 유형·트리거에 따라 갈린다** | · 체크인 주기는 동물 stage·유형별 — Black Dog(신규 주간·장기 격주·새끼 주간), Saving Great(성견 3~4일·강아지 격일), Paws and Whiskers(노령묘 개입 1/3 vs 젖병 수유 75%), Cape Ann(젖병 수유·행동관찰 개 우선). 대형은 예외 건만 상신(LifeLine)<br>· **날짜가 아닌 이벤트가 다음 업무를 만든다** — 체중 3lb 도달 → 중성화(Noah's·Paws and Whiskers), 의료 예정일 → 임보자 연락·예약(Cape Ann), 배치 10일 → 성격 양식(Black Dog)<br>· 입력·배정 단위는 개체·개인이 아니다 — 한배·가정 단위 소통(HSGS·PawSafe), 일괄 처리(LTBHS), 역할·팀 단위 배정(LTBHS·SBCAS), 임보자 역량·가용성 매칭(NKA·SPACAR·Black Dog) |
+| **⑤ 가격 저항선과 수용선이 함께 확인됐고, 결정권자의 직접 응답은 소수다** | · 저항 — Noah's "**Probably not**"($99~149, 임보 7~12가정·Director 사비 운영), Maybel's 지속 불가. 수용 — NKA "가격에 따라, 여러 문제를 풀면 정당화 가능", Second Chance "Yes", Asheville은 가격보다 대체 여부<br>· 체감 가치는 전체 동물 수가 아니라 **임보 가정 수·소통량**에 좌우(Noah's 166두이나 임보 12가정) — 입양 건당 과금 거부(PAWS & More), 사용자 수 과금은 공동 운영 조직과 상충(Maybel's) → 규모별 구간 필요<br>· **파일럿 확정 0건.** 계약·데이터 제공까지 간 곳은 SBCAS 1건, 나머지는 결정권자 미참석(HSGS·SPACAR·Noah's·Black Dog)이거나 실무에서 떨어진 창립자(NKA·Final Victory) — 후속은 실사용자 라운드테이블 |
+| **⑥ 임보자는 링크, 직원은 대시보드 — 접점 설계가 양쪽에서 반복 검증됐다** | · 앱·로그인 없는 문자 링크가 임보자 쪽 결정적 적합 요소 — Paws and Whiskers(노년층), SPACAR 2인, Noah's "Okay, perfect", Black Dog(Maddie's Pet Assistant 로그인 마찰이 직원 업무로 되돌아옴)<br>· 직원 쪽은 **개인 휴대전화 경계와 채널 추가 반대** — LTBHS(개인 문자·별도 메시지함 반대, 대시보드 선호), Black Dog(일반/긴급 2회선 분리), Saving Great·Paws and Whiskers(밤 시간 개인폰 사진)<br>· 함의 — 소통 편의보다 **업무 정보와 사담을 분리하고 긴급/비긴급을 구분**하는 경계 설계가 기능 요건 |
+
+## 7. 미결 · 검증 공백 · 별도 조사
+
+**미결 — 알파 MVP 설계 대기 항목**
+
+- **적용 범위 확정** — 세 갈래로 확인됨: 셸터 워크플로우(LTBHS·SBCAS·PAWS & More·Second Chance), 임보 소통 레이어(HSGS·Noah's·Black Dog·Saving Great·SPACAR·Paws and Whiskers·NKA·Cape Ann), 크로스보더(SPCAI). Saving Great가 제안한 모듈 ON/OFF 구조로 묶을 것인가, 별도 라인으로 갈 것인가. SBCAS 의료팀이 제기한 검사·재진 종료 전 조기 이동은 **별도 사안** 유지
+- **규모별·유형별 기본값 분기** — 전건 검토가 부담으로 전환되는 임보자 규모, stage별 주기 자동 변경, 이벤트 트리거(체중·의료 예정일·배치 경과일) 지원 여부
+- **배정·입력 단위** — 팀·역할 단위 배정과 역할별 화면·권한(LTBHS·SBCAS·Final Victory), 일괄 처리(LTBHS), 한배·가정 단위 소통(HSGS). 사용자별 과금 구조는 공동 운영자 4인이 동일 권한인 조직(Maybel's)과 상충
+- **일정 확정 흐름** — `의료 예정일 → 자동 연락 → 시간 수집 → 예약 확정`(Cape Ann)과 수술 일정(SBCAS)은 현 데모 범위 밖
+- **임보자 매칭·가용성** — 역량(젖병·이유식·질병 대응)·가정 조건·"언제 다시 받을 수 있나"(NKA·SPACAR·Black Dog)
+- **영상 업로드 경로** — Maybel's·Cape Ann 요구 사항에 사진과 영상이 함께 포함되나 데모는 사진만 구현
+- **임보자 발신 이슈 채널** — 직원이 보내는 체크인 외에 임보자가 먼저 제출하는 상시 채널(Noah's)
+
+**검증 공백 — 판독 확정에 필요한 항목**
+
+- **연동 범위와 기술 가능 여부** — Shelterluv(Asheville·NKA·Black Dog·Paws and Whiskers), PetPoint(LTBHS·Cape Ann), Rescue Groups(Saving Great), Shelter Manager(Noah's), Pulse(SPACAR), Maddie's Pet Assistant(Black Dog). 전부 미검증이며 LTBHS·Saving Great·Noah's는 이것이 Go/No-Go
+- **가격·예산 소유자·결재 절차** — 질의 사례가 생겼으나(Noah's·NKA·Second Chance·Maybel's·PAWS & More) 대부분 결정권자 부재 상태의 답변. Cape Ann·SPACAR는 가격 반응 없음, Black Dog·Saving Great·Final Victory·LTBHS는 미논의
+- **CAP** — 9/9 Pawsitive Foster 무료판 시험 사용 통보로 기존 검증 항목(전결 한도·Jared의 임보 프로세스 소유 여부) 보류. 경쟁 비교와 재문의 대응은 `analysis/Pawsitive_Foster_경쟁조사_20260911.md`
+
+**별도 조사**
+
+- **뉴욕주 임보 기록 의무의 법적 실체** — 조항·적용 범위·타 주 유사 규정. 규제 대응을 시장 진입 논리로 활용하려면 선행 검증이 필요하다
+- **크로스보더 라인** — SPCAI Patriot Pets의 실제 업무 흐름 인터뷰(접수·문서·인계·Salesforce 안팎 정보), SPCAI 추천 단체 3~5곳에서 같은 문제 반복 확인. KK9R 특화 항목과 공통 필요 기능 분리
+- **보험 BD** — Final Victory Katy Cowan의 겸직처 Rainwalk Technology(API 내장형 보험). 가입 시 생체 ID 등록 → 청구 시 동일 동물 확인 가설, 수요 미검증. 담당자 소개 제안 확보
+
 ## 읽는 법
 
-- **1절 종합 판독이 결론, 2~5절 표가 근거다.** 판독이 흔들리면 해당 근거 표의 열을 세로로 다시 훑는다
+- **1절 종합 판독이 결론, 2~5절 표가 근거, 6절이 판독별 근거 해설, 7절이 미결이다.** 1절은 한 화면에서 끝나야 하며, 판독이 흔들리면 6절과 해당 근거 표의 열을 세로로 다시 훑는다
 - **2·3절을 우선 대조한다.** 통증 강도가 낮으면 제품 개선으로도 판매되지 않고, 솔루션 적합이 낮으면 통증 규모와 무관하게 자사 제품으로 해결되지 않는다. 두 항목이 동시에 높은 콜의 조건(소재·응답자 프로필)이 곧 ICP다
 - 「소재」 열의 `A`·`B` 는 M1 광고 소재, `T1` 은 트랙 1(네트워크 소개 유입)이다
 - 판정 열은 등급만 싣는다. 그 등급의 근거와 단서(무엇을 대체하는가·전제가 무엇인가)는 바로 오른쪽 열에 있다
