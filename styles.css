@@ -639,7 +639,7 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .markdown-body .table-scroll td { min-width: 0; max-width: none; padding: 9px 11px; word-break: break-word; overflow-wrap: break-word; }
 /* 폭은 열 번호가 아니라 열의 의미로 준다 — build.mjs 가 헤더를 읽어 클래스를 붙인다.
    fixed 레이아웃에서는 width 만 쓴다. min-width 를 함께 걸면 그것이 width 처럼 굳는다 */
-.markdown-body .table-scroll .col-num     { width: 28px; padding-right: 6px; text-align: right; color: var(--ink-4); }
+.markdown-body .table-scroll .col-num     { width: 36px; padding-right: 6px; text-align: right; color: var(--ink-4); } /* 26행부터 두 자리 번호 — 28px 이면 "1 0" 으로 꺾인다 (2026-09-15) */
 .markdown-body .table-scroll .col-track   { width: 34px; padding-left: 4px; padding-right: 4px; text-align: center; }
 .markdown-body .table-scroll .col-org     { width: 138px; }
 .markdown-body .table-scroll .col-verdict { width: 68px; }
