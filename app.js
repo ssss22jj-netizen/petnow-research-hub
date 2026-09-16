@@ -65,6 +65,7 @@ const collectionDefinitions = {
     title: "M2 계획·현황",
     lead: "M2 실행 계획과 진행 중인 트랙별 산출물입니다.",
     paths: [
+      "analysis/비문_wants_수익화_검증계획_20260915.md",
       "deliverables/M2_실행계획_20260817.md",
       "deliverables/Track2_ICP_v1.2_20260902.md",
       "deliverables/M2_소재H_소구점_정의_및_근거_20260823.md",
@@ -143,6 +144,8 @@ const collectionDefinitions = {
     homeLimit: 4,
     lead: "리뷰 출처와 데모 접근 경로, 인터뷰 녹취록, 기획·분석의 근거를 정리한 문서입니다. 리드 사전조사는 하위 페이지에 모았습니다.",
     paths: [
+      "analysis/비문_wants_신분증_사업체목록_20260916.md",
+      "analysis/비문_wants_성취인증_사업체목록_20260916.md",
       "analysis/데모_UI전수와_기획의도_20260820.md",
       "analysis/Eve인터뷰_녹취록_20260817.md",
       "EBP_산타바바라_데모미팅전략.md",
@@ -257,6 +260,9 @@ const collectionExtras = {
 };
 
 const documentRoles = new Map([
+  ["analysis/비문_wants_수익화_검증계획_20260915.md", "수요 검증 계획"],
+  ["analysis/비문_wants_신분증_사업체목록_20260916.md", "사업자 조사명단"],
+  ["analysis/비문_wants_성취인증_사업체목록_20260916.md", "사업자 조사명단"],
   ["킥오프정리_노션용_v2.md", "실행 계획"],
   ["PROJECT_STATE.md", "진행 현황"],
   ["가설_근거_반증실험_보드.md", "가설 관리"],

@@ -795,3 +795,73 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .markdown-body .pf-report .pf-comparison th:nth-child(5) { width: 14%; }
 .markdown-body .pf-report .pf-table td:last-child > strong { color: var(--green); }
 @media (max-width: 700px) { .markdown-body .pf-report .pf-summary > li { padding-right: 8px; } .markdown-body .pf-report .pf-table { min-width: 640px; } }
+
+/* Wants monetization report: scoped additions only. */
+.markdown-body .wm-report { word-break: keep-all; overflow-wrap: break-word; }
+.markdown-body .wm-report .wm-meta { color: var(--muted); font-size: .88rem; margin: 0 0 24px; }
+.markdown-body .wm-report h2 { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line); }
+.markdown-body .wm-report h2:first-of-type { margin-top: 18px; border-top: 0; }
+.markdown-body .wm-report h3 { margin-top: 30px; }
+.markdown-body .wm-report .wm-offer { padding: 22px 24px; border-left: 4px solid var(--green); background: var(--mint); border-radius: 0 10px 10px 0; font-size: 1.04rem; line-height: 1.85; }
+.markdown-body .wm-report .wm-table-wrap { overflow-x: auto; margin: 18px 0 26px; border: 1px solid var(--line); border-radius: 10px; }
+.markdown-body .wm-report table.wm-table { display: table; width: 100%; margin: 0; min-width: 620px; }
+.markdown-body .wm-report .wm-table th { background: var(--green); color: white; padding: 14px 16px; }
+.markdown-body .wm-report .wm-table td { padding: 15px 16px; vertical-align: top; line-height: 1.75; }
+.markdown-body .wm-report .wm-table td:first-child { min-width: 125px; }
+.markdown-body .wm-report .wm-table tr:nth-child(even) td { background: var(--soft); }
+.markdown-body .wm-report .wm-table a { white-space: normal; }
+.markdown-body .wm-report .wm-cell-list { margin: 0; padding-left: 17px; }
+.markdown-body .wm-report .wm-cell-list > li { margin: 0 0 9px; }
+.markdown-body .wm-report .wm-cell-list > li:last-child { margin-bottom: 0; }
+.markdown-body .wm-report table.wm-value-table { min-width: 850px; }
+.markdown-body .wm-report .wm-value-table th:last-child { background: var(--green-2); }
+.markdown-body .wm-report .wm-value-table td:last-child { min-width: 275px; background: var(--mint); }
+.markdown-body .wm-report .wm-priority { display: inline-block; margin-top: 8px; padding: 2px 8px; border-radius: 5px; background: var(--mint); color: var(--green); font-size: 12px; font-weight: 700; white-space: nowrap; }
+.markdown-body .wm-report .wm-priority-later { background: var(--soft); color: var(--muted); }
+.markdown-body .wm-report .wm-flow-list { margin: 0; padding-left: 17px; font-size: 14px; line-height: 1.65; }
+.markdown-body .wm-report .wm-flow-list > li { margin: 0 0 10px; }
+.markdown-body .wm-report .wm-flow-list > li:last-child { margin-bottom: 0; }
+.markdown-body .wm-report .semantic-callout p:last-child { margin-bottom: 0; }
+@media (max-width: 700px) { .markdown-body .wm-report .wm-offer { padding: 16px; } .markdown-body .wm-report h2 { margin-top: 34px; } }
+
+.markdown-body .wm-summary { margin: 22px 0; padding: 0; list-style: none; }
+.markdown-body .wm-summary > li { margin: 0; padding: 16px 18px; border-bottom: 1px solid var(--line); background: var(--soft); }
+.markdown-body .wm-summary > li:first-child { border-radius: 8px 8px 0 0; }
+.markdown-body .wm-summary > li:last-child { border-radius: 0 0 8px 8px; border-bottom: 0; }
+.markdown-body .wm-summary > li > p:first-child { margin: 0 0 8px; line-height: 1.6; }
+.markdown-body .wm-summary > li > p:last-child { margin: 0; }
+.markdown-body .wm-summary > li > ul { margin: 8px 0 0; padding-left: 20px; font-size: .94rem; line-height: 1.7; list-style: disc; }
+.markdown-body .wm-summary > li > ul > li { margin: 5px 0; }
+.markdown-body .wm-report > ul:not(.wm-summary):not(.wm-note) { margin: 16px 0 22px; padding-left: 23px; }
+.markdown-body .wm-report > ul:not(.wm-summary):not(.wm-note) > li { margin: 8px 0; }
+.markdown-body .wm-interpretation { border-left: 3px solid var(--green-2); background: var(--soft); padding: 16px 20px; border-radius: 0 8px 8px 0; color: var(--ink); }
+
+/* Supporting scope and method notes stay readable without competing with findings. */
+.markdown-body .wm-report .wm-note { color: #647066; font-size: 13px; font-weight: 400; line-height: 1.65; margin: 10px 0 18px; padding-left: 16px; text-indent: -16px; }
+.markdown-body .wm-report .wm-note::before { content: "※ "; }
+.markdown-body .wm-report .wm-note strong { font-weight: 500; }
+.markdown-body .wm-report .wm-note a { color: inherit; }
+.markdown-body .wm-report .wm-note + .wm-note { margin-top: -7px; }
+.markdown-body .wm-report ul.wm-note, .markdown-body .wm-report ol.wm-note { padding-left: 19px; text-indent: 0; }
+.markdown-body .wm-report ul.wm-note::before, .markdown-body .wm-report ol.wm-note::before { content: none; }
+.markdown-body .wm-report .wm-note > li { margin: 4px 0; }
+.markdown-body .wm-report .wm-note > li > strong:first-child { font-weight: 600; }
+@media print { .markdown-body .wm-report .wm-note { font-size: 9pt; } }
+
+/* Supply relationship and experiment sequence: self-contained text diagrams. */
+.markdown-body .wm-diagram { margin: 22px 0 26px; padding: 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--soft); }
+.markdown-body .wm-diagram figcaption { margin: 0 0 18px; font-weight: 700; font-size: 15px; color: var(--green); line-height: 1.6; }
+.markdown-body .wm-flow { display: grid; grid-template-columns: minmax(0,1fr) 20px minmax(0,1fr) 20px minmax(0,1fr); align-items: stretch; gap: 8px; }
+.markdown-body .wm-node { min-width: 0; display: flex; flex-direction: column; gap: 10px; padding: 16px 14px; background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--green-2); border-radius: 8px; line-height: 1.6; }
+.markdown-body .wm-node b { color: var(--green); font-size: 16px; }
+.markdown-body .wm-node span { font-size: 14px; }
+.markdown-body .wm-node small { display: block; font-size: 12px; color: var(--muted); }
+.markdown-body .wm-arrow { align-self: center; text-align: center; font-size: 22px; color: var(--green-2); }
+.markdown-body .wm-diagram .wm-diagram-note { margin: 16px 0 0; font-size: 13px; color: var(--green); }
+.markdown-body .wm-report .wm-table-wide { min-width: 850px; }
+@media(max-width:700px) {
+  .markdown-body .wm-diagram { padding: 16px; }
+  .markdown-body .wm-flow { grid-template-columns: 1fr; gap: 8px; }
+  .markdown-body .wm-arrow { transform: rotate(90deg); line-height: 1; }
+}
+@media print { .markdown-body .wm-diagram { break-inside: avoid; } }
