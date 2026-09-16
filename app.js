@@ -4,7 +4,10 @@ const searchInput = document.querySelector("#global-search");
 const searchPanel = document.querySelector("#search-panel");
 const sidebar = document.querySelector(".sidebar");
 
-const data = await fetch("data.json").then((response) => response.json());
+// Load document data from the same build as this script.
+const dataUrl = new URL("./data.json", import.meta.url);
+dataUrl.search = new URL(import.meta.url).search;
+const data = await fetch(dataUrl).then((response) => response.json());
 const docs = data.docs;
 const byId = new Map(docs.map((doc) => [doc.id, doc]));
 const byPath = new Map(docs.map((doc) => [doc.path, doc]));
