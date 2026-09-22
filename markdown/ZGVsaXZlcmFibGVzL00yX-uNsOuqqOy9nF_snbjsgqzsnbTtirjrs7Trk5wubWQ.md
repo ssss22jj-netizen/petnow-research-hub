@@ -6,26 +6,24 @@
 >
 > 콜별 인터뷰 자료는 [인터뷰 모음집](#/library/reports) 페이지에 있다 — 펫나우 팀 원본 정리본(PDF)과 콜별 인사이트 문서를 함께 수록.
 
-기준일 2026-09-15 · 데모 콜 26건 (9/4 이후 13건 추가 — 8/25 콜 2건은 정리본을 9/15에 확보해 14·15번으로 뒤늦게 등재)
+기준일 2026-09-22 · 데모 콜 29건 · 후속 상태는 2026-09-22까지 확인한 메일 반영(KST)
 
 ## 1. 종합 판독
 
-판정 여섯 줄이다. 각 줄 아래 「근거 행」은 2~5절 표의 행 번호이며, 각 판독의 근거를 풀어 쓴 것은 6절, 미결·검증 공백은 7절에 있다.
+판정 여섯 줄이다. 「근거 행」은 2~5절 표의 행 번호이며, 상세 해설은 6절, 미결·검증 공백은 7절에 있다. 콜 당시 반응과 이후 도입 상태를 구분해 읽는다.
 
-- ① 통증은 '입양 준비 판정'이 아니라 **정보 단절과 기억 의존**에 있다 — 준비 판정을 첫 통증으로 든 곳은 26건 중 없음  
-  근거 행 3·13·22 (인계 단절) · 24·25·21·19 (기억 의존)
-- ② 경쟁 상대는 기존 도구 조합이고 **기준 시스템 교체 의향은 26건 중 3건**뿐이다 — 나머지는 존치 + 상위 레이어  
-  근거 행 14·18·23 (교체) · 12·26 (존치 조건)
-- ③ **기존 시스템 자동 연동이 파일럿 선결조건**으로 격상됐다 — 연동 없이는 실험도 거부, 1순위 대상은 Shelterluv, 기술 검증은 0건  
-  근거 행 22·26·24·12
-- ④ 제품 기본값은 **조직 규모·동물 유형·이벤트 트리거**로 갈린다 — 체크인 주기·입력 단위·배정 단위가 조직마다 다르다  
-  근거 행 25·26·16·19 (주기) · 24·16 (트리거) · 15·22·13 (단위)
-- ⑤ 가격 **저항선과 수용선이 함께 확인**됐고 결정권자 직접 응답은 소수다 — **파일럿 확정 0건**, 계약 논의는 SBCAS 1건  
-  근거 행 24·11 (저항) · 20·23·14 (수용) · 13 (계약)
-- ⑥ **임보자는 앱 없는 링크, 직원은 대시보드** — 접점 설계가 양쪽에서 반복 검증됐다  
-  근거 행 16·21·24·25 (임보자) · 22·25·26 (직원)
-
-이번 갱신(13 → 26건)에서 ③·⑥이 새로 섰고, ①·②·④는 13건 판독이 그대로 유지됐으며, ⑤에 첫 가격 거부 사례(Noah's)가 들어갔다.
+- ① 반복 통증은 **정보 단절과 기억에 의존한 실행**이다. 입양 준비 판정을 첫 통증으로 든 곳은 29건 중 없다.  
+  근거 행 3·13·22·27·28(인계·공유) · 24·25·29(기억 의존)
+- ② 경쟁 상대는 기존 도구 조합이다. **CRM 교체 의향은 2건, 첫 중심 시스템 도입은 1건**이며, 새 콜 3건도 기존 CRM 유지를 전제로 한다.  
+  근거 행 14·18(교체) · 23(첫 도입) · 27·28·29(존치)
+- ③ **자동 연동과 실제 사용 가능한 완성도가 파일럿 선택을 좌우한다.** LTBHS는 무연동 이중 업무로 현재 파일럿을 거절했고 CAP는 완성된 경쟁 제품을 선택했다.  
+  근거 행 22·26·24·12(연동) · 5(완성도·타 단체 사용 경험)
+- ④ 제품 기본값은 **주기·입력 단위·검토 절차**별로 나눠야 한다. Pawsitive Transformations는 전건 승인을 추가 업무로 판단하고 한배 일괄 입력을 요구했다.  
+  근거 행 25·26(주기) · 8·15·29(입력) · 27·29(검토)
+- ⑤ **가격 적합성은 무료 파일럿을 시작할 때부터 필요하다.** Pawsitive Transformations는 월 $99를 지속 부담할 수 없어 무료 시험도 거절했다. 확인된 파일럿 확정은 0건이다.  
+  근거 행 24·11·29(가격 저항) · 20·23·14(조건부 수용) · 13·22(계약 논의)
+- ⑥ **임보자 응답은 간단하게, 직원 업무는 모바일에서 공동 확인**하는 접점이 필요하다. 개인 배정과 담당자 부재 시 인계가 함께 가능해야 한다.  
+  근거 행 16·21·24·25(임보자) · 22·27·28(직원)
 
 ## 2. 통증 강도
 
@@ -57,6 +55,9 @@
 | 24 | B | **Noah's Paws Animal Rescue**<br>Amy Duncan · Rescue Coordinator(본업 병행)<br>166두 · 임보 7~12가정 | <span class="pain-badge critical">매우 강함</span><br>본인 | · **임보 관리가 사람의 기억에 의존** — 임보자가 먼저 문자하거나 "요즘 연락이 없었네"라고 떠올릴 때만 연락, 몇 주간 체크인이 없는 경우 발생<br>· 같은 임보 가정에 3년째 있는 고양이를 "잊힌다(they get forgotten about)"고 직접 표현 — 소통 누락이 장기 정체로 이어짐<br>· 전원 자원봉사, Amy가 서류 업무의 약 90%를 본업과 병행 | Shelter Manager(의료·입양·Petfinder 게시)<br>문자 |
 | 25 | B | **Black Dog Animal Rescue**<br>Amira Spargo · Foster Manager<br>연 300~400두 · 활성 임보자 50명 | <span class="pain-badge high">강함</span><br>본인 | · 가장 불필요한 업무로 **내부 커뮤니케이션**을 지목 — `임보자 → 직원 A → 직원 B → 기록` 사이에서 전달 누락<br>· 체크인 정책(배치 직후·매주 금요일, 2개월 후 격주, 새끼는 매주)은 있으나 **바쁘면 실행 자체를 잊음**<br>· 격주 확인 사이에 생겼다 사라진 문제가 기록에서 유실, 10일차 성격 양식을 직원이 Shelterluv에 옮겨 적는 일이 밀려 회의 때 최신 정보 부재 | Shelterluv · Google Voice 2회선<br>Google Docs · Sheets<br>Better Impact · Maddie's Pet Assistant |
 | 26 | B | **Saving Great Animals**<br>Jacintha Sayed · Director<br>상근 5명 · 자원봉사 350~400명 · 110두(임보 106) | <span class="pain-badge critical">매우 강함</span><br>본인 | · **소통 부족이 아니라 채널 과잉** — 이메일·개인 문자·Rescue Groups·Wix 커뮤니티·Signup Genius·SNS를 오가는 것 자체가 문제<br>· 이미 성견 3~4일, 강아지 격일로 소통 중 — "더 자주 연락"은 가치가 아님<br>· 임보자가 개인 번호를 알아 일요일 밤 10시에도 비긴급 사진 수신, 입양용 사진 확보는 "pulling teeth" | Rescue Groups(2013~ 이력)<br>Wix 커뮤니티 · Signup Genius<br>이메일 · 문자 · Instagram/Facebook |
+| 27 | B | **[Animal Friends](Animal_Friends_인터뷰_인사이트_20260921.md)**<br>Cara Constantine · 의료 실무<br>Kathy · Vet Manager<br>올해 입소 약 1,200두 · 임보 수백 두 | <span class="pain-badge critical">매우 강함</span><br>본인 | · 의료팀 공용 이메일에 **임보 업데이트·진료 예약·약 리필·의료 질문·검사실·응급병원 연락이 혼재**, 주말 이틀 뒤 약 170개 누적 사례<br>· 휴무에도 대응하도록 최대 약 10명이 함께 수신하지만 **누가 처리했고 무엇이 남았는지** 다시 확인해야 함<br>· 문제가 수신량에 그치지 않고 요청 분류·담당·완료 확인까지 연결됨 | Shelterluv(공식 의료 기록)<br>의료팀 공용 이메일 |
+| 28 | A | **[SPCA of Luzerne County](Luzerne_SPCA_인터뷰_인사이트_20260921.md)**<br>Carol Amos · Education & Volunteer Coordinator<br>직원 약 30명 · 2개 시설 확장 예정 | <span class="pain-badge high">강함</span><br>본인 | · PetPoint와 직원 단체 채팅에 최신 상황이 나뉘며 **직원 30명 모두가 같은 정보를 보지 못함**<br>· Carol이 직원 정보를 다시 취합해 자원봉사자 Facebook 채팅으로 전달<br>· 현장에서 **동물별 일일 최신 상태와 다음 행동을 모바일로 확인**하고자 함. 임보 소통은 이번 콜의 핵심 검증 대상이 아님 | PetPoint<br>직원 단체 채팅<br>자원봉사자 Facebook 채팅 |
+| 29 | B | **[Pawsitive Transformations](Pawsitive_Transformations_인터뷰_인사이트_20260922.md)**<br>Lauren · Founder<br>임보자 약 15명 · 활성 약 10명 | <span class="pain-badge high">강함</span><br>본인 | · **정기 체크인 발송과 미응답 후속을 사람이 기억해서 실행**<br>· 목요일에 별도 대화를 나누면 토요일 체중·건강·수술 회복 확인을 빠뜨리는 사례<br>· 자체 CRM은 만족스럽게 사용하지만 자동 문자·후속 기능은 비용과 개발 우선순위로 미구축 | 자체 CRM<br>문자 · 이메일 |
 
 ## 3. 솔루션 적합 여부
 
@@ -75,7 +76,7 @@
 | 11 | B | **Maybel's Legacy**<br>Tanya Mitz · 공동 운영자 | <span class="fit-badge good">높음</span><br>Petstablished 존치 | · 필요한 것은 메시지 발송 기능이 아니라 **제출 여부 + 미응답자 + 담당자 + 후속 연락 상태를 일괄 조회하는 운영판**<br>· "연락을 쉽게 한다"보다 **추적 업무 자체의 제거**이 직접적 가치<br>· Petstablished 만족 상태라 **어떻게 연결되고 어느 항목으로 정보가 들어가는지**가 도입 조건 |
 | 12 | B | **Asheville Humane Society**<br>Mallory Uzel · 임보 총괄 | <span class="fit-badge partial">부분</span><br>통합 검증 필요 | · **자동 체크인 수요는 이미 검증돼 있음** — Maddie's Pet Assistant로 1·3·7·14일·이후 월 단위 자동 설문을 유용하게 사용 중<br>· 다만 현 상태로는 "또 하나의 작은 조각"에 가까우며 전체 업무를 줄일지는 모르겠다고 직접 평가<br>· **도입 조건은 Shelterluv 심층 연결** — 상태 변화 감지 → 자동 체크인 → 직원 승인 → Shelterluv 기록 반영까지 |
 | 13 | A | **Santa Barbara County Animal Services**<br>라운드테이블 · 실무진 8인 | <span class="fit-badge good">높음</span><br>1차 방향 재확인 | · 1차의 **"이 동물에게 다음으로 무엇이 필요한지 보여주기"** 방향이 다른 실무진에게도 전반 유효<br>· **워크플로우 설정 기능이 이번 데모 최고 반응** — "쉽다", "실제 운영에 맞는다". 단 경험 적은 직원이 워크플로우 자체를 수정해선 안 됨<br>· 고정 우선순위보다 **정렬·필터**가 중요(기한 초과·임박, 업무 종류, 시설, 위탁 여부, 종)<br>· 업무 배정은 개인이 아니라 **팀 단위**(Santa Barbara·Santa Maria·Clinic)가 운영에 부합 |
-| 14 | A | **PAWS & More**<br>Amber Talbot · ED | <span class="fit-badge good">높음</span><br>장기 전면 교체 의향 | · **한 화면 가시성·강조 리마인더가 데모 이전의 최초 관심 계기** — 랜딩에서 "동물을 클릭하면 무엇이 남았는지 보인다"에 반응<br>· PetPoint와 병행하지 않고 **내부 동물 추적 전체를 Petify 하나로** 쓰고 싶다고 명확히 답변(두 시스템 병행은 직원에게 혼란) — 26건 중 가장 강한 교체 의도. 다만 파일럿은 좁은 모듈부터 시작하는 데 동의<br>· 파일럿 맞춤 요청 1순위는 **의료 재고 추적**, 2순위 개체군 건강 추이 분석 — 임보 소통보다 내부 추적·의료 가시성이 먼저 |
+| 14 | A | **PAWS & More**<br>Amber Talbot · ED | <span class="fit-badge good">높음</span><br>장기 전면 교체 의향 | · **한 화면 가시성·강조 리마인더가 데모 이전의 최초 관심 계기** — 랜딩에서 "동물을 클릭하면 무엇이 남았는지 보인다"에 반응<br>· PetPoint와 병행하지 않고 **내부 동물 추적 전체를 Petify 하나로** 쓰고 싶다고 명확히 답변(두 시스템 병행은 직원에게 혼란) — 29건 중 가장 강한 교체 의도. 다만 파일럿은 좁은 모듈부터 시작하는 데 동의<br>· 파일럿 맞춤 요청 1순위는 **의료 재고 추적**, 2순위 개체군 건강 추이 분석 — 임보 소통보다 내부 추적·의료 가시성이 먼저 |
 | 15 | B | **Humane Society for Greater Savannah**<br>Erica Epperson · Foster Coordinator | <span class="fit-badge good">높음</span><br>소통 레이어 | · PetPoint는 기록, 임보 전용 문자폰은 소통으로 역할이 완전히 분리 — Petify가 들어갈 자리가 명확<br>· 데모 직후 첫 요구가 **①한 임보자가 한배(litter)를 돌볼 때 개체별로 보내야 하는가 ②여러 임보자에게 일괄 발송 가능한가** — 개체 단위 데이터 구조와 코디네이터의 소통 단위(가정·한배) 불일치 가능성<br>· 필요한 것은 자동 리마인더만이 아니라 `소통 대기열 + 일괄 발송 + 응답 추적`의 조합 |
 | 16 | B | **Paws and Whiskers**<br>Tawny Arnold · ED | <span class="fit-badge good">높음</span><br>비동기 체크인 | · 앱 설치·로그인 없이 문자 링크·선택형 입력 구조가 **노년층 임보자에 특히 적합** — 경쟁 제품에 기능이 있어도 사용자층이 못 쓰면 없는 기능<br>· "사용하기 쉽고 읽기 쉽고 정보가 과하지 않다"는 단순함을 장점으로 평가<br>· 직원 개입 비율이 노령묘 임보 1/3 · 젖병 수유 75%로 달라 **유형별 확인 주기·질문 분기** 필요, 목표 체중 도달이 복귀·수술 트리거 |
 | 17 | T1 | **SPCA International**<br>Haley Weathers · Owen Laukkanen | <span class="fit-badge good">높음</span><br>크로스보더 라인 | · OCR·문서 비교(원본·등록값·추출값 한 화면)가 최강 반응 — Owen이 Patriot Pets 업무에 바로 연결<br>· 다국어는 한영에 한정하지 말고 **다국어 기록·문서 관리**로(이집트 → 이탈리아 사례), 상태·문서별 필터는 "이동 준비 상태 관리 도구"로 설명이 적절<br>· Haley가 **개체별 통합 PDF 내보내기**를 직접 요청(Mission Possible 아프가니스탄 → 캐나다 이송 경험) — 신규 기능 후보<br>· KK9R에서 발견한 정보 분산 문제가 다른 국제 단체에서도 반복될 가능성을 처음 확인 |
@@ -88,6 +89,9 @@
 | 24 | B | **Noah's Paws Animal Rescue**<br>Amy Duncan · Rescue Coordinator | <span class="fit-badge good">높음</span><br>소통 레이어 | · 정기 자동 체크인·리마인더·한곳에서 확인·앱 불필요 구조에 매우 긍정 — "They don't have to have an app?" → "Okay, perfect"<br>· Shelter Manager가 의료·입양·게시를 이미 잘 수행해 **그 영역 재구축은 가치 제한**, 빈틈은 임보 소통 레이어<br>· 도입 조건은 Shelter Manager 연동(체중 등 임보 데이터 반환) — 기술 미확인. 임보자가 먼저 이슈를 제출하는 상시 채널 기대는 현 데모 범위 밖 |
 | 25 | B | **Black Dog Animal Rescue**<br>Amira Spargo · Foster Manager | <span class="fit-badge good">높음</span><br>운영층 | · 데모 후 최고 반응은 **커스터마이징·Shelterluv 자동 반영·모든 업데이트 한 화면**<br>· 구체 PoC 후보를 본인이 제시 — `배치 10일차 성격 양식 자동 발송 → 작성 → 검토 → Shelterluv 반영 → 입양 소개글`<br>· 약 리필·사료/특수식 재고를 체크인으로 선제 확인하는 활용법을 직접 확장 — 체크인이 다음 주 필요 자원의 수요 예측 도구<br>· Maddie's Pet Assistant는 기능은 좋으나 **로그인 문제로 Amira가 직접 조언** — 앱·가입 없는 링크 방식의 이점 |
 | 26 | B | **Saving Great Animals**<br>Jacintha Sayed · Director | <span class="fit-badge good">높음</span><br>양방향 연동 필수 | · "**새 시스템이 하나 더 생기면 안 된다**" — Rescue Groups의 개·임보자·연락처·배치일을 다시 입력할 시간 없음(110두), 입양 완료 시 자동 제외까지 요구<br>· 현재 이메일 흐름(폴더·4일 후 리마인더)이 꽤 빨라 **새 시스템은 그보다 적은 행동**이어야 함<br>· 게시 기능은 Rescue Groups가 이미 Petfinder 등에 송출해 중복·충돌 우려 — 파일럿에서는 OFF<br>· 체크인·훈련자료·임보/자원봉사 채팅·행사 신청을 **모듈 ON/OFF로 묶는 커뮤니티 플랫폼**을 직접 제안 — 디자인 파트너 후보 |
+| 27 | B | **Animal Friends**<br>Cara Constantine · Kathy | <span class="fit-badge good">높음</span><br>의료 요청 처리 | · 정기 연락 자동화에서 **약 리필·의료 질문 분류·다음 진료 예약**으로 활용을 직접 확장<br>· 담당자를 정하되 **팀 전체 처리 상태 공개와 부재 시 인계**가 필요<br>· Shelterluv는 유지하며 검토 결과 반영을 원함. 실제 연동 범위는 미검증<br>· 앱·로그인 없는 응답에 대한 강한 직접 수요는 확인되지 않음 |
+| 28 | A | **SPCA of Luzerne County**<br>Carol Amos | <span class="fit-badge good">높음</span><br>모바일 현황판 | · PetPoint 유지 + **동물별 최신 상태·주의 필요·다음 행동을 보는 모바일 화면**에 적합<br>· 설치형 앱이 필수인 것은 아니며 모바일 웹으로 충분하다고 직접 답변<br>· PetPoint 연동은 중요하나 **파일럿의 절대 조건인지까지는 미확인**<br>· 입양 게시에는 긍정 반응만 있어 핵심 구매 이유로 보기 어려움 |
+| 29 | B | **Pawsitive Transformations**<br>Lauren · Founder | <span class="fit-badge good">높음</span><br>검토 방식 조건부 | · 자체 CRM에 **정기 체크인·미응답 알림만 연결**하는 방식에 긍정<br>· **전건 승인(Needs Review)은 추가 업무**라며 반대. 조직별 검토 절차 선택 필요<br>· 한배 여러 마리는 링크 하나에서 개체별로 입력해야 혼동 방지. 일괄 입력 기능 설명은 수용했으나 실사용 미검증<br>· 자체 CRM API·결과 반영 가능 범위는 미확인 |
 
 ## 4. 지불 의향 및 결정 구조
 
@@ -102,7 +106,7 @@
 | 7 | B | **Beatrice Humane Society**<br>Carlee Fiddes · ED<br>연 ~700두 · 임보 풀 ~60 | <span class="fit-badge partial">초기-중간</span> | ROI 논리 매우 강함 — Foster Coordinator 추가 채용 회피를 소프트웨어 비용 정당화 구조로 자체 제시. Carlee가 ED로 예산 결정권 추정이나 범위·한도 미확인 |
 | 8 | B | **PawSafe Animal Rescue**<br>Sharon Schreiber · 임보 운영 총괄 | <span class="fit-badge unknown">미확인</span> | 3개월 무료 파일럿에 "That's perfect" 로 강한 긍정이나 **유료 의향·수용 금액 미질의.** 결재 구조도 확인되지 않음 — 본인은 임보 운영 총괄이며 조직 예산 권한 범위는 미확인 |
 | 9 | B | **Cactus Ranch Rescue**<br>Tylie Biggs · President | <span class="fit-badge unknown">미확인</span> | 제품 반응은 매우 긍정("I really like it")이나 **가격 미전개.** Tylie 가 President 이고 Alexis 와 공동 운영하는 구조라 결재선은 짧을 것으로 보이나 전결 한도 미확인 `[추론]` |
-| 10 | B | **LifeLine Animal Project**<br>Daisy Navin · Program Manager | <span class="fit-badge unknown">미확인</span> | Program Manager로 실무 총괄이나 **위로 Director·Technology Director 라인.** 파일럿에 긍정적이고 본인이 직접 두 Director에게 데모를 보여주겠다고 함. **조직 내부 검토 전이라 정식 파일럿 참여·유료 구매 의사는 미확정** |
+| 10 | B | **LifeLine Animal Project**<br>Daisy Navin · Program Manager | <span class="fit-badge unknown">미확인</span> | Program Manager 위로 Director·Technology Director 라인. 콜에서는 두 Director에게 데모를 보여주겠다고 했으나, **9/18 내부 검토 후 파일럿 이후로 판단을 미룸**. 가격·예산·유료 구매 의향은 여전히 확인되지 않음 |
 | 11 | B | **Maybel's Legacy**<br>Tanya Mitz · 공동 운영자 | <span class="fit-badge weak">낮음</span><br>가격 제약 명확 | $99/월 언급에 **100% 자원봉사 기반 단체에는 지속 가능한 금액이 아니라고 명확히 답변.** 다만 유료 자체를 거부하지 않고 충분한 시간 절약이 증명되면 지불 가능성은 열어둠. 공동 운영자 전원이 동등한 결정 권한 보유 |
 | 12 | B | **Asheville Humane Society**<br>Mallory Uzel · 임보 총괄 | <span class="fit-badge partial">부분</span> | 15년 재직·임보 프로그램을 직접 구축한 주요 의사결정자. **구매 판단은 가격이 아니라 기존 도구·수작업을 실제로 얼마나 없앨 수 있는가에 달려 있다**고 직접 설명. 포스터 전용 SaaS 유료 지출 선례 보유 |
 | 13 | A | **Santa Barbara County Animal Services**<br>라운드테이블 · 실무진 8인 | <span class="fit-badge good">높음</span><br>파일럿 추진 | **계약 초안을 가능한 빨리 보내달라고 요청.** 카운티 계약이 늦어질 경우 연계 비영리기관을 통한 진행 경로까지 먼저 제안. Chameleon 직접 연동이 어려우면 본인이 CSV를 추출해 제공하겠다고 설명하고 경로관리에 쓰는 `Karen Eval` 시트도 공유하기로 함 — **제품 관심을 넘어 계약·데이터·운영자료 제공까지 진전** |
@@ -114,11 +118,14 @@
 | 19 | B | **Cape Ann Animal Aid**<br>Christina Lewis | <span class="fit-badge unknown">미확인</span> | Shelter Manager가 비교적 빨리 가격을 질문해 $99/$149 안내 — 비싸다·싸다·가능하다 어느 반응도 없음. 답변이 전반적으로 짧아 **가격 질문을 구매 신호로 읽으면 과함**. 파일럿 구조에 "Great·Awesome" 수준, 확정 아님 |
 | 20 | A | **Neonatal Kitten Alliance**<br>Andee · Founder | <span class="fit-badge partial">부분</span><br>조건부 긍정 | "Yes, depending on the price point." **$99~149/월도 여러 문제를 해결해 업무 효율이 오르면 정당화할 수 있다**고 직접 답변 — 소규모 비영리 중 비교적 구체적인 상업 신호. Founder로 구매 판단 영향력은 있으나 의료·임보·입양 세부는 직원이 더 잘 앎 |
 | 21 | B | **SPACAR Animal Advocates of Oklahoma**<br>Rachel Tatro · Rachel Dockum | <span class="fit-badge unknown">미확인</span><br>운영진 검토 | 두 사람 모두 결정권 없음 — leadership/admin team 논의 필요. 3개월 후 가격을 **운영진 전달용으로** 먼저 확인, $99~149에 부정 반응은 없으나 수용 답변도 아님. 제품 반응은 "I really like this", "fantastic addition"으로 직접적 |
-| 22 | A | **Little Traverse Bay Humane Society**<br>2차 세션 | <span class="fit-badge partial">부분</span><br>연동 선결 | 계약 초안 검토에는 동의했으나 **API 연동 없이는 파일럿도 상용도 불가하다고 명시**("even on an experimental level"). CSV 수동 업로드는 실제 운영에서 쓰지 않을 것이라고 명확히 거부 — 파일럿 시작 여부를 연동이 결정. 가격 미논의 |
+| 22 | A | **Little Traverse Bay Humane Society**<br>2차 세션 | <span class="fit-badge partial">부분</span><br>연동 선결 | 콜에서는 계약 초안 검토에 동의했지만 API 없이 이중 입력하는 방식은 거부. **9/17 계약 초안 검토 후 현재 단계 파일럿 불가**를 회신했고, 9/18 초기 수기 이관·양쪽 시스템의 계속된 갱신 부담을 이유로 설명. 가격은 미논의, 연동 조사 후 재개 동의도 미확인 |
 | 23 | A | **Second Chance for Love Animal Rescue**<br>Kerrie King | <span class="fit-badge partial">부분</span><br>가격 미검증 | "수작업을 충분히 줄이면 돈을 낼 수 있겠는가"에 **"Yes"**로 명확히 답변. 부부가 직접 운영해 결정 접근성이 높음. 예산·가격 상한·Shelterluv 대비 판단은 미확인. 자동 회의록은 파일럿 동의로 요약했으나 녹취상 최종 확답은 요청되지 않음 |
 | 24 | B | **Noah's Paws Animal Rescue**<br>Amy Duncan | <span class="fit-badge weak">낮음</span><br>재정 제약 | $99~149/월에 **"Probably not."** 주 지원금 없이 기부 기반, Director가 매월 사비 $2,000~10,000 부담, 8월 수술비 $60,000 선지출. **임보 12가정 규모면 Director가 월 $100 가치를 못 느낄 것, 50가정이면 다르다**는 취지 — 체감 가치가 동물 수가 아니라 임보 가정 수에 좌우. Amy는 최종 결정권자 아님(Director/Owner). 무료 3개월만 쓰고 끝날 수 있다고 본인도 언급 |
 | 25 | B | **Black Dog Animal Rescue**<br>Amira Spargo | <span class="fit-badge unknown">미확인</span> | 가격·유료 의향 미논의. **Boss가 Instagram 광고를 직접 보고 Amira에게 전달** — 조직 차원 초기 관심 존재. Director 의견은 아직 없음, Amira가 Director와 가까운 동료에게 데모 공유 후 질문 수집 예정 |
 | 26 | B | **Saving Great Animals**<br>Jacintha Sayed · Director | <span class="fit-badge unknown">미확인</span> | 가격·예산·지불 의사 미논의. Director 직접 참석, 100+두·상근 5명·자원봉사 350~400명이라 가치 창출 여지는 큼. **과거 Petstablished 이전 시 데이터 누락으로 Rescue Groups로 복귀** — 마이그레이션 신뢰 장벽이 매우 높아 add-on 포지셔닝이 오히려 적합 |
+| 27 | B | **Animal Friends**<br>Cara Constantine · Kathy | <span class="fit-badge unknown">미확인</span> | 가격·예산·지불 가능 금액 미논의. Cara와 팀이 필요성을 제안하고 **Manager·CEO·재무 측이 구매 결정**. 의료 요청 규모가 크지만 이를 구매 의향으로 환산할 근거는 없음 |
+| 28 | A | **SPCA of Luzerne County**<br>Carol Amos | <span class="fit-badge unknown">미확인</span> | 가격·예산·현재 PetPoint 비용 미논의. **수의사·Operations Manager·Director 검토 필요**, Carol 단독 결정 불가. 후속 회의 관심과 무료 파일럿 검토 의향은 있으나 확정 아님 |
+| 29 | B | **Pawsitive Transformations**<br>Lauren · Founder | <span class="fit-badge weak">낮음</span><br>$99/월 거절 | **월 $99를 지속 부담할 수 없어 무료 3개월 파일럿도 명시적으로 거절.** 무료 기간 후 다시 기존 방식으로 돌아가는 혼란을 우려. 개체별·소규모 조직별·비영리 요금이면 재검토 의향. $0.50/개체는 예시이며 청구 기간·지불 상한 미확인. 별도 이사회·재무 승인 구조도 미확인 |
 
 ## 5. 후속 조치 및 특이사항
 
@@ -128,65 +135,69 @@
 | 2 | T1 | **Hearts & Bones**<br>Amy · 벤더 선정<br>실무자 아님 | · 임보 PM·입양 PM 인터뷰 요청 | · **KK9R 소개 없었다면 미팅 자체가 불성립**이라고 직접 언급 — 초기 GTM에서 소개 경로의 가치<br>· **AI 사진 보정에 명확히 부정적.** "cute but real" 기준<br>· Airtable·Shelterluv 통합 목적의 **Salesforce 이관을 비용·소요시간 문제로 중단**한 이력<br>· 소규모 레스큐는 예산뿐 아니라 **직원 주의력 자체가 희소 자원** |
 | 3 | A | **Santa Barbara County Animal Services**<br>Sarah Aguilar · 국장<br>연 6,000두 · 셸터 3개소 | · 지자체 관계 구축 트랙으로 계속 | · **전담 IT 부재**로 국장이 내부 시스템·리포팅까지 겸임<br>· Chameleon에 evaluation 테이블이 있으나 **별도 창 구조여서 실무진 미사용** — 기능 보유와 실사용은 별개<br>· 임보 커뮤니케이션도 통증·해법 확인되나, **사업 성과와 반복 연결한 축은 개체 이동·체류일**<br>· 리포팅은 **인터뷰어 선제기** 주제로 우선순위 미검증 |
 | 4 | B | **Kzoo Cat Cafe and Rescue**<br>Abbey Thompson · 창립자<br>임보 10~15개소 | · Medical Director에 데모 공유<br>· 완성 후 사용 의사 재확인 | · **자원봉사자 UX가 실질 도입 조건.** 리마인더 증가가 응답률 개선으로 직결되지 않음<br>· 장기 신뢰 임보자는 **2개월 무연락도 정상 판단** — 전원 동일 주기 강제는 부적합<br>· **물품 관리 통증 없음.** 카페 상비 후 임보자 직접 수령 (1번 건과 정반대)<br>· PoC·디자인 파트너 적합도 높음, **단기 유료 매력도 낮음** |
-| 5 | B | **Citizens for Animal Protection**<br>Jared Carroll · 수의 진료 총괄<br>연 4,000두 · 임보 1/3 | · 파일럿·심층 인터뷰 협력 의사 | · **임보 관할 범위 자료 간 불일치** `[미확인]` — 본인은 직할로 진술하나, 사전조사 조직도상 임보 전담은 Barbara Fitzgerald → Jessica Ellis → Sandi Mercado이며 공식 직책은 클리닉 운영 총괄. **콜 1차 목표였던 프로세스 소유자 확인이 보고서에 부재**<br>· **`기존 CRM 사용 시 2차 도구 미도입` 가설이 본 조직에서 약화** — PetPoint + Petszel 수용 선례<br>· 고정 주간 체크인보다 **의료 마일스톤 기반 발송**(투약 3일차·URI 10일차·백신 부스터)이 적합<br>· 임보자의 부적절 링크 삽입 사고 — **정보 제공자이되 게시 권한자일 필요 없음**<br>· SMS는 **전용 번호·양방향·FCC 절차**까지 구현 단계 질의<br>· Petszel 경쟁 검토 완료 — **기능 미중복, 단 구매자·연동 표면·과금 앵커 중복** |
+| 5 | B | **Citizens for Animal Protection**<br>Jared Carroll · 수의 진료 총괄<br>연 4,000두 · 임보 1/3 | · **현재 Petify 검토 종료**<br>· 9/10(KST) Pawsitive Foster 무료판 시험으로 전환, 9/13 선택 사유 회신<br>· 9/15 Johnny가 제품 준비 후 재연락하겠다고 종료 회신 | · 선택 이유는 **바로 쓸 수 있는 완성 시스템과 타 동물복지 조직의 긍정 후기**<br>· 소수 임보자에게 초대한 시험 단계이며 도입 성공이 확인된 것은 아님<br>· 사용 기능은 임보 필요 동물 목록·임보자 자격별 필터·앱 내 메시지·전체 공지·픽업/반납 예약·신청/승인 관리 6종<br>· 8/23 후속 메일에서 Foster·Transport·Rescue Coordinator가 주사용자라고 밝혀, Jared와 함께 실사용자 검토가 필요한 구조 확인 |
 | 6 | A | **Little Traverse Bay Humane Society**<br>Sarah Schertel · 운영 총괄<br>연 1,000두 | · 베타 일정 선질문<br>· **Michigan Pet Alliance·10월 컨퍼런스·카운티 담당자 연결 자발 제안** | · **경쟁 대상은 타 SaaS가 아니라 종이 체크리스트**<br>· PetPoint가 **신규 SW 별도 개발 방침을 통보**해 스택 재검토 창이 평시보다 개방. 단 교체 결정도, Petify를 대체재로 본 것도 아님<br>· add-on 조건 — 연동, 중복 입력 제거, 비중복 가치, 가격. Petszel 존치 사유가 직접 연동이므로 **중복 입력 제거가 채택의 실질 기준**<br>· **plug-and-play 선호.** 개발 중 기능이 섞인 데모에 아쉬움 표명<br>· **소재 H 대상 기능이 본 조직 수요와 부합할 것으로 예상** (카야 판정 2026-08-25)<br>· dog licensing은 **별도 B2G 트랙.** 셸터 제품 논의와 단일 의제로 통합 금지 |
 | 7 | B | **Beatrice Humane Society**<br>Carlee Fiddes · ED<br>연 ~700두 · 임보 풀 ~60 | · PoC·파일럿 협력 의사 ("I would be interested in seeing that")<br>· Design Partner 후보 | · **Shelter-to-Shelter Record Portability** — 개체 이관 시 기존 medical·admin 기록 재입력 필요, 신규 통증 축 발견<br>· **PetPoint 연동이 실질 도입 조건** — full sync가 어렵더라도 수동 업로드는 "10-second problem"으로 허용<br>· **PetPoint stage를 위치 태그로 개조 사용** — 커스텀 stage 7종(중성화 대기·개 포스터·매장 4곳). stage 단일값 구조가 check-in 누락을 비가시화하는 배경 (사전조사 확인)<br>· **타이밍 — 킷튼 인테이크 0마리 국면(2026-04)** — 조직 사상 최초, 운영 구조 재검토가 가능한 드문 창<br>· 입양 공고 우선순위 낮음 (PetPoint가 이미 실시간 업데이트)<br>· **소재 PDF 미명시 — 내용 기반 B 추정** |
 | 8 | B | **PawSafe Animal Rescue**<br>Sharon Schreiber · 임보 운영 총괄 | · 데모 직접 사용 요청 (iPad·랩탑)<br>· Google Sheets 대비 소요 시간 비교 희망<br>· 3개월 무료 파일럿 긍정 | · **뉴욕주 임보 기록 의무 = 신규 시장 진입 논리.** 규정 변화가 제품 수요를 만든 첫 사례이며, 본인은 뉴욕의 다른 단체도 같은 문제를 겪을 것으로 예상<br>· **단 법 조항·적용 범위는 미검증** `[미확인]` — 확인된 것은 Sharon 이 대응을 위해 실제 운영 방식을 바꾸고 있다는 사실까지<br>· **여러 동물 일괄 입력**이 이번 콜 최대 신규 요구 — 최종 기록이 개체별이어도 입력 단위까지 개체별일 필요는 없음<br>· **가정당 링크 1개** — 10두를 맡은 임보자가 문자 10건·링크 10개를 받는 구조는 실사용 가부를 좌우<br>· 정상 상태 일괄 체크 + 예외만 개별 입력이 과거 운영 방식과 일치<br>· 입양 사이트 게시 기능 우선순위 낮음 |
 | 9 | B | **Cactus Ranch Rescue**<br>Tylie Biggs · President | · Alexis 와 함께 데모 사용 후 회신 ("I'm excited to play with it")<br>· 데모 접근 제공 필요 | · **예정 참석자 교체** — 리드 제출자 Alexis Jones 가 아니라 Tylie Biggs(President) 참석. 시트 담당자명과 실제 대화 상대가 다름<br>· **계정 생성 자체가 사용 장벽** — GroupMe 도입 시 계정·코드·승인 절차 탓에 수개월 뒤에도 전원이 적응하지 못함. 자원봉사 기반에서는 기능 수보다 「쓰기 전에 해야 할 일이 얼마나 적은가」가 우선<br>· **일부만 대신 입력하는 역할은 오히려 중복 업무를 만든다** — 과거 Shelterluv 입력 전담 자원봉사자를 효율이 낮아 폐지<br>· **조직 최대 pain 은 소프트웨어가 아니라 물리적 공간** — 제품 가치를 과장하지 말 것<br>· 완전 임보형에서는 관리 대상이 사람+동물을 넘어 **위치·물품**까지 확장 (Alexis 자택이 사실상 창고) `[추가 검증]` |
-| 10 | B | **LifeLine Animal Project**<br>Daisy Navin · Program Manager | · 본인이 Director·Technology Director에게 데모 시연 예정<br>· 조직 내부 검토 후 파일럿 여부 회신 | · 제품과 무관하게 임보 운영 최대 문제로 **임보 동물이 입양으로 이어지지 않아 체류기간이 안 줄어드는 것**을 지목<br>· **Doobert Connect를 매우 긍정 평가** — 긴급 상황·임보 설문·계약서 보관·업무 흐름에서 부담을 크게 줄임. 문제는 Doobert와 PetPoint가 충분히 연결되지 않는 것<br>· 원하는 흐름은 `PetPoint에서 임보 종료 조회 → 버튼 → 해당 임보자에게 종료 설문 자동 시작`<br>· **경쟁 대상은 기능 하나하나가 아니라 시스템 사이의 끊어진 흐름** |
-| 11 | B | **Maybel's Legacy**<br>Tanya Mitz · 공동 운영자 | · 팀 전체가 데모를 직접 사용해보는 단계<br>· Jamie가 체험 기간 가능 여부 선질문 — 파일럿 관심은 강한 편 | · **여러 사람이 동등한 권한으로 운영해 후속 연락 담당자가 중요해짐** — 질문이 "이 임보자가 답했는가"에서 "답을 안 했는데 우리 중 누가 다시 연락하는가"까지 이어짐<br>· 필요 정보는 현재 담당자·마지막 요청자·마지막 연락일·답변 여부·후속 필요 여부·후속 담당자<br>· 사진·영상·상태 정보가 복수 대화에 산재해 유실되는 문제를 Jamie가 별도 강조 |
-| 12 | B | **Asheville Humane Society**<br>Mallory Uzel · 임보 총괄 | · 도입 조건이 Shelterluv 심층 연동이라 그 범위 확인이 선행 과제 | · **AHS는 기능 적합성이 아니라 Petify가 실제로 업무 구조를 단순화할 수 있는지 검증하기 좋은 고객**<br>· 현 기능만으로는 `기존 여러 도구 → Petify로 통합`이 아니라 `기존 여러 도구 + Petify`가 될 위험이 있고 본인도 이를 직접 우려<br>· Petify가 가장 직접적으로 대체 가능한 영역은 **Maddie's Pet Assistant** — 나머지 5종은 유지 가능성이 높음<br>· 자동 설문의 가치는 설문 자체보다 **문제를 조기에 발견하는 역할**(구토·설사·기침·불안 등 임보자가 심각성을 모르는 증상) |
+| 10 | B | **LifeLine Animal Project**<br>Daisy Navin · Program Manager | · **9/18 내부 의사결정자 검토 후 파일럿 이후로 판단 보류**<br>· 9/21 Johnny가 개발 진전 후 다시 연락하는 방향 수용<br>· 현재 파일럿 참여 단계 아님 | · 제품과 무관하게 임보 운영 최대 문제로 **임보 동물이 입양으로 이어지지 않아 체류기간이 안 줄어드는 것**을 지목<br>· **Doobert Connect를 매우 긍정 평가** — 긴급 상황·임보 설문·계약서 보관·업무 흐름에서 부담을 크게 줄임. 문제는 Doobert와 PetPoint가 충분히 연결되지 않는 것<br>· 원하는 흐름은 `PetPoint에서 임보 종료 조회 → 버튼 → 해당 임보자에게 종료 설문 자동 시작`<br>· **경쟁 대상은 기능 하나하나가 아니라 시스템 사이의 끊어진 흐름** |
+| 11 | B | **Maybel's Legacy**<br>Tanya Mitz · 공동 운영자 | · **9/10 미확정 요소가 너무 많다는 이유로 거절**<br>· 현재 파일럿 검토 종료. 콜 당시 제품 반응과 이후 참여 결정을 구분 | · **여러 사람이 동등한 권한으로 운영해 후속 연락 담당자가 중요해짐** — 질문이 "이 임보자가 답했는가"에서 "답을 안 했는데 우리 중 누가 다시 연락하는가"까지 이어짐<br>· 필요 정보는 현재 담당자·마지막 요청자·마지막 연락일·답변 여부·후속 필요 여부·후속 담당자<br>· 사진·영상·상태 정보가 복수 대화에 산재해 유실되는 문제를 Jamie가 별도 강조 |
+| 12 | B | **Asheville Humane Society**<br>Mallory Uzel · 임보 총괄 | · **9/10 더 포괄적인 임보 관리 시스템을 찾겠다며 보류**<br>· Shelterluv 연동이 강화되면 재논의 가능<br>· 현재 파일럿 참여 단계 아님 | · **AHS는 기능 적합성이 아니라 Petify가 실제로 업무 구조를 단순화할 수 있는지 검증하기 좋은 고객**<br>· 현 기능만으로는 `기존 여러 도구 → Petify로 통합`이 아니라 `기존 여러 도구 + Petify`가 될 위험이 있고 본인도 이를 직접 우려<br>· Petify가 가장 직접적으로 대체 가능한 영역은 **Maddie's Pet Assistant** — 나머지 5종은 유지 가능성이 높음<br>· 자동 설문의 가치는 설문 자체보다 **문제를 조기에 발견하는 역할**(구토·설사·기침·불안 등 임보자가 심각성을 모르는 증상) |
 | 13 | A | **Santa Barbara County Animal Services**<br>라운드테이블 · 실무진 8인 | · **계약 초안 송부**<br>· Chameleon 연동 불가 시 CSV 제공 협의<br>· `Karen Eval` 시트 공유 예정 | · **모바일 접근성이 개인 편의가 아니라 여러 역할의 공통 운영 요구** — 위탁가정 반환·켄넬 현장·입양 상담·자원봉사 관찰 시점 각각에서 즉시 조회·입력 필요<br>· 워크플로우 적용 대상을 `신규/선택/전체`보다 **동물 속성**(8주 이하, 종·시설·연령)으로 걸러내는 요구<br>· 긴급성이 기한 못지않게 우선순위를 좌우 — 켄넬 자해 수준 스트레스 개체, 수술 예약 잔여 개체<br>· 행동·마케팅 체크리스트가 첫 파일럿 후보로 언급됐으나 **일부 참석자 이탈·의료 담당자 부재 상태여서 조직 최종 우선순위로 보긴 어려움** |
 | 14 | A | **PAWS & More**<br>Amber Talbot · ED | · 파일럿 참여 의향 명시 — 의료 재고 추적·건강 추이 분석 맞춤 요청 검토<br>· 연말 신축 이전 일정 확인 | · **기존 인터뷰와 반대로 add-on이 아닌 전면 교체를 원함** — "두 시스템 병행은 직원에게 혼란"<br>· 의료 처치가 1회성이 아니라 `초기 → 2~3주 후 반복 → 추가 후속` 주기라 다음 처치 예정이 상시 발생<br>· 임보 외에 현장 학습·동물 통제·TNR·압수 등 outcome 유형이 넓음 |
 | 15 | B | **Humane Society for Greater Savannah**<br>Erica Epperson | · 데모 링크를 Outcomes Manager에게 공유<br>· 후속 세션에 Erica + Outcomes Manager 동석 권장 | · **소통 단위가 개체가 아니라 가정·한배** — "이 한배 전체는 잘 지내나요"를 한 번에 묻는 구조 필요<br>· 오프시즌 20~30가정 → 피크 100가정으로 계절 변동이 커 확장성이 곧 가치<br>· 물품 관리는 현재 큰 통증 아님 |
-| 16 | B | **Paws and Whiskers**<br>Tawny Arnold · ED | · Brooklyn(Shelter Manager)·Katie(임보 소통 담당)와 데모 검토 예정<br>· Shelterluv 연결·API 방식을 직접 질문 — 연동 범위 확인 필요 | · 문제의 본질은 사진 자체가 아니라 **전달 방식**(아무 시간·직원 개인폰·업무와 사담 혼재·대량) — 정해진 주간 확인 안에서 공식 채널로 수집<br>· 직원 설정은 복잡해도 **임보자 화면은 최대한 단순**하게 |
+| 16 | B | **Paws and Whiskers**<br>Tawny Arnold · ED | · 9/4 Tawny가 의료·동물 기록·입양 업무 의견 제공 의사 회신, 9/7 Johnny가 후속 세션 제안<br>· **9/16 후속 세션 불참**, 최초 데모 완료는 유지<br>· 재예약 여부 확인 필요 | · 문제의 본질은 사진 자체가 아니라 **전달 방식**(아무 시간·직원 개인폰·업무와 사담 혼재·대량) — 정해진 주간 확인 안에서 공식 채널로 수집<br>· 직원 설정은 복잡해도 **임보자 화면은 최대한 단순**하게 |
 | 17 | T1 | **SPCA International**<br>Haley · Owen | · 펫나우가 내부·파트너 전달용 짧은 소개 자료 제작(배경·크로스보더 문제·OCR·다국어·통합 기록·가격대·시험 방식)<br>· 테스트 희망자 이메일 수령 시 데모 계정 제공<br>· Haley 파트너 목록 작성, Owen 내부 프로그램 팀에 소개 | · **역할이 "소개처"에서 "제품 검증자 + 잠재 사용자 + 소개 채널"로 확대**, 당장 떠오르는 파트너만 수십 곳<br>· 접근은 Salesforce 대체가 아니라 Patriot Pets 전용 운영 도구<br>· 리스크 — 한국 구조 환경·FTA 등 KK9R 특화 항목, 다국어 OCR 범위 미구체화, 국가별 입국 규정 판정 기능으로 오인 가능 |
-| 18 | A | **Final Victory**<br>Katy Cowan · 설립자 | · ED에게 파일럿 제안 예정 — 후속은 Katy 단독보다 실사용 직원 라운드테이블<br>· **Rainwalk Technology 담당자(Chris·Colette Doyle) 소개 제안** — Johnny가 메일 보내면 연결 | · Katy가 2026-05부터 Rainwalk Shelter Partner Manager 겸직 — 보험 BD 별도 기회(가입 시 생체 ID 등록 → 청구 시 동일 동물 확인 가설, 수요 미검증)<br>· "속도 자체가 기능", Google Sheets는 낡아서가 아니라 더 쉬워서 씀<br>· 기존 소프트웨어의 웹사이트 기능이 의외로 강한 전환 장벽 |
+| 18 | A | **Final Victory**<br>Katy Cowan · 설립자 | · Katy가 **현재 프로그램을 유지하며 점진적으로 파일럿을 시험할 수 있는지 질문**(9/18 Johnny 답장에 인용된 9/17 발언)<br>· 9/18 Johnny가 병행·연동 추진을 설명하고 실무진 후속 예약 제안<br>· 후속 예약·파일럿 확정은 없음. Rainwalk 담당자 소개는 별도 기회 | · Katy가 2026-05부터 Rainwalk Shelter Partner Manager 겸직 — 보험 BD 별도 기회(가입 시 생체 ID 등록 → 청구 시 동일 동물 확인 가설, 수요 미검증)<br>· "속도 자체가 기능", Google Sheets는 낡아서가 아니라 더 쉬워서 씀<br>· 기존 소프트웨어의 웹사이트 기능이 의외로 강한 전환 장벽 |
 | 19 | B | **Cape Ann Animal Aid**<br>Christina Lewis · Rachel Mason | · 데모 공유·후속 세션에 긍정, 파일럿 미확정 | · 추가 기능 중 유일하게 별도 확인한 것이 **체크인과 함께 사진·영상 업로드** 가능 여부<br>· 행동 체크인은 현재 상태 저장보다 "이전 확인 이후 무엇이 달라졌나" 변화 추적이 핵심 — 데모의 이전/현재 비교 구조와 부합<br>· PetPoint 교체 수요 낮음 — 저장된 정보를 기준으로 다음 행동을 실행하는 층 |
 | 20 | A | **Neonatal Kitten Alliance**<br>Andee · Founder | · 팀에 데모 공유·직원 후속 논의에 거부감 없음, 파일럿 미확정<br>· 범위 확정에는 Foster·Medical Coordinator·Adoption 담당 참여 필요 | · 입양 후 의료기록 이메일이 **Shelterluv 발신으로 가서 입양자가 못 찾고** 매달 입양자·동물병원이 재요청 전화 — 발신자 표시 하나가 반복 업무를 만드는 사례<br>· 새끼고양이는 성장 속도 때문에 사진·체중·의료 상태의 **최신성(마지막 업데이트 시점)**이 조건<br>· '처치 안 함'과 '처치했으나 기록 안 함'을 구분해야 하며 한 번의 완료 행동으로 기록까지 이어져야 함 |
 | 21 | B | **SPACAR Animal Advocates of Oklahoma**<br>Rachel Tatro · Rachel Dockum | · 운영진(leadership/admin) 검토 후 파일럿 결정 — 두 사람은 내부 챔피언 후보<br>· Pulse 보고서 활용·API·최소 가져오기/내보내기 확인 선행 | · **임보자 가용성**(누가 언제 새 동물을 받을 수 있나)이 별도 관리 문제 — 현재 동물 관리와 향후 수용력 관리는 다른 흐름<br>· Cat Cafe 이동 준비 등 조직별 중간 단계 존재 → 상태·다음 행동 설정의 유연성<br>· Petify가 일요일 45분 상담을 **문제 있는 동물만 집중하는 사전 분류 도구**가 될 수 있음<br>· 담당자 Rachel 2인 혼동 — 요청마다 담당자·동물·질문을 묶으면 임보자가 조직도를 알 필요가 없음 |
-| 22 | A | **Little Traverse Bay Humane Society**<br>2차 세션 | · 파일럿 계약 초안 전달(비구속)<br>· PetPoint·Shelterluv 자동 연동 검토, Petbridge 구조 확인<br>· 연동 성사 시 **호환 시스템 사용 타 기관을 베타 테스트로 연결할 의향** | · **Shelterluv 연동을 우선 추천** — PetPoint가 구제품 종료·신제품 개발을 예고해 PetPoint 연동은 시간 낭비일 수 있다고 직접 조언<br>· 별도 알림함·일일 이메일 요약은 펫나우 측 제안이며 고객 핵심 요구 아님 — 오히려 정보 채널 증가 우려<br>· 장기 대기 의료업무(새끼고양이 수술까지 6주)는 당장 할 일과 구분해 기한 임박 시 노출<br>· 다중 탭에서 작성 중 내용이 유지되는 안정성 요구(과거 PetPoint 경험) |
+| 22 | A | **Little Traverse Bay Humane Society**<br>2차 세션 | · 9/16 계약 초안·텀시트 전달 뒤 **9/17 현 단계 파일럿 불가 회신**<br>· 9/18 Sarah가 최초 수기 이관과 무연동 상시 이중 갱신을 이유로 설명<br>· Johnny가 PetPoint 연동 조사 시간을 요청했으나 이후 재개 동의 없음 | · **Shelterluv 연동을 우선 추천** — PetPoint가 구제품 종료·신제품 개발을 예고해 PetPoint 연동은 시간 낭비일 수 있다고 직접 조언<br>· 별도 알림함·일일 이메일 요약은 펫나우 측 제안이며 고객 핵심 요구 아님 — 오히려 정보 채널 증가 우려<br>· 장기 대기 의료업무(새끼고양이 수술까지 6주)는 당장 할 일과 구분해 기한 임박 시 노출<br>· 다중 탭에서 작성 중 내용이 유지되는 안정성 요구(과거 PetPoint 경험) |
 | 23 | A | **Second Chance for Love Animal Rescue**<br>Kerrie King | · 요구사항 세션 → 맞춤 파일럿 → 3개월 무료 구조 설명에 긍정, 최종 확답은 미요청<br>· 다음 단계는 기능 추가 시연보다 **화이트보드·Excel 업무 중 무엇을 없앨 수 있는지** 구체화 | · **Shelterluv 검토 중이라 지금이 시스템 선택 시점** — 다른 CRM 도입 전 파일럿을 시작하면 Petify 중심으로 운영 설계 가능<br>· ROI는 기록 시간 절약보다 **신규 인력·자원봉사자 투입 속도**로 측정할 가치("이것·이것·이것을 하면 된다")<br>· 데모 중 알레르기 기록 가능 여부 질문 — 복잡 의료 사례가 많음 |
 | 24 | B | **Noah's Paws Animal Rescue**<br>Amy Duncan | · "I would still love to do the three-month demo for sure" — Amy 개인 의향 매우 강함, Director 승인 미확인<br>· Shelter Manager 연동 가능 여부 기술 검증 | · **상업 후보라기보다 제품 검증 파일럿 후보** — 증명 지표는 Amy의 주간 할 일이 실제로 몇 개 사라지는가, 장기 미업데이트 임보 동물 수, 체류기간<br>· 체중 3lb 도달 → 중성화처럼 날짜가 아닌 데이터 변화가 다음 업무를 만드는 구조<br>· 임보 확대가 격리 공간 확보 수단이라 시설 수용력과 직결 |
 | 25 | B | **Black Dog Animal Rescue**<br>Amira Spargo | · Director와 가까이 일하는 동료에게 데모 시연·질문 수집<br>· Maddie's Pet Assistant API 가능 여부 확인 필요 | · **Google Voice 일반/긴급 2회선처럼 잘 작동하는 연락 경계**를 통합이 해치면 안 됨 — 개인 번호 미사용 이유는 24/7 연락 가능한 사람으로 보이지 않기 위함<br>· 동물 stage에 따라 체크인 주기가 자동 변경되는 구조(배치 후 2주 주간 → 안정화 격주 → 의료 문제 시 임시 일간)는 가설<br>· 임보 매칭 정보(다른 동물·아이·고양이 유무)는 Sheets로 별도 관리 중 |
 | 26 | B | **Saving Great Animals**<br>Jacintha Sayed · Director | · "we pilot this" 발언, 팀에 데모 공유, 자사 커뮤니티 사이트를 보여주며 제품 방향 논의 의사<br>· Go/No-Go는 **Rescue Groups API·자동 데이터 수신·입양 완료 자동 반영** 가능 여부 | · 최소 파일럿 범위는 `Rescue Groups 동기화 → 일정 기반 자동 체크인(성견 3~4일·강아지 격일) → 임보자 응답 → 직원 검토 → Rescue Groups 갱신`<br>· Paw.com 외부 입양 포털 거부감의 본질은 AI가 아니라 **업무를 줄이지 않고 하나 더 생기는 포털** — 배경 자동화는 환영<br>· 사진 요청에 가이드(얼굴·전신·밝은 곳)를 포함하면 결과물 개선 가능(가설) |
+| 27 | B | **Animal Friends**<br>Cara Constantine · Kathy | · 의료팀 요청 분류·담당·인계 흐름과 Shelterluv 연동 확인<br>· Manager·CEO·재무 측 검토 경로와 예산 확인<br>· **파일럿 관심 단계, 수락 아님** | · 최대 약 10명 공통 수신은 휴무 중 대응을 보장하는 운영 방식이므로 개인 배정만으로 대체하면 안 됨<br>· 정기 의료 체크인·약 리필·의료 질문부터 검증하는 범위는 **분석 제안이며 미합의**<br>· 성과 지표 후보는 요청 처리시간·장기 미처리 수·추가 확인 연락·Shelterluv 반영 시간 |
+| 28 | A | **SPCA of Luzerne County**<br>Carol Amos | · 수의사·Operations Manager 동석 후속 검토 의향, 일정 미확정<br>· PetPoint 연동과 허용 수작업 수준·Director 구매 조건 확인<br>· **파일럿 확정 아님** | · 약 18개월 뒤 2개 시설로 확대한다는 계획이 도구 검토의 계기<br>· 자원봉사자 대상 승인 정보 공유·시설별 화면은 가설<br>· 지방자치단체 유기동물 보호 계약·반려견 등록 사이트 연계는 별도 전략 영역 |
+| 29 | B | **Pawsitive Transformations**<br>Lauren · Founder | · **현재 가격 기준 파일럿 진행하지 않음**<br>· 감당 가능한 요금 구조가 실제 마련되면 재검토<br>· 가격 조건 해결 후 자체 CRM 연동·일괄 입력·검토 선택 여부 확인 | · 무료 시험도 지속 사용 가격이 맞아야 시작한다는 직접 반례<br>· 일상 대화와 필수 정기 체크인 완료를 분리해야 함<br>· 정상 응답 자동 반영·이상 응답만 검토는 제품 가설, 고객 합의 아님<br>· 경쟁 제품 Pawsitive Foster와 별개의 조직 |
+
 
 ## 6. 판독 근거 상세
 
-1절 각 판독의 근거와 함의를 풀어 쓴 것이다. 조직명은 2~5절 표의 행과 같다.
+1절 각 판독의 근거와 함의다. 통증·기능 반응은 콜 근거이며, 날짜가 있는 후속 상태는 메일 근거다.
 
 | 판독 | 근거 · 함의 |
 | --- | --- |
-| **① 통증의 소재는 '입양 준비 판정'이 아니라 정보 단절과 기억 의존이다** | · 준비 완료 판정을 첫 통증으로 진술한 응답자 **26건 중 전건 없음.** 반복 확인된 축은 만기·지연·차기 조치·담당자 — 게시 차단 안전장치는 NKA만 3순위 수요로 언급<br>· 소형 임보 조직은 **체크인 실행이 사람의 기억에 의존** — Noah's(같은 가정에 3년째 있는 고양이를 "잊힌다"고 표현), Black Dog(정책은 있으나 바쁘면 실행을 잊음), SPACAR(체계 자체가 없음), Cape Ann(반응형 구조라 3주 정보 공백)<br>· 대형·시설형은 사람 사이 인계에서 끊긴다 — SBCAS 실무진 8인 공통, Black Dog `임보자 → 직원 A → 직원 B → 기록`, LTBHS 종이·전산 병행, NKA 담당자 부재일 누락 |
-| **② 경쟁 대상은 기존 도구 조합이고, 교체 의향은 26건 중 3건뿐이다** | · 기준 시스템 폐기 의사를 밝힌 곳은 **PAWS & More**(장기 전면 교체)·**Final Victory**(불만은 강하나 웹사이트·결제까지 묶여 전환 난도 높음)·**Second Chance**(시스템 없음) — 나머지 전건은 존치 + 상위 레이어<br>· 판정 기준은 도구 수의 실질 감축 여부 — Asheville "거미줄", Saving Great "**새 시스템이 하나 더 생기면 안 된다**", Final Victory `Buzz + Digitail + Sheets + Petify` 위험을 본인이 인지<br>· 기능 유무보다 실제 사용 여부가 경쟁력 — Final Victory는 기능이 있어도 느려서 직원이 다른 도구로 이탈, Paws and Whiskers·Black Dog는 경쟁 제품 포털이 로그인 마찰로 사장 |
-| **③ 기존 시스템 자동 연동이 '장점'에서 '파일럿 선결조건'으로 격상됐다** | · LTBHS "API 없이는 실험 수준도 불가"·CSV 수동 업로드 거부, Saving Great "자동화를 위해 먼저 수작업을 해야 한다면 가치 없음"(양방향 + 입양 완료 자동 제외), Noah's·Asheville은 연동이 파일럿 실효성을 결정<br>· 연동 대상 분포 — **Shelterluv**(Asheville·NKA·Black Dog·Paws and Whiskers·LTBHS 차기·Second Chance 검토) > PetPoint(LTBHS·Cape Ann·PAWS & More·LifeLine·Beatrice) > Rescue Groups·Shelter Manager·Pulse·Petstablished·Chameleon·Buzz 각 1<br>· 전 콜에서 연동은 Johnny가 계획으로 설명했고 **기술 검증된 것은 없다.** LTBHS가 PetPoint 구제품 종료 예고를 근거로 Shelterluv 우선을 직접 조언 |
-| **④ 제품 기본값은 조직 규모·동물 유형·트리거에 따라 갈린다** | · 체크인 주기는 동물 stage·유형별 — Black Dog(신규 주간·장기 격주·새끼 주간), Saving Great(성견 3~4일·강아지 격일), Paws and Whiskers(노령묘 개입 1/3 vs 젖병 수유 75%), Cape Ann(젖병 수유·행동관찰 개 우선). 대형은 예외 건만 상신(LifeLine)<br>· **날짜가 아닌 이벤트가 다음 업무를 만든다** — 체중 3lb 도달 → 중성화(Noah's·Paws and Whiskers), 의료 예정일 → 임보자 연락·예약(Cape Ann), 배치 10일 → 성격 양식(Black Dog)<br>· 입력·배정 단위는 개체·개인이 아니다 — 한배·가정 단위 소통(HSGS·PawSafe), 일괄 처리(LTBHS), 역할·팀 단위 배정(LTBHS·SBCAS), 임보자 역량·가용성 매칭(NKA·SPACAR·Black Dog) |
-| **⑤ 가격 저항선과 수용선이 함께 확인됐고, 결정권자의 직접 응답은 소수다** | · 저항 — Noah's "**Probably not**"($99~149, 임보 7~12가정·Director 사비 운영), Maybel's 지속 불가. 수용 — NKA "가격에 따라, 여러 문제를 풀면 정당화 가능", Second Chance "Yes", Asheville은 가격보다 대체 여부<br>· 체감 가치는 전체 동물 수가 아니라 **임보 가정 수·소통량**에 좌우(Noah's 166두이나 임보 12가정) — 입양 건당 과금 거부(PAWS & More), 사용자 수 과금은 공동 운영 조직과 상충(Maybel's) → 규모별 구간 필요<br>· **파일럿 확정 0건.** 계약·데이터 제공까지 간 곳은 SBCAS 1건, 나머지는 결정권자 미참석(HSGS·SPACAR·Noah's·Black Dog)이거나 실무에서 떨어진 창립자(NKA·Final Victory) — 후속은 실사용자 라운드테이블 |
-| **⑥ 임보자는 링크, 직원은 대시보드 — 접점 설계가 양쪽에서 반복 검증됐다** | · 앱·로그인 없는 문자 링크가 임보자 쪽 결정적 적합 요소 — Paws and Whiskers(노년층), SPACAR 2인, Noah's "Okay, perfect", Black Dog(Maddie's Pet Assistant 로그인 마찰이 직원 업무로 되돌아옴)<br>· 직원 쪽은 **개인 휴대전화 경계와 채널 추가 반대** — LTBHS(개인 문자·별도 메시지함 반대, 대시보드 선호), Black Dog(일반/긴급 2회선 분리), Saving Great·Paws and Whiskers(밤 시간 개인폰 사진)<br>· 함의 — 소통 편의보다 **업무 정보와 사담을 분리하고 긴급/비긴급을 구분**하는 경계 설계가 기능 요건 |
+| **① 통증은 정보 단절과 기억에 의존한 실행에서 발생한다** | · 29건 중 입양 준비 판정을 첫 통증으로 든 곳은 없음. 게시 차단 안전장치는 NKA가 3순위로 언급<br>· 임보 조직은 발송·미응답 후속을 기억해야 함(Noah's·Black Dog·SPACAR·Pawsitive Transformations). 평소 대화가 정기 건강 확인을 대신하지 않음(Lauren)<br>· 시설형에서는 담당자 사이 정보가 끊김(SBCAS·LTBHS). Animal Friends는 요청 분류·담당·완료가 이메일에 섞이고, Luzerne은 직원 상태 공유와 Carol의 자원봉사자 재전달에 의존 |
+| **② 기존 시스템을 유지하면서 실제 업무를 줄여야 한다** | · CRM 교체 의향은 PAWS & More·Final Victory 2건, 전문 시스템이 없는 Second Chance는 첫 중심 도구 도입 1건으로 구분. Final Victory도 직원 적응을 위해 기존 시스템과 병행 시험을 질문<br>· 새 3건의 기준 기록은 Shelterluv(Animal Friends)·PetPoint(Luzerne)·자체 CRM(Pawsitive Transformations)이며 모두 존치 전제<br>· CAP는 Pawsitive Foster의 준비된 시스템·타 단체 후기를 선택 이유로 설명. 무료 여부뿐 아니라 실제 쓸 수 있다는 신뢰가 선택 기준 |
+| **③ 연동과 완성도는 현재 파일럿의 실행 조건이다** | · LTBHS는 9/17 현 단계 파일럿을 거절하고 초기 수기 이관·무연동 상시 이중 갱신을 이유로 설명. Saving Great는 자동 데이터 수신·입양 완료 제외, Noah's·Asheville은 기준 기록과 연결을 요구<br>· Shelterluv 연동 수요는 Animal Friends까지 반복됨. PetPoint는 Luzerne에서도 중요하나 이 조직이 연동을 절대 도입 조건으로 확인한 것은 아님. Lauren은 자체 CRM이라 별도 API 검증 필요<br>· 연동의 실제 가능 범위는 기술 미검증. LifeLine도 내부 검토 후 파일럿 이후로 판단을 미뤄, 데모 반응만으로 참여를 예측할 수 없음 |
+| **④ 기본값은 주기·입력·검토·배정 단위별로 달라진다** | · 체크인 주기는 개체 단계·유형에 따라 다름(Black Dog·Saving Great·Paws and Whiskers). 체중·의료 예정일·배치 경과일이 다음 행동을 만드는 사례도 존재<br>· 한배·가정 단위 입력(HSGS·PawSafe·Pawsitive Transformations)은 편의뿐 아니라 잘못된 개체 입력을 줄이는 조건<br>· **전건 검토는 공통 요구가 아님.** Lauren은 승인을 추가 업무로 판단. 반면 Animal Friends는 팀의 담당·처리 상태를 중요하게 봄. 조직별 또는 항목별 검토 선택은 검증할 제품 가설 |
+| **⑤ 파일럿 시작 전부터 지속 사용 가격과 구매 주체를 확인해야 한다** | · Noah's는 월 $99~149, Maybel's는 월 $99에 저항. Lauren은 월 $99를 지속 부담할 수 없어 무료 파일럿도 거절. NKA·Second Chance·PAWS & More는 조건부 수용 신호이지만 실제 가격 상한은 미확인<br>· Lauren의 개체별·규모별·비영리 요금 제안은 가격 가설의 근거이며 검증된 과금안이 아님. 모든 소규모 조직이 같은 가격을 거절한다고 일반화할 수 없음<br>· **확인된 파일럿 확정 0건.** SBCAS는 계약·데이터 제공 논의, LTBHS는 계약 문서 전달 뒤 현재 단계 거절. Animal Friends·Luzerne은 내부 검토 주체를 거쳐야 함 |
+| **⑥ 직원의 모바일 공동 처리와 임보자의 간단한 응답을 함께 설계해야 한다** | · 임보자에게 앱·로그인 없는 링크가 적합하다는 직접 반응은 Paws and Whiskers·SPACAR·Noah's·Black Dog에서 반복. Animal Friends에서는 같은 강도의 직접 선택 이유는 미확인<br>· LTBHS는 대시보드, Luzerne은 현장 모바일 조회를 원하며 설치형 앱은 필수 아님. Animal Friends는 개인 배정과 팀 전체 상태 공개·부재 시 인계가 함께 필요<br>· 개인 전화 경계·긴급/비긴급 분리는 Black Dog·Saving Great 등에서 확인. 편리한 수신만으로 끝내지 않고 업무 담당·처리·공식 기록 반영까지 연결해야 함 |
 
 ## 7. 미결 · 검증 공백 · 별도 조사
 
-**미결 — 알파 MVP 설계 대기 항목**
+**미결: 알파 MVP 설계 대기 항목**
 
-- **적용 범위 확정** — 세 갈래로 확인됨: 셸터 워크플로우(LTBHS·SBCAS·PAWS & More·Second Chance), 임보 소통 레이어(HSGS·Noah's·Black Dog·Saving Great·SPACAR·Paws and Whiskers·NKA·Cape Ann), 크로스보더(SPCAI). Saving Great가 제안한 모듈 ON/OFF 구조로 묶을 것인가, 별도 라인으로 갈 것인가. SBCAS 의료팀이 제기한 검사·재진 종료 전 조기 이동은 **별도 사안** 유지
-- **규모별·유형별 기본값 분기** — 전건 검토가 부담으로 전환되는 임보자 규모, stage별 주기 자동 변경, 이벤트 트리거(체중·의료 예정일·배치 경과일) 지원 여부
-- **배정·입력 단위** — 팀·역할 단위 배정과 역할별 화면·권한(LTBHS·SBCAS·Final Victory), 일괄 처리(LTBHS), 한배·가정 단위 소통(HSGS). 사용자별 과금 구조는 공동 운영자 4인이 동일 권한인 조직(Maybel's)과 상충
-- **일정 확정 흐름** — `의료 예정일 → 자동 연락 → 시간 수집 → 예약 확정`(Cape Ann)과 수술 일정(SBCAS)은 현 데모 범위 밖
-- **임보자 매칭·가용성** — 역량(젖병·이유식·질병 대응)·가정 조건·"언제 다시 받을 수 있나"(NKA·SPACAR·Black Dog)
-- **영상 업로드 경로** — Maybel's·Cape Ann 요구 사항에 사진과 영상이 함께 포함되나 데모는 사진만 구현
-- **임보자 발신 이슈 채널** — 직원이 보내는 체크인 외에 임보자가 먼저 제출하는 상시 채널(Noah's)
+- **적용 범위 확정.** 셸터 업무관리(LTBHS·SBCAS·PAWS & More·Second Chance·Luzerne), 임보 소통(HSGS·Noah's·Black Dog·Saving Great·SPACAR·Paws and Whiskers·NKA·Cape Ann·Pawsitive Transformations), 의료 임보 요청 처리(Animal Friends), 크로스보더(SPCAI)를 어떤 공통 기능과 선택 모듈로 묶을지 결정해야 한다. SBCAS의 검사·재진 종료 전 조기 이동 문제는 별도로 유지한다.
+- **조직별 기본값.** 개체 단계별 주기, 체중·의료 예정일·배치 경과일 기준 발송, 평소 대화와 정기 체크인 완료의 분리 여부를 정해야 한다. Lauren의 전건 승인 반대는 직접 확인됐으며, 정상 응답 자동 반영·이상 응답만 검토하는 세부 규칙은 제품 가설이다.
+- **배정·입력 단위.** 팀·역할별 배정과 화면·권한(LTBHS·SBCAS·Final Victory), 담당자 부재 시 팀 인계(Animal Friends), 일괄 처리(LTBHS), 한배·가정 단위 입력(HSGS·PawSafe·Pawsitive Transformations)을 검증해야 한다.
+- **의료 요청과 일정 확정.** 약 리필·의료 질문 분류와 처리 상태(Animal Friends), 의료 예정일 이후 임보자 연락·시간 수집·예약 확정(Cape Ann·Animal Friends)은 다음 검증 범위다.
+- **임보자 매칭·가용성.** 케어 역량·가정 조건·다시 받을 수 있는 시점(NKA·SPACAR·Black Dog)을 현재 동물 기록과 어떻게 연결할지 미결이다.
+- **임보자 발신 이슈·영상.** 직원의 정기 요청 외 상시 이슈 제출(Noah's), 사진과 영상 동시 요청(Maybel's·Cape Ann)의 필요 범위를 확인해야 한다.
 
-**검증 공백 — 판독 확정에 필요한 항목**
+**검증 공백: 도입 판단에 필요한 항목**
 
-- **연동 범위와 기술 가능 여부** — Shelterluv(Asheville·NKA·Black Dog·Paws and Whiskers), PetPoint(LTBHS·Cape Ann), Rescue Groups(Saving Great), Shelter Manager(Noah's), Pulse(SPACAR), Maddie's Pet Assistant(Black Dog). 전부 미검증이며 LTBHS·Saving Great·Noah's는 이것이 Go/No-Go
-- **가격·예산 소유자·결재 절차** — 질의 사례가 생겼으나(Noah's·NKA·Second Chance·Maybel's·PAWS & More) 대부분 결정권자 부재 상태의 답변. Cape Ann·SPACAR는 가격 반응 없음, Black Dog·Saving Great·Final Victory·LTBHS는 미논의
-- **CAP** — 9/9 Pawsitive Foster 무료판 시험 사용 통보로 기존 검증 항목(전결 한도·Jared의 임보 프로세스 소유 여부) 보류. 경쟁 비교와 재문의 대응은 `analysis/Pawsitive_Foster_경쟁조사_20260911.md`
+- **연동 범위와 기술 가능 여부.** Shelterluv(Asheville·NKA·Black Dog·Paws and Whiskers·Animal Friends), PetPoint(LTBHS·Cape Ann·Luzerne), Rescue Groups(Saving Great), Shelter Manager(Noah's), Pulse(SPACAR), Maddie's Pet Assistant(Black Dog), 자체 CRM(Pawsitive Transformations). LTBHS는 초기 이관뿐 아니라 상시 동기화까지 확인돼야 재검토할 수 있으며, 현재 재개 동의는 없다.
+- **가격·예산·결재 절차.** Animal Friends·Luzerne·Black Dog·Saving Great·Final Victory·LTBHS는 가격 미논의다. Lauren은 현재 $99/월을 거절했지만 대안 요금의 지불 상한은 확인되지 않았다. 파일럿 참여와 무료 기간 이후 지속 사용 조건을 함께 확인해야 한다.
+- **현재 보류·종료 리드.** CAP는 경쟁 제품 시험, Maybel's는 미확정 요소가 많아 거절, Asheville은 더 포괄적인 임보 관리·Shelterluv 연동을 원해 보류, LifeLine은 파일럿 이후로 판단을 미뤘다. 콜의 긍정 반응을 현재 진행 중인 파일럿으로 계산하지 않는다.
 
 **별도 조사**
 
-- **뉴욕주 임보 기록 의무의 법적 실체** — 조항·적용 범위·타 주 유사 규정. 규제 대응을 시장 진입 논리로 활용하려면 선행 검증이 필요하다
-- **크로스보더 라인** — SPCAI Patriot Pets의 실제 업무 흐름 인터뷰(접수·문서·인계·Salesforce 안팎 정보), SPCAI 추천 단체 3~5곳에서 같은 문제 반복 확인. KK9R 특화 항목과 공통 필요 기능 분리
-- **보험 BD** — Final Victory Katy Cowan의 겸직처 Rainwalk Technology(API 내장형 보험). 가입 시 생체 ID 등록 → 청구 시 동일 동물 확인 가설, 수요 미검증. 담당자 소개 제안 확보
+- **뉴욕주 임보 기록 의무의 법적 실체.** 조항·적용 범위·타 주 유사 규정은 검증되지 않았다. 규제 대응을 시장 진입 근거로 활용하려면 먼저 확인해야 한다.
+- **크로스보더 제품.** SPCAI Patriot Pets의 업무 흐름과 추천 단체에서 문제 반복 여부를 확인하고 KK9R 특화 기능과 공통 필요를 구분해야 한다.
+- **보험 BD.** Final Victory Katy Cowan의 Rainwalk Technology 담당자 소개 제안이 있다. 생체 ID와 보험 가입·청구 연결 수요는 미검증이다.
+- **지방정부 계약·반려견 등록.** Luzerne은 유기동물 보호 계약과 별도 등록 사이트를 운영한다. LTBHS의 dog licensing과 함께 현 셸터 파일럿과 분리해서 조사할 사안이다.
 
 ## 읽는 법
 
@@ -196,6 +207,7 @@
 - 판정 열은 등급만 싣는다. 그 등급의 근거와 단서(무엇을 대체하는가·전제가 무엇인가)는 바로 오른쪽 열에 있다
 - **통증 강도는 판단 기준 주체를 함께 표기한다.** 응답자 본인의 통증과 전언으로 옮긴 제3자의 통증은 가중치가 다르다
 - 5절 「특이사항」이 특정 콜에서만 비대해지면, 해당 콜의 인사이트 문서를 별도로 분리한다
-- 번호는 등재 순서다. 14~26번은 2026-09-15에 일괄 추가했고, 14·15번(8/25 콜)은 정리본 확보가 늦어 번호가 콜 순서와 다르다
+- 번호는 등재 순서이며 콜 일자순과 다를 수 있다. 27~29번은 Animal Friends·SPCA of Luzerne County·Pawsitive Transformations다. 28번 날짜는 예약 기록 기준이며 원본 날짜와의 차이는 하위 문서 출처에 명시했다
 - 2차 세션(13·22번)은 별도 행으로 둔다 — 1차와 응답자·범위가 달라 합치면 근거가 섞인다
 - 17번(SPCA International)은 임보·워크플로우가 아니라 KK9R용 크로스보더 기능 데모다. 판정 축은 같되 대상 제품 라인이 다르다
+- 후속 메일 날짜는 KST다. Final Victory 9/17 발언은 9/18 Johnny 답장에 인용된 서신을 근거로 한다. 메일 원문과 연락처는 공개 보드에 싣지 않는다.
