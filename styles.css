@@ -865,3 +865,31 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
   .markdown-body .wm-arrow { transform: rotate(90deg); line-height: 1; }
 }
 @media print { .markdown-body .wm-diagram { break-inside: avoid; } }
+
+/* BEGIN meta-report-scan-20261001 */
+.markdown-body .mrpt-report .mrpt-meta { margin: 0 0 18px; color: var(--muted); font-size: 12px; }
+.markdown-body .mrpt-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0 0 30px; }
+.markdown-body .mrpt-card { min-width: 0; padding: 18px 16px; border: 1px solid var(--line); border-top: 4px solid var(--green); border-radius: 10px; background: var(--soft); }
+.markdown-body .mrpt-card-1 { border-top-color: var(--red); }
+.markdown-body .mrpt-card-2 { border-top-color: var(--amber); }
+.markdown-body .mrpt-card p { margin: 0; }
+.markdown-body .mrpt-card .mrpt-kicker { color: var(--muted); font-size: 12px; font-weight: 700; }
+.markdown-body .mrpt-card .mrpt-card-title { margin: 7px 0 10px; font-size: 19px; line-height: 1.35; font-weight: 800; }
+.markdown-body .mrpt-card .mrpt-card-note { font-size: 13px; line-height: 1.65; }
+.markdown-body .mrpt-card-note strong { color: var(--green); }
+.markdown-body .mrpt-card-1 .mrpt-card-note strong { color: var(--red); }
+.markdown-body .mrpt-report h2 { margin-top: 34px; }
+.markdown-body .mrpt-report h3 { margin-top: 24px; }
+.markdown-body .mrpt-report .mrpt-table { margin: 0; }
+.markdown-body .mrpt-report .table-scroll { margin: 16px 0; overflow-x: auto; }
+.markdown-body .mrpt-report .mrpt-table th, .markdown-body .mrpt-report .mrpt-table td { padding: 11px 12px; vertical-align: top; line-height: 1.65; }
+.markdown-body .mrpt-report .mrpt-table-1 { min-width: 740px; }
+.markdown-body .mrpt-table-1 .mrpt-frequency td { background: var(--mint); }
+.markdown-body .mrpt-table-2 th:first-child, .markdown-body .mrpt-table-2 td:first-child { width: 22%; }
+.markdown-body .mrpt-table-2 th:nth-child(2), .markdown-body .mrpt-table-2 td:nth-child(2) { width: 44%; }
+.markdown-body .mrpt-report details { margin: 14px 0; padding: 11px 14px; border: 1px solid var(--line); border-radius: 7px; background: var(--soft); font-size: 13px; }
+.markdown-body .mrpt-report details summary { cursor: pointer; color: var(--muted); font-weight: 700; }
+.markdown-body .mrpt-report details[open] summary { margin-bottom: 10px; color: var(--green); }
+.markdown-body .mrpt-report details ul { margin: 8px 0 0; }
+@media (max-width: 760px) { .markdown-body .mrpt-summary { grid-template-columns: 1fr; } .markdown-body .mrpt-card { padding: 14px 16px; } }
+/* END meta-report-scan-20261001 */
