@@ -885,8 +885,20 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .markdown-body .mrpt-report .mrpt-table th, .markdown-body .mrpt-report .mrpt-table td { padding: 11px 12px; vertical-align: top; line-height: 1.65; }
 .markdown-body .mrpt-report .mrpt-table-1 { min-width: 740px; }
 .markdown-body .mrpt-table-1 .mrpt-outcome td { background: var(--mint); }
-.markdown-body .mrpt-table-2 th:first-child, .markdown-body .mrpt-table-2 td:first-child { width: 44%; }
-.markdown-body .mrpt-table-2 th:nth-child(2), .markdown-body .mrpt-table-2 td:nth-child(2) { width: 28%; }
+/* Column widths follow the amount of content in each report table. */
+.markdown-body .mrpt-table-1 th:nth-child(1), .markdown-body .mrpt-table-1 td:nth-child(1) { width: 24%; }
+.markdown-body .mrpt-table-1 th:nth-child(2), .markdown-body .mrpt-table-1 td:nth-child(2) { width: 23%; }
+.markdown-body .mrpt-table-1 th:nth-child(3), .markdown-body .mrpt-table-1 td:nth-child(3) { width: 23%; }
+.markdown-body .mrpt-table-1 th:nth-child(4), .markdown-body .mrpt-table-1 td:nth-child(4) { width: 30%; }
+.markdown-body .mrpt-table-2 th:nth-child(1), .markdown-body .mrpt-table-2 td:nth-child(1) { width: 34%; }
+.markdown-body .mrpt-table-2 th:nth-child(2), .markdown-body .mrpt-table-2 td:nth-child(2) { width: 33%; }
+.markdown-body .mrpt-table-2 th:nth-child(3), .markdown-body .mrpt-table-2 td:nth-child(3) { width: 33%; }
+.markdown-body .mrpt-table-3 th:nth-child(1), .markdown-body .mrpt-table-3 td:nth-child(1) { width: 20%; }
+.markdown-body .mrpt-table-3 th:nth-child(2), .markdown-body .mrpt-table-3 td:nth-child(2) { width: 30%; }
+.markdown-body .mrpt-table-3 th:nth-child(3), .markdown-body .mrpt-table-3 td:nth-child(3) { width: 50%; }
+.markdown-body .mrpt-table-4 th:nth-child(1), .markdown-body .mrpt-table-4 td:nth-child(1) { width: 14%; }
+.markdown-body .mrpt-table-4 th:nth-child(2), .markdown-body .mrpt-table-4 td:nth-child(2) { width: 43%; }
+.markdown-body .mrpt-table-4 th:nth-child(3), .markdown-body .mrpt-table-4 td:nth-child(3) { width: 43%; }
 .markdown-body .mrpt-report details { margin: 14px 0; padding: 11px 14px; border: 1px solid var(--line); border-radius: 7px; background: var(--soft); font-size: 13px; }
 .markdown-body .mrpt-report details summary { cursor: pointer; color: var(--muted); font-weight: 700; }
 .markdown-body .mrpt-report details[open] summary { margin-bottom: 10px; color: var(--green); }
