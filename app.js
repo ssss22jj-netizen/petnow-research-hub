@@ -64,12 +64,21 @@ function pageHeader(eyebrow, title, lead) {
    「M2 먼저 · 최신순」으로 정한다 (2026-08-25 카야 지시).
    homeLimit 은 홈에서 먼저 보일 개수 — 나머지는 「더보기」로 그 자리에서 펼쳐진다. */
 const collectionDefinitions = {
+  nose: {
+    title: "비문 사업 탐색",
+    lead: "쉘터 CRM 밖에서 비문 인식을 판매할 사업군을 찾는 탐색 — 후보 산업 검증 계획과 사업군별 리드 확보 실험 기획입니다.",
+    paths: [
+      "deliverables/01_전략·기획/펫푸드영양제_비문서비스_리드확보_기획안_20261002.md",
+      "analysis/비문_wants_수익화_검증계획_20260915.md",
+      "analysis/비문_wants_신분증_사업체목록_20260916.md",
+      "analysis/비문_wants_성취인증_사업체목록_20260916.md",
+      "펫나우_비문인식_현재기능_검증_20260726.md",
+    ],
+  },
   m2: {
     title: "M2 계획·현황",
     lead: "M2 실행 계획과 진행 중인 트랙별 산출물입니다.",
     paths: [
-      "deliverables/01_전략·기획/펫푸드영양제_비문서비스_리드확보_기획안_20261002.md",
-      "analysis/비문_wants_수익화_검증계획_20260915.md",
       "deliverables/M2_실행계획_20260817.md",
       "deliverables/Track2_ICP_v1.2_20260902.md",
       "deliverables/M2_소재H_소구점_정의_및_근거_20260823.md",
@@ -195,7 +204,7 @@ const collectionDefinitions = {
   },
 };
 
-const primaryGroups = ["m2", "results", "interview", "workflow", "competitors", "m1", "methods", "appendix"];
+const primaryGroups = ["m2", "nose", "results", "interview", "workflow", "competitors", "m1", "methods", "appendix"];
 
 /* Markdown 문서가 아닌 목록 항목 — 외부 시트·사이트 내 시각 페이지·하위 컬렉션.
    문서 행과 같은 줄에 섞여 정렬되므로 milestone·date 를 문서와 동일하게 갖는다.
