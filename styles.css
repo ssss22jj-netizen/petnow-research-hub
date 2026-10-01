@@ -913,3 +913,8 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 /* Only the three requested metric rows carry bold emphasis. */
 .markdown-body .mrpt-report .mrpt-table-1 tbody td { font-weight: 400; color: inherit; }
 .markdown-body .mrpt-report .mrpt-table-1 tbody td strong { font-weight: 700; }
+
+/* Result criteria: leave room for the interpretation and next action. */
+.markdown-body .mrpt-table-5 th:nth-child(1), .markdown-body .mrpt-table-5 td:nth-child(1) { width: 29%; }
+.markdown-body .mrpt-table-5 th:nth-child(2), .markdown-body .mrpt-table-5 td:nth-child(2) { width: 30%; }
+.markdown-body .mrpt-table-5 th:nth-child(3), .markdown-body .mrpt-table-5 td:nth-child(3) { width: 41%; }
