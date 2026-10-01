@@ -91,6 +91,7 @@ const collectionDefinitions = {
     title: "실험 결과 보고서",
     lead: "집행한 실험의 성과를 사전 판정 기준으로 대조해 정리한 보고서입니다.",
     paths: [
+      "deliverables/03_성과분석/메타광고_성과현황과_소재확장_실행안_20261001.md",
       "deliverables/M2_소재H_중간성과분석_20260902.md",
       "deliverables/M2_소재H_중간성과분석_20260831.md",
       "deliverables/Track2_최종성과분석_20260818.md",
