@@ -23,12 +23,12 @@ const routes = [
   ["주제별 문서", "/library/competitors", "▥", "경쟁사 조사"],
   /* M1 은 종료된 마일스톤이라 참고 자료 바로 위로 내렸다 (2026-08-25 카야 지시) */
   ["주제별 문서", "/library/m1", "◷", "M1 계획·산출물"],
+  /* 비문 판매 사업군 탐색 — 쉘터 CRM 밖 (2026-10-02 카야 지시) */
+  ["주제별 문서", "/library/nose", "◉", "비문 사업 탐색"],
   ["주제별 문서", "/library/methods", "▧", "출처·분석 방법"],
   /* 사전조사 14건은 출처·분석 방법 아래 한 단계 들어간 페이지에 모은다 (2026-08-25 카야 지시).
      홈·상위 목록에 전부 늘어놓으면 나머지 문서가 묻힌다 */
   ["주제별 문서", "/library/leads", "↳", "리드 사전조사", true],
-  /* 비문 판매 사업군 탐색 — 쉘터 CRM 밖 (2026-10-02 카야 지시) */
-  ["주제별 문서", "/library/nose", "◉", "비문 사업 탐색"],
   ["주제별 문서", "/library/appendix", "◇", "별첨"],
 ];
 
@@ -204,7 +204,7 @@ const collectionDefinitions = {
   },
 };
 
-const primaryGroups = ["m2", "results", "interview", "workflow", "competitors", "m1", "methods", "nose", "appendix"];
+const primaryGroups = ["m2", "results", "interview", "workflow", "competitors", "m1", "nose", "methods", "appendix"];
 
 /* Markdown 문서가 아닌 목록 항목 — 외부 시트·사이트 내 시각 페이지·하위 컬렉션.
    문서 행과 같은 줄에 섞여 정렬되므로 milestone·date 를 문서와 동일하게 갖는다.
