@@ -113,6 +113,7 @@ const collectionDefinitions = {
     parent: "interview",
     lead: "콜별 인터뷰 자료를 최신순으로 모았습니다. 인사이트 정리 문서와, 펫나우 팀이 작성한 원본 정리본(PDF)이 함께 있습니다. PDF 는 새 탭에서 열립니다.",
     paths: [
+      "deliverables/04_인터뷰·데모콜/Loves_Legacy_Rescue_인터뷰_인사이트_20261001.md",
       "deliverables/Pawsitive_Transformations_인터뷰_인사이트_20260922.md",
       "deliverables/Animal_Friends_인터뷰_인사이트_20260921.md",
       "deliverables/Luzerne_SPCA_인터뷰_인사이트_20260921.md",
@@ -216,6 +217,7 @@ const collectionExtras = {
     url: "https://docs.google.com/spreadsheets/d/1wkeSUFVlOBCDuR5_GCHLElfhQyS0cTswEWkXcaSp1Ho/edit?pli=1&gid=0#gid=0",
   }],
   reports: [
+    { kind: "page", newTab: true, title: "Love’s Legacy Rescue · Lara McCaskill", description: "2026-10-01 데모 콜 정리본", role: "정리본 PDF", milestone: "M2", date: "2026-10-01", url: "assets/interview-reports/20261001_Loves_Legacy_Rescue_Lara_McCaskill.pdf" },
     { kind: "page", newTab: true, title: "Pawsitive Transformations · Lauren", description: "2026-09-22 데모 콜 정리본", role: "정리본 PDF", milestone: "M2", date: "2026-09-22", url: "assets/interview-reports/20260922_Pawsitive_Transformations_Lauren.pdf" },
     { kind: "page", newTab: true, title: "Animal Friends · Cara Constantine · Kathy", description: "2026-09-21 데모 콜 정리본", role: "정리본 PDF", milestone: "M2", date: "2026-09-21", url: "assets/interview-reports/20260921_Animal_Friends_Cara_Constantine_Kathy.pdf" },
     { kind: "page", newTab: true, title: "SPCA of Luzerne County · Carol Amos", description: "2026-09-21 데모 콜 정리본", role: "정리본 PDF", milestone: "M2", date: "2026-09-21", url: "assets/interview-reports/20260921_SPCA_of_Luzerne_County_Carol_Amos.pdf" },
