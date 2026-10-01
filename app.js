@@ -15,6 +15,8 @@ const byPath = new Map(docs.map((doc) => [doc.path, doc]));
 const routes = [
   ["문서 찾기", "/", "⌂", "전체 문서"],
   ["주제별 문서", "/library/m2", "◐", "M2 계획·현황"],
+  /* 비문 판매 사업군 탐색 — 쉘터 CRM 밖 (2026-10-02 카야 지시) */
+  ["주제별 문서", "/library/nose", "◉", "비문 사업 탐색"],
   ["주제별 문서", "/library/results", "◈", "실험 결과 보고서"],
   ["주제별 문서", "/library/interview", "◎", "고객 인터뷰"],
   /* 콜별 인터뷰 정리본 PDF 모음 (2026-08-25 카야 지시) */
