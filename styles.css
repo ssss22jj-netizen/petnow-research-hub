@@ -909,3 +909,7 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 /* Meta report: match the shared subdued appendix treatment. */
 .markdown-body .mrpt-report .markdown-appendix > h2 { margin: 0 0 14px; }
 .markdown-body .mrpt-report .markdown-appendix .mrpt-table th, .markdown-body .mrpt-report .markdown-appendix .mrpt-table td { padding: 8px 9px; }
+
+/* Only the three requested metric rows carry bold emphasis. */
+.markdown-body .mrpt-report .mrpt-table-1 tbody td { font-weight: 400; color: inherit; }
+.markdown-body .mrpt-report .mrpt-table-1 tbody td strong { font-weight: 700; }
