@@ -1,0 +1,810 @@
+     261001 Love’s Legacy Rescue Lara McCaskill 인터뷰 인사이트 보고서
+1. 단체 및 인터뷰이
+Love’s Legacy Rescue
+  5명의 자원봉사자가 운영하는 소규모 구조단체.
+  임시보호자 모집·온보딩·관리, 입양, 일부 입소 업무와 임시보호자 소통을 소수 인원이 나눠 담당하고 있
+  음. 30min demo between Johnny Shin …
+  임시보호자 네트워크가 여러 지역에 분산되어 있어, 특정 지역의 임시보호자를 찾거나 지역별 안내를 보
+  낼 때 별도 구분이 필요함. 30min demo between Johnny Shin …
+
+Lara McCaskill
+  Board Member / Treasurer
+  공식 역할 외에도:
+     임시보호자 모집
+     온보딩
+     참여 관리
+     임시보호자 전반 관리
+     입양
+     일부 입소
+     임시보호자 소통
+     에 직접 관여. 30min demo between Johnny Shin …
+  실제 운영 문제를 직접 다루는 실무자임.
+  다만 Board Member / Treasurer라는 직책만으로 소프트웨어 구매 권한까지 있다고 볼 수는 없음.
+  구매 의사결정 권한과 승인 구조는 이번 인터뷰에서 확인되지 않음            .
+
+
+2. 핵심 요약
+  Love’s Legacy의 가장 큰 문제는 단순히 “문자가 많다”는 것이 아니라 임시보호자와 특정 직원 사이의 문
+  자에 정보가 갇혀 팀 전체가 상황을 알지 못하는 것.
+
+  내부 팀은 이미 동물별 Slack 채널을 활용하고 있어 내부 정보 공유 자체는 비교적 잘 구조화되어 있음.
+  문제는 임시보호자가 Slack 밖에 있기 때문에 실제 업데이트가:
+     개인 문자
+     단체 문자
+     Slack
+   공유 이메일
+   등에 흩어진다는 점.
+ 특히 담당자가 여행하거나 자리를 비울 때 임시보호자를 다른 직원에게 넘기는 과정에서 업무 인계가 불
+ 편하고 기존 대화가 전달되지 않는 문제가 있음          . 30min demo between Johnny Shin …
+ Shelterluv는 동물 프로필, 입양·Foster 신청, 자원봉사자 정보, 보고 등에 쓰는 공식 기준 기록.
+ Petify가 Shelterluv를 교체해야 한다는 요구는 확인되지 않았고, Lara는 Petify를 기존 Shelterluv 위에 붙
+ 는 보조 서비스로 설명했을 때 자연스럽게 받아들임. 30min demo between Johnny Shin …
+
+ 자동 check-in과 reminder는 현재 업무와 직접적으로 맞음.
+ 특히 임시보호자가 문제가 생겼을 때만 먼저 연락하는 경우가 많아, 정기적으로 사진·행동·상태 정보를 먼
+ 저 받아오는 구조에 대한 필요가 큼.
+
+ Lara는 Petify가 돈을 낼 가치가 있으려면:
+ a. 평균 입양 기간 감소
+ b. Foster retention 개선
+   이 필요하다고 직접 설명. 30min demo between Johnny Shin …
+ 지역별 임시보호자 검색과 현재 수용 가능 여부 확인도 실제 불편으로 제시됨.
+ Shelterluv API가 제한적이라는 고객 발언은 있었지만, Petify가 필요로 하는 연동 범위까지 불가능하다는
+ 뜻은 아님. 실제 읽기/쓰기 가능 범위는 기술 검증 필요.
+
+ 제품 반응은 긍정적이지만 transcript 기준 명시적인 파일럿 참여 확정은 없음.
+ 가격을 듣고 별도 거부 반응은 없었지만, 가격 수용성이나 실제 구매 의향 역시 확인되지 않음.
+
+
+
+3. 현재 운영 구조
+영역                        현재 방식                      판단
+
+공식 기준 기록                  Shelterluv                 명확한 기준 기록
+
+내부 동물별 소통                 Slack 동물별 채널               비교적 잘 작동
+
+임시보호자 소통                  개인 문자 / 단체 문자              정보가 특정 직원에게 갇힘
+
+신청·일부 업데이트                공유 이메일                     추가 분산
+
+이메일 / 문자 발송               GiveButter                 Shelterluv와 수동 이동
+지역별 임시보호자 구분              수작업                        실제 불편
+
+입양 게시                     Petfinder / Adopt-a-Pet    일부 연동 불완전
+
+Foster 정기 update          필요할 때 직원이 직접 연락            비정형·수작업
+Lara는 Shelterluv를 동물 프로필, 입양 신청, Foster 신청, volunteer 계약, 보고 등에 사용한다고 설명했고,
+기준 기록 역할이 맞느냐는 질문에도 동의함. 30min demo between Johnny Shin …
+
+
+
+4. 기준 기록과 실제 운영 정보
+공식 기준 기록
+
+Shelterluv
+  동물 프로필
+  입양 신청
+  Foster 신청
+  Volunteer 정보
+  보고
+
+등을 관리.
+
+실제 일상 운영 정보
+
+하지만 Foster와 관련된 최신 정보는:
+
+  Shelterluv
+  Slack
+  개인 문자
+  단체 문자
+  공유 이메일
+
+에 나뉘어 있음.
+
+특히 내부 Slack은 동물별로 잘 구성되어 있지만, 실제 Foster의 정보가 자동으로 그 안으로 들어오는 구조
+는 아님.
+
+판단
+
+
+
+ 공식 기준 기록은       Shelterluv이지만, Foster 관련 최신 운영 정보는 여러 채널에 분산되
+ 어 있음    .
+따라서 Petify가 새로운 기준 기록이 될 필요는 없음.
+
+가장 자연스러운 역할은:
+
+ Foster → Petify → 팀 → Shelterluv
+사이의 반복적인 정보 수집과 전달을 구조화하는 것.
+5. 가장 중요한 Pain Point ① 특정 직원의 문자에 갇히는 정보
+Love’s Legacy는 내부적으로 Slack을 활용해 동물마다 별도의 채널을 만들고 있음.
+Lara도 이것이 내부 팀이 상황을 파악하는 데는 좋다고 평가함. 30min demo between Johnny Shin …
+하지만 Foster와의 실제 대화는 특정 직원과의 문자에 남음.
+
+담당자가 여행하거나 자리를 비우면:
+
+  Foster에게 새 담당자를 직접 안내
+  기존 대화는 원래 담당자의 문자에 남음
+  다른 팀원은 앞선 맥락을 알기 어려움
+
+이라는 문제가 발생. 30min demo between Johnny Shin …
+
+핵심 해석
+
+
+문제는 단순한 문자량보다:
+
+ Foster → 특정 직원 → 팀
+이라는 전달 구조.
+
+즉 이번 인터뷰에서도 이전에 반복적으로 확인됐던 직원 간 업무 인계 가시성 문제가 다시 확인됨.
+
+Petify가 줄일 수 있는 것
+  담당자 부재 시 별도 handoff
+  이전 대화 설명
+  “누가 연락했지?” 확인
+  특정 직원 휴대폰에서 최신 정보 찾기
+
+
+
+6. 신규 인사이트 ② Slack 자체는 문제의 중심이 아님
+이번 고객은 Slack을 교체할 필요성이 확인되지 않음.
+
+오히려 Lara는 동물별 Slack 채널이 내부 팀에게 유용하다고 설명함.
+
+따라서
+
+
+Petify가:
+
+ Slack까지 모두 대체하는 내부 커뮤니케이션 도구
+가 되는 것은 현재 요구와 맞지 않음.
+더 적합한 접근은:
+
+ Slack 밖에서 발생하는 Foster 정보를 구조적으로 수집하고 팀이 함께 볼 수 있게 만드
+ 는것
+
+
+임.
+
+제품 판단
+
+
+ Foster check-in → 핵심
+ 팀 전체 update 확인 → 핵심과 가까움
+ Slack replacement → 낮은 우선순위
+
+
+7. 가장 중요한 Pain Point ③ Foster가 먼저 정보를 잘 보내지 않음
+Lara는 Foster가 먼저 정보를 보내는 경우가 많지 않고, 대체로 문제가 생겼을 때 연락한다고 설명. 30min
+demo between Johnny Shin …
+즉 현재 방식에서는:
+
+ 좋은 사진
+ 행동 변화
+ 성격 정보
+ 일상 상태
+
+같은 정보는 구조단체가 직접 요청해야 확보되는 경우가 많음.
+
+Petify와의 적합성
+높음.
+
+자동 check-in은:
+
+ “문제가 있으면 알려주세요”
+에서
+
+ “문제가 없어도 일정한 주기로 필요한 정보를 보내주세요”
+로 운영 방식을 바꿀 수 있음.
+
+특히 Lara가 데모 후:
+
+ structured
+ automated
+ proactive
+ 사진과 세부 정보 reminder
+
+가 좋다고 직접 설명함. 30min demo between Johnny Shin …
+
+
+
+8. 신규 인사이트 ④ 업무의 핵심은 단순 연락보다 ‘능동적 정보 수집’
+현재 Foster 동물에 대해서는:
+
+ “누가 이 Foster에게 연락했어?”
+ “최근에 소식 들었어?”
+ “새 사진 좀 받아줄 수 있어?”
+같은 요청이 반복된다고 설명. 30min demo between Johnny Shin …
+
+해석
+
+
+Petify의 가치는 단순히 메시지를 한 번 덜 보내는 데 있지 않음.
+더 중요한 것은:
+
+ 필요한 정보를 정해진 주기에 요청
+ 미응답 확인
+ 사진·행동·성격 정보를 정기적으로 확보
+ 팀 전체가 결과 확인
+
+하는 구조.
+
+즉 이 고객에게는 정기적인 정보 수집 체계 자체가 제품 가치가 될 가능성이 높음.
+
+
+
+9. 가장 중요한 신규 인사이트 ⑤ 평균 입양 기간이 명확한 ROI 기준
+Johnny가:
+
+ 어떤 결과가 나와야 Petify에 돈을 낼 가치가 있겠는가?
+
+라고 물었을 때 Lara는 가장 먼저:
+
+ Average time to adoption
+을 언급. 30min demo between Johnny Shin …
+
+그리고 이유도 명확히 설명함.
+더 많은:
+
+  사진
+  행동 정보
+  성격 정보
+
+가 있을수록 동물을 더 빠르게 입양시키는 데 도움이 된다는 것.
+
+직접 확인된 연결
+
+
+Foster 정보 수집 증가
+→ 입양 프로필에 쓸 수 있는 정보 증가
+→ 평균 입양 기간 개선 가능성
+주의
+
+
+여기서:
+
+ Petfinder 자동 게시 자체가 입양 기간을 줄인다
+고까지 말한 것은 아님.
+
+따라서 입양 기간과 직접 연결된 것은 Foster 정보·사진·행동 자료의 확보이고, 게시 자동화의 효과는 별도 검
+증해야 함.
+
+
+
+10. 신규 인사이트 ⑥ Foster Retention도 구매 가치 기준
+Lara가 두 번째로 제시한 지표는:
+
+ Foster retention
+임. 30min demo between Johnny Shin …
+
+직접 확인
+
+
+Foster retention이 개선된다면 Petify가 돈을 낼 만한 가치가 있다는 판단 기준으로 제시됨.
+아직 미검증
+
+
+Petify의:
+  자동 check-in
+  일정한 소통
+  구조화된 요청
+
+이 실제로 retention을 높이는지는 아직 확인되지 않음.
+따라서 이는 파일럿에서 측정해볼 지표이지, 현재 입증된 제품 효과는 아님.
+
+
+
+11. 지역별 Foster 검색은 분명한 추가 Pain
+Lara는 Shelterluv의 불편 중 하나로:
+
+ 특정 지역에 있고 현재 capacity가 있는 Foster를 쉽게 찾을 수 없다
+
+는 점을 직접 설명. 30min demo between Johnny Shin …
+
+Foster network가 여러 지역에 있기 때문에:
+  특정 지역 행사
+  특정 지역 임시보호 필요
+  지역별 안내
+
+가 있을 때 전체에게 같은 메시지를 보내기 어렵고, 대상자를 별도로 구분해야 함. 30min demo between
+Johnny Shin …
+제품 의미
+
+
+단순 Foster 명단보다:
+
+  지역
+  현재 가능 여부
+  수용 가능한 동물 유형
+
+등을 활용하는 구조가 필요할 가능성이 있음.
+
+분류
+
+
+현재 핵심 기능은 아니지만 자연스러운 확장 영역
+
+
+또한 Foster availability / matching은 다른 인터뷰에서도 반복해서 나온 주제이므로 계속 검증할 가치가 있
+음.
+
+
+
+12. Shelterluv → GiveButter 수동 작업도 명확한 문제
+현재 Love’s Legacy는 GiveButter를 donor management뿐 아니라 이메일과 문자 발송에도 활용.
+
+문제는 Shelterluv와 원하는 방식으로 연결되지 않아:
+
+1. Shelterluv에서 export
+2. GiveButter로 import
+3. 대상자 구분
+4. 이메일 / 문자 발송
+과정을 수동으로 해야 한다는 것.
+
+Lara는 이를 직접 “challenge”라고 표현. 30min demo between Johnny Shin …
+Petify와의 관계
+Petify가:
+  필요한 Foster를 기준 기록에서 불러오고
+  대상자를 구분하고
+  문자 / 이메일 check-in을 발송
+
+할 수 있다면 이 반복 업무의 일부를 직접 줄일 수 있음.
+
+다만 GiveButter 전체를 대체할 필요는 없음.
+
+
+
+13. Shelterluv 연동: 높은 필요성, 가능 범위는 미확인
+Lara는 Shelterluv에 API가 있기는 하지만 **“really limited”**라고 설명. 30min demo between Johnny
+Shin …
+데모에서는:
+
+ Foster update → 직원 검토 → Shelterluv에 반영
+하는 구조가 제시됐고 Lara는 이에 긍정적으로 반응함. 30min demo between Johnny Shin …
+
+정확한 판단
+
+
+직접 확인된 것
+
+  Shelterluv API가 고객이 원하는 모든 연동을 지원하지 않음.
+  GiveButter와 원하는 형태의 데이터 연결이 되지 않아 수동 작업을 하고 있음.
+  Petify의 Shelterluv 반영 구조에는 관심이 있음.
+아직 확인되지 않은 것
+
+  Petify가 필요로 하는 동물 정보 조회가 가능한가
+  Foster assignment 조회가 가능한가
+  note / behavior / photo 등을 write할 수 있는가
+  어느 필드까지 양방향 연동 가능한가
+
+따라서
+
+
+Shelterluv 연동 필요성: 높음
+              :
+연동 가능 범위 기술 검증 필요
+
+
+로 보는 것이 정확함.
+
+‘기술 위험이 높다’고 단정할 근거까지는 아직 없음.
+
+
+14. Adoption Publishing의 중요도
+Lara는 Petfinder와 Adopt-a-Pet을 이미 사용하고 있으며, Petfinder가 Shelterluv와 연결되어 있지 않다는
+점도 언급. 30min demo between Johnny Shin …
+
+또 Petify에서:
+
+ Foster에게 능동적으로 사진과 정보를 요청하고
+ Shelterluv나 Petfinder로 이어지는 구조
+가 도움이 될 것이라고 긍정적으로 반응. 30min demo between Johnny Shin …
+
+판단
+
+
+Publishing 자체는 이번 고객에게 의미 있는 보조 기능.
+다만 현재 가장 강한 문제는:
+
+ publishing 버튼을 누르는 과정
+보다
+
+                        ·   ·
+ 게시할 만한 최신 사진 행동 성격 정보를 제때 확보하지 못하는 것
+
+
+에 가까움.
+
+따라서 우선순위는:
+
+정보 수집   → 기록 정리 → 게시
+순으로 보는 것이 적절.
+
+
+
+15. 모바일 접근성
+Lara는 Petify가 모바일 앱인지 직접 질문했고, Shelterluv는 모바일 최적화가 잘 되어 있지 않다고 언급.
+30min demo between Johnny Shin …
+따라서 모바일 접근성이 장점인 것은 분명함.
+
+다만 Front Street 사례처럼:
+ 컴퓨터로 돌아가야 해서 현장 업무 자체가 막힌다
+
+는 수준의 핵심 문제는 아니었음.
+
+판단
+
+
+           :
+모바일 친화성 긍정 요소
+
+
+            :
+핵심 구매 이유 아직 확인되지 않음
+
+
+
+
+16. 상대의 제품 이해도
+  :
+판단 높음
+
+
+Lara는 데모 이후 Petify를:
+ Foster check-in 자동화
+ reminder
+ 사진 / 정보 수집
+ Shelterluv에 연결
+ 입양 게시 보조
+
+로 이해.
+
+Johnny가 Petify는 Shelterluv를 대체하기보다 기존 시스템의 빈틈을 메우는 서비스라고 설명했을 때 자연
+스럽게 동의함. 30min demo between Johnny Shin …
+
+중요한 점
+
+
+이번 인터뷰에서는 Petify를:
+
+ full CRM
+ 별도 medical system
+ Slack replacement
+ donor management system
+으로 확대해서 요구하지 않았음.
+
+해석
+
+
+현재    Petify의 Add-on 포지셔닝과 고객 기대가 비교적 잘 맞는 사례.
+다만 이는 고객의 직접 표현이 아니라 인터뷰 전체를 토대로 한 해석.
+
+
+
+17. 기능 요구사항 분류
+요구 / 아이디어               분류           판단
+
+정기 Foster check-in      현재 핵심        높은 적합성
+
+자동 reminder             현재 핵심        직접 요청
+
+Text / Email 발송         현재 핵심        기존 수작업 대체
+
+No-app / No-login       현재 핵심        사용 마찰 낮음
+
+건강 / 행동 / 사진 요청         현재 핵심        실제 업무와 직접 연결
+
+Needs Review            현재 핵심        별도 반대 없음
+
+Foster update history   현재 핵심과 가까움   정보 분산 해결
+
+Shelterluv 데이터 연동       기술 검증 필요     중요도 높음
+
+지역별 Foster 검색           자연스러운 확장     직접적인 현재 pain
+
+Foster availability     자연스러운 확장     지역별 검색과 연결
+
+Petfinder 게시            보조 기능        유용성 긍정
+
+Adopt-a-Pet 게시          보조 기능        현재 사용 중
+
+Slack 대체                낮은 우선순위      현재 내부 사용은 잘 작동
+
+GiveButter 전체 대체        범위 밖         donor management 포함
+Full CRM replacement    현재 요구 아님     Shelterluv 유지 방향과 정렬
+
+
+
+18. 요구사항 우선순위
+실제 핵심   Pain
+ Foster에게 먼저 연락해야 정보가 들어옴
+ 개인 문자에 정보가 갇힘
+ 담당자 부재 시 업무 인계 어려움
+ 사진·행동·성격 정보 수집이 그때그때 이루어짐
+ Slack / 문자 / 공유 이메일에 업데이트가 흩어짐
+ 특정 지역의 Foster를 찾고 구분하는 작업이 수동적임
+
+데모와 직접 연결된 요구
+ 정기 check-in
+ 자동 reminder
+ 사진·상태 정보 요청
+ Shelterluv 자동 반영
+ Petfinder 연결
+자연스러운 확장
+
+
+ 지역별 Foster 검색
+ Foster availability
+ Foster matching
+낮은 우선순위 또는 현재 불필요
+
+
+ Slack 대체
+ Full CRM replacement
+ GiveButter 전체 대체
+
+
+19. 실제로 줄일 수 있는 업무
+Petify가 현재 구조와 잘 연결된다면 다음 업무를 줄일 가능성이 있음.
+ Foster마다 개별적으로 check-in 문자 발송
+ “누가 연락했어?” 확인
+ 미응답 Foster 재확인
+ “최근 사진 받아줄래?” 요청
+ 담당자 부재 시 개별 Foster 연락처 handoff
+ 문자·Slack·공유 이메일을 오가며 최신 업데이트 찾기
+ Shelterluv에서 대상자를 export해 다른 communication tool로 옮기는 일부 반복 업무
+ 확보한 정보를 다시 기준 기록으로 정리
+
+가장 직접적인 변화
+
+
+현재:
+
+ “Did you check in with so-and-so?”
+ “Have you heard from so-and-so?”
+ “Can you get updated pictures?”
+라는 식으로 돌아가는 비정기적인 확인 업무를 정해진 check-in과 reminder로 바꾸는 것. 30min demo
+between Johnny Shin …
+
+
+20. 가장 적합한 파일럿 범위
+이번 고객은 처음부터 범위를 크게 잡을 필요가 없음.
+
+1단계 — 대상 동물 / Foster 불러오기
+Shelterluv에서 실제 가능한 범위 내:
+  동물
+  Foster
+  담당자
+  지역
+  기본 상태
+
+2단계 — 정기 Check-in
+예:
+
+  건강
+  행동
+  성격
+  사진
+
+을 주간 또는 필요한 주기로 자동 요청.
+
+3단계 — Reminder
+미응답 Foster에게 자동 재요청.
+
+4단계 — 팀 전체 가시성
+팀이:
+
+  발송 여부
+  응답 여부
+  overdue
+  review 여부
+  최근 update
+
+를 함께 확인.
+
+5단계 — Shelterluv 연동
+기술적으로 가능한 항목부터 검토된 정보를 Shelterluv에 반영.
+
+6단계 — 입양 정보 활용
+Foster가 제출한:
+  사진
+  행동
+  성격
+
+정보를 입양 프로필 작성에 활용.
+
+Petfinder 자동 게시까지 포함할지는 실제 연동 가능성과 현재 작업 시간을 확인한 뒤 결정.
+
+
+21. 가장 중요한 파일럿 가설
+ Foster에게 정기적으로 사진·행동·상태 정보를 요청하고 미응답을 자동으로 관리하면,
+ Love’s Legacy의 분산된 확인 업무가 줄고 입양에 필요한 최신 정보를 더 안정적으로
+ 확보할 수 있는가?
+
+
+그리고 2차적으로:
+
+ 그 정보 증가가 실제 평균 입양 기간과                   Foster retention 변화로 이어지는가?
+를 측정할 수 있음.
+
+첫 번째는 현재 제품의 직접적인 검증 가설이고, 두 번째는 Lara가 제시한 성과 지표를 검증하는 가설.
+
+
+
+22. 파일럿 가능성
+자동 회의록에는 Love’s Legacy가 파일럿 참여에 합의했다고 적혀 있음. 30min demo between Johnny
+Shin …
+하지만 transcript 기준으로는 공식 확정이라고 보기 어려움.
+
+직접 확인된 긍정 신호
+
+
+  데모 후 “I think this is great.”이라고 평가.
+  구조화되고 자동화된 check-in이 도움이 될 것이라고 직접 설명.
+  3개월 무료 파일럿 설명에도 긍정적으로 반응.
+  후속 회의와 팀원 초대 제안에 “That sounds good.”이라고 답함. 30min demo between Johnny Shin …
+  30min demo between Johnny Shin …
+하지만
+ “I want to join the pilot.”
+ “Yes, we will participate.”
+와 같은 명시적인 참여 선언은 없음.
+
+ 후속 회의를 실제 예약한 것도 transcript에서는 확인되지 않음.
+
+판단
+
+
+파일럿 관심 긍정적:
+파일럿 가능성 중상    :
+공식 파일럿 확정 아직 아님   :
+가장 중요한 다음 신호는 실제 후속 roundtable 예약 여부.
+
+
+
+23. Commercial Signal
+이번 인터뷰에서 좋은 점은 Lara가 단순히 제품이 좋다고 한 것이 아니라 어떤 성과가 나와야 돈을 낼 가치가
+있는지 직접 설명했다는 것            .
+직접 확인된 구매 가치 기준
+
+
+ 평균 입양 기간 감소
+ Foster retention 개선 30min demo between Johnny Shin …
+가격
+
+
+Johnny는 예상 가격으로:
+ 월 $99~149
+ 추가 customization 시 조금 더
+
+를 설명.
+
+Lara는 이에 별도의 반대나 긍정적인 가격 수용 의사를 밝히지 않음. 30min demo between Johnny Shin …
+따라서
+
+
+확인된 것:
+
+ 돈을 낼 가치의 기준을 가지고 있음.
+
+확인되지 않은 것:
+
+ 실제 예산
+ 월 $99~149 수용 가능 여부
+ 최종 구매 권한
+ 현재 Shelterluv / GiveButter 관련 비용
+ 유료 전환 의향
+
+판단
+
+
+유료 가능성 미확인 :
+단, 상업적 가치 판단 기준은 명확하게 확인됨.
+
+
+
+24. 전체 신호 평가
+항목                           판단
+
+Foster communication 문제      강함
+
+
+정보 분산                        강함
+
+
+담당자 부재 / 업무 인계 문제            강함
+
+
+Foster의 능동적 update 부족        강함
+
+
+정기 check-in 자동화 수요           높음
+
+
+자동 reminder 수요               높음
+
+
+사진 / 행동 정보 수집 수요             높음
+
+
+Shelterluv 기준 기록 역할          명확
+
+
+Shelterluv 교체 요구             확인되지 않음
+
+
+Add-on 구조 적합성                높음   / 해석
+Shelterluv 연동 필요성            높음
+
+
+Shelterluv 연동 가능 범위          기술 검증 필요
+
+
+Slack 대체 필요성                 낮음
+
+
+지역별 Foster 검색                명확한 추가 수요
+
+
+Foster availability          자연스러운 확장 후보
+
+
+Adoption publishing          긍정적 보조 기능
+
+
+평균 입양 기간                     명확한   ROI 기준
+Foster retention             명확한   ROI 기준
+모바일 접근성                           긍정 요소
+
+
+제품 이해도                            높음
+
+
+파일럿 관심                            긍정적
+
+
+파일럿 가능성                           중상
+
+
+공식 파일럿 확정                         아직 아님
+
+
+가격 수용성                            미확인
+
+
+유료 가능성                            미확인
+
+
+
+
+최종 인사이트
+
+Love’s Legacy의 핵심 문제는 Foster와 연락할 수단이 없다는 것이 아니라, 개인 문자에서 발생한 정보를
+팀 전체의 운영 정보로 연결하기 어렵다는 것.
+
+내부 Slack은 이미 동물별로 잘 사용되고 있으므로 이를 대체하는 것은 우선순위가 낮음.
+Petify가 가장 직접적으로 해결할 수 있는 부분은 Foster에게 먼저 연락하고, 답변을 기다리고, 다시
+follow-up하고, 사진을 요청하는 비정기적 업무를 구조화된 정기 check-in으로 바꾸는 것.
+Foster가 문제가 있을 때만 먼저 연락하는 현재 방식 때문에 입양에 필요한 사진·행동·성격 정보가 충분히
+쌓이지 않는 문제가 있음.
+Lara가 평균 입양 기간과 Foster retention을 지불 가치 판단 기준으로 직접 제시했다는 점은 이번 인터뷰
+의 가장 중요한 신규 인사이트 중 하나.
+다만 “Petfinder 자동 게시가 입양 기간을 줄인다”까지 확인된 것은 아님. 직접 확인된 연결은 더 많은 사진
+·행동·성격 정보 → 더 빠른 입양 가능성임.
+지역별 Foster 검색은 실제 현재 업무의 명확한 불편이며, 다른 인터뷰에서도 반복적으로 나타난 Foster
+availability / matching 수요와 연결됨.
+Shelterluv 연동은 중요하지만, 고객이 API가 제한적이라고 말한 사실만으로 연동 위험이 높다고 단정할
+수 없음. 실제 Petify에 필요한 읽기·쓰기 범위를 기술적으로 확인해야 함.
+Shelterluv 교체 요구는 확인되지 않았으며, Lara는 Petify를 기존 CRM 위에 붙는 Add-on으로 설명했을
+때 자연스럽게 받아들임.
+제품 반응과 후속 회의에 대한 태도는 긍정적이지만 transcript상 파일럿 참여를 명시적으로 확정한 것은
+아님.
+
+가격을 듣고 거부하지 않았다는 이유만으로 가격 수용성이 있다고 볼 수도 없음. 현재 단계에서 유료 가능
+성은 미확인이 가장 정확함.
+가장 좋은 후속 단계는 추가 기능을 넓게 논의하기보다, 실제 운영 담당자들과 함께 정기 check-in →
+reminder → 팀 공유 → Shelterluv 반영 흐름을 얼마나 단순하게 구현할 수 있는지 확인하는 roundtable
+임.
+

@@ -68,6 +68,7 @@ const collectionDefinitions = {
     title: "M2 계획·현황",
     lead: "M2 실행 계획과 진행 중인 트랙별 산출물입니다.",
     paths: [
+      "deliverables/01_전략·기획/펫푸드영양제_비문서비스_리드확보_기획안_20261002.md",
       "analysis/비문_wants_수익화_검증계획_20260915.md",
       "deliverables/M2_실행계획_20260817.md",
       "deliverables/Track2_ICP_v1.2_20260902.md",
