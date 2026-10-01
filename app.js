@@ -15,8 +15,6 @@ const byPath = new Map(docs.map((doc) => [doc.path, doc]));
 const routes = [
   ["문서 찾기", "/", "⌂", "전체 문서"],
   ["주제별 문서", "/library/m2", "◐", "M2 계획·현황"],
-  /* 비문 판매 사업군 탐색 — 쉘터 CRM 밖 (2026-10-02 카야 지시) */
-  ["주제별 문서", "/library/nose", "◉", "비문 사업 탐색"],
   ["주제별 문서", "/library/results", "◈", "실험 결과 보고서"],
   ["주제별 문서", "/library/interview", "◎", "고객 인터뷰"],
   /* 콜별 인터뷰 정리본 PDF 모음 (2026-08-25 카야 지시) */
@@ -29,6 +27,8 @@ const routes = [
   /* 사전조사 14건은 출처·분석 방법 아래 한 단계 들어간 페이지에 모은다 (2026-08-25 카야 지시).
      홈·상위 목록에 전부 늘어놓으면 나머지 문서가 묻힌다 */
   ["주제별 문서", "/library/leads", "↳", "리드 사전조사", true],
+  /* 비문 판매 사업군 탐색 — 쉘터 CRM 밖 (2026-10-02 카야 지시) */
+  ["주제별 문서", "/library/nose", "◉", "비문 사업 탐색"],
   ["주제별 문서", "/library/appendix", "◇", "별첨"],
 ];
 
@@ -72,8 +72,6 @@ const collectionDefinitions = {
     paths: [
       "deliverables/01_전략·기획/펫푸드영양제_비문서비스_리드확보_기획안_20261002.md",
       "analysis/비문_wants_수익화_검증계획_20260915.md",
-      "analysis/비문_wants_신분증_사업체목록_20260916.md",
-      "analysis/비문_wants_성취인증_사업체목록_20260916.md",
       "펫나우_비문인식_현재기능_검증_20260726.md",
     ],
   },
@@ -206,7 +204,7 @@ const collectionDefinitions = {
   },
 };
 
-const primaryGroups = ["m2", "nose", "results", "interview", "workflow", "competitors", "m1", "methods", "appendix"];
+const primaryGroups = ["m2", "results", "interview", "workflow", "competitors", "m1", "methods", "nose", "appendix"];
 
 /* Markdown 문서가 아닌 목록 항목 — 외부 시트·사이트 내 시각 페이지·하위 컬렉션.
    문서 행과 같은 줄에 섞여 정렬되므로 milestone·date 를 문서와 동일하게 갖는다.
