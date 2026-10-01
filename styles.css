@@ -905,3 +905,7 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .markdown-body .mrpt-report details ul { margin: 8px 0 0; }
 @media (max-width: 760px) { .markdown-body .mrpt-summary { grid-template-columns: 1fr; } .markdown-body .mrpt-card { padding: 14px 16px; } }
 /* END meta-report-scan-20261001 */
+
+/* Meta report: match the shared subdued appendix treatment. */
+.markdown-body .mrpt-report .markdown-appendix > h2 { margin: 0 0 14px; }
+.markdown-body .mrpt-report .markdown-appendix .mrpt-table th, .markdown-body .mrpt-report .markdown-appendix .mrpt-table td { padding: 8px 9px; }
