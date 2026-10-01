@@ -884,7 +884,7 @@ kbd { padding: 2px 6px; border: 1px solid #ced9d2; border-radius: 5px; backgroun
 .markdown-body .mrpt-report .table-scroll { margin: 16px 0; overflow-x: auto; }
 .markdown-body .mrpt-report .mrpt-table th, .markdown-body .mrpt-report .mrpt-table td { padding: 11px 12px; vertical-align: top; line-height: 1.65; }
 .markdown-body .mrpt-report .mrpt-table-1 { min-width: 740px; }
-.markdown-body .mrpt-table-1 .mrpt-frequency td { background: var(--mint); }
+.markdown-body .mrpt-table-1 .mrpt-outcome td { background: var(--mint); }
 .markdown-body .mrpt-table-2 th:first-child, .markdown-body .mrpt-table-2 td:first-child { width: 22%; }
 .markdown-body .mrpt-table-2 th:nth-child(2), .markdown-body .mrpt-table-2 td:nth-child(2) { width: 44%; }
 .markdown-body .mrpt-report details { margin: 14px 0; padding: 11px 14px; border: 1px solid var(--line); border-radius: 7px; background: var(--soft); font-size: 13px; }
