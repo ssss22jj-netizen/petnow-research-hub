@@ -18,7 +18,7 @@
 | 통증 가설 | 우리 가설이 그 조직에선 가설이 아니라 구조 | 통증 위치가 우리 제품과 어긋남 |
 | 타이밍 | 도구 선택·예산 편성 창이 열려 있음 | 예산 확정·위기 대응 중이라 닫혀 있음 |
 
-기준일 2026-09-16 · 사전조사 완료 84건
+기준일 2026-09-16 · 사전조사 완료 85건
 
 | # | 소재 | 조직 | 실측 규모 | 결정·조달 | 통증 가설 | 타이밍 | 콜에서 확인 |
 | ---: | :---: | --- | --- | --- | --- | --- | --- |
@@ -106,6 +106,7 @@
 | 86 | B | **The charlie project dog rescue**<br>미팅 11/3 | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | — |
 | 87 | B | **LA County Animal Care and Control**<br>미팅 없음 | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | — |
 | 88 | B | **Sit Happens Rescue**<br>미팅 10/19 | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | — |
+| 89 | B | **Milwaukee Area Domestic Animal Control Commission**<br>미팅 10/7 | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | — |
 
 `[정황]` 공개자료에서 끌어낸 추론이라 콜에서 확인해야 한다 · `[미확인]` 찾지 못했다 · 표기 없으면 확인된 사실
 
@@ -194,6 +195,7 @@
 <a class="compact-doc-row" href="../analysis/The_charlie_project_dog_rescue_사전조사_20260930.md"><span class="compact-doc-number">82</span><span class="compact-doc-copy"><strong>The charlie project dog rescue 사전조사</strong><small>Mara Sabath · Director of Operations (창업자 아님 — Founder 는 Pam Stadler, 990 등재 임원도 Pamela Stadler 1인). 본업은 Buffalo Grove 의 이벤트 기획사 Memorable Events 대표(2차 요약). 이 조직의 입양은 월 1회 행사로 돌아가므로 행사 운영 언어가 그대로 먹힌다 — 기능 설명 대신 '10/24 행사 때 어느 개를 누가 데려왔나'로 연다.</small></span><span class="compact-doc-role">사전조사</span><span class="compact-doc-arrow">→</span></a>
 <a class="compact-doc-row" href="../analysis/LA_County_Animal_Care_and_Control_사전조사_20261001.md"><span class="compact-doc-number">83</span><span class="compact-doc-copy"><strong>LA County Animal Care and Control 사전조사</strong><small>Christine Quesada · Volunteer Programs Director (부서 임원 9인 명단에는 없는 프로그램 실무 책임자, 자원봉사 서비스는 Deputy Director Chris Cirar 소관). 자원봉사와 포스터가 같은 우산 아래 있고 두 지원 폼 모두 Volgistics 다 — 사람 축 도구는 이미 있으니 '개체 축'으로 열어야 한다. 첫 질문은 '봉사자 관리는 Volgistics 로 하시는 것 같은데, 나가 있는 동물 쪽은 어디서 보세요?'</small></span><span class="compact-doc-role">사전조사</span><span class="compact-doc-arrow">→</span></a>
 <a class="compact-doc-row" href="../analysis/Sit_Happens_Rescue_사전조사_20261001.md"><span class="compact-doc-number">84</span><span class="compact-doc-copy"><strong>Sit Happens Rescue 사전조사</strong><small>Leslie Amaral · Executive director or founder (IRS care-of 명의, 공개 자료에 다른 임원 이름 0명 — 사실상 1인 운영). 설립 8개월차인데 ShelterLuv·Adopt-a-Pet·CUDDLY 를 직접 붙인 운영자이고, 의료비를 단가로 공표하는 사람이다. 첫 질문은 'ShelterLuv 쓰신다고 하셨는데 Fosterluv 쪽도 켜 두셨어요? 포스터분들이 직접 체중·사진 올리시나요?' — 중복 반론을 선점하고 들어가야 한다.</small></span><span class="compact-doc-role">사전조사</span><span class="compact-doc-arrow">→</span></a>
+<a class="compact-doc-row" href="../analysis/Milwaukee_Area_Domestic_Animal_Control_C_사전조사_20261002.md"><span class="compact-doc-number">85</span><span class="compact-doc-copy"><strong>Milwaukee Area Domestic Animal Control Commission 사전조사</strong><small>Karen Sparapani · Executive Director 겸 Humane Officer, ED 13년차(2013-02 취임, 직전 Elmbrook Humane Society ED). 콜 6일 전인 2026-10-01 에 5쪽 신규 입양·전원 전략문을 본인 서명으로 공표한 사람이고, 거기서 쓴 단어가 length of stay·pathway·transfer partner tier·모니터링 지표다. 그 언어로 들어가야 하고 '기부자 리포트'·'소규모 레스큐'·'쉘터 SW 교체'는 통하지 않는다. 자기 조직 문제를 공개적으로 직설하는 타입(2024-05 WISN '큰 위기다, 이런 건 살면서 본 적 없다')이라 과밀·수기 업무를 에둘러 물을 필요가 없다. 첫 질문은 '14일 지나면 입양비를 내리고 7일마다 또 내리신다고 하셨는데, 그 시계랑 Tier2 Day5 19시 홀드는 지금 무엇으로 돌리고 계세요?' 다.</small></span><span class="compact-doc-role">사전조사</span><span class="compact-doc-arrow">→</span></a>
 </div>
 
 정본은 `analysis/raw/leads.json` 이고 이 문서는 `site/build-leads.py` 가 생성한다.

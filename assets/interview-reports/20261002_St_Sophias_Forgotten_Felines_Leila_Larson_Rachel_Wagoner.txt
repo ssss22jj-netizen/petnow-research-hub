@@ -1,0 +1,904 @@
+261002 St. Sophia’s Forgotten Felines Leila Larson / Rachel Wagoner 인터뷰 인사이트
+보고서
+1. 단체 및 인터뷰이
+St. Sophia’s Forgotten Felines
+  고양이 중심 shelter / rescue.
+  인터뷰 당시 약 30명의 Foster를 관리.
+  Foster 동물뿐 아니라 자체 시설의 shelter cat도 함께 관리.
+  특히:
+     백신 일정
+     의료 상태
+     체중
+     수술 준비
+     Foster별 동물 배치
+     등을 지속적으로 추적해야 하는 운영 구조.
+  일부 Foster는 한 번에 10~15마리, 또는 여러 litter와 성묘를 동시에 맡기도 함.
+
+Leila Larson / Rachel Wagoner
+  둘 다 Foster Coordinator.
+  주요 업무:
+     Foster communication
+     일정 관리
+     백신 관리
+     데이터 입력
+     고양이 intake
+     행사
+     일부 social media
+  Foster 운영의 실제 실무자.
+  소프트웨어 구매나 가격 결정 권한은 없음.
+  최종 검토는 Shelter Director 및 leadership team이 담당.
+  이번 Petify 검토도 Shelter Director가 먼저 정보를 전달하면서 시작됨.
+
+
+
+2. 핵심 요약
+  이번 조직의 핵심 문제는 단순히 Foster에게 연락하는 일이 많다는 것이 아니라, 의료·상태 업데이트가
+  group chat과 Messenger에 비정형적으로 남아 중요한 요청과 단순 코멘트를 구분하기 어렵다는 것.
+Foster가 “오늘 litter box를 안 썼다”처럼 내용을 남겨도 직원 입장에서는 단순 공유인지 실제 대응 요청인
+지 알기 어려워, 나중에 Foster는 “왜 대응하지 않았느냐”고 느끼는 상황까지 발생.
+즉 중요한 신규 인사이트는:
+
+                  ‘       ’
+정보가 있는 것과 처리해야 할 문제 로 등록되는 것은 다르다           .
+Petstablished는:
+  의료기록
+  입양 프로필
+  계약
+  동물 데이터
+  등을 처음부터 끝까지 관리하는 공식 기준 기록.
+하지만 Foster communication history는 Petstablished에 정식으로 쌓이지 않고, 사실상 직원 기억 +
+group chat에 남음.
+과거 별도의 medical update form을 도입했지만 Foster가 지속적으로 작성하지 않아 정착에 실패.
+따라서 Petify의 가치는 새로운 form을 하나 더 만드는 것이 아니라:
+  정기 요청
+  reminder
+  모바일에서 간단한 응답
+  미응답 추적
+  문제 여부 구분
+  직원 검토
+  기준 기록 반영
+  을 하나의 흐름으로 만드는 데 있음.
+Kitten / litter 운영 비중이 높아 batch check-in은 매우 중요한 사용성 조건.
+또 이번 인터뷰에서는:
+  이름 변경 추적
+  수술 가능 체중 도달
+  특정 medical milestone
+  같은 이벤트 기반 알림 수요가 새롭게 드러남.
+Rachel은 현재 Google Drive, Petstablished, Asana 등 여러 도구에 같은 정보를 나눠 관리하면서 일부가
+오래된 정보로 남는다고 설명.
+따라서 이 고객에게 Petify의 가장 자연스러운 위치는 Petstablished를 교체하는 CRM이 아니라, 여러 운
+영용 tracker와 Foster communication을 줄여주는 자동화층.
+
+제품 반응은 긍정적이지만 파일럿은 아직 확정되지 않음.
+  가격도 실무자들이 결정할 수 없어 수용성은 미확인.
+
+
+
+3. 현재 운영 구조
+ 영역                              현재 방식                            판단
+
+ 공식 동물 기록                        Petstablished                    명확한 기준 기록
+
+ 의료 기록                           Petstablished + Google Drive 일   운영상 분산
+                                 부
+
+ 입양 프로필                          Petstablished                    이미 해결
+
+ 입양 계약                           Petstablished                    이미 해결
+
+ Foster communication            Group chat / Messenger           비정형
+
+ Foster update history           정식 기록 거의 없음                      핵심 공백
+
+ 의료 update form                  과거 사용 시도                         정착 실패
+
+ 업무 / Foster pathway             Asana 및 자체 tracker               분산
+
+ Foster별 동물 현황                   여러 도구에서 관리                       최신성 문제
+
+ 다수 동물 관리                        개별 + 수작업                         Litter 단위 개선 필요
+
+
+
+4. 기준 기록과 실제 운영 정보
+공식 기준 기록
+
+Petstablished
+Leila와 Rachel은 Petstablished에:
+  전체 동물 데이터
+  의료 기록
+  입양 프로필
+  입양 계약
+
+등을 저장하며, Rachel은 사실상 “처음부터 끝까지” 사용한다고 설명.
+
+따라서 공식 기준 기록은 비교적 명확함.
+
+실제   day-to-day 운영
+반면 Foster와 관련된 실제 최신 정보는:
+
+ Group chat
+ Messenger
+ 직원 기억
+ Google Drive
+ Asana
+ 자체 Foster pathway
+
+등에 분산.
+
+중요한 구분
+
+
+
+ 공식 기록은       Petstablished이지만 실제 Foster 운영 과정은 Petstablished 하나로 끝나
+ 지 않음    .
+따라서 Petify가 Petstablished를 대체할 이유는 현재 보이지 않음.
+
+더 적합한 방향은:
+
+ Foster communication + operational tracking → Petify → Petstablished
+구조.
+
+
+
+5. 가장 중요한 Pain Point ① 단순 코멘트와 실제 ‘문제’를 구분하기 어렵다
+이번 인터뷰에서 상당히 중요한 사례.
+
+Foster가 group chat에서:
+
+ “오늘 이 고양이가 litter box를 안 썼어요.”
+라고 이야기했을 때 직원 입장에서는:
+
+ 그냥 오늘 있었던 일 공유인지
+ 계속되는 문제인지
+ 의료적으로 확인해달라는 요청인지
+
+명확하지 않을 수 있음.
+
+그런데 나중에 Foster는:
+
+ 이야기했는데 왜 대응하지 않았느냐
+고 느낄 수 있음.
+
+핵심 해석
+
+
+문제는 단순 정보 누락만이 아님.
+
+                      ‘   ’ ‘           ’
+ 비정형 대화 안에서는 참고 정보 와 직원이 처리해야 할 요청 의 경계가 불명확하다         .
+Petify 시사점
+단순한 자유 입력보다:
+
+  Doing well
+  Something changed
+  Needs attention
+같은 구조화된 상태 선택이 실제로 의미가 있음.
+
+즉 Foster가 메시지를 보내는 순간:
+
+ “이것은 직원이 대응해야 하는 건이다.”
+라는 의미까지 같이 전달할 수 있어야 함.
+
+
+
+6. 신규 인사이트 ② Formal reporting의 부재가 직원 간 의료 인계를 어렵게 함
+현재 Foster update는 정식 기록으로 거의 남지 않음.
+
+Leila는 사실상:
+
+ 직원들의 머릿속과 group chat에 남아 있다
+
+고 설명.
+
+이 때문에 다른 직원이 의료 업무를 대신하게 되면:
+
+  어떤 치료를 했는지
+  몇 회 진행했는지
+  어떤 증상이 남아 있는지
+
+를 다시 Foster에게 물어봐야 함.
+
+실제 예:
+
+  설사 치료
+  flea treatment
+  Panacur 투약
+등에서:
+
+ “지금까지 뭘 했나요?”
+ “몇 번째 round인가요?”
+를 다시 확인해야 함.
+
+핵심
+
+
+이 고객에게 Pet-linked history는 단순 기록 편의 기능이 아니라:
+
+ 직원 간 의료 인계를 위한 공통 기억
+
+
+역할을 할 수 있음.
+
+
+
+7. 신규 인사이트 ③ 과거 Form 도입 실패에서 배워야 함
+St. Sophia’s는 이미 medical update form을 시도한 경험이 있음.
+예:
+
+ 치료 시작
+ Panacur 5일
+ 상태 update
+
+등을 Foster가 form으로 기록하도록 했음.
+
+하지만 처음 잠깐 사용된 뒤 Foster들이 계속 작성하지 않아 사실상 중단.
+
+중요한 의미
+
+
+이번 고객에게:
+
+ “Form을 제공하면 정보가 잘 들어올 것이다.”
+라는 가정은 위험함.
+
+이미 반례가 있음.
+
+Petify가 다른 점을 증명해야 함
+ 앱 설치 없음
+ 로그인 없음
+ 요청이 먼저 옴
+ 해당 동물에 맞는 질문만 보임
+ 미응답 reminder
+ 모바일에서 빠르게 완료
+
+즉 파일럿에서 중요한 것은:
+
+ Form 자체가 아니라 실제 응답률이 기존 방식보다 높아지는가
+임.
+
+중요한 파일럿 지표
+
+
+ Foster check-in 응답률
+ reminder 후 응답률
+ 미응답 비율
+ 평균 응답 시간
+
+
+
+8. 신규 인사이트 ④ 커뮤니케이션 양의 균형도 문제
+Rachel의 표현에서 흥미로운 부분.
+현재 Foster는 크게 두 유형:
+
+ 자주 연락하는 Foster
+ 거의 연락하지 않는 Foster
+
+즉 어떤 사람에게서는 하루에도 메시지가 많이 오고, 어떤 사람의 상태는 거의 알기 어려움.
+
+원하는 상태
+
+
+모든 Foster에게:
+
+ 예측 가능한 주기의 일정한         update
+를 받는 것.
+
+의미
+
+
+Petify의 자동 check-in은:
+
+ 메시지를 더 많이 받는 시스템
+
+이 아니라
+
+ 커뮤니케이션 편차를 줄이는 시스템
+
+
+으로도 볼 수 있음.
+
+이는 Foster engagement 측면에서도 의미 있는 가설.
+9. 가장 중요한 신규 인사이트 ⑤ Litter 단위 Batch Check-in 필요성이 다시 강하게 확인
+Leila가 데모 이후 바로 질문한 것:
+
+ Foster가 여러 마리를 돌보면 하나씩 입력해야 하는가?
+였음.
+
+Rachel은 일부 Foster가:
+  10~15마리
+  litter 2개
+  litter + 성묘
+까지 한 번에 돌본다고 설명.
+
+특히 문제가 되는 사례
+
+
+litter 전체가:
+  diarrhea
+  fleas
+같은 공통 문제를 겪는 경우.
+
+각 kitten마다 같은 질문을 반복해서 작성하는 것은 불필요.
+
+가장 적합한 구조
+
+
+공통 질문
+
+→ litter 전체에 한 번
+개별 이슈
+
+→ 해당 kitten만 추가 질문
+판단
+
+
+Cat / kitten 조직에서는:
+Batch / Litter check-in = 높은 우선순위
+단순 Nice-to-have가 아님.
+
+
+
+10. 신규 인사이트 ⑥ ‘Weight milestone → 다음 업무’가 강한 활용 사례
+Rachel이 제시한 매우 구체적인 사례:
+
+ kitten이 2lb가 되면 surgery-ready.
+현재 문제는 직원이:
+
+    모든 kitten의 시작 체중을 기억하지 못하고
+    Foster가 먼저 알려주지 않을 수 있으며
+    나중에 연락했을 때 이미 수술 기준을 훨씬 넘긴 경우가 있음.
+
+제품적으로 매우 좋은 흐름
+
+
+Regular Weight Check-in
+↓
+Weight ≥ 2lb
+↓
+Surgery Ready
+↓
+직원에게 다음 업무 표시
+
+의미
+
+
+Petify가 단순히:
+
+ 데이터를 받는 Check-in tool
+
+이 아니라
+
+ 받은 데이터가 특정 조건을 충족하면 다음 업무를 만들어주는 운영 도구
+
+
+가 될 가능성을 보여줌.
+
+
+
+11. 신규 인사이트 ⑦ 이름 변경도 실제 운영상 Identity 문제
+Rachel은 Foster가 고양이 이름을 바꾸는 경우가 있다고 설명.
+예:
+
+    Cat 1
+    Cat 2
+로 임시 등록됐다가 Foster가 새 이름을 사용.
+
+그러면 직원은:
+
+ 지금 말하는 고양이가 시스템의 어느 고양이인지
+다시 찾아야 함.
+
+의미
+
+
+이건 단순 profile edit 문제가 아니라:
+
+ Foster가 쓰는 이름과 기준 기록의 이름 사이의 identity mapping 문제
+임.
+
+자연스러운 확장 후보
+
+
+  Current name
+  Previous name
+  Foster nickname
+  Animal ID
+등을 함께 보여주는 구조.
+
+하지만 이번 파일럿 핵심 기능으로 넣을 정도의 우선순위인지는 추가 검증 필요.
+
+
+
+12. 신규 인사이트 ⑧ 문제는 ‘툴이 너무 많다’보다 ‘툴마다 상태가 다르다’
+Rachel이 후반에 설명한 현재 환경:
+  Google Drive
+  Petstablished
+  Asana
+  Foster pathway tracker
+문제는 여러 시스템을 쓰는 것 자체만은 아님.
+
+더 큰 문제는:
+
+ 한 곳을 업데이트해도 다른 곳은 그대로 남음.
+
+사람들이 대신 입력해줄 때도 모든 tracker를 동시에 업데이트하지 않아 오래된 정보가 남는 문제가 있음.
+
+핵심
+
+
+
+ Tool fragmentation → Data inconsistency
+로 발전하고 있음.
+
+Petify의 가치
+“모든 소프트웨어를 없애겠습니다.”
+보다:
+
+ 정보를 한 번 입력하면 필요한 기록이 함께 최신 상태가 되도록 하겠습니다                         .
+가 더 적합함.
+
+
+
+13. ‘하나로 합치고 싶다’는 요구를 Full CRM 요청으로 보면 안 됨
+Rachel은:
+
+ everything in one spot
+ automated
+가 되면 좋겠다고 설명.
+
+하지만 맥락을 보면:
+
+ Petstablished 자체를 없애달라는 요구가 아님.
+ Petstablished가 처음부터 끝까지 기준 기록 역할을 하고 있음.
+ 실제 불편은 Google Drive, Asana, 자체 tracking 등 주변 운영 도구의 중복 입력.
+
+따라서 해석
+
+
+이 고객이 원하는 것은:
+
+❌ Petify가 새로운 full CRM이 되는 것
+보다는
+
+✅ Petstablished   위에서 흩어진   Foster / medical workflow를 줄여주는 운영층
+에 가까움.
+
+
+
+14. Petstablished 연동이 중요한 이유
+Petify에서 정보를 잘 모아도 Petstablished와 연결되지 않으면:
+ Petify 업데이트
+ Google Drive
+ Petstablished
+를 다시 각각 수정해야 할 수 있음.
+
+그러면 고객이 가장 싫어하는:
+ 여러 tracker의 정보가 서로 달라지는 문제
+
+가 다시 발생.
+
+따라서 필요한 흐름
+
+
+Foster
+↓ check-in
+Petify
+↓ 검토 / 자동 처리
+Petstablished
+판단
+
+
+Petstablished 연동 필요성: 매우 높음
+ ,
+단 중요한 제한
+
+
+이번 인터뷰에서는:
+
+     Petstablished API 여부
+     읽기 가능 데이터
+     쓰기 가능 데이터
+     실제 integration 범위
+
+를 기술적으로 검증하지 않음.
+
+따라서:
+
+연동 가능성 미확인   :      / 기술 검증 필요
+
+
+15. Publishing은 핵심 Pain이 아님
+Petify의 Petfinder / Adopt-a-Pet publishing 기능을 보여줬지만, Leila는 Petstablished가 이미 상당 부분 이
+역할을 한다고 설명.
+
+판단
+
+
+이번 고객에서 Publishing은:
+
+낮은 우선순위
+
+
+중요한 이유
+
+
+Pilot에 기능을 많이 넣는 것보다:
+ Foster check-in
+ Medical tracking
+ Batch litter
+ Weight
+ Staff handoff
+에 집중하는 편이 훨씬 적절함.
+
+
+
+16. Needs Review의 적합성
+이번 인터뷰에서는 Needs Review에 대한 직접적인 부정 반응은 없음.
+
+현재 group chat에서:
+
+ 중요한 요청
+ 단순 코멘트
+
+를 구분하기 어렵다는 문제가 있으므로 오히려:
+
+ 문제가 있거나 변경된 내용만 직원이 확인하는 구조
+
+와 잘 맞을 가능성이 있음.
+
+다만
+
+
+Cambron 사례처럼:
+
+ 모든 정상 응답까지 직원이 검토할 필요가 있는가
+
+는 이번 인터뷰에서 확인되지 않음.
+
+따라서
+
+
+Needs Review fit: 긍정 가능성 있으나 추가 검증 필요
+정도로 보는 것이 안전.
+
+
+
+17. 상대의 제품 이해도
+  :
+판단 비교적 높음
+
+
+Leila와 Rachel 모두 데모 이후:
+ Litter / batch
+ 의료 추적
+ 체중
+ 이름 변경
+ 정보 중앙화
+
+등 실제 자신의 업무에 맞는 질문으로 확장.
+
+특히 후반에는 Rachel이:
+
+ 현재 어떤 도구를 쓰고 무엇이 중복되는지
+
+까지 연결해 설명.
+
+중요한 점
+
+
+제품 요구가:
+
+ Social media scheduler
+ Accounting
+ Full CRM
+같이 멀리 확장되지 않음.
+
+대부분 실제 Foster / medical 운영 문제에서 나온 요구.
+
+
+
+18. 기능 요구사항 분류
+요구 / 아이디어                      분류           판단
+
+자동 Foster check-in             현재 핵심        매우 높은 적합성
+
+자동 reminder                    현재 핵심        수작업 감소
+
+Email / Text 발송                현재 핵심        높은 적합성
+
+No-app / No-login              현재 핵심        기존 form 실패 보완 가능
+
+Health / Medication / Weight   현재 핵심        실제 운영과 직접 연결
+
+문제 여부 구분                       현재 핵심과 가까움   group chat 문제 해결
+Litter batch check-in          자연스러운 확장     매우 높은 중요도
+
+개별 kitten 예외 입력                자연스러운 확장     Batch와 함께 필요
+Weight milestone               자연스러운 확장     강한 신규 활용 사례
+
+Surgery-ready 상태               자연스러운 확장     Weight 기반 다음 단계
+이름 변경 history           자연스러운 확장        실제 추적 문제
+
+Foster별 동물 현황           자연스러운 확장        현재 자체 tracker 대체 가능
+
+Petstablished 연동        기술 검증 필요        매우 중요
+
+Google Drive 일부 대체      Add-on 전략과 맞음   의료 tracking 범위
+
+Asana 일부 대체             Add-on 전략과 맞음   Foster workflow 범위
+Full CRM replacement    현재 요구 아님        Petstablished 유지가 자연스러움
+Adoption publishing     낮은 우선순위         이미 Petstablished에서 상당 부분
+                                        처리
+
+
+
+
+19. 실제 핵심 Pain / 데모 후 추가 요구 구분
+실제 핵심   Pain
+인터뷰 전부터 존재:
+
+ Foster 연락을 직원이 직접 해야 함
+ Foster마다 연락 빈도 편차 큼
+ Group chat에서 중요한 update가 묻힘
+ 단순 코멘트와 실제 concern 구분이 어려움
+ 의료 update가 공식적으로 기록되지 않음
+ 다른 직원이 들어오면 앞선 치료 내용을 모름
+ 여러 tracking tool이 서로 최신 상태가 아님
+
+데모 후 나온 강한 요구
+
+
+ Litter batch
+ 개별 kitten 예외 처리
+ Weight milestone
+ Surgery readiness
+ 이름 변경 추적
+
+낮은 우선순위
+
+
+ Adoption publishing
+
+
+20. Petify가 실제로 줄일 수 있는 업무
+현재 직원들이 반복하는:
+
+  Foster에게 개별 check-in 메시지
+  최근 update 찾기
+  group chat 뒤지기
+  “지금까지 어떤 치료했나요?” 다시 질문
+  Foster가 form을 안 썼는지 다시 확인
+  Kitten별 체중 확인
+  수술 가능 시점을 사람이 기억
+  Google Drive update
+  Petstablished update
+  Asana update
+  Foster pathway update
+  서로 다른 tracker 내용 대조
+
+등을 줄일 가능성이 있음.
+
+실제   ROI
+이 고객에서는:
+
+ 문자 몇 개 감소
+
+보다
+
+ 같은 의료      ·Foster 정보를 몇 번 다시 찾아보고 입력해야 하는지가 줄어드는가
+가 더 좋은 지표.
+
+
+
+21. 가장 적합한 Pilot Scope
+이번 고객은 의료 / kitten Foster workflow에 집중하는 것이 가장 좋음.
+
+1단계 — Foster / Cat 데이터 연결
+가능하면 Petstablished에서:
+
+  Cat ID
+  Name
+  Foster
+  Litter
+  Weight
+  Medical status
+불러오기.
+
+2단계 — Weekly Check-in
+예:
+
+  건강
+  식욕
+  Stool
+  Fleas
+  Medication
+  Weight
+  Photos
+3단계 — Litter Batch
+공통 질문은 litter 전체에 한 번.
+
+이상 있는 kitten만 별도로 추가 입력.
+
+4단계 — 자동 Reminder
+미응답자에게 재요청.
+
+5단계 — 문제 분류
+  정상
+  변경 있음
+  확인 필요
+
+등을 구분.
+
+6단계 — Weight Milestone
+예:
+
+2lb 도달
+→ Surgery Ready
+→ 직원에게 표시.
+7단계 — Petstablished 반영
+기술적으로 가능한 범위의 검토된 정보를 자동 반영.
+22. 가장 중요한 파일럿 가설
+ 정기 Foster check-in과 litter 단위 update를 자동화하고 의료 정보를 Petstablished
+ 와 연결하면, Foster 상태 누락과 직원 간 의료 인계 문제를 줄이면서 여러 tracker를 관
+
+ 리하는 반복 업무를 실제로 줄일 수 있는가?
+
+
+그리고 추가 가설:
+
+ Weight 같은 정량 정보를 기준으로 다음 업무를 자동 표시하면 surgery readiness를
+ 더 빠르게 파악할 수 있는가?
+
+
+두 번째 가설은 이번 인터뷰에서 상당히 좋은 신규 활용 사례.
+
+
+
+23. 파일럿 가능성
+긍정 신호
+
+
+ Shelter Director가 먼저 Petify 정보를 직원들에게 전달.
+ Leila는 데모를 “great”이라고 평가.
+ Rachel도 첫 데모 이후 더 자세히 보고 싶다는 반응.
+ 실제 운영 문제와 연결된 구체적인 기능 아이디어가 여러 개 나옴.
+ 인터뷰 종료 전에 Leila가 이미 Director / leadership team에 메시지를 보냄.
+ Rachel도 팀과 논의한 뒤 판단하겠다고 설명.
+제한
+
+
+ Leila / Rachel에게 최종 승인 권한 없음.
+ Director 승인 필요.
+ 가격 수용성 미확인.
+ Petstablished 연동 가능 범위 미확인.
+ 공식 파일럿 참여 선언 없음.
+
+판단
+
+
+        :
+파일럿 관심 긍정적
+
+
+            :
+파일럿 가능성 중상 높음       ~
+공식 파일럿 확정 아직 아님 :
+이번에는 특히 이미 leadership에게 바로 공유했다는 점이 좋은 후속 신호.
+24. Commercial Signal
+가격:
+
+ 약 $99~149 / month
+
+를 설명했지만 Leila와 Rachel 모두:
+
+ 가격은 Director가 결정할 영역
+
+이라고 명확히 답함.
+
+확인된 것
+
+
+ 실제 제품 가치는 인식.
+ 시간 절감 가능성을 구체적으로 설명.
+ 도구 통합 / 자동화 필요성도 있음.
+
+확인되지 않은 것
+
+
+ 가격 수용성
+ 예산
+ Director 반응
+ 구매 프로세스
+ 유료 전환 의향
+
+판단
+
+
+        :
+유료 가능성 미확인
+
+
+가격에 반대하지 않았다는 사실을 가격 수용 신호로 해석해서는 안 됨.
+
+
+
+25. 전체 신호 평가
+항목                           판단
+
+Foster communication 문제      강함
+
+정보 누락                        강함
+
+Medical update 기록 부재         매우 강함
+
+Staff 간 의료 인계 문제             매우 강함
+
+자동 check-in 수요               매우 높음
+자동 reminder 수요                  높음
+
+기존 Form 정착 실패                   중요한 제약
+
+No-app / No-login 적합성           높아 보임
+
+Litter / Batch 중요성              매우 높음
+
+Weight milestone                강한 신규 활용 사례
+
+Name tracking                   유효한 확장 요구
+
+Petstablished 기준 기록 역할          매우 명확
+
+Petstablished replacement 수요    확인되지 않음
+
+Petstablished 연동 필요성            매우 높음
+
+연동 가능 범위                        기술 검증 필요
+
+Tool fragmentation              매우 강함
+
+데이터 최신성 문제                      강함
+
+Adoption publishing             낮은 우선순위
+
+제품 이해도                          비교적 높음
+
+파일럿 관심                          긍정적
+
+파일럿 가능성                         중상~높음
+
+공식 파일럿 확정                       아직 아님
+
+가격 수용성                          미확인
+
+유료 가능성                          미확인
+
+
+
+
+최종 인사이트
+
+ St. Sophia’s의 핵심 문제는 단순히 Foster에게 연락하기 어렵다는 것이 아니라 Foster의 의료·상태
+ update가 비정형 group chat에 남아 ‘누가 무엇을 처리해야 하는지’가 불명확하다는 것.
+ 특히 casual comment와 실제 concern이 같은 채널에 존재하면서 정보는 있었지만 업무로 인식되지 않는
+ 문제가 발생하고 있음.
+Foster medical update를 정식 form으로 받으려는 시도도 이미 했지만 사용이 지속되지 않았으므로,
+Petify도 form을 제공하는 것만으로는 충분하지 않음. 실제 응답률과 사용 편의성을 반드시 검증해야 함.
+Petstablished는 처음부터 끝까지 사용하는 명확한 기준 기록이므로 이를 교체하는 방향보다는
+Petstablished 주변의 Foster communication / medical tracking / reminder를 자동화하는 Add-on이
+더 적합.
+Rachel이 말한 “모든 것을 한곳에서 관리하고 싶다”는 요구도 Full CRM 교체 요구라기보다 Google
+Drive, Asana, Foster tracker 등에 나뉜 반복 업무를 줄이고 싶다는 의미로 해석하는 것이 정확.
+이번 인터뷰에서 Litter / Batch 필요성이 다시 강하게 확인됐으며, Foster가 10~15마리를 동시에 관리하는
+경우도 있어 kitten 조직에서는 핵심 사용성 조건에 가까움.
+특히 Weight → Surgery Ready처럼 check-in으로 들어온 데이터를 자동으로 다음 업무에 연결하는 기능
+은 중요한 신규 인사이트. Petify가 단순 정보 수집 도구가 아니라 다음 행동을 알려주는 운영 도구로 확장
+될 수 있음을 보여줌.
+이름 변경 추적도 단순 편의 기능보다는 Foster가 부르는 이름과 기준 기록의 identity를 연결하는 실제 운
+영 문제에서 나온 요구.
+가장 좋은 파일럿은 기능을 넓게 추가하는 것이 아니라 Weekly Foster Check-in → Litter Batch →
+Medical / Weight Update → Staff Review → Petstablished 반영 → Surgery Ready 표시 흐름을 검증
+하는 것.
+파일럿 반응은 긍정적이며 Leila가 바로 Director / leadership과 논의를 시작했다는 점도 좋은 신호지만,
+공식 참여 확정과 가격 수용성은 아직 확인되지 않음.
+
