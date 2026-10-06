@@ -27,5 +27,6 @@
 | 펫 보험(1순위) | 보험 사기 증가(영국 2024년 적발 1만 3,823건, 전년 대비 132% 증가). 존재하지 않는 반려동물 가입, AI로 만든 사진·서류. 적발 사기의 90% 이상인 가입 전 질병 은폐는 비문으로 해결 안 됨 | checking pets at enrollment / Make sure the pet on the policy is real, and the one in the claim. |
 | 펫 ID·분실동물(2순위) | 칩의 41.9% 미등록, 등록 칩의 35.4% 전화번호 오류(Ohio State 연구). 발견자에게 칩 리더기 없음 | found pets without a scanner / Let finders identify a pet with just a phone. |
 | 펫 릴로케이션(2순위·탐색) | CDC 2024 규정: 고위험 국가 경유 시 칩이 안 읽히면 입국 거부·자비 반송, 대체 신원 수단 불인정. 비문은 국경 심사를 대신하지 못하며, 보완 가치는 업체 내부 운영(픽업~인도 동일 개체 기록) 쪽. 실제 수요는 회신으로 확인 | tracking which dog is which / Keep a record that it's the same dog, from pickup to delivery. |
+| 해외 장거리 펫 운송(후보·조사 전) | 근거 조사 전. 차량 운송 중 개체 혼동·인계 분쟁을 가설로 둠. 국경을 넘지 않는 미국 내 이동이라 규정 충돌은 적을 것으로 추정. 소규모 사업자가 많아 API 연동 역량 확인 필요 | 릴로케이션과 같은 방향(픽업~인도 동일 개체 기록). 착수 시 조사 후 확정 |
 
 상세 문구·응대 문구·운영 규칙: 비문 SaaS Apollo 직접 영업 메시지 문서(내부). 근거 출처: BBB 2025 Puppy Scam Study, Insurance Times·PEIA 보험사기 자료, Ohio State 마이크로칩 연구, CDC 개 수입 FAQ.
