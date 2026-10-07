@@ -18,7 +18,7 @@
 | 통증 가설 | 우리 가설이 그 조직에선 가설이 아니라 구조 | 통증 위치가 우리 제품과 어긋남 |
 | 타이밍 | 도구 선택·예산 편성 창이 열려 있음 | 예산 확정·위기 대응 중이라 닫혀 있음 |
 
-기준일 2026-09-16 · 사전조사 완료 93건
+기준일 2026-09-16 · 사전조사 완료 94건
 
 | # | 소재 | 조직 | 실측 규모 | 결정·조달 | 통증 가설 | 타이밍 | 콜에서 확인 |
 | ---: | :---: | --- | --- | --- | --- | --- | --- |
@@ -113,8 +113,9 @@
 | 93 | A | **Cooper's Co-Op Dog Rescue**<br>미팅 10/13 | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | — |
 | 94 | B | **Texas Pawprints**<br>미팅 10/7 | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | — |
 | 95 | A | **Blue angels advocacy and rescue resource**<br>미팅 10/6 | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | — |
-| 96 | A | **Tacoma Humane**<br>미팅 10/7 | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | — |
+| 96 | A | **Tacoma Humane**<br>미팅 10/14 | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | — |
 | 97 | A | **Ruff World Safe House**<br>미팅 11/4 | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | — |
+| 98 | A | **Delco CARES**<br>미팅 10/12 | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | <span class="fit-badge pending">미판정</span> | — |
 
 `[정황]` 공개자료에서 끌어낸 추론이라 콜에서 확인해야 한다 · `[미확인]` 찾지 못했다 · 표기 없으면 확인된 사실
 
@@ -212,6 +213,7 @@
 <a class="compact-doc-row" href="../analysis/Blue_angels_advocacy_and_rescue_resource_사전조사_20261006.md"><span class="compact-doc-number">91</span><span class="compact-doc-copy"><strong>Blue angels advocacy and rescue resource 사전조사</strong><small>Regina Quinn — 설립자이자 IRS 등록 명의, 공개 자료상 확인되는 유일한 인력(본업은 Hampton의 마사지 치료사, 레스큐 전화를 사업장과 공유). 조직 슬로건이 'Advocacy comes before rescue' — 처리량·효율 언어가 아니라 애드보커시와 '평생 팔로업' 약속을 되묻는 언어가 먹힌다</small></span><span class="compact-doc-role">사전조사</span><span class="compact-doc-arrow">→</span></a>
 <a class="compact-doc-row" href="../analysis/Tacoma_Humane_사전조사_20261006.md"><span class="compact-doc-number">92</span><span class="compact-doc-copy"><strong>Tacoma Humane 사전조사</strong><small>Natalie Huffman — 폼 자기보고 Foster coordinator, 조직 도메인 업무 메일로 접수. 조직 공개 자료에 이름은 없고 'foster lead' 는 복수로 존재하는 직책이라 포스터 담당 팀의 실무자로 보는 게 맞다. 연 3,307마리를 1,259가정에 돌리는 현장 언어가 먹히고, 폼에 'ShelterLuv and FosterLuv' 로 모듈을 정확히 구분해 적은 사람이다 — 처리량·ROI 세일즈가 아니라 '1월에 넘어온 FosterLuv에서 아직 안 되는 게 뭔가'로 들어간다</small></span><span class="compact-doc-role">사전조사</span><span class="compact-doc-arrow">→</span></a>
 <a class="compact-doc-row" href="../analysis/Ruff_World_Safe_House_사전조사_20261006.md"><span class="compact-doc-number">93</span><span class="compact-doc-copy"><strong>Ruff World Safe House 사전조사</strong><small>Dianne Lopez — 폼 자기보고 Executive director or founder, 조직 SNS 계정이 본인 이름으로 돌아가고 Facebook 소개문이 1인칭 단수다(위에 결재권자가 없다). 조직 채널의 유일한 자작 콘텐츠가 안락사 반대 장문 글이고 자기규정도 '뉴멕시코주 건강견 안락사 종식'이다 — 효율·ROI 화법이 아니라 '이 아이를 끝까지 책임진다' 쪽 언어가 먹힌다. 구상은 대규모 생키추어리·도그파크·서비스몰·직원 주택보유까지 뻗어 있는데 공개 운영 흔적은 거의 0이다. 비전을 깎으려 들면 닫히므로, 비전을 인정하고 '그 중 지금 당장 돌아가게 만들 한 칸'으로 좁히는 진행으로 간다</small></span><span class="compact-doc-role">사전조사</span><span class="compact-doc-arrow">→</span></a>
+<a class="compact-doc-row" href="../analysis/Delco_CARES_사전조사_20261007.md"><span class="compact-doc-number">94</span><span class="compact-doc-copy"><strong>Delco CARES 사전조사</strong><small>Shaunna — 포스터 프로그램 담당(폼 자기보고 Shelter or rescue manager), 성·공식 직책명 미확인. /foster 절차 2단계의 'foster coordinator' 와 동일인일 개연성이 높다. 설립 5주차에 신청→전화 스크리닝→홈비짓→승인·매칭→교육·물품→배치 6단계와 핸드북·24/7 지원까지 문서화해 둔 사람이다 — 기능 나열이나 입양 건수 화법이 아니라 '그 6단계가 화면에서 어떻게 흐르나', '배치 이후 가정별 상태를 어디서 보나' 같은 운영 절차 언어가 먹힌다. 본인 소개문이 '좋은 포스터 매칭이 성공적 입양의 토대'로 끝나므로 매칭 품질·반환율 쪽 지표로 말할 것. 대표·창립자 표기가 공개 자료에 없어 전결권은 미확인이며, 이사회 구조가 명시돼 있다</small></span><span class="compact-doc-role">사전조사</span><span class="compact-doc-arrow">→</span></a>
 </div>
 
 정본은 `analysis/raw/leads.json` 이고 이 문서는 `site/build-leads.py` 가 생성한다.
