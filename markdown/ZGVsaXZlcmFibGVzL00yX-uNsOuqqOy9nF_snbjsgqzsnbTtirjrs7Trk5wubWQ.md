@@ -6,24 +6,24 @@
 >
 > 콜별 인터뷰 자료는 [인터뷰 모음집](#/library/reports) 페이지에 있다. 펫나우 팀이 작성한 원본 정리본(PDF)과 콜별 인사이트 문서를 함께 수록했다.
 
-기준일 2026-10-06 · 데모 콜 32건(2차 세션 포함) · Love’s Legacy(10/1)·Lexington Humane Society(10/1)·St. Sophia's Forgotten Felines(10/2)는 인터뷰 보고서를 반영했다. 기존 콜의 후속 메일은 9/22 확인분까지 반영했으며, 최신 후속 현황은 Demo f/u 현황판을 기준으로 한다(KST).
+기준일 2026-10-08 · 데모 콜 33건(2차 세션 포함) · Love’s Legacy(10/1)·Lexington Humane Society(10/1)·St. Sophia's Forgotten Felines(10/2)·MADACC(10/7)는 인터뷰 보고서를 반영했다. 기존 콜의 후속 메일은 9/22 확인분까지 반영했으며, 최신 후속 현황은 Demo f/u 현황판을 기준으로 한다(KST).
 
 ## 1. 종합 판정
 
 종합 판정은 다음 여섯 가지다. 「근거 행」은 2~5절 표의 행 번호를 가리킨다. 상세 해설은 6절에, 아직 결론을 내리지 못했거나 검증하지 못한 항목은 7절에 있다. 콜 당시의 제품 반응과 이후의 도입 상태는 구분해서 읽는다.
 
-- ① 반복해서 확인된 문제는 **직원 사이에 정보가 전달되지 않고, 해야 할 일을 사람이 기억해서 실행한다는 것**이다. 입양 준비 여부를 판단하는 일을 가장 큰 문제로 든 곳은 32건 중 없다.  
-  근거 행 3·13·22·27·28·30·32(인계·공유) · 24·25·29·30·31(정기 확인)
-- ② 고객은 기존 도구 조합과 비교해 제품 도입을 검토한다. **CRM을 교체하려는 의향은 2건, 처음으로 중심 운영 시스템을 도입하려는 경우는 1건**이다. Animal Friends·Luzerne·Pawsitive Transformations·Love’s Legacy·Lexington Humane Society·St. Sophia's Forgotten Felines에서도 기존 CRM을 유지하겠다는 전제가 확인됐다.  
-  근거 행 14·18(교체) · 23(첫 도입) · 27·28·29·30·31·32(존치)
+- ① 반복해서 확인된 문제는 **직원 사이에 정보가 전달되지 않고, 해야 할 일을 사람이 기억해서 실행한다는 것**이다. 입양 준비 여부를 판단하는 일을 가장 큰 문제로 든 곳은 33건 중 없다.  
+  근거 행 3·13·22·27·28·30·32(인계·공유) · 24·25·29·30·31·33(정기 확인)
+- ② 고객은 기존 도구 조합과 비교해 제품 도입을 검토한다. **CRM을 교체하려는 의향은 2건, 처음으로 중심 운영 시스템을 도입하려는 경우는 1건**이다. Animal Friends·Luzerne·Pawsitive Transformations·Love’s Legacy·Lexington Humane Society·St. Sophia's Forgotten Felines·MADACC에서도 기존 CRM을 유지하겠다는 전제가 확인됐다.  
+  근거 행 14·18(교체) · 23(첫 도입) · 27·28·29·30·31·32·33(존치)
 - ③ **기존 도구와 자동으로 연동되는지, 실제 업무에 쓸 만큼 제품이 완성됐는지가 파일럿 참여를 좌우한다.** Little Traverse Bay Humane Society(LTBHS)는 연동 없이 두 시스템에 같은 일을 해야 한다는 이유로 현재 파일럿을 거절했고, Citizens for Animal Protection(CAP)는 이미 완성된 경쟁 제품을 선택했다.  
-  근거 행 22·26·24·12(연동) · 5(완성도·타 단체 사용 경험)
+  근거 행 22·26·24·12·33(연동) · 5(완성도·타 단체 사용 경험)
 - ④ **연락 주기, 개체별·한배별 입력 방식, 제출 후 검토 절차는 조직에 맞게 설정할 수 있어야 한다.** Pawsitive Transformations는 모든 제출 건을 승인하는 절차를 추가 업무로 판단했고, 한배의 여러 동물 정보를 한 번에 입력하는 기능을 요구했다. Lexington Humane Society도 정상 응답까지 직원이 검토하지 않기를 원했고, 고양이 중심 단체 두 곳(31·32번)은 데모 직후 한배 단위 요청이 가능한지 질문했다.  
   근거 행 25·26(주기) · 8·15·29·31·32(입력) · 27·29·31(검토)
-- ⑤ **무료 파일럿을 시작할 때부터 고객이 이후 요금을 계속 부담할 수 있는지 확인해야 한다.** Pawsitive Transformations는 월 $99를 지속해서 부담할 수 없다는 이유로 무료 시험도 거절했다. 이 보드에 수록된 32콜의 확인 자료에서 파일럿 참여 확정 사례는 0건이다. Love’s Legacy는 평균 입양 기간과 임보자의 지속 참여를 지불 가치의 기준으로 제시했지만, 가격 수용과 파일럿 참여는 확정하지 않았다.  
-  근거 행 24·11·29(가격 저항) · 20·23·14(조건부 수용) · 13·22(계약 논의) · 30(성과 기준) · 31·32(가격 미논의·결정권자 미참석)
+- ⑤ **무료 파일럿을 시작할 때부터 고객이 이후 요금을 계속 부담할 수 있는지 확인해야 한다.** Pawsitive Transformations는 월 $99를 지속해서 부담할 수 없다는 이유로 무료 시험도 거절했다. 파일럿 참여를 명시적으로 수락한 곳은 33콜 중 MADACC 1곳이며(10/7, 계약·착수 전), 효과가 입증되면 비용을 내겠다고도 밝혔다. Love’s Legacy는 평균 입양 기간과 임보자의 지속 참여를 지불 가치의 기준으로 제시했지만, 가격 수용과 파일럿 참여는 확정하지 않았다.  
+  근거 행 24·11·29(가격 저항) · 20·23·14(조건부 수용) · 13·22(계약 논의) · 30(성과 기준) · 31·32(가격 미논의·결정권자 미참석) · 33(파일럿 수락·유료 의향)
 - ⑥ **임보자는 간단하게 응답하고, 직원은 모바일에서 업무 상태를 함께 확인할 수 있어야 한다.** 개별 담당자를 지정하는 기능과 담당자가 없을 때 다른 직원이 업무를 인계받는 기능이 함께 필요하다.  
-  근거 행 16·21·24·25(임보자) · 22·27·28(직원) · 30·32(담당자 부재 시 정보 인계)
+  근거 행 16·21·24·25(임보자) · 22·27·28·33(직원) · 30·32(담당자 부재 시 정보 인계)
 
 ## 2. 업무 문제의 심각도
 
@@ -61,6 +61,7 @@
 | 30 | B | **[Love’s Legacy Rescue](04_인터뷰·데모콜/Loves_Legacy_Rescue_인터뷰_인사이트_20261001.md)**<br>Lara McCaskill · 이사·재무 담당<br>자원봉사자 운영진 5명 · 임보자 11~30명(신청 폼) | <span class="pain-badge high">강함</span><br>본인 | · **임보자와 특정 담당자가 주고받은 문자를 다른 팀원이 보지 못해, 담당자가 자리를 비우면 대화 맥락을 인계하기 어렵다.**<br>· 임보자는 주로 문제가 생겼을 때 연락하므로, 직원이 사진·행동·성격 정보를 먼저 요청하고 재확인해야 한다.<br>· 내부 Slack 동물별 채널은 잘 사용하고 있다. 외부 임보자 정보를 팀의 업무 기록으로 전달하는 과정이 문제다.<br>· 지역과 현재 수용 여력에 맞는 임보자를 찾고, Shelterluv 자료를 GiveButter로 옮겨 발송 대상을 구분하는 일도 수작업이다. | Shelterluv<br>Slack · 개인/단체 문자<br>공유 이메일 · GiveButter |
 | 31 | B | **Lexington Humane Society**<br>Cambron Johnson · 임보팀 실무 담당<br>임보 동물 약 120두(새끼고양이 약 100두) · 임보팀 3명 | <span class="pain-badge high">강함</span><br>본인 | · **직원 3명이 상태 확인 시점과 질문을 Google Calendar 알림과 기억으로 관리한다.** 알림이 오면 연락처를 다시 찾고, 질문을 직접 작성해 이메일·문자로 하나씩 보낸다.<br>· 알림을 놓치거나 담당자가 그날 자리를 비우면 상태 확인이 늦어지거나 빠진다.<br>· 새끼고양이 약 100두 중 어느 개체에 어떤 증상이 있었는지 기억하는 일도 부담이다. | Shelter Buddy(임보자·의료 기록)<br>Acuity(진료 예약)<br>Google Calendar · 이메일 · 문자 |
 | 32 | B | **St. Sophia's Forgotten Felines**<br>Leila Larson·Rachel Wagoner · Foster Coordinator<br>임보자 약 30명 · 임보자 1명이 최대 10~15두 | <span class="pain-badge critical">매우 강함</span><br>본인 2인 | · **임보자의 의료·상태 정보가 단체 채팅과 Messenger에 남아, 단순 공유와 직원이 처리해야 할 요청을 구분하기 어렵다.** 임보자는 알렸는데 왜 대응하지 않았느냐고 느끼게 된다.<br>· 임보 기록이 정식으로 남지 않아, 다른 직원이 의료 업무를 넘겨받으면 치료 내용과 투약 회차를 임보자에게 다시 물어야 한다.<br>· 과거 의료 업데이트 양식을 도입했으나 임보자가 계속 작성하지 않아 중단됐다.<br>· Google Drive·Petstablished·Asana·자체 tracker에 같은 정보를 나눠 기록해, 일부가 오래된 정보로 남는다. | Petstablished(공식 기록)<br>단체 채팅 · Messenger<br>Google Drive · Asana · 자체 tracker |
+| 33 | B | **Milwaukee Area Domestic Animal Control Commission(MADACC)**<br>Karen Sparapani · Director(정부기관)<br>연 약 13,000두 · 고양이 6,000두 이상 · 임보 가정 50~100곳 | <span class="pain-badge critical">매우 강함</span><br>본인 | · **자동 정기 확인이 없어 문제없는 임보 동물이 관리에서 빠진다.** 생후 4개월 된 새끼고양이가 아직 임보처에 남아 있는 상황까지 생길 수 있다고 설명했다.<br>· 여러 직원이 문자·전화로 요청을 처리하면서, 같은 일을 두 명이 하거나 누군가 했을 거라 여겨 아무도 하지 않는 일이 함께 생긴다. 처리 결과가 Chameleon에 남지 않는 경우도 있다.<br>· 의료·켄넬 현장 직원이 Chameleon을 직접 다루기 어렵다.<br>· 19개 지자체에서 유기동물을 받아 Wisconsin 전역 셸터·레스큐로 이관하는데, 이관 협의는 담당자 간 개별 연락에 의존한다. | Chameleon(약 20년, 공식 기록)<br>문자 · 전화 · 이메일 |
 
 ## 3. 솔루션 적합 여부
 
@@ -98,6 +99,7 @@
 | 30 | B | **Love’s Legacy Rescue**<br>Lara McCaskill · 이사·재무 담당 | <span class="fit-badge good">높음</span><br>기존 CRM 보완 | · Lara는 **정기 체크인과 자동 재요청으로 사진·상태 정보를 먼저 받는 방식**에 긍정적으로 반응했다.<br>· Shelterluv를 공식 기록으로, Slack을 내부 소통 도구로 유지하면서 임보자의 최신 정보를 팀이 함께 확인하는 방식이 현재 업무와 맞는다.<br>· Shelterluv API가 제한적이라는 고객 경험은 있었으나, Petify에 필요한 조회·기록 기능의 연동 가능 범위는 별도로 확인해야 한다.<br>· 게시 기능은 보조 가치다. 가장 먼저 해결할 문제는 게시할 최신 정보를 확보하는 일이며, 실제 업무 감소 효과는 아직 측정하지 않았다. |
 | 31 | B | **Lexington Humane Society**<br>Cambron Johnson · 임보팀 실무 담당 | <span class="fit-badge good">높음</span><br>기존 CRM 보완 | · Cambron은 **Petify가 현재의 캘린더 알림과 개별 메시지 작업을 대체할 수 있다**고 직접 연결했다.<br>· **정상 응답("everything's fine")까지 직원이 매번 확인하지 않아도 되는 방식**을 원했다. 문제가 있는 응답만 직원에게 보여주는 구조가 맞는다.<br>· 데모 직후 한배 새끼고양이를 하나의 프로필로 묶을 수 있는지 질문했다. 일괄 요청은 개발 중이고 한배 묶음은 "가능할 것 같다"고 답한 단계다.<br>· Shelter Buddy 연동이 필요해 보이나 연동 가능 범위와 도입 필수 조건인지는 논의하지 않았다. 표준 질문 템플릿·AI 질문 생성·긴급 알림 버튼은 제품 측이 제안한 방식이다. |
 | 32 | B | **St. Sophia's Forgotten Felines**<br>Leila Larson·Rachel Wagoner · Foster Coordinator | <span class="fit-badge good">높음</span><br>기존 CRM 보완 | · Leila는 데모를 "great"이라고 평가했고, Rachel도 더 자세히 보고 싶다고 반응했다.<br>· **Petstablished를 공식 기록으로 유지하면서 주변의 임보 소통·의료 추적·tracker 업무를 줄이는 보조 도구**로 맞는다. Rachel의 "everything in one spot"은 Petstablished 교체 요구가 아니다.<br>· 데모 직후 여러 마리를 맡은 임보자가 하나씩 입력해야 하는지 질문했다. 공통 질문은 한배 전체에 한 번 묻고, 이상이 있는 개체만 따로 입력하는 방식이 필요하다.<br>· 체중 2lb에 도달하면 수술 가능 상태로 표시하는 활용 사례를 제시했다. 게시 기능은 Petstablished가 이미 처리하고 있어 우선순위가 낮다. Petstablished 연동 가능 범위는 확인하지 않았다. |
+| 33 | B | **Milwaukee Area Domestic Animal Control Commission(MADACC)**<br>Karen Sparapani · Director(정부기관) | <span class="fit-badge good">높음</span><br>기존 CRM 보완 | · Karen은 **Chameleon을 공식 기록으로 두고, 직원은 쉬운 화면으로 일하는 구조**를 원했다. Chameleon은 계속 쓰되 직접 들여다보고 싶지는 않다는 취지로 설명했다.<br>· 모바일 기반의 단순한 화면이 의료팀·현장 직원에게 맞는다고 강하게 반응했다.<br>· 요청 발송, 응답 여부, 기한 초과, 담당자, 검토 완료, Chameleon 반영 여부까지 한 흐름으로 보여야 한다.<br>· **Chameleon 자동 반영은 사실상 도입 조건이다.** 필요하면 Chameleon 측에 직접 협력을 요구하겠다고 했다. 연동 가능 범위는 기술 검증 전이다. |
 
 ## 4. 지불 의향 및 결정 구조
 
@@ -135,6 +137,7 @@
 | 30 | B | **Love’s Legacy Rescue**<br>Lara McCaskill · 이사·재무 담당 | <span class="fit-badge unknown">미확인</span><br>지불 가치 기준 제시 | Lara는 **평균 입양 기간 감소와 임보자의 지속 참여 개선**을 돈을 낼 가치의 기준으로 제시했다. Johnny가 월 $99~149와 추가 맞춤 개발 시 비용 증가 가능성을 설명했지만, Lara는 가격 수용이나 거절 의사를 밝히지 않았다. 예산·최종 구매 권한·승인 절차도 확인되지 않았다. 이사·재무 담당이라는 직책만으로 단독 구매 권한을 가정하지 않는다. |
 | 31 | B | **Lexington Humane Society**<br>Cambron Johnson · 임보팀 실무 담당 | <span class="fit-badge unknown">미확인</span><br>가격 미논의 | 가격·예산·기존 소프트웨어 비용·최종 승인권자를 논의하지 않았다. Cambron은 작은 팀이라 시간을 줄일 수 있다면 큰 도움이 된다는 취지로 설명했다. Petify를 처음 발견해 팀에 전달한 사람은 Manager이며, Cambron의 구매 결정 권한은 확인되지 않았다. |
 | 32 | B | **St. Sophia's Forgotten Felines**<br>Leila Larson·Rachel Wagoner · Foster Coordinator | <span class="fit-badge unknown">미확인</span><br>Director 결정 | Johnny가 월 $99~149를 설명했으나 Leila와 Rachel은 가격은 Shelter Director가 결정한다고 답했다. 두 사람에게는 구매 권한이 없고, 최종 검토는 Director와 운영진이 맡는다. 가격에 반대하지 않았다는 사실을 가격 수용으로 보지 않는다. |
+| 33 | B | **Milwaukee Area Domestic Animal Control Commission(MADACC)**<br>Karen Sparapani · Director(정부기관) | <span class="fit-badge good">높음</span><br>유료 의향 명시 | 무료 파일럿 이후의 상업 계약 설명에 **"Happy to pay as long as it works."**라고 답했다. 파일럿 단계는 Karen이 직접 결정할 수 있다고 설명했다. 실제 가격대·예산·조달 절차·유료 계약의 최종 승인권은 확인되지 않았다. |
 
 ## 5. 후속 조치 및 특이사항
 
@@ -172,6 +175,7 @@
 | 30 | B | **Love’s Legacy Rescue**<br>Lara McCaskill · 이사·재무 담당 | · **운영 담당자를 포함한 후속 회의 제안에 긍정 반응을 보였으나, 실제 예약과 파일럿 참여는 확인되지 않았다.**<br>· 후속 회의에서 정기 요청→미응답 재요청→팀 공유→Shelterluv 기록 반영의 실제 업무와 연동 범위를 확인한다.<br>· 제안할 시험에서는 요청·재확인 시간과 최신 사진·행동 정보 확보를 먼저 측정하고, 평균 입양 기간·임보 지속 참여는 별도 기간을 정해 살펴본다. | · **내부 Slack은 잘 작동하고 있어 대체 요구가 없다.**<br>· 입양 기간과 임보 지속 참여는 고객이 제시한 가치 기준이며, Petify의 효과가 입증됐다는 뜻은 아니다.<br>· 지역별·수용 여력별 임보자 검색은 추가 요구다. 보고서의 파일럿 설계안은 고객과 확정한 범위가 아니다.<br>· 자료: 2026-10-01 인터뷰 요약 보고서(전체 19쪽). |
 | 31 | B | **Lexington Humane Society**<br>Cambron Johnson · 임보팀 실무 담당 | · **후속 세션 제안에 긍정적으로 반응했으나, 파일럿 참여는 밝히지 않았다.**<br>· 10/2 Johnny가 데모 링크와 후속 세션 예약 링크를 보내 Manager·임보팀과 공유해 달라고 요청했다. 10/6까지 회신은 확인되지 않았다.<br>· 다음 세션에는 Manager와 실무 담당자가 함께 참여하도록 요청한다.<br>· 확인 항목: Shelter Buddy 연동 범위와 필수 조건 여부, 의사결정자·예산, 일괄·한배 요청 기능의 개발 일정. | · Lexington Humane Society는 Fayette County Animal Control과 같은 건물에서 일하며, 유기·포기 동물이 Animal Control을 거쳐 넘어온다. 정부 계약과 반려견 등록은 Cambron의 담당 범위 밖이어서 임보 파일럿과 별도 기회로 관리한다.<br>· 임보 가정 수는 확인하지 않았다.<br>· 자료: 2026-10-01 인터뷰 요약 보고서. |
 | 32 | B | **St. Sophia's Forgotten Felines**<br>Leila Larson·Rachel Wagoner · Foster Coordinator | · **Leila가 인터뷰 중 Director와 운영진에게 메시지를 보냈고, Rachel도 팀과 논의한 뒤 판단하겠다고 했다.** 파일럿 참여는 확정되지 않았다.<br>· 10/2 Johnny가 데모 링크와 후속 세션 예약 링크를 보내 Director·운영진과 공유해 달라고 요청했다. 10/6까지 회신은 확인되지 않았다.<br>· Director의 반응과 가격 수용 여부, Petstablished 연동 범위를 확인한다.<br>· 시험을 제안한다면 상태 확인 응답률·재요청 후 응답률·평균 응답 시간을 과거 양식 방식과 비교한다. | · 과거 양식 도입이 실패한 사례가 있어, 양식을 제공하는 것만으로 정보가 모인다고 가정하지 않는다.<br>· 임보자가 고양이 이름을 바꿔 부르면 기준 기록의 어느 개체인지 다시 찾아야 한다. 이름 변경 추적은 추가 요구이며 우선순위는 확인하지 않았다.<br>· 자료: 2026-10-02 인터뷰 요약 보고서. |
+| 33 | B | **Milwaukee Area Domestic Animal Control Commission(MADACC)**<br>Karen Sparapani · Director(정부기관) | · **파일럿 제안에 "I love it. I'm in. I'm in."이라고 즉시 수락했다.** 이 보드에서 파일럿 참여를 명시적으로 수락한 첫 사례이며, 계약·착수 전이다.<br>· 10/8 Johnny가 데모 링크를 보내고, 실무진과의 라운드테이블에서 파일럿 범위를 정하자고 제안했다. licensing 담당자 소개와 이관(transfer) 아이디어의 내부 검토 후 회신도 약속했다.<br>· 파일럿의 첫 단계는 Chameleon 연동 범위 확인이다. 이관과 licensing은 파일럿에 섞지 않고 별도 트랙으로 관리한다. | · **이관(transfer)은 데모 전부터 해결하려던 문제다.** 입소 후 5일 보호 기간, 협력 레스큐의 등급별 우선 열람, 6일차 이후 공개 확대, 의료 기록 제공까지 구조를 구체화했다.<br>· **licensing:** 19개 지자체가 같은 시스템을 쓰지 못하고 이용자 불만이 크다. 2027년 주기는 준비가 늦었고 2028 licensing year 전환에 적극적이다. 구매 확정이 아니라 시점이 정해진 검토 의향이다.<br>· Denver 정부 셸터 디렉터 소개를 자발적으로 제안했다. 실제 소개 전까지 별도 리드로 계산하지 않는다.<br>· 자료: 2026-10-07 인터뷰 요약 보고서. |
 
 
 ## 6. 종합 판정의 근거
@@ -180,11 +184,11 @@
 
 | 종합 판정 | 근거와 의미 |
 | --- | --- |
-| **① 직원 사이에 정보가 전달되지 않고, 해야 할 일을 사람이 기억해서 실행한다** | · 32건 중 입양 준비 여부를 판단하는 일을 가장 큰 어려움으로 든 곳은 없다. NKA는 게시를 차단하는 안전장치를 3순위로 언급했다.<br>· 임보 중심 조직에서는 직원이 상태 확인 요청을 보낼 때와 미응답자에게 다시 연락할 때를 기억해야 한다(Noah's·Black Dog·SPACAR·Pawsitive Transformations). Lauren은 평소에 대화하더라도 정기적인 건강 확인을 대신할 수는 없다고 설명했다. Love’s Legacy는 문제가 없을 때도 사진·행동 정보를 먼저 요청해야 하며, 개인 문자에 남은 내용을 다른 담당자가 이어받기 어렵다고 설명했다.<br>· 시설을 운영하는 조직에서는 담당자 사이에 정보가 전달되지 않는 문제가 있다(SBCAS·LTBHS). Animal Friends에서는 요청 유형과 담당자·완료 여부가 이메일에 섞여 있다. Luzerne에서는 직원끼리 동물 상태를 공유하고 Carol이 자원봉사자에게 다시 전달하는 방식에 의존한다. |
+| **① 직원 사이에 정보가 전달되지 않고, 해야 할 일을 사람이 기억해서 실행한다** | · 33건 중 입양 준비 여부를 판단하는 일을 가장 큰 어려움으로 든 곳은 없다. NKA는 게시를 차단하는 안전장치를 3순위로 언급했다.<br>· 임보 중심 조직에서는 직원이 상태 확인 요청을 보낼 때와 미응답자에게 다시 연락할 때를 기억해야 한다(Noah's·Black Dog·SPACAR·Pawsitive Transformations). Lauren은 평소에 대화하더라도 정기적인 건강 확인을 대신할 수는 없다고 설명했다. Love’s Legacy는 문제가 없을 때도 사진·행동 정보를 먼저 요청해야 하며, 개인 문자에 남은 내용을 다른 담당자가 이어받기 어렵다고 설명했다.<br>· 시설을 운영하는 조직에서는 담당자 사이에 정보가 전달되지 않는 문제가 있다(SBCAS·LTBHS). Animal Friends에서는 요청 유형과 담당자·완료 여부가 이메일에 섞여 있다. Luzerne에서는 직원끼리 동물 상태를 공유하고 Carol이 자원봉사자에게 다시 전달하는 방식에 의존한다. |
 | **② 기존 도구를 유지하면서 실제 업무를 줄여야 도입을 검토할 수 있다** | · CRM 교체 의향이 있는 PAWS & More·Final Victory 2건과, 전문 시스템이 없어 첫 중심 도구를 도입하려는 Second Chance 1건은 구분한다. Final Victory도 직원이 적응할 수 있도록 기존 시스템과 함께 시험할 수 있는지 질문했다.<br>· Animal Friends·Love’s Legacy는 Shelterluv, Luzerne은 PetPoint, Pawsitive Transformations는 자체 CRM을 공식 기록용 시스템으로 유지한다. Love’s Legacy는 내부 Slack도 유용하게 사용하고 있으므로, 기존 도구 전체를 대체해야 한다는 요구로 해석하지 않는다.<br>· CAP는 Pawsitive Foster가 바로 쓸 수 있는 시스템이고 다른 단체의 후기도 있다는 점을 선택 이유로 설명했다. 무료인지뿐 아니라 실제로 사용할 수 있다는 신뢰도 선택 기준이다. |
 | **③ 자동 연동과 실제 업무에 쓸 수 있는 제품 완성도가 파일럿 참여를 좌우한다** | · LTBHS는 9/17 현 단계 파일럿을 거절했다. 데이터를 처음에 수기로 옮기고, 연동 없이 양쪽 시스템을 계속 갱신해야 한다는 부담을 이유로 설명했다. Saving Great는 데이터를 자동으로 받아오고 입양이 끝난 동물을 관리 대상에서 자동 제외하는 기능을 원한다. Noah's·Asheville은 공식 기록용 시스템과의 연결을 요구한다.<br>· Animal Friends도 Shelterluv 연동을 요구했다. Love’s Legacy는 연동 구조에 긍정적으로 반응했지만, 연동 없이는 파일럿에 참여하지 않겠다고 확인한 것은 아니다. GiveButter로 자료를 수동 이전하는 불편과 API 제약 경험은 Petify의 연동 불가를 뜻하지 않는다. Luzerne에서도 PetPoint 연동은 중요하지만, 연동 없이는 절대로 도입하지 않겠다고 확인한 것은 아니다. Lauren은 자체 CRM을 쓰므로 API를 별도로 검증해야 한다.<br>· 실제로 어디까지 연동할 수 있는지는 기술적으로 검증하지 않았다. LifeLine도 내부 검토 후 Petify의 파일럿 단계가 끝난 뒤로 도입 판단을 미뤘으므로, 데모에 대한 반응만으로 참여 여부를 예측할 수 없다. |
 | **④ 연락 주기와 입력·검토·배정 방식은 조직에 맞게 설정할 수 있어야 한다** | · 상태 확인 요청을 보내는 주기는 동물의 단계와 유형에 따라 다르다(Black Dog·Saving Great·Paws and Whiskers). 체중·의료 예정일·배치 후 경과일에 따라 다음에 할 일이 정해지는 사례도 있다.<br>· 한배나 가정 단위로 정보를 입력하는 방식(HSGS·PawSafe·Pawsitive Transformations)은 편리할 뿐 아니라, 다른 동물의 정보를 잘못 입력하는 일을 줄이는 조건이기도 하다.<br>· **모든 제출 건을 직원이 검토해야 한다는 공통 요구는 없다.** Lauren은 승인 절차가 추가 업무라고 판단했다. Animal Friends는 팀원이 누가 담당하고 어디까지 처리했는지 확인하는 기능을 중요하게 봤다. 조직이나 항목에 따라 검토 여부를 선택하는 기능은 앞으로 검증할 제품 가설이다. |
-| **⑤ 무료 파일럿부터 이후 요금을 계속 부담할 수 있는지와 구매 결정권자를 확인해야 한다** | · Noah's는 월 $99~149, Maybel's는 월 $99에 저항을 보였다. Lauren은 월 $99를 지속적으로 부담할 수 없어 무료 파일럿도 거절했다. NKA·Second Chance·PAWS & More는 조건부로 비용을 낼 가능성을 보였지만 실제 가격 상한은 확인되지 않았다.<br>· Lauren의 개체별·규모별·비영리 요금 제안은 가격 가설을 세울 근거이며, 검증된 과금안은 아니다. 모든 소규모 조직이 같은 가격을 거절한다고 일반화할 수 없다.<br>· **이 보드에 수록된 콜의 확인 자료에서 파일럿 참여 확정 사례는 0건이다.** SBCAS와는 계약과 데이터 제공을 논의하고 있으며, LTBHS는 계약 문서를 받은 뒤 현재 단계의 참여를 거절했다. Animal Friends·Luzerne은 내부 검토와 구매 결정을 맡은 사람의 검토를 거쳐야 한다.<br>· Love’s Legacy는 평균 입양 기간과 임보자의 지속 참여를 지불 가치의 기준으로 제시했다. 후속 회의 제안에 대한 긍정 반응이나 가격 설명에 이의를 제기하지 않은 사실을 파일럿 확정·가격 수용으로 계산하지 않는다. |
+| **⑤ 무료 파일럿부터 이후 요금을 계속 부담할 수 있는지와 구매 결정권자를 확인해야 한다** | · Noah's는 월 $99~149, Maybel's는 월 $99에 저항을 보였다. Lauren은 월 $99를 지속적으로 부담할 수 없어 무료 파일럿도 거절했다. NKA·Second Chance·PAWS & More는 조건부로 비용을 낼 가능성을 보였지만 실제 가격 상한은 확인되지 않았다.<br>· Lauren의 개체별·규모별·비영리 요금 제안은 가격 가설을 세울 근거이며, 검증된 과금안은 아니다. 모든 소규모 조직이 같은 가격을 거절한다고 일반화할 수 없다.<br>· **파일럿 참여를 명시적으로 수락한 곳은 MADACC 1곳이다(10/7, 계약·착수 전).** 그 밖에 SBCAS와는 계약과 데이터 제공을 논의하고 있으며, LTBHS는 계약 문서를 받은 뒤 현재 단계의 참여를 거절했다. Animal Friends·Luzerne은 내부 검토와 구매 결정을 맡은 사람의 검토를 거쳐야 한다.<br>· Love’s Legacy는 평균 입양 기간과 임보자의 지속 참여를 지불 가치의 기준으로 제시했다. 후속 회의 제안에 대한 긍정 반응이나 가격 설명에 이의를 제기하지 않은 사실을 파일럿 확정·가격 수용으로 계산하지 않는다. |
 | **⑥ 임보자는 간단하게 응답하고, 직원은 모바일에서 업무 상태를 함께 확인해야 한다** | · 임보자가 앱을 설치하거나 로그인하지 않고 링크로 응답하는 방식에 직접 긍정한 반응은 Paws and Whiskers·SPACAR·Noah's·Black Dog에서 반복됐다. Animal Friends에서 이 방식이 같은 강도의 직접적인 선택 이유인지는 확인되지 않았다.<br>· LTBHS는 업무 현황을 보여주는 대시보드를, Luzerne은 현장에서 모바일로 조회하는 기능을 원하며 앱 설치가 필수는 아니다. Animal Friends에서는 담당자를 지정하는 동시에 팀 전체가 처리 상태를 보고 담당자가 없을 때 다른 직원이 이어서 처리할 수 있어야 한다.<br>· Black Dog은 개인 전화번호를 쓰지 않고 긴급 연락과 일반 연락을 구분한다. Saving Great는 직원 개인 번호로 긴급하지 않은 사진을 받는 문제를 겪는다. 정보를 편리하게 받는 데 더해 담당자를 정하고, 요청을 처리하고, 공식 기록에 결과를 반영하는 과정까지 연결해야 한다. |
 
 ## 7. 미결 · 검증 공백 · 별도 조사
@@ -200,7 +204,7 @@
 
 **추가 확인 항목: 고객이 도입을 결정하는 데 필요한 정보**
 
-- **기존 시스템과 어떤 정보를 주고받을 수 있는지 기술적으로 확인해야 한다.** 대상은 Shelterluv(Asheville·NKA·Black Dog·Paws and Whiskers·Animal Friends·Love’s Legacy), PetPoint(LTBHS·Cape Ann·Luzerne), Rescue Groups(Saving Great), Shelter Manager(Noah's), Pulse(SPACAR), Maddie's Pet Assistant(Black Dog), 자체 CRM(Pawsitive Transformations), Shelter Buddy(Lexington Humane Society), Petstablished(St. Sophia's)이다. LTBHS가 재검토하려면 최초 데이터 이전뿐 아니라 이후 변경 사항도 두 시스템에 자동으로 반영할 수 있는지 확인해야 한다. 현재 LTBHS가 파일럿을 다시 진행하겠다고 동의한 것은 아니다.
+- **기존 시스템과 어떤 정보를 주고받을 수 있는지 기술적으로 확인해야 한다.** 대상은 Shelterluv(Asheville·NKA·Black Dog·Paws and Whiskers·Animal Friends·Love’s Legacy), PetPoint(LTBHS·Cape Ann·Luzerne), Rescue Groups(Saving Great), Shelter Manager(Noah's), Pulse(SPACAR), Maddie's Pet Assistant(Black Dog), 자체 CRM(Pawsitive Transformations), Shelter Buddy(Lexington Humane Society), Petstablished(St. Sophia's), Chameleon(MADACC)이다. LTBHS가 재검토하려면 최초 데이터 이전뿐 아니라 이후 변경 사항도 두 시스템에 자동으로 반영할 수 있는지 확인해야 한다. 현재 LTBHS가 파일럿을 다시 진행하겠다고 동의한 것은 아니다.
 - **가격·예산·구매 승인 절차를 확인해야 한다.** Animal Friends·Luzerne·Black Dog·Saving Great·Final Victory·LTBHS와는 가격을 논의하지 않았다. Lauren은 현재 $99/월을 거절했으며, 다른 요금 방식에서 얼마까지 지불할 수 있는지는 확인되지 않았다. Love’s Legacy는 월 $99~149 설명에 가격 수용 의사를 밝히지 않았고, 구매 승인 구조도 확인되지 않았다. Lexington Humane Society와는 가격을 논의하지 않았고, St. Sophia's 실무자 2명은 가격을 Shelter Director가 결정한다고 답했다. 파일럿에 참여할지와 무료 기간이 끝난 뒤에도 계속 사용할 조건을 함께 확인해야 한다.
 - **검토를 보류하거나 종료한 고객의 현재 상태를 반영해야 한다.** CAP는 경쟁 제품을 시험하기로 했고, Maybel's는 확정되지 않은 요소가 많다는 이유로 거절했다. Asheville은 더 포괄적인 임보 관리와 Shelterluv 연동을 원해 보류했으며, LifeLine은 Petify의 파일럿 단계가 끝난 뒤 도입 여부를 다시 검토하겠다고 했다. 콜에서 긍정적으로 반응했다는 이유로 현재 파일럿에 참여 중인 고객으로 계산하지 않는다.
 
@@ -211,7 +215,7 @@
 - **뉴욕주 임보 기록 의무의 실제 법적 근거를 확인해야 한다.** 법 조항과 적용 범위, 다른 주의 유사 규정은 검증되지 않았다. 규정 대응을 새로운 고객 확보의 근거로 활용하려면 먼저 확인해야 한다.
 - **국가 간 동물 이송용 제품의 공통 수요를 확인해야 한다.** SPCAI의 Patriot Pets 업무 흐름을 조사하고, 소개받은 단체도 같은 문제를 겪는지 확인해야 한다. KK9R에만 필요한 기능과 여러 단체에 공통으로 필요한 기능을 구분한다.
 - **보험 사업과 연계할 기회는 별도로 검토한다.** Final Victory의 Katy Cowan이 Rainwalk Technology 담당자를 소개하겠다고 제안했다. 생체 ID를 보험 가입·청구 과정에 연결할 수요가 있는지는 확인되지 않았다.
-- **지방정부 계약과 반려견 등록 업무는 셸터 파일럿과 분리해서 조사한다.** Luzerne은 지방자치단체와 유기동물 보호 계약을 맺고 운영한다. 반려견 등록은 PetPoint와 연결되지 않은 지방정부 사이트에서 처리한다고 설명했다. LTBHS의 반려견 등록(dog licensing) 업무, Lexington Humane Society와 같은 건물을 쓰는 Fayette County Animal Control과의 관계와 함께 별도 검토할 사안이다.
+- **지방정부 계약과 반려견 등록 업무는 셸터 파일럿과 분리해서 조사한다.** Luzerne은 지방자치단체와 유기동물 보호 계약을 맺고 운영한다. 반려견 등록은 PetPoint와 연결되지 않은 지방정부 사이트에서 처리한다고 설명했다. LTBHS의 반려견 등록(dog licensing) 업무, Lexington Humane Society와 같은 건물을 쓰는 Fayette County Animal Control과의 관계와 함께 별도 검토할 사안이다. MADACC는 19개 지자체의 licensing을 맡고 있으며 2028 licensing year 전환을 검토하고 있어, 셸터 파일럿과 분리한 별도 트랙으로 다룬다.
 
 ## 읽는 법
 
